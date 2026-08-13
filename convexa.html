@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Publico pero NO indexable. Decision del usuario del 2026-08-12: publico e
+     indexable no son lo mismo. Aplica a TODAS las paginas del sitio. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Optimización Convexa en Espacios de Hilbert</title>
+<style>
+:root{
+  --fondo:#fdfdfb; --texto:#1b1b1f; --tenue:#5f5f6e; --linea:#e2e2dc;
+  --lateral:#f5f5f1; --acento:#3b5bdb;
+  --teo:#1c3f94; --prop:#4178c0; --coro:#2b5aa8; --lema:#4a7c8c;
+  --def:#2f7d43; --obs:#a37211; --ej:#6b7a2a;
+  --pruebafondo:#f7f7f4;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --fondo:#14141a; --texto:#e8e8ea; --tenue:#a0a0b0; --linea:#2c2c36;
+    --lateral:#1a1a22; --acento:#8aa4f5;
+    --teo:#7fa0e8; --prop:#8fb8e8; --coro:#89a8e0; --lema:#8fc0cf;
+    --def:#7fc98f; --obs:#e0b45c; --ej:#b6c46a;
+    --pruebafondo:#1c1c24;
+  }
+}
+:root[data-theme="dark"]{
+  --fondo:#14141a; --texto:#e8e8ea; --tenue:#a0a0b0; --linea:#2c2c36;
+  --lateral:#1a1a22; --acento:#8aa4f5;
+  --teo:#7fa0e8; --prop:#8fb8e8; --coro:#89a8e0; --lema:#8fc0cf;
+  --def:#7fc98f; --obs:#e0b45c; --ej:#b6c46a;
+  --pruebafondo:#1c1c24;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--fondo); color:var(--texto);
+  font-family:Georgia,"Times New Roman",serif; line-height:1.62;
+  display:flex; min-height:100vh;
+}
+a{color:var(--acento)}
+.lateral{
+  width:270px; flex:0 0 270px; background:var(--lateral);
+  border-right:1px solid var(--linea); padding:1.4rem 1.1rem;
+  position:sticky; top:0; height:100vh; overflow-y:auto;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:.86rem;
+}
+.marca{
+  text-transform:uppercase; letter-spacing:.09em; font-size:.7rem;
+  color:var(--tenue); margin:1.3rem 0 .5rem; font-weight:600;
+}
+.marca:first-child{margin-top:0}
+.lateral ul{list-style:none; margin:0; padding:0}
+.lateral li{margin:.16rem 0}
+.lateral a{text-decoration:none; color:var(--texto); display:block;
+  padding:.16rem .3rem; border-radius:4px; line-height:1.35}
+.lateral a:hover{background:rgba(128,128,160,.16)}
+.notas .activo>a{color:var(--acento); font-weight:600}
+.toc .n2{padding-left:.85rem; font-size:.82rem}
+.toc .n3{padding-left:1.7rem; font-size:.8rem; color:var(--tenue)}
+main{flex:1; min-width:0; padding:2.6rem clamp(1rem,4vw,3.4rem); max-width:56rem}
+header.cab{border-bottom:1px solid var(--linea); padding-bottom:1.1rem;
+  margin-bottom:2rem}
+header.cab h1{font-size:1.9rem; margin:0 0 .35rem; line-height:1.2}
+header.cab p{margin:.15rem 0; color:var(--tenue); font-size:.95rem}
+h2{font-size:1.5rem; margin:2.6rem 0 .9rem; padding-top:.4rem;
+   border-top:1px solid var(--linea)}
+h3{font-size:1.18rem; margin:2rem 0 .7rem}
+h4{font-size:1.02rem; margin:1.5rem 0 .5rem}
+p{margin:.75rem 0}
+.display{overflow-x:auto; overflow-y:hidden; margin:1.1rem 0; padding:.15rem 0}
+.enunciado{margin:1.3rem 0; padding-left:.9rem; border-left:3px solid var(--linea)}
+.enunciado .rotulo{font-weight:700; font-family:system-ui,sans-serif;
+  font-size:.94rem}
+.enunciado p:first-of-type{display:inline}
+.enunciado.teo{border-left-color:var(--teo)} .enunciado.teo .rotulo{color:var(--teo)}
+.enunciado.prop{border-left-color:var(--prop)} .enunciado.prop .rotulo{color:var(--prop)}
+.enunciado.coro{border-left-color:var(--coro)} .enunciado.coro .rotulo{color:var(--coro)}
+.enunciado.lema{border-left-color:var(--lema)} .enunciado.lema .rotulo{color:var(--lema)}
+.enunciado.def{border-left-color:var(--def)} .enunciado.def .rotulo{color:var(--def)}
+.enunciado.obs{border-left-color:var(--obs)} .enunciado.obs .rotulo{color:var(--obs)}
+.enunciado.ej{border-left-color:var(--ej)} .enunciado.ej .rotulo{color:var(--ej)}
+.enunciado.teo,.enunciado.prop,.enunciado.coro,.enunciado.lema{font-style:italic}
+.df{color:var(--def); font-weight:600}
+.fuente{color:var(--tenue); font-size:.78rem;
+  font-family:system-ui,sans-serif; white-space:nowrap}
+.prueba{margin:1rem 0}
+.verprueba{
+  font-family:system-ui,sans-serif; font-size:.82rem; cursor:pointer;
+  background:transparent; color:var(--tenue); border:1px solid var(--linea);
+  border-radius:5px; padding:.28rem .7rem;
+}
+.verprueba:hover{color:var(--acento); border-color:var(--acento)}
+.cuerpoprueba{
+  margin-top:.6rem; padding:.5rem .95rem; background:var(--pruebafondo);
+  border-left:2px solid var(--linea); border-radius:0 5px 5px 0;
+}
+code{font-family:ui-monospace,Consolas,monospace; font-size:.9em}
+@media (max-width:880px){
+  body{flex-direction:column}
+  .lateral{width:100%; flex:none; height:auto; position:static;
+    border-right:none; border-bottom:1px solid var(--linea)}
+  main{padding:1.6rem 1.1rem}
+}
+</style>
+<script>
+// Las macros del preambulo de main.tex, declaradas aqui. NO se convierten
+// formulas: MathJax las lee tal cual del texto del DOM.
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['\\[','\\]'], ['$$','$$']],
+    processEnvironments: true,
+    macros: {
+      R:"\\mathbb{R}", N:"\\mathbb{N}", E:"\\mathbb{E}", Prob:"\\mathbb{P}",
+      F:"\\mathcal{F}", dd:"\\,\\mathrm{d}",
+      norm:["\\left\\lVert #1 \\right\\rVert",1],
+      abs:["\\left\\lvert #1 \\right\\rvert",1],
+      ip:["\\left\\langle #1,#2\\right\\rangle",2],
+      Tr:"\\operatorname{tr}", Id:"\\operatorname{Id}",
+      Var:"\\operatorname{Var}", Cov:"\\operatorname{Cov}",
+      Hs:"\\mathcal{H}", Ks:"\\mathcal{K}",
+      Bop:["\\mathcal{B}(#1)",1], Ball:"\\mathcal{B}", Dif:"\\mathrm{D}",
+      orth:["#1^{\\perp}",1],
+      aff:"\\operatorname{aff}", conv:"\\operatorname{conv}",
+      cono:"\\operatorname{cone}", cl:"\\operatorname{cl}",
+      intr:"\\operatorname{int}", ri:"\\operatorname{ri}",
+      polar:["#1^{\\circ}",1], Ncono:"N", Proy:"P", simplex:"\\Delta",
+      subdif:"\\partial", dom:"\\operatorname{dom}", epi:"\\operatorname{epi}",
+      argmin:"\\operatorname*{argmin}", argmax:"\\operatorname*{argmax}",
+      dist:["d_{#1}",1],
+      Sym:["\\mathbb{S}^{#1}",1], PSD:["\\mathbb{S}^{#1}_{+}",1]
+    }
+  },
+  options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="lateral"><div class="marca">Notas</div><ul class="notas">
+<li class="activo"><a href="convexa.html">Optimización Convexa en Espacios de Hilbert</a></li>
+</ul>
+<div class="marca">En esta nota</div><ul class="toc">
+<li class="n1"><a href="#cap:calculo">Preliminares de cálculo</a></li>
+<li class="n2"><a href="#cap1:sec-segundo-orden">Derivadas de orden superior</a></li>
+<li class="n2"><a href="#cap1:sec-optimalidad">Condiciones de optimalidad</a></li>
+<li class="n1"><a href="#cap:taylor">Fórmulas de Taylor y los problemas del curso</a></li>
+<li class="n2"><a href="#cap2:sec-taylor">Las fórmulas y el lema del descenso</a></li>
+<li class="n2"><a href="#cap2:sec-ejemplos">Los problemas del curso</a></li>
+<li class="n2"><a href="#cap2:sec-caratheodory">Combinaciones convexas y el teorema de Carathéodory</a></li>
+<li class="n1"><a href="#cap:conos">Conjuntos afines, conos y la proyección</a></li>
+<li class="n2"><a href="#cap3:sec-afines">Conjuntos afines e interior relativo</a></li>
+<li class="n2"><a href="#cap3:sec-conos">Conos convexos y dualidad</a></li>
+<li class="n2"><a href="#cap3:sec-proyeccion">La proyección sobre un convexo cerrado</a></li>
+</ul>
+</nav>
+<main>
+<header class="cab">
+  <h1>Optimización Convexa en Espacios de Hilbert</h1>
+  <p>Notas del curso de Mauricio Junca</p>
+  <p>Universidad de los Andes · 2026-20</p>
+</header>
+<section class="capitulo"><h2 id="cap:calculo">Preliminares de cálculo</h2>
+<p>En $\R^n$ la derivada de una función se calcula por coordenadas. Se derivan las
+$n$ funciones parciales, se apilan los resultados en un vector, y ese vector es
+el gradiente. Todo el cálculo diferencial de varias variables descansa sobre esa
+operación, y en un espacio de Hilbert de dimensión infinita no está disponible:
+no hay $n$ coordenadas que apilar, y aunque se fije una base ortonormal
+numerable, la sucesión de derivadas parciales no tiene por qué ser un elemento
+del espacio.</p>
+<p>Sobreviven, en cambio, las dos definiciones que no mencionan coordenadas. Una
+mide cómo cambia $f$ a lo largo de cada recta que pasa por el punto; la otra
+pide una aproximación afín uniforme en todas las direcciones a la vez. Son las
+derivadas de Gâteaux y de Fréchet. El gradiente reaparecerá, pero por una razón
+distinta de la de $\R^n$, y esa razón trae consigo una hipótesis que en
+dimensión finita no hacía falta escribir.</p>
+<p>A lo largo del capítulo $\Hs$ y $\Ks$ denotan espacios de Hilbert reales,
+$U\subset\Hs$ es abierto y no vacío, y $\Bop{\Hs,\Ks}$ es el espacio de los
+operadores lineales <em>acotados</em> de $\Hs$ en $\Ks$. Escribimos
+$\Ball(x;r)=\{y\in\Hs:\norm{x-y}\le r\}$ y $[x,y]$ para el segmento que une $x$
+con $y$.</p>
+<div class="enunciado def" id="cap1:def-direccional"><span class="rotulo">Definición.</span> <p>Sean $f:U\to\R$ y $x\in U$. Dado $d\in\Hs$, la <span class="df">derivada direccional</span> de $f$
+en $x$ en la dirección $d$ es</p>
+<div class="display">\[
+  f&#x27;(x;d):=\lim_{t\downarrow 0}\frac{f(x+td)-f(x)}{t},
+\]</div>
+<p>siempre que el límite exista.</p></div>
+<p>La derivada direccional existe con mucha facilidad y por sí sola dice poco. Lo
+que la vuelve útil es exigir que dependa linealmente de la dirección.</p>
+<div class="enunciado def" id="cap1:def-gateaux"><span class="rotulo">Definición.</span> <p>Sean $f:U\to\R$ y $x\in U$. Decimos que $f$ es <span class="df">Gâteaux diferenciable</span> en $x$
+si $f&#x27;(x;d)$ existe para toda $d\in\Hs$ y la aplicación $d\mapsto f&#x27;(x;d)$ es
+lineal y acotada. En tal caso el operador $\Dif f(x)\in\Bop{\Hs,\R}$ así
+definido se llama la <span class="df">derivada de Gâteaux</span> de $f$ en $x$.
+<span class="fuente">[Bauschke--Combettes, Definición 2.54]</span></p></div>
+<p>En $\R^n$ basta pedir linealidad, porque allí toda aplicación lineal es
+continua. En dimensión infinita la acotación es una hipótesis de verdad, y el
+motivo se ve en el enunciado siguiente.</p>
+<div class="enunciado prop" id="cap1:prop-gradiente"><span class="rotulo">Proposición.</span> <p>Si $f$ es Gâteaux diferenciable en $x$, existe un único vector
+$\nabla f(x)\in\Hs$ tal que</p>
+<div class="display">\[
+  (\forall d\in\Hs)\qquad f&#x27;(x;d)=\ip{\nabla f(x)}{d}.
+\]</div>
+<p>Lo llamamos el <span class="df">gradiente</span> de $f$ en $x$.
+<span class="fuente">[Bauschke--Combettes, Observación 2.55]</span></p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>$\Dif f(x)$ es un funcional lineal acotado sobre $\Hs$, luego el teorema de
+representación de Riesz y Fréchet le asocia un único $u\in\Hs$ con
+$\Dif f(x)d=\ip{u}{d}$ para toda $d$. Basta tomar $\nabla f(x)=u$.
+<span class="fuente">[Bauschke--Combettes, Fact 2.24]</span></p></div></div>
+<p>La dimensión cambia aquí el argumento y no el enunciado. En $\R^n$ el gradiente
+se construye: es el vector cuyas entradas son las derivadas parciales, y su
+existencia no requiere ningún teorema. En $\Hs$ no hay entradas, y el gradiente
+existe porque un funcional lineal continuo sobre un espacio de Hilbert
+<em>es</em> un producto interno contra un vector. Sin la continuidad el teorema de
+Riesz no se aplica y no hay gradiente ninguno: un funcional lineal no acotado
+$\ell:\Hs\to\R$ satisface $\ell&#x27;(x;d)=\ell(d)$ para todo $x$ y todo $d$, de modo
+que es Gâteaux diferenciable en el sentido puramente algebraico en todos los
+puntos, y sin embargo no existe ningún $u$ con $\ell=\ip{u}{\cdot}$.</p>
+<p>Que la linealidad no sea automática se ve ya en el ejemplo más simple posible.</p>
+<div class="enunciado ej" id="cap1:ej-norma"><span class="rotulo">Ejemplo.</span> <p>Sea $f:\Hs\to\R$ dada por $f(x)=\norm{x}$, con $\Hs\neq\{0\}$. Para toda
+dirección $d$,</p>
+<div class="display">\[
+  f&#x27;(0;d)=\lim_{t\downarrow 0}\frac{\norm{0+td}-\norm{0}}{t}=\norm{d},
+\]</div>
+<p>de manera que todas las derivadas direccionales en el origen existen. Pero
+$d\mapsto\norm{d}$ no es lineal, así que $f$ no es Gâteaux diferenciable en $0$.
+<span class="fuente">[Bauschke--Combettes, Example 2.65]</span></p></div>
+<p>La segunda noción sustituye el límite direccional por uno uniforme.</p>
+<div class="enunciado def" id="cap1:def-frechet"><span class="rotulo">Definición.</span> <p>Sean $T:U\to\Ks$ y $x\in U$. Decimos que $T$ es <span class="df">Fréchet diferenciable</span> en
+$x$ si existe $\Dif T(x)\in\Bop{\Hs,\Ks}$ tal que</p>
+<div class="display">\[
+  \lim_{0\neq\norm{h}\to 0}\frac{\norm{T(x+h)-T(x)-\Dif T(x)h}}{\norm{h}}=0,
+\]</div>
+<p>o lo que es lo mismo, si $T(x+h)=T(x)+\Dif T(x)h+o(\norm{h})$.
+<span class="fuente">[Bauschke--Combettes, Definición 2.56]</span></p></div>
+<div class="enunciado lema" id="cap1:lema-frechet-implica"><span class="rotulo">Lema.</span> <p>Si $T$ es Fréchet diferenciable en $x$, entonces $T$ es continua en $x$, es
+Gâteaux diferenciable en $x$, y las dos derivadas coinciden.
+<span class="fuente">[Bauschke--Combettes, Lema 2.61]</span></p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Escriba $L=\Dif T(x)$. Para la segunda afirmación, dados $t&gt;0$ y $d\neq 0$,</p>
+<div class="display">\[
+  \norm{\frac{T(x+td)-T(x)}{t}-Ld}
+   =\norm{d}\,\frac{\norm{T(x+td)-T(x)-L(td)}}{\norm{td}},
+\]</div>
+<p>y el segundo factor tiende a $0$ cuando $t\downarrow 0$, luego el cociente
+converge a $Ld$. Para la continuidad, fije $\varepsilon&gt;0$ y tome
+$\delta\in ]0,\varepsilon/(\varepsilon+\norm{L})]$ tal que
+$\norm{T(x+h)-T(x)-Lh}\le\varepsilon\norm{h}$ para todo $h$ con
+$\norm{h}\le\delta$. Pero entonces:</p>
+<div class="display">\[
+  \norm{T(x+h)-T(x)}\le\varepsilon\norm{h}+\norm{L}\norm{h}
+   \le\delta(\varepsilon+\norm{L})\le\varepsilon .
+\]</div></div></div>
+<p>El recíproco es falso, y el contraejemplo habitual vive en $\R^2$.</p>
+<div class="enunciado ej" id="cap1:ej-noconti"><span class="rotulo">Ejemplo.</span> <p>Sea $f:\R^2\to\R$ definida por $f(x,y)=x^3y/(x^6+y^2)$ si $(x,y)\neq(0,0)$ y
+$f(0,0)=0$. Sobre la recta $y=mx$ se tiene
+$f(x,mx)=mx^2/(x^4+m^2)\to 0$, y lo mismo sobre el eje vertical, de modo que
+todas las derivadas direccionales en el origen existen y valen $0$. Sin embargo
+$f(x,x^3)=1/2$ para todo $x\neq 0$, así que $f$ no es continua en el origen y en
+particular no es Fréchet diferenciable allí.</p></div>
+<p>Lo que sí es cierto es que la continuidad de la derivada de Gâteaux basta para
+recuperar la de Fréchet.</p>
+<div class="enunciado teo" id="cap1:teo-c1"><span class="rotulo">Teorema.</span> <p>Sean $T:U\to\Ks$ y $x\in U$. Suponga que la derivada de Gâteaux de $T$ existe en
+un entorno de $x$ y que $\Dif T$ es continua en $x$. Entonces $T$ es Fréchet
+diferenciable en $x$.
+<span class="fuente">[Bauschke--Combettes, Fact 2.62]</span></p></div>
+<p>Cuando $f$ es Gâteaux diferenciable en $U$ y $\nabla f$ es continua en $U$
+escribimos $f\in C^1(U)$, y el teorema anterior dice que toda función de
+$C^1(U)$ es Fréchet diferenciable en $U$. En $\R^n$ esto equivale a que las
+derivadas parciales sean continuas, formulación que aquí no tiene análogo porque
+las parciales necesitan una base.</p>
+<p>De la diferenciabilidad se obtiene la representación integral del incremento,
+que es la herramienta con la que se prueba casi todo lo que sigue.</p>
+<div class="enunciado prop" id="cap1:prop-integral"><span class="rotulo">Proposición.</span> <p>Sea $f:U\to\R$ Fréchet diferenciable y sean $x,y\in U$ con $[x,y]\subset U$.
+Entonces</p>
+<div class="display">\[
+  f(y)-f(x)=\int_0^1\ip{\nabla f\bigl(x+t(y-x)\bigr)}{y-x}\,dt .
+\]</div></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Defina $\phi:[0,1]\to\R$ por $\phi(t)=f\bigl(x+t(y-x)\bigr)$. Por la regla de la
+cadena $\phi$ es diferenciable con
+$\phi&#x27;(t)=\ip{\nabla f(x+t(y-x))}{y-x}$, y el resultado es el teorema
+fundamental del cálculo aplicado a $\phi$, que es una función real de variable
+real.</p></div></div>
+<p>Observe que el enunciado no ha cambiado nada al pasar a $\Hs$. La integral que
+aparece es la de una función real sobre $[0,1]$, y el producto interno solo
+interviene evaluado punto a punto; ningún paso pide dimensión finita.</p>
+<h3 id="cap1:sec-segundo-orden">Derivadas de orden superior</h3>
+<p>Si $f:U\to\R$ es Gâteaux diferenciable en $U$, el gradiente es una aplicación
+$\nabla f:U\to\Hs$, y tiene sentido preguntar si a su vez es diferenciable. Su
+derivada en $x$ es un operador de $\Hs$ en $\Hs$ que denotamos
+$\nabla^2 f(x)\in\Bop{\Hs}$, y que en $\R^n$ es la matriz hessiana. Cuando
+$\nabla^2 f$ existe y es continua en $U$ escribimos $f\in C^2(U)$.</p>
+<div class="enunciado prop" id="cap1:prop-autoadjunta"><span class="rotulo">Proposición.</span> <p>Si $f$ es dos veces Fréchet diferenciable en $x$, entonces $\nabla^2 f(x)$ es
+autoadjunto.
+<span class="fuente">[Bauschke--Combettes, Fact 2.66 y Example 2.67]</span></p></div>
+<p>En $\R^n$ esta propiedad se lee sobre las entradas de la matriz y es la simetría
+de la hessiana. Sobre el operador la formulación no depende de la base.</p>
+<div class="enunciado ej" id="cap1:ej-cuadratica"><span class="rotulo">Ejemplo.</span> <p>Sean $L\in\Bop{\Hs,\Ks}$ y $r\in\Ks$, y sea $f:\Hs\to\R$ dada por
+$f(x)=\tfrac12\norm{Lx-r}^2$. Entonces $f$ es dos veces Fréchet diferenciable en
+todo punto, con</p>
+<div class="display">\[
+  \nabla f(x)=L^{*}(Lx-r),\qquad \nabla^2 f(x)=L^{*}L .
+\]</div>
+<p><span class="fuente">[Bauschke--Combettes, Example 2.60]</span></p></div>
+<p>En $\R^n$ este es el problema de mínimos cuadrados $f(x)=\tfrac12\norm{Ax-b}^2$,
+con la traspuesta $A^{\top}$ en lugar del adjunto. El cálculo es el mismo en los
+dos casos,</p>
+<div class="display">\[
+  f&#x27;(x;h)=\ip{Lx-r}{Lh}=\ip{L^{*}(Lx-r)}{h},
+\]</div>
+<p>y el único paso con contenido es la definición de adjunto, que existe para todo
+operador acotado entre espacios de Hilbert.</p>
+<p>Dos ejemplos cercanos no admiten esa lectura. El producto interno de Frobenius
+$\ip{X}{Y}=\Tr(X^{\top}Y)$ sobre matrices $n\times n$ y la aplicación
+$F(X)=X^{-1}$ sobre las simétricas definidas positivas viven en un espacio de
+dimensión $n^2$. El primero tiene un análogo genuino en dimensión infinita, el
+producto interno de Hilbert--Schmidt. El segundo se generaliza mejor de lo que
+parece: derivar la identidad $(X+tH)(X+tH)^{-1}=I$ solo usa que la inversión
+esté definida en un entorno de $X$, y eso vale para operadores acotados
+invertibles.</p>
+<h3 id="cap1:sec-optimalidad">Condiciones de optimalidad</h3>
+<p>Sea $f:U\to\R$. Decimos que $x\in U$ es un <span class="df">mínimo local</span> de $f$ si existe
+$r&gt;0$ tal que $f(x)\le f(y)$ para todo $y\in\Ball(x;r)\cap U$, y que es
+<span class="df">estricto</span> si la desigualdad es estricta para $y\neq x$. Es un <span class="df">punto
+crítico</span> si $f$ es Gâteaux diferenciable en $x$ y $\nabla f(x)=0$.</p>
+<div class="enunciado teo" id="cap1:teo-primer-orden"><span class="rotulo">Teorema (Condición necesaria de primer orden).</span> <p>Sea $f:U\to\R$ Gâteaux diferenciable en $U$. Todo mínimo local de $f$ es un
+punto crítico.</p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Sea $x$ un mínimo local y sea $d\in\Hs$. Para $t&gt;0$ pequeño $x+td$ está en la
+bola donde $f(x)$ es mínimo, luego el cociente incremental es no negativo y por
+tanto $f&#x27;(x;d)\ge 0$. Tomando $d=-\nabla f(x)$ se obtiene
+$0\le\ip{\nabla f(x)}{-\nabla f(x)}=-\norm{\nabla f(x)}^2$, de donde
+$\nabla f(x)=0$.</p></div></div>
+<p>La prueba no usa coordenadas, ni compacidad, ni la dimensión. Con las
+condiciones de segundo orden la situación es distinta, y hay que separarlas.</p>
+<div class="enunciado teo" id="cap1:teo-segundo-necesaria"><span class="rotulo">Teorema (Condición necesaria de segundo orden).</span> <p>Sea $f\in C^2(U)$ y sea $x$ un mínimo local de $f$. Entonces
+$\ip{\nabla^2 f(x)h}{h}\ge 0$ para todo $h\in\Hs$.</p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Por la condición necesaria de primer orden se tiene $\nabla f(x)=0$, así que la
+fórmula de Taylor de segundo orden da, para $t&gt;0$ pequeño,</p>
+<div class="display">\[
+  0\le f(x+th)-f(x)=\frac{t^2}{2}\ip{\nabla^2 f(x)h}{h}+o(t^2).
+\]</div>
+<p>Divida por $t^2$ y haga $t\downarrow 0$.</p></div></div>
+<p>La condición suficiente es la que no se traslada. En $\R^n$ se enuncia así: si
+$x$ es un punto crítico y $\nabla^2 f(x)$ es definida positiva, entonces $x$ es
+un mínimo local estricto. Su prueba toma $\lambda&gt;0$ el menor valor propio de la
+hessiana y usa que $\ip{\nabla^2 f(x)h}{h}\ge\lambda\norm{h}^2$ para todo $h$.
+Ese paso es el que se rompe: el menor valor propio existe porque la esfera
+unidad de $\R^n$ es compacta y la forma cuadrática es continua, mientras que en
+dimensión infinita la esfera unidad no es compacta y un operador autoadjunto
+puede ser definido positivo con ínfimo espectral nulo.</p>
+<div class="enunciado ej" id="cap1:ej-diagonal"><span class="rotulo">Ejemplo.</span> <p>Sea $\Hs=\ell^2$ y sea $A$ el operador diagonal $Ay=(y_n/n)_{n\ge1}$. Entonces
+$A$ es acotado y autoadjunto, y</p>
+<div class="display">\[
+  \ip{Ay}{y}=\sum_{n\ge1}\frac{y_n^2}{n}&gt;0
+  \qquad\text{para todo } y\neq 0,
+\]</div>
+<p>así que $A$ es definido positivo. Pero tomando $y=e_n$ el $n$-ésimo vector de la
+base canónica se obtiene $\ip{Ae_n}{e_n}=1/n$, de donde
+$\inf_{\norm{y}=1}\ip{Ay}{y}=0$ y no existe ningún $\lambda&gt;0$ que sirva.</p></div>
+<p>Por consiguiente el enunciado correcto pide directamente lo que la demostración
+utiliza, que en dimensión finita es una consecuencia gratuita de la definitud y
+aquí no lo es.</p>
+<div class="enunciado teo" id="cap1:teo-segundo-suficiente"><span class="rotulo">Teorema (Condición suficiente de segundo orden).</span> <p>Sea $f\in C^2(U)$ y sea $x\in U$ un punto crítico. Suponga que existe
+$\alpha&gt;0$ tal que</p>
+<div class="display">\[
+  (\forall h\in\Hs)\qquad \ip{\nabla^2 f(x)h}{h}\ge\alpha\norm{h}^2 .
+\]</div>
+<p>Entonces $x$ es un mínimo local estricto de $f$.</p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Queremos mostrar que $f(x+h)&gt;f(x)$ para $\norm{h}$ suficientemente pequeño y
+$h\neq0$. Como $\nabla f(x)=0$, la fórmula de Taylor de segundo orden da</p>
+<div class="display">\[
+  f(x+h)=f(x)+\tfrac12\ip{\nabla^2 f(x)h}{h}+o(\norm{h}^2)
+   \ge f(x)+\norm{h}^2\Bigl(\frac{\alpha}{2}+\frac{o(\norm{h}^2)}{\norm{h}^2}\Bigr),
+\]</div>
+<p>y el paréntesis es positivo en cuanto $\norm{h}$ es pequeño.</p></div></div>
+<div class="enunciado obs" id="cap1:obs-coercividad"><span class="rotulo">Observación.</span> <p>En $\R^n$ las dos hipótesis coinciden. Si $H$ es simétrica y definida positiva,
+la función $h\mapsto\ip{Hh}{h}$ es continua y estrictamente positiva sobre la
+esfera unidad, que es compacta, luego alcanza un mínimo $\alpha&gt;0$ y por
+homogeneidad $\ip{Hh}{h}\ge\alpha\norm{h}^2$ para todo $h$. La hipótesis del
+teorema anterior equivale entonces a la definitud, y lo que en $\R^n$ se deduce
+aquí hay que suponerlo.</p></div></section>
+<section class="capitulo"><h2 id="cap:taylor">Fórmulas de Taylor y los problemas del curso</h2>
+<p>Las fórmulas de Taylor del capítulo anterior admiten dos lecturas. Una es
+cualitativa y dice que el error de la aproximación afín es $o(\norm{h})$; la
+otra es cuantitativa y acota ese error por una constante explícita multiplicada
+por $\norm{h}^2$. La primera basta para las condiciones de optimalidad, y la
+segunda es la que hace falta para estimar cuánto baja una función al dar un
+paso, que es de lo que viven todos los métodos de descenso del curso.</p>
+<p>Esa versión cuantitativa se conoce como lema del descenso, y pasa a dimensión
+infinita sin fricción alguna: su demostración utiliza la desigualdad de Cauchy y
+Schwarz y una integral sobre $[0,1]$, y ninguna de las dos cosas sabe en qué
+espacio está.</p>
+<h3 id="cap2:sec-taylor">Las fórmulas y el lema del descenso</h3>
+<p>Recogemos primero las tres formas de la fórmula de Taylor. Sean
+$U\subset\Hs$ abierto, $f:U\to\R$ y $x,y\in U$ con $[x,y]\subset U$, y
+escribamos $h=y-x$. Si $f$ es Fréchet diferenciable,</p>
+<div class="display">\[
+  f(x+h)=f(x)+\ip{\nabla f(x)}{h}
+    +\int_0^1\ip{\nabla f(x+th)-\nabla f(x)}{h}\,dt,
+\]</div>
+<p>que es la representación integral del incremento del capítulo anterior con el
+término lineal despejado, y también</p>
+<div class="display">\[
+  f(x+h)=f(x)+\ip{\nabla f(x)}{h}+o(\norm{h}),
+\]</div>
+<p>que es la definición misma de la derivada de Fréchet. Si además
+$f\in C^2(U)$, la fórmula de segundo orden es</p>
+<div class="display">\[
+  f(x+h)=f(x)+\ip{\nabla f(x)}{h}
+    +\tfrac12\ip{\nabla^2 f(x)h}{h}+o(\norm{h}^2).
+\]</div>
+<p>La forma integral es la que interesa, porque expresa el error como una integral
+del incremento del gradiente. Si ese incremento se puede acotar, el error
+también.</p>
+<div class="enunciado teo" id="cap2:teo-descenso"><span class="rotulo">Teorema (Lema del descenso).</span> <p>Sea $U\subset\Hs$ abierto, convexo y no vacío, sea $\beta&gt;0$ y sea
+$f:U\to\R$ Fréchet diferenciable con $\nabla f$ $\beta$-Lipschitz en $U$.
+Entonces, para todos $x,y\in U$,</p>
+<div class="display">\[
+  \abs{f(y)-f(x)-\ip{\nabla f(x)}{y-x}}\le\frac{\beta}{2}\norm{y-x}^2 .
+\]</div>
+<p><span class="fuente">[Bauschke--Combettes, Lema 2.64(i)]</span></p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Por la forma integral de Taylor y la desigualdad de Cauchy y Schwarz,</p>
+<div class="display">\begin{align*}
+  \abs{f(y)-f(x)-\ip{\nabla f(x)}{y-x}}
+   &amp;=\Bigl|\int_0^1\ip{\nabla f(x+t(y-x))-\nabla f(x)}{y-x}\,dt\Bigr|\\
+   &amp;\le\int_0^1\norm{y-x}\,\beta\,\norm{t(y-x)}\,dt\\
+   &amp;=\frac{\beta}{2}\norm{y-x}^2 . 
+\end{align*}</div></div></div>
+<p>La convexidad de $U$ garantiza que el segmento $[x,y]$ esté contenido en $U$, y
+la acotación de $\nabla f$ es lo que vuelve estimable el integrando. El único
+paso con contenido geométrico es la desigualdad de Cauchy y Schwarz, que en un
+espacio con producto interno se demuestra a partir de los axiomas y no menciona
+ninguna base; todo lo demás es el teorema fundamental del cálculo aplicado a una
+función de $[0,1]$ en $\R$.</p>
+<h3 id="cap2:sec-ejemplos">Los problemas del curso</h3>
+<p>Los problemas siguientes reaparecerán a lo largo del curso. En cada uno se
+señala qué espacio necesita.</p>
+<p>El primero es el de <span class="df">mínimos cuadrados</span>. Dados $L\in\Bop{\Hs,\Ks}$ y
+$r\in\Ks$, se busca</p>
+<div class="display">\[
+  \min_{x\in\Hs}\ \tfrac12\norm{Lx-r}^2 .
+\]</div>
+<p>Según se calculó en el capítulo anterior, el gradiente es $L^{*}(Lx-r)$, así que
+los puntos críticos son las soluciones de la ecuación normal
+$L^{*}Lx=L^{*}r$. En $\R^n$, si $A$ tiene rango completo entonces
+$A^{\top}A$ es definida positiva e invertible, y la solución es única e igual a
+$(A^{\top}A)^{-1}A^{\top}b$. En $\Hs$ la inyectividad de $L$ ya no basta para
+invertir $L^{*}L$: hace falta que $L$ esté acotado inferiormente, es decir que
+exista $\alpha&gt;0$ con $\norm{Lx}\ge\alpha\norm{x}$, y entonces
+$\ip{L^{*}Lx}{x}=\norm{Lx}^2\ge\alpha^2\norm{x}^2$. Es la misma coercividad que
+apareció en la condición suficiente de segundo orden, y por el mismo motivo.</p>
+<p>El segundo es la <span class="df">proyección</span> sobre un conjunto. Dado $C\subset\Hs$ y
+$p\in\Hs$,</p>
+<div class="display">\[
+  \min_{x\in C}\ \tfrac12\norm{x-p}^2 .
+\]</div>
+<p>Cuando $C$ es convexo, cerrado y no vacío este problema tiene solución única en
+cualquier espacio de Hilbert, y su demostración es el teorema de la proyección
+con el que termina el capítulo siguiente.</p>
+<p>El tercero añade un término no diferenciable al primero. Con $A\in\R^{m\times n}$,
+$b\in\R^m$ y $\lambda&gt;0$,</p>
+<div class="display">\[
+  \min_{x\in\R^n}\ \tfrac12\norm{Ax-b}_2^2+\lambda\norm{x}_1 .
+\]</div>
+<p>Aquí conviven dos normas distintas sobre el mismo espacio, y eso es lo que
+impide subir el problema a un Hilbert cualquiera sin más. La versión en
+dimensión infinita reemplaza $\norm{\cdot}_1$ por una función convexa propia y
+l.s.c. sobre $\Hs$ que toma el valor $+\infty$ fuera de un subconjunto, y no por
+una segunda norma del espacio.</p>
+<p>El cuarto es la <span class="df">regresión logística</span>. Dados $N$ pares $(a_i,y_i)$ con
+$a_i\in\R^n$ e $y_i\in\{-1,1\}$,</p>
+<div class="display">\[
+  \min_{x\in\R^n}\ \frac1N\sum_{i=1}^{N}
+    \log\bigl(1+e^{-y_i\ip{a_i}{x}}\bigr).
+\]</div>
+<p>La suma es finita por construcción, así que el problema es de dimensión finita y
+no hay nada que trasladar.</p>
+<p>El quinto es el de <span class="df">portafolio</span>. Con $\Sigma$ la matriz de covarianzas,
+$\mu$ el vector de retornos esperados, $\gamma&gt;0$ y
+$\simplex^n=\{x\in\R^n_+:\ip{\mathbf{1}}{x}=1\}$ el símplex,</p>
+<div class="display">\[
+  \min_{x\in\simplex^n}\ \tfrac12\ip{\Sigma x}{x}-\gamma\ip{\mu}{x}.
+\]</div>
+<p>Cierra la lista el <span class="df">programa lineal</span>, que en la forma de Dantzig es</p>
+<div class="display">\[
+  \min_{x\in\R^n}\ \ip{c}{x}
+  \qquad\text{sujeto a}\qquad
+  \ip{a_i}{x}\le b_i,\quad i=1,\dots,N,
+\]</div>
+<p>es decir $Ax\le b$ componente a componente. Los tres últimos son problemas de
+dimensión finita y se estudian ahí. El programa lineal admite una generalización
+a espacios de Hilbert, la programación cónica, en la que la desigualdad
+componente a componente se sustituye por el orden parcial inducido por un cono
+convexo cerrado; ese orden se construye en el capítulo siguiente.</p>
+<h3 id="cap2:sec-caratheodory">Combinaciones convexas y el teorema de Carathéodory</h3>
+<p>Aquí termina el cálculo y empieza la geometría convexa. Recuerde que dados
+$x_1,\dots,x_k$ en $\Hs$, una <span class="df">combinación convexa</span> suya es una suma
+$\sum_{i=1}^{k}\alpha_i x_i$ con $\alpha_i\ge0$ y
+$\sum_{i=1}^{k}\alpha_i=1$, y que la combinación es <span class="df">afín</span> si solo se pide
+$\sum_{i=1}^{k}\alpha_i=1$.</p>
+<div class="enunciado def" id="cap2:def-afin-indep"><span class="rotulo">Definición.</span> <p>Los puntos $x_0,x_1,\dots,x_k$ de $\Hs$ son <span class="df">afínmente independientes</span> si las
+únicas escalares $\alpha_0,\dots,\alpha_k$ con
+$\sum_{i=0}^{k}\alpha_i x_i=0$ y $\sum_{i=0}^{k}\alpha_i=0$ son todas nulas.
+<span class="fuente">[Junca, §4.1]</span></p></div>
+<div class="enunciado lema" id="cap2:lema-afin-lineal"><span class="rotulo">Lema.</span> <p>Los puntos $x_0,x_1,\dots,x_k$ son afínmente independientes si y solo si los $k$
+vectores $x_1-x_0,\dots,x_k-x_0$ son linealmente independientes.
+<span class="fuente">[Junca, §4.1]</span></p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Las dos condiciones $\sum_{i=0}^{k}\alpha_i x_i=0$ y
+$\sum_{i=0}^{k}\alpha_i=0$ equivalen, eliminando $\alpha_0=-\sum_{i\ge1}\alpha_i$
+de la primera mediante la segunda, a la única condición
+$\sum_{i=1}^{k}\alpha_i(x_i-x_0)=0$. Los $\alpha_i$ con $i\ge1$ son nulos
+exactamente cuando los $x_i-x_0$ son linealmente independientes, y en tal caso
+$\alpha_0$ también lo es.</p></div></div>
+<p>Ninguno de los dos enunciados menciona la dimensión, y los dos valen en $\Hs$
+tal como están escritos. Lo que sí depende de la dimensión es la consecuencia
+que se extrae de ellos.</p>
+<div class="enunciado teo" id="cap2:teo-caratheodory"><span class="rotulo">Teorema (Carathéodory).</span> <p>Sea $B\subset\R^n$. Todo elemento de $\conv(B)$ se puede escribir como
+combinación convexa de elementos de $B$ afínmente independientes, y por tanto
+como combinación convexa de a lo más $n+1$ elementos de $B$.
+<span class="fuente">[Junca, §4.1]</span></p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Sea $x=\sum_{i=1}^{k}\alpha_i x_i$ con $\alpha_i&gt;0$, $\sum\alpha_i=1$ y
+$x_i\in B$. Si los $x_i$ son afínmente independientes, el lema anterior da $k-1\le n$ y no
+hay nada más que probar.
+Suponga que no lo son. Existen entonces escalares $\mu_i$ no todos nulos con
+$\sum_{i=1}^{k}\mu_i x_i=0$ y $\sum_{i=1}^{k}\mu_i=0$, y para todo
+$\epsilon\in\R$,</p>
+<div class="display">\[
+  x=\sum_{i=1}^{k}(\alpha_i-\epsilon\mu_i)x_i,
+  \qquad \sum_{i=1}^{k}(\alpha_i-\epsilon\mu_i)=1 .
+\]</div>
+<p>Como los $\mu_i$ suman cero y no son todos nulos, alguno es positivo. Tomando
+$\epsilon=\min\{\alpha_i/\mu_i:\mu_i&gt;0\}&gt;0$, todos los coeficientes
+$\alpha_i-\epsilon\mu_i$ siguen siendo no negativos y al menos uno se anula, de
+donde $x$ es combinación convexa de a lo más $k-1$ elementos de $B$. Repitiendo
+el proceso se llega a una familia afínmente independiente.</p></div></div>
+<p>El teorema es falso en dimensión infinita, y no por un tecnicismo de la
+demostración: el número $n+1$ que aparece en la conclusión <em>es</em> la
+dimensión del espacio, así que en $\Hs$ no hay ningún enunciado análogo que
+escribir. En un espacio de Hilbert separable de dimensión infinita, el conjunto
+$B=\{e_n\}_{n\ge1}$ formado por una base ortonormal es tal que ningún elemento
+de $\conv(B)$ con infinitas coordenadas no nulas admite una representación
+finita, y $\conv(B)$ contiene puntos que requieren tantos términos como se
+quiera.</p>
+<p>De Carathéodory se deduce el corolario siguiente, cuya suerte al cambiar de
+espacio es distinta de la del teorema.</p>
+<div class="enunciado coro" id="cap2:coro-conv-compacto"><span class="rotulo">Corolario.</span> <p>Sea $B\subset\R^n$ compacto. Entonces $\conv(B)$ es compacto.
+<span class="fuente">[Junca, §4.1]</span></p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Basta ver que toda sucesión de $\conv(B)$ tiene una subsucesión convergente. Por
+el teorema de Carathéodory, cada término se escribe
+$x^k=\sum_{i=1}^{n+1}\alpha_i^k x_i^k$ con $x_i^k\in B$ y
+$\alpha^k\in\simplex^n$. El producto $B^{n+1}\times\simplex^n$ es compacto, luego
+la sucesión $(x_1^k,\dots,x_{n+1}^k,\alpha^k)$ tiene una subsucesión convergente
+a un punto $(x_1,\dots,x_{n+1},\alpha)$, y sobre ella
+$x^k\to\sum_{i=1}^{n+1}\alpha_i x_i\in\conv(B)$.</p></div></div>
+<p>En un espacio de Hilbert de dimensión infinita el enunciado es falso tal como
+está, porque $\conv(B)$ ni siquiera tiene por qué ser cerrado. Tome
+$B=\{0\}\cup\{e_n/n\}_{n\ge1}$, que es compacto por ser una sucesión convergente
+junto con su límite: la envolvente convexa de $B$ no contiene a todos sus puntos
+límite. Lo que sí sigue siendo cierto es que la envolvente convexa <em>cerrada</em>
+de un compacto es compacta, resultado debido a Mazur, cuya demostración no se da
+aquí y no se necesitará hasta los teoremas de separación.</p></section>
+<section class="capitulo"><h2 id="cap:conos">Conjuntos afines, conos y la proyección</h2>
+<p>Aquí aparecen por primera vez las dos caras de la dimensión infinita a la vez.
+Un resultado deja de ser cierto, y no por un defecto de su demostración sino
+porque el objeto que describe se desvanece; otro sigue siendo cierto palabra por
+palabra, y su demostración hay que rehacerla desde el principio.</p>
+<p>El primero es el interior relativo. En $\R^n$ todo conjunto convexo no vacío
+tiene interior relativo no vacío, y sobre ese hecho descansan media docena de
+resultados posteriores. El segundo es la existencia de la proyección sobre un
+convexo cerrado, que en $\R^n$ se obtiene de Weierstrass y aquí no puede
+obtenerse así, porque la bola cerrada no es compacta.</p>
+<h3 id="cap3:sec-afines">Conjuntos afines e interior relativo</h3>
+<div class="enunciado def" id="cap3:def-afin"><span class="rotulo">Definición.</span> <p>Un conjunto $A\subset\Hs$ es <span class="df">afín</span> si para todos $x,y\in A$ y todo
+$\alpha\in\R$ se tiene $\alpha x+(1-\alpha)y\in A$, es decir, si la recta que
+pasa por dos puntos cualesquiera de $A$ está contenida en $A$.</p></div>
+<p>Es fácil ver que $A$ es afín y no vacío si y solo si existe un subespacio
+vectorial $V$ y un punto $x_0$ con $A=x_0+V$, y que $V$ queda determinado por
+$A$. En un espacio de Hilbert $A$ es cerrado exactamente cuando $V$ lo es,
+distinción que en $\R^n$ no existe porque allí todo subespacio es cerrado.</p>
+<p>Dado $B\subset\Hs$ no vacío, la <span class="df">envolvente afín</span> $\aff(B)$ es el conjunto de
+las combinaciones afines finitas de elementos de $B$, y la <span class="df">envolvente
+convexa</span> $\conv(B)$ el de las combinaciones convexas finitas. Las dos son el
+menor conjunto afín, respectivamente convexo, que contiene a $B$.</p>
+<div class="enunciado def" id="cap3:def-ri"><span class="rotulo">Definición.</span> <p>Sea $C\subset\R^n$ convexo. El <span class="df">interior relativo</span> de $C$ es</p>
+<div class="display">\[
+  \ri(C)=\bigl\{x\in C:\ \exists r&gt;0
+    \ \text{tal que}\ \Ball(x;r)\cap\aff(C)\subset C\bigr\},
+\]</div>
+<p>es decir, el interior de $C$ como subconjunto del espacio afín que genera.</p></div>
+<p>La definición se escribe igual en $\Hs$, y no sirve de nada. El resultado que la
+hace útil es el siguiente, y solo vale en dimensión finita.</p>
+<div class="enunciado teo" id="cap3:teo-ri"><span class="rotulo">Teorema.</span> <p>Sea $C\subset\R^n$ convexo y no vacío. Entonces $\ri(C)\neq\varnothing$ y
+$\cl(C)=\cl(\ri(C))$.
+<span class="fuente">[Junca, §4.1]</span></p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Sea $d=\dim(\aff(C))$ y tome $x_0,\dots,x_d\in C$ afínmente independientes, que
+existen por definición de $d$. El baricentro
+$\bar x=\tfrac{1}{d+1}\sum_{i=0}^{d}x_i$ pertenece a $C$ por convexidad, y
+pertenece al interior relativo de $\conv\{x_0,\dots,x_d\}$, que es un símplex de
+dimensión $d$ dentro de $\aff(C)$. Por consiguiente $\bar x\in\ri(C)$.</p>
+<p>Para la segunda afirmación, la inclusión $\cl(\ri(C))\subset\cl(C)$ es
+inmediata. Recíprocamente, basta mostrar que $C\subset\cl(\ri(C))$. Sean
+$x\in C$ e $y\in\ri(C)$. En efecto, para todo $\lambda\in ]0,1]$ el punto
+$(1-\lambda)x+\lambda y$ está en $\ri(C)$, y tomando $\lambda_k\downarrow0$ la
+sucesión $y_k=(1-\lambda_k)x+\lambda_k y$ está contenida en $\ri(C)$ y converge
+a $x$, de donde $x\in\cl(\ri(C))$.</p></div></div>
+<p>El paso que fija la dimensión es el primero. La existencia de $d+1$ puntos
+afínmente independientes y el hecho de que su baricentro sea interior al símplex
+que generan dependen de que $d$ sea finito, y no hay manera de rodearlo. La
+conclusión, además, es falsa.</p>
+<div class="enunciado ej" id="cap3:ej-cono-positivo"><span class="rotulo">Ejemplo.</span> <p>Sea $\Hs=\ell^2$ y sea
+$C=\{x\in\ell^2:\ x_n\ge0\ \text{para todo}\ n\}$ el cono positivo, que es
+convexo, cerrado y no vacío. Su envolvente afín es todo $\ell^2$, porque todo
+$x\in\ell^2$ se escribe $x=x^{+}-x^{-}$ con $x^{+},x^{-}\in C$, de modo que
+$\ri(C)=\intr(C)$. Y ese interior es vacío: dados $x\in C$ y $r&gt;0$, como
+$x_n\to0$ existe $n$ con $x_n&lt;r$, y entonces $x-re_n$ está a distancia $r$ de
+$x$ y tiene la $n$-ésima coordenada negativa, luego no pertenece a $C$. Así que
+ninguna bola centrada en un punto de $C$ está contenida en $C$.</p></div>
+<p>De aquí en adelante, cada vez que un argumento de dimensión finita invoque
+$\ri$, habrá que sustituirlo por una hipótesis explícita: interior no vacío de
+verdad, o continuidad en un punto, o una condición de Slater. Bauschke y
+Combettes dedican una sección entera a los sustitutos disponibles.
+<span class="fuente">[Bauschke--Combettes, §6.2]</span></p>
+<h3 id="cap3:sec-conos">Conos convexos y dualidad</h3>
+<div class="enunciado def" id="cap3:def-cono"><span class="rotulo">Definición.</span> <p>Un conjunto $K\subset\Hs$ es un <span class="df">cono</span> si $\lambda x\in K$ para todo $x\in K$
+y todo $\lambda\ge0$. Un cono $K$ es convexo si y solo si
+$\alpha x+\beta y\in K$ para todos $x,y\in K$ y todos $\alpha,\beta\ge0$.</p></div>
+<p>Con esta convención todo cono contiene el origen. La variante que pide
+$\lambda&gt;0$ obliga a escribir $\cono(B)\cup\{0\}$ donde aquí basta $\cono(B)$, y
+no cambia ningún enunciado posterior.</p>
+<p>Dado $B\subset\Hs$, la <span class="df">envolvente cónica</span> es</p>
+<div class="display">\[
+  \cono(B)=\Bigl\{\sum_{i=1}^{k}\lambda_i x_i:\
+    k\in\N,\ x_i\in B,\ \lambda_i\ge0\Bigr\},
+\]</div>
+<p>el menor cono convexo que contiene a $B$. Las sumas son finitas, igual que en
+las envolventes afín y convexa, así que la definición no cambia al pasar a
+dimensión infinita.</p>
+<div class="enunciado def" id="cap3:def-dual"><span class="rotulo">Definición.</span> <p>Sea $K\subset\Hs$ un cono. El <span class="df">cono dual</span> de $K$ es</p>
+<div class="display">\[
+  \polar{K}=\bigl\{y\in\Hs:\ \ip{x}{y}\ge0\ \text{para todo}\ x\in K\bigr\}.
+\]</div>
+<p><span class="fuente">[Bauschke--Combettes, §6.3]</span></p></div>
+<div class="enunciado prop" id="cap3:prop-dual-cerrado"><span class="rotulo">Proposición.</span> <p>Para todo cono $K\subset\Hs$, el cono dual $\polar{K}$ es un cono convexo y
+cerrado.</p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Es claro que $\polar{K}$ es un cono convexo, porque las condiciones
+$\ip{x}{y}\ge0$ son estables por sumas y por múltiplos no negativos de $y$. Para
+la clausura, observe que</p>
+<div class="display">\[
+  \polar{K}=\bigcap_{x\in K}\{y\in\Hs:\ \ip{x}{y}\ge0\},
+\]</div>
+<p>y cada uno de esos conjuntos es la preimagen del cerrado $[0,\infty[$ por el
+funcional continuo $\ip{x}{\cdot}$, luego es cerrado. Una intersección
+arbitraria de cerrados es cerrada.</p></div></div>
+<p>La prueba no usa la dimensión, y la intersección puede ser no numerable sin que
+eso cause ningún problema. El resultado siguiente es de otra naturaleza.</p>
+<div class="enunciado teo" id="cap3:teo-bipolar"><span class="rotulo">Teorema.</span> <p>Sea $K\subset\Hs$ un cono. Entonces $\polar{(\polar{K})}=\cl(\cono(K))$. En
+particular, $K$ es un cono convexo y cerrado si y solo si
+$\polar{(\polar{K})}=K$.
+<span class="fuente">[Bauschke--Combettes, §6.3]</span></p></div>
+<p>La inclusión $\cl(\cono(K))\subset\polar{(\polar{K})}$ es inmediata a partir de
+la proposición anterior. La otra requiere separar un punto
+que no esté en $\cl(\cono(K))$ de ese conjunto mediante un hiperplano, y ahí es
+donde la dimensión infinita cobra su peaje. En $\R^n$ dos convexos disjuntos
+siempre se separan; en $\Hs$ la versión ingenua de ese enunciado es falsa y hace
+falta una hipótesis adicional. La que sirve aquí es que el conjunto del que se
+separa sea convexo y cerrado, y en ese caso la separación se construye a partir
+del teorema de la proyección. El bipolar no es entonces un resultado gratuito en
+dimensión infinita, aunque su enunciado sea el mismo que en $\R^n$.</p>
+<p>Los ejemplos habituales se reparten entre los dos ambientes.</p>
+<div class="enunciado ej" id="cap3:ej-duales"><span class="rotulo">Ejemplo.</span> <p>El ortante positivo $K=\R^n_{+}$ satisface $\polar{K}=K$. Si $U\subset\Hs$ es un
+subespacio cerrado, entonces $\polar{U}=\orth{U}$, y sin la hipótesis de que $U$
+sea cerrado se obtiene $\polar{U}=\orth{(\cl U)}$. El cono de segundo orden</p>
+<div class="display">\[
+  Q^{n+1}=\bigl\{(t,x)\in\R\times\R^n:\ \norm{x}_2\le t\bigr\}
+\]</div>
+<p>es autodual, y la verificación queda como ejercicio. El cono
+$\PSD{n}$ de las matrices simétricas semidefinidas positivas también es autodual,
+y es cerrado y convexo porque</p>
+<div class="display">\[
+  \PSD{n}=\bigcap_{v\in\R^n}\bigl\{X\in\Sym{n}:\ \ip{X}{vv^{\top}}\ge0\bigr\},
+\]</div>
+<p>que es de nuevo una intersección de semiespacios cerrados.</p></div>
+<p>De los cuatro, los dos primeros tienen sentido en $\Hs$ y los dos últimos no.
+El ortante positivo se generaliza al cono positivo de $L^2$, que es autodual por
+la misma cuenta; el cono de segundo orden se generaliza al cono de Lorentz de
+$\R\times\Hs$; y $\PSD{n}$ es un objeto de matrices, de modo que se queda donde
+está.</p>
+<p>Todo cono convexo induce un orden parcial sobre el espacio, mediante</p>
+<div class="display">\[
+  x\preceq_K y \iff y-x\in K,
+\]</div>
+<p>y es este orden el que permite escribir restricciones de desigualdad en
+problemas que no viven en $\R^n$. La programación cónica consiste en sustituir
+el $Ax\le b$ componente a componente por una desigualdad $\preceq_K$.</p>
+<div class="enunciado def" id="cap3:def-normal"><span class="rotulo">Definición.</span> <p>Sea $C\subset\Hs$ convexo y no vacío y sea $p\in C$. El <span class="df">cono normal</span> a $C$
+en $p$ es</p>
+<div class="display">\[
+  \Ncono_C(p)=\bigl\{v\in\Hs:\ \ip{v}{x-p}\le0\ \text{para todo}\ x\in C\bigr\}.
+\]</div>
+<p><span class="fuente">[Bauschke--Combettes, §6.4]</span></p></div>
+<p>Se trata en efecto de un cono convexo y cerrado, por el mismo argumento de
+intersección de semiespacios de más arriba. Si
+$p\in\intr(C)$ entonces $\Ncono_C(p)=\{0\}$, porque cualquier $v\neq0$ admite un
+$x=p+\epsilon v\in C$ con $\epsilon&gt;0$ pequeño, y para él
+$\ip{v}{x-p}=\epsilon\norm{v}^2&gt;0$. Ahora bien, el cono positivo de $\ell^2$
+obliga a leer ese enunciado con cuidado: en
+dimensión infinita hay convexos cerrados con interior vacío, y sobre ellos la
+afirmación no dice nada de ningún punto.</p>
+<h3 id="cap3:sec-proyeccion">La proyección sobre un convexo cerrado</h3>
+<p>En $\R^n$ la demostración del resultado siguiente es corta:
+la función $x\mapsto\norm{x-z}^2$ es continua y coerciva, se restringe a la
+intersección de $C$ con una bola cerrada suficientemente grande, que es un
+compacto, y Weierstrass da el mínimo. Ese argumento no está disponible en
+dimensión infinita, porque la bola cerrada de $\Hs$ no es compacta. Lo que
+sustituye a la compacidad es la ley del paralelogramo, que convierte la
+convexidad de $C$ en una estimación sobre lo rápido que se acercan entre sí dos
+puntos casi óptimos, y la completitud del espacio, que recoge el límite.</p>
+<div class="enunciado teo" id="cap3:teo-proyeccion"><span class="rotulo">Teorema.</span> <p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, y sea $z\in\Hs$. Entonces existe
+un único $p\in C$ tal que</p>
+<div class="display">\[
+  \norm{z-p}=\min_{x\in C}\norm{z-x}.
+\]</div>
+<p>Lo denotamos $p=\Proy_C z$.
+<span class="fuente">[Bauschke--Combettes, §3.2]</span></p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Sea $\delta=\inf_{x\in C}\norm{z-x}$ y sea $(x_k)$ una sucesión en $C$ con
+$\norm{z-x_k}\to\delta$. Queremos mostrar que $(x_k)$ es de Cauchy. En efecto,
+la ley del paralelogramo aplicada a los vectores $x_k-z$ y $x_m-z$ da</p>
+<div class="display">\[
+  \norm{x_k-x_m}^2
+   =2\norm{x_k-z}^2+2\norm{x_m-z}^2
+     -4\norm{\frac{x_k+x_m}{2}-z}^2,
+\]</div>
+<p>y como $C$ es convexo el punto medio $\tfrac12(x_k+x_m)$ pertenece a $C$, de
+donde el último término es al menos $4\delta^2$. Por consiguiente</p>
+<div class="display">\[
+  \norm{x_k-x_m}^2\le 2\norm{x_k-z}^2+2\norm{x_m-z}^2-4\delta^2,
+\]</div>
+<p>y el miembro derecho tiende a $0$ cuando $k,m\to\infty$. Como $\Hs$ es completo,
+$(x_k)$ converge a un punto $p$, que está en $C$ por ser $C$ cerrado, y la
+continuidad de la norma da $\norm{z-p}=\delta$.</p>
+<p>Para la unicidad, si $p$ y $q$ realizan ambos el ínfimo, la misma identidad con
+$x_k=p$ y $x_m=q$ da $\norm{p-q}^2\le2\delta^2+2\delta^2-4\delta^2=0$.</p></div></div>
+<p>Las tres hipótesis se usan y ninguna sobra. La convexidad es lo único que
+garantiza que el punto medio siga en $C$, que es el paso donde entra el
+paralelogramo; sin ella el ínfimo puede no alcanzarse. La clausura es lo que
+permite que el límite esté en $C$. Y la completitud es lo que convierte una
+sucesión de Cauchy en una sucesión convergente, que es exactamente el papel que
+en $\R^n$ hacía la compacidad.</p>
+<div class="enunciado teo" id="cap3:teo-caracterizacion"><span class="rotulo">Teorema.</span> <p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, sean $z\in\Hs$ y $p\in C$.
+Entonces $p=\Proy_C z$ si y solo si</p>
+<div class="display">\[
+  \ip{z-p}{v-p}\le0\qquad\text{para todo } v\in C.
+\]</div>
+<p><span class="fuente">[Bauschke--Combettes, §3.2]</span></p></div>
+<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Suponga primero que $p=\Proy_C z$ y sea $v\in C$. Para $t\in ]0,1]$ el punto
+$p+t(v-p)$ pertenece a $C$ por convexidad, luego</p>
+<div class="display">\[
+  \norm{z-p}^2\le\norm{z-p-t(v-p)}^2
+   =\norm{z-p}^2-2t\ip{z-p}{v-p}+t^2\norm{v-p}^2 .
+\]</div>
+<p>De aquí $2t\ip{z-p}{v-p}\le t^2\norm{v-p}^2$, y dividiendo por $t&gt;0$ y haciendo
+$t\downarrow0$ se obtiene $\ip{z-p}{v-p}\le0$.</p>
+<p>Recíprocamente, suponga que la desigualdad se cumple para todo $v\in C$. Pero
+entonces:</p>
+<div class="display">\[
+  \norm{z-v}^2=\norm{(z-p)+(p-v)}^2
+   =\norm{z-p}^2-2\ip{z-p}{v-p}+\norm{p-v}^2\ge\norm{z-p}^2,
+\]</div>
+<p>donde el término central es no negativo por hipótesis. Luego $p$ realiza el
+mínimo.</p></div></div>
+<div class="enunciado obs" id="cap3:obs-normal"><span class="rotulo">Observación.</span> <p>La desigualdad del teorema anterior dice exactamente que
+$z-\Proy_C z\in\Ncono_C(\Proy_C z)$, con el cono normal definido más arriba.
+Geométricamente, el vector que va del punto proyectado al
+punto original forma un ángulo obtuso con toda dirección que apunte hacia
+dentro de $C$, y el hiperplano que pasa por $\Proy_C z$ perpendicular a ese
+vector deja a $C$ entero de un lado. Es un hiperplano soporte de $C$ en
+$\Proy_C z$, y es la herramienta que faltaba para cerrar la igualdad bipolar de
+la sección anterior.</p></div></section>
+</main>
+<script>
+document.querySelectorAll('.verprueba').forEach(function(b){
+  b.addEventListener('click', function(){
+    var c = b.nextElementSibling;
+    var oculto = c.hasAttribute('hidden');
+    if (oculto) { c.removeAttribute('hidden'); b.textContent = 'Ocultar demostración'; }
+    else { c.setAttribute('hidden',''); b.textContent = 'Ver demostración'; }
+  });
+});
+</script>
+</body>
+</html>
