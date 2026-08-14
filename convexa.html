@@ -168,6 +168,9 @@ code{font-family:ui-monospace,Consolas,monospace; font-size:.85em}
 .v{display:none}
 .v[data-on="true"]{display:inline}
 .display .v[data-on="true"]{display:block}
+/* La rama de un \ifnum\modoNota envuelve displays enteros, asi que es un
+   <div> y tiene que ir en bloque, no en linea. */
+div.v[data-on="true"]{display:block}
 /* En modo «ambas» salen las dos, y sin esto saldrian pegadas y sin saber cual
    es cual. La de de Finetti va en gris, que es lo que hace \dfin en el PDF:
    debajo si es un display, detras y separada si va en linea. */
@@ -263,16 +266,10 @@ main{grid-column:2; width:min(41em,100%); margin:0 auto;
 #toc a.lvl-cap{color:var(--ink); font-weight:600; margin-top:.55em}
 #toc a.lvl-sec{padding-left:16px}
 #toc a.lvl-sub{padding-left:26px}
-#toc a.lvl-stmt{padding-left:16px; color:var(--faint); font-size:12px}
-#toc a.lvl-stmt .n{
-  color:var(--muted); font-variant-numeric:tabular-nums;
-  display:inline-block; min-width:2.3em;
-}
 #toc a.aqui{
   border-left-color:var(--link); background:var(--raise);
   color:var(--ink);
 }
-#toc a.aqui .n{color:var(--link)}
 
 /* ---------------------------------------------------------------------
    Cuadernos: la lateral DERECHA, que elige que Overleaf se esta viendo.
@@ -1071,32 +1068,28 @@ function setNota(n){
 /* --- indice ---------------------------------------------------------- */
 let observador = null;
 
+/* *** El indice es el del PDF: capitulos, secciones y subsecciones, y NADA
+   mas. *** Instruccion del usuario del 2026-08-14: «el toc debe ser el mismo
+   que del pdf real del overleaf».
+
+   Antes listaba tambien cada definicion y cada proposicion, copiado del
+   artefacto de la tesis. Alli tenia sentido porque aquel documento no tiene
+   secciones y su cuerpo son enunciados encadenados, asi que un indice de solo
+   encabezados habria quedado vacio. Aqui hay capitulos de verdad, y meter los
+   58 enunciados hace un indice que no se parece al del libro. */
 function construyeIndice(){
   const toc = $("#toc");
-  const piezas = $$("main h2, main h3, main h4, main .stmt");
+  const piezas = $$("main h2, main h3, main h4");
   let html = "<h4>Índice</h4>", n = 0;
   const dianas = [];
+  const CLASE = {H2:"lvl-cap", H3:"lvl-sec", H4:"lvl-sub"};
   piezas.forEach(el => {
     if(!el.id) el.id = "auto-" + (n++);
-    let clase, texto;
-    if(el.tagName === "H2"){ clase = "lvl-cap"; texto = esc(el.textContent.trim()); }
-    else if(el.tagName === "H3"){ clase = "lvl-sec"; texto = esc(el.textContent.trim()); }
-    else if(el.tagName === "H4"){ clase = "lvl-sub"; texto = esc(el.textContent.trim()); }
-    else{
-      const cab = el.querySelector(".head");
-      if(!cab) return;
-      // El .head trae la fuente pegada: se quita, que en una linea de indice
-      // no cabe y no ayuda a localizar nada.
-      const limpio = cab.cloneNode(true);
-      limpio.querySelectorAll(".src").forEach(s => s.remove());
-      const t = limpio.textContent.trim();
-      const m = t.match(/^(.*?)\s+([\d.]+)$/);
-      clase = "lvl-stmt";
-      texto = m ? '<span class="n">' + esc(m[2]) + '</span>' + esc(m[1])
-                : esc(t);
-    }
-    html += '<a class="' + clase + '" href="#' + esc(el.id)
-          + '" data-d="' + esc(el.id) + '">' + texto + "</a>";
+    // data-toc es el [titulo corto] de \chapter[corto]{largo}, que es justo
+    // el que LaTeX pone en el indice del PDF.
+    const texto = el.dataset.toc || el.textContent.trim();
+    html += '<a class="' + CLASE[el.tagName] + '" href="#' + esc(el.id)
+          + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
     dianas.push(el);
   });
   toc.innerHTML = html;

@@ -168,6 +168,9 @@ code{font-family:ui-monospace,Consolas,monospace; font-size:.85em}
 .v{display:none}
 .v[data-on="true"]{display:inline}
 .display .v[data-on="true"]{display:block}
+/* La rama de un \ifnum\modoNota envuelve displays enteros, asi que es un
+   <div> y tiene que ir en bloque, no en linea. */
+div.v[data-on="true"]{display:block}
 /* En modo «ambas» salen las dos, y sin esto saldrian pegadas y sin saber cual
    es cual. La de de Finetti va en gris, que es lo que hace \dfin en el PDF:
    debajo si es un display, detras y separada si va en linea. */
@@ -263,16 +266,10 @@ main{grid-column:2; width:min(41em,100%); margin:0 auto;
 #toc a.lvl-cap{color:var(--ink); font-weight:600; margin-top:.55em}
 #toc a.lvl-sec{padding-left:16px}
 #toc a.lvl-sub{padding-left:26px}
-#toc a.lvl-stmt{padding-left:16px; color:var(--faint); font-size:12px}
-#toc a.lvl-stmt .n{
-  color:var(--muted); font-variant-numeric:tabular-nums;
-  display:inline-block; min-width:2.3em;
-}
 #toc a.aqui{
   border-left-color:var(--link); background:var(--raise);
   color:var(--ink);
 }
-#toc a.aqui .n{color:var(--link)}
 
 /* ---------------------------------------------------------------------
    Cuadernos: la lateral DERECHA, que elige que Overleaf se esta viendo.
@@ -450,7 +447,7 @@ no hay reparto de masa, esa $T$ se llama <strong>aplicación de transporte
 equivale a que</p>
 <div class="display"><span class="v" data-var="std">\[\int_{X\times Y}\big[\varphi(x)+\psi(y)\big]\dd\gamma
             = \int_X\varphi\dd\mu + \int_Y\psi\dd\nu\]</span><span class="v" data-var="fin">\[\gamma(\varphi\oplus\psi) = \mu(\varphi)+\nu(\psi)\]</span></div>
-<p>\noindent para toda pareja $(\varphi,\psi)$ de funciones test, donde $\varphi\oplus\psi$
+<p>para toda pareja $(\varphi,\psi)$ de funciones test, donde $\varphi\oplus\psi$
 denota $(x,y)\mapsto\varphi(x)+\psi(y)$; basta tomarlas en
 $L^1(\mu)\times L^1(\nu)$, o en $C_b(X)\times C_b(Y)$ si $X$ e $Y$ son polacos, o
 en $C_0(X)\times C_0(Y)$ si además son localmente compactos.
@@ -492,7 +489,6 @@ puntos extremales que no están concentrados en ninguna gráfica.
 <span class="src">[Villani, Introducción §1]</span> (De paso, $\operatorname{Perm}(n)$ tiene $n!$
 elementos, que para $n=70$ pasa de $10^{100}$ <span class="src">[Peyré--Cuturi, §2.2]</span>, así
 que la relajación interesa también por razones de cálculo.)</p></div></div>
-<p>\bigskip</p>
 <p>Pasando a la existencia, el argumento es el método directo, y todo se reduce a
 compacidad del admisible y semicontinuidad inferior del funcional. Los siguientes
 resultados se enuncian sin demostrarlos.
@@ -658,58 +654,46 @@ cíclica y se prueba en §1.6.</p>
 <p>La construcción empieza escribiendo la restricción como un supremo, para poder
 sacarla del conjunto admisible y meterla en el funcional. Si
 $\gamma\in\Meas_+(X\times Y)$ entonces</p>
-<p>\ifnum\modoNota=1</p>
-<div class="display">\[
+<div class="v" data-var="fin"><div class="display">\[
   \sup_{\varphi,\psi}\;
   \mu(\varphi)+\nu(\psi)-\gamma(\varphi\oplus\psi)
   =\begin{cases}
      0 &amp; \text{si }\gamma\in\Adm(\mu,\nu),\\
      +\infty &amp; \text{en otro caso},
    \end{cases}
-\]</div>
-<p>\else</p>
-<div class="display">\[
+\]</div></div><div class="v" data-var="std"><div class="display">\[
   \sup_{\varphi,\psi}\;
   \int_X\varphi\dd\mu+\int_Y\psi\dd\nu-\int_{X\times Y}(\varphi(x)+\psi(y))\dd\gamma
   =\begin{cases}
      0 &amp; \text{si }\gamma\in\Adm(\mu,\nu),\\
      +\infty &amp; \text{en otro caso},
    \end{cases}
-\]</div>
-<p>\fi</p>
-<p>\noindent tomando el supremo entre las $\varphi,\psi$ continuas y acotadas. En
+\]</div></div>
+<p>tomando el supremo entre las $\varphi,\psi$ continuas y acotadas. En
 efecto, si $\gamma$ tiene las marginales correctas la expresión de dentro se
 anula idénticamente, por la forma emparejada de la restricción; y si no las
 tiene, alguna pareja de prueba la hace positiva, y escalándola el supremo se va a
 $+\infty$. Sumando ese supremo se pueden borrar las restricciones sobre $\gamma$,
 puesto que la minimización evitará sola el valor $+\infty$, y el problema queda</p>
-<p>\ifnum\modoNota=1</p>
-<div class="display">\begin{align}
+<div class="v" data-var="fin"><div class="display">\begin{align}
   \min_{\gamma}\;\gamma(c)
   +\sup_{\varphi,\psi}\;\Big[\mu(\varphi)+\nu(\psi)-\gamma(\varphi\oplus\psi)\Big].
   \label{eq:infsup}
-\end{align}</div>
-<p>\else</p>
-<div class="display">\begin{align}
+\end{align}</div></div><div class="v" data-var="std"><div class="display">\begin{align}
   \min_{\gamma}\;\int_{X\times Y}c\dd\gamma
   +\sup_{\varphi,\psi}\;\Big[\int_X\varphi\dd\mu+\int_Y\psi\dd\nu
     -\int_{X\times Y}(\varphi(x)+\psi(y))\dd\gamma\Big].
   \label{eq:infsup}
-\end{align}</div>
-<p>\fi</p>
+\end{align}</div></div>
 <p>Intercambiando formalmente el ínfimo y el supremo se llega a</p>
-<p>\ifnum\modoNota=1</p>
-<div class="display">\[
+<div class="v" data-var="fin"><div class="display">\[
   \sup_{\varphi,\psi}\;\mu(\varphi)+\nu(\psi)
   +\inf_{\gamma}\;\gamma\big(c-\varphi\oplus\psi\big),
-\]</div>
-<p>\else</p>
-<div class="display">\[
+\]</div></div><div class="v" data-var="std"><div class="display">\[
   \sup_{\varphi,\psi}\;\int_X\varphi\dd\mu+\int_Y\psi\dd\nu
   +\inf_{\gamma}\int_{X\times Y}\big(c(x,y)-(\varphi(x)+\psi(y))\big)\dd\gamma,
-\]</div>
-<p>\fi</p>
-<p>\noindent donde ese intercambio \remarcar{no está justificado todavía}.
+\]</div></div>
+<p>donde ese intercambio \remarcar{no está justificado todavía}.
 Lo que lo justificaría en dimensión finita es un teorema de Rockafellar que pide
 concavidad en una variable, convexidad en la otra y compacidad
 <span class="src">[Rockafellar, <em>Convex Analysis</em> §37]</span>, pero aquí el espacio es de
@@ -727,7 +711,7 @@ una restricción sobre la pareja $(\varphi,\psi)$:</p>
      0 &amp; \text{si }\varphi\oplus\psi\le c\text{ sobre }X\times Y,\\
      -\infty &amp; \text{en otro caso}.
    \end{cases}\]</span></div>
-<p>\noindent En efecto, si $\varphi\oplus\psi&gt;c$ en algún punto, tome medidas
+<p>En efecto, si $\varphi\oplus\psi&gt;c$ en algún punto, tome medidas
 concentradas en el conjunto donde la desigualdad estricta se cumple y con masa
 tendiendo a infinito. Se llega así al problema siguiente.</p>
 <div class="stmt problema" id="transporte-optimo-x23"><div class="head">Problema 1.9</div><div class="body"><p>Dadas $\mu\in\Pmeas(X)$, $\nu\in\Pmeas(Y)$ y $c:X\times Y\to[0,+\infty)$,
@@ -750,7 +734,7 @@ plan admisible,</p>
 <div class="display"><span class="v" data-var="std">\[\int_X\varphi\dd\mu+\int_Y\psi\dd\nu
   =\int_{X\times Y}(\varphi\oplus\psi)\dd\gamma
   \le\int_{X\times Y}c\dd\gamma,\]</span><span class="v" data-var="fin">\[\mu(\varphi)+\nu(\psi)=\gamma(\varphi\oplus\psi)\le\gamma(c),\]</span></div>
-<p>\noindent donde la igualdad es la forma emparejada de la restricción de
+<p>donde la igualdad es la forma emparejada de la restricción de
 marginales. Tomando supremo a la izquierda e ínfimo a la derecha queda
 $\sup(\mathrm{DP})\le\min(\mathrm{KP})$.</p>
 <div class="stmt observacion" id="transporte-optimo-x24"><div class="head">Observación sobre los conjuntos nulos</div><div class="body"><p>Villani enuncia eso como resultado propio <span class="src">[Villani, Proposición 1.5]</span> y
@@ -859,7 +843,7 @@ cae aunque la equicontinuidad sobreviva.</p>
 <div class="display"><span class="v" data-var="std">\[\min(\mathrm{KP})=\max_{\varphi\in\cconc(X)}
   \int_X\varphi\dd\mu+\int_Y\ccon{\varphi}\dd\nu,\]</span><span class="v" data-var="fin">\[\min(\mathrm{KP})=\max_{\varphi\in\cconc(X)}
   \mu(\varphi)+\nu(\ccon{\varphi}),\]</span></div>
-<p>\noindent y de ahí sale gratis una propiedad que el primal esconde: el lado
+<p>y de ahí sale gratis una propiedad que el primal esconde: el lado
 derecho es un supremo de funcionales lineales en la pareja $(\mu,\nu)$, luego
 $\min(\mathrm{KP})$ es una función convexa de $(\mu,\nu)$. Del lado
 izquierdo, donde el valor está definido como un mínimo, no se deduce nada
@@ -891,10 +875,8 @@ $\mathbf f_i+\mathbf g_j=\mathbf C_{i,j}$. <span class="src">[Peyré--Cuturi, ec
 para costes $c(x,y)=h(x-y)$ con $h$ estrictamente convexa, el plan
 óptimo proviene de una aplicación, y el argumento consiste en derivar la
 condición de saturación.</p></section>
-<section class="capitulo"><p>\chapter[1.3 El caso c(x,y)=h(x-y) con h estrictamente convexa]
-        {1.3 El caso $c(x,y)=h(x-y)$ con $h$ estrictamente convexa y la
-         existencia de una aplicación óptima}</p>
-<p>\markboth{\semanaHead}{1.3 El caso $c(x,y)=h(x-y)$}</p>
+<section class="capitulo"><h2 id="transporte-optimo-x31" data-toc="1.3 El caso c(x,y)=h(x-y) con h estrictamente convexa">1.3 El caso $c(x,y)=h(x-y)$ con $h$ estrictamente convexa y la
+         existencia de una aplicación óptima</h2>
 <p>Toda esta sección transcurre en $X=Y=\Omega\subset\R^{d}$, con $\Omega$ compacto
 por simplicidad, y con un coste de la forma $c(x,y)=h(x-y)$ para $h$ estrictamente
 convexa. Bajo esas hipótesis se responde lo que §1.1 dejó abierto: el plan óptimo
@@ -918,14 +900,14 @@ igualdad sobre el soporte sale de combinarla con</p>
   =\int_\Omega\varphi\dd\mu+\int_\Omega\ccon{\varphi}\dd\nu
   =\int_{\Omega\times\Omega}\big(\varphi(x)+\ccon{\varphi}(y)\big)\dd\gamma_\star,\]</span><span class="v" data-var="fin">\[\gamma_\star(c)=\mu(\varphi)+\nu(\ccon{\varphi})
   =\gamma_\star(\varphi\oplus\ccon{\varphi}),\]</span></div>
-<p>\noindent donde la primera igualdad es la ausencia de salto de dualidad y la
+<p>donde la primera igualdad es la ausencia de salto de dualidad y la
 segunda es la forma emparejada de la restricción de marginales. La función
 $c-\varphi\oplus\ccon{\varphi}$ es no negativa y tiene integral nula, luego se
 anula $\gamma_\star$-a.e.; siendo continua, el conjunto donde se anula es cerrado,
 y un cerrado que soporta toda la masa contiene al soporte. Este último paso pide
 la definición precisa, que no es la de un conjunto donde la medida esté
 concentrada.</p>
-<div class="stmt definicion" id="transporte-optimo-x31"><div class="head">Definición 1.14</div><div class="body"><p>Sobre un espacio métrico separable $X$, el <span class="df">soporte</span> de una medida $\gamma$ es
+<div class="stmt definicion" id="transporte-optimo-x32"><div class="head">Definición 1.14</div><div class="body"><p>Sobre un espacio métrico separable $X$, el <span class="df">soporte</span> de una medida $\gamma$ es
 el menor cerrado sobre el cual $\gamma$ está concentrada,</p>
 <div class="display">\[
   \spt(\gamma):=\bigcap\{A: A\text{ cerrado},\ \gamma(X\setminus A)=0\},
@@ -946,7 +928,7 @@ en $x_0$ y $x_0\notin\partial\Omega$, la condición de primer orden en un punto
 interior da $\nabla\varphi(x_0)=\nabla_x c(x_0,y_0)$. El hecho se usará mucho más
 adelante, así que se recoge en un enunciado breve, sin las hipótesis más finas
 sobre $c$.</p>
-<div class="stmt proposicion" id="transporte-optimo-x32"><div class="head">Proposición 1.15</div><div class="body"><p>Si $c$ es $C^{1}$, $\varphi$ es un potencial de Kantorovich para el coste $c$ en
+<div class="stmt proposicion" id="transporte-optimo-x33"><div class="head">Proposición 1.15</div><div class="body"><p>Si $c$ es $C^{1}$, $\varphi$ es un potencial de Kantorovich para el coste $c$ en
 el transporte de $\mu$ a $\nu$, y $(x_0,y_0)$ pertenece al soporte de un plan
 óptimo $\gamma_\star$, entonces $\nabla\varphi(x_0)=\nabla_x c(x_0,y_0)$, siempre
 que $\varphi$ sea diferenciable en $x_0$. En particular, los gradientes de dos
@@ -962,7 +944,7 @@ $\mu(B(x_0,r))=\gamma_\star(B(x_0,r)\times\Omega)=0$, contra $x_0\in\spt(\mu)$.
 Tomado ese $y_0$, los dos potenciales tienen en $x_0$ el mismo gradiente
 $\nabla_x c(x_0,y_0)$, que no depende de cuál de los dos se use.</p></div>
 <p>La igualdad $\nabla\varphi=\nabla_x c$ es útil justo cuando determina $y_0$.</p>
-<div class="stmt definicion" id="transporte-optimo-x33"><div class="head">Definición 1.16</div><div class="body"><p>Para $\Omega\subset\R^{d}$, se dice que $c:\Omega\times\Omega\to\R$ satisface la
+<div class="stmt definicion" id="transporte-optimo-x34"><div class="head">Definición 1.16</div><div class="body"><p>Para $\Omega\subset\R^{d}$, se dice que $c:\Omega\times\Omega\to\R$ satisface la
 <span class="df">condición de torsión</span> si $c$ es diferenciable respecto de $x$ en todo punto y
 la aplicación $y\mapsto\nabla_x c(x_0,y)$ es inyectiva para cada $x_0$. En
 economía se la conoce como condición de Spence--Mirrlees, y para dominios y
@@ -978,7 +960,7 @@ $\nabla\varphi(x_0)\in\partial h(x_0-y_0)$, con el subdiferencial de $h$, y en l
 dos formas se despeja $x_0-y_0$ porque $\partial h$ es inyectivo. Los dos hechos
 de análisis convexo que hacen falta para eso se demuestran en el §1.6, y son los
 siguientes.</p>
-<div class="stmt proposicion" id="transporte-optimo-x34"><div class="head">Proposición (caracterización del subdiferencial)</div><div class="body"><p>Sea $f:\R^{d}\to\R\cup\{+\infty\}$ propia, convexa y l.s.c. Entonces, para
+<div class="stmt proposicion" id="transporte-optimo-x35"><div class="head">Proposición (caracterización del subdiferencial)</div><div class="body"><p>Sea $f:\R^{d}\to\R\cup\{+\infty\}$ propia, convexa y l.s.c. Entonces, para
 cualesquiera $z,w\in\R^{d}$,</p>
 <div class="display">\[
   \ip{z}{w}=f(z)+f^{*}(w)
@@ -990,7 +972,7 @@ es diferenciable en un punto interior a su dominio si y solo si el
 subdiferencial ahí es un único punto, que entonces es $\nabla f$.
 <span class="src">[Villani, Proposición 2.4 y §2.1.3, puntos 1) y 3)]</span></p></div></div>
 <!-- entorno omitido: conexPersonal -->
-<div class="stmt lema" id="transporte-optimo-x35"><div class="head">Lema (inversión de $\partial h$)</div><div class="body"><p>Si $h$ es estrictamente convexa, $\partial h$ es inyectivo, en el sentido de que
+<div class="stmt lema" id="transporte-optimo-x36"><div class="head">Lema (inversión de $\partial h$)</div><div class="body"><p>Si $h$ es estrictamente convexa, $\partial h$ es inyectivo, en el sentido de que
 $w\in\partial h(z_1)\cap\partial h(z_2)$ obliga a $z_1=z_2$. En consecuencia
 $\partial h^{*}(w)$ se reduce a un punto para cada $w$ en el rango de $\partial
 h$, y ahí $h^{*}$ es diferenciable y se escribe
@@ -1017,13 +999,13 @@ $\varphi$ sea diferenciable $\mu$-a.e., cosa que se garantiza pidiendo que $\mu$
 sea absolutamente continua respecto de Lebesgue y probando que $\varphi$ es
 Lipschitz. Lo primero que hace falta es que ser Lipschitz baste.
 <span class="src">[Recuadro 1.9]</span></p>
-<div class="stmt teorema" id="transporte-optimo-x36"><div class="head">Teorema (Rademacher)</div><div class="body"><p>Sea $f:\R^{d}\to\R$ Lipschitz continua. Entonces el conjunto de puntos donde $f$
+<div class="stmt teorema" id="transporte-optimo-x37"><div class="head">Teorema (Rademacher)</div><div class="body"><p>Sea $f:\R^{d}\to\R$ Lipschitz continua. Entonces el conjunto de puntos donde $f$
 no es diferenciable es despreciable para la medida de Lebesgue.</p></div></div>
 <p>Con eso, para cada $x_0$ el punto $y_0$ tal que $(x_0,y_0)\in\spt(\gamma_\star)$
 es único cuando existe, es decir, $\gamma_\star$ es de la forma
 $\gamma_T=(\Id,T)\pushf\mu$ con $T(x_0)=y_0$, y de paso quedan la unicidad del
 plan óptimo y la del gradiente del potencial. Todo junto:</p>
-<div class="stmt teorema" id="transporte-optimo-x37"><div class="head">Teorema 1.17</div><div class="body"><p>Sean $\mu$ y $\nu$ probabilidades sobre un dominio compacto $\Omega\subset\R^{d}$.
+<div class="stmt teorema" id="transporte-optimo-x38"><div class="head">Teorema 1.17</div><div class="body"><p>Sean $\mu$ y $\nu$ probabilidades sobre un dominio compacto $\Omega\subset\R^{d}$.
 Existe un plan de transporte óptimo $\gamma_\star$ para el coste $c(x,y)=h(x-y)$
 con $h$ estrictamente convexa. Es único y de la forma $(\Id,T)\pushf\mu$ siempre
 que $\mu$ sea absolutamente continua y $\partial\Omega$ sea despreciable. Más aún,
@@ -1047,28 +1029,28 @@ todo plan óptimo está inducido por una aplicación de transporte y que esa
 aplicación es $x\mapsto x-(\nabla h)^{-1}(\nabla\varphi(x))$, luego queda
 determinada, puesto que $\varphi$ no depende de $\gamma_\star$. Se sigue la
 unicidad del plan óptimo.</p></div>
-<div class="stmt observacion" id="transporte-optimo-x38"><div class="head">Observación 1.18</div><div class="body"><p>Todos los costes de la forma $c(x,y)=\abs{x-y}^{p}$ con $p&gt;1$ se tratan con el
+<div class="stmt observacion" id="transporte-optimo-x39"><div class="head">Observación 1.18</div><div class="body"><p>Todos los costes de la forma $c(x,y)=\abs{x-y}^{p}$ con $p&gt;1$ se tratan con el
 Teorema 1.17.</p></div></div>
-<div class="stmt observacion" id="transporte-optimo-x39"><div class="head">Observación 1.19</div><div class="body"><p>En el teorema anterior la unicidad se obtuvo dando la expresión explícita de la
+<div class="stmt observacion" id="transporte-optimo-x40"><div class="head">Observación 1.19</div><div class="body"><p>En el teorema anterior la unicidad se obtuvo dando la expresión explícita de la
 aplicación óptima, pero hay un argumento más general: cada vez que se sepa que
 todo $\gamma_\star$ óptimo está inducido por una aplicación, se tiene unicidad.
 En efecto, si $\gamma_1=\gamma_{T_1}$ y $\gamma_2=\gamma_{T_2}$ fuesen óptimos y
 distintos, $\tfrac12\gamma_1+\tfrac12\gamma_2$ sería óptimo por convexidad, y ese
 plan no puede estar inducido por una aplicación a menos que $T_1=T_2$
 $\mu$-a.e. Contradicción.</p></div></div>
-<div class="stmt observacion" id="transporte-optimo-x40"><div class="head">Observación 1.20</div><div class="body"><p>Si las hipótesis sobre $\mu$ las cumple también $\nu$, hay además una aplicación
+<div class="stmt observacion" id="transporte-optimo-x41"><div class="head">Observación 1.20</div><div class="body"><p>Si las hipótesis sobre $\mu$ las cumple también $\nu$, hay además una aplicación
 óptima en el sentido contrario, $\gamma_\star=(S,\Id)\pushf\nu$. Entonces
 $\gamma_\star$-a.e.\ valen $y=T(x)$ y $x=S(y)$, es decir $S(T(x))=x$ para
 $\mu$-a.e.\ $x$, de donde $T$ es invertible sobre un conjunto de medida total y
 su inversa es la aplicación óptima de $\nu$ a $\mu$.</p></div></div>
-<h3 id="transporte-optimo-x41">1.3.1 El caso cuadrático en $\R^{d}$</h3>
+<h3 id="transporte-optimo-x42">1.3.1 El caso cuadrático en $\R^{d}$</h3>
 <p>El coste $c(x,y)=\tfrac12\abs{x-y}^{2}$ en $\R^{d}$ merece atención aparte, y la
 razón es la conexión entre la $c$-concavidad y la convexidad de siempre. Para
 enunciarla hace falta el segundo hecho de análisis convexo prometido arriba.</p>
-<div class="stmt proposicion" id="transporte-optimo-x42"><div class="head">Proposición (dualidad de Legendre)</div><div class="body"><p>Sea $f:\R^{d}\to\R\cup\{+\infty\}$ propia. Son equivalentes: $f$ es convexa y
+<div class="stmt proposicion" id="transporte-optimo-x43"><div class="head">Proposición (dualidad de Legendre)</div><div class="body"><p>Sea $f:\R^{d}\to\R\cup\{+\infty\}$ propia. Son equivalentes: $f$ es convexa y
 l.s.c.; $f=g^{*}$ para alguna $g$ propia; y $f^{**}=f$.
 <span class="src">[Villani, Proposición 2.5]</span></p></div></div>
-<div class="stmt proposicion" id="transporte-optimo-x43"><div class="head">Proposición 1.21</div><div class="body"><p>Dada $\chi:\R^{d}\to\R\cup\{-\infty\}$, defina
+<div class="stmt proposicion" id="transporte-optimo-x44"><div class="head">Proposición 1.21</div><div class="body"><p>Dada $\chi:\R^{d}\to\R\cup\{-\infty\}$, defina
 $u_\chi:\R^{d}\to\R\cup\{+\infty\}$ mediante
 $u_\chi(x)=\tfrac12\abs{x}^{2}-\chi(x)$. Entonces
 $u_{\ccon{\chi}}=(u_\chi)^{*}$. En particular, una función $\zeta$ es
@@ -1104,7 +1086,7 @@ para todo $\gamma\in\Adm(\mu,\nu)$ vale</p>
    -\int_{\Omega\times\Omega}\ip{x}{y}\dd\gamma,\]</span><span class="v" data-var="fin">\[\gamma\big(\tfrac12\abs{\pi_x-\pi_y}^{2}\big)
   =\tfrac12\mu(\abs{\cdot}^{2})+\tfrac12\nu(\abs{\cdot}^{2})
    -\gamma\big(\ip{\pi_x}{\pi_y}\big),\]</span></div>
-<p>\noindent de modo que minimizar el coste equivale a maximizar
+<p>de modo que minimizar el coste equivale a maximizar
 <span class="v" data-var="std">$\int\ip{x}{y}\dd\gamma$</span><span class="v" data-var="fin">$\gamma(\ip{\pi_x}{\pi_y})$</span>, y el dual de ese
 problema pide parejas $(u,v)$ con $\ip{x}{y}\le u(x)+v(y)$. Se llega así a
 $u(x_0)+u^{*}(y_0)=\ip{x_0}{y_0}$ para una función convexa $u$ y su conjugada, y
@@ -1123,7 +1105,7 @@ contenido $\Haus^{d-1}$-a.e.\ en una unión numerable de superficies $(d-1)$ de
 clase $C^{2}$, y recíprocamente todo conjunto $(d-1)$-rectificable en ese sentido
 $C^{2}$ está contenido en el conjunto de no diferenciabilidad de alguna función
 convexa.</p>
-<div class="stmt observacion" id="transporte-optimo-x44"><div class="head">Observación (caracterización de Gigli)</div><div class="body"><p>Esas consideraciones permiten extender el Teorema 1.17 así: dadas
+<div class="stmt observacion" id="transporte-optimo-x45"><div class="head">Observación (caracterización de Gigli)</div><div class="body"><p>Esas consideraciones permiten extender el Teorema 1.17 así: dadas
 $\mu,\nu\in\Pmeas(\Omega)$, si $\mu(A)=0$ para toda superficie $A$ de clase
 $C^{2}$ y codimensión $1$, entonces el plan óptimo para el coste cuadrático es
 único y está inducido por una aplicación, sea cual sea $\nu$. Y esa condición
@@ -1138,16 +1120,16 @@ existencia de solución $(\varphi,\psi)$ de</p>
   \varphi\in L^{1}(\mu),\ \psi\in L^{1}(\nu),\ \varphi\oplus\psi\le c\right\},\]</span><span class="v" data-var="fin">\[(\mathrm{DP\text{-}var})\quad
   \sup\big\{\mu(\varphi)+\nu(\psi)\;:\;
   \varphi\in L^{1}(\mu),\ \psi\in L^{1}(\nu),\ \varphi\oplus\psi\le c\big\},\]</span></div>
-<p>\noindent junto con $\max(\mathrm{DP\text{-}var})=\min(\mathrm{KP})$. El mismo
+<p>junto con $\max(\mathrm{DP\text{-}var})=\min(\mathrm{KP})$. El mismo
 enunciado, ya en la forma transformada que la prueba va a usar, está demostrado
 en Villani.</p>
-<div class="stmt teorema" id="transporte-optimo-x45"><div class="head">Teorema (existencia de una pareja conjugada óptima) 2.9 de Villani</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ con segundos momentos finitos.
+<div class="stmt teorema" id="transporte-optimo-x46"><div class="head">Teorema (existencia de una pareja conjugada óptima) 2.9 de Villani</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ con segundos momentos finitos.
 Entonces existe una pareja $(u,u^{*})$ de funciones convexas propias, l.s.c.\ y
 conjugadas entre sí que realiza el ínfimo de
 <span class="v" data-var="std">$\int u\dd\mu+\int v\dd\nu$</span><span class="v" data-var="fin">$\mu(u)+\nu(v)$</span> sobre todas las parejas $(u,v)$
 que satisfacen $\ip{x}{y}\le u(x)+v(y)$ para todos $x,y$.
 <span class="src">[Villani, Teorema 2.9]</span></p></div></div>
-<div class="stmt teorema" id="transporte-optimo-x46"><div class="head">Teorema 1.22</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ y $c(x,y)=\tfrac12\abs{x-y}^{2}$.
+<div class="stmt teorema" id="transporte-optimo-x47"><div class="head">Teorema 1.22</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ y $c(x,y)=\tfrac12\abs{x-y}^{2}$.
 Suponga <span class="v" data-var="std">$\int\abs{x}^{2}\dd\mu,\ \int\abs{y}^{2}\dd\nu&lt;+\infty$</span><span class="v" data-var="fin">$\mu(\abs{\cdot}^{2}),\ \nu(\abs{\cdot}^{2})&lt;+\infty$</span>, lo que implica
 $\min(\mathrm{KP})&lt;+\infty$, y suponga que $\mu$ no da masa a las superficies
 $(d-1)$ de clase $C^{2}$. Entonces existe, y es única, una aplicación de
@@ -1173,7 +1155,7 @@ que se usa en la prueba, son los segundos momentos de $\mu$ y de $\nu$, como en
 la condición (2.2) de Villani.</p>
 <p>El caso gaussiano da la única aplicación óptima que en este capítulo se puede
 escribir con fórmula cerrada.</p>
-<div class="stmt ejemplo" id="transporte-optimo-x47"><div class="head">Ejemplo</div><div class="body"><p>Sean $\mu=\mathcal N(m_\mu,\Sigma_\mu)$ y $\nu=\mathcal N(m_\nu,\Sigma_\nu)$ dos
+<div class="stmt ejemplo" id="transporte-optimo-x48"><div class="head">Ejemplo</div><div class="body"><p>Sean $\mu=\mathcal N(m_\mu,\Sigma_\mu)$ y $\nu=\mathcal N(m_\nu,\Sigma_\nu)$ dos
 gaussianas no degeneradas en $\R^{d}$ y sea $c(x,y)=\abs{x-y}^{2}$. La aplicación
 afín</p>
 <div class="display">\[
@@ -1193,7 +1175,7 @@ afín</p>
 \]</div>
 <p>donde el segundo sumando es el cuadrado de la métrica de Bures entre las dos
 matrices de covarianza. <span class="src">[Peyré--Cuturi, ecs. (2.40) a (2.42)]</span></p></div></div>
-<div class="stmt observacion" id="transporte-optimo-x48"><div class="head">Observación (la ecuación de Monge--Ampère)</div><div class="body"><p>Si $\mu$ y $\nu$ tienen densidades $\rho_\mu$ y $\rho_\nu$, la condición
+<div class="stmt observacion" id="transporte-optimo-x49"><div class="head">Observación (la ecuación de Monge--Ampère)</div><div class="body"><p>Si $\mu$ y $\nu$ tienen densidades $\rho_\mu$ y $\rho_\nu$, la condición
 $(\nabla u)\pushf\mu=\nu$ se escribe formalmente, por cambio de variable, como</p>
 <div class="display">\[
   \det\big(D^{2}u(x)\big)\,\rho_\nu\big(\nabla u(x)\big)=\rho_\mu(x),
@@ -1204,7 +1186,7 @@ desplazamientos pequeños, $u(x)=\tfrac12\abs{x}^{2}+\varepsilon w(x)$ da
 $\det(D^{2}u)=1+\varepsilon \Delta w+o(\varepsilon)$. La restricción de
 convexidad fuerza $\det(D^{2}u)\ge0$ y es necesaria para que la ecuación tenga
 solución. <span class="src">[Peyré--Cuturi, Observación 2.25 y ec. (2.32)]</span></p></div></div>
-<div class="stmt observacion" id="transporte-optimo-x49"><div class="head">Observación 1.23</div><div class="body"><p>En dimensión uno todo esto da un resultado especialmente limpio. Suponga que
+<div class="stmt observacion" id="transporte-optimo-x50"><div class="head">Observación 1.23</div><div class="body"><p>En dimensión uno todo esto da un resultado especialmente limpio. Suponga que
 $\mu\in\Pmeas(\R)$ no tiene átomos. Entonces toda función convexa es
 diferenciable $\mu$-a.e., puesto que el conjunto de puntos de no diferenciabilidad
 de una función convexa es a lo sumo numerable: si $\psi$ es convexa, los
@@ -1218,7 +1200,7 @@ distribución: si $C_\mu$ y $C_\nu$ son las de $\mu$ y $\nu$ y $C_\nu^{-1}$ es l
 pseudoinversa, o función cuantil generalizada, entonces $T=C_\nu^{-1}\circ C_\mu$.
 <span class="src">[Peyré--Cuturi, ec. (2.39)]</span> El capítulo 2 vuelve sobre ello y prueba que
 la aplicación monótona es óptima para toda una familia de costes.</p>
-<div class="stmt observacion" id="transporte-optimo-x50"><div class="head">Observación 1.24</div><div class="body"><p>Algunas de las propiedades del caso cuadrático sobreviven al pasar a un coste
+<div class="stmt observacion" id="transporte-optimo-x51"><div class="head">Observación 1.24</div><div class="body"><p>Algunas de las propiedades del caso cuadrático sobreviven al pasar a un coste
 general $c(x,y)$ de clase $C^{1,1}$ que satisfaga la condición de torsión de la
 Definición 1.16. Que el transporte sea el gradiente de una función convexa deja
 de ser cierto, evidentemente; pero las propiedades de diferenciabilidad de los
@@ -1232,7 +1214,7 @@ punto que aquí no se ha tocado, el de prescindir de la compacidad. Su Proposici
 dominio, y semicóncava cuando $c\in C^{1,1}_{\mathrm{loc}}$, condición que excluye
 los costes $\abs{x-y}^{p}$ con $p&lt;2$. <span class="src">[Villani, Proposición 2.43]</span> Con ella
 se obtiene el Teorema 1.17 sobre todo $\R^{d}$.</p>
-<div class="stmt teorema" id="transporte-optimo-x51"><div class="head">Teorema (Gangbo--McCann) 2.44 de Villani</div><div class="body"><p>Sea $c$ un coste estrictamente convexo y superlineal sobre $\R^{d}$, y sean
+<div class="stmt teorema" id="transporte-optimo-x52"><div class="head">Teorema (Gangbo--McCann) 2.44 de Villani</div><div class="body"><p>Sea $c$ un coste estrictamente convexo y superlineal sobre $\R^{d}$, y sean
 $\mu,\nu$ probabilidades sobre $\R^{d}$ cuyo coste total de transporte no sea
 siempre infinito. Si $\mu$ es absolutamente continua respecto de Lebesgue, existe
 un único plan de transporte óptimo, tiene la forma $(\Id,T)\pushf\mu$, y $T$ queda
@@ -1241,7 +1223,7 @@ $T(x)=x-\nabla c^{*}(\nabla\varphi(x))$ para alguna $\varphi$ que es $c$-cóncav
 Si además $c\in C^{1,1}_{\mathrm{loc}}$, la conclusión vale bajo la hipótesis más
 débil de que $\mu$ no dé masa a los conjuntos de dimensión de Hausdorff a lo sumo
 $d-1$. <span class="src">[Villani, Teorema 2.44]</span></p></div></div>
-<h3 id="transporte-optimo-x52">1.3.2 El caso cuadrático en el toro plano</h3>
+<h3 id="transporte-optimo-x53">1.3.2 El caso cuadrático en el toro plano</h3>
 <p>Ver qué ocurre al sustituir las medidas sobre $\R^{d}$ por medidas sobre el toro
 plano $\Tor^{d}=\R^{d}/\Z^{d}$, y el coste $\tfrac12\abs{x-y}^{2}$ por el cuadrado
 de la distancia en el toro, es útil por dos razones. Es el ejemplo más simple de
@@ -1267,7 +1249,7 @@ punto donde el $\bar k$ óptimo sea único. Dado un punto $x$, se llama
 vista como función de la pareja $(x,y)$, no es diferenciable en $(x,y)$; se
 escribe $\cut(x)$, y en el toro plano coincide con el conjunto de los $y$ tales
 que $y-x\in\partial Q+\Z^{d}$.</p>
-<div class="stmt teorema" id="transporte-optimo-x53"><div class="head">Teorema 1.25</div><div class="body"><p>Tome $\mu,\nu\in\Pmeas(\Tor^{d})$, con $\mu\ll\Leb^{d}$, y
+<div class="stmt teorema" id="transporte-optimo-x54"><div class="head">Teorema 1.25</div><div class="body"><p>Tome $\mu,\nu\in\Pmeas(\Tor^{d})$, con $\mu\ll\Leb^{d}$, y
 $c(x,y)=\tfrac12\abs{[x-y]}^{2}$. Entonces existe un único plan de transporte
 óptimo $\gamma_\star\in\Adm(\mu,\nu)$. Tiene la forma $\gamma_\star=\gamma_T$ y la
 aplicación óptima viene dada por $T(x)=x-\nabla\varphi(x)$ para a.e.\ $x$, donde
@@ -1299,7 +1281,7 @@ deduce $x_0-y_0-k_0=\nabla\varphi(x_0)$, lo que determina $k_0$ de manera única
 partir de $x_0$ y de $y_0$, y por ende $y_0\notin\cut(x_0)$. De aquí $y_0$ queda
 determinado de manera única por $x_0$, y se obtiene el resultado usual de
 existencia y unicidad de la aplicación óptima.</p></div>
-<div class="stmt observacion" id="transporte-optimo-x54"><div class="head">Observación 1.26</div><div class="body"><p>En la demostración anterior se puede observar además que $k_0=0$ si
+<div class="stmt observacion" id="transporte-optimo-x55"><div class="head">Observación 1.26</div><div class="body"><p>En la demostración anterior se puede observar además que $k_0=0$ si
 $x_0-y_0\in Q$. En particular, si $\spt(\mu)$ y $\spt(\nu)$ están contenidos en
 $\tfrac12 Q$, el transporte es idéntico al que se obtendría con el coste
 cuadrático clásico en $\R^{d}$ en vez del marco periódico de $\Tor^{d}$.</p></div></div>
@@ -1307,13 +1289,13 @@ cuadrático clásico en $\R^{d}$ en vez del marco periódico de $\Tor^{d}$.</p><
 riemanniana completa y el coste por $d(x,y)^{2}$ con $d$ la distancia geodésica.
 El teorema de McCann que lo cubre está enunciado en Villani.
 <span class="src">[Villani, §2.4.5]</span></p></section>
-<section class="capitulo"><h2 id="transporte-optimo-x55">1.4 Contraejemplos a la existencia</h2>
+<section class="capitulo"><h2 id="transporte-optimo-x56">1.4 Contraejemplos a la existencia</h2>
 <p>Quedan fuera del Teorema 1.17 dos situaciones en las que no existe transporte
 óptimo, y las dos merecen verse. En ambas el coste $c(x,y)$ sería de los que
 suelen dar existencia, por ejemplo $c(x,y)=\abs{x-y}^{2}$, y la razón del fallo
 está en la medida $\mu$. También hay ejemplos donde la culpa es del coste y no de
 las medidas, y aparecen entre los ejercicios del texto guía, en Ex(58) y Ex(59).</p>
-<h3 id="transporte-optimo-x56">No hay transporte</h3>
+<h3 id="transporte-optimo-x57">No hay transporte</h3>
 <p>El primero es muy fácil. Considere $\mu=\delta_a$ con $a\in X$ y suponga que
 $\nu$ no es una masa de Dirac. Entonces no hay ninguna aplicación de transporte:
 $T\pushf\delta_a=\delta_{T(a)}$, luego ninguna $T:X\to Y$ puede servir si $\nu$
@@ -1329,13 +1311,13 @@ medidas atómicas. Con $\mu=\delta_a$ la situación es de hecho la más simple
 posible: el conjunto $\Adm(\mu,\nu)$ contiene un solo elemento, que es
 $\gamma=\mu\otimes\nu=\delta_a\otimes\nu$. Es el mismo obstáculo que abría §1.1,
 visto ahora desde el lado en que se resuelve.</p>
-<h3 id="transporte-optimo-x57">Hay transporte, pero no óptimo</h3>
+<h3 id="transporte-optimo-x58">Hay transporte, pero no óptimo</h3>
 <p>Tome el coste cuadrático $c(x,y)=\abs{x-y}^{2}$, aunque cualquier otro coste
 estrictamente creciente en la distancia daría el mismo resultado, y ponga</p>
 <div class="display"><span class="v" data-var="std">\[\mu=\Haus^{1}\llcorner A,\qquad
   \nu=\frac{\Haus^{1}\llcorner B+\Haus^{1}\llcorner C}{2},\]</span><span class="v" data-var="fin">\[\mu(f)=\Haus^{1}(Af),\qquad
   \nu(f)=\tfrac12\Haus^{1}(Bf)+\tfrac12\Haus^{1}(Cf),\]</span></div>
-<p>\noindent donde $A$, $B$ y $C$ son tres segmentos verticales paralelos en
+<p>donde $A$, $B$ y $C$ son tres segmentos verticales paralelos en
 $\R^{2}$ cuyos extremos están sobre las rectas $y=0$ e $y=1$ y cuyas abscisas son
 $0$, $1$ y $-1$ respectivamente, y $\Haus^{1}$ es la medida de Hausdorff
 unidimensional. Las dos son probabilidades porque los tres segmentos miden $1$.</p>
@@ -1435,32 +1417,28 @@ function setNota(n){
 /* --- indice ---------------------------------------------------------- */
 let observador = null;
 
+/* *** El indice es el del PDF: capitulos, secciones y subsecciones, y NADA
+   mas. *** Instruccion del usuario del 2026-08-14: «el toc debe ser el mismo
+   que del pdf real del overleaf».
+
+   Antes listaba tambien cada definicion y cada proposicion, copiado del
+   artefacto de la tesis. Alli tenia sentido porque aquel documento no tiene
+   secciones y su cuerpo son enunciados encadenados, asi que un indice de solo
+   encabezados habria quedado vacio. Aqui hay capitulos de verdad, y meter los
+   58 enunciados hace un indice que no se parece al del libro. */
 function construyeIndice(){
   const toc = $("#toc");
-  const piezas = $$("main h2, main h3, main h4, main .stmt");
+  const piezas = $$("main h2, main h3, main h4");
   let html = "<h4>Índice</h4>", n = 0;
   const dianas = [];
+  const CLASE = {H2:"lvl-cap", H3:"lvl-sec", H4:"lvl-sub"};
   piezas.forEach(el => {
     if(!el.id) el.id = "auto-" + (n++);
-    let clase, texto;
-    if(el.tagName === "H2"){ clase = "lvl-cap"; texto = esc(el.textContent.trim()); }
-    else if(el.tagName === "H3"){ clase = "lvl-sec"; texto = esc(el.textContent.trim()); }
-    else if(el.tagName === "H4"){ clase = "lvl-sub"; texto = esc(el.textContent.trim()); }
-    else{
-      const cab = el.querySelector(".head");
-      if(!cab) return;
-      // El .head trae la fuente pegada: se quita, que en una linea de indice
-      // no cabe y no ayuda a localizar nada.
-      const limpio = cab.cloneNode(true);
-      limpio.querySelectorAll(".src").forEach(s => s.remove());
-      const t = limpio.textContent.trim();
-      const m = t.match(/^(.*?)\s+([\d.]+)$/);
-      clase = "lvl-stmt";
-      texto = m ? '<span class="n">' + esc(m[2]) + '</span>' + esc(m[1])
-                : esc(t);
-    }
-    html += '<a class="' + clase + '" href="#' + esc(el.id)
-          + '" data-d="' + esc(el.id) + '">' + texto + "</a>";
+    // data-toc es el [titulo corto] de \chapter[corto]{largo}, que es justo
+    // el que LaTeX pone en el indice del PDF.
+    const texto = el.dataset.toc || el.textContent.trim();
+    html += '<a class="' + CLASE[el.tagName] + '" href="#' + esc(el.id)
+          + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
     dianas.push(el);
   });
   toc.innerHTML = html;
