@@ -168,6 +168,13 @@ code{font-family:ui-monospace,Consolas,monospace; font-size:.85em}
 .v{display:none}
 .v[data-on="true"]{display:inline}
 .display .v[data-on="true"]{display:block}
+/* En modo «ambas» salen las dos, y sin esto saldrian pegadas y sin saber cual
+   es cual. La de de Finetti va en gris, que es lo que hace \dfin en el PDF:
+   debajo si es un display, detras y separada si va en linea. */
+:root[data-nota="ambas"] .v[data-var="fin"]{color:var(--faint)}
+:root[data-nota="ambas"] .v[data-var="fin"]::before{content:"\00a0\00a0"}
+:root[data-nota="ambas"] .display .v[data-var="fin"]{margin-top:-.4em}
+:root[data-nota="ambas"] .display .v[data-var="fin"]::before{content:none}
 
 /* --- enunciados ------------------------------------------------------ */
 .stmt{
@@ -334,33 +341,16 @@ main{grid-column:2; width:min(41em,100%); margin:0 auto;
 </style>
 
 <script>
-// Las macros del preambulo, declaradas aqui. NO se convierten formulas:
-// MathJax las lee tal cual del texto del DOM.
+// Las macros salen del preambulo del PROPIO main.tex de esta nota, leidas por
+// build.py. Escritas a mano aqui se desincronizaban en silencio: el dia que
+// alguien anade un \newcommand al Overleaf, la web lo ensena como codigo crudo.
+// NO se convierten formulas: MathJax las lee tal cual del texto del DOM.
 window.MathJax = {
   tex: {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {
-      R:"\\mathbb{R}", N:"\\mathbb{N}", E:"\\mathbb{E}", Prob:"\\mathbb{P}",
-      F:"\\mathcal{F}", dd:"\\,\\mathrm{d}",
-      norm:["\\left\\lVert #1 \\right\\rVert",1],
-      abs:["\\left\\lvert #1 \\right\\rvert",1],
-      ip:["\\left\\langle #1,#2\\right\\rangle",2],
-      Tr:"\\operatorname{tr}", Id:"\\operatorname{Id}",
-      Var:"\\operatorname{Var}", Cov:"\\operatorname{Cov}",
-      Hs:"\\mathcal{H}", Ks:"\\mathcal{K}",
-      Bop:["\\mathcal{B}(#1)",1], Ball:"\\mathcal{B}", Dif:"\\mathrm{D}",
-      orth:["#1^{\\perp}",1],
-      aff:"\\operatorname{aff}", conv:"\\operatorname{conv}",
-      cono:"\\operatorname{cone}", cl:"\\operatorname{cl}",
-      intr:"\\operatorname{int}", ri:"\\operatorname{ri}",
-      polar:["#1^{\\circ}",1], Ncono:"N", Proy:"P", simplex:"\\Delta",
-      subdif:"\\partial", dom:"\\operatorname{dom}", epi:"\\operatorname{epi}",
-      argmin:"\\operatorname*{argmin}", argmax:"\\operatorname*{argmax}",
-      dist:["d_{#1}",1],
-      Sym:["\\mathbb{S}^{#1}",1], PSD:["\\mathbb{S}^{#1}_{+}",1]
-    }
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "\\mathcal{B}", "Dif": "\\mathrm{D}", "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "Proy": "P", "simplex": "\\Delta", "subdif": "\\partial", "dist": ["d_{#1}", 1], "Sym": ["\\mathbb{S}^{#1}", 1], "PSD": ["\\mathbb{S}^{#1}_{+}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
 };
@@ -1024,6 +1014,7 @@ la sección anterior.</p></div></div></section>
 <nav id="cuadernos" aria-label="Cuadernos">
 <h4>Cuadernos</h4>
 <a href="convexa.html" class="aqui"><span class="t">Optimización Convexa en Espacios de Hilbert</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a href="transporte-optimo.html"><span class="t">Lecture Notes on Optimal Transport</span><span class="c">Universidad de los Andes · 2026-20</span></a>
 <a class="portada" href="index.html">Todas las notas</a>
 </nav>
 </div>
@@ -1068,6 +1059,7 @@ function setTam(n){
    cual se ve. «ambas» ensena las dos, que es el \notaAmbas del LaTeX. */
 function setNota(n){
   if(!CFG.notaciones.length) return;
+  document.documentElement.dataset.nota = n;   // el CSS de «ambas» lo necesita
   $$(".v[data-var]").forEach(v => {
     v.dataset.on = (n === "ambas" || v.dataset.var === n) ? "true" : "false";
   });
