@@ -7,104 +7,335 @@
      indexable no son lo mismo. Aplica a TODAS las paginas del sitio. -->
 <meta name="robots" content="noindex, nofollow">
 <title>Optimización Convexa en Espacios de Hilbert</title>
+<!-- Un libro abierto, dibujado en SVG y empotrado como data URI: no es un
+     archivo aparte, asi que no hay una peticion mas ni un 404 que enseñe el
+     icono roto. Los colores son los del sitio. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316324f'/%3E%3Cpath d='M5.5 8.6c3.5-1.3 6.9-1.2 9.8.6v14.2c-2.9-1.8-6.3-1.9-9.8-.6z' fill='%23fcfcfd'/%3E%3Cpath d='M26.5 8.6c-3.5-1.3-6.9-1.2-9.8.6v14.2c2.9-1.8 6.3-1.9 9.8-.6z' fill='%23cfe0f2'/%3E%3C/svg%3E">
 <style>
+/* ---------------------------------------------------------------------
+   Tokens. Los mismos del artefacto de notas_junca, que es la referencia
+   que pidio el usuario el 2026-08-14.
+   La paleta clara COMPLETA vive en :root; los dos bloques de abajo solo
+   redefinen tokens, nunca estilan un componente, que si no el tema
+   «sistema» (sin data-theme) se queda sin color.
+   --------------------------------------------------------------------- */
 :root{
-  --fondo:#fdfdfb; --texto:#1b1b1f; --tenue:#5f5f6e; --linea:#e2e2dc;
-  --lateral:#f5f5f1; --acento:#3b5bdb;
-  --teo:#1c3f94; --prop:#4178c0; --coro:#2b5aa8; --lema:#4a7c8c;
-  --def:#2f7d43; --obs:#a37211; --ej:#6b7a2a;
-  --pruebafondo:#f7f7f4;
+  --paper:#fcfcfd; --ink:#16191f; --muted:#5a636f; --faint:#8a93a0;
+  --rule:#dde1e7; --raise:#f1f4f8; --raise2:#e7ecf2;
+  --def:#1c6b3c; --def-bg:#e6f1ea; --mark:#8f1d3f;
+  --link:#1d4f87; --shadow:rgba(16,25,40,.15);
+  --btn:#eef1f6; --btn-on:#16324f; --btn-on-ink:#ffffff;
+
+  /* Letra y cuerpo. Son tokens porque los mueven los botones de la barra.
+     Todo es fuente de sistema. Las cadenas van de lo mejor a lo peor y
+     siempre acaban en una familia generica, asi que en un equipo sin la
+     primera no se rompe nada, solo cambia. */
+  --ff-body:"Charter","Iowan Old Style","Source Serif Pro",Cambria,Georgia,serif;
+  --ff-math:"Cambria Math","STIX Two Math","Latin Modern Math",Cambria,serif;
+  --fs:17px;
+  --lh:1.6;
+
+  /* Cuanto hay que dejar libre arriba. La barra es sticky y taparia lo que se
+     ancla al borde superior: los dos paneles y el destino de cada enlace
+     interno. Son tokens porque al plegar la barra hay que recuperar ese
+     hueco; si se quedan fijos, el documento sigue esquivando una barra que
+     ya no esta. */
+  --arriba-panel:52px;
+  --arriba-ancla:60px;
+}
+:root[data-bar="off"]{--arriba-panel:14px; --arriba-ancla:18px}
+/* La matematica se queda en una serif matematica aunque el cuerpo sea de palo:
+   es lo que hace cualquier revista, y una integral en Segoe UI se lee mal. */
+:root[data-font="sans"]{
+  --ff-body:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --lh:1.62;
+}
+/* «Como el PDF». Aqui SI se puede pedir por nombre, al contrario que en el
+   artefacto: esto es una pagina normal, no un artifact con CSP, asi que si
+   el equipo tiene Latin Modern instalada la coge, y si no cae a Cambria. */
+:root[data-font="lm"]{
+  --ff-body:"Latin Modern Roman","LM Roman 10",Cambria,Georgia,serif;
+  --lh:1.58;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --fondo:#14141a; --texto:#e8e8ea; --tenue:#a0a0b0; --linea:#2c2c36;
-    --lateral:#1a1a22; --acento:#8aa4f5;
-    --teo:#7fa0e8; --prop:#8fb8e8; --coro:#89a8e0; --lema:#8fc0cf;
-    --def:#7fc98f; --obs:#e0b45c; --ej:#b6c46a;
-    --pruebafondo:#1c1c24;
+    --paper:#131619; --ink:#e2e6eb; --muted:#98a1ac; --faint:#727c88;
+    --rule:#282e35; --raise:#1a1e23; --raise2:#232930;
+    --def:#68be8b; --def-bg:#18271e; --mark:#df8199;
+    --link:#79a9dd; --shadow:rgba(0,0,0,.55);
+    --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
   }
 }
 :root[data-theme="dark"]{
-  --fondo:#14141a; --texto:#e8e8ea; --tenue:#a0a0b0; --linea:#2c2c36;
-  --lateral:#1a1a22; --acento:#8aa4f5;
-  --teo:#7fa0e8; --prop:#8fb8e8; --coro:#89a8e0; --lema:#8fc0cf;
-  --def:#7fc98f; --obs:#e0b45c; --ej:#b6c46a;
-  --pruebafondo:#1c1c24;
+  --paper:#131619; --ink:#e2e6eb; --muted:#98a1ac; --faint:#727c88;
+  --rule:#282e35; --raise:#1a1e23; --raise2:#232930;
+  --def:#68be8b; --def-bg:#18271e; --mark:#df8199;
+  --link:#79a9dd; --shadow:rgba(0,0,0,.55);
+  --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
 }
+
 *{box-sizing:border-box}
 body{
-  margin:0; background:var(--fondo); color:var(--texto);
-  font-family:Georgia,"Times New Roman",serif; line-height:1.62;
-  display:flex; min-height:100vh;
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--ff-body);
+  font-size:var(--fs); line-height:var(--lh);
+  -webkit-text-size-adjust:100%;
 }
-a{color:var(--acento)}
-.lateral{
-  width:270px; flex:0 0 270px; background:var(--lateral);
-  border-right:1px solid var(--linea); padding:1.4rem 1.1rem;
-  position:sticky; top:0; height:100vh; overflow-y:auto;
-  font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:.86rem;
+mjx-container{font-family:var(--ff-math)}
+
+/* --- barra de control ------------------------------------------------ */
+.bar{
+  position:sticky; top:0; z-index:40;
+  display:flex; flex-wrap:wrap; gap:14px; align-items:center;
+  padding:9px 20px; background:var(--paper);
+  border-bottom:1px solid var(--rule);
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif; font-size:12.5px;
 }
-.marca{
-  text-transform:uppercase; letter-spacing:.09em; font-size:.7rem;
-  color:var(--tenue); margin:1.3rem 0 .5rem; font-weight:600;
+.grp{display:flex; align-items:center; gap:7px}
+.grp>label{color:var(--faint); text-transform:uppercase; letter-spacing:.07em;
+  font-size:10.5px; font-weight:600}
+.seg{display:flex; border:1px solid var(--rule); border-radius:5px; overflow:hidden}
+.seg button{
+  border:0; background:var(--btn); color:var(--muted);
+  padding:4px 11px; font:inherit; cursor:pointer;
 }
-.marca:first-child{margin-top:0}
-.lateral ul{list-style:none; margin:0; padding:0}
-.lateral li{margin:.16rem 0}
-.lateral a{text-decoration:none; color:var(--texto); display:block;
-  padding:.16rem .3rem; border-radius:4px; line-height:1.35}
-.lateral a:hover{background:rgba(128,128,160,.16)}
-.notas .activo>a{color:var(--acento); font-weight:600}
-.toc .n2{padding-left:.85rem; font-size:.82rem}
-.toc .n3{padding-left:1.7rem; font-size:.8rem; color:var(--tenue)}
-main{flex:1; min-width:0; padding:2.6rem clamp(1rem,4vw,3.4rem); max-width:56rem}
-header.cab{border-bottom:1px solid var(--linea); padding-bottom:1.1rem;
-  margin-bottom:2rem}
-header.cab h1{font-size:1.9rem; margin:0 0 .35rem; line-height:1.2}
-header.cab p{margin:.15rem 0; color:var(--tenue); font-size:.95rem}
-h2{font-size:1.5rem; margin:2.6rem 0 .9rem; padding-top:.4rem;
-   border-top:1px solid var(--linea)}
-h3{font-size:1.18rem; margin:2rem 0 .7rem}
-h4{font-size:1.02rem; margin:1.5rem 0 .5rem}
-p{margin:.75rem 0}
-.display{overflow-x:auto; overflow-y:hidden; margin:1.1rem 0; padding:.15rem 0}
-.enunciado{margin:1.3rem 0; padding-left:.9rem; border-left:3px solid var(--linea)}
-.enunciado .rotulo{font-weight:700; font-family:system-ui,sans-serif;
-  font-size:.94rem}
-.enunciado p:first-of-type{display:inline}
-.enunciado.teo{border-left-color:var(--teo)} .enunciado.teo .rotulo{color:var(--teo)}
-.enunciado.prop{border-left-color:var(--prop)} .enunciado.prop .rotulo{color:var(--prop)}
-.enunciado.coro{border-left-color:var(--coro)} .enunciado.coro .rotulo{color:var(--coro)}
-.enunciado.lema{border-left-color:var(--lema)} .enunciado.lema .rotulo{color:var(--lema)}
-.enunciado.def{border-left-color:var(--def)} .enunciado.def .rotulo{color:var(--def)}
-.enunciado.obs{border-left-color:var(--obs)} .enunciado.obs .rotulo{color:var(--obs)}
-.enunciado.ej{border-left-color:var(--ej)} .enunciado.ej .rotulo{color:var(--ej)}
-.enunciado.teo,.enunciado.prop,.enunciado.coro,.enunciado.lema{font-style:italic}
+.seg button+button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--btn-on); color:var(--btn-on-ink)}
+.plain{
+  border:1px solid var(--rule); border-radius:5px; background:var(--btn);
+  color:var(--muted); padding:4px 11px; font:inherit; cursor:pointer;
+}
+.plain:hover,.seg button:hover{color:var(--ink)}
+.plain.icon{padding:4px 9px; font-size:14px; line-height:1}
+.plain.icon[aria-pressed="true"]{background:var(--btn-on); color:var(--btn-on-ink)}
+/* La barra se pliega entera hacia arriba, como la cinta de Excel. Es sticky, y
+   en pantalla estrecha ocupa tres filas, asi que su altura se paga durante todo
+   el scroll. Plegada no queda nada de ella salvo la pestana de volver, que va
+   fija en la esquina y translucida hasta que se apunta. */
+#b-bar{margin-left:auto; font-size:10px}
+:root[data-bar="off"] .bar{display:none}
+#volver{
+  position:fixed; top:0; right:14px; z-index:45; display:none;
+  border:1px solid var(--rule); border-top:0; border-radius:0 0 6px 6px;
+  background:var(--paper); color:var(--faint);
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif; font-size:12px;
+  line-height:1; padding:3px 11px 4px; cursor:pointer; opacity:.45;
+}
+#volver:hover,#volver:focus-visible{opacity:1; color:var(--ink)}
+:root[data-bar="off"] #volver{display:block}
+.grp .val{
+  color:var(--muted); font-variant-numeric:tabular-nums; min-width:1.6em;
+  text-align:right;
+}
+:focus-visible{outline:2px solid var(--link); outline-offset:2px}
+
+/* --- pagina ---------------------------------------------------------- */
+/* En `em`, no en `rem`: la medida tiene que seguir dando los mismos ~68
+   caracteres por linea cuando el lector sube el cuerpo. Con `rem` la columna se
+   queda quieta y el texto grande cabe a 40 caracteres. Por lo mismo, TODO lo
+   de dentro de main va en em; la barra de control se queda en px, que no debe
+   crecer con el texto. */
+.title{font-size:1.72em; line-height:1.25; font-weight:600; margin:.2em 0 .1em;
+  text-wrap:balance}
+.subtitle{color:var(--muted); font-size:1.02em; margin:0 0 .5em}
+.byline{color:var(--faint); font-size:.85em;
+  font-family:"Segoe UI",system-ui,sans-serif; margin:0 0 2.2em;
+  padding-bottom:1.4em; border-bottom:1px solid var(--rule)}
+
+h2,h3,h4{font-weight:600; line-height:1.28; text-wrap:balance;
+  margin:2.1em 0 .5em; scroll-margin-top:var(--arriba-ancla)}
+h2{font-size:1.3em}
+h3{font-size:1.06em; color:var(--muted)}
+h4{font-size:.98em; color:var(--muted)}
+p{margin:0 0 .85em}
+
+a{color:var(--link)}
 .df{color:var(--def); font-weight:600}
-.fuente{color:var(--tenue); font-size:.78rem;
-  font-family:system-ui,sans-serif; white-space:nowrap}
-.prueba{margin:1rem 0}
-.verprueba{
-  font-family:system-ui,sans-serif; font-size:.82rem; cursor:pointer;
-  background:transparent; color:var(--tenue); border:1px solid var(--linea);
-  border-radius:5px; padding:.28rem .7rem;
+/* La atribucion. Gris y pequena: tiene que estar, no que leerse. */
+.src{
+  color:var(--faint); font-family:"Segoe UI",system-ui,sans-serif;
+  font-size:.76em; letter-spacing:.02em; margin-left:.55em; font-weight:400;
 }
-.verprueba:hover{color:var(--acento); border-color:var(--acento)}
-.cuerpoprueba{
-  margin-top:.6rem; padding:.5rem .95rem; background:var(--pruebafondo);
-  border-left:2px solid var(--linea); border-radius:0 5px 5px 0;
+code{font-family:ui-monospace,Consolas,monospace; font-size:.85em}
+
+/* --- ecuaciones ------------------------------------------------------ */
+.display{overflow-x:auto; overflow-y:hidden; margin:1.1em 0; padding:.15em 0}
+
+/* Las dos ramas de \fin y \displayfin. Se emiten LAS DOS y se ensena una:
+   es lo que permite conmutar la notacion en el navegador sin volver a
+   generar nada. Una nota sin \fin no produce ni un .v, y entonces el
+   selector de notacion no sale en la barra. */
+.v{display:none}
+.v[data-on="true"]{display:inline}
+.display .v[data-on="true"]{display:block}
+
+/* --- enunciados ------------------------------------------------------ */
+.stmt{
+  margin:1.5em 0; padding:.75em 0 .75em 1.05em;
+  border-left:2px solid var(--rule); scroll-margin-top:var(--arriba-ancla);
 }
-code{font-family:ui-monospace,Consolas,monospace; font-size:.9em}
-@media (max-width:880px){
-  body{flex-direction:column}
-  .lateral{width:100%; flex:none; height:auto; position:static;
-    border-right:none; border-bottom:1px solid var(--linea)}
-  main{padding:1.6rem 1.1rem}
+.stmt .head{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:.79em;
+  font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:.4em;
+}
+.stmt.definicion,.stmt.problema{border-left-color:var(--def)}
+.stmt.definicion .head,.stmt.problema .head{color:var(--def)}
+.stmt.teorema,.stmt.proposicion,.stmt.lema,.stmt.corolario{
+  border-left-color:var(--link)}
+.stmt.teorema>.body,.stmt.proposicion>.body,.stmt.lema>.body,
+.stmt.corolario>.body{font-style:italic}
+.stmt .body mjx-container{font-style:normal}
+.stmt.observacion{border-left-style:dotted}
+.stmt.ejemplo{border-left-color:var(--mark)}
+.stmt.ejemplo .head{color:var(--mark)}
+.stmt .body p:last-child{margin-bottom:0}
+ol.rom{margin:.4em 0 .4em 1.3em; padding:0}
+ol.rom li{margin-bottom:.4em}
+
+/* --- demostraciones (o soluciones) ----------------------------------- */
+.proof-btn{
+  margin-top:.5em; border:1px solid var(--rule); border-radius:4px;
+  background:transparent; color:var(--muted); cursor:pointer;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:.75em;
+  padding:2.5px 9px; letter-spacing:.02em;
+}
+.proof-btn:hover{color:var(--ink); background:var(--raise)}
+.proof-btn::before{content:"\25B8 "; font-size:.9em}
+.proof-btn[aria-expanded="true"]::before{content:"\25BE "}
+.proof{
+  display:none; margin-top:.7em; padding:.7em .95em;
+  background:var(--raise); border-radius:5px;
+  font-size:.945em; color:var(--muted);
+}
+.proof[data-open="true"]{display:block}
+.proof p:last-child{margin-bottom:0}
+
+.note{
+  margin-top:3.5em; padding-top:1.2em; border-top:1px solid var(--rule);
+  color:var(--faint); font-size:.8em;
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+
+/* ---------------------------------------------------------------------
+   La rejilla de tres columnas: indice a la izquierda, texto en medio,
+   cuadernos a la derecha. Las dos laterales son 1fr, asi que el texto
+   queda centrado se pliegue la que se pliegue.
+   --------------------------------------------------------------------- */
+.wrap{display:grid; grid-template-columns:1fr auto 1fr}
+main{grid-column:2; width:min(41em,100%); margin:0 auto;
+  padding:34px 20px 120px}
+
+/* ---------------------------------------------------------------------
+   Indice lateral. Lista capitulos, secciones Y cada enunciado, que es lo
+   que hace el artefacto: en un documento donde el cuerpo son enunciados
+   encadenados, un indice de solo secciones deja fuera casi todo el
+   contenido navegable. Se construye en JS desde el DOM ya renderizado.
+   --------------------------------------------------------------------- */
+#toc{
+  grid-column:1; justify-self:end; align-self:start;
+  position:sticky; top:var(--arriba-panel); width:16.5rem;
+  margin:34px 2rem 0 12px;
+  max-height:calc(100vh - var(--arriba-panel) - 24px);
+  overflow-y:auto; overscroll-behavior:contain;
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:12.5px; line-height:1.45;
+}
+:root[data-toc="off"] #toc{display:none}
+#toc h4{
+  margin:0 0 .6em; font-size:10.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--faint);
+}
+#toc a{
+  display:block; padding:2.5px 8px; border-radius:4px;
+  color:var(--muted); text-decoration:none;
+  border-left:2px solid transparent;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+#toc a:hover{background:var(--raise); color:var(--ink)}
+#toc a.lvl-cap{color:var(--ink); font-weight:600; margin-top:.55em}
+#toc a.lvl-sec{padding-left:16px}
+#toc a.lvl-sub{padding-left:26px}
+#toc a.lvl-stmt{padding-left:16px; color:var(--faint); font-size:12px}
+#toc a.lvl-stmt .n{
+  color:var(--muted); font-variant-numeric:tabular-nums;
+  display:inline-block; min-width:2.3em;
+}
+#toc a.aqui{
+  border-left-color:var(--link); background:var(--raise);
+  color:var(--ink);
+}
+#toc a.aqui .n{color:var(--link)}
+
+/* ---------------------------------------------------------------------
+   Cuadernos: la lateral DERECHA, que elige que Overleaf se esta viendo.
+   Es lo que pidio el usuario el 2026-08-14, y el modelo que dio es la
+   barra de cuadernos de OneNote.
+   --------------------------------------------------------------------- */
+#cuadernos{
+  grid-column:3; justify-self:start; align-self:start;
+  position:sticky; top:var(--arriba-panel); width:15.5rem;
+  margin:34px 12px 0 2rem;
+  max-height:calc(100vh - var(--arriba-panel) - 24px);
+  overflow-y:auto; overscroll-behavior:contain;
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:12.5px; line-height:1.45;
+}
+:root[data-notas="off"] #cuadernos{display:none}
+#cuadernos h4{
+  margin:0 0 .6em; font-size:10.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--faint);
+}
+#cuadernos a{
+  display:block; padding:.5em .7em; margin-bottom:.3em; border-radius:5px;
+  color:var(--muted); text-decoration:none;
+  border:1px solid var(--rule); border-left:3px solid var(--rule);
+  background:var(--raise);
+}
+#cuadernos a:hover{color:var(--ink); border-left-color:var(--link)}
+#cuadernos a .t{display:block; color:var(--ink); font-weight:600;
+  line-height:1.3; white-space:normal}
+#cuadernos a .c{display:block; color:var(--faint); font-size:11px;
+  margin-top:.2em}
+#cuadernos a.aqui{
+  border-left-color:var(--link); background:var(--raise2);
+}
+#cuadernos a.aqui .t{color:var(--link)}
+#cuadernos .portada{
+  display:block; margin-top:.9em; padding:.35em .7em;
+  border:0; background:transparent; color:var(--faint); font-size:11.5px;
+}
+#cuadernos .portada:hover{color:var(--link); background:transparent}
+
+/* ---------------------------------------------------------------------
+   Estrecho: los dos paneles pasan a cajon sobre el texto, cada uno por
+   su lado. El indice entra por la izquierda y los cuadernos por la
+   derecha, que es de donde salen cuando hay sitio.
+   --------------------------------------------------------------------- */
+@media (max-width:1180px){
+  :root{--arriba-panel:44px}
+  .wrap{display:block}
+  main{width:auto; max-width:41em; margin:0 auto}
+  #toc,#cuadernos{
+    position:fixed; top:var(--arriba-panel); bottom:0; width:min(20rem,82vw);
+    margin:0; max-height:none; padding:14px 10px 30px;
+    background:var(--paper); z-index:50;
+  }
+  #toc{left:0; border-right:1px solid var(--rule);
+    box-shadow:6px 0 22px var(--shadow)}
+  #cuadernos{right:0; border-left:1px solid var(--rule);
+    box-shadow:-6px 0 22px var(--shadow)}
+}
+
+@media (max-width:560px){
+  :root{--fs:16px}
+  main{padding:24px 14px 90px}
 }
 </style>
+
 <script>
-// Las macros del preambulo de main.tex, declaradas aqui. NO se convierten
-// formulas: MathJax las lee tal cual del texto del DOM.
+// Las macros del preambulo, declaradas aqui. NO se convierten formulas:
+// MathJax las lee tal cual del texto del DOM.
 window.MathJax = {
   tex: {
     inlineMath: [['$','$']],
@@ -137,29 +368,43 @@ window.MathJax = {
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-<nav class="lateral"><div class="marca">Notas</div><ul class="notas">
-<li class="activo"><a href="convexa.html">Optimización Convexa en Espacios de Hilbert</a></li>
-</ul>
-<div class="marca">En esta nota</div><ul class="toc">
-<li class="n1"><a href="#cap:calculo">Preliminares de cálculo</a></li>
-<li class="n2"><a href="#cap1:sec-segundo-orden">Derivadas de orden superior</a></li>
-<li class="n2"><a href="#cap1:sec-optimalidad">Condiciones de optimalidad</a></li>
-<li class="n1"><a href="#cap:taylor">Fórmulas de Taylor y los problemas del curso</a></li>
-<li class="n2"><a href="#cap2:sec-taylor">Las fórmulas y el lema del descenso</a></li>
-<li class="n2"><a href="#cap2:sec-ejemplos">Los problemas del curso</a></li>
-<li class="n2"><a href="#cap2:sec-caratheodory">Combinaciones convexas y el teorema de Carathéodory</a></li>
-<li class="n1"><a href="#cap:conos">Conjuntos afines, conos y la proyección</a></li>
-<li class="n2"><a href="#cap3:sec-afines">Conjuntos afines e interior relativo</a></li>
-<li class="n2"><a href="#cap3:sec-conos">Conos convexos y dualidad</a></li>
-<li class="n2"><a href="#cap3:sec-proyeccion">La proyección sobre un convexo cerrado</a></li>
-</ul>
-</nav>
+
+<div class="bar" id="barra">
+  <button class="plain icon" id="b-toc" aria-pressed="true"
+          title="Índice">&#9776;</button>
+
+  <div class="grp">
+    <label>Letra</label>
+    <div class="seg">
+      <button id="f-serif" aria-pressed="true">Serif</button>
+      <button id="f-sans"  aria-pressed="false">Palo</button>
+      <button id="f-lm"    aria-pressed="false"
+              title="Latin Modern, la del PDF. Solo si está instalada en el equipo">LaTeX</button>
+    </div>
+  </div>
+  <div class="grp">
+    <label>Tamaño</label>
+    <div class="seg">
+      <button id="s-menos" title="Más pequeño">A&minus;</button>
+      <button id="s-mas"   title="Más grande">A+</button>
+    </div>
+    <span class="val" id="s-val">17</span>
+  </div>
+  <button class="plain" id="b-all">Abrir todas las demostraciones</button>
+  <button class="plain icon" id="b-notas" aria-pressed="true"
+          title="Cuadernos">&#9707;</button>
+  <button class="plain icon" id="b-bar" aria-controls="barra" aria-expanded="true"
+          aria-label="Ocultar la barra" title="Ocultar la barra">&#9650;</button>
+</div>
+<button id="volver" aria-controls="barra" aria-expanded="false"
+        aria-label="Mostrar la barra" title="Mostrar la barra">&#9662;</button>
+
+<div class="wrap">
+<nav id="toc" aria-label="Índice"></nav>
 <main>
-<header class="cab">
-  <h1>Optimización Convexa en Espacios de Hilbert</h1>
-  <p>Notas del curso de Mauricio Junca</p>
-  <p>Universidad de los Andes · 2026-20</p>
-</header>
+  <h1 class="title">Optimización Convexa en Espacios de Hilbert</h1>
+  <p class="subtitle">Notas del curso de Mauricio Junca</p>
+  <p class="byline">Universidad de los Andes · 2026-20</p>
 <section class="capitulo"><h2 id="cap:calculo">Preliminares de cálculo</h2>
 <p>En $\R^n$ la derivada de una función se calcula por coordenadas. Se derivan las
 $n$ funciones parciales, se apilan los resultados en un vector, y ese vector es
@@ -179,33 +424,33 @@ $U\subset\Hs$ es abierto y no vacío, y $\Bop{\Hs,\Ks}$ es el espacio de los
 operadores lineales <em>acotados</em> de $\Hs$ en $\Ks$. Escribimos
 $\Ball(x;r)=\{y\in\Hs:\norm{x-y}\le r\}$ y $[x,y]$ para el segmento que une $x$
 con $y$.</p>
-<div class="enunciado def" id="cap1:def-direccional"><span class="rotulo">Definición.</span> <p>Sean $f:U\to\R$ y $x\in U$. Dado $d\in\Hs$, la <span class="df">derivada direccional</span> de $f$
+<div class="stmt definicion" id="cap1:def-direccional"><div class="head">Definición</div><div class="body"><p>Sean $f:U\to\R$ y $x\in U$. Dado $d\in\Hs$, la <span class="df">derivada direccional</span> de $f$
 en $x$ en la dirección $d$ es</p>
 <div class="display">\[
   f&#x27;(x;d):=\lim_{t\downarrow 0}\frac{f(x+td)-f(x)}{t},
 \]</div>
-<p>siempre que el límite exista.</p></div>
+<p>siempre que el límite exista.</p></div></div>
 <p>La derivada direccional existe con mucha facilidad y por sí sola dice poco. Lo
 que la vuelve útil es exigir que dependa linealmente de la dirección.</p>
-<div class="enunciado def" id="cap1:def-gateaux"><span class="rotulo">Definición.</span> <p>Sean $f:U\to\R$ y $x\in U$. Decimos que $f$ es <span class="df">Gâteaux diferenciable</span> en $x$
+<div class="stmt definicion" id="cap1:def-gateaux"><div class="head">Definición</div><div class="body"><p>Sean $f:U\to\R$ y $x\in U$. Decimos que $f$ es <span class="df">Gâteaux diferenciable</span> en $x$
 si $f&#x27;(x;d)$ existe para toda $d\in\Hs$ y la aplicación $d\mapsto f&#x27;(x;d)$ es
 lineal y acotada. En tal caso el operador $\Dif f(x)\in\Bop{\Hs,\R}$ así
 definido se llama la <span class="df">derivada de Gâteaux</span> de $f$ en $x$.
-<span class="fuente">[Bauschke--Combettes, Definición 2.54]</span></p></div>
+<span class="src">[Bauschke--Combettes, Definición 2.54]</span></p></div></div>
 <p>En $\R^n$ basta pedir linealidad, porque allí toda aplicación lineal es
 continua. En dimensión infinita la acotación es una hipótesis de verdad, y el
 motivo se ve en el enunciado siguiente.</p>
-<div class="enunciado prop" id="cap1:prop-gradiente"><span class="rotulo">Proposición.</span> <p>Si $f$ es Gâteaux diferenciable en $x$, existe un único vector
+<div class="stmt proposicion" id="cap1:prop-gradiente"><div class="head">Proposición</div><div class="body"><p>Si $f$ es Gâteaux diferenciable en $x$, existe un único vector
 $\nabla f(x)\in\Hs$ tal que</p>
 <div class="display">\[
   (\forall d\in\Hs)\qquad f&#x27;(x;d)=\ip{\nabla f(x)}{d}.
 \]</div>
 <p>Lo llamamos el <span class="df">gradiente</span> de $f$ en $x$.
-<span class="fuente">[Bauschke--Combettes, Observación 2.55]</span></p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>$\Dif f(x)$ es un funcional lineal acotado sobre $\Hs$, luego el teorema de
+<span class="src">[Bauschke--Combettes, Observación 2.55]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p1">Ver demostración</button><div class="proof" id="convexa-p1"><p>$\Dif f(x)$ es un funcional lineal acotado sobre $\Hs$, luego el teorema de
 representación de Riesz y Fréchet le asocia un único $u\in\Hs$ con
 $\Dif f(x)d=\ip{u}{d}$ para toda $d$. Basta tomar $\nabla f(x)=u$.
-<span class="fuente">[Bauschke--Combettes, Fact 2.24]</span></p></div></div>
+<span class="src">[Bauschke--Combettes, Fact 2.24]</span></p></div>
 <p>La dimensión cambia aquí el argumento y no el enunciado. En $\R^n$ el gradiente
 se construye: es el vector cuyas entradas son las derivadas parciales, y su
 existencia no requiere ningún teorema. En $\Hs$ no hay entradas, y el gradiente
@@ -216,26 +461,26 @@ $\ell:\Hs\to\R$ satisface $\ell&#x27;(x;d)=\ell(d)$ para todo $x$ y todo $d$, de
 que es Gâteaux diferenciable en el sentido puramente algebraico en todos los
 puntos, y sin embargo no existe ningún $u$ con $\ell=\ip{u}{\cdot}$.</p>
 <p>Que la linealidad no sea automática se ve ya en el ejemplo más simple posible.</p>
-<div class="enunciado ej" id="cap1:ej-norma"><span class="rotulo">Ejemplo.</span> <p>Sea $f:\Hs\to\R$ dada por $f(x)=\norm{x}$, con $\Hs\neq\{0\}$. Para toda
+<div class="stmt ejemplo" id="cap1:ej-norma"><div class="head">Ejemplo</div><div class="body"><p>Sea $f:\Hs\to\R$ dada por $f(x)=\norm{x}$, con $\Hs\neq\{0\}$. Para toda
 dirección $d$,</p>
 <div class="display">\[
   f&#x27;(0;d)=\lim_{t\downarrow 0}\frac{\norm{0+td}-\norm{0}}{t}=\norm{d},
 \]</div>
 <p>de manera que todas las derivadas direccionales en el origen existen. Pero
 $d\mapsto\norm{d}$ no es lineal, así que $f$ no es Gâteaux diferenciable en $0$.
-<span class="fuente">[Bauschke--Combettes, Example 2.65]</span></p></div>
+<span class="src">[Bauschke--Combettes, Example 2.65]</span></p></div></div>
 <p>La segunda noción sustituye el límite direccional por uno uniforme.</p>
-<div class="enunciado def" id="cap1:def-frechet"><span class="rotulo">Definición.</span> <p>Sean $T:U\to\Ks$ y $x\in U$. Decimos que $T$ es <span class="df">Fréchet diferenciable</span> en
+<div class="stmt definicion" id="cap1:def-frechet"><div class="head">Definición</div><div class="body"><p>Sean $T:U\to\Ks$ y $x\in U$. Decimos que $T$ es <span class="df">Fréchet diferenciable</span> en
 $x$ si existe $\Dif T(x)\in\Bop{\Hs,\Ks}$ tal que</p>
 <div class="display">\[
   \lim_{0\neq\norm{h}\to 0}\frac{\norm{T(x+h)-T(x)-\Dif T(x)h}}{\norm{h}}=0,
 \]</div>
 <p>o lo que es lo mismo, si $T(x+h)=T(x)+\Dif T(x)h+o(\norm{h})$.
-<span class="fuente">[Bauschke--Combettes, Definición 2.56]</span></p></div>
-<div class="enunciado lema" id="cap1:lema-frechet-implica"><span class="rotulo">Lema.</span> <p>Si $T$ es Fréchet diferenciable en $x$, entonces $T$ es continua en $x$, es
+<span class="src">[Bauschke--Combettes, Definición 2.56]</span></p></div></div>
+<div class="stmt lema" id="cap1:lema-frechet-implica"><div class="head">Lema</div><div class="body"><p>Si $T$ es Fréchet diferenciable en $x$, entonces $T$ es continua en $x$, es
 Gâteaux diferenciable en $x$, y las dos derivadas coinciden.
-<span class="fuente">[Bauschke--Combettes, Lema 2.61]</span></p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Escriba $L=\Dif T(x)$. Para la segunda afirmación, dados $t&gt;0$ y $d\neq 0$,</p>
+<span class="src">[Bauschke--Combettes, Lema 2.61]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p2">Ver demostración</button><div class="proof" id="convexa-p2"><p>Escriba $L=\Dif T(x)$. Para la segunda afirmación, dados $t&gt;0$ y $d\neq 0$,</p>
 <div class="display">\[
   \norm{\frac{T(x+td)-T(x)}{t}-Ld}
    =\norm{d}\,\frac{\norm{T(x+td)-T(x)-L(td)}}{\norm{td}},
@@ -248,20 +493,20 @@ $\norm{h}\le\delta$. Pero entonces:</p>
 <div class="display">\[
   \norm{T(x+h)-T(x)}\le\varepsilon\norm{h}+\norm{L}\norm{h}
    \le\delta(\varepsilon+\norm{L})\le\varepsilon .
-\]</div></div></div>
+\]</div></div>
 <p>El recíproco es falso, y el contraejemplo habitual vive en $\R^2$.</p>
-<div class="enunciado ej" id="cap1:ej-noconti"><span class="rotulo">Ejemplo.</span> <p>Sea $f:\R^2\to\R$ definida por $f(x,y)=x^3y/(x^6+y^2)$ si $(x,y)\neq(0,0)$ y
+<div class="stmt ejemplo" id="cap1:ej-noconti"><div class="head">Ejemplo</div><div class="body"><p>Sea $f:\R^2\to\R$ definida por $f(x,y)=x^3y/(x^6+y^2)$ si $(x,y)\neq(0,0)$ y
 $f(0,0)=0$. Sobre la recta $y=mx$ se tiene
 $f(x,mx)=mx^2/(x^4+m^2)\to 0$, y lo mismo sobre el eje vertical, de modo que
 todas las derivadas direccionales en el origen existen y valen $0$. Sin embargo
 $f(x,x^3)=1/2$ para todo $x\neq 0$, así que $f$ no es continua en el origen y en
-particular no es Fréchet diferenciable allí.</p></div>
+particular no es Fréchet diferenciable allí.</p></div></div>
 <p>Lo que sí es cierto es que la continuidad de la derivada de Gâteaux basta para
 recuperar la de Fréchet.</p>
-<div class="enunciado teo" id="cap1:teo-c1"><span class="rotulo">Teorema.</span> <p>Sean $T:U\to\Ks$ y $x\in U$. Suponga que la derivada de Gâteaux de $T$ existe en
+<div class="stmt teorema" id="cap1:teo-c1"><div class="head">Teorema</div><div class="body"><p>Sean $T:U\to\Ks$ y $x\in U$. Suponga que la derivada de Gâteaux de $T$ existe en
 un entorno de $x$ y que $\Dif T$ es continua en $x$. Entonces $T$ es Fréchet
 diferenciable en $x$.
-<span class="fuente">[Bauschke--Combettes, Fact 2.62]</span></p></div>
+<span class="src">[Bauschke--Combettes, Fact 2.62]</span></p></div></div>
 <p>Cuando $f$ es Gâteaux diferenciable en $U$ y $\nabla f$ es continua en $U$
 escribimos $f\in C^1(U)$, y el teorema anterior dice que toda función de
 $C^1(U)$ es Fréchet diferenciable en $U$. En $\R^n$ esto equivale a que las
@@ -269,16 +514,16 @@ derivadas parciales sean continuas, formulación que aquí no tiene análogo por
 las parciales necesitan una base.</p>
 <p>De la diferenciabilidad se obtiene la representación integral del incremento,
 que es la herramienta con la que se prueba casi todo lo que sigue.</p>
-<div class="enunciado prop" id="cap1:prop-integral"><span class="rotulo">Proposición.</span> <p>Sea $f:U\to\R$ Fréchet diferenciable y sean $x,y\in U$ con $[x,y]\subset U$.
+<div class="stmt proposicion" id="cap1:prop-integral"><div class="head">Proposición</div><div class="body"><p>Sea $f:U\to\R$ Fréchet diferenciable y sean $x,y\in U$ con $[x,y]\subset U$.
 Entonces</p>
 <div class="display">\[
   f(y)-f(x)=\int_0^1\ip{\nabla f\bigl(x+t(y-x)\bigr)}{y-x}\,dt .
-\]</div></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Defina $\phi:[0,1]\to\R$ por $\phi(t)=f\bigl(x+t(y-x)\bigr)$. Por la regla de la
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p3">Ver demostración</button><div class="proof" id="convexa-p3"><p>Defina $\phi:[0,1]\to\R$ por $\phi(t)=f\bigl(x+t(y-x)\bigr)$. Por la regla de la
 cadena $\phi$ es diferenciable con
 $\phi&#x27;(t)=\ip{\nabla f(x+t(y-x))}{y-x}$, y el resultado es el teorema
 fundamental del cálculo aplicado a $\phi$, que es una función real de variable
-real.</p></div></div>
+real.</p></div>
 <p>Observe que el enunciado no ha cambiado nada al pasar a $\Hs$. La integral que
 aparece es la de una función real sobre $[0,1]$, y el producto interno solo
 interviene evaluado punto a punto; ningún paso pide dimensión finita.</p>
@@ -288,18 +533,18 @@ $\nabla f:U\to\Hs$, y tiene sentido preguntar si a su vez es diferenciable. Su
 derivada en $x$ es un operador de $\Hs$ en $\Hs$ que denotamos
 $\nabla^2 f(x)\in\Bop{\Hs}$, y que en $\R^n$ es la matriz hessiana. Cuando
 $\nabla^2 f$ existe y es continua en $U$ escribimos $f\in C^2(U)$.</p>
-<div class="enunciado prop" id="cap1:prop-autoadjunta"><span class="rotulo">Proposición.</span> <p>Si $f$ es dos veces Fréchet diferenciable en $x$, entonces $\nabla^2 f(x)$ es
+<div class="stmt proposicion" id="cap1:prop-autoadjunta"><div class="head">Proposición</div><div class="body"><p>Si $f$ es dos veces Fréchet diferenciable en $x$, entonces $\nabla^2 f(x)$ es
 autoadjunto.
-<span class="fuente">[Bauschke--Combettes, Fact 2.66 y Example 2.67]</span></p></div>
+<span class="src">[Bauschke--Combettes, Fact 2.66 y Example 2.67]</span></p></div></div>
 <p>En $\R^n$ esta propiedad se lee sobre las entradas de la matriz y es la simetría
 de la hessiana. Sobre el operador la formulación no depende de la base.</p>
-<div class="enunciado ej" id="cap1:ej-cuadratica"><span class="rotulo">Ejemplo.</span> <p>Sean $L\in\Bop{\Hs,\Ks}$ y $r\in\Ks$, y sea $f:\Hs\to\R$ dada por
+<div class="stmt ejemplo" id="cap1:ej-cuadratica"><div class="head">Ejemplo</div><div class="body"><p>Sean $L\in\Bop{\Hs,\Ks}$ y $r\in\Ks$, y sea $f:\Hs\to\R$ dada por
 $f(x)=\tfrac12\norm{Lx-r}^2$. Entonces $f$ es dos veces Fréchet diferenciable en
 todo punto, con</p>
 <div class="display">\[
   \nabla f(x)=L^{*}(Lx-r),\qquad \nabla^2 f(x)=L^{*}L .
 \]</div>
-<p><span class="fuente">[Bauschke--Combettes, Example 2.60]</span></p></div>
+<p><span class="src">[Bauschke--Combettes, Example 2.60]</span></p></div></div>
 <p>En $\R^n$ este es el problema de mínimos cuadrados $f(x)=\tfrac12\norm{Ax-b}^2$,
 con la traspuesta $A^{\top}$ en lugar del adjunto. El cálculo es el mismo en los
 dos casos,</p>
@@ -321,23 +566,23 @@ invertibles.</p>
 $r&gt;0$ tal que $f(x)\le f(y)$ para todo $y\in\Ball(x;r)\cap U$, y que es
 <span class="df">estricto</span> si la desigualdad es estricta para $y\neq x$. Es un <span class="df">punto
 crítico</span> si $f$ es Gâteaux diferenciable en $x$ y $\nabla f(x)=0$.</p>
-<div class="enunciado teo" id="cap1:teo-primer-orden"><span class="rotulo">Teorema (Condición necesaria de primer orden).</span> <p>Sea $f:U\to\R$ Gâteaux diferenciable en $U$. Todo mínimo local de $f$ es un
-punto crítico.</p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Sea $x$ un mínimo local y sea $d\in\Hs$. Para $t&gt;0$ pequeño $x+td$ está en la
+<div class="stmt teorema" id="cap1:teo-primer-orden"><div class="head">Teorema (Condición necesaria de primer orden)</div><div class="body"><p>Sea $f:U\to\R$ Gâteaux diferenciable en $U$. Todo mínimo local de $f$ es un
+punto crítico.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p4">Ver demostración</button><div class="proof" id="convexa-p4"><p>Sea $x$ un mínimo local y sea $d\in\Hs$. Para $t&gt;0$ pequeño $x+td$ está en la
 bola donde $f(x)$ es mínimo, luego el cociente incremental es no negativo y por
 tanto $f&#x27;(x;d)\ge 0$. Tomando $d=-\nabla f(x)$ se obtiene
 $0\le\ip{\nabla f(x)}{-\nabla f(x)}=-\norm{\nabla f(x)}^2$, de donde
-$\nabla f(x)=0$.</p></div></div>
+$\nabla f(x)=0$.</p></div>
 <p>La prueba no usa coordenadas, ni compacidad, ni la dimensión. Con las
 condiciones de segundo orden la situación es distinta, y hay que separarlas.</p>
-<div class="enunciado teo" id="cap1:teo-segundo-necesaria"><span class="rotulo">Teorema (Condición necesaria de segundo orden).</span> <p>Sea $f\in C^2(U)$ y sea $x$ un mínimo local de $f$. Entonces
-$\ip{\nabla^2 f(x)h}{h}\ge 0$ para todo $h\in\Hs$.</p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Por la condición necesaria de primer orden se tiene $\nabla f(x)=0$, así que la
+<div class="stmt teorema" id="cap1:teo-segundo-necesaria"><div class="head">Teorema (Condición necesaria de segundo orden)</div><div class="body"><p>Sea $f\in C^2(U)$ y sea $x$ un mínimo local de $f$. Entonces
+$\ip{\nabla^2 f(x)h}{h}\ge 0$ para todo $h\in\Hs$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p5">Ver demostración</button><div class="proof" id="convexa-p5"><p>Por la condición necesaria de primer orden se tiene $\nabla f(x)=0$, así que la
 fórmula de Taylor de segundo orden da, para $t&gt;0$ pequeño,</p>
 <div class="display">\[
   0\le f(x+th)-f(x)=\frac{t^2}{2}\ip{\nabla^2 f(x)h}{h}+o(t^2).
 \]</div>
-<p>Divida por $t^2$ y haga $t\downarrow 0$.</p></div></div>
+<p>Divida por $t^2$ y haga $t\downarrow 0$.</p></div>
 <p>La condición suficiente es la que no se traslada. En $\R^n$ se enuncia así: si
 $x$ es un punto crítico y $\nabla^2 f(x)$ es definida positiva, entonces $x$ es
 un mínimo local estricto. Su prueba toma $\lambda&gt;0$ el menor valor propio de la
@@ -346,7 +591,7 @@ Ese paso es el que se rompe: el menor valor propio existe porque la esfera
 unidad de $\R^n$ es compacta y la forma cuadrática es continua, mientras que en
 dimensión infinita la esfera unidad no es compacta y un operador autoadjunto
 puede ser definido positivo con ínfimo espectral nulo.</p>
-<div class="enunciado ej" id="cap1:ej-diagonal"><span class="rotulo">Ejemplo.</span> <p>Sea $\Hs=\ell^2$ y sea $A$ el operador diagonal $Ay=(y_n/n)_{n\ge1}$. Entonces
+<div class="stmt ejemplo" id="cap1:ej-diagonal"><div class="head">Ejemplo</div><div class="body"><p>Sea $\Hs=\ell^2$ y sea $A$ el operador diagonal $Ay=(y_n/n)_{n\ge1}$. Entonces
 $A$ es acotado y autoadjunto, y</p>
 <div class="display">\[
   \ip{Ay}{y}=\sum_{n\ge1}\frac{y_n^2}{n}&gt;0
@@ -354,29 +599,29 @@ $A$ es acotado y autoadjunto, y</p>
 \]</div>
 <p>así que $A$ es definido positivo. Pero tomando $y=e_n$ el $n$-ésimo vector de la
 base canónica se obtiene $\ip{Ae_n}{e_n}=1/n$, de donde
-$\inf_{\norm{y}=1}\ip{Ay}{y}=0$ y no existe ningún $\lambda&gt;0$ que sirva.</p></div>
+$\inf_{\norm{y}=1}\ip{Ay}{y}=0$ y no existe ningún $\lambda&gt;0$ que sirva.</p></div></div>
 <p>Por consiguiente el enunciado correcto pide directamente lo que la demostración
 utiliza, que en dimensión finita es una consecuencia gratuita de la definitud y
 aquí no lo es.</p>
-<div class="enunciado teo" id="cap1:teo-segundo-suficiente"><span class="rotulo">Teorema (Condición suficiente de segundo orden).</span> <p>Sea $f\in C^2(U)$ y sea $x\in U$ un punto crítico. Suponga que existe
+<div class="stmt teorema" id="cap1:teo-segundo-suficiente"><div class="head">Teorema (Condición suficiente de segundo orden)</div><div class="body"><p>Sea $f\in C^2(U)$ y sea $x\in U$ un punto crítico. Suponga que existe
 $\alpha&gt;0$ tal que</p>
 <div class="display">\[
   (\forall h\in\Hs)\qquad \ip{\nabla^2 f(x)h}{h}\ge\alpha\norm{h}^2 .
 \]</div>
-<p>Entonces $x$ es un mínimo local estricto de $f$.</p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Queremos mostrar que $f(x+h)&gt;f(x)$ para $\norm{h}$ suficientemente pequeño y
+<p>Entonces $x$ es un mínimo local estricto de $f$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p6">Ver demostración</button><div class="proof" id="convexa-p6"><p>Queremos mostrar que $f(x+h)&gt;f(x)$ para $\norm{h}$ suficientemente pequeño y
 $h\neq0$. Como $\nabla f(x)=0$, la fórmula de Taylor de segundo orden da</p>
 <div class="display">\[
   f(x+h)=f(x)+\tfrac12\ip{\nabla^2 f(x)h}{h}+o(\norm{h}^2)
    \ge f(x)+\norm{h}^2\Bigl(\frac{\alpha}{2}+\frac{o(\norm{h}^2)}{\norm{h}^2}\Bigr),
 \]</div>
-<p>y el paréntesis es positivo en cuanto $\norm{h}$ es pequeño.</p></div></div>
-<div class="enunciado obs" id="cap1:obs-coercividad"><span class="rotulo">Observación.</span> <p>En $\R^n$ las dos hipótesis coinciden. Si $H$ es simétrica y definida positiva,
+<p>y el paréntesis es positivo en cuanto $\norm{h}$ es pequeño.</p></div>
+<div class="stmt observacion" id="cap1:obs-coercividad"><div class="head">Observación</div><div class="body"><p>En $\R^n$ las dos hipótesis coinciden. Si $H$ es simétrica y definida positiva,
 la función $h\mapsto\ip{Hh}{h}$ es continua y estrictamente positiva sobre la
 esfera unidad, que es compacta, luego alcanza un mínimo $\alpha&gt;0$ y por
 homogeneidad $\ip{Hh}{h}\ge\alpha\norm{h}^2$ para todo $h$. La hipótesis del
 teorema anterior equivale entonces a la definitud, y lo que en $\R^n$ se deduce
-aquí hay que suponerlo.</p></div></section>
+aquí hay que suponerlo.</p></div></div></section>
 <section class="capitulo"><h2 id="cap:taylor">Fórmulas de Taylor y los problemas del curso</h2>
 <p>Las fórmulas de Taylor del capítulo anterior admiten dos lecturas. Una es
 cualitativa y dice que el error de la aproximación afín es $o(\norm{h})$; la
@@ -410,20 +655,20 @@ $f\in C^2(U)$, la fórmula de segundo orden es</p>
 <p>La forma integral es la que interesa, porque expresa el error como una integral
 del incremento del gradiente. Si ese incremento se puede acotar, el error
 también.</p>
-<div class="enunciado teo" id="cap2:teo-descenso"><span class="rotulo">Teorema (Lema del descenso).</span> <p>Sea $U\subset\Hs$ abierto, convexo y no vacío, sea $\beta&gt;0$ y sea
+<div class="stmt teorema" id="cap2:teo-descenso"><div class="head">Teorema (Lema del descenso)</div><div class="body"><p>Sea $U\subset\Hs$ abierto, convexo y no vacío, sea $\beta&gt;0$ y sea
 $f:U\to\R$ Fréchet diferenciable con $\nabla f$ $\beta$-Lipschitz en $U$.
 Entonces, para todos $x,y\in U$,</p>
 <div class="display">\[
   \abs{f(y)-f(x)-\ip{\nabla f(x)}{y-x}}\le\frac{\beta}{2}\norm{y-x}^2 .
 \]</div>
-<p><span class="fuente">[Bauschke--Combettes, Lema 2.64(i)]</span></p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Por la forma integral de Taylor y la desigualdad de Cauchy y Schwarz,</p>
+<p><span class="src">[Bauschke--Combettes, Lema 2.64(i)]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p7">Ver demostración</button><div class="proof" id="convexa-p7"><p>Por la forma integral de Taylor y la desigualdad de Cauchy y Schwarz,</p>
 <div class="display">\begin{align*}
   \abs{f(y)-f(x)-\ip{\nabla f(x)}{y-x}}
    &amp;=\Bigl|\int_0^1\ip{\nabla f(x+t(y-x))-\nabla f(x)}{y-x}\,dt\Bigr|\\
    &amp;\le\int_0^1\norm{y-x}\,\beta\,\norm{t(y-x)}\,dt\\
    &amp;=\frac{\beta}{2}\norm{y-x}^2 . 
-\end{align*}</div></div></div>
+\end{align*}</div></div>
 <p>La convexidad de $U$ garantiza que el segmento $[x,y]$ esté contenido en $U$, y
 la acotación de $\nabla f$ es lo que vuelve estimable el integrando. El único
 paso con contenido geométrico es la desigualdad de Cauchy y Schwarz, que en un
@@ -496,27 +741,27 @@ $x_1,\dots,x_k$ en $\Hs$, una <span class="df">combinación convexa</span> suya 
 $\sum_{i=1}^{k}\alpha_i x_i$ con $\alpha_i\ge0$ y
 $\sum_{i=1}^{k}\alpha_i=1$, y que la combinación es <span class="df">afín</span> si solo se pide
 $\sum_{i=1}^{k}\alpha_i=1$.</p>
-<div class="enunciado def" id="cap2:def-afin-indep"><span class="rotulo">Definición.</span> <p>Los puntos $x_0,x_1,\dots,x_k$ de $\Hs$ son <span class="df">afínmente independientes</span> si las
+<div class="stmt definicion" id="cap2:def-afin-indep"><div class="head">Definición</div><div class="body"><p>Los puntos $x_0,x_1,\dots,x_k$ de $\Hs$ son <span class="df">afínmente independientes</span> si las
 únicas escalares $\alpha_0,\dots,\alpha_k$ con
 $\sum_{i=0}^{k}\alpha_i x_i=0$ y $\sum_{i=0}^{k}\alpha_i=0$ son todas nulas.
-<span class="fuente">[Junca, §4.1]</span></p></div>
-<div class="enunciado lema" id="cap2:lema-afin-lineal"><span class="rotulo">Lema.</span> <p>Los puntos $x_0,x_1,\dots,x_k$ son afínmente independientes si y solo si los $k$
+<span class="src">[Junca, §4.1]</span></p></div></div>
+<div class="stmt lema" id="cap2:lema-afin-lineal"><div class="head">Lema</div><div class="body"><p>Los puntos $x_0,x_1,\dots,x_k$ son afínmente independientes si y solo si los $k$
 vectores $x_1-x_0,\dots,x_k-x_0$ son linealmente independientes.
-<span class="fuente">[Junca, §4.1]</span></p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Las dos condiciones $\sum_{i=0}^{k}\alpha_i x_i=0$ y
+<span class="src">[Junca, §4.1]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p8">Ver demostración</button><div class="proof" id="convexa-p8"><p>Las dos condiciones $\sum_{i=0}^{k}\alpha_i x_i=0$ y
 $\sum_{i=0}^{k}\alpha_i=0$ equivalen, eliminando $\alpha_0=-\sum_{i\ge1}\alpha_i$
 de la primera mediante la segunda, a la única condición
 $\sum_{i=1}^{k}\alpha_i(x_i-x_0)=0$. Los $\alpha_i$ con $i\ge1$ son nulos
 exactamente cuando los $x_i-x_0$ son linealmente independientes, y en tal caso
-$\alpha_0$ también lo es.</p></div></div>
+$\alpha_0$ también lo es.</p></div>
 <p>Ninguno de los dos enunciados menciona la dimensión, y los dos valen en $\Hs$
 tal como están escritos. Lo que sí depende de la dimensión es la consecuencia
 que se extrae de ellos.</p>
-<div class="enunciado teo" id="cap2:teo-caratheodory"><span class="rotulo">Teorema (Carathéodory).</span> <p>Sea $B\subset\R^n$. Todo elemento de $\conv(B)$ se puede escribir como
+<div class="stmt teorema" id="cap2:teo-caratheodory"><div class="head">Teorema (Carathéodory)</div><div class="body"><p>Sea $B\subset\R^n$. Todo elemento de $\conv(B)$ se puede escribir como
 combinación convexa de elementos de $B$ afínmente independientes, y por tanto
 como combinación convexa de a lo más $n+1$ elementos de $B$.
-<span class="fuente">[Junca, §4.1]</span></p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Sea $x=\sum_{i=1}^{k}\alpha_i x_i$ con $\alpha_i&gt;0$, $\sum\alpha_i=1$ y
+<span class="src">[Junca, §4.1]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p9">Ver demostración</button><div class="proof" id="convexa-p9"><p>Sea $x=\sum_{i=1}^{k}\alpha_i x_i$ con $\alpha_i&gt;0$, $\sum\alpha_i=1$ y
 $x_i\in B$. Si los $x_i$ son afínmente independientes, el lema anterior da $k-1\le n$ y no
 hay nada más que probar.
 Suponga que no lo son. Existen entonces escalares $\mu_i$ no todos nulos con
@@ -530,7 +775,7 @@ $\epsilon\in\R$,</p>
 $\epsilon=\min\{\alpha_i/\mu_i:\mu_i&gt;0\}&gt;0$, todos los coeficientes
 $\alpha_i-\epsilon\mu_i$ siguen siendo no negativos y al menos uno se anula, de
 donde $x$ es combinación convexa de a lo más $k-1$ elementos de $B$. Repitiendo
-el proceso se llega a una familia afínmente independiente.</p></div></div>
+el proceso se llega a una familia afínmente independiente.</p></div>
 <p>El teorema es falso en dimensión infinita, y no por un tecnicismo de la
 demostración: el número $n+1$ que aparece en la conclusión <em>es</em> la
 dimensión del espacio, así que en $\Hs$ no hay ningún enunciado análogo que
@@ -541,15 +786,15 @@ finita, y $\conv(B)$ contiene puntos que requieren tantos términos como se
 quiera.</p>
 <p>De Carathéodory se deduce el corolario siguiente, cuya suerte al cambiar de
 espacio es distinta de la del teorema.</p>
-<div class="enunciado coro" id="cap2:coro-conv-compacto"><span class="rotulo">Corolario.</span> <p>Sea $B\subset\R^n$ compacto. Entonces $\conv(B)$ es compacto.
-<span class="fuente">[Junca, §4.1]</span></p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Basta ver que toda sucesión de $\conv(B)$ tiene una subsucesión convergente. Por
+<div class="stmt corolario" id="cap2:coro-conv-compacto"><div class="head">Corolario</div><div class="body"><p>Sea $B\subset\R^n$ compacto. Entonces $\conv(B)$ es compacto.
+<span class="src">[Junca, §4.1]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p10">Ver demostración</button><div class="proof" id="convexa-p10"><p>Basta ver que toda sucesión de $\conv(B)$ tiene una subsucesión convergente. Por
 el teorema de Carathéodory, cada término se escribe
 $x^k=\sum_{i=1}^{n+1}\alpha_i^k x_i^k$ con $x_i^k\in B$ y
 $\alpha^k\in\simplex^n$. El producto $B^{n+1}\times\simplex^n$ es compacto, luego
 la sucesión $(x_1^k,\dots,x_{n+1}^k,\alpha^k)$ tiene una subsucesión convergente
 a un punto $(x_1,\dots,x_{n+1},\alpha)$, y sobre ella
-$x^k\to\sum_{i=1}^{n+1}\alpha_i x_i\in\conv(B)$.</p></div></div>
+$x^k\to\sum_{i=1}^{n+1}\alpha_i x_i\in\conv(B)$.</p></div>
 <p>En un espacio de Hilbert de dimensión infinita el enunciado es falso tal como
 está, porque $\conv(B)$ ni siquiera tiene por qué ser cerrado. Tome
 $B=\{0\}\cup\{e_n/n\}_{n\ge1}$, que es compacto por ser una sucesión convergente
@@ -568,9 +813,9 @@ resultados posteriores. El segundo es la existencia de la proyección sobre un
 convexo cerrado, que en $\R^n$ se obtiene de Weierstrass y aquí no puede
 obtenerse así, porque la bola cerrada no es compacta.</p>
 <h3 id="cap3:sec-afines">Conjuntos afines e interior relativo</h3>
-<div class="enunciado def" id="cap3:def-afin"><span class="rotulo">Definición.</span> <p>Un conjunto $A\subset\Hs$ es <span class="df">afín</span> si para todos $x,y\in A$ y todo
+<div class="stmt definicion" id="cap3:def-afin"><div class="head">Definición</div><div class="body"><p>Un conjunto $A\subset\Hs$ es <span class="df">afín</span> si para todos $x,y\in A$ y todo
 $\alpha\in\R$ se tiene $\alpha x+(1-\alpha)y\in A$, es decir, si la recta que
-pasa por dos puntos cualesquiera de $A$ está contenida en $A$.</p></div>
+pasa por dos puntos cualesquiera de $A$ está contenida en $A$.</p></div></div>
 <p>Es fácil ver que $A$ es afín y no vacío si y solo si existe un subespacio
 vectorial $V$ y un punto $x_0$ con $A=x_0+V$, y que $V$ queda determinado por
 $A$. En un espacio de Hilbert $A$ es cerrado exactamente cuando $V$ lo es,
@@ -579,18 +824,18 @@ distinción que en $\R^n$ no existe porque allí todo subespacio es cerrado.</p>
 las combinaciones afines finitas de elementos de $B$, y la <span class="df">envolvente
 convexa</span> $\conv(B)$ el de las combinaciones convexas finitas. Las dos son el
 menor conjunto afín, respectivamente convexo, que contiene a $B$.</p>
-<div class="enunciado def" id="cap3:def-ri"><span class="rotulo">Definición.</span> <p>Sea $C\subset\R^n$ convexo. El <span class="df">interior relativo</span> de $C$ es</p>
+<div class="stmt definicion" id="cap3:def-ri"><div class="head">Definición</div><div class="body"><p>Sea $C\subset\R^n$ convexo. El <span class="df">interior relativo</span> de $C$ es</p>
 <div class="display">\[
   \ri(C)=\bigl\{x\in C:\ \exists r&gt;0
     \ \text{tal que}\ \Ball(x;r)\cap\aff(C)\subset C\bigr\},
 \]</div>
-<p>es decir, el interior de $C$ como subconjunto del espacio afín que genera.</p></div>
+<p>es decir, el interior de $C$ como subconjunto del espacio afín que genera.</p></div></div>
 <p>La definición se escribe igual en $\Hs$, y no sirve de nada. El resultado que la
 hace útil es el siguiente, y solo vale en dimensión finita.</p>
-<div class="enunciado teo" id="cap3:teo-ri"><span class="rotulo">Teorema.</span> <p>Sea $C\subset\R^n$ convexo y no vacío. Entonces $\ri(C)\neq\varnothing$ y
+<div class="stmt teorema" id="cap3:teo-ri"><div class="head">Teorema</div><div class="body"><p>Sea $C\subset\R^n$ convexo y no vacío. Entonces $\ri(C)\neq\varnothing$ y
 $\cl(C)=\cl(\ri(C))$.
-<span class="fuente">[Junca, §4.1]</span></p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Sea $d=\dim(\aff(C))$ y tome $x_0,\dots,x_d\in C$ afínmente independientes, que
+<span class="src">[Junca, §4.1]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p11">Ver demostración</button><div class="proof" id="convexa-p11"><p>Sea $d=\dim(\aff(C))$ y tome $x_0,\dots,x_d\in C$ afínmente independientes, que
 existen por definición de $d$. El baricentro
 $\bar x=\tfrac{1}{d+1}\sum_{i=0}^{d}x_i$ pertenece a $C$ por convexidad, y
 pertenece al interior relativo de $\conv\{x_0,\dots,x_d\}$, que es un símplex de
@@ -600,28 +845,28 @@ inmediata. Recíprocamente, basta mostrar que $C\subset\cl(\ri(C))$. Sean
 $x\in C$ e $y\in\ri(C)$. En efecto, para todo $\lambda\in ]0,1]$ el punto
 $(1-\lambda)x+\lambda y$ está en $\ri(C)$, y tomando $\lambda_k\downarrow0$ la
 sucesión $y_k=(1-\lambda_k)x+\lambda_k y$ está contenida en $\ri(C)$ y converge
-a $x$, de donde $x\in\cl(\ri(C))$.</p></div></div>
+a $x$, de donde $x\in\cl(\ri(C))$.</p></div>
 <p>El paso que fija la dimensión es el primero. La existencia de $d+1$ puntos
 afínmente independientes y el hecho de que su baricentro sea interior al símplex
 que generan dependen de que $d$ sea finito, y no hay manera de rodearlo. La
 conclusión, además, es falsa.</p>
-<div class="enunciado ej" id="cap3:ej-cono-positivo"><span class="rotulo">Ejemplo.</span> <p>Sea $\Hs=\ell^2$ y sea
+<div class="stmt ejemplo" id="cap3:ej-cono-positivo"><div class="head">Ejemplo</div><div class="body"><p>Sea $\Hs=\ell^2$ y sea
 $C=\{x\in\ell^2:\ x_n\ge0\ \text{para todo}\ n\}$ el cono positivo, que es
 convexo, cerrado y no vacío. Su envolvente afín es todo $\ell^2$, porque todo
 $x\in\ell^2$ se escribe $x=x^{+}-x^{-}$ con $x^{+},x^{-}\in C$, de modo que
 $\ri(C)=\intr(C)$. Y ese interior es vacío: dados $x\in C$ y $r&gt;0$, como
 $x_n\to0$ existe $n$ con $x_n&lt;r$, y entonces $x-re_n$ está a distancia $r$ de
 $x$ y tiene la $n$-ésima coordenada negativa, luego no pertenece a $C$. Así que
-ninguna bola centrada en un punto de $C$ está contenida en $C$.</p></div>
+ninguna bola centrada en un punto de $C$ está contenida en $C$.</p></div></div>
 <p>De aquí en adelante, cada vez que un argumento de dimensión finita invoque
 $\ri$, habrá que sustituirlo por una hipótesis explícita: interior no vacío de
 verdad, o continuidad en un punto, o una condición de Slater. Bauschke y
 Combettes dedican una sección entera a los sustitutos disponibles.
-<span class="fuente">[Bauschke--Combettes, §6.2]</span></p>
+<span class="src">[Bauschke--Combettes, §6.2]</span></p>
 <h3 id="cap3:sec-conos">Conos convexos y dualidad</h3>
-<div class="enunciado def" id="cap3:def-cono"><span class="rotulo">Definición.</span> <p>Un conjunto $K\subset\Hs$ es un <span class="df">cono</span> si $\lambda x\in K$ para todo $x\in K$
+<div class="stmt definicion" id="cap3:def-cono"><div class="head">Definición</div><div class="body"><p>Un conjunto $K\subset\Hs$ es un <span class="df">cono</span> si $\lambda x\in K$ para todo $x\in K$
 y todo $\lambda\ge0$. Un cono $K$ es convexo si y solo si
-$\alpha x+\beta y\in K$ para todos $x,y\in K$ y todos $\alpha,\beta\ge0$.</p></div>
+$\alpha x+\beta y\in K$ para todos $x,y\in K$ y todos $\alpha,\beta\ge0$.</p></div></div>
 <p>Con esta convención todo cono contiene el origen. La variante que pide
 $\lambda&gt;0$ obliga a escribir $\cono(B)\cup\{0\}$ donde aquí basta $\cono(B)$, y
 no cambia ningún enunciado posterior.</p>
@@ -633,14 +878,14 @@ no cambia ningún enunciado posterior.</p>
 <p>el menor cono convexo que contiene a $B$. Las sumas son finitas, igual que en
 las envolventes afín y convexa, así que la definición no cambia al pasar a
 dimensión infinita.</p>
-<div class="enunciado def" id="cap3:def-dual"><span class="rotulo">Definición.</span> <p>Sea $K\subset\Hs$ un cono. El <span class="df">cono dual</span> de $K$ es</p>
+<div class="stmt definicion" id="cap3:def-dual"><div class="head">Definición</div><div class="body"><p>Sea $K\subset\Hs$ un cono. El <span class="df">cono dual</span> de $K$ es</p>
 <div class="display">\[
   \polar{K}=\bigl\{y\in\Hs:\ \ip{x}{y}\ge0\ \text{para todo}\ x\in K\bigr\}.
 \]</div>
-<p><span class="fuente">[Bauschke--Combettes, §6.3]</span></p></div>
-<div class="enunciado prop" id="cap3:prop-dual-cerrado"><span class="rotulo">Proposición.</span> <p>Para todo cono $K\subset\Hs$, el cono dual $\polar{K}$ es un cono convexo y
-cerrado.</p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Es claro que $\polar{K}$ es un cono convexo, porque las condiciones
+<p><span class="src">[Bauschke--Combettes, §6.3]</span></p></div></div>
+<div class="stmt proposicion" id="cap3:prop-dual-cerrado"><div class="head">Proposición</div><div class="body"><p>Para todo cono $K\subset\Hs$, el cono dual $\polar{K}$ es un cono convexo y
+cerrado.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p12">Ver demostración</button><div class="proof" id="convexa-p12"><p>Es claro que $\polar{K}$ es un cono convexo, porque las condiciones
 $\ip{x}{y}\ge0$ son estables por sumas y por múltiplos no negativos de $y$. Para
 la clausura, observe que</p>
 <div class="display">\[
@@ -648,13 +893,13 @@ la clausura, observe que</p>
 \]</div>
 <p>y cada uno de esos conjuntos es la preimagen del cerrado $[0,\infty[$ por el
 funcional continuo $\ip{x}{\cdot}$, luego es cerrado. Una intersección
-arbitraria de cerrados es cerrada.</p></div></div>
+arbitraria de cerrados es cerrada.</p></div>
 <p>La prueba no usa la dimensión, y la intersección puede ser no numerable sin que
 eso cause ningún problema. El resultado siguiente es de otra naturaleza.</p>
-<div class="enunciado teo" id="cap3:teo-bipolar"><span class="rotulo">Teorema.</span> <p>Sea $K\subset\Hs$ un cono. Entonces $\polar{(\polar{K})}=\cl(\cono(K))$. En
+<div class="stmt teorema" id="cap3:teo-bipolar"><div class="head">Teorema</div><div class="body"><p>Sea $K\subset\Hs$ un cono. Entonces $\polar{(\polar{K})}=\cl(\cono(K))$. En
 particular, $K$ es un cono convexo y cerrado si y solo si
 $\polar{(\polar{K})}=K$.
-<span class="fuente">[Bauschke--Combettes, §6.3]</span></p></div>
+<span class="src">[Bauschke--Combettes, §6.3]</span></p></div></div>
 <p>La inclusión $\cl(\cono(K))\subset\polar{(\polar{K})}$ es inmediata a partir de
 la proposición anterior. La otra requiere separar un punto
 que no esté en $\cl(\cono(K))$ de ese conjunto mediante un hiperplano, y ahí es
@@ -665,7 +910,7 @@ separa sea convexo y cerrado, y en ese caso la separación se construye a partir
 del teorema de la proyección. El bipolar no es entonces un resultado gratuito en
 dimensión infinita, aunque su enunciado sea el mismo que en $\R^n$.</p>
 <p>Los ejemplos habituales se reparten entre los dos ambientes.</p>
-<div class="enunciado ej" id="cap3:ej-duales"><span class="rotulo">Ejemplo.</span> <p>El ortante positivo $K=\R^n_{+}$ satisface $\polar{K}=K$. Si $U\subset\Hs$ es un
+<div class="stmt ejemplo" id="cap3:ej-duales"><div class="head">Ejemplo</div><div class="body"><p>El ortante positivo $K=\R^n_{+}$ satisface $\polar{K}=K$. Si $U\subset\Hs$ es un
 subespacio cerrado, entonces $\polar{U}=\orth{U}$, y sin la hipótesis de que $U$
 sea cerrado se obtiene $\polar{U}=\orth{(\cl U)}$. El cono de segundo orden</p>
 <div class="display">\[
@@ -677,7 +922,7 @@ y es cerrado y convexo porque</p>
 <div class="display">\[
   \PSD{n}=\bigcap_{v\in\R^n}\bigl\{X\in\Sym{n}:\ \ip{X}{vv^{\top}}\ge0\bigr\},
 \]</div>
-<p>que es de nuevo una intersección de semiespacios cerrados.</p></div>
+<p>que es de nuevo una intersección de semiespacios cerrados.</p></div></div>
 <p>De los cuatro, los dos primeros tienen sentido en $\Hs$ y los dos últimos no.
 El ortante positivo se generaliza al cono positivo de $L^2$, que es autodual por
 la misma cuenta; el cono de segundo orden se generaliza al cono de Lorentz de
@@ -690,12 +935,12 @@ está.</p>
 <p>y es este orden el que permite escribir restricciones de desigualdad en
 problemas que no viven en $\R^n$. La programación cónica consiste en sustituir
 el $Ax\le b$ componente a componente por una desigualdad $\preceq_K$.</p>
-<div class="enunciado def" id="cap3:def-normal"><span class="rotulo">Definición.</span> <p>Sea $C\subset\Hs$ convexo y no vacío y sea $p\in C$. El <span class="df">cono normal</span> a $C$
+<div class="stmt definicion" id="cap3:def-normal"><div class="head">Definición</div><div class="body"><p>Sea $C\subset\Hs$ convexo y no vacío y sea $p\in C$. El <span class="df">cono normal</span> a $C$
 en $p$ es</p>
 <div class="display">\[
   \Ncono_C(p)=\bigl\{v\in\Hs:\ \ip{v}{x-p}\le0\ \text{para todo}\ x\in C\bigr\}.
 \]</div>
-<p><span class="fuente">[Bauschke--Combettes, §6.4]</span></p></div>
+<p><span class="src">[Bauschke--Combettes, §6.4]</span></p></div></div>
 <p>Se trata en efecto de un cono convexo y cerrado, por el mismo argumento de
 intersección de semiespacios de más arriba. Si
 $p\in\intr(C)$ entonces $\Ncono_C(p)=\{0\}$, porque cualquier $v\neq0$ admite un
@@ -713,14 +958,14 @@ dimensión infinita, porque la bola cerrada de $\Hs$ no es compacta. Lo que
 sustituye a la compacidad es la ley del paralelogramo, que convierte la
 convexidad de $C$ en una estimación sobre lo rápido que se acercan entre sí dos
 puntos casi óptimos, y la completitud del espacio, que recoge el límite.</p>
-<div class="enunciado teo" id="cap3:teo-proyeccion"><span class="rotulo">Teorema.</span> <p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, y sea $z\in\Hs$. Entonces existe
+<div class="stmt teorema" id="cap3:teo-proyeccion"><div class="head">Teorema</div><div class="body"><p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, y sea $z\in\Hs$. Entonces existe
 un único $p\in C$ tal que</p>
 <div class="display">\[
   \norm{z-p}=\min_{x\in C}\norm{z-x}.
 \]</div>
 <p>Lo denotamos $p=\Proy_C z$.
-<span class="fuente">[Bauschke--Combettes, §3.2]</span></p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Sea $\delta=\inf_{x\in C}\norm{z-x}$ y sea $(x_k)$ una sucesión en $C$ con
+<span class="src">[Bauschke--Combettes, §3.2]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p13">Ver demostración</button><div class="proof" id="convexa-p13"><p>Sea $\delta=\inf_{x\in C}\norm{z-x}$ y sea $(x_k)$ una sucesión en $C$ con
 $\norm{z-x_k}\to\delta$. Queremos mostrar que $(x_k)$ es de Cauchy. En efecto,
 la ley del paralelogramo aplicada a los vectores $x_k-z$ y $x_m-z$ da</p>
 <div class="display">\[
@@ -737,20 +982,20 @@ donde el último término es al menos $4\delta^2$. Por consiguiente</p>
 $(x_k)$ converge a un punto $p$, que está en $C$ por ser $C$ cerrado, y la
 continuidad de la norma da $\norm{z-p}=\delta$.</p>
 <p>Para la unicidad, si $p$ y $q$ realizan ambos el ínfimo, la misma identidad con
-$x_k=p$ y $x_m=q$ da $\norm{p-q}^2\le2\delta^2+2\delta^2-4\delta^2=0$.</p></div></div>
+$x_k=p$ y $x_m=q$ da $\norm{p-q}^2\le2\delta^2+2\delta^2-4\delta^2=0$.</p></div>
 <p>Las tres hipótesis se usan y ninguna sobra. La convexidad es lo único que
 garantiza que el punto medio siga en $C$, que es el paso donde entra el
 paralelogramo; sin ella el ínfimo puede no alcanzarse. La clausura es lo que
 permite que el límite esté en $C$. Y la completitud es lo que convierte una
 sucesión de Cauchy en una sucesión convergente, que es exactamente el papel que
 en $\R^n$ hacía la compacidad.</p>
-<div class="enunciado teo" id="cap3:teo-caracterizacion"><span class="rotulo">Teorema.</span> <p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, sean $z\in\Hs$ y $p\in C$.
+<div class="stmt teorema" id="cap3:teo-caracterizacion"><div class="head">Teorema</div><div class="body"><p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, sean $z\in\Hs$ y $p\in C$.
 Entonces $p=\Proy_C z$ si y solo si</p>
 <div class="display">\[
   \ip{z-p}{v-p}\le0\qquad\text{para todo } v\in C.
 \]</div>
-<p><span class="fuente">[Bauschke--Combettes, §3.2]</span></p></div>
-<div class="prueba"><button class="verprueba" type="button">Ver demostración</button><div class="cuerpoprueba" hidden><p>Suponga primero que $p=\Proy_C z$ y sea $v\in C$. Para $t\in ]0,1]$ el punto
+<p><span class="src">[Bauschke--Combettes, §3.2]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p14">Ver demostración</button><div class="proof" id="convexa-p14"><p>Suponga primero que $p=\Proy_C z$ y sea $v\in C$. Para $t\in ]0,1]$ el punto
 $p+t(v-p)$ pertenece a $C$ por convexidad, luego</p>
 <div class="display">\[
   \norm{z-p}^2\le\norm{z-p-t(v-p)}^2
@@ -765,25 +1010,227 @@ entonces:</p>
    =\norm{z-p}^2-2\ip{z-p}{v-p}+\norm{p-v}^2\ge\norm{z-p}^2,
 \]</div>
 <p>donde el término central es no negativo por hipótesis. Luego $p$ realiza el
-mínimo.</p></div></div>
-<div class="enunciado obs" id="cap3:obs-normal"><span class="rotulo">Observación.</span> <p>La desigualdad del teorema anterior dice exactamente que
+mínimo.</p></div>
+<div class="stmt observacion" id="cap3:obs-normal"><div class="head">Observación</div><div class="body"><p>La desigualdad del teorema anterior dice exactamente que
 $z-\Proy_C z\in\Ncono_C(\Proy_C z)$, con el cono normal definido más arriba.
 Geométricamente, el vector que va del punto proyectado al
 punto original forma un ángulo obtuso con toda dirección que apunte hacia
 dentro de $C$, y el hiperplano que pasa por $\Proy_C z$ perpendicular a ese
 vector deja a $C$ entero de un lado. Es un hiperplano soporte de $C$ en
 $\Proy_C z$, y es la herramienta que faltaba para cerrar la igualdad bipolar de
-la sección anterior.</p></div></section>
+la sección anterior.</p></div></div></section>
+  <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
+<nav id="cuadernos" aria-label="Cuadernos">
+<h4>Cuadernos</h4>
+<a href="convexa.html" class="aqui"><span class="t">Optimización Convexa en Espacios de Hilbert</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a class="portada" href="index.html">Todas las notas</a>
+</nav>
+</div>
+
 <script>
-document.querySelectorAll('.verprueba').forEach(function(b){
-  b.addEventListener('click', function(){
-    var c = b.nextElementSibling;
-    var oculto = c.hasAttribute('hidden');
-    if (oculto) { c.removeAttribute('hidden'); b.textContent = 'Ocultar demostración'; }
-    else { c.setAttribute('hidden',''); b.textContent = 'Ver demostración'; }
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* Los rotulos y las notaciones los inyecta el generador, porque dependen de
+   que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
+   una de lecture notes dice «demostraciones». */
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": []};
+
+/* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
+   navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
+   en los valores por defecto. */
+function recuerda(k, v){ try{ localStorage.setItem("notas."+k, v); }catch(e){} }
+function recordado(k){ try{ return localStorage.getItem("notas."+k); }catch(e){ return null; } }
+
+/* --- letra y cuerpo -------------------------------------------------- */
+const FUENTES = {serif:"f-serif", sans:"f-sans", lm:"f-lm"};
+function setFuente(f){
+  document.documentElement.dataset.font = f;
+  for(const [k, id] of Object.entries(FUENTES))
+    $("#"+id).setAttribute("aria-pressed", k === f);
+  recuerda("font", f);
+}
+
+const FS_MIN = 13, FS_MAX = 26;
+let fs = 17;
+function setTam(n){
+  fs = Math.max(FS_MIN, Math.min(FS_MAX, n));
+  document.documentElement.style.setProperty("--fs", fs + "px");
+  $("#s-val").textContent = fs;
+  $("#s-menos").disabled = (fs === FS_MIN);
+  $("#s-mas").disabled   = (fs === FS_MAX);
+  recuerda("fs", fs);
+}
+
+/* --- notacion -------------------------------------------------------- */
+/* Las dos ramas de cada \fin estan las dos en el HTML; esto solo decide
+   cual se ve. «ambas» ensena las dos, que es el \notaAmbas del LaTeX. */
+function setNota(n){
+  if(!CFG.notaciones.length) return;
+  $$(".v[data-var]").forEach(v => {
+    v.dataset.on = (n === "ambas" || v.dataset.var === n) ? "true" : "false";
   });
+  CFG.notaciones.forEach(x =>
+    $("#n-"+x.id).setAttribute("aria-pressed", String(x.id === n)));
+  recuerda("nota", n);
+}
+
+/* --- indice ---------------------------------------------------------- */
+let observador = null;
+
+function construyeIndice(){
+  const toc = $("#toc");
+  const piezas = $$("main h2, main h3, main h4, main .stmt");
+  let html = "<h4>Índice</h4>", n = 0;
+  const dianas = [];
+  piezas.forEach(el => {
+    if(!el.id) el.id = "auto-" + (n++);
+    let clase, texto;
+    if(el.tagName === "H2"){ clase = "lvl-cap"; texto = esc(el.textContent.trim()); }
+    else if(el.tagName === "H3"){ clase = "lvl-sec"; texto = esc(el.textContent.trim()); }
+    else if(el.tagName === "H4"){ clase = "lvl-sub"; texto = esc(el.textContent.trim()); }
+    else{
+      const cab = el.querySelector(".head");
+      if(!cab) return;
+      // El .head trae la fuente pegada: se quita, que en una linea de indice
+      // no cabe y no ayuda a localizar nada.
+      const limpio = cab.cloneNode(true);
+      limpio.querySelectorAll(".src").forEach(s => s.remove());
+      const t = limpio.textContent.trim();
+      const m = t.match(/^(.*?)\s+([\d.]+)$/);
+      clase = "lvl-stmt";
+      texto = m ? '<span class="n">' + esc(m[2]) + '</span>' + esc(m[1])
+                : esc(t);
+    }
+    html += '<a class="' + clase + '" href="#' + esc(el.id)
+          + '" data-d="' + esc(el.id) + '">' + texto + "</a>";
+    dianas.push(el);
+  });
+  toc.innerHTML = html;
+  vigila(dianas);
+}
+
+function esc(s){
+  return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+}
+
+/* Resaltar donde esta el lector. Se marca la ultima pieza que ya paso por
+   arriba de la ventana, que es lo que hace un lector de PDF; con «la que se ve»
+   a secas, en un salto largo no se marca ninguna. */
+function vigila(dianas){
+  if(observador) observador.disconnect();
+  const vistas = new Set();
+  observador = new IntersectionObserver(entradas => {
+    entradas.forEach(e => e.isIntersecting ? vistas.add(e.target)
+                                           : vistas.delete(e.target));
+    let actual = null;
+    for(const d of dianas){
+      if(vistas.has(d)){ actual = d; break; }
+      if(d.getBoundingClientRect().top < 80) actual = d;
+    }
+    marca(actual);
+  }, {rootMargin: "-70px 0px -65% 0px", threshold: 0});
+  dianas.forEach(d => observador.observe(d));
+}
+
+function marca(el){
+  const toc = $("#toc");
+  toc.querySelectorAll("a.aqui").forEach(a => a.classList.remove("aqui"));
+  if(!el) return;
+  const a = toc.querySelector('a[data-d="' + CSS.escape(el.id) + '"]');
+  if(!a) return;
+  a.classList.add("aqui");
+  const r = a.getBoundingClientRect(), rt = toc.getBoundingClientRect();
+  if(r.top < rt.top || r.bottom > rt.bottom)
+    a.scrollIntoView({block:"nearest"});
+}
+
+/* --- los dos paneles y la barra --------------------------------------- */
+function setToc(on){
+  document.documentElement.dataset.toc = on ? "on" : "off";
+  $("#b-toc").setAttribute("aria-pressed", String(on));
+  recuerda("toc", on ? "on" : "off");
+}
+function setNotas(on){
+  document.documentElement.dataset.notas = on ? "on" : "off";
+  $("#b-notas").setAttribute("aria-pressed", String(on));
+  recuerda("cuadernos", on ? "on" : "off");
+}
+/* Plegar la barra devuelve su altura al texto. Arranca desplegada, que es donde
+   se ve que existe, y la eleccion se recuerda: quien la pliega la encuentra
+   plegada la proxima vez. */
+function setBarra(on){
+  document.documentElement.dataset.bar = on ? "on" : "off";
+  $("#b-bar").setAttribute("aria-expanded", String(on));
+  $("#volver").setAttribute("aria-expanded", String(on));
+  recuerda("bar", on ? "on" : "off");
+}
+
+/* --- demostraciones o soluciones -------------------------------------- */
+function refrescaBotonGlobal(){
+  const bs = $$(".proof-btn");
+  const todas = bs.length > 0 && bs.every(b => b.getAttribute("aria-expanded") === "true");
+  $("#b-all").textContent = todas ? CFG.cerrarTodas : CFG.abrirTodas;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest(".proof-btn");
+  if(!b) return;
+  const caja = document.getElementById(b.dataset.t);
+  const abierto = b.getAttribute("aria-expanded") === "true";
+  b.setAttribute("aria-expanded", String(!abierto));
+  b.textContent = abierto ? CFG.ver : CFG.ocultar;
+  caja.dataset.open = String(!abierto);
+  refrescaBotonGlobal();
 });
+$("#b-all").addEventListener("click", () => {
+  const bs = $$(".proof-btn");
+  const abrir = !bs.every(b => b.getAttribute("aria-expanded") === "true");
+  bs.forEach(b => {
+    b.setAttribute("aria-expanded", String(abrir));
+    b.textContent = abrir ? CFG.ocultar : CFG.ver;
+    document.getElementById(b.dataset.t).dataset.open = String(abrir);
+  });
+  refrescaBotonGlobal();
+});
+
+/* --- arranque -------------------------------------------------------- */
+$("#f-serif").addEventListener("click", () => setFuente("serif"));
+$("#f-sans").addEventListener("click",  () => setFuente("sans"));
+$("#f-lm").addEventListener("click",    () => setFuente("lm"));
+$("#s-menos").addEventListener("click", () => setTam(fs - 1));
+$("#s-mas").addEventListener("click",   () => setTam(fs + 1));
+$("#b-toc").addEventListener("click", () =>
+  setToc(document.documentElement.dataset.toc !== "on"));
+$("#b-notas").addEventListener("click", () =>
+  setNotas(document.documentElement.dataset.notas !== "on"));
+$("#b-bar").addEventListener("click", () => setBarra(false));
+$("#volver").addEventListener("click", () => {
+  setBarra(true);
+  $("#b-bar").focus();   // el foco iba en un boton que acaba de desaparecer
+});
+CFG.notaciones.forEach(x =>
+  $("#n-"+x.id).addEventListener("click", () => setNota(x.id)));
+
+/* En pantalla estrecha los paneles tapan el texto, asi que al pulsar un enlace
+   se cierran solos. En ancha se quedan, que es donde sirven de mapa. */
+const ancha = () => window.matchMedia("(min-width:1181px)").matches;
+$("#toc").addEventListener("click", e => {
+  if(e.target.closest("a") && !ancha()) setToc(false);
+});
+
+construyeIndice();
+refrescaBotonGlobal();
+setFuente(FUENTES[recordado("font")] ? recordado("font") : "serif");
+setTam(parseInt(recordado("fs"), 10) || 17);
+setToc(recordado("toc") ? recordado("toc") === "on" : ancha());
+setNotas(recordado("cuadernos") ? recordado("cuadernos") === "on" : ancha());
+setBarra(recordado("bar") !== "off");
+if(CFG.notaciones.length){
+  const guardada = recordado("nota");
+  const valida = CFG.notaciones.some(x => x.id === guardada);
+  setNota(valida ? guardada : CFG.notaciones[0].id);
+}
 </script>
 </body>
 </html>
