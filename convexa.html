@@ -347,7 +347,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "\\mathcal{B}", "Dif": "\\mathrm{D}", "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "Proy": "P", "simplex": "\\Delta", "subdif": "\\partial", "dist": ["d_{#1}", 1], "Sym": ["\\mathbb{S}^{#1}", 1], "PSD": ["\\mathbb{S}^{#1}_{+}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "lev": "\\operatorname{lev}", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "dist": ["d_{#1}", 1], "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
 };
@@ -414,13 +414,14 @@ con $y$.</p>
 <div class="stmt definicion" id="cap1:def-direccional"><div class="head">Definición</div><div class="body"><p>Sean $f:U\to\R$ y $x\in U$. Dado $d\in\Hs$, la <span class="df">derivada direccional</span> de $f$
 en $x$ en la dirección $d$ es</p>
 <div class="display">\[
-  f&#x27;(x;d):=\lim_{t\downarrow 0}\frac{f(x+td)-f(x)}{t},
+  \dird{d}{f}(x):=\lim_{t\downarrow 0}\frac{f(x+td)-f(x)}{t},
 \]</div>
 <p>siempre que el límite exista.</p></div></div>
 <p>La derivada direccional existe con mucha facilidad y por sí sola dice poco. Lo
 que la vuelve útil es exigir que dependa linealmente de la dirección.</p>
 <div class="stmt definicion" id="cap1:def-gateaux"><div class="head">Definición</div><div class="body"><p>Sean $f:U\to\R$ y $x\in U$. Decimos que $f$ es <span class="df">Gâteaux diferenciable</span> en $x$
-si $f&#x27;(x;d)$ existe para toda $d\in\Hs$ y la aplicación $d\mapsto f&#x27;(x;d)$ es
+si $\dird{d}{f}(x)$ existe para toda $d\in\Hs$ y la aplicación
+$d\mapsto\dird{d}{f}(x)$ es
 lineal y acotada. En tal caso el operador $\Dif f(x)\in\Bop{\Hs,\R}$ así
 definido se llama la <span class="df">derivada de Gâteaux</span> de $f$ en $x$.
 <span class="src">[Bauschke--Combettes, Definición 2.54]</span></p></div></div>
@@ -430,7 +431,7 @@ motivo se ve en el enunciado siguiente.</p>
 <div class="stmt proposicion" id="cap1:prop-gradiente"><div class="head">Proposición</div><div class="body"><p>Si $f$ es Gâteaux diferenciable en $x$, existe un único vector
 $\nabla f(x)\in\Hs$ tal que</p>
 <div class="display">\[
-  (\forall d\in\Hs)\qquad f&#x27;(x;d)=\ip{\nabla f(x)}{d}.
+  (\forall d\in\Hs)\qquad \dird{d}{f}(x)=\ip{\nabla f(x)}{d}.
 \]</div>
 <p>Lo llamamos el <span class="df">gradiente</span> de $f$ en $x$.
 <span class="src">[Bauschke--Combettes, Observación 2.55]</span></p></div></div>
@@ -444,14 +445,14 @@ existencia no requiere ningún teorema. En $\Hs$ no hay entradas, y el gradiente
 existe porque un funcional lineal continuo sobre un espacio de Hilbert
 <em>es</em> un producto interno contra un vector. Sin la continuidad el teorema de
 Riesz no se aplica y no hay gradiente ninguno: un funcional lineal no acotado
-$\ell:\Hs\to\R$ satisface $\ell&#x27;(x;d)=\ell(d)$ para todo $x$ y todo $d$, de modo
+$\ell:\Hs\to\R$ satisface $\dird{d}{\ell}(x)=\ell(d)$ para todo $x$ y todo $d$, de modo
 que es Gâteaux diferenciable en el sentido puramente algebraico en todos los
 puntos, y sin embargo no existe ningún $u$ con $\ell=\ip{u}{\cdot}$.</p>
 <p>Que la linealidad no sea automática se ve ya en el ejemplo más simple posible.</p>
 <div class="stmt ejemplo" id="cap1:ej-norma"><div class="head">Ejemplo</div><div class="body"><p>Sea $f:\Hs\to\R$ dada por $f(x)=\norm{x}$, con $\Hs\neq\{0\}$. Para toda
 dirección $d$,</p>
 <div class="display">\[
-  f&#x27;(0;d)=\lim_{t\downarrow 0}\frac{\norm{0+td}-\norm{0}}{t}=\norm{d},
+  \dird{d}{f}(0)=\lim_{t\downarrow 0}\frac{\norm{0+td}-\norm{0}}{t}=\norm{d},
 \]</div>
 <p>de manera que todas las derivadas direccionales en el origen existen. Pero
 $d\mapsto\norm{d}$ no es lineal, así que $f$ no es Gâteaux diferenciable en $0$.
@@ -536,7 +537,7 @@ todo punto, con</p>
 con la traspuesta $A^{\top}$ en lugar del adjunto. El cálculo es el mismo en los
 dos casos,</p>
 <div class="display">\[
-  f&#x27;(x;h)=\ip{Lx-r}{Lh}=\ip{L^{*}(Lx-r)}{h},
+  \dird{h}{f}(x)=\ip{Lx-r}{Lh}=\ip{L^{*}(Lx-r)}{h},
 \]</div>
 <p>y el único paso con contenido es la definición de adjunto, que existe para todo
 operador acotado entre espacios de Hilbert.</p>
@@ -557,7 +558,7 @@ crítico</span> si $f$ es Gâteaux diferenciable en $x$ y $\nabla f(x)=0$.</p>
 punto crítico.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p4">Ver demostración</button><div class="proof" id="convexa-p4"><p>Sea $x$ un mínimo local y sea $d\in\Hs$. Para $t&gt;0$ pequeño $x+td$ está en la
 bola donde $f(x)$ es mínimo, luego el cociente incremental es no negativo y por
-tanto $f&#x27;(x;d)\ge 0$. Tomando $d=-\nabla f(x)$ se obtiene
+tanto $\dird{d}{f}(x)\ge 0$. Tomando $d=-\nabla f(x)$ se obtiene
 $0\le\ip{\nabla f(x)}{-\nabla f(x)}=-\norm{\nabla f(x)}^2$, de donde
 $\nabla f(x)=0$.</p></div>
 <p>La prueba no usa coordenadas, ni compacidad, ni la dimensión. Con las
@@ -1006,6 +1007,375 @@ dentro de $C$, y el hiperplano que pasa por $\Proy_C z$ perpendicular a ese
 vector deja a $C$ entero de un lado. Es un hiperplano soporte de $C$ en
 $\Proy_C z$, y es la herramienta que faltaba para cerrar la igualdad bipolar de
 la sección anterior.</p></div></div></section>
+<section class="capitulo"><h2 id="cap:separacion">Separación y funciones convexas</h2>
+<p>La proyección sobre un convexo cerrado se pagó cara en el capítulo anterior, y
+ahora empieza a rendir. De ella salen los dos teoremas de separación con los que
+abre esta sesión, y el primero de ellos sale gratis: su demostración es un
+renglón de la desigualdad variacional, y ese renglón no menciona la dimensión
+en ningún momento.</p>
+<p>El segundo teorema es otra historia. Separar un punto de un convexo cerrado
+disjunto de él es una cosa; apoyar un hiperplano en un punto de la frontera es
+otra, porque allí no hay distancia positiva de la que tirar. La demostración
+clásica construye una sucesión de hiperplanos que separan puntos exteriores cada
+vez más cercanos y pasa al límite, y para pasar al límite necesita que la esfera
+unidad sea compacta. En $\Hs$ no lo es, y el enunciado se queda abajo.</p>
+<p>La segunda mitad del capítulo cambia de objeto y empieza con las funciones
+convexas. Ahí la traducción vuelve a ser cómoda, porque el epígrafo convierte
+toda pregunta sobre una función en una pregunta sobre un conjunto de
+$\Hs\times\R$, y los conjuntos ya sabemos tratarlos.</p>
+<h3 id="cap4:sec-corolarios">Dos corolarios de la proyección</h3>
+<p>Recordemos el enunciado con el que cerró el capítulo anterior: si $C\subset\Hs$
+es convexo, cerrado y no vacío, si $z\in\Hs$ y si $p\in C$, entonces $p=\Proy_Cz$
+si y solo si $\ip{z-p}{v-p}\le0$ para todo $v\in C$. Esa desigualdad es
+exactamente la pertenencia $z-p\in\Ncono_C(p)$, que es la forma en que se usa a
+partir de ahora.</p>
+<div class="stmt proposicion" id="cap4:prop-normal"><div class="head">Proposición</div><div class="body"><p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, y sean $z\in\Hs$ y $p\in C$.
+Entonces</p>
+<div class="display">\[
+  p=\Proy_Cz\quad\Longleftrightarrow\quad z-p\in\Ncono_C(p).
+\]</div>
+<p>En particular, $z-\Proy_Cz\in\Ncono_C(\Proy_Cz)$ para todo $z\in\Hs$.
+<span class="src">[Bauschke--Combettes, §3.2]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p15">Ver demostración</button><div class="proof" id="convexa-p15"><p>Es la caracterización del capítulo anterior, escrita con la definición del cono
+normal, y la segunda afirmación es la primera aplicada a $p=\Proy_Cz$.</p></div>
+<p>El segundo corolario es que la proyección no separa puntos: llevar dos puntos
+sobre $C$ nunca aumenta la distancia entre ellos. En clase esto se enunció como
+que $\Proy_C$ es $1$-Lipschitz, y es cierto, pero la misma demostración da bastante
+más y no cuesta nada darla entera. Un operador $T$ definido sobre $D\subset\Hs$
+se llama <span class="df">firmemente no expansivo</span> si</p>
+<div class="display">\[
+  \norm{Tx-Ty}^2\le\ip{x-y}{Tx-Ty}\qquad\text{para todos } x,y\in D,
+\]</div>
+<p>y de aquí se sigue que $T$ es $1$-Lipschitz sin más que aplicar
+Cauchy--Schwarz al miembro derecho.</p>
+<div class="stmt teorema" id="cap4:teo-lipschitz"><div class="head">Teorema</div><div class="body"><p>Sea $C\subset\Hs$ convexo, cerrado y no vacío. Entonces $\Proy_C$ es firmemente
+no expansiva. En particular,</p>
+<div class="display">\[
+  \norm{\Proy_Cx-\Proy_Cy}\le\norm{x-y}\qquad\text{para todos } x,y\in\Hs,
+\]</div>
+<p>es decir, $\Proy_C$ es $1$-Lipschitz.
+<span class="src">[Bauschke--Combettes, Proposición 4.16]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p16">Ver demostración</button><div class="proof" id="convexa-p16"><p>Sean $x$ e $y$ en $\Hs$. Como $\Proy_Cy\in C$, la caracterización aplicada a $x$
+da $\ip{x-\Proy_Cx}{\Proy_Cy-\Proy_Cx}\le0$, y como $\Proy_Cx\in C$, la misma
+caracterización aplicada a $y$ da $\ip{y-\Proy_Cy}{\Proy_Cx-\Proy_Cy}\le0$.
+Sumando las dos desigualdades:</p>
+<div class="display">\[
+  \ip{(x-y)-(\Proy_Cx-\Proy_Cy)}{\Proy_Cx-\Proy_Cy}\ge0,
+\]</div>
+<p>de donde $\norm{\Proy_Cx-\Proy_Cy}^2\le\ip{x-y}{\Proy_Cx-\Proy_Cy}$. Por
+Cauchy--Schwarz el miembro derecho está acotado por
+$\norm{x-y} \norm{\Proy_Cx-\Proy_Cy}$, y dividiendo por
+$\norm{\Proy_Cx-\Proy_Cy}$ cuando este número no es cero se obtiene la
+desigualdad de Lipschitz.</p></div>
+<p>Nada de esto ha usado la dimensión, y no es casualidad: los dos ingredientes son
+la desigualdad variacional y Cauchy--Schwarz, y los dos viven en cualquier
+espacio con producto interno. El teorema de la sección siguiente se comporta
+igual de bien; el de después, no.</p>
+<h3 id="cap4:sec-separacion">Separación y hiperplanos de soporte</h3>
+<p>Dado $a\in\Hs$ no nulo y $\gamma\in\R$, el conjunto $\{x\in\Hs:\ip{a}{x}=\gamma\}$
+es un <span class="df">hiperplano</span>, y los dos conjuntos que define, $\ip{a}{x}\le\gamma$ y
+$\ip{a}{x}\ge\gamma$, son sus <span class="df">semiespacios</span>. Decimos que el hiperplano
+<span class="df">separa estrictamente</span> dos conjuntos si cada uno está contenido en uno de los
+semiespacios abiertos.</p>
+<div class="stmt teorema" id="cap4:teo-separacion"><div class="head">Teorema de separación estricta</div><div class="body"><p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, y sea $z\notin C$. Entonces existe
+$a\ne0$ tal que</p>
+<div class="display">\[
+  \ip{a}{z}&gt;\sup_{x\in C}\ip{a}{x}.
+\]</div>
+<p><span class="src">[Bauschke--Combettes, §3.4]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p17">Ver demostración</button><div class="proof" id="convexa-p17"><p>Tome $a=z-\Proy_Cz$, que no es cero porque $z\notin C$. Por la desigualdad
+variacional, para todo $x\in C$ se tiene $\ip{a}{x-\Proy_Cz}\le0$, y como
+$\Proy_Cz=z-a$ esto es</p>
+<div class="display">\[
+  0\ge\ip{a}{x-z+a}=\ip{a}{x-z}+\norm{a}^2 .
+\]</div>
+<p>De aquí $\ip{a}{z}\ge\ip{a}{x}+\norm{a}^2$ para todo $x\in C$, y tomando supremo
+en $x$ queda $\ip{a}{z}\ge\sup_{x\in C}\ip{a}{x}+\norm{a}^2$, que es la
+desigualdad estricta porque $\norm{a}&gt;0$.</p></div>
+<p>Merece la pena mirar qué se ha usado: la existencia de $\Proy_Cz$, que es el
+teorema del capítulo anterior, y su desigualdad variacional. Ni compacidad, ni
+coordenadas, ni finitud de nada. La versión de este teorema en $\R^n$ y la
+versión en $\Hs$ son el mismo texto, y la única razón de que la de $\Hs$ sea
+verdadera es que la proyección existe, que es lo que costó trabajo probar.</p>
+<p>El resultado vale de hecho bastante más lejos, sin producto interno y sin
+proyección: en cualquier espacio normado, dos convexos disjuntos no vacíos con
+uno cerrado y el otro compacto se separan estrictamente por un hiperplano
+cerrado <span class="src">[Brezis, Teorema 1.7]</span>, y el caso de arriba es el de $B=\{z\}$.
+Esa demostración pasa por el teorema de Hahn--Banach, que reaparece dentro de un
+momento con el hiperplano de soporte.</p>
+<p>Pasemos al punto de la frontera. Si $p\in C$, un hiperplano <span class="df">de soporte</span> de
+$C$ en $p$ es uno que pasa por $p$ y deja a $C$ entero de un lado, es decir, un
+$a\ne0$ con $\ip{a}{x-p}\le0$ para todo $x\in C$. En el lenguaje del capítulo
+anterior esto dice que $a\in\Ncono_C(p)\setminus\{0\}$, así que el teorema de
+soporte afirma que el cono normal en un punto frontera no se reduce al cero.</p>
+<p>El enunciado que sigue se demuestra y se usa <em>en $\R^n$</em>. Escribimos $V$
+para el subespacio director de $\aff(C)$, es decir, el único subespacio con
+$\aff(C)=p+V$ para $p\in C$ cualquiera.</p>
+<div class="stmt teorema" id="cap4:teo-soporte"><div class="head">Teorema del hiperplano de soporte</div><div class="body"><p>Sea $C\subset\R^n$ convexo, cerrado y no vacío, y sea $V$ el subespacio director
+de $\aff(C)$.</p>
+<!-- entorno omitido: enumerate -->
+<p><span class="src">[Junca, §6.2, para la variante con el interior]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p18">Ver demostración</button><div class="proof" id="convexa-p18"><p><em>(a)</em> Sea $E=\aff(C)=p+V$. Como $p$ no está en el interior relativo de $C$,
+ninguna bola de $E$ centrada en $p$ queda dentro de $C$, de manera que para cada
+$k$ existe $z_k\in E\setminus C$ con $\norm{z_k-p}&lt;1/k$. Ponga
+$p_k=\Proy_Cz_k$, que es distinto de $z_k$ porque $z_k\notin C$, y</p>
+<div class="display">\[
+  a_k=\frac{z_k-p_k}{\norm{z_k-p_k}} .
+\]</div>
+<p>En efecto $a_k\in V$, porque $z_k\in E$ y $p_k\in C\subset E$, luego su
+diferencia está en $V$. La desigualdad variacional da
+$\ip{z_k-p_k}{x-p_k}\le0$ para todo $x\in C$, y dividiendo por
+$\norm{z_k-p_k}&gt;0$:</p>
+<div class="display">\[
+  \ip{a_k}{x-p_k}\le0\qquad\text{para todo } x\in C .
+\]</div>
+<p>Ahora bien, $p\in C$ implica $\norm{z_k-p_k}\le\norm{z_k-p}$, y por lo tanto
+$\norm{p_k-p}\le\norm{p_k-z_k}+\norm{z_k-p}\le2\norm{z_k-p}\to0$, es decir
+$p_k\to p$. La sucesión $(a_k)$ vive en $\{a\in V:\norm{a}=1\}$, que es
+<em>compacta</em> por ser la esfera unidad de un espacio de dimensión finita, así
+que tiene una
+subsucesión convergente a cierto $a$ con $\norm{a}=1$, y en particular $a\ne0$.
+Pasando al límite a lo largo de esa subsucesión en la desigualdad anterior se
+obtiene $\ip{a}{x-p}\le0$ para todo $x\in C$.</p>
+<p><em>(b)</em> Sea $p\in\partial C$ y distinga dos casos. Si $p\notin\ri(C)$, el
+apartado anterior da directamente el vector buscado. Si $p\in\ri(C)$, entonces
+$\aff(C)$ no puede ser todo $\R^n$: si lo fuera, el interior relativo
+coincidiría con el interior y $p$ sería un punto interior de $C$, contra
+$p\in\partial C$. Luego $V$ es un subespacio propio y $\orth{V}\ne\{0\}$. Tome
+$a\in\orth{V}$ no nulo. Todo $x\in C$ cumple $x-p\in V$, así que $\ip{a}{x-p}=0$,
+y en particular la desigualdad se cumple.</p></div>
+<p>La demostración del apartado <em>(a)</em> usa la dimensión finita dos veces, y en
+dos sitios que no tienen nada que ver entre sí. El primero es la construcción de
+los $z_k$: se apoya en que un punto de $C$ que no esté en $\ri(C)$ se aproxima
+desde $\aff(C)\setminus C$, y detrás de eso está que $\ri(C)$ sea no vacío, que
+es el enunciado que el capítulo anterior dejó abajo. El segundo es el paso al
+límite de los $a_k$, que necesita que la esfera unidad de $V$ sea compacta. En $\Hs$ el
+subespacio $V$ puede ser de dimensión infinita, y entonces su esfera unidad no es
+compacta: la sucesión ortonormal $(e_n)$ vive en ella y no tiene ninguna
+subsucesión convergente en norma, porque $\norm{e_n-e_m}=\sqrt2$ para $n\ne m$.</p>
+<p>Arreglar uno de los dos fallos no arregla el otro. Si se supone que $C$ tiene
+interior no vacío en $\Hs$, el primer problema desaparece, porque entonces
+$\aff(C)=\Hs$ y $V=\Hs$; el segundo sigue en pie tal cual. El sustituto en
+dimensión infinita no es esta demostración con retoques, sino la forma
+geométrica del teorema de Hahn--Banach, que es un resultado de espacios
+normados y no usa la proyección en ningún sitio.</p>
+<div class="stmt teorema" id="cap4:teo-hb1"><div class="head">Teorema Hahn--Banach, primera forma geométrica</div><div class="body"><p>Sean $A$ y $B$ subconjuntos convexos, no vacíos y disjuntos de un espacio
+normado $E$, y suponga que uno de los dos es abierto. Entonces existe un
+hiperplano cerrado que los separa.
+<span class="src">[Brezis, Teorema 1.6]</span></p></div></div>
+<p>De aquí sale la versión del teorema de soporte que sí vale en $\Hs$, y la
+hipótesis que hay que pagar está a la vista: alguien tiene que tener interior.</p>
+<div class="stmt corolario" id="cap4:cor-soporte-hilbert"><div class="head">Corolario</div><div class="body"><p>Sea $C\subset\Hs$ convexo con $\intr(C)\ne\varnothing$ y sea $p\in\partial C$.
+Entonces existe $a\ne0$ tal que $\ip{a}{x-p}\le0$ para todo $x\in C$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p19">Ver demostración</button><div class="proof" id="convexa-p19"><p>Queremos aplicar el teorema anterior a $A=\intr(C)$, que es abierto, convexo y
+no vacío, y a $B=\{p\}$, que es convexo y no vacío. Son disjuntos porque
+$p\in\partial C$ no pertenece al interior. Existe entonces un hiperplano cerrado
+que los separa, es decir, un funcional lineal continuo no nulo y un $\gamma\in\R$
+con $\varphi(x)\le\gamma\le\varphi(p)$ para todo $x\in\intr(C)$. Por el teorema
+de representación de Riesz y Fréchet, $\varphi=\ip{a}{\cdot}$ para un único
+$a\in\Hs$, que no es cero porque $\varphi$ no lo es.</p>
+<p>Falta pasar de $\intr(C)$ a $C$. Sea $x\in C$ y fije $u\in\intr(C)$, digamos con
+$\Ball(u;r)\subset C$. Para $t\in ]0,1]$ la convexidad da</p>
+<div class="display">\[
+  (1-t)x+t\,\Ball(u;r)\subset C,
+\]</div>
+<p>y el miembro izquierdo es la bola de centro $(1-t)x+tu$ y radio $tr$, de manera
+que $(1-t)x+tu\in\intr(C)$. Por lo tanto $\ip{a}{(1-t)x+tu}\le\gamma$ para todo
+$t\in ]0,1]$, y haciendo $t\downarrow0$ queda $\ip{a}{x}\le\gamma\le\ip{a}{p}$.</p></div>
+<div class="stmt observacion" id="cap4:obs-incierto"><div class="head">Observación</div><div class="body"><p>Queda abierto qué ocurre en $\Hs$ cuando $C$ es cerrado, convexo y de interior
+vacío, que es el caso que el corolario no cubre y que en $\R^n$ resolvía el
+interior relativo. La demostración por proyección no se adapta y Hahn--Banach no
+se aplica, pero de eso no se sigue que el enunciado sea falso, y aquí no se
+afirma ni una cosa ni la otra: hace falta un resultado que decida si todo punto
+de la frontera de un convexo cerrado de $\Hs$ admite hiperplano de soporte.</p>
+<p>Lo que sí está establecido es que sin hipótesis la separación falla de verdad en
+dimensión infinita, y no por falta de una demostración mejor: existen dos
+convexos disjuntos, ambos cerrados, que no se pueden separar por ningún
+hiperplano cerrado. En dimensión finita, en cambio, dos convexos disjuntos
+cualesquiera se separan sin ninguna hipótesis adicional.
+<span class="src">[Brezis, Observación 4 tras el Teorema 1.7]</span></p></div></div>
+<h3 id="cap4:sec-funciones" data-toc="Funciones convexas">Funciones convexas y semicontinuidad inferior</h3>
+<p>A partir de aquí las funciones toman valores en $\R\cup\{+\infty\}$, y el
+<span class="df">dominio</span> de $f\colon\Hs\to\R\cup\{+\infty\}$ es
+$\dom f=\{x\in\Hs: f(x)&lt;+\infty\}$. Admitir el valor $+\infty$ no es un capricho
+de generalidad: es lo que permite tratar un problema con restricciones como uno
+sin ellas, sumándole a la función objetivo una que valga cero sobre el conjunto
+factible e infinito fuera. Una función es <span class="df">propia</span> si su dominio no es vacío.</p>
+<div class="stmt definicion" id="cap4:def-convexa"><div class="head">Definición</div><div class="body"><p>Una función $f\colon\Hs\to\R\cup\{+\infty\}$ es <span class="df">convexa</span> si</p>
+<div class="display">\[
+  f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)
+\]</div>
+<p>para todos $x,y\in\Hs$ y todo $\lambda\in[0,1]$, con el convenio habitual sobre
+$+\infty$. Es <span class="df">estrictamente convexa</span> si la desigualdad es estricta siempre
+que $x\ne y$ y $\lambda\in ]0,1[$.
+<span class="src">[Bauschke--Combettes, Proposición 8.4]</span></p></div></div>
+<div class="stmt proposicion" id="cap4:prop-dominio"><div class="head">Proposición</div><div class="body"><p>Si $f$ es convexa, entonces $\dom f$ es convexo.
+<span class="src">[Bauschke--Combettes, Proposición 8.2]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p20">Ver demostración</button><div class="proof" id="convexa-p20"><p>Sean $x,y\in\dom f$ y $\lambda\in[0,1]$. El miembro derecho de la desigualdad de
+convexidad es finito, luego $f(\lambda x+(1-\lambda)y)&lt;+\infty$.</p></div>
+<p>Los dos conjuntos que acompañan a una función son su epígrafo y sus conjuntos de
+nivel:</p>
+<div class="display">\[
+  \epi f=\{(x,t)\in\Hs\times\R: f(x)\le t\},
+  \qquad
+  \lev_\alpha f=\{x\in\Hs: f(x)\le\alpha\} .
+\]</div>
+<p>El epígrafo vive en $\Hs\times\R$, que es de nuevo un espacio de Hilbert con el
+producto interno $\ip{(x,s)}{(y,t)}=\ip{x}{y}+st$, y de ahí sale su utilidad:
+traduce cada pregunta sobre $f$ en una pregunta sobre un subconjunto de un
+Hilbert, y de esas sabemos bastante desde el capítulo anterior. La primera
+traducción es la propia convexidad.</p>
+<div class="stmt proposicion" id="cap4:prop-epi"><div class="head">Proposición</div><div class="body"><p>$f$ es convexa si y solo si $\epi f$ es un subconjunto convexo de $\Hs\times\R$.
+<span class="src">[Bauschke--Combettes, Definición 8.1 y Proposición 8.4]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p21">Ver demostración</button><div class="proof" id="convexa-p21"><p>Suponga $f$ convexa y tome $(x,s)$ y $(y,t)$ en $\epi f$ y $\lambda\in[0,1]$.
+Entonces</p>
+<div class="display">\[
+  f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)\le\lambda s+(1-\lambda)t,
+\]</div>
+<p>así que $\lambda(x,s)+(1-\lambda)(y,t)\in\epi f$. Recíprocamente, suponga $\epi f$
+convexo y sean $x,y\in\dom f$. Los puntos $(x,f(x))$ y $(y,f(y))$ están en
+$\epi f$, luego su combinación convexa también, y eso es precisamente
+$f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)$. Si alguno de los dos
+puntos no está en el dominio la desigualdad es trivial.</p></div>
+<p>Bauschke--Combettes toman este enunciado como definición de función convexa y
+demuestran la desigualdad a partir de él, que es el camino inverso al de aquí.
+Los conjuntos de nivel dan la mitad de un resultado análogo, y solo la mitad.</p>
+<div class="stmt proposicion" id="cap4:prop-nivel"><div class="head">Proposición</div><div class="body"><p>Si $f$ es convexa, entonces $\lev_\alpha f$ es convexo para todo $\alpha\in\R$.
+El recíproco es falso.
+<span class="src">[Bauschke--Combettes, Corolario 8.5]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p22">Ver demostración</button><div class="proof" id="convexa-p22"><p>Sean $x,y\in\lev_\alpha f$ y $\lambda\in[0,1]$. Entonces
+$f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)\le\lambda\alpha+
+(1-\lambda)\alpha=\alpha$.</p>
+<p>Para ver que el recíproco falla, tome $f(x)=\sqrt{\norm{x}}$ sobre $\Hs\ne\{0\}$.
+Sus conjuntos de nivel son $\lev_\alpha f=\{x:\norm{x}\le\alpha^2\}$ para
+$\alpha\ge0$ y vacíos para $\alpha&lt;0$, es decir bolas cerradas, que son convexas.
+Sin embargo $f$ no es convexa: fije $u$ con $\norm{u}=1$ y tome $x=u$, $y=0$ y
+$\lambda=1/2$. Entonces $f(u/2)=1/\sqrt2&gt;1/2=\tfrac12f(u)+\tfrac12f(0)$.</p></div>
+<p>De la convexidad del epígrafo sale la desigualdad de Jensen para combinaciones
+finitas, y sale sin esfuerzo.</p>
+<div class="stmt proposicion" id="cap4:prop-jensen"><div class="head">Proposición desigualdad de Jensen</div><div class="body"><p>Sea $f$ convexa, sean $x_1,\dots,x_k$ en $\dom f$ y sean $\lambda_1,\dots,
+\lambda_k$ no negativos con $\sum_{i=1}^k\lambda_i=1$. Entonces</p>
+<div class="display">\[
+  f\Big(\sum_{i=1}^k\lambda_ix_i\Big)\le\sum_{i=1}^k\lambda_if(x_i).
+\]</div>
+<p><span class="src">[Bauschke--Combettes, Proposición 8.11]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p23">Ver demostración</button><div class="proof" id="convexa-p23"><p>Cada $(x_i,f(x_i))$ pertenece a $\epi f$, que es convexo, luego</p>
+<div class="display">\[
+  \sum_{i=1}^k\lambda_i\big(x_i,f(x_i)\big)
+   =\Big(\sum_{i=1}^k\lambda_ix_i,\ \sum_{i=1}^k\lambda_if(x_i)\Big)\in\epi f,
+\]</div>
+<p>y pertenecer al epígrafo es exactamente la desigualdad del enunciado.</p></div>
+<p>La combinación es finita, y eso es lo único que la demostración necesita. La
+versión integral de la desigualdad, con una medida de probabilidad en lugar de
+los pesos $\lambda_i$, es un enunciado distinto y pide hipótesis propias.</p>
+<p>Veamos ejemplos. Toda función afín $f(x)=\ip{a}{x}+\beta$ es convexa, con
+igualdad en la desigualdad de definición, y la norma $f(x)=\norm{x}$ lo es por la
+desigualdad triangular y la homogeneidad
+<span class="src">[Bauschke--Combettes, Example 8.9]</span>. El tercero es el que cambia de aspecto
+al subir de dimensión.</p>
+<div class="stmt ejemplo" id="cap4:ej-cuadratica"><div class="head">Ejemplo</div><div class="body"><p>Sea $A\in\Bop{\Hs}$ autoadjunto, sea $b\in\Hs$ y sea $c\in\R$. La función</p>
+<div class="display">\[
+  f(x)=\tfrac12\ip{Ax}{x}+\ip{b}{x}+c
+\]</div>
+<p>es convexa si y solo si $\ip{Ay}{y}\ge0$ para todo $y\in\Hs$. En efecto, la parte
+afín no interviene y un cálculo directo da, para $\lambda\in[0,1]$,</p>
+<div class="display">\[
+  \lambda f(x)+(1-\lambda)f(y)-f\big(\lambda x+(1-\lambda)y\big)
+   =\tfrac12\lambda(1-\lambda)\ip{A(x-y)}{x-y},
+\]</div>
+<p>donde se ha usado que $A$ es autoadjunto para escribir $\ip{Ax}{y}=\ip{Ay}{x}$.
+El miembro izquierdo es no negativo para todos $x,y$ y todo $\lambda$ si y solo
+si lo es $\ip{A(x-y)}{x-y}$, y $x-y$ recorre todo $\Hs$.</p></div></div>
+<p>En $\R^n$ la condición es que la matriz simétrica $Q$ sea semidefinida positiva,
+y la traspuesta del enunciado de clase pasa aquí a ser el adjunto, como ya
+ocurrió con los mínimos cuadrados del capítulo 2. La identidad de arriba es
+exacta y no menciona la dimensión en ningún paso.</p>
+<div class="stmt ejemplo" id="cap4:ej-indicadora"><div class="head">Ejemplo</div><div class="body"><p>Sea $C\subset\Hs$ y sea $\delta_C$ su <span class="df">función indicadora</span>, que vale $0$ sobre
+$C$ y $+\infty$ fuera. Entonces $\epi\delta_C=C\times\R_+$, de manera que
+$\delta_C$ es convexa si y solo si $C$ es convexo.
+<span class="src">[Bauschke--Combettes, Example 8.3]</span></p></div></div>
+<p>Las operaciones que preservan la convexidad son las que permiten reconocerla sin
+volver a la definición, y todas las de la lista siguiente valen en $\Hs$ con la
+demostración de $\R^n$.</p>
+<div class="stmt proposicion" id="cap4:prop-operaciones"><div class="head">Proposición</div><div class="body"><p>Sean $f$ y $(f_i)_{i\in I}$ funciones convexas de $\Hs$ en $\R\cup\{+\infty\}$.</p>
+<!-- entorno omitido: enumerate --></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p24">Ver demostración</button><div class="proof" id="convexa-p24"><p>Los apartados <em>(i)</em>, <em>(ii)</em> y <em>(iv)</em> se obtienen escribiendo la
+desigualdad de convexidad de la función construida y sustituyendo la de las
+funciones de partida; en <em>(iv)</em> el paso
+$h(\lambda f(x)+(1-\lambda)f(y))\le\lambda h(f(x))+(1-\lambda)h(f(y))$ pide que
+$h$ sea convexa, y el paso previo
+$h(f(\lambda x+(1-\lambda)y))\le h(\lambda f(x)+(1-\lambda)f(y))$ pide que sea
+creciente.</p>
+<p>Para <em>(iii)</em>, observe que $\epi(\sup_i f_i)=\bigcap_{i\in I}\epi f_i$, y una
+intersección arbitraria de convexos es convexa.</p>
+<p>Para <em>(v)</em>, sean $x_1,x_2\in\dom f$ y $\lambda\in[0,1]$, y fije
+$\varepsilon&gt;0$. Por definición del ínfimo existen $y_1,y_2\in\Ks$ con
+$G(x_j,y_j)\le f(x_j)+\varepsilon$. Pero entonces:</p>
+<div class="display">\[
+  f\big(\lambda x_1+(1-\lambda)x_2\big)
+   \le G\big(\lambda x_1+(1-\lambda)x_2,\ \lambda y_1+(1-\lambda)y_2\big)
+   \le\lambda G(x_1,y_1)+(1-\lambda)G(x_2,y_2),
+\]</div>
+<p>donde la primera desigualdad es la definición de $f$ como ínfimo y la segunda es
+la convexidad de $G$. El miembro derecho está acotado por
+$\lambda f(x_1)+(1-\lambda)f(x_2)+\varepsilon$, y basta hacer $\varepsilon\downarrow0$.</p></div>
+<p>El apartado <em>(iii)</em> tiene un caso particular que aparece todo el tiempo: el
+máximo de finitas funciones afines, $f(x)=\max_{i}\{\ip{c_i}{x}+\beta_i\}$, es
+convexo. El apartado <em>(v)</em> es el que más sorprende, porque un ínfimo de
+funciones convexas no tiene por qué ser convexo; lo que lo salva es que aquí el
+ínfimo se toma sobre una variable de una función conjuntamente convexa en las
+dos.</p>
+<p>Queda la última noción de la sesión, que es la que hace falta para que un
+problema de minimización tenga solución.</p>
+<div class="stmt definicion" id="cap4:def-lsc"><div class="head">Definición</div><div class="body"><p>Una función $f\colon\Hs\to\R\cup\{+\infty\}$ es <span class="df">semicontinua inferiormente</span>
+(l.s.c.) en $x$ si para toda sucesión $x_k\to x$ se tiene</p>
+<div class="display">\[
+  f(x)\le\liminf_{k}f(x_k),
+\]</div>
+<p>y es l.s.c. si lo es en todo punto.
+<span class="src">[Bauschke--Combettes, Lema 1.36]</span></p></div></div>
+<div class="stmt proposicion" id="cap4:prop-lsc"><div class="head">Proposición</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$. Las siguientes afirmaciones son
+equivalentes.</p>
+<!-- entorno omitido: enumerate -->
+<p><span class="src">[Bauschke--Combettes, Lema 1.24]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p25">Ver demostración</button><div class="proof" id="convexa-p25"><p><em>(i)</em> implica <em>(ii)</em>: sea $(x_k,t_k)$ una sucesión de $\epi f$ que
+converge a $(x,t)$. Entonces $f(x)\le\liminf_kf(x_k)\le\liminf_kt_k=t$, luego
+$(x,t)\in\epi f$.</p>
+<p><em>(ii)</em> implica <em>(iii)</em>: fije $\alpha$ y sea $(x_k)$ una sucesión de
+$\lev_\alpha f$ que converge a $x$. La sucesión $(x_k,\alpha)$ está en $\epi f$ y
+converge a $(x,\alpha)$, que por tanto pertenece a $\epi f$, es decir
+$f(x)\le\alpha$.</p>
+<p><em>(iii)</em> implica <em>(i)</em>: fije $x$, sea $x_k\to x$ y ponga
+$\mu=\liminf_kf(x_k)$. Si $\mu=+\infty$ no hay nada que probar, así que suponga
+$\mu&lt;+\infty$ y tome $\alpha&gt;\mu$. Existe una subsucesión con
+$f(x_{k_j})\le\alpha$ para todo $j$, es decir, contenida en $\lev_\alpha f$, y
+como este conjunto es cerrado y $x_{k_j}\to x$, se sigue $f(x)\le\alpha$.
+Haciendo $\alpha\downarrow\mu$ queda $f(x)\le\mu$.</p></div>
+<p>Esta demostración no ha usado ninguna propiedad de $\Hs$, ni siquiera la norma
+más allá de definir las sucesiones convergentes, y de hecho el resultado vale en
+cualquier espacio topológico de Hausdorff. La dimensión infinita entra por otro
+sitio, y es un sitio que en $\R^n$ no existe.</p>
+<p>En $\R^n$ hay una sola noción razonable de convergencia y la semicontinuidad
+inferior es una sola cosa. En $\Hs$ hay dos topologías en juego, la de la norma
+y la débil, y sobre la débil la definición por sucesiones y la definición por
+conjuntos de nivel cerrados dejan de coincidir, porque la topología débil no es
+metrizable. Esa distinción importa porque el argumento clásico para la existencia
+de un mínimo, tomar una sucesión minimizante y extraer una subsucesión
+convergente, en $\Hs$ solo funciona en la topología débil: es lo que la
+condición suficiente de segundo orden del capítulo 1 ya dejó ver, y es la razón
+de que la bola cerrada no sea compacta. Para funciones convexas, sin embargo,
+las cuatro nociones se colapsan en una.</p>
+<div class="stmt teorema" id="cap4:teo-lsc-debil"><div class="head">Teorema</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ convexa. Entonces las cuatro afirmaciones
+siguientes son equivalentes: $f$ es l.s.c. para la topología de la norma, $f$ es
+l.s.c. por sucesiones para la topología de la norma, $f$ es l.s.c. para la
+topología débil y $f$ es l.s.c. por sucesiones débiles.
+<span class="src">[Bauschke--Combettes, Teorema 9.1]</span></p></div></div>
+<p>La convexidad es lo que hace esto posible, y se ve bien en la formulación por
+epígrafos: el epígrafo de una función convexa es un conjunto convexo, y un
+convexo cerrado en norma es débilmente cerrado. La l.s.c. respecto de la norma,
+que es barata de comprobar, se transporta gratis a la topología débil, que es la
+que tiene compacidad. Ese es el enunciado que sostiene la existencia de mínimos
+en dimensión infinita.</p></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 <nav id="cuadernos" aria-label="Cuadernos">

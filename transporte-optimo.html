@@ -347,7 +347,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "spt": "\\operatorname{spt}", "cut": "\\operatorname{cut}", "MK": "\\operatorname{MK}", "dv": "\\operatorname{div}", "dom": "\\operatorname{dom}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "epi": "\\operatorname{epi}", "ri": "\\operatorname{ri}", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Pmeas": "\\mathcal{P}", "Ptwo": "\\mathcal{P}_2", "Pac": "\\mathcal{P}^{ac}", "Meas": "\\mathcal{M}", "pushf": "{}_{\\#}", "Z": "\\mathbb{Z}", "Haus": "\\mathscr{H}", "Leb": "\\mathscr{L}", "Tor": "\\mathbb{T}", "Adm": "\\Pi", "ccon": ["#1^{c}", 1], "cconc": "c\\text{-conc}", "W": "W", "Wp": "W_p", "Wtwo": "W_2", "Wspace": "\\mathbb{W}", "dt": "\\partial_t", "Ben": "\\mathcal{B}", "Ent": "\\mathcal{H}", "Ffun": "\\mathcal{F}", "JKO": "\\mathrm{JKO}", "subdif": "\\partial", "dist": ["d_{#1}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "spt": "\\operatorname{spt}", "cut": "\\operatorname{cut}", "gra": "\\operatorname{gra}", "MK": "\\operatorname{MK}", "dv": "\\operatorname{div}", "dom": "\\operatorname{dom}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "epi": "\\operatorname{epi}", "ri": "\\operatorname{ri}", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Pmeas": "\\mathcal{P}", "Ptwo": "\\mathcal{P}_2", "Pac": "\\mathcal{P}^{ac}", "Meas": "\\mathcal{M}", "pushf": "{}_{\\#}", "Z": "\\mathbb{Z}", "Haus": "\\mathscr{H}", "Leb": "\\mathscr{L}", "Tor": "\\mathbb{T}", "Tcost": "\\mathscr{T}", "Adm": "\\Pi", "ccon": ["#1^{c}", 1], "cconc": "c\\text{-conc}", "W": "W", "Wp": "W_p", "Wtwo": "W_2", "Wspace": "\\mathbb{W}", "dt": "\\partial_t", "Ben": "\\mathcal{B}", "Ent": "\\mathcal{H}", "Ffun": "\\mathcal{F}", "JKO": "\\mathrm{JKO}", "subdif": "\\partial", "dist": ["d_{#1}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
 };
@@ -510,7 +510,8 @@ entonces alguna subsucesión converge débil-$*$ a un $\xi\in\mathscr X&#x27;$.<
 $\lambda(A)\in\R$ de modo que, para toda unión numerable disjunta
 $A=\bigcup_i A_i$, se cumplen $\sum_i\abs{\lambda(A_i)}&lt;+\infty$ y
 $\lambda(A)=\sum_i\lambda(A_i)$. El conjunto de todas ellas se escribe
-$<span class="df">\Meas(X)</span>$, y la <span class="df">variación total</span> de $\lambda$ es la medida positiva</p>
+$<span class="df">\Meas(X)</span>$, y el de las que además son positivas, $<span class="df">\Meas_+(X)</span>$. La
+<span class="df">variación total</span> de $\lambda$ es la medida positiva</p>
 <div class="display">\[
   \abs{\lambda}(A):=\sup\Big\{\textstyle\sum_i\abs{\lambda(A_i)}
     \;:\; A=\bigcup_i A_i\ \text{disjunta}\Big\}.
@@ -776,14 +777,14 @@ solo si sus elementos son equicontinuos y equiacotados.</p></div></div>
 <p>De modo que hay que fabricar, desde una sucesión maximizante arbitraria, otra que
 tenga las dos propiedades sin perder optimalidad. La herramienta que lo consigue
 es la $c$-transformada.</p>
-<div class="stmt definicion" id="transporte-optimo-x27"><div class="head">Definición 1.10</div><div class="body"><p>Dada $\chi:X\to\overline\R$, su <em>$c$-transformada</em>, o función
-$c$-conjugada, es $\ccon{\chi}:Y\to\overline\R$ dada por</p>
+<div class="stmt definicion" id="transporte-optimo-x27"><div class="head">Definición 1.10</div><div class="body"><p>Dada $f:X\to\overline\R$, su <em>$c$-transformada</em>, o función
+$c$-conjugada, es $\ccon{f}:Y\to\overline\R$ dada por</p>
 <div class="display">\[
-  \ccon{\chi}(y)=\inf_{x\in X}\;c(x,y)-\chi(x),
+  \ccon{f}(y)=\inf_{x\in X}\;c(x,y)-f(x),
 \]</div>
 <p>y análogamente la <em>$\bar c$-transformada</em> de $\zeta:Y\to\overline\R$ es
 $\zeta^{\bar c}(x)=\inf_{y\in Y} c(x,y)-\zeta(y)$. Se dice que $\psi$ sobre $Y$
-es <em>$\bar c$-cóncava</em> si $\psi=\ccon{\chi}$ para alguna $\chi$, y que
+es <em>$\bar c$-cóncava</em> si $\psi=\ccon{f}$ para alguna $f$, y que
 $\varphi$ sobre $X$ es <em>$c$-cóncava</em> si $\varphi=\zeta^{\bar c}$ para alguna
 $\zeta$; el conjunto de funciones $c$-cóncavas (resp. $\bar c$- cóncavas)  se denota por $\cconc(X)$ 
 (resp. $\bar c\text{-conc}(Y))$. (Cuando $X=Y$ y $c$ es simétrico la distinción entre $c$
@@ -791,14 +792,14 @@ y $\bar c$ deja de tener papel y se abandona.)</p></div></div>
 <p>Lo que hace útil esta construcción es que acota el módulo de continuidad, y quien
 lo permite es el hecho siguiente. <span class="src">[Recuadro 1.8]</span></p>
 <div class="stmt proposicion" id="transporte-optimo-x28"><div class="head">Proposición (módulo de continuidad de un ínfimo)</div><div class="body"><p>Si toda una familia $(f_\alpha)_\alpha$ satisface
-$\abs{f_\alpha(x)-f_\alpha(x&#x27;)}\le\omega(d(x,x&#x27;))$, entonces
-$f:=\inf_\alpha f_\alpha$ satisface la misma estimación.</p></div></div>
+$\abs{f_\alpha(x)-f_\alpha(x&#x27;)}\le\omega(d(x,x&#x27;))$, entonces su ínfimo puntual
+$\inf_\alpha f_\alpha$ satisface la misma estimación.</p></div></div>
 <p>Si $c$ es continua y finita sobre un compacto, y por tanto uniformemente
 continua, existe $\omega$ continua y creciente con $\omega(0)=0$ tal que
 $\abs{c(x,y)-c(x&#x27;,y&#x27;)}\le\omega(d(x,x&#x27;)+d(y,y&#x27;))$. Escribiendo
-$\ccon{\chi}(y)=\inf_x g_x(y)$ con $g_x(y):=c(x,y)-\chi(x)$, cada $g_x$ satisface
-$\abs{g_x(y)-g_x(y&#x27;)}\le\omega(d(y,y&#x27;))$, porque $\chi(x)$ es una constante para
-cada $x$ fijo. De aquí, $\ccon{\chi}$ hereda el módulo de $c$.</p>
+$\ccon{f}(y)=\inf_x g_x(y)$ con $g_x(y):=c(x,y)-f(x)$, cada $g_x$ satisface
+$\abs{g_x(y)-g_x(y&#x27;)}\le\omega(d(y,y&#x27;))$, porque $f(x)$ es una constante para
+cada $x$ fijo. De aquí, $\ccon{f}$ hereda el módulo de $c$.</p>
 <p>Se comprueba sin dificultad que una pareja admisible $(\varphi,\psi)$ se puede
 reemplazar por $(\varphi,\ccon{\varphi})$ y luego por
 $(\varphi^{c\bar c},\ccon{\varphi})$ sin violar las restricciones y sin disminuir
@@ -861,9 +862,10 @@ se puede escoger uno que sí lo sea, y así se hará a menudo.</p></div></div>
 potenciales que coinciden $\mu$-a.e.\ pueden tener regularidad distinta y
 gradientes distintos punto a punto. En cuanto se derive un potencial, que es lo
 que se hace en §1.3, la diferencia deja de ser inocua.</p>
-<p>La dualidad tiene además una consecuencia sobre el soporte, que se prueba en
-§1.6. Si $\gamma_\star$ es óptimo para $(\mathrm{KP})$ y $(\varphi,\psi)$ lo es
-para $(\mathrm{DP})$, entonces</p>
+<p>La dualidad tiene además una consecuencia sobre el <em>soporte</em> de un plan, que
+es el menor cerrado sobre el cual está concentrado y se escribe $\spt$. La
+consecuencia se prueba en §1.6: si $\gamma_\star$ es óptimo para $(\mathrm{KP})$
+y $(\varphi,\psi)$ lo es para $(\mathrm{DP})$, entonces</p>
 <div class="display">\[
   \spt(\gamma_\star)\subset\big\{(x,y)\in X\times Y:\varphi(x)+\psi(y)=c(x,y)\big\},
 \]</div>
@@ -921,16 +923,13 @@ $x=x_0$, de donde</p>
 <div class="display">\[
   x\mapsto c(x,y_0)-\varphi(x)\quad\text{alcanza su mínimo en }x=x_0 .
 \]</div>
-<p>(La fuente escribe aquí que el mínimo lo alcanza $x\mapsto\varphi(x)-c(x,y_0)$,
-que es esta misma función cambiada de signo; en su demostración del Teorema 1.25
-el signo aparece ya como aquí.) Si $\varphi$ y $c(\cdot,y_0)$ son diferenciables
+<p>Si $\varphi$ y $c(\cdot,y_0)$ son diferenciables
 en $x_0$ y $x_0\notin\partial\Omega$, la condición de primer orden en un punto
 interior da $\nabla\varphi(x_0)=\nabla_x c(x_0,y_0)$. El hecho se usará mucho más
 adelante, así que se recoge en un enunciado breve, sin las hipótesis más finas
 sobre $c$.</p>
-<div class="stmt proposicion" id="transporte-optimo-x33"><div class="head">Proposición 1.15</div><div class="body"><p>Si $c$ es $C^{1}$, $\varphi$ es un potencial de Kantorovich para el coste $c$ en
-el transporte de $\mu$ a $\nu$, y $(x_0,y_0)$ pertenece al soporte de un plan
-óptimo $\gamma_\star$, entonces $\nabla\varphi(x_0)=\nabla_x c(x_0,y_0)$, siempre
+<div class="stmt proposicion" id="transporte-optimo-x33"><div class="head">Proposición 1.15</div><div class="body"><p>Si $c\in C^{1}$, $\varphi$  potencial de Kantorovich para  $c$ en
+el transporte de $\mu$ a $\nu$, y $(x_0,y_0)\in\spt(\gamma_\star)$, entonces $\nabla\varphi(x_0)=\nabla_x c(x_0,y_0)$, siempre
 que $\varphi$ sea diferenciable en $x_0$. En particular, los gradientes de dos
 potenciales de Kantorovich distintos coinciden en todo punto
 $x_0\in\spt(\mu)$ donde ambos sean diferenciables.</p></div></div>
@@ -940,7 +939,7 @@ soporte del plan. En efecto, si $(\{x_0\}\times\Omega)\cap\spt(\gamma_\star)$
 fuera vacío, siendo $\{x_0\}\times\Omega$ compacto y $\spt(\gamma_\star)$ cerrado
 los dos estarían a distancia positiva, luego algún $B(x_0,r)\times\Omega$ sería
 disjunto de $\spt(\gamma_\star)$ y
-$\mu(B(x_0,r))=\gamma_\star(B(x_0,r)\times\Omega)=0$, contra $x_0\in\spt(\mu)$.
+$\mu(B(x_0,r))=\gamma_\star(B(x_0,r)\times\Omega)=0$, contradice $x_0\in\spt(\mu)$.
 Tomado ese $y_0$, los dos potenciales tienen en $x_0$ el mismo gradiente
 $\nabla_x c(x_0,y_0)$, que no depende de cuál de los dos se use.</p></div>
 <p>La igualdad $\nabla\varphi=\nabla_x c$ es útil justo cuando determina $y_0$.</p>
@@ -951,32 +950,66 @@ economía se la conoce como condición de Spence--Mirrlees, y para dominios y
 costes razonables equivale a
 $\det \big(\partial^{2}c/\partial y_i \partial x_j\big)\neq0$.</p></div></div>
 <!-- entorno omitido: intuicion -->
-<p>La estrategia se ve con detalle en el caso $c(x,y)=h(x-y)$ con $h$ estrictamente
-convexa, y el lector puede trasladarla al caso general. Para esta elección de $c$,
+<p>En el caso $c(x,y)=h(x-y)$ con $h$ estrictamente
+convexa se ejemplifica la estrategia a seguir para obtener el mapa de transporte y mostrar su unicidad. Para esta elección de $c$,
 si $\varphi$ y $h$ son diferenciables en $x_0$ y en $x_0-y_0$ respectivamente y
 $x_0\notin\partial\Omega$, queda $\nabla\varphi(x_0)=\nabla h(x_0-y_0)$. Cuando
 $h$ no es diferenciable la igualdad se escribe
-$\nabla\varphi(x_0)\in\partial h(x_0-y_0)$, con el subdiferencial de $h$, y en las
-dos formas se despeja $x_0-y_0$ porque $\partial h$ es inyectivo. Los dos hechos
-de análisis convexo que hacen falta para eso se demuestran en el §1.6, y son los
-siguientes.</p>
-<div class="stmt proposicion" id="transporte-optimo-x35"><div class="head">Proposición (caracterización del subdiferencial)</div><div class="body"><p>Sea $f:\R^{d}\to\R\cup\{+\infty\}$ propia, convexa y l.s.c. Entonces, para
-cualesquiera $z,w\in\R^{d}$,</p>
+$\nabla\varphi(x_0)\in\partial h(x_0-y_0)$, con el subdiferencial de $h$.</p>
+<p>Ahora bien, solo nos queda despejar $x_0-y_0$,  y por tanto necesitamos saber  en qué sentido se
+invierte  $\partial h$ y qué añade la convexidad estricta. Las siguientes proposiciones de análisis convexo se puede consultar sus demostraciones en el libro de Bauschke--Combettes.</p>
+<p>Una función $f:\R^d\to(-\infty,\infty]$ es <span class="df">propia</span> si  $f(x) \neq \infty$ para algún $x$.</p>
+<div class="stmt definicion" id="transporte-optimo-x35"><div class="head">Definición</div><div class="body"><p>Para $f:\R^{d}\to\R\cup\{+\infty\}$ propia, el <span class="df">subdiferencial</span> de $f$ es el
+operador <span class="df">multivaluado</span> $\partial f:\R^{d}\to2^{\R^{d}}$ dado por</p>
+<div class="display">\[
+  \partial f(z)=\big\{w\in\R^{d}\;:\;\ip{y-z}{w}+f(z)\le f(y)
+    \ \text{ para todo } y\in\R^{d}\big\},
+\]</div>
+<p>y sus elementos son los <span class="df">subgradientes</span> de $f$ en $z$. Es decir, $w$ es
+subgradiente en $z$ cuando la función afín $y\mapsto\ip{y-z}{w}+f(z)$ minora a
+$f$ y la toca en $z$.</p></div></div>
+<!-- entorno omitido: figure -->
+<p>Un operador $A:\R^{d}\to2^{\R^{d}}$ se identifica con su <span class="df">gráfica</span>
+$\gra A=\{(z,w):w\in Az\}$, y su <span class="df">inversa</span> $A^{-1}$ se define como el operador
+de gráfica $\{(w,z):(z,w)\in\gra A\}$. En
+general $A^{-1}$ es otro operador multivaluado, pero la convexidad estricta de
+$h$ nos permite ver que $(\partial h)^{-1}$ es univaluado. Para ver esto primero
+requerimos los siguientes hechos básicos de conjugadas.</p>
+<div class="stmt definicion" id="transporte-optimo-x36"><div class="head">Definición</div><div class="body"><p>Para $f:\R^{d}\to[-\infty,+\infty]$, la <span class="df">conjugada de Fenchel</span> de $f$, también
+llamada transformada de Legendre, es</p>
+<div class="display">\[
+  f^{*}(w):=\sup_{z\in\R^{d}}\big(\ip{z}{w}-f(z)\big),
+\]</div>
+<p>y la <span class="df">biconjugada</span> es $f^{**}=(f^{*})^{*}$.</p></div></div>
+<p>Fijada la pendiente $w$, la recta $z\mapsto\ip{z}{w}$ pasa por el origen y el
+mayor hueco vertical que deja por encima de la gráfica de $f$ es $f^{*}(w)$;
+bajarla exactamente esa cantidad produce el minorante afín de pendiente $w$ que
+toca a $f$, cuya ordenada al origen es $-f^{*}(w)$.</p>
+<!-- entorno omitido: figure -->
+<div class="stmt teorema" id="transporte-optimo-x37"><div class="head">Teorema (Fenchel--Moreau)</div><div class="body"><p>Sea $f:\R^{d}\to\R\cup\{+\infty\}$ propia. Entonces $f$ es convexa y l.s.c.\ si y
+solo si $f=f^{**}$, y en ese caso $f^{*}$ también es propia.
+<span class="src">[B.C, Teorema 13.37; Villani, Proposición 2.5]</span></p></div></div>
+<div class="stmt proposicion" id="transporte-optimo-x38"><div class="head">Proposición (saturación de Fenchel--Young)</div><div class="body"><p>Sea $f$ propia, convexa y l.s.c. Entonces, para cualesquiera $z,w\in\R^{d}$,</p>
 <div class="display">\[
   \ip{z}{w}=f(z)+f^{*}(w)
   \iff w\in\partial f(z)
-  \iff z\in\partial f^{*}(w),
+  \iff z\in\partial f^{*}(w).
 \]</div>
-<p>donde $f^{*}(w)=\sup_z\ip{z}{w}-f(z)$ es la conjugada de Legendre. Más aún, $f$
-es diferenciable en un punto interior a su dominio si y solo si el
-subdiferencial ahí es un único punto, que entonces es $\nabla f$.
-<span class="src">[Villani, Proposición 2.4 y §2.1.3, puntos 1) y 3)]</span></p></div></div>
-<!-- entorno omitido: conexPersonal -->
-<div class="stmt lema" id="transporte-optimo-x36"><div class="head">Lema (inversión de $\partial h$)</div><div class="body"><p>Si $h$ es estrictamente convexa, $\partial h$ es inyectivo, en el sentido de que
-$w\in\partial h(z_1)\cap\partial h(z_2)$ obliga a $z_1=z_2$. En consecuencia
-$\partial h^{*}(w)$ se reduce a un punto para cada $w$ en el rango de $\partial
-h$, y ahí $h^{*}$ es diferenciable y se escribe
-$(\nabla h)^{-1}:=\nabla h^{*}$. <span class="src">[Villani, ec. (2.21)]</span></p></div></div>
+<p>Equivalentemente, $(\partial f)^{-1}=\partial f^{*}$.
+<span class="src">[B.C, Teorema 16.29 y Cor. 16.30; Villani, Proposición 2.4]</span></p></div></div>
+<p>La desigualdad $f(z)+f^{*}(w)\ge\ip{z}{w}$ vale siempre, sin más que la
+definición de conjugada, y la proposición dice que su conjunto de saturación es
+exactamente la gráfica de $\partial f$. De ahí sale
+$(\partial f)^{-1}=\partial f^{*}$, la versión subdiferencial de $f^{**}=f$, que
+identifica la inversa para toda $f$ propia, convexa y l.s.c. Queda la
+univaluación, y ahí entra la convexidad estricta.</p>
+<div class="stmt lema" id="transporte-optimo-x39"><div class="head">Lema (inversión de $\partial h$)</div><div class="body"><p>Sea $h$ propia, convexa, l.s.c.\ y estrictamente convexa. Entonces $\partial h$
+es <span class="df">inyectivo</span>, en el sentido de que $w\in\partial h(z_1)\cap\partial h(z_2)$
+obliga a $z_1=z_2$. En consecuencia $\partial h^{*}(w)=(\partial h)^{-1}(w)$ se
+reduce a un punto para cada $w$ en el rango de $\partial h$, y ahí $h^{*}$ es
+diferenciable y se escribe $(\nabla h)^{-1}:=\nabla h^{*}$.
+<span class="src">[Villani, ec. (2.21); la diferenciabilidad donde el subdiferencial es un
+punto, Villani §2.1.3, punto 3)]</span></p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p9">Ver demostración</button><div class="proof" id="transporte-optimo-p9"><p>Suponga en busca de contradicción que $w\in\partial h(z_1)\cap\partial h(z_2)$
 con $z_1\neq z_2$. Por definición de subdiferencial,
 $h(z_2)\ge h(z_1)+\ip{w}{z_2-z_1}$ y $h(z_1)\ge h(z_2)+\ip{w}{z_1-z_2}$;
@@ -986,11 +1019,19 @@ $\ell(z):=h(z_1)+\ip{w}{z-z_1}$ minora a $h$ y la toca en $z_1$ y en $z_2$, y po
 convexidad
 $h((1-t)z_1+tz_2)\le(1-t)h(z_1)+t h(z_2)=\ell((1-t)z_1+tz_2)\le h((1-t)z_1+tz_2)$
 para todo $t\in[0,1]$. De aquí $h$ es afín sobre el segmento. Contradicción, pues
-$h$ es estrictamente convexa. La segunda afirmación es la proposición anterior:
-$z\in\partial h^{*}(w)$ equivale a $w\in\partial h(z)$, y la inyectividad recién
+$h$ es estrictamente convexa. Para la segunda afirmación, la proposición anterior
+da $z\in\partial h^{*}(w)\iff w\in\partial h(z)$, y la inyectividad recién
 probada deja un solo $z$ posible.</p></div>
-<p>Note que $(\nabla h)^{-1}$ tiene sentido para toda $h$ estrictamente convexa,
-sea o no $h\in C^{1}$, y que con él la relación de arriba se despeja como</p>
+<p>Un operador $A$ es <span class="df">monótono</span> si $\ip{z_1-z_2}{w_1-w_2}\ge0$ para todos
+$(z_1,w_1),(z_2,w_2)\in\operatorname{gra}A$, y <span class="df">monótono maximal</span> si ningún
+monótono tiene gráfica estrictamente mayor.</p>
+<div class="stmt observacion" id="transporte-optimo-x40"><div class="head">Observación Condiciones necesarias para los algoritmos</div><div class="body"><p>En la práctica, para los algoritmos se necesita poder calcular el resolvente del operador, i.e. calcular $(\Id+\gamma \partial h)^{-1}$, el cual, a priori, es un operador no definido en todas partes. Sin embargo la condición de que $h$ sea propia, l.s.c y convexa basta para no lidiar con este problema. Pues en tal caso, $\partial h$ es un operador monótono maximal
+<span class="src">[B.C, Teorema 20.25]</span> y por consiguiente 
+$\Id+\partial h$ es sobreyectivo <span class="src">[B.C, Prop. 16.45]</span>, de modo que la resolvente
+$(\Id+\gamma \partial h)^{-1}$ tiene dominio total.</p></div></div>
+<!-- entorno omitido: conexPersonal -->
+<p>Con eso, $(\nabla h)^{-1}$ tiene sentido para toda $h$ estrictamente convexa, sea
+o no $h\in C^{1}$, y la relación de arriba se despeja como</p>
 <div class="display">\[
   x_0-y_0=(\nabla h)^{-1}\big(\nabla\varphi(x_0)\big).
 \]</div>
@@ -999,18 +1040,17 @@ $\varphi$ sea diferenciable $\mu$-a.e., cosa que se garantiza pidiendo que $\mu$
 sea absolutamente continua respecto de Lebesgue y probando que $\varphi$ es
 Lipschitz. Lo primero que hace falta es que ser Lipschitz baste.
 <span class="src">[Recuadro 1.9]</span></p>
-<div class="stmt teorema" id="transporte-optimo-x37"><div class="head">Teorema (Rademacher)</div><div class="body"><p>Sea $f:\R^{d}\to\R$ Lipschitz continua. Entonces el conjunto de puntos donde $f$
+<div class="stmt teorema" id="transporte-optimo-x41"><div class="head">Teorema (Rademacher)</div><div class="body"><p>Sea $f:\R^{d}\to\R$ Lipschitz continua. Entonces el conjunto de puntos donde $f$
 no es diferenciable es despreciable para la medida de Lebesgue.</p></div></div>
 <p>Con eso, para cada $x_0$ el punto $y_0$ tal que $(x_0,y_0)\in\spt(\gamma_\star)$
 es único cuando existe, es decir, $\gamma_\star$ es de la forma
 $\gamma_T=(\Id,T)\pushf\mu$ con $T(x_0)=y_0$, y de paso quedan la unicidad del
 plan óptimo y la del gradiente del potencial. Todo junto:</p>
-<div class="stmt teorema" id="transporte-optimo-x38"><div class="head">Teorema 1.17</div><div class="body"><p>Sean $\mu$ y $\nu$ probabilidades sobre un dominio compacto $\Omega\subset\R^{d}$.
-Existe un plan de transporte óptimo $\gamma_\star$ para el coste $c(x,y)=h(x-y)$
-con $h$ estrictamente convexa. Es único y de la forma $(\Id,T)\pushf\mu$ siempre
-que $\mu$ sea absolutamente continua y $\partial\Omega$ sea despreciable. Más aún,
-existe un potencial de Kantorovich $\varphi$, y $T$ y los potenciales están
-ligados por</p>
+<div class="stmt teorema" id="transporte-optimo-x42"><div class="head">Teorema 1.17</div><div class="body"><p>Si $\mu,\nu\in\Pmeas(\Omega)$ con $\Omega\subset\R^{d}$ compacto y
+$c(x,y)=h(x-y)$ con $h$ estrictamente convexa $\Longrightarrow\exists \gamma_\star$
+plan óptimo. Más aún, si $\mu(\partial\Omega)=0$ y $\mu\ll\Leb^{d}\Rightarrow$
+$\gamma_\star$ es <span class="df">único</span>, $\gamma_\star=(\Id,T)\pushf\mu$ para algún $T$, y
+existe un potencial de Kantorovich $\varphi$ tal que:</p>
 <div class="display">\[
   T(x)=x-(\nabla h)^{-1}\big(\nabla\varphi(x)\big).
 \]</div></div></div>
@@ -1020,49 +1060,46 @@ $x_0\notin\partial\Omega$ y $\nabla\varphi(x_0)$ existe, entonces necesariamente
 $y_0=x_0-(\nabla h)^{-1}(\nabla\varphi(x_0))$. Basta pues ver que los dos
 conjuntos de puntos malos son $\mu$-despreciables. Los de la frontera lo son por
 hipótesis. Los de no diferenciabilidad son despreciables para Lebesgue por
-Rademacher, y aquí es donde entra que $\varphi$ sea Lipschitz: siendo $h$
-localmente Lipschitz, por ser convexa y finita, y siendo $\Omega$ acotado, el
+Rademacher. En efecto, como $h$ es localmente Lipschitz, por ser convexa y finita,  el
 coste $c$ es Lipschitz sobre $\Omega\times\Omega$; y $\varphi$ comparte el módulo
-de continuidad de $c$, según se vio en §1.2. De la absoluta continuidad de $\mu$,
-los dos conjuntos son entonces $\mu$-despreciables. Esto muestra a la vez que
+de continuidad de $c$, y por tanto $\varphi$ es Lipschitz también. Esto muestra a la vez que
 todo plan óptimo está inducido por una aplicación de transporte y que esa
 aplicación es $x\mapsto x-(\nabla h)^{-1}(\nabla\varphi(x))$, luego queda
 determinada, puesto que $\varphi$ no depende de $\gamma_\star$. Se sigue la
-unicidad del plan óptimo.</p></div>
-<div class="stmt observacion" id="transporte-optimo-x39"><div class="head">Observación 1.18</div><div class="body"><p>Todos los costes de la forma $c(x,y)=\abs{x-y}^{p}$ con $p&gt;1$ se tratan con el
+unicidad.</p></div>
+<div class="stmt observacion" id="transporte-optimo-x43"><div class="head">Observación 1.18</div><div class="body"><p>Todos los costes de la forma $c(x,y)=\abs{x-y}^{p}$ con $p&gt;1$ se tratan con el
 Teorema 1.17.</p></div></div>
-<div class="stmt observacion" id="transporte-optimo-x40"><div class="head">Observación 1.19</div><div class="body"><p>En el teorema anterior la unicidad se obtuvo dando la expresión explícita de la
+<div class="stmt observacion" id="transporte-optimo-x44"><div class="head">Observación 1.19</div><div class="body"><p>En el teorema anterior la unicidad se obtuvo dando la expresión explícita de la
 aplicación óptima, pero hay un argumento más general: cada vez que se sepa que
 todo $\gamma_\star$ óptimo está inducido por una aplicación, se tiene unicidad.
 En efecto, si $\gamma_1=\gamma_{T_1}$ y $\gamma_2=\gamma_{T_2}$ fuesen óptimos y
 distintos, $\tfrac12\gamma_1+\tfrac12\gamma_2$ sería óptimo por convexidad, y ese
 plan no puede estar inducido por una aplicación a menos que $T_1=T_2$
 $\mu$-a.e. Contradicción.</p></div></div>
-<div class="stmt observacion" id="transporte-optimo-x41"><div class="head">Observación 1.20</div><div class="body"><p>Si las hipótesis sobre $\mu$ las cumple también $\nu$, hay además una aplicación
+<div class="stmt observacion" id="transporte-optimo-x45"><div class="head">Observación 1.20</div><div class="body"><p>Si las hipótesis sobre $\mu$ las cumple también $\nu$, hay además una aplicación
 óptima en el sentido contrario, $\gamma_\star=(S,\Id)\pushf\nu$. Entonces
 $\gamma_\star$-a.e.\ valen $y=T(x)$ y $x=S(y)$, es decir $S(T(x))=x$ para
 $\mu$-a.e.\ $x$, de donde $T$ es invertible sobre un conjunto de medida total y
 su inversa es la aplicación óptima de $\nu$ a $\mu$.</p></div></div>
-<h3 id="transporte-optimo-x42">1.3.1 El caso cuadrático en $\R^{d}$</h3>
+<h3 id="transporte-optimo-x46">1.3.1 El caso cuadrático en $\R^{d}$</h3>
 <p>El coste $c(x,y)=\tfrac12\abs{x-y}^{2}$ en $\R^{d}$ merece atención aparte, y la
-razón es la conexión entre la $c$-concavidad y la convexidad de siempre. Para
-enunciarla hace falta el segundo hecho de análisis convexo prometido arriba.</p>
-<div class="stmt proposicion" id="transporte-optimo-x43"><div class="head">Proposición (dualidad de Legendre)</div><div class="body"><p>Sea $f:\R^{d}\to\R\cup\{+\infty\}$ propia. Son equivalentes: $f$ es convexa y
-l.s.c.; $f=g^{*}$ para alguna $g$ propia; y $f^{**}=f$.
-<span class="src">[Villani, Proposición 2.5]</span></p></div></div>
-<div class="stmt proposicion" id="transporte-optimo-x44"><div class="head">Proposición 1.21</div><div class="body"><p>Dada $\chi:\R^{d}\to\R\cup\{-\infty\}$, defina
-$u_\chi:\R^{d}\to\R\cup\{+\infty\}$ mediante
-$u_\chi(x)=\tfrac12\abs{x}^{2}-\chi(x)$. Entonces
-$u_{\ccon{\chi}}=(u_\chi)^{*}$. En particular, una función $\zeta$ es
+razón es la conexión entre la $c$-concavidad y la convexidad de siempre. Quien la
+produce es Fenchel--Moreau, leído en la forma equivalente de que las funciones
+convexas y l.s.c.\ son exactamente las que son una conjugada.
+<span class="src">[B.C, Cor. 13.38; Villani, Proposición 2.5]</span></p>
+<div class="stmt proposicion" id="transporte-optimo-x47"><div class="head">Proposición 1.21</div><div class="body"><p>Dada $f:\R^{d}\to\R\cup\{-\infty\}$, defina
+$u_f:\R^{d}\to\R\cup\{+\infty\}$ mediante
+$u_f(x)=\tfrac12\abs{x}^{2}-f(x)$. Entonces
+$u_{\ccon{f}}=(u_f)^{*}$. En particular, una función $\zeta$ es
 $c$-cóncava si y solo si $x\mapsto\tfrac12\abs{x}^{2}-\zeta(x)$ es convexa y
 l.s.c.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p11">Ver demostración</button><div class="proof" id="transporte-optimo-p11"><p>Calcule:</p>
 <div class="display">\[
-  u_{\ccon{\chi}}(x)=\tfrac12\abs{x}^{2}-\ccon{\chi}(x)
-  =\sup_y\ \tfrac12\abs{x}^{2}-\tfrac12\abs{x-y}^{2}+\chi(y)
-  =\sup_y\ \ip{x}{y}-\Big(\tfrac12\abs{y}^{2}-\chi(y)\Big),
+  u_{\ccon{f}}(x)=\tfrac12\abs{x}^{2}-\ccon{f}(x)
+  =\sup_y\ \tfrac12\abs{x}^{2}-\tfrac12\abs{x-y}^{2}+f(y)
+  =\sup_y\ \ip{x}{y}-\Big(\tfrac12\abs{y}^{2}-f(y)\Big),
 \]</div>
-<p>que es $(u_\chi)^{*}(x)$. Para la segunda parte, las funciones $c$-cóncavas están
+<p>que es $(u_f)^{*}(x)$. Para la segunda parte, las funciones $c$-cóncavas están
 caracterizadas por ser $c$-transformadas y las convexas l.s.c.\ por ser
 conjugadas, luego $\zeta$ es $c$-cóncava si y solo si $u_\zeta$ es una conjugada,
 que por la proposición anterior es lo mismo que ser convexa y l.s.c.</p></div>
@@ -1093,7 +1130,8 @@ $u(x_0)+u^{*}(y_0)=\ip{x_0}{y_0}$ para una función convexa $u$ y su conjugada, 
 por la caracterización del subdiferencial, a $y_0\in\partial u(x_0)$.</p>
 <p>La existencia de la aplicación óptima vale bajo hipótesis más débiles sobre
 $\mu$: basta pedir que $\mu(A)=0$ para todo $A\subset\R^{d}$ con
-$\Haus^{d-1}(A)&lt;+\infty$, o cualquier condición que asegure que el conjunto de no
+$\Haus^{d-1}(A)&lt;+\infty$, donde $\Haus^{s}$ es la medida de Hausdorff
+$s$-dimensional, o cualquier condición que asegure que el conjunto de no
 diferenciabilidad de $u$ sea despreciable. Está probado que ese conjunto es
 $(d-1)$-rectificable, es decir, está contenido, salvo conjuntos
 $\Haus^{d-1}$-despreciables, en una unión numerable de imágenes Lipschitz de
@@ -1105,7 +1143,7 @@ contenido $\Haus^{d-1}$-a.e.\ en una unión numerable de superficies $(d-1)$ de
 clase $C^{2}$, y recíprocamente todo conjunto $(d-1)$-rectificable en ese sentido
 $C^{2}$ está contenido en el conjunto de no diferenciabilidad de alguna función
 convexa.</p>
-<div class="stmt observacion" id="transporte-optimo-x45"><div class="head">Observación (caracterización de Gigli)</div><div class="body"><p>Esas consideraciones permiten extender el Teorema 1.17 así: dadas
+<div class="stmt observacion" id="transporte-optimo-x48"><div class="head">Observación (caracterización de Gigli)</div><div class="body"><p>Esas consideraciones permiten extender el Teorema 1.17 así: dadas
 $\mu,\nu\in\Pmeas(\Omega)$, si $\mu(A)=0$ para toda superficie $A$ de clase
 $C^{2}$ y codimensión $1$, entonces el plan óptimo para el coste cuadrático es
 único y está inducido por una aplicación, sea cual sea $\nu$. Y esa condición
@@ -1123,13 +1161,13 @@ existencia de solución $(\varphi,\psi)$ de</p>
 <p>junto con $\max(\mathrm{DP\text{-}var})=\min(\mathrm{KP})$. El mismo
 enunciado, ya en la forma transformada que la prueba va a usar, está demostrado
 en Villani.</p>
-<div class="stmt teorema" id="transporte-optimo-x46"><div class="head">Teorema (existencia de una pareja conjugada óptima) 2.9 de Villani</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ con segundos momentos finitos.
+<div class="stmt teorema" id="transporte-optimo-x49"><div class="head">Teorema (existencia de una pareja conjugada óptima) 2.9 de Villani</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ con segundos momentos finitos.
 Entonces existe una pareja $(u,u^{*})$ de funciones convexas propias, l.s.c.\ y
 conjugadas entre sí que realiza el ínfimo de
 <span class="v" data-var="std">$\int u\dd\mu+\int v\dd\nu$</span><span class="v" data-var="fin">$\mu(u)+\nu(v)$</span> sobre todas las parejas $(u,v)$
 que satisfacen $\ip{x}{y}\le u(x)+v(y)$ para todos $x,y$.
 <span class="src">[Villani, Teorema 2.9]</span></p></div></div>
-<div class="stmt teorema" id="transporte-optimo-x47"><div class="head">Teorema 1.22</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ y $c(x,y)=\tfrac12\abs{x-y}^{2}$.
+<div class="stmt teorema" id="transporte-optimo-x50"><div class="head">Teorema 1.22</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ y $c(x,y)=\tfrac12\abs{x-y}^{2}$.
 Suponga <span class="v" data-var="std">$\int\abs{x}^{2}\dd\mu,\ \int\abs{y}^{2}\dd\nu&lt;+\infty$</span><span class="v" data-var="fin">$\mu(\abs{\cdot}^{2}),\ \nu(\abs{\cdot}^{2})&lt;+\infty$</span>, lo que implica
 $\min(\mathrm{KP})&lt;+\infty$, y suponga que $\mu$ no da masa a las superficies
 $(d-1)$ de clase $C^{2}$. Entonces existe, y es única, una aplicación de
@@ -1149,44 +1187,12 @@ función $u$ es diferenciable $\mu$-a.e., otra vez por la hipótesis sobre $\mu$
 por ser $u$ convexa.</p></div>
 <p>Una advertencia sobre la hipótesis de momentos: la fuente la escribe con la
 medida de Lebesgue,
-<span class="v" data-var="std">$\int\abs{x}^{2}\dd x&lt;+\infty$</span><span class="v" data-var="fin">$\Leb^{d}(\abs{\cdot}^{2})&lt;+\infty$</span>, y así no
+<span class="v" data-var="std">$\int\abs{x}^{2}\dd x&lt;+\infty$</span><span class="v" data-var="fin">$\Leb^{d}(\abs{\cdot}^{2})&lt;+\infty$</span>, donde
+$\Leb^{d}$ es la medida de Lebesgue de $\R^{d}$, y así no
 diría nada, porque esa cantidad es infinita siempre. Lo que hace falta, y es lo
 que se usa en la prueba, son los segundos momentos de $\mu$ y de $\nu$, como en
 la condición (2.2) de Villani.</p>
-<p>El caso gaussiano da la única aplicación óptima que en este capítulo se puede
-escribir con fórmula cerrada.</p>
-<div class="stmt ejemplo" id="transporte-optimo-x48"><div class="head">Ejemplo</div><div class="body"><p>Sean $\mu=\mathcal N(m_\mu,\Sigma_\mu)$ y $\nu=\mathcal N(m_\nu,\Sigma_\nu)$ dos
-gaussianas no degeneradas en $\R^{d}$ y sea $c(x,y)=\abs{x-y}^{2}$. La aplicación
-afín</p>
-<div class="display">\[
-  T(x)=m_\nu+A(x-m_\mu),\qquad
-  A=\Sigma_\mu^{-1/2}\big(\Sigma_\mu^{1/2}\Sigma_\nu\Sigma_\mu^{1/2}\big)^{1/2}
-    \Sigma_\mu^{-1/2}=A^{\top},
-\]</div>
-<p>cumple $T\pushf\mu=\nu$, y es el gradiente de la función convexa</p>
-<div class="display">\[
-  \psi(x)=\tfrac12\ip{x-m_\mu}{A(x-m_\mu)}+\ip{m_\nu}{x},
-\]</div>
-<p>luego es la aplicación óptima. El coste óptimo vale</p>
-<div class="display">\[
-  \min(\mathrm{KP})=\abs{m_\mu-m_\nu}^{2}
-  +\Tr\Big(\Sigma_\mu+\Sigma_\nu
-    -2\big(\Sigma_\mu^{1/2}\Sigma_\nu\Sigma_\mu^{1/2}\big)^{1/2}\Big),
-\]</div>
-<p>donde el segundo sumando es el cuadrado de la métrica de Bures entre las dos
-matrices de covarianza. <span class="src">[Peyré--Cuturi, ecs. (2.40) a (2.42)]</span></p></div></div>
-<div class="stmt observacion" id="transporte-optimo-x49"><div class="head">Observación (la ecuación de Monge--Ampère)</div><div class="body"><p>Si $\mu$ y $\nu$ tienen densidades $\rho_\mu$ y $\rho_\nu$, la condición
-$(\nabla u)\pushf\mu=\nu$ se escribe formalmente, por cambio de variable, como</p>
-<div class="display">\[
-  \det\big(D^{2}u(x)\big)\,\rho_\nu\big(\nabla u(x)\big)=\rho_\mu(x),
-\]</div>
-<p>y $u$ es la única función convexa, salvo constante aditiva, que la resuelve. El
-operador $\det(D^{2}u)$ se comporta como un laplaciano no lineal degenerado: para
-desplazamientos pequeños, $u(x)=\tfrac12\abs{x}^{2}+\varepsilon w(x)$ da
-$\det(D^{2}u)=1+\varepsilon \Delta w+o(\varepsilon)$. La restricción de
-convexidad fuerza $\det(D^{2}u)\ge0$ y es necesaria para que la ecuación tenga
-solución. <span class="src">[Peyré--Cuturi, Observación 2.25 y ec. (2.32)]</span></p></div></div>
-<div class="stmt observacion" id="transporte-optimo-x50"><div class="head">Observación 1.23</div><div class="body"><p>En dimensión uno todo esto da un resultado especialmente limpio. Suponga que
+<div class="stmt observacion" id="transporte-optimo-x51"><div class="head">Observación 1.23</div><div class="body"><p>En dimensión uno todo esto da un resultado especialmente limpio. Suponga que
 $\mu\in\Pmeas(\R)$ no tiene átomos. Entonces toda función convexa es
 diferenciable $\mu$-a.e., puesto que el conjunto de puntos de no diferenciabilidad
 de una función convexa es a lo sumo numerable: si $\psi$ es convexa, los
@@ -1195,12 +1201,9 @@ vacíos y disjuntos cuando $x$ recorre esos puntos. Existe pues una aplicación 
 transporte óptima para el coste cuadrático entre $\mu$ y cualquier
 $\nu\in\Pmeas(\R)$, y es la derivada de una función convexa, es decir, una
 aplicación no decreciente.</p></div></div>
-<p>Esa aplicación se escribe además explícitamente con las funciones de
-distribución: si $C_\mu$ y $C_\nu$ son las de $\mu$ y $\nu$ y $C_\nu^{-1}$ es la
-pseudoinversa, o función cuantil generalizada, entonces $T=C_\nu^{-1}\circ C_\mu$.
-<span class="src">[Peyré--Cuturi, ec. (2.39)]</span> El capítulo 2 vuelve sobre ello y prueba que
-la aplicación monótona es óptima para toda una familia de costes.</p>
-<div class="stmt observacion" id="transporte-optimo-x51"><div class="head">Observación 1.24</div><div class="body"><p>Algunas de las propiedades del caso cuadrático sobreviven al pasar a un coste
+<p>El capítulo 2 vuelve sobre el caso unidimensional y prueba que esa aplicación
+monótona es óptima para toda una familia de costes.</p>
+<div class="stmt observacion" id="transporte-optimo-x52"><div class="head">Observación 1.24</div><div class="body"><p>Algunas de las propiedades del caso cuadrático sobreviven al pasar a un coste
 general $c(x,y)$ de clase $C^{1,1}$ que satisfaga la condición de torsión de la
 Definición 1.16. Que el transporte sea el gradiente de una función convexa deja
 de ser cierto, evidentemente; pero las propiedades de diferenciabilidad de los
@@ -1214,7 +1217,8 @@ punto que aquí no se ha tocado, el de prescindir de la compacidad. Su Proposici
 dominio, y semicóncava cuando $c\in C^{1,1}_{\mathrm{loc}}$, condición que excluye
 los costes $\abs{x-y}^{p}$ con $p&lt;2$. <span class="src">[Villani, Proposición 2.43]</span> Con ella
 se obtiene el Teorema 1.17 sobre todo $\R^{d}$.</p>
-<div class="stmt teorema" id="transporte-optimo-x52"><div class="head">Teorema (Gangbo--McCann) 2.44 de Villani</div><div class="body"><p>Sea $c$ un coste estrictamente convexo y superlineal sobre $\R^{d}$, y sean
+<div class="stmt teorema" id="transporte-optimo-x53"><div class="head">Teorema (Gangbo--McCann) 2.44 de Villani</div><div class="body"><p>Sea $c$ un coste estrictamente convexo y <span class="df">superlineal</span> sobre $\R^{d}$, es
+decir, con $c(z)/\abs{z}\to+\infty$ cuando $\abs{z}\to\infty$, y sean
 $\mu,\nu$ probabilidades sobre $\R^{d}$ cuyo coste total de transporte no sea
 siempre infinito. Si $\mu$ es absolutamente continua respecto de Lebesgue, existe
 un único plan de transporte óptimo, tiene la forma $(\Id,T)\pushf\mu$, y $T$ queda
@@ -1223,7 +1227,7 @@ $T(x)=x-\nabla c^{*}(\nabla\varphi(x))$ para alguna $\varphi$ que es $c$-cóncav
 Si además $c\in C^{1,1}_{\mathrm{loc}}$, la conclusión vale bajo la hipótesis más
 débil de que $\mu$ no dé masa a los conjuntos de dimensión de Hausdorff a lo sumo
 $d-1$. <span class="src">[Villani, Teorema 2.44]</span></p></div></div>
-<h3 id="transporte-optimo-x53">1.3.2 El caso cuadrático en el toro plano</h3>
+<h3 id="transporte-optimo-x54">1.3.2 El caso cuadrático en el toro plano</h3>
 <p>Ver qué ocurre al sustituir las medidas sobre $\R^{d}$ por medidas sobre el toro
 plano $\Tor^{d}=\R^{d}/\Z^{d}$, y el coste $\tfrac12\abs{x-y}^{2}$ por el cuadrado
 de la distancia en el toro, es útil por dos razones. Es el ejemplo más simple de
@@ -1249,7 +1253,7 @@ punto donde el $\bar k$ óptimo sea único. Dado un punto $x$, se llama
 vista como función de la pareja $(x,y)$, no es diferenciable en $(x,y)$; se
 escribe $\cut(x)$, y en el toro plano coincide con el conjunto de los $y$ tales
 que $y-x\in\partial Q+\Z^{d}$.</p>
-<div class="stmt teorema" id="transporte-optimo-x54"><div class="head">Teorema 1.25</div><div class="body"><p>Tome $\mu,\nu\in\Pmeas(\Tor^{d})$, con $\mu\ll\Leb^{d}$, y
+<div class="stmt teorema" id="transporte-optimo-x55"><div class="head">Teorema 1.25</div><div class="body"><p>Tome $\mu,\nu\in\Pmeas(\Tor^{d})$, con $\mu\ll\Leb^{d}$, y
 $c(x,y)=\tfrac12\abs{[x-y]}^{2}$. Entonces existe un único plan de transporte
 óptimo $\gamma_\star\in\Adm(\mu,\nu)$. Tiene la forma $\gamma_\star=\gamma_T$ y la
 aplicación óptima viene dada por $T(x)=x-\nabla\varphi(x)$ para a.e.\ $x$, donde
@@ -1281,7 +1285,7 @@ deduce $x_0-y_0-k_0=\nabla\varphi(x_0)$, lo que determina $k_0$ de manera única
 partir de $x_0$ y de $y_0$, y por ende $y_0\notin\cut(x_0)$. De aquí $y_0$ queda
 determinado de manera única por $x_0$, y se obtiene el resultado usual de
 existencia y unicidad de la aplicación óptima.</p></div>
-<div class="stmt observacion" id="transporte-optimo-x55"><div class="head">Observación 1.26</div><div class="body"><p>En la demostración anterior se puede observar además que $k_0=0$ si
+<div class="stmt observacion" id="transporte-optimo-x56"><div class="head">Observación 1.26</div><div class="body"><p>En la demostración anterior se puede observar además que $k_0=0$ si
 $x_0-y_0\in Q$. En particular, si $\spt(\mu)$ y $\spt(\nu)$ están contenidos en
 $\tfrac12 Q$, el transporte es idéntico al que se obtendría con el coste
 cuadrático clásico en $\R^{d}$ en vez del marco periódico de $\Tor^{d}$.</p></div></div>
@@ -1289,13 +1293,13 @@ cuadrático clásico en $\R^{d}$ en vez del marco periódico de $\Tor^{d}$.</p><
 riemanniana completa y el coste por $d(x,y)^{2}$ con $d$ la distancia geodésica.
 El teorema de McCann que lo cubre está enunciado en Villani.
 <span class="src">[Villani, §2.4.5]</span></p></section>
-<section class="capitulo"><h2 id="transporte-optimo-x56">1.4 Contraejemplos a la existencia</h2>
+<section class="capitulo"><h2 id="transporte-optimo-x57">1.4 Contraejemplos a la existencia</h2>
 <p>Quedan fuera del Teorema 1.17 dos situaciones en las que no existe transporte
 óptimo, y las dos merecen verse. En ambas el coste $c(x,y)$ sería de los que
 suelen dar existencia, por ejemplo $c(x,y)=\abs{x-y}^{2}$, y la razón del fallo
 está en la medida $\mu$. También hay ejemplos donde la culpa es del coste y no de
 las medidas, y aparecen entre los ejercicios del texto guía, en Ex(58) y Ex(59).</p>
-<h3 id="transporte-optimo-x57">No hay transporte</h3>
+<h3 id="transporte-optimo-x58">No hay transporte</h3>
 <p>El primero es muy fácil. Considere $\mu=\delta_a$ con $a\in X$ y suponga que
 $\nu$ no es una masa de Dirac. Entonces no hay ninguna aplicación de transporte:
 $T\pushf\delta_a=\delta_{T(a)}$, luego ninguna $T:X\to Y$ puede servir si $\nu$
@@ -1311,7 +1315,7 @@ medidas atómicas. Con $\mu=\delta_a$ la situación es de hecho la más simple
 posible: el conjunto $\Adm(\mu,\nu)$ contiene un solo elemento, que es
 $\gamma=\mu\otimes\nu=\delta_a\otimes\nu$. Es el mismo obstáculo que abría §1.1,
 visto ahora desde el lado en que se resuelve.</p>
-<h3 id="transporte-optimo-x58">Hay transporte, pero no óptimo</h3>
+<h3 id="transporte-optimo-x59">Hay transporte, pero no óptimo</h3>
 <p>Tome el coste cuadrático $c(x,y)=\abs{x-y}^{2}$, aunque cualquier otro coste
 estrictamente creciente en la distancia daría el mismo resultado, y ponga</p>
 <div class="display"><span class="v" data-var="std">\[\mu=\Haus^{1}\llcorner A,\qquad
@@ -1355,6 +1359,953 @@ medida $\nu$ uniforme sobre $Q\times\{-1\}\cup Q\times\{1\}$, la única solució
 $(\mathrm{KP})$ parte cada unidad de masa en dos mitades y las transporta en línea
 recta, de donde $(\mathrm{MP})$ no tiene solución.
 <span class="src">[Villani, Ejercicio 2.14]</span></p></section>
+<section class="capitulo"><h2 id="transporte-optimo-x60" data-toc="1.5 Kantorovich como relajación de Monge">1.5 Kantorovich como relajación de Monge</h2>
+<p>Los dos problemas del §1.1 viven, de entrada, sobre conjuntos admisibles
+distintos: $(\mathrm{MP})$ sobre aplicaciones y $(\mathrm{KP})$ sobre planes. La
+Observación 1.3 permite ponerlos sobre el mismo, porque para toda aplicación $T$
+vale</p>
+<div class="display"><span class="v" data-var="std">\[
+  M(T)=\int_\Omega c(x,T(x))\dd\mu=\int_{\Omega\times\Omega}c\dd\gamma_T=K(\gamma_T),
+\]</span><span class="v" data-var="fin">\[
+  M(T)=\mu\big(c(\cdot,T(\cdot))\big)=\gamma_T(c)=K(\gamma_T),
+\]</span></div>
+<p>de modo que el problema de Monge se reescribe como</p>
+<div class="display">\[
+  \inf\{J(\gamma):\gamma\in\Adm(\mu,\nu)\},
+  \qquad
+  J(\gamma)=\begin{cases}
+    K(\gamma)=M(T) &amp; \text{si }\gamma=\gamma_T,\\[2pt]
+    +\infty &amp; \text{en caso contrario.}
+  \end{cases}
+\]</div>
+<p>La definición de $J$ obliga a que la minimización se restrinja a los planes
+inducidos por una aplicación, y deja $(\mathrm{MP})$ y $(\mathrm{KP})$ como dos
+problemas sobre el mismo conjunto admisible que solo se diferencian en el
+funcional.</p>
+<p>Queda entonces la pregunta de por qué Kantorovich sustituyó $J$ por $K$, y si
+$\inf K=\inf J$. Cuando el minimizante de $K$ resulta ser de la forma
+$\gamma_T$, los dos mínimos coinciden y no hay nada que discutir; el caso general
+lo justifica la siguiente noción.
+<span class="src">[Recuadro 1.10]</span></p>
+<div class="stmt definicion" id="transporte-optimo-x61"><div class="head">Definición</div><div class="body"><p>Sea $F:X\to\R\cup\{+\infty\}$ acotada inferiormente sobre un espacio métrico $X$.
+La <span class="df">relajación</span> de $F$ es el mayor funcional $\bar F:X\to\R\cup\{+\infty\}$
+entre los $G$ que son l.s.c.\ y cumplen $G\le F$. Existe, porque el supremo de
+una familia arbitraria de funciones l.s.c.\ es l.s.c.</p></div></div>
+<div class="stmt proposicion" id="transporte-optimo-x62"><div class="head">Proposición</div><div class="body"><p>La relajación admite la representación</p>
+<div class="display">\[
+  \bar F(x)=\inf\Big\{\liminf_n F(x_n)\;:\;x_n\to x\Big\},
+\]</div>
+<p>y se tiene $\inf F=\inf\bar F$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p14">Ver demostración</button><div class="proof" id="transporte-optimo-p14"><p>Solo de la segunda afirmación, que es la que se usa. De $F\ge\bar F$ sale
+$\inf F\ge\inf\bar F$. Para la otra, llame $\ell:=\inf F$ y observe que $F\ge\ell$
+y que una función constante es l.s.c., luego $\ell$ compite en la familia que
+define $\bar F$ y por tanto $\bar F\ge\ell$, es decir $\inf\bar F\ge\inf F$.</p></div>
+<p>Lo que se probará es que $K$ es la relajación de $J$. Ocurre además que esa
+relajación resulta ser continua y no solo semicontinua, y que coincide con $J$
+sobre $\{J&lt;+\infty\}$. Las hipótesis son $\Omega\subset\R^{d}$ compacto, $c$
+continua y $\mu$ <span class="df">sin átomos</span>, es decir con $\mu(\{x\})=0$ para todo
+$x\in\Omega$. La compacidad se supone por simplicidad y el resultado vale en
+condiciones más generales.</p>
+<p>El primero de los resultados preliminares es unidimensional y el capítulo 2 lo
+retoma en detalle.</p>
+<div class="stmt lema" id="transporte-optimo-x63"><div class="head">Lema 1.27</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre la recta real y sea $\mu$ sin átomos.
+Entonces existe al menos una aplicación de transporte $T$ con $T\pushf\mu=\nu$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p15">Ver demostración</button><div class="proof" id="transporte-optimo-p15"><p>Basta tomar la aplicación monótona creciente de la Observación 1.23. Aquella
+además optimizaba el coste cuadrático, cosa que aquí no interesa.</p></div>
+<p>Para pasar de la recta a $\R^{d}$ se transporta el problema entero a la recta
+mediante un isomorfismo boreliano.</p>
+<div class="stmt lema" id="transporte-optimo-x64"><div class="head">Lema 1.28</div><div class="body"><p>Existe una aplicación de Borel $\sigma_d:\R^{d}\to\R$ inyectiva, cuya imagen es
+un subconjunto de Borel de $\R$ y cuya inversa es también de Borel.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p16">Ver demostración</button><div class="proof" id="transporte-optimo-p16"><p>Basta con $d=2$, porque después se procede por inducción: dada $\sigma_{d-1}$
+sobre $\R^{d-1}$, se define
+$\sigma_d(x_1,x_2,\dots,x_d)=\sigma_2\big(x_1,\sigma_{d-1}(x_2,\dots,x_d)\big)$.</p>
+<p>Basta también con definirla sobre $ ]0,1[^{2}$, porque
+$(x,y)\mapsto\big(\tfrac12+\tfrac1\pi\arctan x,\ \tfrac12+\tfrac1\pi\arctan y\big)$
+lleva $\R^{2}$ a $ ]0,1[^{2}$ y es un isomorfismo boreliano.</p>
+<p>Considere entonces la aplicación que a la pareja $(x,y)$, con
+$x=0,x_1x_2x_3\dots$ e $y=0,y_1y_2y_3\dots$ en notación decimal, le asocia el
+punto $0,x_1y_1x_2y_2x_3y_3\dots$. Para evitar ambigüedades se acuerda que
+ninguna expansión decimal termine en un $9$ periódico, de modo que $0.347299999\dots$
+se escribe $0.3473$. Ese acuerdo es también la razón de que la imagen no sea el
+intervalo entero: puntos como $0.393939\dots$ no se obtienen, porque
+provendrían de $x=0.333\dots$ e $y=0.999\dots$. Ese conjunto de puntos
+excluidos es de Borel.</p>
+<p>La medibilidad de la aplicación y la de su inversa se comprueban sobre una base:
+la preimagen de un intervalo definido prescribiendo las primeras $2k$ cifras de
+un número de $\R$ es un rectángulo de $\R^{2}$, el producto de los dos intervalos
+que prescriben las primeras $k$ cifras de cada componente. Esos intervalos
+generan la tribu de Borel.</p></div>
+<div class="stmt corolario" id="transporte-optimo-x65"><div class="head">Corolario 1.29</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ y sea $\mu$ sin átomos. Entonces
+existe al menos una aplicación de transporte $T$ con $T\pushf\mu=\nu$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p17">Ver demostración</button><div class="proof" id="transporte-optimo-p17"><p>Tome una aplicación de transporte de $(\sigma_d)\pushf\mu$ a $(\sigma_d)\pushf\nu$,
+que existe por el Lema 1.27 porque $(\sigma_d)\pushf\mu$ sigue sin átomos al ser
+$\sigma_d$ inyectiva, y componga con $\sigma_d$ y con $(\sigma_d)^{-1}$.</p></div>
+<div class="stmt observacion" id="transporte-optimo-x66"><div class="head">Observación 1.30</div><div class="body"><p>El Lema 1.28 da una construcción explícita de una aplicación de transporte entre
+una medida sin átomos $\mu$ y una medida cualquiera $\nu$ cuando el espacio
+ambiente es $\R^{d}$. El hecho es mucho más general, porque todo espacio de
+medida dotado de una medida sin átomos es isomorfo a $[0,1]$ con la medida de
+Lebesgue, y ese es el argumento con el que se obtiene la existencia de
+aplicaciones de transporte en espacios arbitrarios. Aquí no hace falta: al
+componer con los isomorfismos que llevan un espacio arbitrario a $[0,1]$ la
+función de coste deja de ser continua, y aunque eso se puede manejar con el Lema
+1.8, que admite costes obtenidos componiendo una función continua con
+aplicaciones medibles de $x$ y de $y$ por separado, la construcción explícita
+basta para el caso euclídeo.</p></div></div>
+<p>El último preliminar dice que fijar la masa sobre particiones cada vez más finas
+fuerza la convergencia débil.</p>
+<div class="stmt lema" id="transporte-optimo-x67"><div class="head">Lema 1.31</div><div class="body"><p>Sobre un espacio métrico compacto $X$ con una probabilidad $\varrho$, considere
+una sucesión de particiones $G_n$, cada una formada por conjuntos disjuntos
+$C_{i,n}$ con $\bigcup_{i\in I_n}C_{i,n}=X$, y suponga que
+$\operatorname{size}(G_n):=\max_i\operatorname{diam}(C_{i,n})\to0$. Si las
+probabilidades $\varrho_n$ cumplen $\varrho_n(C_{i,n})=\varrho(C_{i,n})$ para
+todo $n$ y todo $i\in I_n$, entonces $\varrho_n\rightharpoonup\varrho$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p18">Ver demostración</button><div class="proof" id="transporte-optimo-p18"><p>Escriba $m_{i,n}:=\varrho_n(C_{i,n})=\varrho(C_{i,n})$ y tome $\phi\in C(X)$, con
+módulo de continuidad $\omega$. Sobre un conjunto $C$ donde las dos medidas
+tengan la misma masa $m$, las dos integrales de $\phi$ caen en el mismo intervalo
+$[m\inf_C\phi,\ m\sup_C\phi]$, luego su diferencia no supera
+$m\cdot\operatorname{osc}_C(\phi)\le m \omega(\operatorname{diam}C)$. Sumando
+sobre la partición,</p>
+<div class="display"><span class="v" data-var="std">\begin{align*}
+  \left\lvert\int_X\phi\dd\varrho_n-\int_X\phi\dd\varrho\right\rvert
+  &amp;\le\sum_{i\in I_n}m_{i,n}\,\omega\big(\operatorname{diam}(C_{i,n})\big)\\
+  &amp;\le\omega\big(\operatorname{size}(G_n)\big)\sum_{i\in I_n}m_{i,n}
+   =\omega\big(\operatorname{size}(G_n)\big),
+\end{align*}</span><span class="v" data-var="fin">\begin{align*}
+  \abs{\varrho_n(\phi)-\varrho(\phi)}
+  &amp;\le\sum_{i\in I_n}m_{i,n}\,\omega\big(\operatorname{diam}(C_{i,n})\big)\\
+  &amp;\le\omega\big(\operatorname{size}(G_n)\big)\sum_{i\in I_n}m_{i,n}
+   =\omega\big(\operatorname{size}(G_n)\big),
+\end{align*}</span></div>
+<p>que tiende a $0$ porque $\phi$ es uniformemente continua sobre un compacto. Esto
+vale para toda $\phi\in C(X)$, que es la convergencia débil.</p></div>
+<div class="stmt teorema" id="transporte-optimo-x68"><div class="head">Teorema 1.32</div><div class="body"><p>Sobre un compacto $\Omega\subset\R^{d}$, y si $\mu$ no tiene átomos, el conjunto
+de los planes $\gamma_T$ inducidos por una aplicación es denso en
+$\Adm(\mu,\nu)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p19">Ver demostración</button><div class="proof" id="transporte-optimo-p19"><p>Fije $n$ y una partición de $\Omega$ en conjuntos $K_{i,n}$ de diámetro menor que
+$1/(2n)$, por ejemplo cubos pequeños. Los productos
+$C_{i,j,n}:=K_{i,n}\times K_{j,n}$ forman una partición de $\Omega\times\Omega$
+de tamaño menor que $1/n$.</p>
+<p>Tome $\gamma\in\Adm(\mu,\nu)$. Por el Lema 1.31 basta construir una aplicación
+$T$ que lleve $\mu$ sobre $\nu$ y tal que $\gamma_T$ dé a cada $C_{i,j,n}$ la
+misma masa que $\gamma$. Defina para ello las <em>columnas</em>
+$\operatorname{Col}_{i,n}:=K_{i,n}\times\Omega$, llame $\gamma_{i,n}$ a la
+restricción de $\gamma$ a la columna y $\mu_{i,n},\nu_{i,n}$ a sus marginales.
+Para cada $i$ hay una aplicación $T_{i,n}$ que envía $\mu_{i,n}$ sobre
+$\nu_{i,n}$: la da el Corolario 1.29, porque $\mu_{i,n}\le\mu$ y esas medidas son
+por tanto sin átomos. Como las $\mu_{i,n}$ están concentradas sobre conjuntos
+disjuntos, pegando las $T_{i,n}$ se obtiene una sola $T$, y de
+$\sum_i\mu_{i,n}=\mu$ y $\sum_i\nu_{i,n}=\nu$ se sigue $T\pushf\mu=\nu$.</p>
+<p>Queda comprobar las masas, y es directo. La masa que $\gamma_T$ da a $C_{i,j,n}$
+es la que le da $\gamma_{T_{i,n}}$, y</p>
+<div class="display">\begin{align*}
+  \gamma_{T_{i,n}}(C_{i,j,n})
+  &amp;=\mu_{i,n}\big(\{x\in K_{i,n}:T_{i,n}(x)\in K_{j,n}\}\big)
+   =\mu_{i,n}\big(\{x:T_{i,n}(x)\in K_{j,n}\}\big)\\
+  &amp;=\nu_{i,n}(K_{j,n})=\gamma(K_{i,n}\times K_{j,n}).
+\end{align*}</div>
+<p>Una sola aplicación por columna basta, sin necesidad de refinar más.</p></div>
+<div class="stmt teorema" id="transporte-optimo-x69"><div class="head">Teorema 1.33</div><div class="body"><p>Bajo las hipótesis anteriores, $K$ es la relajación de $J$. En particular
+$\inf J=\min K$, y los problemas de Monge y de Kantorovich tienen el mismo
+ínfimo.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p20">Ver demostración</button><div class="proof" id="transporte-optimo-p20"><p>Siendo $K$ continua es l.s.c., y de $K\le J$ se sigue que $K$ es menor o igual
+que la relajación de $J$. Falta ver que para cada $\gamma$ existe una sucesión de
+aplicaciones $T_n$ con $\gamma_{T_n}\rightharpoonup\gamma$ y
+$J(\gamma_{T_n})\to K(\gamma)$, porque entonces el ínfimo de la caracterización
+secuencial de $\bar J$ es menor o igual que $K(\gamma)$ y se tiene la igualdad.
+Ahora bien, sobre los planes de la forma $\gamma_{T_n}$ los dos funcionales
+coinciden, y $K$ es continua, así que basta con producir una sucesión $T_n$ tal
+que $\gamma_{T_n}\rightharpoonup\gamma$. Eso es el Teorema 1.32.</p></div>
+<p>La igualdad de los dos ínfimos ya se había observado en el segundo contraejemplo
+de §1.4, donde el ínfimo entre aplicaciones valía $1$ y el mínimo entre planes
+también, alcanzado por un plan que no proviene de ninguna aplicación. El Teorema
+1.33 dice que aquello no era un accidente.</p></section>
+<section class="capitulo"><h2 id="transporte-optimo-x70" data-toc="1.6 Convexidad, c-concavidad, monotonía cíclica, dualidad y optimalidad">1.6 Convexidad, $c$-concavidad, monotonía cíclica, dualidad y
+         optimalidad</h2>
+<p>Esta sección paga la deuda contraída en §1.2, donde la dualidad se usó sin
+demostrarla, y de paso caracteriza los planes óptimos por una propiedad
+geométrica de su soporte. El camino pasa por comparar las funciones $c$-cóncavas
+con las convexas.</p>
+<h3 id="transporte-optimo-x71">1.6.1 Funciones convexas y $c$-cóncavas</h3>
+<!-- entorno omitido: conexion -->
+<p>Una función $f:\R^{d}\to\R\cup\{+\infty\}$ es <span class="df">convexa</span> si
+$f((1-t)x+ty)\le(1-t)f(x)+tf(y)$ para todos $x,y\in\R^{d}$ y $t\in[0,1]$. No hace
+falta ocuparse de las funciones convexas definidas sobre un subconjunto
+$\Omega\subset\R^{d}$, que para que la definición tenga sentido tendría que ser
+convexo, porque siempre se puede extender $f$ fuera de $\Omega$ poniéndola igual
+a $+\infty$, y la convexidad se conserva.
+<span class="src">[Recuadro 1.11]</span></p>
+<p>La familia es estable por supremos: si $f_\alpha$ son convexas, también lo es
+$f:=\sup_\alpha f_\alpha$, pues de
+$f_\alpha((1-t)x+ty)\le(1-t)f_\alpha(x)+tf_\alpha(y)\le(1-t)f(x)+tf(y)$ se pasa al
+supremo en $\alpha$. También se ve con epigrafos, notando que una función es
+convexa exactamente cuando su epigrafo lo es, y que una intersección de convexos
+es convexa.</p>
+<p>Las funciones convexas con valores reales sobre $\R^{d}$ son automáticamente
+continuas y localmente Lipschitz, y en general lo son en el interior de su
+dominio $\{f&lt;+\infty\}$. Sobre la frontera entre $\{f&lt;+\infty\}$ y
+$\{f=+\infty\}$ puede haber discontinuidades, y esa es la razón de que
+habitualmente se pida al menos semicontinuidad inferior.</p>
+<div class="stmt teorema" id="transporte-optimo-x72"><div class="head">Teorema</div><div class="body"><p>Una función $f:\R^{d}\to\R\cup\{+\infty\}$ es convexa y l.s.c.\ si y solo si
+existe una familia de funciones afines $f_\alpha$ con $f=\sup_\alpha f_\alpha$.
+La familia se puede tomar igual a la de <em>todas</em> las funciones afines
+menores que $f$.</p></div></div>
+<p>Una implicación es inmediata, porque afín implica convexa y el supremo de
+convexas es convexa. La otra tiene detrás la imagen de que el epigrafo de una
+función convexa y l.s.c.\ es un convexo cerrado de $\R^{d}\times\R$ y se escribe
+como intersección de los semiespacios que lo contienen; una demostración precisa
+usa el teorema de Hahn--Banach en su forma geométrica.</p>
+<p>La conjugada de Fenchel se definió en §1.3. Conviene tener a mano un ejemplo: la
+transformada de Legendre de $x\mapsto\tfrac1p\abs{x}^{p}$ es
+$x\mapsto\tfrac1q\abs{x}^{q}$, donde $\tfrac1p+\tfrac1q=1$.
+<span class="src">[Recuadro 1.12]</span></p>
+<p>Del teorema anterior sale una lectura de Fenchel--Moreau que se usará enseguida:
+una función es convexa y l.s.c.\ si y solo si es la conjugada de alguna función,
+porque la clase de las transformadas de Legendre coincide exactamente con la de
+los supremos de funciones afines. Para convencerse de que todo supremo de afines
+es una conjugada, escriba $f(y)=\sup_\alpha\ip{x_\alpha}{y}+b_\alpha$ y defina,
+para cada vector $x$,</p>
+<div class="display">\[
+  g(x)=-\sup\{b_\alpha: x_\alpha=x\},
+\]</div>
+<p>con $g(x)=+\infty$ si ningún $\alpha$ cumple $x_\alpha=x$. Entonces
+$g^{*}(y)=\sup_x\ip{x}{y}-g(x)=\sup_\alpha\ip{x_\alpha}{y}+b_\alpha=f(y)$.</p>
+<p>Del subdiferencial, definido también en §1.3, quedan por recoger tres hechos.
+El primero es que $\partial f(x)$ nunca es vacío si $x$ está en el interior
+relativo de $\dom f$, y en particular si está en el interior de $\{f&lt;+\infty\}$.
+El segundo, que en todo punto donde $f$ es diferenciable el subdiferencial se
+reduce al conjunto unitario $\{\nabla f(x)\}$. El tercero es la monotonía: si
+$p_1\in\partial f(x_1)$ y $p_2\in\partial f(x_2)$, entonces
+$\ip{p_1-p_2}{x_1-x_2}\ge0$, sin más que sumar las dos desigualdades de
+subgradiente cruzadas.</p>
+<p>La convexidad estricta se lee en el subdiferencial, y la lectura es simétrica
+bajo conjugación.</p>
+<div class="stmt proposicion" id="transporte-optimo-x73"><div class="head">Proposición</div><div class="body"><p>Sea $f$ propia, convexa y l.s.c. Entonces $\partial f$ es inyectivo si y solo si
+$f$ es estrictamente convexa sobre $\dom f$; y $\partial f$ es univaluado si y
+solo si $f^{*}$ es estrictamente convexa sobre $\dom f^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p21">Ver demostración</button><div class="proof" id="transporte-optimo-p21"><p>Que la convexidad estricta implica la inyectividad es el lema de inversión de
+§1.3. Recíprocamente, suponga que $f$ no es estrictamente convexa: hay entonces
+$z_1\neq z_2$ en $\dom f$ sobre cuyo segmento $f$ es afín. Tome $z$ en el
+interior de ese segmento, donde el subdiferencial no es vacío, y
+$w\in\partial f(z)$. Restringidas al segmento, la función $f$ y la minorante afín
+$y\mapsto f(z)+\ip{w}{y-z}$ son las dos afines, la primera domina a la segunda y
+las dos coinciden en un punto interior; luego coinciden en todo el segmento, y en
+particular $w\in\partial f(z_1)\cap\partial f(z_2)$. Así $\partial f$ no es
+inyectivo.</p>
+<p>La segunda equivalencia es la primera leída a través de
+$(\partial f)^{-1}=\partial f^{*}$, que es la saturación de Fenchel--Young:
+$\partial f$ es univaluado exactamente cuando $\partial f^{*}$ es inyectivo, y
+eso ocurre exactamente cuando $f^{*}$ es estrictamente convexa.</p></div>
+<p>De ahí sale la formulación habitual, $f$ es de clase $C^{1}$ si y solo si $f^{*}$
+es estrictamente convexa, porque una función convexa finita es diferenciable
+exactamente en los puntos donde su subdiferencial se reduce a un punto. Y de ahí
+también que para $h$ estrictamente convexa el operador $\partial h$, que es
+multivaluado, se pueda invertir con inversa univaluada, que es lo que el Teorema
+1.17 usa en lugar de $(\nabla h)^{-1}$.</p>
+<p>Todo esto tiene su análogo $c$-cóncavo, y la distinción entre $c$-cóncava y
+$\bar c$-cóncava carece de contenido en el caso simétrico. Las funciones
+$c$-cóncavas se definieron como la $\bar c$-transformada de algo, de modo que,
+salvo el cambio de signo, la $c$-concavidad se definió exactamente como una
+generalización de la convexidad. Se admite el valor $+\infty$ para las convexas y
+$-\infty$ para las cóncavas y $c$-cóncavas, con la excepción de la convexa
+idénticamente $+\infty$ y de la $c$-cóncava idénticamente $-\infty$.</p>
+<p>En lugar de probar $f^{**}=f$ conviene probar el enunciado más general que le
+corresponde a las funciones $c$-cóncavas.</p>
+<div class="stmt proposicion" id="transporte-optimo-x74"><div class="head">Proposición 1.34</div><div class="body"><p>Suponga que $c$ toma valores reales. Para toda $\varphi:X\to\R\cup\{-\infty\}$ se
+tiene $\varphi^{c\bar c}\ge\varphi$, con igualdad si y solo si $\varphi$ es
+$c$-cóncava; y en general $\varphi^{c\bar c}$ es la menor función $c$-cóncava
+mayor o igual que $\varphi$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p22">Ver demostración</button><div class="proof" id="transporte-optimo-p22"><p>Para la desigualdad, escriba</p>
+<div class="display">\[
+  \varphi^{c\bar c}(x)=\inf_y\, c(x,y)-\ccon{\varphi}(y)
+  =\inf_y\, c(x,y)-\inf_{x&#x27;}\big(c(x&#x27;,y)-\varphi(x&#x27;)\big).
+\]</div>
+<p>Como $\inf_{x&#x27;}(c(x&#x27;,y)-\varphi(x&#x27;))\le c(x,y)-\varphi(x)$, queda
+$\varphi^{c\bar c}(x)\ge\inf_y c(x,y)-c(x,y)+\varphi(x)=\varphi(x)$. El mismo
+cálculo da $\zeta^{\bar cc}\ge\zeta$ para toda $\zeta:Y\to\R\cup\{-\infty\}$.</p>
+<p>Si $\varphi$ es $c$-cóncava, escríbala como $\varphi=\zeta^{\bar c}$. Entonces</p>
+<div class="display">\[
+  \varphi=\zeta^{\bar c}
+  \;\Rightarrow\;\ccon{\varphi}=\zeta^{\bar cc}\ge\zeta
+  \;\Rightarrow\;\varphi^{c\bar c}\le\zeta^{\bar c}=\varphi,
+\]</div>
+<p>donde la última implicación usa que las transformadas invierten las
+desigualdades entre funciones, por el signo menos de su definición. Junto con la
+primera parte, $\varphi^{c\bar c}=\varphi$.</p>
+<p>Para la minimalidad, tome $\tilde\varphi=g^{\bar c}$ una función $c$-cóncava
+cualquiera con $\tilde\varphi\ge\varphi$. Entonces</p>
+<div class="display">\[
+  g^{\bar c}\ge\varphi
+  \;\Rightarrow\;g^{\bar cc}\le\ccon{\varphi}
+  \;\Rightarrow\;g\le\ccon{\varphi}
+  \;\Rightarrow\;\tilde\varphi=g^{\bar c}\ge\varphi^{c\bar c},
+\]</div>
+<p>donde el paso central usa $g^{\bar cc}\ge g$.</p></div>
+<p>El resultado es fácil precisamente porque las funciones $c$-cóncavas se
+<em>definen</em> como $c$-transformadas de algo, mientras que las convexas se
+definen por la desigualdad de convexidad y no como supremos de afines. Esa es la
+razón de que el teorema correspondiente para funciones convexas necesite
+Hahn--Banach.</p>
+<div class="stmt corolario" id="transporte-optimo-x75"><div class="head">Corolario</div><div class="body"><p>Para toda $\varphi$ se tiene $\varphi^{c\bar cc}=\ccon{\varphi}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p23">Ver demostración</button><div class="proof" id="transporte-optimo-p23"><p>De $\varphi^{c\bar c}\ge\varphi$ sale $\varphi^{c\bar cc}\le\ccon{\varphi}$. Y
+$\ccon{\varphi}$ es $\bar c$-cóncava, luego la proposición aplicada en $Y$ da
+$(\ccon{\varphi})^{\bar cc}=\ccon{\varphi}$, que es la otra desigualdad.</p></div>
+<p>Esta es la identidad anunciada en §1.2: la mejora de una pareja admisible
+mediante $(\varphi,\psi)\mapsto(\varphi,\ccon{\varphi})\mapsto
+(\varphi^{c\bar c},\ccon{\varphi})$ se agota en dos pasos. En el caso discreto es
+un hecho de interés algorítmico, porque invita a iterar la alternancia de
+transformadas para mejorar el potencial y la alternancia se estanca de
+inmediato.
+<span class="src">[Peyré--Cuturi, Proposición 3.1(iii)]</span></p>
+<p>Villani lleva la comparación entre las dos clases un paso más lejos, hacia una
+condición diferencial. Si $c$ es de clase $C^{1,1}_{\mathrm{loc}}$, estrictamente
+convexo y superlineal, toda función $c$-cóncava $\varphi$ es semicóncava y
+satisface, en casi todo punto,</p>
+<div class="display">\[
+  D^{2}\varphi(x)\le D^{2}c\big(x-y\big),
+  \qquad y=x-\nabla c^{*}(\nabla\varphi(x)),
+\]</div>
+<p>que para el coste cuadrático $c(z)=\tfrac12\abs{z}^{2}$ se reduce a
+$D^{2}\varphi\le I_d$. <span class="src">[Villani, ec. (2.80) y Observación 2.56]</span></p>
+<p>Queda un último concepto sobre funciones convexas, que después se traduce al
+marco $c$-cóncavo. Defina la gráfica del subdiferencial de una función convexa
+como</p>
+<div class="display">\[
+  \gra(\partial f):=\{(x,p):p\in\partial f(x)\}
+  =\{(x,p):f(x)+f^{*}(p)=\ip{x}{p}\},
+\]</div>
+<p>donde la segunda igualdad es la saturación de Fenchel--Young de §1.3. Ya se sabe
+que esa gráfica es monótona, es decir que $(x_i,p_i)\in\gra(\partial f)$ para
+$i=1,2$ implica $\ip{p_2-p_1}{x_2-x_1}\ge0$.</p>
+<p>El recíproco falla. Tome $R$ el giro de $90^{\circ}$ en $\R^{2}$ y el conjunto
+$A=\{(x,Rx):x\in\R^{2}\}$. Cumple la desigualdad de monotonía, y con holgura,
+porque $\ip{Rx_1-Rx_2}{x_1-x_2}=\ip{R(x_1-x_2)}{x_1-x_2}=0$ para todos $x_1,x_2$.
+Sin embargo $x\mapsto Rx$ no es el gradiente de ninguna función, convexa o no: la
+jacobiana de un gradiente es simétrica y la de esta aplicación es $R$, que es
+antisimétrica y no nula. Tampoco $A$ está contenido en la gráfica del
+subdiferencial de ninguna función convexa, y para verlo basta un ciclo de tres
+puntos, como se comprueba más abajo.</p>
+<p>La monotonía no alcanza pues para caracterizar gradientes y subdiferenciales de
+funciones convexas. Con más precisión: un campo de gradientes que sea monótono sí
+es el gradiente de una función convexa, pero la monotonía por sí sola no produce
+la función.</p>
+<!-- entorno omitido: intuicion -->
+<div class="stmt definicion" id="transporte-optimo-x76"><div class="head">Definición 1.35</div><div class="body"><p>Un conjunto $A\subset\R^{d}\times\R^{d}$ es <span class="df">cíclicamente monótono</span> si para
+todo $k\in\N$, toda permutación $\sigma$ y toda familia finita de puntos
+$(x_1,p_1),\dots,(x_k,p_k)\in A$ se tiene</p>
+<div class="display">\[
+  \sum_{i=1}^{k}\ip{x_i}{p_i}\ \ge\ \sum_{i=1}^{k}\ip{x_i}{p_{\sigma(i)}}.
+\]</div></div></div>
+<p>La palabra «cíclicamente» viene de que toda permutación se descompone como
+composición disjunta de ciclos, de modo que basta comprobar la propiedad para
+permutaciones cíclicas, es decir con $\sum_i\ip{x_i}{p_{i+1}}$ en lugar de
+$\sum_i\ip{x_i}{p_{\sigma(i)}}$ y el convenio $p_{k+1}=p_1$. Con $k=2$ se
+recupera la monotonía de siempre, porque</p>
+<div class="display">\[
+  \ip{x_1}{p_1}+\ip{x_2}{p_2}\ge\ip{x_1}{p_2}+\ip{x_2}{p_1}
+  \iff \ip{p_1-p_2}{x_1-x_2}\ge0 .
+\]</div>
+<p>El giro de antes no supera la prueba con tres puntos. Tome $x_1=(1,0)$,
+$x_2=(0,1)$, $x_3=(-1,0)$ y $p_i=Rx_i$, es decir $p_1=(0,1)$, $p_2=(-1,0)$ y
+$p_3=(0,-1)$. El lado izquierdo vale $0$, porque $\ip{x}{Rx}=0$ siempre. Con la
+permutación $\sigma(1)=3$, $\sigma(2)=1$, $\sigma(3)=2$, el lado derecho vale
+$\ip{x_1}{p_3}+\ip{x_2}{p_1}+\ip{x_3}{p_2}=0+1+1=2$, y la desigualdad falla.</p>
+<div class="stmt teorema" id="transporte-optimo-x77"><div class="head">Teorema (Rockafellar)</div><div class="body"><p>Todo conjunto cíclicamente monótono está contenido en la gráfica del
+subdiferencial de una función convexa.</p></div></div>
+<p>No se demuestra aquí porque se obtendrá como caso particular del Teorema 1.37,
+que es su versión $c$-cóncava. Villani da la versión completa con una prueba
+elemental y añade la mitad que aquí no se enuncia: los conjuntos cíclicamente
+monótonos maximales para la inclusión son exactamente los subdiferenciales de
+funciones convexas propias y l.s.c., y una función convexa l.s.c.\ queda
+determinada por su subdiferencial salvo constante aditiva.
+<span class="src">[Villani, Teorema 2.27 y Observación 2.28]</span></p>
+<h3 id="transporte-optimo-x78">1.6.2 $c$-monotonía cíclica y dualidad</h3>
+<div class="stmt definicion" id="transporte-optimo-x79"><div class="head">Definición 1.36</div><div class="body"><p>Dada $c:X\times Y\to\R\cup\{+\infty\}$, un conjunto $\Gamma\subset X\times Y$ es
+<span class="df">$c$-cíclicamente monótono</span>, abreviado <span class="df">$c$-CM</span>, si para todo $k\in\N$,
+toda permutación $\sigma$ y toda familia finita de puntos
+$(x_1,y_1),\dots,(x_k,y_k)\in\Gamma$ se tiene</p>
+<div class="display">\[
+  \sum_{i=1}^{k}c(x_i,y_i)\ \le\ \sum_{i=1}^{k}c(x_i,y_{\sigma(i)}).
+\]</div></div></div>
+<p>Igual que en el caso convexo, basta atender a las permutaciones cíclicas. La
+palabra «monótono» es un residuo del caso $c(x,y)=-\ip{x}{y}$, que es el que
+recupera la Definición 1.35.</p>
+<div class="stmt observacion" id="transporte-optimo-x80"><div class="head">Observación</div><div class="body"><p>En el caso discreto la condición no es una pista sino la definición misma de
+optimalidad. Para $x_1,\dots,x_N$ e $y_1,\dots,y_N$ en $\R^{n}$, con
+$\mu=\tfrac1N\sum_i\delta_{x_i}$, $\nu=\tfrac1N\sum_j\delta_{y_j}$ y
+$\gamma=\tfrac1N\sum_i\delta_{(x_i,y_i)}$, el plan $\gamma$ es óptimo para el
+coste cuadrático si y solo si
+$\sum_i\abs{x_i-y_i}^{2}\le\sum_i\abs{x_i-y_{\sigma(i)}}^{2}$ para toda
+permutación $\sigma$, y eso equivale a la condición sobre ciclos. La prueba usa
+Birkhoff y Krein--Milman para escribir cualquier plan como promedio de
+permutaciones, que es el argumento ya visto en §1.1.
+<span class="src">[Villani, Ejercicio 2.21]</span></p></div></div>
+<p>El teorema siguiente generaliza el de Rockafellar y es la pieza sobre la que se
+apoya el resto de la sección.</p>
+<div class="stmt teorema" id="transporte-optimo-x81"><div class="head">Teorema 1.37</div><div class="body"><p>Si $\Gamma\neq\emptyset$ es un conjunto $c$-CM en $X\times Y$ y
+$c:X\times Y\to\R$ no toma el valor $+\infty$, entonces existe una función
+$c$-cóncava $\varphi:X\to\R\cup\{-\infty\}$, distinta de la constante $-\infty$,
+tal que</p>
+<div class="display">\[
+  \Gamma\subset\{(x,y)\in X\times Y:\varphi(x)+\ccon{\varphi}(y)=c(x,y)\}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p24">Ver demostración</button><div class="proof" id="transporte-optimo-p24"><p>La idea es dar una fórmula explícita para $\varphi$ y comprobar sobre ella las
+tres cosas que se piden: que está bien definida, que es $c$-cóncava y que satura
+la restricción sobre $\Gamma$.</p>
+<p>Fije $(x_0,y_0)\in\Gamma$ y defina, para $x\in X$,</p>
+<div class="display">\begin{align*}
+  \varphi(x)=\inf\big\{\,&amp;c(x,y_n)-c(x_n,y_n)+c(x_n,y_{n-1})-c(x_{n-1},y_{n-1})
+    +\dots\\
+  &amp;+c(x_1,y_0)-c(x_0,y_0)\;:\;n\in\N,\ (x_i,y_i)\in\Gamma
+    \text{ para todo }i=1,\dots,n\big\}.
+\end{align*}</div>
+<p>Como $c$ toma valores reales y $\Gamma$ no es vacío, $\varphi$ nunca vale
+$+\infty$. Defina además, para $y\in Y$,</p>
+<div class="display">\begin{align*}
+  -\psi(y)=\inf\big\{\,&amp;-c(x_n,y)+c(x_n,y_{n-1})-c(x_{n-1},y_{n-1})+\dots
+    +c(x_1,y_0)\\
+  &amp;-c(x_0,y_0)\;:\;n\in\N,\ (x_i,y_i)\in\Gamma,\ y_n=y\big\}.
+\end{align*}</div>
+<p>De la definición se ve que $\psi(y)&gt;-\infty$ si y solo si $y\in\pi_y(\Gamma)$. Y
+por construcción $\varphi=\psi^{\bar c}$: en efecto, $c(x,y)-\psi(y)$ es el
+ínfimo de las mismas cadenas con $y_n=y$, y tomando además el ínfimo en $y$ se
+recupera $\varphi(x)$. Esto prueba que $\varphi$ es $c$-cóncava.</p>
+<p>Que $\varphi$ no es la constante $-\infty$ se ve en $\varphi(x_0)\ge0$. Tomando
+$x=x_0$ y cualquier cadena $(x_i,y_i)\in\Gamma$, y escribiendo $x_{n+1}=x_0$, la
+expresión que aparece dentro del ínfimo es</p>
+<div class="display">\[
+  \sum_{i=0}^{n}c(x_{i+1},y_i)-\sum_{i=0}^{n}c(x_i,y_i),
+\]</div>
+<p>y la $c$-monotonía cíclica de $\Gamma$, aplicada a los puntos
+$(x_0,y_0),\dots,(x_n,y_n)$ con la permutación que manda $i$ en $i-1$, dice
+justamente que esa diferencia es no negativa.</p>
+<p>Falta la saturación. La desigualdad $\varphi(x)+\ccon{\varphi}(y)\le c(x,y)$ vale
+siempre por definición de $c$-transformada, así que basta la contraria sobre
+$\Gamma$. Además $\ccon{\varphi}=\psi^{\bar cc}\ge\psi$, luego basta comprobar
+$\varphi(x)+\psi(y)\ge c(x,y)$.</p>
+<p>Tome $(x,y)\in\Gamma$ y $\varepsilon&gt;0$. De $\varphi=\psi^{\bar c}$ se obtiene un
+punto $\bar y\in\pi_y(\Gamma)$ con $c(x,\bar y)-\psi(\bar y)&lt;\varphi(x)+\varepsilon$;
+en particular $\psi(\bar y)\neq\pm\infty$. De la definición de $\psi$ sale</p>
+<div class="display">\[
+  -\psi(y)\le-c(x,y)+c(x,\bar y)-\psi(\bar y),
+\]</div>
+<p>porque toda cadena que termine en $\bar y$ se puede prolongar añadiéndole el
+punto $(x,y)\in\Gamma$, y la prolongación aporta exactamente los dos términos
+$-c(x,y)+c(x,\bar y)$. Juntando las dos desigualdades,</p>
+<div class="display">\[
+  -\psi(y)\le-c(x,y)+c(x,\bar y)-\psi(\bar y)&lt;-c(x,y)+\varphi(x)+\varepsilon,
+\]</div>
+<p>y siendo $\varepsilon$ arbitrario queda $c(x,y)\le\varphi(x)+\psi(y)$.</p></div>
+<p>La medibilidad de $\varphi$ no se ha discutido porque su $c$-concavidad la da de
+inmediato, al ser entonces continua; eso descansa en que $c$ sea uniformemente
+continua, y en el caso general la medibilidad y la integrabilidad son más
+delicadas.</p>
+<div class="stmt teorema" id="transporte-optimo-x82"><div class="head">Teorema 1.38</div><div class="body"><p>Si $\gamma$ es un plan de transporte óptimo para el coste $c$ y $c$ es continua,
+entonces $\spt(\gamma)$ es un conjunto $c$-CM.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p25">Ver demostración</button><div class="proof" id="transporte-optimo-p25"><p>Suponga lo contrario: hay $k$, una permutación $\sigma$ y puntos
+$(x_1,y_1)$, \dots, $(x_k,y_k)$ en $\spt(\gamma)$ tales que</p>
+<div class="display">\[
+  \sum_{i=1}^{k}c(x_i,y_i)&gt;\sum_{i=1}^{k}c(x_i,y_{\sigma(i)}).
+\]</div>
+<p>La idea es fabricar con ellos un competidor mejor, moviendo un poco de masa de
+cada $(x_i,y_i)$ hacia $(x_i,y_{\sigma(i)})$ sin tocar las marginales.</p>
+<p>Tome $\varepsilon&lt;\tfrac1{2k}\big(\sum_i c(x_i,y_i)-\sum_i c(x_i,y_{\sigma(i)})\big)$.
+Por continuidad de $c$ existe $r$ tal que, para todo $i$,</p>
+<div class="display">\[
+  (x,y)\in B(x_i,r)\times B(y_i,r)\Rightarrow c(x,y)&gt;c(x_i,y_i)-\varepsilon,
+\]</div>
+<div class="display">\[
+  (x,y)\in B(x_i,r)\times B(y_{\sigma(i)},r)
+    \Rightarrow c(x,y)&lt;c(x_i,y_{\sigma(i)})+\varepsilon.
+\]</div>
+<p>Ponga $V_i:=B(x_i,r)\times B(y_i,r)$, que cumple $\gamma(V_i)&gt;0$ por ser
+$(x_i,y_i)\in\spt(\gamma)$, y defina las probabilidades
+$\gamma_i:=\gamma\llcorner V_i/\gamma(V_i)$ con marginales $\mu_i$ y $\nu_i$.
+Tome $\varepsilon_0&lt;\tfrac1k\min_i\gamma(V_i)$ y, para cada $i$, un plan
+$\tilde\gamma_i\in\Adm(\mu_i,\nu_{\sigma(i)})$ cualquiera, por ejemplo
+$\mu_i\otimes\nu_{\sigma(i)}$. El competidor es</p>
+<div class="display">\[
+  \tilde\gamma:=\gamma-\varepsilon_0\sum_{i=1}^{k}\gamma_i
+    +\varepsilon_0\sum_{i=1}^{k}\tilde\gamma_i .
+\]</div>
+<p>Es una medida positiva: basta que lo sea $\gamma-\varepsilon_0\sum_i\gamma_i$, y
+como $\varepsilon_0\gamma_i=(\varepsilon_0/\gamma(V_i)) \gamma\llcorner V_i$ con
+$\varepsilon_0/\gamma(V_i)\le\tfrac1k$, cada sumando está dominado por
+$\tfrac1k\gamma$ y la suma de los $k$ por $\gamma$.</p>
+<p>Tiene las marginales correctas:</p>
+<div class="display">\begin{align*}
+  (\pi_x)\pushf\tilde\gamma
+    &amp;=\mu-\varepsilon_0\sum_i\mu_i+\varepsilon_0\sum_i\mu_i=\mu,\\
+  (\pi_y)\pushf\tilde\gamma
+    &amp;=\nu-\varepsilon_0\sum_i\nu_i+\varepsilon_0\sum_i\nu_{\sigma(i)}=\nu,
+\end{align*}</div>
+<p>la segunda porque $\sigma$ es una permutación y las dos sumas recorren los mismos
+sumandos.</p>
+<p>Y cuesta menos. Usando que $\gamma_i$ está concentrada en
+$B(x_i,r)\times B(y_i,r)$, que $\tilde\gamma_i$ lo está en
+$B(x_i,r)\times B(y_{\sigma(i)},r)$ y que ambas tienen masa uno,</p>
+<div class="display"><span class="v" data-var="std">\[
+  \int c\dd\gamma-\int c\dd\tilde\gamma
+  \ \ge\ \varepsilon_0\Big(\sum_i c(x_i,y_i)-\sum_i c(x_i,y_{\sigma(i)})
+    -2k\varepsilon\Big)&gt;0
+\]</span><span class="v" data-var="fin">\[
+  \gamma(c)-\tilde\gamma(c)
+  \ \ge\ \varepsilon_0\Big(\sum_i c(x_i,y_i)-\sum_i c(x_i,y_{\sigma(i)})
+    -2k\varepsilon\Big)&gt;0
+\]</span></div>
+<p>por la elección de $\varepsilon$. Esto contradice la optimalidad de $\gamma$.</p></div>
+<p>Juntando los dos teoremas anteriores se obtiene la dualidad que se debía desde
+§1.2. Conviene decir que este es solo uno de los caminos posibles: se prueba la
+dualidad a través de la monotonía cíclica, y también se puede hacer al revés,
+probando primero la dualidad como en §1.6.3 y deduciendo después la monotonía
+cíclica con argumentos como los del Teorema 1.42.</p>
+<div class="stmt teorema" id="transporte-optimo-x83"><div class="head">Teorema 1.39</div><div class="body"><p>Suponga que $X$ e $Y$ son espacios polacos y que $c:X\times Y\to\R$ es
+uniformemente continua y acotada. Entonces $(\mathrm{DP})$ admite una solución
+$(\varphi,\ccon{\varphi})$ y se tiene $\max(\mathrm{DP})=\min(\mathrm{KP})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p26">Ver demostración</button><div class="proof" id="transporte-optimo-p26"><p>Siendo $c$ continua, $(\mathrm{KP})$ admite una solución $\gamma$, y por el
+Teorema 1.38 su soporte $\Gamma$ es $c$-cíclicamente monótono. Como $c$ toma
+valores reales, el Teorema 1.37 da una función $c$-cóncava $\varphi$ con</p>
+<div class="display">\[
+  \Gamma\subset\{(x,y):\varphi(x)+\ccon{\varphi}(y)=c(x,y)\}.
+\]</div>
+<p>De su $c$-concavidad, y de la $\bar c$-concavidad de $\ccon{\varphi}$, las dos son
+continuas. Además, de $\ccon{\varphi}(y)=\inf_x c(x,y)-\varphi(x)$ y de la
+acotación de $c$ sale una cota superior para $\ccon{\varphi}$, que se convierte en
+una cota inferior para $\varphi$; simétricamente se obtienen una cota superior
+para $\varphi$ y una inferior para $\ccon{\varphi}$. Las dos son pues continuas y
+acotadas, y por tanto admisibles en $(\mathrm{DP})$.</p>
+<p>Ahora bien,</p>
+<div class="display"><span class="v" data-var="std">\[\int_X\varphi\dd\mu+\int_Y\ccon{\varphi}\dd\nu
+  =\int_{X\times Y}\big(\varphi(x)+\ccon{\varphi}(y)\big)\dd\gamma
+  =\int_{X\times Y}c(x,y)\dd\gamma,\]</span><span class="v" data-var="fin">\[\mu(\varphi)+\nu(\ccon{\varphi})=\gamma(\varphi\oplus\ccon{\varphi})=\gamma(c),\]</span></div>
+<p>donde la primera igualdad es la condición de marginales y la segunda
+que $\gamma$ está concentrada sobre $\Gamma$. Usando la optimalidad de $\gamma$,</p>
+<div class="display"><span class="v" data-var="std">\[
+  (\mathrm{DP})\ \ge\ \int\varphi\dd\mu+\int\ccon{\varphi}\dd\nu
+  =\int c\dd\gamma=(\mathrm{KP}),
+\]</span><span class="v" data-var="fin">\[
+  (\mathrm{DP})\ \ge\ \mu(\varphi)+\nu(\ccon{\varphi})
+  =\gamma(c)=(\mathrm{KP}),
+\]</span></div>
+<p>y con la desigualdad $(\mathrm{DP})\le(\mathrm{KP})$, ya conocida, queda la
+igualdad. De paso, la pareja $(\varphi,\ccon{\varphi})$ resulta óptima.</p></div>
+<p>Quedan fuera del teorema anterior algunos casos que interesan. El primero es el
+cuadrático en $\R^{d}$, donde $c(x,y)=\tfrac12\abs{x-y}^{2}$ no es acotado ni
+uniformemente continuo. Es el enunciado que §1.3.1 usó por adelantado.</p>
+<div class="stmt teorema" id="transporte-optimo-x84"><div class="head">Teorema 1.40</div><div class="body"><p>Sean $\mu,\nu$ probabilidades sobre $\R^{d}$ con segundos momentos finitos y
+$c(x,y)=\tfrac12\abs{x-y}^{2}$. Considere la variante</p>
+<div class="display"><span class="v" data-var="std">\[(\mathrm{DP\text{-}var})\quad
+  \sup\left\{\int_{\R^{d}}\varphi\dd\mu+\int_{\R^{d}}\psi\dd\nu\;:\;
+  \varphi\in L^{1}(\mu),\ \psi\in L^{1}(\nu),\ \varphi\oplus\psi\le c\right\}.\]</span><span class="v" data-var="fin">\[(\mathrm{DP\text{-}var})\quad
+  \sup\big\{\mu(\varphi)+\nu(\psi)\;:\;
+  \varphi\in L^{1}(\mu),\ \psi\in L^{1}(\nu),\ \varphi\oplus\psi\le c\big\}.\]</span></div>
+<p>Entonces $(\mathrm{DP\text{-}var})$ admite una solución
+$(\varphi,\psi)$, las funciones $x\mapsto\tfrac12\abs{x}^{2}-\varphi(x)$ e
+$y\mapsto\tfrac12\abs{y}^{2}-\psi(y)$ son convexas y conjugadas entre sí para la
+transformada de Legendre, y $\max(\mathrm{DP\text{-}var})=\min(\mathrm{KP})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p27">Ver demostración</button><div class="proof" id="transporte-optimo-p27"><p>Las consideraciones del Teorema 1.39 dan una pareja $(\varphi,\psi)$ con
+$\varphi$ $c$-cóncava y $\psi=\ccon{\varphi}$ tal que
+$\varphi(x)+\ccon{\varphi}(y)=c(x,y)$ para todo $(x,y)$ en el soporte de un plan
+óptimo $\gamma$. De la Proposición 1.21 se deduce que
+$\tfrac12\abs{x}^{2}-\varphi(x)$ y $\tfrac12\abs{y}^{2}-\psi(y)$ son convexas y
+conjugadas entre sí.</p>
+<p>Falta la integrabilidad. Al ser convexa, propia y l.s.c., la función
+$\tfrac12\abs{x}^{2}-\varphi(x)$ está minorada por una función afín, luego
+$\varphi$ está mayorada por un polinomio de segundo grado, y la hipótesis sobre
+$\mu$ da $\varphi_+\in L^{1}(\mu)$. Lo mismo para $\psi_+\in L^{1}(\nu)$.
+Integrando $\varphi\oplus\psi$ respecto de $\gamma$,</p>
+<div class="display"><span class="v" data-var="std">\[\int_{\R^{d}}\varphi\dd\mu+\int_{\R^{d}}\psi\dd\nu
+  =\int_{\R^{d}\times\R^{d}}\varphi\oplus\psi\dd\gamma
+  =\int_{\R^{d}\times\R^{d}}c\dd\gamma\ \ge\ 0,\]</span><span class="v" data-var="fin">\[\mu(\varphi)+\nu(\psi)=\gamma(\varphi\oplus\psi)=\gamma(c)\ \ge\ 0,\]</span></div>
+<p>cantidad que es además finita. Como cada una de las dos integrales está
+bien definida en $[-\infty,+\infty[$ y su suma es finita, ninguna puede valer
+$-\infty$, de donde $\varphi\in L^{1}(\mu)$ y $\psi\in L^{1}(\nu)$. Se concluye
+como antes.</p></div>
+<p>La hipótesis de momentos es la de $\mu$ y $\nu$, y no la que la fuente escribe
+contra la medida de Lebesgue; vale aquí la misma advertencia hecha tras el
+Teorema 1.22.</p>
+<p>El segundo caso que falta es el de un coste que solo sea l.s.c. Se sabe que esa
+hipótesis basta para que exista un plan óptimo, y lo que se quiere ahora es la
+fórmula de dualidad</p>
+<div class="display"><span class="v" data-var="std">\begin{equation}\label{eq:dualcont}
+  \min(\mathrm{KP})=\sup\left\{
+    \int_X\varphi\dd\mu+\int_Y\psi\dd\nu
+    \;:\;\varphi\in C(X),\ \psi\in C(Y),\ \varphi\oplus\psi\le c\right\}.
+\end{equation}</span><span class="v" data-var="fin">\begin{equation}\label{eq:dualcont}
+  \min(\mathrm{KP})=\sup\left\{
+    \mu(\varphi)+\nu(\psi)
+    \;:\;\varphi\in C(X),\ \psi\in C(Y),\ \varphi\oplus\psi\le c\right\}.
+\end{equation}</span></div>
+<p>Hasta aquí está establecida para $c$ uniformemente continua y acotada, con
+existencia de pareja maximizante, y se sabe que una desigualdad vale siempre. La
+restricción a costes uniformemente continuos venía de querer garantizar la
+continuidad de las funciones $c$-cóncavas $\varphi(x)=\inf_y c(x,y)-\psi(y)$.</p>
+<p>Para tratar un coste $c$ l.s.c.\ y acotado inferiormente se usa que existe una
+sucesión $c_k$ de funciones continuas, cada una $k$-Lipschitz y acotada, que
+converge crecientemente a $c$.</p>
+<div class="stmt lema" id="transporte-optimo-x85"><div class="head">Lema 1.41</div><div class="body"><p>Suponga que $c_k$ y $c$ son l.s.c.\ y acotadas inferiormente y que $c_k$ converge
+crecientemente a $c$. Entonces</p>
+<div class="display"><span class="v" data-var="std">\[\lim_{k\to\infty}\min\left\{\int c_k\dd\gamma:\gamma\in\Adm(\mu,\nu)\right\}
+  =\min\left\{\int c\dd\gamma:\gamma\in\Adm(\mu,\nu)\right\}.\]</span><span class="v" data-var="fin">\[\lim_{k\to\infty}\min\{\gamma(c_k):\gamma\in\Adm(\mu,\nu)\}
+  =\min\{\gamma(c):\gamma\in\Adm(\mu,\nu)\}.\]</span></div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p28">Ver demostración</button><div class="proof" id="transporte-optimo-p28"><p>De $c_k\le c$ sale que el límite de la izquierda, que existe por monotonía, no
+supera la cantidad de la derecha. Para la otra desigualdad tome $\gamma_k$
+óptimo para el coste $c_k$; por ser $\Adm(\mu,\nu)$ tight se puede suponer, pasando
+a una subsucesión, que $\gamma_k\rightharpoonup\bar\gamma$. Fije un índice $j$.
+Para $k\ge j$ se tiene $c_k\ge c_j$, luego</p>
+<div class="display"><span class="v" data-var="std">\[
+  \lim_k\min\{\textstyle\int c_k\dd\gamma\}
+  =\lim_k\textstyle\int c_k\dd\gamma_k
+  \ \ge\ \liminf_k\textstyle\int c_j\dd\gamma_k
+  \ \ge\ \textstyle\int c_j\dd\bar\gamma,
+\]</span><span class="v" data-var="fin">\[
+  \lim_k\min\{\gamma(c_k)\}
+  =\lim_k\gamma_k(c_k)
+  \ \ge\ \liminf_k\gamma_k(c_j)
+  \ \ge\ \bar\gamma(c_j),
+\]</span></div>
+<p>la última por la semicontinuidad inferior del coste asociado a $c_j$, que es el
+Lema 1.6. Siendo $j$ arbitrario y valiendo
+<span class="v" data-var="std">$\lim_j\int c_j\dd\bar\gamma
+ =\int c\dd\bar\gamma$</span><span class="v" data-var="fin">$\lim_j\bar\gamma(c_j)
+ =\bar\gamma(c)$</span> por convergencia monótona, queda</p>
+<div class="display"><span class="v" data-var="std">\[
+  \lim_k\min\{\textstyle\int c_k\dd\gamma\}
+  \ \ge\ \textstyle\int c\dd\bar\gamma
+  \ \ge\ \min\{\textstyle\int c\dd\gamma\}.
+\]</span><span class="v" data-var="fin">\[
+  \lim_k\min\{\gamma(c_k)\}
+  \ \ge\ \bar\gamma(c)
+  \ \ge\ \min\{\gamma(c)\}.
+\]</span></div>
+<p>De paso, esto da la optimalidad de $\bar\gamma$ para el coste límite.</p></div>
+<div class="stmt teorema" id="transporte-optimo-x86"><div class="head">Teorema 1.42</div><div class="body"><p>Si $X,Y$ son espacios polacos y $c:X\times Y\to\R\cup\{+\infty\}$ es l.s.c.\ y
+acotada inferiormente, entonces vale la fórmula de dualidad
+$\min(\mathrm{KP})=\sup(\mathrm{DP})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p29">Ver demostración</button><div class="proof" id="transporte-optimo-p29"><p>Tome $c_k$ $k$-Lipschitz y acotadas, creciendo hacia $c$. Para cada una vale la
+dualidad del Teorema 1.39, luego</p>
+<div class="display"><span class="v" data-var="std">\begin{align*}
+  \min\{\textstyle\int c_k\dd\gamma:\gamma\in\Adm(\mu,\nu)\}
+  &amp;=\max\{\textstyle\int\varphi\dd\mu+\int\psi\dd\nu
+    :\varphi\oplus\psi\le c_k\}\\
+  &amp;\le\sup\{\textstyle\int\varphi\dd\mu+\int\psi\dd\nu
+    :\varphi\oplus\psi\le c\},
+\end{align*}</span><span class="v" data-var="fin">\begin{align*}
+  \min\{\gamma(c_k):\gamma\in\Adm(\mu,\nu)\}
+  &amp;=\max\{\mu(\varphi)+\nu(\psi)
+    :\varphi\oplus\psi\le c_k\}\\
+  &amp;\le\sup\{\mu(\varphi)+\nu(\psi)
+    :\varphi\oplus\psi\le c\},
+\end{align*}</span></div>
+<p>donde el máximo y el supremo se toman sobre funciones de $C_b$. La desigualdad se
+justifica porque $c_k\le c$, de modo que toda pareja admisible para $c_k$ lo es
+para $c$. Haciendo $k\to+\infty$ y usando el Lema 1.41 se concluye. Para el coste
+$c$ no se puede garantizar la existencia de una pareja maximizante.</p></div>
+<div class="stmt teorema" id="transporte-optimo-x87"><div class="head">Teorema 1.43</div><div class="body"><p>Si $c$ es l.s.c.\ y $\gamma$ es un plan de transporte óptimo, entonces $\gamma$
+está concentrada sobre un conjunto $c$-CM $\Gamma$, que en general no será
+cerrado.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p30">Ver demostración</button><div class="proof" id="transporte-optimo-p30"><p>Por el teorema anterior vale la fórmula de dualidad, así que tomando una sucesión
+maximizante $(\varphi_h,\psi_h)$ del problema dual,</p>
+<div class="display"><span class="v" data-var="std">\[
+  \int\big(\varphi_h(x)+\psi_h(y)\big)\dd\gamma
+       =\int\varphi_h\dd\mu+\int\psi_h\dd\nu\longrightarrow\int c\dd\gamma,
+\]</span><span class="v" data-var="fin">\[
+  \gamma(\varphi_h\oplus\psi_h)=\mu(\varphi_h)+\nu(\psi_h)
+       \longrightarrow\gamma(c),
+\]</span></div>
+<p>puesto que <span class="v" data-var="std">$\int c\dd\gamma$</span><span class="v" data-var="fin">$\gamma(c)$</span> es el mínimo del primal y también
+el máximo del dual. Las funciones $f_h:=c-\varphi_h\oplus\psi_h$ sobre
+$X\times Y$ son no negativas y su integral tiende a $0$, luego convergen a $0$ en
+$L^{1}(X\times Y,\gamma)$ y, pasando a una subsucesión que no se reetiqueta,
+también $\gamma$-a.e. Sea $\Gamma$ un conjunto con $\gamma(\Gamma)=1$ donde la
+convergencia puntual valga.</p>
+<p>Tome $k$, una permutación $\sigma$ y puntos $(x_1,y_1),\dots,(x_k,y_k)\in\Gamma$.
+Entonces</p>
+<div class="display">\[
+  \sum_{i=1}^{k}c(x_i,y_i)=\lim_h\sum_{i=1}^{k}\varphi_h(x_i)+\psi_h(y_i)
+  =\lim_h\sum_{i=1}^{k}\varphi_h(x_i)+\psi_h(y_{\sigma(i)})
+  \le\sum_{i=1}^{k}c(x_i,y_{\sigma(i)}),
+\]</div>
+<p>donde la igualdad central es un simple reordenamiento de la suma y la desigualdad
+final es la restricción del dual. Esto prueba que $\Gamma$ es $c$-CM.</p></div>
+<div class="stmt observacion" id="transporte-optimo-x88"><div class="head">Observación 1.44</div><div class="body"><p>La fórmula de dualidad para costes l.s.c.\ se diferencia de la de costes
+continuos en que no hay existencia para $(\mathrm{DP})$. Si el dual se replantea
+como $(\mathrm{DP\text{-}var})$, sí se puede producir un maximizante: primero el
+Teorema 1.43 da un conjunto $c$-CM que carga el plan óptimo, y después el Teorema
+1.37 construye sobre él un potencial $\varphi$. Esto exige que $c$ tome valores
+reales y no depende de su continuidad, aunque sí usa la existencia de un
+$\gamma$ óptimo. Para costes no uniformemente continuos hay además cuestiones de
+medibilidad sobre la $\varphi$ del Teorema 1.37.</p></div></div>
+<h3 id="transporte-optimo-x89">1.6.3 Una prueba directa de la dualidad</h3>
+<p>La sección anterior probó $\min(\mathrm{KP})=\sup(\mathrm{DP})$ a través de la
+$c$-monotonía cíclica. Aquí se da una prueba alternativa, independiente de ella y
+basada en un truco de análisis convexo, restringida al caso compacto. Lo único
+que se usa es que $H^{**}=H$ para $H$ convexa y l.s.c.</p>
+<p>Suponga $X$ e $Y$ compactos y $c:X\times Y\to\R$ continua. Para cada
+$p\in C(X\times Y)$ defina</p>
+<div class="display"><span class="v" data-var="std">\[H(p):=-\max\left\{\int_X\varphi\dd\mu+\int_Y\psi\dd\nu\;:\;
+  \varphi(x)+\psi(y)\le c(x,y)-p(x,y)\right\},\]</span><span class="v" data-var="fin">\[H(p):=-\max\{\mu(\varphi)+\nu(\psi)\;:\;\varphi\oplus\psi\le c-p\},\]</span></div>
+<p>que es el opuesto del valor de $(\mathrm{DP})$ con coste $c-p$. Que el
+máximo se alcance es la Proposición 1.11, que además acota el módulo de
+continuidad de las $\varphi$ y $\psi$ óptimas por el de $c-p$ y, normalizando con
+$\varphi(x_0)=0$, acota su oscilación por una constante que solo depende de
+$\sup\abs{c-p}$.</p>
+<div class="stmt lema" id="transporte-optimo-x90"><div class="head">Lema 1.45</div><div class="body"><p>La función $H:C(X\times Y)\to\R$ es convexa y l.s.c.\ para la convergencia
+uniforme sobre el compacto $X\times Y$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p31">Ver demostración</button><div class="proof" id="transporte-optimo-p31"><p>Para la convexidad, tome $p_0$ y $p_1$ con sus potenciales óptimos
+$(\varphi_0,\psi_0)$ y $(\varphi_1,\psi_1)$, y para $t\in[0,1]$ escriba
+$p_t=(1-t)p_0+tp_1$ y análogamente $\varphi_t$ y $\psi_t$. La pareja
+$(\varphi_t,\psi_t)$ es admisible en el máximo que define $-H(p_t)$, luego</p>
+<div class="display"><span class="v" data-var="std">\[
+  H(p_t)\le-\Big(\int_X\varphi_t\dd\mu+\int_Y\psi_t\dd\nu\Big)=(1-t)H(p_0)+tH(p_1).
+\]</span><span class="v" data-var="fin">\[
+  H(p_t)\le-\big(\mu(\varphi_t)+\nu(\psi_t)\big)=(1-t)H(p_0)+tH(p_1).
+\]</span></div>
+<p>Para la semicontinuidad, tome $p_n\to p$ y extraiga una subsucesión $p_{n_k}$ que
+realice el $\liminf$ de $H(p_n)$. De la convergencia uniforme, la sucesión
+$p_{n_k}$ es equicontinua y acotada, por el recíproco de Ascoli--Arzelà. Entonces
+los potenciales óptimos correspondientes $(\varphi_{n_k},\psi_{n_k})$ también lo
+son, por las cotas de arriba, y extrayendo de nuevo se puede suponer
+$\varphi_{n_k}\to\varphi$ y $\psi_{n_k}\to\psi$ uniformemente. Pasando al límite
+en $\varphi_{n_k}(x)+\psi_{n_k}(y)\le c(x,y)-p_{n_k}(x,y)$ queda
+$\varphi(x)+\psi(y)\le c(x,y)-p(x,y)$, luego</p>
+<div class="display"><span class="v" data-var="std">\[
+  H(p)\le-\Big(\int_X\varphi\dd\mu+\int_Y\psi\dd\nu\Big)=\lim_k H(p_{n_k})=\liminf_n H(p_n).
+\]</span><span class="v" data-var="fin">\[
+  H(p)\le-\big(\mu(\varphi)+\nu(\psi)\big)=\lim_k H(p_{n_k})=\liminf_n H(p_n).
+\]</span></div></div>
+<p>Calcule ahora $H^{*}:\Meas(X\times Y)\to\R\cup\{+\infty\}$, donde el
+emparejamiento entre $C(X\times Y)$ y $\Meas(X\times Y)$ es el del teorema de
+Riesz del Recuadro 1.3. Para $\gamma\in\Meas(X\times Y)$,</p>
+<div class="display"><span class="v" data-var="std">\[H^{*}(\gamma)=\sup_p\left\{\int_{X\times Y}p\dd\gamma
+  +\sup\left\{\int_X\varphi\dd\mu+\int_Y\psi\dd\nu:
+  \varphi\oplus\psi\le c-p\right\}\right\},\]</span><span class="v" data-var="fin">\[H^{*}(\gamma)=\sup_p\big\{\gamma(p)
+  +\sup\{\mu(\varphi)+\nu(\psi):\varphi\oplus\psi\le c-p\}\big\},\]</span></div>
+<p>que es un solo supremo sobre las ternas $(p,\varphi,\psi)$ admisibles.
+Si $\gamma\notin\Meas_+(X\times Y)$, hay $p_0\le0$ con
+<span class="v" data-var="std">$\int p_0\dd\gamma&gt;0$</span><span class="v" data-var="fin">$\gamma(p_0)&gt;0$</span>; tomando $\varphi=\psi=0$ y
+$p=c+np_0$, que es admisible, y haciendo $n\to\infty$ se obtiene
+$H^{*}(\gamma)=+\infty$. Si en cambio $\gamma\in\Meas_+(X\times Y)$, conviene
+elegir el mayor $p$ posible, es decir $p=c-\varphi\oplus\psi$, y queda</p>
+<div class="display"><span class="v" data-var="std">\[H^{*}(\gamma)=\sup_{\varphi,\psi}\ \int_{X\times Y}c\dd\gamma
+  +\Big(\int_X\varphi\dd\mu-\int_{X\times Y}\varphi(x)\dd\gamma\Big)
+  +\Big(\int_Y\psi\dd\nu-\int_{X\times Y}\psi(y)\dd\gamma\Big),\]</span><span class="v" data-var="fin">\[H^{*}(\gamma)=\sup_{\varphi,\psi}\ \gamma(c)
+  +\big(\mu(\varphi)-\gamma(\varphi\circ\pi_x)\big)
+  +\big(\nu(\psi)-\gamma(\psi\circ\pi_y)\big),\]</span></div>
+<p>que es exactamente la expresión con la que en §1.2 se reescribieron las
+restricciones de $(\mathrm{KP})$. Los dos paréntesis se anulan si las marginales
+de $\gamma$ son $\mu$ y $\nu$, y si alguna falla el supremo correspondiente es
+$+\infty$. Por tanto</p>
+<div class="display">\[
+  H^{*}(\gamma)=\begin{cases}
+    K(\gamma) &amp; \text{si }\gamma\in\Adm(\mu,\nu),\\
+    +\infty &amp; \text{en caso contrario.}
+  \end{cases}
+\]</div>
+<div class="stmt teorema" id="transporte-optimo-x91"><div class="head">Teorema 1.46</div><div class="body"><p>Si $X$ e $Y$ son compactos y $c$ es continua, entonces
+$\min(\mathrm{KP})=\sup(\mathrm{DP})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p32">Ver demostración</button><div class="proof" id="transporte-optimo-p32"><p>Se tiene $\max(\mathrm{DP})=-H(0)=-H^{**}(0)$, porque $H$ es convexa y l.s.c.\ por
+el Lema 1.45. Y
+$H^{**}(0)=\sup_\gamma\ip{0}{\gamma}-H^{*}(\gamma)=-\inf H^{*}=-\min(\mathrm{KP})$.</p></div>
+<p>La versión de Fenchel--Moreau que hace falta aquí es la de un espacio vectorial
+normado, y no la de $\R^{d}$ enunciada en §1.3: el par en dualidad es
+$C(X\times Y)$ contra $\Meas(X\times Y)$. La identidad $H^{**}=H$ sigue valiendo
+porque un convexo cerrado en norma es cerrado débilmente. Villani obtiene la
+dualidad de Kantorovich por esta misma vía, aunque con otra herramienta, el
+teorema de dualidad de Fenchel--Rockafellar aplicado a dos funcionales convexos
+sobre $C_b(X\times Y)$.
+<span class="src">[Villani, Teorema 1.9 y §1.1.7]</span></p>
+<h3 id="transporte-optimo-x92">1.6.4 Condiciones suficientes de optimalidad y estabilidad</h3>
+<p>Lo visto sobre $c$-transformadas permite ahora probar condiciones
+<em>suficientes</em> de optimalidad, al menos cuando el coste satisface la
+condición de torsión de la Definición 1.16. Como en §1.3, primero un enunciado
+general bajo compacidad y después una prueba distinta para el caso cuadrático,
+que no la necesita.</p>
+<div class="stmt teorema" id="transporte-optimo-x93"><div class="head">Teorema 1.47</div><div class="body"><p>Sea $\Omega\subset\R^{d}$ compacto y sea $c$ un coste de clase $C^{1}$ que
+satisface la condición de torsión sobre $\Omega\times\Omega$. Suponga dadas
+$\mu\in\Pmeas(\Omega)$ y $\varphi\in\cconc(\Omega)$, con $\varphi$ diferenciable
+$\mu$-a.e.\ y $\mu(\partial\Omega)=0$, y suponga que la aplicación $T$ satisface
+$\nabla_x c(x,T(x))=\nabla\varphi(x)$. Entonces $T$ es óptima para el coste $c$
+entre $\mu$ y $\nu:=T\pushf\mu$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p33">Ver demostración</button><div class="proof" id="transporte-optimo-p33"><p>Escriba $\varphi(x)=\inf_y c(x,y)-\psi(y)$ para cierta $\psi:\Omega\to\R$, que se
+puede suponer $\bar c$-cóncava y por tanto continua; de hecho basta tomar
+$\psi=\ccon{\varphi}$. Fije $x_0\in\Omega$ tal que $\nabla\varphi(x_0)$ exista y
+$x_0\notin\partial\Omega$. Por compacidad y continuidad el ínfimo se alcanza en
+algún $y_0$, de modo que</p>
+<div class="display">\[
+  \varphi(x)\le c(x,y_0)-\psi(y_0)\ \text{ para todo }x,
+  \qquad \varphi(x_0)=c(x_0,y_0)-\psi(y_0),
+\]</div>
+<p>y por tanto $x\mapsto c(x,y_0)-\varphi(x)$ es mínima en $x=x_0$. Nótese que $y_0$
+se definió por optimalidad en $y$ y que lo que se usa ahora es la optimalidad en
+$x$. La condición de primer orden en un punto interior da</p>
+<div class="display">\[
+  \nabla\varphi(x_0)=\nabla_x c(x_0,y_0).
+\]</div>
+<p>Por hipótesis $y\mapsto\nabla_x c(x_0,y)$ es inyectiva, luego $y_0=T(x_0)$. Esto
+prueba $\varphi(x_0)+\psi(T(x_0))=c(x_0,T(x_0))$, y lo mismo para $\mu$-a.e.\
+$x_0$. Integrando respecto de $\mu$,</p>
+<div class="display"><span class="v" data-var="std">\[\int\varphi\dd\mu+\int\psi\dd\nu
+  =\int\varphi\dd\mu+\int\psi\circ T\dd\mu=\int c(x,T(x))\dd\mu(x),\]</span><span class="v" data-var="fin">\[\mu(\varphi)+\nu(\psi)=\mu(\varphi)+\mu(\psi\circ T)
+  =\mu\big(c(\cdot,T(\cdot))\big),\]</span></div>
+<p>y la última cantidad es el coste de $T$ en el problema de Monge.
+Siendo $(\varphi,\psi)$ admisible en $(\mathrm{DP})$ se tiene
+<span class="v" data-var="std">$\int\varphi\dd\mu+\int\psi\dd\nu
+ \le(\mathrm{DP})\le(\mathrm{KP})$</span><span class="v" data-var="fin">$\mu(\varphi)+\nu(\psi)
+ \le(\mathrm{DP})\le(\mathrm{KP})$</span>, de donde $T$ es óptima.</p></div>
+<p>Y ahora la prueba prometida para $c(x,y)=\tfrac12\abs{x-y}^{2}$.</p>
+<div class="stmt teorema" id="transporte-optimo-x94"><div class="head">Teorema 1.48</div><div class="body"><p>Suponga que $\mu\in\Pmeas(\R^{d})$ tiene segundo momento finito y que
+$u:\R^{d}\to\R\cup\{+\infty\}$ es convexa y diferenciable $\mu$-a.e. Ponga
+$T=\nabla u$ y suponga
+<span class="v" data-var="std">$\int\abs{T(x)}^{2}\dd\mu(x)&lt;+\infty$</span><span class="v" data-var="fin">$\mu(\abs{T}^{2})&lt;+\infty$</span>. Entonces
+$T$ es óptima para el coste $c(x,y)=\tfrac12\abs{x-y}^{2}$ entre $\mu$ y
+$\nu:=T\pushf\mu$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p34">Ver demostración</button><div class="proof" id="transporte-optimo-p34"><p>Para una función convexa $u$ valen</p>
+<div class="display">\[
+  u(x)+u^{*}(y)\ge\ip{x}{y}\ \text{ para todos }x,y\in\R^{d},
+  \qquad u(x)+u^{*}(y)=\ip{x}{y}\ \text{ si }y=\nabla u(x),
+\]</div>
+<p>que es la desigualdad de Fenchel--Young y su saturación. Tome cualquier
+$\gamma\in\Adm(\mu,\nu)$ y escriba</p>
+<div class="display"><span class="v" data-var="std">\[\int\ip{x}{y}\dd\gamma\le\int\big(u(x)+u^{*}(y)\big)\dd\gamma
+  =\int u\dd\mu+\int u^{*}(T(x))\dd\mu=\int\ip{x}{T(x)}\dd\mu,\]</span><span class="v" data-var="fin">\[\gamma(\ip{\pi_x}{\pi_y})\le\gamma(u\circ\pi_x)+\gamma(u^{*}\circ\pi_y)
+  =\mu(u)+\mu(u^{*}\circ T)=\mu(\ip{\cdot}{T(\cdot)}),\]</span></div>
+<p>donde la penúltima igualdad usa $\nu=T\pushf\mu$ y la última la
+saturación en $y=T(x)$. Esto prueba
+<span class="v" data-var="std">$\int\ip{x}{y}\dd\gamma\le\int\ip{x}{y}\dd\gamma_T$</span><span class="v" data-var="fin">$\gamma(\ip{\pi_x}{\pi_y})\le\gamma_T(\ip{\pi_x}{\pi_y})$</span>. Restando ambas
+cantidades de
+<span class="v" data-var="std">$\int\tfrac12(\abs{x}^{2}+\abs{y}^{2})\dd\gamma$</span><span class="v" data-var="fin">$\gamma(\tfrac12(\abs{\pi_x}^{2}+\abs{\pi_y}^{2}))$</span>, que solo depende de
+$\mu$ y $\nu$ y es finita por las hipótesis de momentos, queda</p>
+<div class="display"><span class="v" data-var="std">\[\int\tfrac12\abs{x-y}^{2}\dd\gamma
+  \ \ge\ \int\tfrac12\abs{x-y}^{2}\dd\gamma_T,\]</span><span class="v" data-var="fin">\[\gamma\big(\tfrac12\abs{\pi_x-\pi_y}^{2}\big)
+  \ \ge\ \gamma_T\big(\tfrac12\abs{\pi_x-\pi_y}^{2}\big),\]</span></div>
+<p>que es lo que se quería.</p></div>
+<p>Con esto queda completo el teorema de Brenier anunciado en §1.3.1: la
+implicación directa daba $T=\nabla u$ para el plan óptimo, y esta recíproca dice
+que todo gradiente de función convexa es óptimo entre sus propias marginales.</p>
+<p>Vale la pena comparar las dos demostraciones. En las dos había que probar cierta
+optimalidad del punto $T(x)$ entre los posibles $y$. En la primera se probó que
+existía un punto óptimo $y_0$ y de las condiciones de primer orden se dedujo
+$y_0=T(x_0)$. En la segunda se usó la caracterización de los minimizantes de una
+función convexa, que es lo que hay detrás de la igualdad
+$u(x)+u^{*}(y)=\ip{x}{y}$ cuando $y=\nabla u(x)$.</p>
+<p>Pasando a un criterio válido para costes casi arbitrarios, lo que se probó es que
+los planes óptimos están necesariamente concentrados sobre conjuntos $c$-CM, y el
+recíproco también vale en los casos más razonables. Se demuestra aquí en el caso
+más fácil, con $c$ uniformemente continua y acotada. El ingrediente principal es
+el Teorema 1.37, que solo pide que el coste sea finito; la continuidad y la
+compacidad hacen falta para evitar problemas de integrabilidad, y también para el
+resultado de estabilidad que viene después.</p>
+<div class="stmt teorema" id="transporte-optimo-x95"><div class="head">Teorema 1.49</div><div class="body"><p>Suponga dado $\gamma\in\Pmeas(X\times Y)$, con $X$ e $Y$ polacos, y
+$c:X\times Y\to\R$ uniformemente continua y acotada. Si $\spt(\gamma)$ es $c$-CM,
+entonces $\gamma$ es un plan de transporte óptimo entre sus marginales
+$\mu=(\pi_x)\pushf\gamma$ y $\nu=(\pi_y)\pushf\gamma$ para el coste $c$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p35">Ver demostración</button><div class="proof" id="transporte-optimo-p35"><p>El Teorema 1.37 da una función $c$-cóncava $\varphi$ tal que $\spt(\gamma)$ está
+contenido en $\{(x,y):\varphi(x)+\ccon{\varphi}(y)=c(x,y)\}$. Las dos funciones
+$\varphi$ y $\ccon{\varphi}$ son continuas por la continuidad de $c$, y por tanto
+acotadas sobre $X$ y sobre $Y$. Usando lo que se sabe de dualidad,</p>
+<div class="display"><span class="v" data-var="std">\[
+  (\mathrm{KP})\le\int c\dd\gamma
+  =\int\big(\varphi(x)+\ccon{\varphi}(y)\big)\dd\gamma
+  =\int\varphi\dd\mu+\int\ccon{\varphi}\dd\nu\le(\mathrm{DP})=(\mathrm{KP}),
+\]</span><span class="v" data-var="fin">\[
+  (\mathrm{KP})\le\gamma(c)
+  =\gamma(\varphi\oplus\ccon{\varphi})
+  =\mu(\varphi)+\nu(\ccon{\varphi})\le(\mathrm{DP})=(\mathrm{KP}),
+\]</span></div>
+<p>lo que muestra que $\gamma$ es óptimo y, de paso, que $(\varphi,\ccon{\varphi})$
+resuelve el dual.</p></div>
+<div class="stmt observacion" id="transporte-optimo-x96"><div class="head">Observación</div><div class="body"><p>Este recíproco tardó en establecerse. En 2003 Villani lo registraba como problema
+abierto incluso para el coste cuadrático en $\R^{n}$, con lo más cercano un
+teorema de Ambrosio que lo daba bajo la condición
+<span class="v" data-var="std">$\int  \int\abs{x-y}^{2}\dd\mu(x)\dd\nu(y)&lt;+\infty$</span><span class="v" data-var="fin">$(\mu\otimes\nu)(\abs{\pi_x-\pi_y}^{2})&lt;+\infty$</span>.
+<span class="src">[Villani, Problema abierto 2.25]</span> Que la implicación siga siendo cierta al
+retirar las hipótesis del Teorema 1.49, y en particular para costes infinitos, es
+delicado: hay un contraejemplo cuando el coste toma el valor $+\infty$.</p></div></div>
+<p>El criterio suficiente da además la estabilidad de los planes óptimos, y para
+enunciarla hace falta una noción de convergencia de conjuntos.
+<span class="src">[Recuadro 1.13]</span></p>
+<div class="stmt definicion" id="transporte-optimo-x97"><div class="head">Definición</div><div class="body"><p>Sobre un espacio métrico compacto $X$, la <span class="df">distancia de Hausdorff</span> entre dos
+subconjuntos compactos es</p>
+<div class="display">\[
+  \dist{H}(A,B):=\max\big\{\max\{d(x,A):x\in B\},\ \max\{d(x,B):x\in A\}\big\},
+\]</div>
+<p>y admite las expresiones equivalentes
+$\dist{H}(A,B)=\max\{\abs{d(x,A)-d(x,B)}:x\in X\}$ y
+$\dist{H}(A,B)=\inf\{\varepsilon&gt;0:A\subset B_\varepsilon,\ B\subset A_\varepsilon\}$,
+donde $A_\varepsilon$ y $B_\varepsilon$ son los entornos de radio $\varepsilon$.</p></div></div>
+<div class="stmt teorema" id="transporte-optimo-x98"><div class="head">Teorema (Blaschke)</div><div class="body"><p>$\dist{H}$ es una distancia, y con ella el conjunto de los subconjuntos compactos
+de $X$ es a su vez un espacio métrico compacto.</p></div></div>
+<div class="stmt proposicion" id="transporte-optimo-x99"><div class="head">Proposición</div><div class="body"><p>Si $\dist{H}(A_n,A)\to0$ y $\mu_n$ es una sucesión de medidas positivas con
+$\spt(\mu_n)\subset A_n$ y $\mu_n\rightharpoonup\mu$, entonces $\spt(\mu)\subset A$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p36">Ver demostración</button><div class="proof" id="transporte-optimo-p36"><p>Para cada $n$ vale <span class="v" data-var="std">$\int d(x,A_n)\dd\mu_n=0$</span><span class="v" data-var="fin">$\mu_n(d(\cdot,A_n))=0$</span>, porque
+$\mu_n$ está soportada en $A_n$. Como $d(x,A_n)\to d(x,A)$ uniformemente y
+$\mu_n\rightharpoonup\mu$, la dualidad entre convergencia uniforme y convergencia
+débil de medidas da
+<span class="v" data-var="std">$\int d(x,A_n)\dd\mu_n\to\int d(x,A)\dd\mu$</span><span class="v" data-var="fin">$\mu_n(d(\cdot,A_n))\to\mu(d(\cdot,A))$</span>, luego
+<span class="v" data-var="std">$\int d(x,A)\dd\mu=0$</span><span class="v" data-var="fin">$\mu(d(\cdot,A))=0$</span> y $\mu$ está concentrada sobre $A$.</p></div>
+<div class="stmt teorema" id="transporte-optimo-x100"><div class="head">Teorema 1.50</div><div class="body"><p>Suponga $X$ e $Y$ compactos y $c$ continua. Sea $\gamma_n\in\Pmeas(X\times Y)$
+una sucesión de planes óptimos para el coste $c$ entre sus propias marginales
+$\mu_n:=(\pi_x)\pushf\gamma_n$ y $\nu_n:=(\pi_y)\pushf\gamma_n$, y suponga
+$\gamma_n\rightharpoonup\gamma$. Entonces $\mu_n\rightharpoonup\mu:=(\pi_x)\pushf\gamma$,
+$\nu_n\rightharpoonup\nu:=(\pi_y)\pushf\gamma$, y $\gamma$ es óptimo en el
+transporte de $\mu$ a $\nu$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p37">Ver demostración</button><div class="proof" id="transporte-optimo-p37"><p>Ponga $\Gamma_n:=\spt(\gamma_n)$. Pasando a una subsucesión se puede suponer
+$\Gamma_n\to\Gamma$ en la topología de Hausdorff, por Blaschke. Cada $\Gamma_n$
+es $c$-CM por el Teorema 1.38, y el límite de Hausdorff de conjuntos $c$-CM
+también lo es: fijados $(x_1,y_1),\dots,(x_k,y_k)\in\Gamma$, hay puntos
+$(x_i^{n},y_i^{n})\in\Gamma_n$ con $(x_i^{n},y_i^{n})\to(x_i,y_i)$ para cada $i$,
+y la monotonía cíclica de $\Gamma_n$ da
+$\sum_i c(x_i^{n},y_i^{n})\le\sum_i c(x_i^{n},y_{\sigma(i)}^{n})$, que en el
+límite es $\sum_i c(x_i,y_i)\le\sum_i c(x_i,y_{\sigma(i)})$.</p>
+<p>Además, de $\gamma_n\rightharpoonup\gamma$ junto con $\Gamma_n\to\Gamma$ se sigue
+$\spt(\gamma)\subset\Gamma$, que es la proposición anterior. Luego $\spt(\gamma)$
+es $c$-CM y el Teorema 1.49 da la optimalidad de $\gamma$.</p></div>
+<div class="stmt observacion" id="transporte-optimo-x101"><div class="head">Observación</div><div class="body"><p>La maquinaria de Hausdorff se puede evitar. Basta observar que si
+$\gamma_n\rightharpoonup\gamma$, todo punto de $\spt(\gamma)$ se aproxima por
+puntos de $\spt(\gamma_n)$, porque toda bola $B$ centrada en él cumple
+$\liminf_n\gamma_n(B)\ge\gamma(B)&gt;0$ y por tanto corta a $\spt(\gamma_n)$ para
+$n$ grande. Con eso el argumento del límite se hace directamente sobre
+$\spt(\gamma)$ y la monotonía cíclica resulta estable por convergencia débil.
+<span class="src">[Villani, Observación 2.23]</span></p></div></div>
+<p>Se cierra con una consecuencia sencilla y útil. Para un coste
+$c:X\times Y\to\R$ y $\mu\in\Pmeas(X)$, $\nu\in\Pmeas(Y)$, escriba</p>
+<div class="display"><span class="v" data-var="std">\[\Tcost_c(\mu,\nu):=\min\left\{\int_{X\times Y}c\dd\gamma\;:\;
+  \gamma\in\Adm(\mu,\nu)\right\}.\]</span><span class="v" data-var="fin">\[\Tcost_c(\mu,\nu):=\min\{\gamma(c)\;:\;\gamma\in\Adm(\mu,\nu)\}.\]</span></div>
+<div class="stmt teorema" id="transporte-optimo-x102"><div class="head">Teorema 1.51</div><div class="body"><p>Suponga $X$ e $Y$ compactos y $c$ continua, y sean $\mu_n\rightharpoonup\mu$ en
+$\Pmeas(X)$ y $\nu_n\rightharpoonup\nu$ en $\Pmeas(Y)$. Entonces
+$\Tcost_c(\mu_n,\nu_n)\to\Tcost_c(\mu,\nu)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p38">Ver demostración</button><div class="proof" id="transporte-optimo-p38"><p>Sea $\gamma_n$ un plan óptimo de $\mu_n$ a $\nu_n$. Pasando a una subsucesión,
+$\gamma_n\rightharpoonup\gamma$, y el Teorema 1.50 da la optimalidad de $\gamma$.
+Entonces
+<span class="v" data-var="std">$\Tcost_c(\mu_n,\nu_n)=\int c\dd\gamma_n
+ \to\int c\dd\gamma=\Tcost_c(\mu,\nu)$</span><span class="v" data-var="fin">$\Tcost_c(\mu_n,\nu_n)=\gamma_n(c)
+ \to\gamma(c)=\Tcost_c(\mu,\nu)$</span>
+a lo largo de esa subsucesión, y siendo arbitraria, sobre la sucesión entera.</p></div>
+<div class="stmt teorema" id="transporte-optimo-x103"><div class="head">Teorema 1.52</div><div class="body"><p>Con las mismas hipótesis, sea $(\varphi_n,\psi_n)$ para cada $n$ una pareja de
+potenciales de Kantorovich $c$-cóncavos para el transporte de $\mu_n$ a $\nu_n$.
+Entonces, pasando a una subsucesión, $\varphi_n\to\varphi$ y $\psi_n\to\psi$
+uniformemente, y $(\varphi,\psi)$ es una pareja de potenciales de Kantorovich
+para $\mu$ y $\nu$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="transporte-optimo-p39">Ver demostración</button><div class="proof" id="transporte-optimo-p39"><p>Las funciones $c$-cóncavas comparten el módulo de continuidad de $c$, así que,
+trasladándolas por una constante, se les puede aplicar Ascoli--Arzelà: hay
+$\varphi_n\to\tilde\varphi$ y $\psi_n\to\tilde\psi$ uniformemente. De
+$\varphi_n(x)+\psi_n(y)\le c(x,y)$ se deduce en el límite
+$\tilde\varphi(x)+\tilde\psi(y)\le c(x,y)$. Además</p>
+<div class="display"><span class="v" data-var="std">\[
+  \Tcost_c(\mu_n,\nu_n)
+  =\int\varphi_n\dd\mu_n+\int\psi_n\dd\nu_n
+  \longrightarrow
+  \int\tilde\varphi\dd\mu+\int\tilde\psi\dd\nu,
+\]</span><span class="v" data-var="fin">\[
+  \Tcost_c(\mu_n,\nu_n)
+  =\mu_n(\varphi_n)+\nu_n(\psi_n)
+  \longrightarrow
+  \mu(\tilde\varphi)+\nu(\tilde\psi),
+\]</span></div>
+<p>mientras que el Teorema 1.51 da $\Tcost_c(\mu_n,\nu_n)\to\Tcost_c(\mu,\nu)$. La
+pareja $(\tilde\varphi,\tilde\psi)$ es pues admisible en el dual y alcanza el
+valor máximo, luego son potenciales de Kantorovich. Si el límite tiene potenciales
+únicos, la convergencia vale sobre la sucesión entera.</p></div></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 <nav id="cuadernos" aria-label="Cuadernos">
