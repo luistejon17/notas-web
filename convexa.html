@@ -26,6 +26,19 @@
   --link:#1d4f87; --shadow:rgba(16,25,40,.15);
   --btn:#eef1f6; --btn-on:#16324f; --btn-on-ink:#ffffff;
 
+  /* Fondo de los paneles (barra, TOC, cuadernos): ligeramente distinto del
+     fondo del texto, para que se note donde acaba uno y empieza el otro.
+     Es un alias de --raise, asi que hereda su valor en cada tema sin que
+     los bloques de abajo tengan que redefinirlo tambien. */
+  --panel-bg:var(--raise);
+
+  /* Ancho de los paneles laterales. Son variables porque el arrastre del
+     borde (como el explorer de VS Code) las reescribe en JS, y todo lo que
+     depende de la posicion del borde -las pestanas y el tirador- las lee de
+     aqui en vez de recalcular nada. */
+  --toc-w:264px; --toc-min:180px; --toc-max:480px;
+  --cuadernos-w:248px; --cuadernos-min:180px; --cuadernos-max:420px;
+
   /* Letra y cuerpo. Son tokens porque los mueven los botones de la barra.
      Todo es fuente de sistema. Las cadenas van de lo mejor a lo peor y
      siempre acaban en una familia generica, asi que en un equipo sin la
@@ -87,7 +100,7 @@ mjx-container{font-family:var(--ff-math)}
 .bar{
   position:sticky; top:0; z-index:40;
   display:flex; flex-wrap:wrap; gap:14px; align-items:center;
-  padding:9px 20px; background:var(--paper);
+  padding:9px 20px; background:var(--panel-bg);
   border-bottom:1px solid var(--rule);
   font-family:"Segoe UI",system-ui,-apple-system,sans-serif; font-size:12.5px;
 }
@@ -107,7 +120,6 @@ mjx-container{font-family:var(--ff-math)}
 }
 .plain:hover,.seg button:hover{color:var(--ink)}
 .plain.icon{padding:4px 9px; font-size:14px; line-height:1}
-.plain.icon[aria-pressed="true"]{background:var(--btn-on); color:var(--btn-on-ink)}
 /* La barra se pliega entera hacia arriba, como la cinta de Excel. Es sticky, y
    en pantalla estrecha ocupa tres filas, asi que su altura se paga durante todo
    el scroll. Plegada no queda nada de ella salvo la pestana de volver, que va
@@ -117,7 +129,7 @@ mjx-container{font-family:var(--ff-math)}
 #volver{
   position:fixed; top:0; right:14px; z-index:45; display:none;
   border:1px solid var(--rule); border-top:0; border-radius:0 0 6px 6px;
-  background:var(--paper); color:var(--faint);
+  background:var(--panel-bg); color:var(--faint);
   font-family:"Segoe UI",system-ui,-apple-system,sans-serif; font-size:12px;
   line-height:1; padding:3px 11px 4px; cursor:pointer; opacity:.45;
 }
@@ -236,64 +248,100 @@ ol.rom li{margin-bottom:.4em}
 }
 
 /* ---------------------------------------------------------------------
-   La rejilla de tres columnas: indice a la izquierda, texto en medio,
-   cuadernos a la derecha. Las dos laterales son 1fr, asi que el texto
-   queda centrado se pliegue la que se pliegue.
+   El TOC empuja el texto (ocupa su propio hueco, en el flujo); los
+   cuadernos se SOBREPONEN encima sin moverlo, que es el modelo de OneNote
+   que pidio el usuario el 2026-08-16. Por eso el TOC es un hijo mas de
+   .wrap (flex) y los cuadernos van con position:fixed, fuera del flujo.
+   Sin tope de ancho para el texto: ocupa todo el hueco que quede, sea
+   cual sea el ancho del TOC. Decision del usuario del 2026-08-16.
    --------------------------------------------------------------------- */
-.wrap{display:grid; grid-template-columns:1fr auto 1fr}
-main{grid-column:2; width:min(41em,100%); margin:0 auto;
-  padding:34px 20px 120px}
+.wrap{display:flex; align-items:flex-start}
+main{flex:1 1 auto; min-width:0; padding:34px clamp(20px,4vw,64px) 120px}
 
 /* ---------------------------------------------------------------------
    Indice lateral. Lista capitulos, secciones Y cada enunciado, que es lo
    que hace el artefacto: en un documento donde el cuerpo son enunciados
    encadenados, un indice de solo secciones deja fuera casi todo el
    contenido navegable. Se construye en JS desde el DOM ya renderizado.
+
+   El ancho vive en --toc-w y lo reescribe el JS al arrastrar el borde
+   (panel.js abajo). Plegado es --toc-w:0, y el hueco que deja lo recupera
+   el texto solo, porque main es flex:1 y no tiene un ancho fijo que
+   defender.
    --------------------------------------------------------------------- */
 #toc{
-  grid-column:1; justify-self:end; align-self:start;
-  position:sticky; top:var(--arriba-panel); width:16.5rem;
-  margin:34px 2rem 0 12px;
+  flex:0 0 auto; position:sticky; top:var(--arriba-panel);
+  width:var(--toc-w); max-width:90vw;
   max-height:calc(100vh - var(--arriba-panel) - 24px);
-  overflow-y:auto; overscroll-behavior:contain;
+  overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain;
+  background:var(--panel-bg); border-right:1px solid var(--rule);
+  padding:22px 16px 24px 20px; margin:0;
   font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
   font-size:12.5px; line-height:1.45;
+  transition:width .12s ease, border-color .12s ease;
 }
-:root[data-toc="off"] #toc{display:none}
+body.arrastrando #toc{transition:none}
+:root[data-toc="off"] #toc{
+  width:0!important; padding-left:0; padding-right:0;
+  border-right-color:transparent; overflow:hidden;
+}
 #toc h4{
   margin:0 0 .6em; font-size:10.5px; font-weight:700; letter-spacing:.08em;
   text-transform:uppercase; color:var(--faint);
 }
+/* El buscador filtra por texto las entradas ya construidas: no hace falta
+   para 8-15 entradas, pero transporte optimo ya tiene 14 y solo va a crecer
+   segun se enchufen mas notas. */
+.toc-buscar{
+  display:block; width:100%; margin:0 0 .8em; padding:5px 8px;
+  border:1px solid var(--rule); border-radius:5px;
+  background:var(--paper); color:var(--ink); font:inherit; font-size:12px;
+}
+.toc-buscar:focus-visible{outline:2px solid var(--link); outline-offset:1px}
+#toc a[hidden]{display:none}
 #toc a{
   display:block; padding:2.5px 8px; border-radius:4px;
   color:var(--muted); text-decoration:none;
   border-left:2px solid transparent;
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
-#toc a:hover{background:var(--raise); color:var(--ink)}
+#toc a:hover{background:var(--raise2); color:var(--ink)}
 #toc a.lvl-cap{color:var(--ink); font-weight:600; margin-top:.55em}
 #toc a.lvl-sec{padding-left:16px}
 #toc a.lvl-sub{padding-left:26px}
 #toc a.aqui{
-  border-left-color:var(--link); background:var(--raise);
+  border-left-color:var(--link); background:var(--raise2);
   color:var(--ink);
 }
 
 /* ---------------------------------------------------------------------
    Cuadernos: la lateral DERECHA, que elige que Overleaf se esta viendo.
-   Es lo que pidio el usuario el 2026-08-14, y el modelo que dio es la
-   barra de cuadernos de OneNote.
+   El modelo que dio el usuario es la barra de cuadernos de OneNote, y el
+   2026-08-16 preciso la diferencia clave con el TOC: esta NO empuja el
+   texto, se sobrepone. position:fixed la saca del flujo de .wrap para
+   siempre, no solo en pantalla estrecha.
    --------------------------------------------------------------------- */
+/* Cerrado es el estado BASE, no una excepcion: los cuadernos arrancan
+   plegados casi siempre (arranca() por defecto los deja asi), y si el
+   abierto fuera el estado base se veria un parpadeo del panel entero
+   sobrepuesto en el instante entre que llega el HTML y corre el JS que lo
+   pliega. Con el cerrado como base ese parpadeo no existe. */
 #cuadernos{
-  grid-column:3; justify-self:start; align-self:start;
-  position:sticky; top:var(--arriba-panel); width:15.5rem;
-  margin:34px 12px 0 2rem;
-  max-height:calc(100vh - var(--arriba-panel) - 24px);
-  overflow-y:auto; overscroll-behavior:contain;
+  position:fixed; top:var(--arriba-panel); right:0; bottom:0;
+  width:0; max-width:90vw;
+  overflow:hidden; overscroll-behavior:contain;
+  background:var(--panel-bg); border-left:1px solid transparent;
+  padding:0; margin:0; z-index:38;
   font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
   font-size:12.5px; line-height:1.45;
+  transition:width .12s ease;
 }
-:root[data-notas="off"] #cuadernos{display:none}
+body.arrastrando #cuadernos{transition:none}
+:root[data-cuadernos="on"] #cuadernos{
+  width:var(--cuadernos-w); overflow-y:auto;
+  border-left-color:var(--rule); box-shadow:-10px 0 26px var(--shadow);
+  padding:22px 20px 24px 16px;
+}
 #cuadernos h4{
   margin:0 0 .6em; font-size:10.5px; font-weight:700; letter-spacing:.08em;
   text-transform:uppercase; color:var(--faint);
@@ -302,7 +350,7 @@ main{grid-column:2; width:min(41em,100%); margin:0 auto;
   display:block; padding:.5em .7em; margin-bottom:.3em; border-radius:5px;
   color:var(--muted); text-decoration:none;
   border:1px solid var(--rule); border-left:3px solid var(--rule);
-  background:var(--raise);
+  background:var(--raise2);
 }
 #cuadernos a:hover{color:var(--ink); border-left-color:var(--link)}
 #cuadernos a .t{display:block; color:var(--ink); font-weight:600;
@@ -310,7 +358,7 @@ main{grid-column:2; width:min(41em,100%); margin:0 auto;
 #cuadernos a .c{display:block; color:var(--faint); font-size:11px;
   margin-top:.2em}
 #cuadernos a.aqui{
-  border-left-color:var(--link); background:var(--raise2);
+  border-left-color:var(--link); background:var(--paper);
 }
 #cuadernos a.aqui .t{color:var(--link)}
 #cuadernos .portada{
@@ -320,28 +368,61 @@ main{grid-column:2; width:min(41em,100%); margin:0 auto;
 #cuadernos .portada:hover{color:var(--link); background:transparent}
 
 /* ---------------------------------------------------------------------
-   Estrecho: los dos paneles pasan a cajon sobre el texto, cada uno por
-   su lado. El indice entra por la izquierda y los cuadernos por la
-   derecha, que es de donde salen cuando hay sitio.
+   Las pestanas y el tirador de cada borde. Van position:fixed, igual que
+   #volver, y NO son hijos del panel: si lo fueran, el overflow-y:auto del
+   TOC recortaria en X tambien (CSS no deja overflow-x:visible con
+   overflow-y:auto) y la pestana desaparecia en cuanto el panel se
+   plegara. Al ser hermanos fijos, su posicion sale del mismo --*-w que
+   fija el ancho del panel, asi que se mueven solos con el.
+
+   La flecha apunta hacia donde se va el panel al pulsarla: hacia su
+   propio borde (colapsar) o hacia el texto (expandir). Es la regla que
+   dio el usuario el 2026-08-16, mirando el TOC, y aqui se refleja para
+   los cuadernos.
    --------------------------------------------------------------------- */
-@media (max-width:1180px){
-  :root{--arriba-panel:44px}
-  .wrap{display:block}
-  main{width:auto; max-width:41em; margin:0 auto}
-  #toc,#cuadernos{
-    position:fixed; top:var(--arriba-panel); bottom:0; width:min(20rem,82vw);
-    margin:0; max-height:none; padding:14px 10px 30px;
-    background:var(--paper); z-index:50;
-  }
-  #toc{left:0; border-right:1px solid var(--rule);
-    box-shadow:6px 0 22px var(--shadow)}
-  #cuadernos{right:0; border-left:1px solid var(--rule);
-    box-shadow:-6px 0 22px var(--shadow)}
+.pestana{
+  position:fixed; top:50%; transform:translateY(-50%); z-index:41;
+  width:18px; height:44px; padding:0; margin:0;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--rule); background:var(--panel-bg);
+  color:var(--muted); font-size:12px; line-height:1; cursor:pointer;
 }
+.pestana:hover{color:var(--ink)}
+.pestana.cerrada{color:var(--faint)}
+#toc-pestana{
+  left:var(--toc-w); margin-left:-1px;
+  border-radius:0 6px 6px 0;
+}
+#cuadernos-pestana{
+  right:var(--cuadernos-w); margin-right:-1px;
+  border-radius:6px 0 0 6px;
+}
+.tirador{
+  position:fixed; top:var(--arriba-panel);
+  height:calc(100vh - var(--arriba-panel)); width:9px;
+  cursor:ew-resize; background:transparent; z-index:39;
+}
+.tirador:hover,.tirador.activo{background:var(--link); opacity:.3}
+#toc-tirador{left:calc(var(--toc-w) - 4px)}
+:root[data-toc="off"] #toc-tirador{left:0}
+#cuadernos-tirador{right:calc(var(--cuadernos-w) - 4px)}
+:root[data-cuadernos="off"] #cuadernos-tirador{right:0}
 
 @media (max-width:560px){
   :root{--fs:16px}
   main{padding:24px 14px 90px}
+}
+
+/* Sin esto, imprimir la pagina imprime tambien la barra de control, el TOC,
+   los cuadernos y sus pestanas/tiradores: son navegacion de pantalla, no
+   parte de la nota. Las demostraciones plegadas SI se imprimen abiertas,
+   porque en papel no hay boton que pulsar. */
+@media print{
+  .bar,#volver,#toc,#cuadernos,.pestana,.tirador{display:none!important}
+  .wrap{display:block}
+  main{padding:0; max-width:none}
+  .proof{display:block!important}
+  .proof-btn{display:none}
 }
 </style>
 
@@ -365,8 +446,6 @@ window.MathJax = {
 <body>
 
 <div class="bar" id="barra">
-  <button class="plain icon" id="b-toc" aria-pressed="true"
-          title="Índice">&#9776;</button>
 
   <div class="grp">
     <label>Letra</label>
@@ -386,8 +465,6 @@ window.MathJax = {
     <span class="val" id="s-val">17</span>
   </div>
   <button class="plain" id="b-all">Abrir todas las demostraciones</button>
-  <button class="plain icon" id="b-notas" aria-pressed="true"
-          title="Cuadernos">&#9707;</button>
   <button class="plain icon" id="b-bar" aria-controls="barra" aria-expanded="true"
           aria-label="Ocultar la barra" title="Ocultar la barra">&#9650;</button>
 </div>
@@ -395,7 +472,15 @@ window.MathJax = {
         aria-label="Mostrar la barra" title="Mostrar la barra">&#9662;</button>
 
 <div class="wrap">
-<nav id="toc" aria-label="Índice"></nav>
+<nav id="toc" aria-label="Índice">
+  <h4>Índice</h4>
+  <input type="search" id="toc-buscar" class="toc-buscar"
+         placeholder="Buscar…" aria-label="Buscar en el índice">
+  <div id="toc-lista"></div>
+</nav>
+<div class="tirador" id="toc-tirador" aria-hidden="true"></div>
+<button class="pestana" id="toc-pestana" aria-controls="toc" aria-expanded="true"
+        title="Ocultar el índice">&#9666;</button>
 <main>
   <h1 class="title">Optimización Convexa en Espacios de Hilbert</h1>
   <p class="subtitle">Notas del curso de Mauricio Junca</p>
@@ -1393,6 +1478,9 @@ en dimensión infinita.</p></section>
 <a href="transporte-optimo.html"><span class="t">Lecture Notes on Optimal Transport</span><span class="c">Universidad de los Andes · 2026-20</span></a>
 <a class="portada" href="index.html">Todas las notas</a>
 </nav>
+<div class="tirador" id="cuadernos-tirador" aria-hidden="true"></div>
+<button class="pestana cerrada" id="cuadernos-pestana" aria-controls="cuadernos" aria-expanded="false"
+        title="Cuadernos">&#9666;</button>
 </div>
 
 <script>
@@ -1457,9 +1545,9 @@ let observador = null;
    encabezados habria quedado vacio. Aqui hay capitulos de verdad, y meter los
    58 enunciados hace un indice que no se parece al del libro. */
 function construyeIndice(){
-  const toc = $("#toc");
+  const lista = $("#toc-lista");
   const piezas = $$("main h2, main h3, main h4");
-  let html = "<h4>Índice</h4>", n = 0;
+  let html = "", n = 0;
   const dianas = [];
   const CLASE = {H2:"lvl-cap", H3:"lvl-sec", H4:"lvl-sub"};
   piezas.forEach(el => {
@@ -1471,9 +1559,19 @@ function construyeIndice(){
           + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
     dianas.push(el);
   });
-  toc.innerHTML = html;
+  lista.innerHTML = html;
   vigila(dianas);
 }
+
+/* Filtro del indice. Solo hace falta a partir de un puñado de entradas, pero
+   no cuesta nada tenerlo siempre: no reordena ni reconstruye nada, solo
+   oculta los <a> cuyo texto no matchea. */
+$("#toc-buscar").addEventListener("input", e => {
+  const q = e.target.value.trim().toLowerCase();
+  $$("#toc-lista a").forEach(a => {
+    a.hidden = q !== "" && !a.textContent.toLowerCase().includes(q);
+  });
+});
 
 function esc(s){
   return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -1510,17 +1608,140 @@ function marca(el){
     a.scrollIntoView({block:"nearest"});
 }
 
-/* --- los dos paneles y la barra --------------------------------------- */
-function setToc(on){
-  document.documentElement.dataset.toc = on ? "on" : "off";
-  $("#b-toc").setAttribute("aria-pressed", String(on));
-  recuerda("toc", on ? "on" : "off");
+/* --- los paneles laterales: TOC y cuadernos --------------------------- */
+/* Los dos se manejan igual, con dos mandos: la pestana (clic = pliega o
+   despliega del todo) y el tirador del borde (arrastre = elige el ancho, y
+   si se arrastra mas alla del minimo, pliega). La unica diferencia entre
+   los dos es de que lado cuelgan y hacia donde apunta la flecha cuando
+   estan abiertos: hacia su propio borde, que es hacia donde se va el panel
+   al plegarse. Instruccion del usuario del 2026-08-16.
+
+   Todo lo que cambia el ancho pasa por una sola variable CSS (--toc-w o
+   --cuadernos-w): el panel, la pestana y el tirador la leen los tres, asi
+   que moverla una vez los mueve a los tres a la vez. */
+function creaPanel(cfg){
+  const panel = $("#" + cfg.id);
+  const pestana = $("#" + cfg.id + "-pestana");
+  const tirador = $("#" + cfg.id + "-tirador");
+  const flechaAbierta = cfg.lado === "izq" ? "◂" : "▸";
+  const flechaCerrada = cfg.lado === "izq" ? "▸" : "◂";
+  const raiz = document.documentElement;
+  let abierto = true;
+  let ancho = cfg.defecto;
+
+  function aplicaAncho(px){
+    ancho = Math.max(cfg.min, Math.min(cfg.max, px));
+    raiz.style.setProperty(cfg.varW, ancho + "px");
+  }
+
+  function setAbierto(on, memoriza){
+    abierto = on;
+    raiz.dataset[cfg.dataset] = on ? "on" : "off";
+    if(on) raiz.style.setProperty(cfg.varW, ancho + "px");
+    pestana.classList.toggle("cerrada", !on);
+    pestana.setAttribute("aria-expanded", String(on));
+    pestana.textContent = on ? flechaAbierta : flechaCerrada;
+    pestana.title = on ? cfg.tituloOcultar : cfg.tituloMostrar;
+    // Cerrado, el panel sigue en el DOM con ancho 0: sin esto, Tab entra
+    // igual a sus enlaces aunque no se vean. inert los saca del todo.
+    panel.toggleAttribute("inert", !on);
+    if(memoriza){
+      recuerda(cfg.clave + ".on", on ? "1" : "0");
+      recuerda(cfg.clave + ".w", ancho);
+    }
+  }
+
+  pestana.addEventListener("click", () => setAbierto(!abierto, true));
+
+  // El arrastre vive en pointerdown/move/up, no en mouse-*, para que
+  // funcione igual con raton y con dedo.
+  let x0 = 0, w0 = 0, arrastrando = false;
+  tirador.addEventListener("pointerdown", e => {
+    arrastrando = true; x0 = e.clientX; w0 = abierto ? ancho : 0;
+    tirador.setPointerCapture(e.pointerId);
+    tirador.classList.add("activo");
+    document.body.classList.add("arrastrando");
+  });
+  tirador.addEventListener("pointermove", e => {
+    if(!arrastrando) return;
+    const dx = (e.clientX - x0) * (cfg.lado === "izq" ? 1 : -1);
+    const w = w0 + dx;
+    // Arrastrar mas alla del minimo pliega en vivo, como el explorer de
+    // VS Code al llevar el borde hasta el final.
+    if(w < cfg.min - 40){
+      if(abierto){ abierto = false; raiz.dataset[cfg.dataset] = "off"; panel.toggleAttribute("inert", true); }
+      raiz.style.setProperty(cfg.varW, "0px");
+      return;
+    }
+    if(!abierto){ abierto = true; raiz.dataset[cfg.dataset] = "on"; panel.toggleAttribute("inert", false); }
+    aplicaAncho(w);
+  });
+  function sueltaArrastre(){
+    if(!arrastrando) return;
+    arrastrando = false;
+    tirador.classList.remove("activo");
+    document.body.classList.remove("arrastrando");
+    pestana.classList.toggle("cerrada", !abierto);
+    pestana.setAttribute("aria-expanded", String(abierto));
+    pestana.textContent = abierto ? flechaAbierta : flechaCerrada;
+    recuerda(cfg.clave + ".on", abierto ? "1" : "0");
+    recuerda(cfg.clave + ".w", ancho);
+  }
+  tirador.addEventListener("pointerup", sueltaArrastre);
+  tirador.addEventListener("pointercancel", sueltaArrastre);
+  // Doble clic en el tirador: como en muchos editores, vuelve al ancho por
+  // defecto de un golpe en vez de tener que ajustarlo a ojo.
+  tirador.addEventListener("dblclick", () => {
+    aplicaAncho(cfg.defecto);
+    setAbierto(true, true);
+  });
+
+  function arranca(porDefectoAbierto){
+    const w = parseInt(recordado(cfg.clave + ".w"), 10);
+    if(w) ancho = Math.max(cfg.min, Math.min(cfg.max, w));
+    const memoria = recordado(cfg.clave + ".on");
+    setAbierto(memoria !== null ? memoria === "1" : porDefectoAbierto, false);
+  }
+
+  return {setAbierto, arranca};
 }
-function setNotas(on){
-  document.documentElement.dataset.notas = on ? "on" : "off";
-  $("#b-notas").setAttribute("aria-pressed", String(on));
-  recuerda("cuadernos", on ? "on" : "off");
-}
+
+const tocPanel = creaPanel({
+  id:"toc", lado:"izq", varW:"--toc-w", dataset:"toc", clave:"toc",
+  min:180, max:480, defecto:264,
+  tituloOcultar:"Ocultar el índice", tituloMostrar:"Mostrar el índice",
+});
+const cuadernosPanel = creaPanel({
+  id:"cuadernos", lado:"der", varW:"--cuadernos-w", dataset:"cuadernos",
+  clave:"cuadernos", min:180, max:420, defecto:248,
+  tituloOcultar:"Ocultar cuadernos", tituloMostrar:"Cuadernos",
+});
+
+/* Los cuadernos se SOBREPONEN al texto (peticion del 2026-08-16), asi que se
+   cierran solos con un clic fuera o con Escape, igual que el flyout de
+   OneNote que fue el modelo. El TOC no: empuja el texto en vez de taparlo,
+   asi que quedarse abierto no esconde nada y no hace falta cerrarlo solo. */
+document.addEventListener("pointerdown", e => {
+  if(document.documentElement.dataset.cuadernos !== "on") return;
+  if(e.target.closest("#cuadernos, #cuadernos-pestana, #cuadernos-tirador")) return;
+  cuadernosPanel.setAbierto(false, true);
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && document.documentElement.dataset.cuadernos === "on")
+    cuadernosPanel.setAbierto(false, true);
+});
+
+/* Atajos de teclado para las dos pestanas, para no depender de acertarle con
+   el raton a una franja de 18px. Se ignoran mientras se escribe en el
+   buscador del indice o en cualquier otro campo. */
+document.addEventListener("keydown", e => {
+  if(e.metaKey || e.ctrlKey || e.altKey) return;
+  const enCampo = /^(INPUT|TEXTAREA)$/.test(e.target.tagName);
+  if(enCampo) return;
+  if(e.key === "[") tocPanel.setAbierto(document.documentElement.dataset.toc !== "on", true);
+  else if(e.key === "]") cuadernosPanel.setAbierto(document.documentElement.dataset.cuadernos !== "on", true);
+});
+
 /* Plegar la barra devuelve su altura al texto. Arranca desplegada, que es donde
    se ve que existe, y la eleccion se recuerda: quien la pliega la encuentra
    plegada la proxima vez. */
@@ -1564,10 +1785,6 @@ $("#f-sans").addEventListener("click",  () => setFuente("sans"));
 $("#f-lm").addEventListener("click",    () => setFuente("lm"));
 $("#s-menos").addEventListener("click", () => setTam(fs - 1));
 $("#s-mas").addEventListener("click",   () => setTam(fs + 1));
-$("#b-toc").addEventListener("click", () =>
-  setToc(document.documentElement.dataset.toc !== "on"));
-$("#b-notas").addEventListener("click", () =>
-  setNotas(document.documentElement.dataset.notas !== "on"));
 $("#b-bar").addEventListener("click", () => setBarra(false));
 $("#volver").addEventListener("click", () => {
   setBarra(true);
@@ -1576,19 +1793,21 @@ $("#volver").addEventListener("click", () => {
 CFG.notaciones.forEach(x =>
   $("#n-"+x.id).addEventListener("click", () => setNota(x.id)));
 
-/* En pantalla estrecha los paneles tapan el texto, asi que al pulsar un enlace
-   se cierran solos. En ancha se quedan, que es donde sirven de mapa. */
-const ancha = () => window.matchMedia("(min-width:1181px)").matches;
+/* En pantalla estrecha el TOC abierto tapa casi todo el texto, asi que al
+   pulsar un enlace se pliega solo. En ancha se queda, que es donde sirve de
+   mapa. Los cuadernos no necesitan este trato: son un enlace a OTRA pagina,
+   asi que la navegacion ya los deja atras. */
+const ancha = () => window.matchMedia("(min-width:900px)").matches;
 $("#toc").addEventListener("click", e => {
-  if(e.target.closest("a") && !ancha()) setToc(false);
+  if(e.target.closest("a") && !ancha()) tocPanel.setAbierto(false, true);
 });
 
 construyeIndice();
 refrescaBotonGlobal();
 setFuente(FUENTES[recordado("font")] ? recordado("font") : "serif");
 setTam(parseInt(recordado("fs"), 10) || 17);
-setToc(recordado("toc") ? recordado("toc") === "on" : ancha());
-setNotas(recordado("cuadernos") ? recordado("cuadernos") === "on" : ancha());
+tocPanel.arranca(ancha());
+cuadernosPanel.arranca(false);
 setBarra(recordado("bar") !== "off");
 if(CFG.notaciones.length){
   const guardada = recordado("nota");
