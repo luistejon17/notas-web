@@ -272,6 +272,13 @@ main{flex:1 1 auto; min-width:0; padding:34px clamp(20px,4vw,64px) 120px}
 #toc{
   flex:0 0 auto; position:sticky; top:var(--arriba-panel);
   width:var(--toc-w); max-width:90vw;
+  /* min-height IGUAL al max-height: sin esto la caja del panel solo era tan
+     alta como su contenido, asi que un indice corto dejaba el fondo gris a
+     medias y el resto de la columna se veia blanco, como si el panel se
+     hubiera acabado antes de tiempo. Encontrado por el usuario el
+     2026-08-16 mirando convexa, que tiene un indice mas corto que la
+     pantalla. */
+  min-height:calc(100vh - var(--arriba-panel) - 24px);
   max-height:calc(100vh - var(--arriba-panel) - 24px);
   overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain;
   background:var(--panel-bg); border-right:1px solid var(--rule);
@@ -393,10 +400,12 @@ body.arrastrando #cuadernos{transition:none}
   left:var(--toc-w); margin-left:-1px;
   border-radius:0 6px 6px 0;
 }
+:root[data-toc="off"] #toc-pestana{left:0; margin-left:0}
 #cuadernos-pestana{
   right:var(--cuadernos-w); margin-right:-1px;
   border-radius:6px 0 0 6px;
 }
+:root[data-cuadernos="off"] #cuadernos-pestana{right:0; margin-right:0}
 .tirador{
   position:fixed; top:var(--arriba-panel);
   height:calc(100vh - var(--arriba-panel)); width:9px;
@@ -800,7 +809,13 @@ function creaPanel(cfg){
   function setAbierto(on, memoriza){
     abierto = on;
     raiz.dataset[cfg.dataset] = on ? "on" : "off";
-    if(on) raiz.style.setProperty(cfg.varW, ancho + "px");
+    // SIEMPRE los dos casos, no solo al abrir: la pestana y el tirador leen
+    // esta misma variable para su propia posicion (left/right:var(...)), y
+    // si al cerrar por clic se deja el valor de cuando estaba abierto, los
+    // dos se quedan clavados donde estaban en vez de irse al borde. Bug
+    // encontrado por el usuario el 2026-08-16: el arrastre SI la ponia a
+    // 0 al plegar en vivo, pero el clic en la pestana no.
+    raiz.style.setProperty(cfg.varW, (on ? ancho : 0) + "px");
     pestana.classList.toggle("cerrada", !on);
     pestana.setAttribute("aria-expanded", String(on));
     pestana.textContent = on ? flechaAbierta : flechaCerrada;
