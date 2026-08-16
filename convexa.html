@@ -199,6 +199,14 @@ div.v[data-on="true"]{display:block}
 .stmt.observacion{border-left-style:dotted}
 .stmt.ejemplo{border-left-color:var(--mark)}
 .stmt.ejemplo .head{color:var(--mark)}
+/* El enunciado del compendio de ejercicios. En el PDF va dentro de un cuadro
+   y aqui tambien, que es lo que lo distingue de la solucion que va debajo:
+   dentro del recuadro esta lo de quien puso el ejercicio, fuera lo del autor. */
+.stmt.ejercicio{
+  border:1px solid var(--rule); border-radius:3px;
+  padding:.75em 1.05em; background:var(--fondo-caja,transparent);
+}
+.stmt.ejercicio .head{color:var(--link)}
 .stmt .body p:last-child{margin-bottom:0}
 ol.rom{margin:.4em 0 .4em 1.3em; padding:0}
 ol.rom li{margin-bottom:.4em}
@@ -1381,6 +1389,7 @@ en dimensión infinita.</p></section>
 <nav id="cuadernos" aria-label="Cuadernos">
 <h4>Cuadernos</h4>
 <a href="convexa.html" class="aqui"><span class="t">Optimización Convexa en Espacios de Hilbert</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a href="ejercicios-convexa.html"><span class="t">Ejercicios Opti Convexa</span><span class="c">Universidad de los Andes · 2026-20</span></a>
 <a href="transporte-optimo.html"><span class="t">Lecture Notes on Optimal Transport</span><span class="c">Universidad de los Andes · 2026-20</span></a>
 <a class="portada" href="index.html">Todas las notas</a>
 </nav>

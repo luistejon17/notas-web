@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Publico pero NO indexable. Decision del usuario del 2026-08-12: publico e
+     indexable no son lo mismo. Aplica a TODAS las paginas del sitio. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Ejercicios Opti Convexa</title>
+<!-- Un libro abierto, dibujado en SVG y empotrado como data URI: no es un
+     archivo aparte, asi que no hay una peticion mas ni un 404 que enseñe el
+     icono roto. Los colores son los del sitio. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316324f'/%3E%3Cpath d='M5.5 8.6c3.5-1.3 6.9-1.2 9.8.6v14.2c-2.9-1.8-6.3-1.9-9.8-.6z' fill='%23fcfcfd'/%3E%3Cpath d='M26.5 8.6c-3.5-1.3-6.9-1.2-9.8.6v14.2c2.9-1.8 6.3-1.9 9.8-.6z' fill='%23cfe0f2'/%3E%3C/svg%3E">
+<style>
+/* ---------------------------------------------------------------------
+   Tokens. Los mismos del artefacto de notas_junca, que es la referencia
+   que pidio el usuario el 2026-08-14.
+   La paleta clara COMPLETA vive en :root; los dos bloques de abajo solo
+   redefinen tokens, nunca estilan un componente, que si no el tema
+   «sistema» (sin data-theme) se queda sin color.
+   --------------------------------------------------------------------- */
+:root{
+  --paper:#fcfcfd; --ink:#16191f; --muted:#5a636f; --faint:#8a93a0;
+  --rule:#dde1e7; --raise:#f1f4f8; --raise2:#e7ecf2;
+  --def:#1c6b3c; --def-bg:#e6f1ea; --mark:#8f1d3f;
+  --link:#1d4f87; --shadow:rgba(16,25,40,.15);
+  --btn:#eef1f6; --btn-on:#16324f; --btn-on-ink:#ffffff;
+
+  /* Letra y cuerpo. Son tokens porque los mueven los botones de la barra.
+     Todo es fuente de sistema. Las cadenas van de lo mejor a lo peor y
+     siempre acaban en una familia generica, asi que en un equipo sin la
+     primera no se rompe nada, solo cambia. */
+  --ff-body:"Charter","Iowan Old Style","Source Serif Pro",Cambria,Georgia,serif;
+  --ff-math:"Cambria Math","STIX Two Math","Latin Modern Math",Cambria,serif;
+  --fs:17px;
+  --lh:1.6;
+
+  /* Cuanto hay que dejar libre arriba. La barra es sticky y taparia lo que se
+     ancla al borde superior: los dos paneles y el destino de cada enlace
+     interno. Son tokens porque al plegar la barra hay que recuperar ese
+     hueco; si se quedan fijos, el documento sigue esquivando una barra que
+     ya no esta. */
+  --arriba-panel:52px;
+  --arriba-ancla:60px;
+}
+:root[data-bar="off"]{--arriba-panel:14px; --arriba-ancla:18px}
+/* La matematica se queda en una serif matematica aunque el cuerpo sea de palo:
+   es lo que hace cualquier revista, y una integral en Segoe UI se lee mal. */
+:root[data-font="sans"]{
+  --ff-body:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --lh:1.62;
+}
+/* «Como el PDF». Aqui SI se puede pedir por nombre, al contrario que en el
+   artefacto: esto es una pagina normal, no un artifact con CSP, asi que si
+   el equipo tiene Latin Modern instalada la coge, y si no cae a Cambria. */
+:root[data-font="lm"]{
+  --ff-body:"Latin Modern Roman","LM Roman 10",Cambria,Georgia,serif;
+  --lh:1.58;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131619; --ink:#e2e6eb; --muted:#98a1ac; --faint:#727c88;
+    --rule:#282e35; --raise:#1a1e23; --raise2:#232930;
+    --def:#68be8b; --def-bg:#18271e; --mark:#df8199;
+    --link:#79a9dd; --shadow:rgba(0,0,0,.55);
+    --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131619; --ink:#e2e6eb; --muted:#98a1ac; --faint:#727c88;
+  --rule:#282e35; --raise:#1a1e23; --raise2:#232930;
+  --def:#68be8b; --def-bg:#18271e; --mark:#df8199;
+  --link:#79a9dd; --shadow:rgba(0,0,0,.55);
+  --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--ff-body);
+  font-size:var(--fs); line-height:var(--lh);
+  -webkit-text-size-adjust:100%;
+}
+mjx-container{font-family:var(--ff-math)}
+
+/* --- barra de control ------------------------------------------------ */
+.bar{
+  position:sticky; top:0; z-index:40;
+  display:flex; flex-wrap:wrap; gap:14px; align-items:center;
+  padding:9px 20px; background:var(--paper);
+  border-bottom:1px solid var(--rule);
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif; font-size:12.5px;
+}
+.grp{display:flex; align-items:center; gap:7px}
+.grp>label{color:var(--faint); text-transform:uppercase; letter-spacing:.07em;
+  font-size:10.5px; font-weight:600}
+.seg{display:flex; border:1px solid var(--rule); border-radius:5px; overflow:hidden}
+.seg button{
+  border:0; background:var(--btn); color:var(--muted);
+  padding:4px 11px; font:inherit; cursor:pointer;
+}
+.seg button+button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--btn-on); color:var(--btn-on-ink)}
+.plain{
+  border:1px solid var(--rule); border-radius:5px; background:var(--btn);
+  color:var(--muted); padding:4px 11px; font:inherit; cursor:pointer;
+}
+.plain:hover,.seg button:hover{color:var(--ink)}
+.plain.icon{padding:4px 9px; font-size:14px; line-height:1}
+.plain.icon[aria-pressed="true"]{background:var(--btn-on); color:var(--btn-on-ink)}
+/* La barra se pliega entera hacia arriba, como la cinta de Excel. Es sticky, y
+   en pantalla estrecha ocupa tres filas, asi que su altura se paga durante todo
+   el scroll. Plegada no queda nada de ella salvo la pestana de volver, que va
+   fija en la esquina y translucida hasta que se apunta. */
+#b-bar{margin-left:auto; font-size:10px}
+:root[data-bar="off"] .bar{display:none}
+#volver{
+  position:fixed; top:0; right:14px; z-index:45; display:none;
+  border:1px solid var(--rule); border-top:0; border-radius:0 0 6px 6px;
+  background:var(--paper); color:var(--faint);
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif; font-size:12px;
+  line-height:1; padding:3px 11px 4px; cursor:pointer; opacity:.45;
+}
+#volver:hover,#volver:focus-visible{opacity:1; color:var(--ink)}
+:root[data-bar="off"] #volver{display:block}
+.grp .val{
+  color:var(--muted); font-variant-numeric:tabular-nums; min-width:1.6em;
+  text-align:right;
+}
+:focus-visible{outline:2px solid var(--link); outline-offset:2px}
+
+/* --- pagina ---------------------------------------------------------- */
+/* En `em`, no en `rem`: la medida tiene que seguir dando los mismos ~68
+   caracteres por linea cuando el lector sube el cuerpo. Con `rem` la columna se
+   queda quieta y el texto grande cabe a 40 caracteres. Por lo mismo, TODO lo
+   de dentro de main va en em; la barra de control se queda en px, que no debe
+   crecer con el texto. */
+.title{font-size:1.72em; line-height:1.25; font-weight:600; margin:.2em 0 .1em;
+  text-wrap:balance}
+.subtitle{color:var(--muted); font-size:1.02em; margin:0 0 .5em}
+.byline{color:var(--faint); font-size:.85em;
+  font-family:"Segoe UI",system-ui,sans-serif; margin:0 0 2.2em;
+  padding-bottom:1.4em; border-bottom:1px solid var(--rule)}
+
+h2,h3,h4{font-weight:600; line-height:1.28; text-wrap:balance;
+  margin:2.1em 0 .5em; scroll-margin-top:var(--arriba-ancla)}
+h2{font-size:1.3em}
+h3{font-size:1.06em; color:var(--muted)}
+h4{font-size:.98em; color:var(--muted)}
+p{margin:0 0 .85em}
+
+a{color:var(--link)}
+.df{color:var(--def); font-weight:600}
+/* La atribucion. Gris y pequena: tiene que estar, no que leerse. */
+.src{
+  color:var(--faint); font-family:"Segoe UI",system-ui,sans-serif;
+  font-size:.76em; letter-spacing:.02em; margin-left:.55em; font-weight:400;
+}
+code{font-family:ui-monospace,Consolas,monospace; font-size:.85em}
+
+/* --- ecuaciones ------------------------------------------------------ */
+.display{overflow-x:auto; overflow-y:hidden; margin:1.1em 0; padding:.15em 0}
+
+/* Las dos ramas de \fin y \displayfin. Se emiten LAS DOS y se ensena una:
+   es lo que permite conmutar la notacion en el navegador sin volver a
+   generar nada. Una nota sin \fin no produce ni un .v, y entonces el
+   selector de notacion no sale en la barra. */
+.v{display:none}
+.v[data-on="true"]{display:inline}
+.display .v[data-on="true"]{display:block}
+/* La rama de un \ifnum\modoNota envuelve displays enteros, asi que es un
+   <div> y tiene que ir en bloque, no en linea. */
+div.v[data-on="true"]{display:block}
+/* En modo «ambas» salen las dos, y sin esto saldrian pegadas y sin saber cual
+   es cual. La de de Finetti va en gris, que es lo que hace \dfin en el PDF:
+   debajo si es un display, detras y separada si va en linea. */
+:root[data-nota="ambas"] .v[data-var="fin"]{color:var(--faint)}
+:root[data-nota="ambas"] .v[data-var="fin"]::before{content:"\00a0\00a0"}
+:root[data-nota="ambas"] .display .v[data-var="fin"]{margin-top:-.4em}
+:root[data-nota="ambas"] .display .v[data-var="fin"]::before{content:none}
+
+/* --- enunciados ------------------------------------------------------ */
+.stmt{
+  margin:1.5em 0; padding:.75em 0 .75em 1.05em;
+  border-left:2px solid var(--rule); scroll-margin-top:var(--arriba-ancla);
+}
+.stmt .head{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:.79em;
+  font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:.4em;
+}
+.stmt.definicion,.stmt.problema{border-left-color:var(--def)}
+.stmt.definicion .head,.stmt.problema .head{color:var(--def)}
+.stmt.teorema,.stmt.proposicion,.stmt.lema,.stmt.corolario{
+  border-left-color:var(--link)}
+.stmt.teorema>.body,.stmt.proposicion>.body,.stmt.lema>.body,
+.stmt.corolario>.body{font-style:italic}
+.stmt .body mjx-container{font-style:normal}
+.stmt.observacion{border-left-style:dotted}
+.stmt.ejemplo{border-left-color:var(--mark)}
+.stmt.ejemplo .head{color:var(--mark)}
+/* El enunciado del compendio de ejercicios. En el PDF va dentro de un cuadro
+   y aqui tambien, que es lo que lo distingue de la solucion que va debajo:
+   dentro del recuadro esta lo de quien puso el ejercicio, fuera lo del autor. */
+.stmt.ejercicio{
+  border:1px solid var(--rule); border-radius:3px;
+  padding:.75em 1.05em; background:var(--fondo-caja,transparent);
+}
+.stmt.ejercicio .head{color:var(--link)}
+.stmt .body p:last-child{margin-bottom:0}
+ol.rom{margin:.4em 0 .4em 1.3em; padding:0}
+ol.rom li{margin-bottom:.4em}
+
+/* --- demostraciones (o soluciones) ----------------------------------- */
+.proof-btn{
+  margin-top:.5em; border:1px solid var(--rule); border-radius:4px;
+  background:transparent; color:var(--muted); cursor:pointer;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:.75em;
+  padding:2.5px 9px; letter-spacing:.02em;
+}
+.proof-btn:hover{color:var(--ink); background:var(--raise)}
+.proof-btn::before{content:"\25B8 "; font-size:.9em}
+.proof-btn[aria-expanded="true"]::before{content:"\25BE "}
+.proof{
+  display:none; margin-top:.7em; padding:.7em .95em;
+  background:var(--raise); border-radius:5px;
+  font-size:.945em; color:var(--muted);
+}
+.proof[data-open="true"]{display:block}
+.proof p:last-child{margin-bottom:0}
+
+.note{
+  margin-top:3.5em; padding-top:1.2em; border-top:1px solid var(--rule);
+  color:var(--faint); font-size:.8em;
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+
+/* ---------------------------------------------------------------------
+   La rejilla de tres columnas: indice a la izquierda, texto en medio,
+   cuadernos a la derecha. Las dos laterales son 1fr, asi que el texto
+   queda centrado se pliegue la que se pliegue.
+   --------------------------------------------------------------------- */
+.wrap{display:grid; grid-template-columns:1fr auto 1fr}
+main{grid-column:2; width:min(41em,100%); margin:0 auto;
+  padding:34px 20px 120px}
+
+/* ---------------------------------------------------------------------
+   Indice lateral. Lista capitulos, secciones Y cada enunciado, que es lo
+   que hace el artefacto: en un documento donde el cuerpo son enunciados
+   encadenados, un indice de solo secciones deja fuera casi todo el
+   contenido navegable. Se construye en JS desde el DOM ya renderizado.
+   --------------------------------------------------------------------- */
+#toc{
+  grid-column:1; justify-self:end; align-self:start;
+  position:sticky; top:var(--arriba-panel); width:16.5rem;
+  margin:34px 2rem 0 12px;
+  max-height:calc(100vh - var(--arriba-panel) - 24px);
+  overflow-y:auto; overscroll-behavior:contain;
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:12.5px; line-height:1.45;
+}
+:root[data-toc="off"] #toc{display:none}
+#toc h4{
+  margin:0 0 .6em; font-size:10.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--faint);
+}
+#toc a{
+  display:block; padding:2.5px 8px; border-radius:4px;
+  color:var(--muted); text-decoration:none;
+  border-left:2px solid transparent;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+#toc a:hover{background:var(--raise); color:var(--ink)}
+#toc a.lvl-cap{color:var(--ink); font-weight:600; margin-top:.55em}
+#toc a.lvl-sec{padding-left:16px}
+#toc a.lvl-sub{padding-left:26px}
+#toc a.aqui{
+  border-left-color:var(--link); background:var(--raise);
+  color:var(--ink);
+}
+
+/* ---------------------------------------------------------------------
+   Cuadernos: la lateral DERECHA, que elige que Overleaf se esta viendo.
+   Es lo que pidio el usuario el 2026-08-14, y el modelo que dio es la
+   barra de cuadernos de OneNote.
+   --------------------------------------------------------------------- */
+#cuadernos{
+  grid-column:3; justify-self:start; align-self:start;
+  position:sticky; top:var(--arriba-panel); width:15.5rem;
+  margin:34px 12px 0 2rem;
+  max-height:calc(100vh - var(--arriba-panel) - 24px);
+  overflow-y:auto; overscroll-behavior:contain;
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:12.5px; line-height:1.45;
+}
+:root[data-notas="off"] #cuadernos{display:none}
+#cuadernos h4{
+  margin:0 0 .6em; font-size:10.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--faint);
+}
+#cuadernos a{
+  display:block; padding:.5em .7em; margin-bottom:.3em; border-radius:5px;
+  color:var(--muted); text-decoration:none;
+  border:1px solid var(--rule); border-left:3px solid var(--rule);
+  background:var(--raise);
+}
+#cuadernos a:hover{color:var(--ink); border-left-color:var(--link)}
+#cuadernos a .t{display:block; color:var(--ink); font-weight:600;
+  line-height:1.3; white-space:normal}
+#cuadernos a .c{display:block; color:var(--faint); font-size:11px;
+  margin-top:.2em}
+#cuadernos a.aqui{
+  border-left-color:var(--link); background:var(--raise2);
+}
+#cuadernos a.aqui .t{color:var(--link)}
+#cuadernos .portada{
+  display:block; margin-top:.9em; padding:.35em .7em;
+  border:0; background:transparent; color:var(--faint); font-size:11.5px;
+}
+#cuadernos .portada:hover{color:var(--link); background:transparent}
+
+/* ---------------------------------------------------------------------
+   Estrecho: los dos paneles pasan a cajon sobre el texto, cada uno por
+   su lado. El indice entra por la izquierda y los cuadernos por la
+   derecha, que es de donde salen cuando hay sitio.
+   --------------------------------------------------------------------- */
+@media (max-width:1180px){
+  :root{--arriba-panel:44px}
+  .wrap{display:block}
+  main{width:auto; max-width:41em; margin:0 auto}
+  #toc,#cuadernos{
+    position:fixed; top:var(--arriba-panel); bottom:0; width:min(20rem,82vw);
+    margin:0; max-height:none; padding:14px 10px 30px;
+    background:var(--paper); z-index:50;
+  }
+  #toc{left:0; border-right:1px solid var(--rule);
+    box-shadow:6px 0 22px var(--shadow)}
+  #cuadernos{right:0; border-left:1px solid var(--rule);
+    box-shadow:-6px 0 22px var(--shadow)}
+}
+
+@media (max-width:560px){
+  :root{--fs:16px}
+  main{padding:24px 14px 90px}
+}
+</style>
+
+<script>
+// Las macros salen del preambulo del PROPIO main.tex de esta nota, leidas por
+// build.py. Escritas a mano aqui se desincronizaban en silencio: el dia que
+// alguien anade un \newcommand al Overleaf, la web lo ensena como codigo crudo.
+// NO se convierten formulas: MathJax las lee tal cual del texto del DOM.
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['\\[','\\]'], ['$$','$$']],
+    processEnvironments: true,
+    macros: {"aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "rint": "\\operatorname{ri}", "cl": "\\operatorname{cl}", "tr": "\\operatorname{tr}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1], "trans": "^{\\mathsf{T}}", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2]}
+  },
+  options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="bar" id="barra">
+  <button class="plain icon" id="b-toc" aria-pressed="true"
+          title="Índice">&#9776;</button>
+
+  <div class="grp">
+    <label>Letra</label>
+    <div class="seg">
+      <button id="f-serif" aria-pressed="true">Serif</button>
+      <button id="f-sans"  aria-pressed="false">Palo</button>
+      <button id="f-lm"    aria-pressed="false"
+              title="Latin Modern, la del PDF. Solo si está instalada en el equipo">LaTeX</button>
+    </div>
+  </div>
+  <div class="grp">
+    <label>Tamaño</label>
+    <div class="seg">
+      <button id="s-menos" title="Más pequeño">A&minus;</button>
+      <button id="s-mas"   title="Más grande">A+</button>
+    </div>
+    <span class="val" id="s-val">17</span>
+  </div>
+  <button class="plain" id="b-all">Abrir todas las soluciones</button>
+  <button class="plain icon" id="b-notas" aria-pressed="true"
+          title="Cuadernos">&#9707;</button>
+  <button class="plain icon" id="b-bar" aria-controls="barra" aria-expanded="true"
+          aria-label="Ocultar la barra" title="Ocultar la barra">&#9650;</button>
+</div>
+<button id="volver" aria-controls="barra" aria-expanded="false"
+        aria-label="Mostrar la barra" title="Mostrar la barra">&#9662;</button>
+
+<div class="wrap">
+<nav id="toc" aria-label="Índice"></nav>
+<main>
+  <h1 class="title">Ejercicios Opti Convexa</h1>
+  <p class="subtitle">Soluciones de los ejercicios del curso de Mauricio Junca</p>
+  <p class="byline">Universidad de los Andes · 2026-20</p>
+<section class="capitulo"><h3 id="ejercicios-convexa-x1">Ejercicios asignados por Junca</h3>
+<h4 id="ejercicios-convexa-x2">Tarea 1</h4>
+<div class="stmt ejercicio" id="ej:t1-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sea $f : \mathbb{R}^{n} \mapsto \mathbb{R}$ tal que $|f(x)| \leq \lVert x\rVert^{2}$
+para todo $x$. Muestre que $f$ es Fréchet diferenciable en $0$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p1">Ver solución</button><div class="proof" id="ejercicios-convexa-p1"><p>$|f(0)| \leq \lVert 0\rVert^{2} = 0 \Rightarrow f(0) = 0$. Note que</p>
+<div class="display">\[
+  \frac{|f(h) - f(0)|}{\lVert h\rVert} = \frac{|f(h)|}{\lVert h\rVert}
+  \leq \lVert h\rVert \xrightarrow{\ h \to 0\ } 0 .
+\]</div>
+<p>$\Rightarrow f$ es Fréchet en $0$ con $\Dif f(0) = 0$. \qed</p></div>
+<div class="stmt ejercicio" id="ej:t1-2"><div class="head">Ejercicio 2</div><div class="body"><p>Derive la fórmula de Taylor de segundo orden con resto integral para una
+función $C^{2}$. Úsela para probar el lema de descenso cuando la Hessiana está
+acotada por $LI$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p2">Ver solución</button><div class="proof" id="ejercicios-convexa-p2"><p>Defina $\varphi(s) = f(x+sh)$ $\Rightarrow$ $\varphi&#x27;(s) = \langle\nabla f(x+sh), h\rangle$
+y $\varphi&#x27;&#x27;(s) = \langle\nabla^{2} f(x+sh)h, h\rangle$. Sea
+$g(s) = \varphi(s) + (1-s)\varphi&#x27;(s)$. Pero entonces:</p>
+<div class="display">\[
+  g&#x27;(s) = \varphi&#x27;(s) + (1-s)\varphi&#x27;&#x27;(s) - \varphi&#x27;(s) = (1-s)\varphi&#x27;&#x27;(s),
+\]</div>
+<p>y además $g(0) = f(x) + \langle\nabla f(x), h\rangle$ y $g(1) = f(x+h)$. De
+$g(1) - g(0) = \int_{0}^{1} g&#x27;(s) ds$:</p>
+<div class="display">\[
+  f(x+h) - f(x) - \langle\nabla f(x), h\rangle
+   = \int_{0}^{1} (1-s)\,\langle\nabla^{2} f(x+sh)h, h\rangle \,ds .
+\]</div>
+<p>Suponga ahora $-LI \preceq \nabla^{2} f \preceq LI$, de modo que
+$|\langle\nabla^{2} f(z)h, h\rangle| \leq L\lVert h\rVert^{2}$ para todo $z$.
+Pero entonces:</p>
+<div class="display">\[
+  \bigl|f(x+h) - f(x) - \langle\nabla f(x), h\rangle\bigr|
+   \leq \int_{0}^{1} (1-s)L\lVert h\rVert^{2}\,ds
+   = L\lVert h\rVert^{2}\Bigl[s - \tfrac{s^{2}}{2}\Bigr]_{0}^{1}
+   = \frac{L}{2}\lVert h\rVert^{2},
+\]</div>
+<p>y con $y = x+h$ $\Rightarrow$
+$|f(y) - f(x) - \langle\nabla f(x), y-x\rangle| \leq \frac{L}{2}\lVert y-x\rVert^{2}$. \qed</p></div>
+<div class="stmt ejercicio" id="ej:t1-3"><div class="head">Ejercicio 3</div><div class="body"><p>Sea $f : \mathbb{R}^{2} \mapsto \mathbb{R}$ dada por</p>
+<div class="display">\[
+  f(x) = \frac{2y\exp(-x^{-2})}{y^{2}+\exp(-2x^{-2})}
+\]</div>
+<p>si $x \neq 0$ y $0$ de lo contrario. Muestre que $f$ es Gâteaux diferenciable
+en el origen pero no continua.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p3">Ver solución</button><div class="proof" id="ejercicios-convexa-p3"><p>Sea $d = (d_{1}, d_{2})$. Si $d_{1}d_{2} = 0$ $\Rightarrow$ $f(td) = 0$ para
+todo $t$. Si $d_{1}d_{2} \neq 0$, escriba $m = d_{2}/d_{1}$; sobre la recta
+$y = mx$,</p>
+<div class="display">\[
+  |f(x, mx)| = \frac{|2mx\,e^{-x^{-2}}|}{m^{2}x^{2} + e^{-2x^{-2}}}
+   \leq \frac{|2mx\,e^{-x^{-2}}|}{m^{2}x^{2}}
+   = \frac{2\,e^{-x^{-2}}}{|m||x|} ,
+\]</div>
+<p>y como $e^{-u^{-2}} = o(u^{k})$ para todo $k$, dividir por $t$ no cambia el
+límite:</p>
+<div class="display">\[
+  \left|\frac{f(td)}{t}\right| \leq \frac{2\,e^{-(td_{1})^{-2}}}{|m|\,|td_{1}|\,|t|}
+   \xrightarrow{\ t \to 0\ } 0 .
+\]</div>
+<p>$\Rightarrow \dird{d}{f}(0) = 0$ para todo $d \in \mathbb{R}^{2}$, y $d \mapsto 0$
+es lineal $\Rightarrow f$ es Gâteaux diferenciable en el origen.</p>
+<p>Por otro lado, tome $y = e^{-x^{-2}}$:</p>
+<div class="display">\[
+  f(x,y) = \frac{2\,e^{-2x^{-2}}}{2\,e^{-2x^{-2}}} = 1 ,
+\]</div>
+<p>y $(x, e^{-x^{-2}}) \to (0,0)$ cuando $x \to 0$, mientras que $f(0,0) = 0$
+$\Rightarrow f$ no es continua. \qed</p></div>
+<div class="stmt ejercicio" id="ej:t1-4"><div class="head">Ejercicio 4</div><div class="body"><p>Sea $f : \mathbb{R}^{2} \mapsto \mathbb{R}$ dada por</p>
+<div class="display">\[
+  f(x) = \frac{x^{3}y}{x^{4}+y^{2}}
+\]</div>
+<p>si $(x,y) \neq (0,0)$ y $0$ de lo contrario. Muestre que $f$ es Gâteaux
+diferenciable en el origen pero no es Fréchet diferenciable.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p4">Ver solución</button><div class="proof" id="ejercicios-convexa-p4"><p>Sea $d = (d_{1}, d_{2})$. Si $d_{2} = 0$ $\Rightarrow$ $f(td) = 0$ para todo
+$t$. Si $d_{2} \neq 0$,</p>
+<div class="display">\[
+  \frac{f(td)}{t} = \frac{t^{4}d_{1}^{3}d_{2}}{t\,(t^{4}d_{1}^{4} + t^{2}d_{2}^{2})}
+   = \frac{t\,d_{1}^{3}d_{2}}{t^{2}d_{1}^{4} + d_{2}^{2}}
+   \xrightarrow{\ t \to 0\ } 0 .
+\]</div>
+<p>$\Rightarrow \dird{d}{f}(0) = 0$ para todo $d \in \mathbb{R}^{2}$ $\Rightarrow f$
+es Gâteaux diferenciable en el origen, y si fuera Fréchet sería con
+$\nabla f(0,0) = 0$.</p>
+<p>Pero tome $y = x^{2}$, con $x &gt; 0$:</p>
+<div class="display">\[
+  \frac{|f(x,x^{2}) - f(0,0) - \langle\nabla f(0,0), (x,x^{2})\rangle|}{\lVert (x,x^{2})\rVert}
+   = \frac{x^{5}/(2x^{4})}{\sqrt{x^{2}+x^{4}}}
+   = \frac{x/2}{x\sqrt{1+x^{2}}}
+   \xrightarrow{\ x \downarrow 0\ } \frac{1}{2} \neq 0 .
+\]</div>
+<p>$\Rightarrow f(h) - f(0) - \langle\nabla f(0,0), h\rangle$ no es $o(\lVert h\rVert)$
+$\Rightarrow f$ no es Fréchet diferenciable en el origen. \qed</p></div>
+<div class="stmt ejercicio" id="ej:t1-5"><div class="head">Ejercicio 5$^{*}$</div><div class="body"><p>Calcule las primeras dos derivadas de la función $f(X) = -\log\det(X)$ para $X$
+matriz definida positiva de $n \times n$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p5">Ver solución</button><div class="proof" id="ejercicios-convexa-p5"><p>Sea $U = \{X \in \Sym{n} : X \succ 0\}$ y $f : U \to \mathbb{R}$ dada por
+$f(X) = -\log\det X = -\tr(\log X)$. Todas las series de abajo convergen para
+$\lVert X^{-1}H\rVert &lt; 1$, que es el régimen en que se toma $H \to 0$.</p>
+<p><strong>Primera derivada.</strong> De $X+H = X(I + X^{-1}H)$:</p>
+<div class="display">\[
+  f(X+H) = -\log\bigl(\det X \cdot \det(I + X^{-1}H)\bigr)
+   = f(X) - \tr\bigl(\log(I + X^{-1}H)\bigr) .
+\]</div>
+<p>Con $\log(I+A) = \sum_{n \geq 1} (-1)^{n-1}A^{n}/n$:</p>
+<div class="display">\[
+  f(X+H) = f(X) + \tr\Bigl(\sum_{n \geq 1} \frac{(-X^{-1}H)^{n}}{n}\Bigr)
+   \Rightarrow f(X+H) - f(X) - \tr(-X^{-1}H) = O(\lVert H\rVert^{2}) .
+\]</div>
+<p>Como $X^{-1}$ es simétrica, $\tr(-X^{-1}H) = \langle -X^{-1}, H\rangle$
+$\Rightarrow \nabla f(X) = -X^{-1}$.</p>
+<p><strong>Segunda derivada.</strong> Sea $g : \Sym{n} \to \Sym{n}$ dada por
+$g(X) = X^{-1}$, es decir $g = -\nabla f$. De $X+H = X(I + X^{-1}H)$:</p>
+<div class="display">\[
+  g(X+H) = (I + X^{-1}H)^{-1}X^{-1} = \sum_{n \geq 0} (-X^{-1}H)^{n}X^{-1}
+   = g(X) - X^{-1}HX^{-1} + \sum_{n \geq 2} (-X^{-1}H)^{n}X^{-1} .
+\]</div>
+<p>$\Rightarrow \lVert g(X+H) - g(X) + X^{-1}HX^{-1}\rVert = O(\lVert H\rVert^{2})$
+$\Rightarrow \Dif g(X)(H) = -X^{-1}HX^{-1}$. Pero entonces:</p>
+<div class="display">\[
+  \nabla^{2} f(X) = -\Dif g(X) = \bigl(H \mapsto X^{-1}HX^{-1}\bigr). \qed
+\]</div></div>
+<h4 id="ejercicios-convexa-x3">Tarea 2</h4>
+<p><em>Ejercicios con * son sugeridos para los estudiantes inscritos en la
+materia de código 4.</em></p>
+<div class="stmt ejercicio" id="ej:t2-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sea $A \in \Sym{n}$, $b \in \mathbb{R}^{n}$, $c \in \mathbb{R}$ y considere</p>
+<div class="display">\[
+  C = \{x \in \mathbb{R}^{n} : x\trans A x + b\trans x + c \leq 0\}.
+\]</div>
+<!-- entorno omitido: enumerate --></div></div>
+<p><em>Solución pendiente.</em></p>
+<div class="stmt ejercicio" id="ej:t2-2"><div class="head">Ejercicio 2</div><div class="body"><p>Calcule $\aff(C)$, $\rint(C)$ y la clausura relativa para:</p>
+<!-- entorno omitido: enumerate --></div></div>
+<p><em>Solución pendiente.</em></p>
+<div class="stmt ejercicio" id="ej:t2-3"><div class="head">Ejercicio 3</div><div class="body"><p>Sean $K_{1}, K_{2} \subseteq \mathbb{R}^{n}$ conos convexos. Pruebe que
+$K_{1} + K_{2} = \conv(K_{1} \cup K_{2})$.</p></div></div>
+<p><em>Solución pendiente.</em></p>
+<div class="stmt ejercicio" id="ej:t2-4"><div class="head">Ejercicio 4</div><div class="body"><p>Calcule el cono dual de:</p>
+<!-- entorno omitido: enumerate -->
+<p>En los dos últimos casos demuestre la autodualidad.</p></div></div>
+<p><em>Solución pendiente.</em></p>
+<div class="stmt ejercicio" id="ej:t2-5"><div class="head">Ejercicio 5$^{*}$</div><div class="body"><p>Sean $C \subset \mathbb{R}^{n}$ y $D \subset \mathbb{R}^{m}$ conjuntos convexos
+no vacíos. Pruebe que se cumplen las propiedades siguientes:</p>
+<!-- entorno omitido: enumerate --></div></div>
+<p><em>Solución pendiente.</em></p>
+<div class="stmt ejercicio" id="ej:t2-6"><div class="head">Ejercicio 6$^{*}$</div><div class="body"><p>Sea $\Delta_{n} = \{x \geq 0 : \mathbf{1}\trans x = 1\}$. Muestre que la
+proyección euclidiana de $y \in \mathbb{R}^{n}$ sobre $\Delta_{n}$ tiene la
+forma</p>
+<div class="display">\[
+  x_{i} = (y_{i} - \tau)_{+},
+\]</div>
+<p>para un único $\tau$ que satisface $\sum_{i}(y_{i} - \tau)_{+} = 1$. Diseñe un
+algoritmo de complejidad $O(n\log n)$ basado en ordenar las coordenadas de $y$.</p></div></div>
+<p><em>Solución pendiente.</em></p></section>
+  <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
+</main>
+<nav id="cuadernos" aria-label="Cuadernos">
+<h4>Cuadernos</h4>
+<a href="convexa.html"><span class="t">Optimización Convexa en Espacios de Hilbert</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a href="ejercicios-convexa.html" class="aqui"><span class="t">Ejercicios Opti Convexa</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a href="transporte-optimo.html"><span class="t">Lecture Notes on Optimal Transport</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a class="portada" href="index.html">Todas las notas</a>
+</nav>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* Los rotulos y las notaciones los inyecta el generador, porque dependen de
+   que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
+   una de lecture notes dice «demostraciones». */
+const CFG = {"ver": "Ver solución", "ocultar": "Ocultar solución", "abrirTodas": "Abrir todas las soluciones", "cerrarTodas": "Cerrar todas las soluciones", "notaciones": []};
+
+/* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
+   navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
+   en los valores por defecto. */
+function recuerda(k, v){ try{ localStorage.setItem("notas."+k, v); }catch(e){} }
+function recordado(k){ try{ return localStorage.getItem("notas."+k); }catch(e){ return null; } }
+
+/* --- letra y cuerpo -------------------------------------------------- */
+const FUENTES = {serif:"f-serif", sans:"f-sans", lm:"f-lm"};
+function setFuente(f){
+  document.documentElement.dataset.font = f;
+  for(const [k, id] of Object.entries(FUENTES))
+    $("#"+id).setAttribute("aria-pressed", k === f);
+  recuerda("font", f);
+}
+
+const FS_MIN = 13, FS_MAX = 26;
+let fs = 17;
+function setTam(n){
+  fs = Math.max(FS_MIN, Math.min(FS_MAX, n));
+  document.documentElement.style.setProperty("--fs", fs + "px");
+  $("#s-val").textContent = fs;
+  $("#s-menos").disabled = (fs === FS_MIN);
+  $("#s-mas").disabled   = (fs === FS_MAX);
+  recuerda("fs", fs);
+}
+
+/* --- notacion -------------------------------------------------------- */
+/* Las dos ramas de cada \fin estan las dos en el HTML; esto solo decide
+   cual se ve. «ambas» ensena las dos, que es el \notaAmbas del LaTeX. */
+function setNota(n){
+  if(!CFG.notaciones.length) return;
+  document.documentElement.dataset.nota = n;   // el CSS de «ambas» lo necesita
+  $$(".v[data-var]").forEach(v => {
+    v.dataset.on = (n === "ambas" || v.dataset.var === n) ? "true" : "false";
+  });
+  CFG.notaciones.forEach(x =>
+    $("#n-"+x.id).setAttribute("aria-pressed", String(x.id === n)));
+  recuerda("nota", n);
+}
+
+/* --- indice ---------------------------------------------------------- */
+let observador = null;
+
+/* *** El indice es el del PDF: capitulos, secciones y subsecciones, y NADA
+   mas. *** Instruccion del usuario del 2026-08-14: «el toc debe ser el mismo
+   que del pdf real del overleaf».
+
+   Antes listaba tambien cada definicion y cada proposicion, copiado del
+   artefacto de la tesis. Alli tenia sentido porque aquel documento no tiene
+   secciones y su cuerpo son enunciados encadenados, asi que un indice de solo
+   encabezados habria quedado vacio. Aqui hay capitulos de verdad, y meter los
+   58 enunciados hace un indice que no se parece al del libro. */
+function construyeIndice(){
+  const toc = $("#toc");
+  const piezas = $$("main h2, main h3, main h4");
+  let html = "<h4>Índice</h4>", n = 0;
+  const dianas = [];
+  const CLASE = {H2:"lvl-cap", H3:"lvl-sec", H4:"lvl-sub"};
+  piezas.forEach(el => {
+    if(!el.id) el.id = "auto-" + (n++);
+    // data-toc es el [titulo corto] de \chapter[corto]{largo}, que es justo
+    // el que LaTeX pone en el indice del PDF.
+    const texto = el.dataset.toc || el.textContent.trim();
+    html += '<a class="' + CLASE[el.tagName] + '" href="#' + esc(el.id)
+          + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
+    dianas.push(el);
+  });
+  toc.innerHTML = html;
+  vigila(dianas);
+}
+
+function esc(s){
+  return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+}
+
+/* Resaltar donde esta el lector. Se marca la ultima pieza que ya paso por
+   arriba de la ventana, que es lo que hace un lector de PDF; con «la que se ve»
+   a secas, en un salto largo no se marca ninguna. */
+function vigila(dianas){
+  if(observador) observador.disconnect();
+  const vistas = new Set();
+  observador = new IntersectionObserver(entradas => {
+    entradas.forEach(e => e.isIntersecting ? vistas.add(e.target)
+                                           : vistas.delete(e.target));
+    let actual = null;
+    for(const d of dianas){
+      if(vistas.has(d)){ actual = d; break; }
+      if(d.getBoundingClientRect().top < 80) actual = d;
+    }
+    marca(actual);
+  }, {rootMargin: "-70px 0px -65% 0px", threshold: 0});
+  dianas.forEach(d => observador.observe(d));
+}
+
+function marca(el){
+  const toc = $("#toc");
+  toc.querySelectorAll("a.aqui").forEach(a => a.classList.remove("aqui"));
+  if(!el) return;
+  const a = toc.querySelector('a[data-d="' + CSS.escape(el.id) + '"]');
+  if(!a) return;
+  a.classList.add("aqui");
+  const r = a.getBoundingClientRect(), rt = toc.getBoundingClientRect();
+  if(r.top < rt.top || r.bottom > rt.bottom)
+    a.scrollIntoView({block:"nearest"});
+}
+
+/* --- los dos paneles y la barra --------------------------------------- */
+function setToc(on){
+  document.documentElement.dataset.toc = on ? "on" : "off";
+  $("#b-toc").setAttribute("aria-pressed", String(on));
+  recuerda("toc", on ? "on" : "off");
+}
+function setNotas(on){
+  document.documentElement.dataset.notas = on ? "on" : "off";
+  $("#b-notas").setAttribute("aria-pressed", String(on));
+  recuerda("cuadernos", on ? "on" : "off");
+}
+/* Plegar la barra devuelve su altura al texto. Arranca desplegada, que es donde
+   se ve que existe, y la eleccion se recuerda: quien la pliega la encuentra
+   plegada la proxima vez. */
+function setBarra(on){
+  document.documentElement.dataset.bar = on ? "on" : "off";
+  $("#b-bar").setAttribute("aria-expanded", String(on));
+  $("#volver").setAttribute("aria-expanded", String(on));
+  recuerda("bar", on ? "on" : "off");
+}
+
+/* --- demostraciones o soluciones -------------------------------------- */
+function refrescaBotonGlobal(){
+  const bs = $$(".proof-btn");
+  const todas = bs.length > 0 && bs.every(b => b.getAttribute("aria-expanded") === "true");
+  $("#b-all").textContent = todas ? CFG.cerrarTodas : CFG.abrirTodas;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest(".proof-btn");
+  if(!b) return;
+  const caja = document.getElementById(b.dataset.t);
+  const abierto = b.getAttribute("aria-expanded") === "true";
+  b.setAttribute("aria-expanded", String(!abierto));
+  b.textContent = abierto ? CFG.ver : CFG.ocultar;
+  caja.dataset.open = String(!abierto);
+  refrescaBotonGlobal();
+});
+$("#b-all").addEventListener("click", () => {
+  const bs = $$(".proof-btn");
+  const abrir = !bs.every(b => b.getAttribute("aria-expanded") === "true");
+  bs.forEach(b => {
+    b.setAttribute("aria-expanded", String(abrir));
+    b.textContent = abrir ? CFG.ocultar : CFG.ver;
+    document.getElementById(b.dataset.t).dataset.open = String(abrir);
+  });
+  refrescaBotonGlobal();
+});
+
+/* --- arranque -------------------------------------------------------- */
+$("#f-serif").addEventListener("click", () => setFuente("serif"));
+$("#f-sans").addEventListener("click",  () => setFuente("sans"));
+$("#f-lm").addEventListener("click",    () => setFuente("lm"));
+$("#s-menos").addEventListener("click", () => setTam(fs - 1));
+$("#s-mas").addEventListener("click",   () => setTam(fs + 1));
+$("#b-toc").addEventListener("click", () =>
+  setToc(document.documentElement.dataset.toc !== "on"));
+$("#b-notas").addEventListener("click", () =>
+  setNotas(document.documentElement.dataset.notas !== "on"));
+$("#b-bar").addEventListener("click", () => setBarra(false));
+$("#volver").addEventListener("click", () => {
+  setBarra(true);
+  $("#b-bar").focus();   // el foco iba en un boton que acaba de desaparecer
+});
+CFG.notaciones.forEach(x =>
+  $("#n-"+x.id).addEventListener("click", () => setNota(x.id)));
+
+/* En pantalla estrecha los paneles tapan el texto, asi que al pulsar un enlace
+   se cierran solos. En ancha se quedan, que es donde sirven de mapa. */
+const ancha = () => window.matchMedia("(min-width:1181px)").matches;
+$("#toc").addEventListener("click", e => {
+  if(e.target.closest("a") && !ancha()) setToc(false);
+});
+
+construyeIndice();
+refrescaBotonGlobal();
+setFuente(FUENTES[recordado("font")] ? recordado("font") : "serif");
+setTam(parseInt(recordado("fs"), 10) || 17);
+setToc(recordado("toc") ? recordado("toc") === "on" : ancha());
+setNotas(recordado("cuadernos") ? recordado("cuadernos") === "on" : ancha());
+setBarra(recordado("bar") !== "off");
+if(CFG.notaciones.length){
+  const guardada = recordado("nota");
+  const valida = CFG.notaciones.some(x => x.id === guardada);
+  setNota(valida ? guardada : CFG.notaciones[0].id);
+}
+</script>
+</body>
+</html>
