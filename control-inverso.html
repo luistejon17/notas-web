@@ -1,0 +1,2368 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Publico pero NO indexable. Decision del usuario del 2026-08-12: publico e
+     indexable no son lo mismo. Aplica a TODAS las paginas del sitio. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Control Óptimo Inverso en Tiempo Continuo</title>
+<!-- Un libro abierto, dibujado en SVG y empotrado como data URI: no es un
+     archivo aparte, asi que no hay una peticion mas ni un 404 que enseñe el
+     icono roto. Los colores son los del sitio. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316324f'/%3E%3Cpath d='M5.5 8.6c3.5-1.3 6.9-1.2 9.8.6v14.2c-2.9-1.8-6.3-1.9-9.8-.6z' fill='%23fcfcfd'/%3E%3Cpath d='M26.5 8.6c-3.5-1.3-6.9-1.2-9.8.6v14.2c2.9-1.8 6.3-1.9 9.8-.6z' fill='%23cfe0f2'/%3E%3C/svg%3E">
+<style>
+/* ---------------------------------------------------------------------
+   Tokens. Los mismos del artefacto de notas_junca, que es la referencia
+   que pidio el usuario el 2026-08-14.
+   La paleta clara COMPLETA vive en :root; los dos bloques de abajo solo
+   redefinen tokens, nunca estilan un componente, que si no el tema
+   «sistema» (sin data-theme) se queda sin color.
+   --------------------------------------------------------------------- */
+:root{
+  --paper:#fcfcfd; --ink:#16191f; --muted:#5a636f; --faint:#8a93a0;
+  --rule:#dde1e7; --raise:#f1f4f8; --raise2:#e7ecf2;
+  --def:#1c6b3c; --def-bg:#e6f1ea; --mark:#8f1d3f;
+  --link:#1d4f87; --shadow:rgba(16,25,40,.15);
+  --btn:#eef1f6; --btn-on:#16324f; --btn-on-ink:#ffffff;
+
+  /* Fondo de los paneles (barra, TOC, cuadernos): ligeramente distinto del
+     fondo del texto, para que se note donde acaba uno y empieza el otro.
+     Es un alias de --raise, asi que hereda su valor en cada tema sin que
+     los bloques de abajo tengan que redefinirlo tambien. */
+  --panel-bg:var(--raise);
+
+  /* Ancho de los paneles laterales. Son variables porque el arrastre del
+     borde (como el explorer de VS Code) las reescribe en JS, y todo lo que
+     depende de la posicion del borde -las pestanas y el tirador- las lee de
+     aqui en vez de recalcular nada. */
+  --toc-w:264px; --toc-min:180px; --toc-max:480px;
+  --cuadernos-w:248px; --cuadernos-min:180px; --cuadernos-max:420px;
+
+  /* Letra y cuerpo. Son tokens porque los mueven los botones de la barra.
+     Todo es fuente de sistema. Las cadenas van de lo mejor a lo peor y
+     siempre acaban en una familia generica, asi que en un equipo sin la
+     primera no se rompe nada, solo cambia. */
+  --ff-body:"Charter","Iowan Old Style","Source Serif Pro",Cambria,Georgia,serif;
+  --ff-math:"Cambria Math","STIX Two Math","Latin Modern Math",Cambria,serif;
+  --fs:17px;
+  --lh:1.6;
+
+  /* Cuanto hay que dejar libre arriba. La barra es sticky y taparia lo que se
+     ancla al borde superior: los dos paneles y el destino de cada enlace
+     interno. Son tokens porque al plegar la barra hay que recuperar ese
+     hueco; si se quedan fijos, el documento sigue esquivando una barra que
+     ya no esta. */
+  --arriba-panel:52px;
+  --arriba-ancla:60px;
+}
+:root[data-bar="off"]{--arriba-panel:14px; --arriba-ancla:18px}
+/* La matematica se queda en una serif matematica aunque el cuerpo sea de palo:
+   es lo que hace cualquier revista, y una integral en Segoe UI se lee mal. */
+:root[data-font="sans"]{
+  --ff-body:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --lh:1.62;
+}
+/* «Como el PDF». Aqui SI se puede pedir por nombre, al contrario que en el
+   artefacto: esto es una pagina normal, no un artifact con CSP, asi que si
+   el equipo tiene Latin Modern instalada la coge, y si no cae a Cambria. */
+:root[data-font="lm"]{
+  --ff-body:"Latin Modern Roman","LM Roman 10",Cambria,Georgia,serif;
+  --lh:1.58;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131619; --ink:#e2e6eb; --muted:#98a1ac; --faint:#727c88;
+    --rule:#282e35; --raise:#1a1e23; --raise2:#232930;
+    --def:#68be8b; --def-bg:#18271e; --mark:#df8199;
+    --link:#79a9dd; --shadow:rgba(0,0,0,.55);
+    --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131619; --ink:#e2e6eb; --muted:#98a1ac; --faint:#727c88;
+  --rule:#282e35; --raise:#1a1e23; --raise2:#232930;
+  --def:#68be8b; --def-bg:#18271e; --mark:#df8199;
+  --link:#79a9dd; --shadow:rgba(0,0,0,.55);
+  --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--ff-body);
+  font-size:var(--fs); line-height:var(--lh);
+  -webkit-text-size-adjust:100%;
+}
+mjx-container{font-family:var(--ff-math)}
+
+/* --- barra de control ------------------------------------------------ */
+.bar{
+  position:sticky; top:0; z-index:40;
+  display:flex; flex-wrap:wrap; gap:14px; align-items:center;
+  padding:9px 20px; background:var(--panel-bg);
+  border-bottom:1px solid var(--rule);
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif; font-size:12.5px;
+}
+.grp{display:flex; align-items:center; gap:7px}
+.grp>label{color:var(--faint); text-transform:uppercase; letter-spacing:.07em;
+  font-size:10.5px; font-weight:600}
+.seg{display:flex; border:1px solid var(--rule); border-radius:5px; overflow:hidden}
+.seg button{
+  border:0; background:var(--btn); color:var(--muted);
+  padding:4px 11px; font:inherit; cursor:pointer;
+}
+.seg button+button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--btn-on); color:var(--btn-on-ink)}
+.plain{
+  border:1px solid var(--rule); border-radius:5px; background:var(--btn);
+  color:var(--muted); padding:4px 11px; font:inherit; cursor:pointer;
+}
+.plain:hover,.seg button:hover{color:var(--ink)}
+.plain.icon{padding:4px 9px; font-size:14px; line-height:1}
+/* La barra se pliega entera hacia arriba, como la cinta de Excel. Es sticky, y
+   en pantalla estrecha ocupa tres filas, asi que su altura se paga durante todo
+   el scroll. Plegada no queda nada de ella salvo la pestana de volver, que va
+   fija en la esquina y translucida hasta que se apunta. */
+#b-bar{margin-left:auto; font-size:10px}
+:root[data-bar="off"] .bar{display:none}
+#volver{
+  position:fixed; top:0; right:14px; z-index:45; display:none;
+  border:1px solid var(--rule); border-top:0; border-radius:0 0 6px 6px;
+  background:var(--panel-bg); color:var(--faint);
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif; font-size:12px;
+  line-height:1; padding:3px 11px 4px; cursor:pointer; opacity:.45;
+}
+#volver:hover,#volver:focus-visible{opacity:1; color:var(--ink)}
+:root[data-bar="off"] #volver{display:block}
+.grp .val{
+  color:var(--muted); font-variant-numeric:tabular-nums; min-width:1.6em;
+  text-align:right;
+}
+:focus-visible{outline:2px solid var(--link); outline-offset:2px}
+
+/* --- pagina ---------------------------------------------------------- */
+/* En `em`, no en `rem`: la medida tiene que seguir dando los mismos ~68
+   caracteres por linea cuando el lector sube el cuerpo. Con `rem` la columna se
+   queda quieta y el texto grande cabe a 40 caracteres. Por lo mismo, TODO lo
+   de dentro de main va en em; la barra de control se queda en px, que no debe
+   crecer con el texto. */
+.title{font-size:1.72em; line-height:1.25; font-weight:600; margin:.2em 0 .1em;
+  text-wrap:balance}
+.subtitle{color:var(--muted); font-size:1.02em; margin:0 0 .5em}
+.byline{color:var(--faint); font-size:.85em;
+  font-family:"Segoe UI",system-ui,sans-serif; margin:0 0 2.2em;
+  padding-bottom:1.4em; border-bottom:1px solid var(--rule)}
+
+h2,h3,h4{font-weight:600; line-height:1.28; text-wrap:balance;
+  margin:2.1em 0 .5em; scroll-margin-top:var(--arriba-ancla)}
+h2{font-size:1.3em}
+h3{font-size:1.06em; color:var(--muted)}
+h4{font-size:.98em; color:var(--muted)}
+p{margin:0 0 .85em}
+
+a{color:var(--link)}
+.df{color:var(--def); font-weight:600}
+/* La atribucion. Gris y pequena: tiene que estar, no que leerse. */
+.src{
+  color:var(--faint); font-family:"Segoe UI",system-ui,sans-serif;
+  font-size:.76em; letter-spacing:.02em; margin-left:.55em; font-weight:400;
+}
+code{font-family:ui-monospace,Consolas,monospace; font-size:.85em}
+
+/* --- ecuaciones ------------------------------------------------------ */
+/* Solo se ve el documento del idioma activo. Los dos estan en el DOM porque
+   comparten \label a proposito; sus id llevan el idioma delante. */
+.doc{display:none}
+.doc[data-on="true"]{display:block}
+
+/* Una ecuacion numerada: la formula ocupa el ancho y el numero se va al
+   margen derecho, como en el PDF. `.jn` es el numero que esa ecuacion tenia
+   en la nota original de Junca, para poder citarsela a el. */
+.display.numerado{display:flex; align-items:center; gap:12px; overflow:visible}
+.display.numerado .eqbody{flex:1; min-width:0; overflow-x:auto}
+.eqside{
+  flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:2px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:.72em;
+  font-variant-numeric:tabular-nums;
+}
+.eqside .num{color:var(--muted)}
+.eqside .jn{color:var(--faint); font-size:.9em; white-space:nowrap}
+
+/* El numero de seccion, delante del titulo y en su propia caja para que el
+   texto no baile entre una seccion de un digito y otra de dos. */
+.secnum{color:var(--faint); font-weight:400; margin-right:.5em;
+  font-variant-numeric:tabular-nums}
+
+/* Un termino con definicion emergente. Se marca poco: subrayar cada aparicion
+   llena el parrafo y el cuadro deja de significar «aqui esta la definicion». */
+button.term{
+  font:inherit; color:inherit; background:var(--def-bg);
+  border:0; border-bottom:1px dashed var(--def);
+  padding:0 2px; margin:0 -1px; cursor:help; border-radius:2px;
+}
+#pop{
+  position:fixed; z-index:60; max-width:min(32rem,calc(100vw - 24px));
+  display:none; padding:.6em .8em;
+  background:var(--paper); color:var(--ink);
+  border:1px solid var(--rule); border-radius:7px;
+  box-shadow:0 6px 22px var(--shadow);
+  font-family:var(--ff-body); font-size:.87em; line-height:1.5;
+}
+#pop[data-on="true"]{display:block}
+#pop p{margin:0}
+
+/* Una referencia cuyo destino no existe: se deja el rotulo y se le quita el
+   enlace. Un enlace muerto es peor, porque parece que funciona. */
+.xref.muerta{color:var(--muted); text-decoration:none}
+
+.display{overflow-x:auto; overflow-y:hidden; margin:1.1em 0; padding:.15em 0}
+
+/* Las dos ramas de \fin y \displayfin. Se emiten LAS DOS y se ensena una:
+   es lo que permite conmutar la notacion en el navegador sin volver a
+   generar nada. Una nota sin \fin no produce ni un .v, y entonces el
+   selector de notacion no sale en la barra. */
+.v{display:none}
+.v[data-on="true"]{display:inline}
+.display .v[data-on="true"]{display:block}
+/* La rama de un \ifnum\modoNota envuelve displays enteros, asi que es un
+   <div> y tiene que ir en bloque, no en linea. */
+div.v[data-on="true"]{display:block}
+/* En modo «ambas» salen las dos, y sin esto saldrian pegadas y sin saber cual
+   es cual. La de de Finetti va en gris, que es lo que hace \dfin en el PDF:
+   debajo si es un display, detras y separada si va en linea. */
+:root[data-nota="ambas"] .v[data-var="fin"]{color:var(--faint)}
+:root[data-nota="ambas"] .v[data-var="fin"]::before{content:"\00a0\00a0"}
+:root[data-nota="ambas"] .display .v[data-var="fin"]{margin-top:-.4em}
+:root[data-nota="ambas"] .display .v[data-var="fin"]::before{content:none}
+
+/* --- enunciados ------------------------------------------------------ */
+.stmt{
+  margin:1.5em 0; padding:.75em 0 .75em 1.05em;
+  border-left:2px solid var(--rule); scroll-margin-top:var(--arriba-ancla);
+}
+.stmt .head{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:.79em;
+  font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:.4em;
+}
+.stmt.definicion,.stmt.problema{border-left-color:var(--def)}
+.stmt.definicion .head,.stmt.problema .head{color:var(--def)}
+.stmt.teorema,.stmt.proposicion,.stmt.lema,.stmt.corolario{
+  border-left-color:var(--link)}
+.stmt.teorema>.body,.stmt.proposicion>.body,.stmt.lema>.body,
+.stmt.corolario>.body{font-style:italic}
+.stmt .body mjx-container{font-style:normal}
+.stmt.observacion{border-left-style:dotted}
+.stmt.ejemplo{border-left-color:var(--mark)}
+.stmt.ejemplo .head{color:var(--mark)}
+/* El enunciado del compendio de ejercicios. En el PDF va dentro de un cuadro
+   y aqui tambien, que es lo que lo distingue de la solucion que va debajo:
+   dentro del recuadro esta lo de quien puso el ejercicio, fuera lo del autor. */
+.stmt.ejercicio{
+  border:1px solid var(--rule); border-radius:3px;
+  padding:.75em 1.05em; background:var(--fondo-caja,transparent);
+}
+.stmt.ejercicio .head{color:var(--link)}
+.stmt .body p:last-child{margin-bottom:0}
+ol.rom{margin:.4em 0 .4em 1.3em; padding:0}
+ol.rom li{margin-bottom:.4em}
+
+/* --- demostraciones (o soluciones) ----------------------------------- */
+.proof-btn{
+  margin-top:.5em; border:1px solid var(--rule); border-radius:4px;
+  background:transparent; color:var(--muted); cursor:pointer;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:.75em;
+  padding:2.5px 9px; letter-spacing:.02em;
+}
+.proof-btn:hover{color:var(--ink); background:var(--raise)}
+.proof-btn::before{content:"\25B8 "; font-size:.9em}
+.proof-btn[aria-expanded="true"]::before{content:"\25BE "}
+.proof{
+  display:none; margin-top:.7em; padding:.7em .95em;
+  background:var(--raise); border-radius:5px;
+  font-size:.945em; color:var(--muted);
+}
+.proof[data-open="true"]{display:block}
+.proof p:last-child{margin-bottom:0}
+
+.note{
+  margin-top:3.5em; padding-top:1.2em; border-top:1px solid var(--rule);
+  color:var(--faint); font-size:.8em;
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+
+/* ---------------------------------------------------------------------
+   El TOC empuja el texto (ocupa su propio hueco, en el flujo); los
+   cuadernos se SOBREPONEN encima sin moverlo, que es el modelo de OneNote
+   que pidio el usuario el 2026-08-16. Por eso el TOC es un hijo mas de
+   .wrap (flex) y los cuadernos van con position:fixed, fuera del flujo.
+   Sin tope de ancho para el texto: ocupa todo el hueco que quede, sea
+   cual sea el ancho del TOC. Decision del usuario del 2026-08-16.
+   --------------------------------------------------------------------- */
+.wrap{display:flex; align-items:flex-start}
+main{flex:1 1 auto; min-width:0; padding:34px clamp(20px,4vw,64px) 120px}
+
+/* ---------------------------------------------------------------------
+   Indice lateral. Lista capitulos, secciones Y cada enunciado, que es lo
+   que hace el artefacto: en un documento donde el cuerpo son enunciados
+   encadenados, un indice de solo secciones deja fuera casi todo el
+   contenido navegable. Se construye en JS desde el DOM ya renderizado.
+
+   El ancho vive en --toc-w y lo reescribe el JS al arrastrar el borde
+   (panel.js abajo). Plegado es --toc-w:0, y el hueco que deja lo recupera
+   el texto solo, porque main es flex:1 y no tiene un ancho fijo que
+   defender.
+   --------------------------------------------------------------------- */
+#toc{
+  flex:0 0 auto; position:sticky; top:var(--arriba-panel);
+  width:var(--toc-w); max-width:90vw;
+  /* min-height IGUAL al max-height: sin esto la caja del panel solo era tan
+     alta como su contenido, asi que un indice corto dejaba el fondo gris a
+     medias y el resto de la columna se veia blanco, como si el panel se
+     hubiera acabado antes de tiempo. Encontrado por el usuario el
+     2026-08-16 mirando convexa, que tiene un indice mas corto que la
+     pantalla. */
+  min-height:calc(100vh - var(--arriba-panel) - 24px);
+  max-height:calc(100vh - var(--arriba-panel) - 24px);
+  overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain;
+  background:var(--panel-bg); border-right:1px solid var(--rule);
+  padding:22px 16px 24px 20px; margin:0;
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:12.5px; line-height:1.45;
+  transition:width .12s ease, border-color .12s ease;
+}
+body.arrastrando #toc{transition:none}
+:root[data-toc="off"] #toc{
+  width:0!important; padding-left:0; padding-right:0;
+  border-right-color:transparent; overflow:hidden;
+}
+#toc h4{
+  margin:0 0 .6em; font-size:10.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--faint);
+}
+/* El buscador filtra por texto las entradas ya construidas: no hace falta
+   para 8-15 entradas, pero transporte optimo ya tiene 14 y solo va a crecer
+   segun se enchufen mas notas. */
+.toc-buscar{
+  display:block; width:100%; margin:0 0 .8em; padding:5px 8px;
+  border:1px solid var(--rule); border-radius:5px;
+  background:var(--paper); color:var(--ink); font:inherit; font-size:12px;
+}
+.toc-buscar:focus-visible{outline:2px solid var(--link); outline-offset:1px}
+#toc a[hidden]{display:none}
+#toc a{
+  display:block; padding:2.5px 8px; border-radius:4px;
+  color:var(--muted); text-decoration:none;
+  border-left:2px solid transparent;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+#toc a:hover{background:var(--raise2); color:var(--ink)}
+#toc a.lvl-cap{color:var(--ink); font-weight:600; margin-top:.55em}
+#toc a.lvl-sec{padding-left:16px}
+#toc a.lvl-sub{padding-left:26px}
+#toc a.aqui{
+  border-left-color:var(--link); background:var(--raise2);
+  color:var(--ink);
+}
+
+/* ---------------------------------------------------------------------
+   Cuadernos: la lateral DERECHA, que elige que Overleaf se esta viendo.
+   El modelo que dio el usuario es la barra de cuadernos de OneNote, y el
+   2026-08-16 preciso la diferencia clave con el TOC: esta NO empuja el
+   texto, se sobrepone. position:fixed la saca del flujo de .wrap para
+   siempre, no solo en pantalla estrecha.
+   --------------------------------------------------------------------- */
+/* Cerrado es el estado BASE, no una excepcion: los cuadernos arrancan
+   plegados casi siempre (arranca() por defecto los deja asi), y si el
+   abierto fuera el estado base se veria un parpadeo del panel entero
+   sobrepuesto en el instante entre que llega el HTML y corre el JS que lo
+   pliega. Con el cerrado como base ese parpadeo no existe. */
+#cuadernos{
+  position:fixed; top:var(--arriba-panel); right:0; bottom:0;
+  width:0; max-width:90vw;
+  overflow:hidden; overscroll-behavior:contain;
+  background:var(--panel-bg); border-left:1px solid transparent;
+  padding:0; margin:0; z-index:38;
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:12.5px; line-height:1.45;
+  transition:width .12s ease;
+}
+body.arrastrando #cuadernos{transition:none}
+:root[data-cuadernos="on"] #cuadernos{
+  width:var(--cuadernos-w); overflow-y:auto;
+  border-left-color:var(--rule); box-shadow:-10px 0 26px var(--shadow);
+  padding:22px 20px 24px 16px;
+}
+#cuadernos h4{
+  margin:0 0 .6em; font-size:10.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--faint);
+}
+#cuadernos a{
+  display:block; padding:.5em .7em; margin-bottom:.3em; border-radius:5px;
+  color:var(--muted); text-decoration:none;
+  border:1px solid var(--rule); border-left:3px solid var(--rule);
+  background:var(--raise2);
+}
+#cuadernos a:hover{color:var(--ink); border-left-color:var(--link)}
+#cuadernos a .t{display:block; color:var(--ink); font-weight:600;
+  line-height:1.3; white-space:normal}
+#cuadernos a .c{display:block; color:var(--faint); font-size:11px;
+  margin-top:.2em}
+#cuadernos a.aqui{
+  border-left-color:var(--link); background:var(--paper);
+}
+#cuadernos a.aqui .t{color:var(--link)}
+#cuadernos .portada{
+  display:block; margin-top:.9em; padding:.35em .7em;
+  border:0; background:transparent; color:var(--faint); font-size:11.5px;
+}
+#cuadernos .portada:hover{color:var(--link); background:transparent}
+
+/* ---------------------------------------------------------------------
+   Las pestanas y el tirador de cada borde. Van position:fixed, igual que
+   #volver, y NO son hijos del panel: si lo fueran, el overflow-y:auto del
+   TOC recortaria en X tambien (CSS no deja overflow-x:visible con
+   overflow-y:auto) y la pestana desaparecia en cuanto el panel se
+   plegara. Al ser hermanos fijos, su posicion sale del mismo --*-w que
+   fija el ancho del panel, asi que se mueven solos con el.
+
+   La flecha apunta hacia donde se va el panel al pulsarla: hacia su
+   propio borde (colapsar) o hacia el texto (expandir). Es la regla que
+   dio el usuario el 2026-08-16, mirando el TOC, y aqui se refleja para
+   los cuadernos.
+   --------------------------------------------------------------------- */
+.pestana{
+  position:fixed; top:50%; transform:translateY(-50%); z-index:41;
+  width:18px; height:44px; padding:0; margin:0;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--rule); background:var(--panel-bg);
+  color:var(--muted); font-size:12px; line-height:1; cursor:pointer;
+}
+.pestana:hover{color:var(--ink)}
+.pestana.cerrada{color:var(--faint)}
+#toc-pestana{
+  left:var(--toc-w); margin-left:-1px;
+  border-radius:0 6px 6px 0;
+}
+:root[data-toc="off"] #toc-pestana{left:0; margin-left:0}
+#cuadernos-pestana{
+  right:var(--cuadernos-w); margin-right:-1px;
+  border-radius:6px 0 0 6px;
+}
+:root[data-cuadernos="off"] #cuadernos-pestana{right:0; margin-right:0}
+.tirador{
+  position:fixed; top:var(--arriba-panel);
+  height:calc(100vh - var(--arriba-panel)); width:9px;
+  cursor:ew-resize; background:transparent; z-index:39;
+}
+.tirador:hover,.tirador.activo{background:var(--link); opacity:.3}
+#toc-tirador{left:calc(var(--toc-w) - 4px)}
+:root[data-toc="off"] #toc-tirador{left:0}
+#cuadernos-tirador{right:calc(var(--cuadernos-w) - 4px)}
+:root[data-cuadernos="off"] #cuadernos-tirador{right:0}
+
+@media (max-width:560px){
+  :root{--fs:16px}
+  main{padding:24px 14px 90px}
+}
+
+/* Sin esto, imprimir la pagina imprime tambien la barra de control, el TOC,
+   los cuadernos y sus pestanas/tiradores: son navegacion de pantalla, no
+   parte de la nota. Las demostraciones plegadas SI se imprimen abiertas,
+   porque en papel no hay boton que pulsar. */
+@media print{
+  .bar,#volver,#toc,#cuadernos,.pestana,.tirador{display:none!important}
+  .wrap{display:block}
+  main{padding:0; max-width:none}
+  .proof{display:block!important}
+  .proof-btn{display:none}
+}
+</style>
+
+<script>
+// Las macros salen del preambulo del PROPIO main.tex de esta nota, leidas por
+// build.py. Escritas a mano aqui se desincronizaban en silencio: el dia que
+// alguien anade un \newcommand al Overleaf, la web lo ensena como codigo crudo.
+// NO se convierten formulas: MathJax las lee tal cual del texto del DOM.
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['\\[','\\]'], ['$$','$$']],
+    processEnvironments: true,
+    macros: {"resaltar": ["\\textcolor{amaObs}{#1}", 1], "bd": "\\bullethang{verdee}", "bh": "\\bullethang{bluePropo}", "bent": "\\bullethang{blueThm}", "bej": "\\bullethang{olive}", "brem": "\\bullethang{dunkelmagenta}", "s": "\\subseteq", "rt": "\\Longrightarrow", "lt": "\\Longleftarrow", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Tor": "\\mathbb{T}", "gen": ["\\mathcal{L}_{#1}", 1], "Gen": ["\\boldsymbol{\\mathcal{L}}_{#1}", 1], "Sg": ["\\boldsymbol{P}_{#1}", 1], "Hs": "\\mathcal{H}", "Hd": "\\mathcal{H}^{*}", "M": "\\mathcal{M}", "ch": "\\widehat{c}", "Gap": "\\operatorname{Gap}_E", "Opt": "\\operatorname{Opt}", "dom": "\\mathcal{D}", "pair": ["\\langle #1,#2\\rangle", 2], "qv": ["\\langle #1\\rangle", 1], "qc": ["\\langle #1,#2\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "tIntuicion": "Intuition", "tOjo": "Warning", "tConexion": "Connection", "tVive": "Where it lives", "tAbierto": "Where it lives is still open", "tConexP": "Personal connection", "carpeta": "en"}
+  },
+  options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="bar" id="barra">
+  <div class="grp">
+    <label>Idioma</label>
+    <div class="seg">
+      <button id="i-es" aria-pressed="true">Español</button>
+      <button id="i-en" aria-pressed="false">English</button>
+    </div>
+  </div>
+  <div class="grp">
+    <label>Notación</label>
+    <div class="seg">
+      <button id="n-fin" aria-pressed="true">de Finetti</button>
+      <button id="n-std" aria-pressed="false">Integrales</button>
+    </div>
+  </div>
+  <div class="grp">
+    <label>Letra</label>
+    <div class="seg">
+      <button id="f-serif" aria-pressed="true">Serif</button>
+      <button id="f-sans"  aria-pressed="false">Palo</button>
+      <button id="f-lm"    aria-pressed="false"
+              title="Latin Modern, la del PDF. Solo si está instalada en el equipo">LaTeX</button>
+    </div>
+  </div>
+  <div class="grp">
+    <label>Tamaño</label>
+    <div class="seg">
+      <button id="s-menos" title="Más pequeño">A&minus;</button>
+      <button id="s-mas"   title="Más grande">A+</button>
+    </div>
+    <span class="val" id="s-val">17</span>
+  </div>
+  <button class="plain" id="b-all">Abrir todas las demostraciones</button>
+  <button class="plain icon" id="b-bar" aria-controls="barra" aria-expanded="true"
+          aria-label="Ocultar la barra" title="Ocultar la barra">&#9650;</button>
+</div>
+<button id="volver" aria-controls="barra" aria-expanded="false"
+        aria-label="Mostrar la barra" title="Mostrar la barra">&#9662;</button>
+
+<div class="wrap">
+<nav id="toc" aria-label="Índice">
+  <h4>Índice</h4>
+  <input type="search" id="toc-buscar" class="toc-buscar"
+         placeholder="Buscar…" aria-label="Buscar en el índice">
+  <div id="toc-lista"></div>
+</nav>
+<div class="tirador" id="toc-tirador" aria-hidden="true"></div>
+<button class="pestana" id="toc-pestana" aria-controls="toc" aria-expanded="true"
+        title="Ocultar el índice">&#9666;</button>
+<main>
+  <h1 class="title">Control Óptimo Inverso en Tiempo Continuo</h1>
+  <p class="subtitle">La formulación por medidas de ocupación, a partir de la nota de Mauricio Junca</p>
+  <p class="byline">Universidad de los Andes · Propuesta de tesis</p>
+<div class="doc" data-lang="es" data-on="true"><section class="capitulo"><h3 id="es-sec:forward"><span class="secnum">1</span>Control estocástico descontado directo</h3>
+<p><button class="term" type="button" data-k="E">$E\s\R^d$</button> el espacio de estados, <button class="term" type="button" data-k="A">$A\s\R^m$</button> las acciones,
+compacto. Fijos <button class="term" type="button" data-k="rho">$\rho&gt;0$</button> la tasa de descuento y
+<button class="term" type="button" data-k="nu0">$\nu_0\in\mathscr P(E)$</button> la ley inicial. La letra
+$\Omega$ queda reservada al espacio muestral de $(\Omega,\mathscr F,\{\mathscr
+F_t\},\P)$, y $W$ es un browniano en $\R^d$.</p>
+<div class="v" data-var="std"></div><div class="v" data-var="fin"><p>Las integrales van en notación de de Finetti, una medida aplicada a una función:
+$\mu(f)=\int f d\mu$, con superíndice para nombrar la variable de integración
+cuando actúan varias medidas seguidas.</p></div>
+<p>El modelo es la difusión controlada</p>
+<div class="display numerado" id="es-eq:sde"><div class="eqbody">\begin{equation}
+
+  dX_t=b(X_t,a_t)\,dt+\sigma(X_t,a_t)\,dW_t,\qquad X_0\sim\nu_0,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(2)</span><span class="num">(1)</span></div></div>
+<p>cuyo generador con la acción $a\in A$ congelada es</p>
+<div class="display numerado" id="es-eq:generator"><div class="eqbody">\begin{equation}
+
+  \gen{a}\varphi(x)=b(x,a)\cdot\nabla\varphi(x)
+  +\tfrac12\operatorname{Tr}\bigl(\sigma\sigma^\top(x,a)\,D^2\varphi(x)\bigr).
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(3)</span><span class="num">(2)</span></div></div>
+<p><button class="term" type="button" data-k="gen">$\gen{}$</button> es el operador con $\dom(\gen{})\s C_b(E)$ y rango en
+$C_b(E\times A)$ dado por</p>
+<div class="display numerado" id="es-eq:gen-operador"><div class="eqbody">\begin{equation}
+
+  \gen{}\varphi:(x,a)\longmapsto\gen{a}\varphi(x).
+\end{equation}</div><div class="eqside"><span class="num">(3)</span></div></div>
+<p><a class="xref" href="#es-eq:sde">(1)</a> presupone un proceso de acciones $a_t$, y eso es más de lo que
+hace falta. La formulación que se adopta es el problema de martingala controlado
+relajado, que cambia el proceso de acciones por uno a valores medida y aguanta la
+aleatorización que pide la formulación de programación lineal.</p>
+<div class="stmt definicion" id="es-def:relajada"><div class="head">Definición 1.1</div><div class="body"><p><span class="src">[Borkar]</span>
+$V=\mathscr P(A)$, compacto metrizable en la topología débil. Un proceso
+$(X,\pi)$ a valores en $E\times V$, progresivamente medible respecto de
+$\{\mathscr F_t\}$ y con $X_0\sim\nu_0$, resuelve el <span class="df">problema de martingala
+controlado relajado</span> para $(\gen{},\nu_0)$ si $\forall f\in\dom(\gen{})$</p>
+<div class="display numerado" id="es-eq:mart"><div class="eqbody"><span class="v" data-var="std">\[f(X_t)-\int_0^t\!\!\int_A \gen{a}f(X_s)\,\pi_s(da)\,ds\]</span><span class="v" data-var="fin">\[f(X_t)-\lambda_{[0,t]}^{\,s}\,\pi_s^a\,\gen{a}f(X_s)\]</span></div></div>
+<p>es $\{\mathscr F_t\}$-martingala.</p></div></div>
+<p><button class="term" type="button" data-k="pi">$\pi=(\pi_t)_{t\ge0}$</button> adaptado a valores en $\mathscr P(A)$, compacto porque $A$
+lo es; todavía no hay ningún núcleo $x\mapsto\pi_x$. Con $\pi_t=\delta_{a_t}$ se
+recupera <a class="xref" href="#es-eq:sde">(1)</a>, con la misma ley, la misma medida de ocupación y el
+mismo costo.</p>
+<p>Una política relajada promedia el generador, no los coeficientes. Para un núcleo
+$\pi:E\to\mathscr P(A)$,</p>
+<div class="display numerado" id="es-eq:gen-pi"><div class="eqbody">\begin{equation}
+
+  \Gen{\pi}\varphi(x)=\pi_x^a\bigl(\gen{}\varphi(x,a)\bigr)
+  =b_\pi(x)\cdot\nabla\varphi(x)
+  +\tfrac12\operatorname{Tr}\bigl(\Sigma_\pi(x)D^2\varphi(x)\bigr),
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(33)–(35)</span><span class="num">(4)</span></div></div>
+<p>con $b_\pi(x)=\pi_x^a b(x,a)$ y $\Sigma_\pi(x)=\pi_x^a \sigma\sigma^\top(x,a)$.
+Lo que <a class="xref" href="#es-eq:gen-pi">(4)</a> promedia es $\sigma\sigma^\top$, y $\pi_x^a\sigma$ da
+otra cosa: con $d=m=1$, $A=\{-1,1\}$, $\sigma(x,a)=a$ y $\pi_x$ uniforme,
+$\pi_x^a\sigma=0$ mientras $\Sigma_\pi=1$, o sea
+$\Gen{\pi}=\tfrac12\partial_x^2$. La ley de la difusión la determina
+$\sigma\sigma^\top$.</p>
+<p>$\Sigma_\pi$ es promedio de matrices semidefinidas positivas $\rt$ semidefinida
+positiva $\rt$ $\Gen{\pi}$ conserva la forma <a class="xref" href="#es-eq:generator">(2)</a> y cumple el
+principio del máximo positivo. Si además vale la condición de rango
+$\mathcal R(\lambda \mathrm{Id}-\Gen{\pi})=\mathscr C_0(E)$ para algún
+$\lambda&gt;0$ <span class="src">[Baudoin]</span> $\rt$ $\Gen{\pi}$ genera un semigrupo de
+Feller--Dynkin $\Sg{t,\pi}$, con función de transición $P_{t,\pi,x}$ tq
+$P_{t,\pi,x}(\varphi)=\Sg{t,\pi}\varphi(x)$. $\Sg{t,\pi}$ y $\Gen{\pi}$ actúan
+sobre funciones; $P_{t,\pi,x}$ es una medida en $E$.</p>
+<p>Para un costo instantáneo boreliano acotado $c:E\times A\to\R$, el costo
+descontado de una política relajada y el problema directo son</p>
+<div class="display numerado" id="es-eq:J"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\E\left[\int_0^\infty e^{-\rho t}\int_A c(X_t,a)\,\pi_t(da)\,dt\right],
+   \qquad \inf_\pi J_c(\pi),\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\P\bigl(\lambda_\rho^t\,\pi_t^a\,c(X_t,a)\bigr),
+   \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(5)</span></div></div>
+<p>con $\lambda_\rho=e^{-\rho t}dt$ de masa total $1/\rho$, y $\P$ la medida de la
+solución $(X,\pi)$. El ínfimo en <a class="xref" href="#es-eq:J">(5)</a> recorre las soluciones de la
+Definición <a class="xref" href="#es-def:relajada">1.1</a>.</p>
+<p>Con política markoviana la esperanza se abre en el semigrupo.</p>
+<div class="stmt proposicion" id="es-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[Borkar]</span>
+Si $\pi_s=\pi(X_s)$ para un núcleo medible $\pi:E\to\mathscr P(A)$, un
+<span class="df">control markoviano relajado</span> $\rt$ $X$ solo resuelve el problema de
+martingala para $(\Gen{\pi},\nu_0)$; si ese problema está bien puesto $\rt$ $X$
+es markoviano con función de transición $P_{t,\pi,x}$ y</p>
+<div class="display numerado" id="es-eq:J-semigrupo"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_E\!\int_0^\infty e^{-\rho t}\,
+    \Sg{t,\pi}c_\pi(x)\,dt\,\nu_0(dx),\qquad
+    c_\pi(y)=\int_Ac(y,a)\,\pi_y(da),\]</span><span class="v" data-var="fin">\[J_c(\pi)=\nu_0^x\,\lambda_\rho^t\,P_{t,\pi,x}^y\,\pi_y^a\,c(y,a)
+   =\nu_0^x\,\lambda_\rho^t\,\Sg{t,\pi}c_\pi(x).\]</span></div></div>
+<p>Equivalentemente $J_c(\pi)=\nu_0\bigl((\rho \mathrm{Id}-\Gen{\pi})^{-1}c_\pi\bigr)$.</p></div></div>
+<p>La última identidad es la forma resolvente del costo: $\lambda_\rho^t\Sg{t,\pi}$
+es la transformada de Laplace del semigrupo, o sea
+$(\rho \mathrm{Id}-\Gen{\pi})^{-1}$, así que evaluar $J_c$ es resolver la
+ecuación elíptica lineal $\rho V_\pi-\Gen{\pi}V_\pi=c_\pi$ e integrar contra
+$\nu_0$; el operador que hay que invertir es aquel cuya sobreyectividad se supuso
+arriba. La forma markoviana $\pi_t=\pi(X_t)$ sale de desintegrar una medida de
+ocupación óptima <a class="xref" href="#es-eq:desintegracion">(16)</a>, y hasta entonces $\pi_x$ solo está
+definido en esta subclase.</p>
+<h4 id="es-control-inverso-x1">Formulación HJB</h4>
+<p><button class="term" type="button" data-k="V">$V(x)$</button> la función de valor, el costo óptimo arrancando en $x$. Bajo programación
+dinámica cumple</p>
+<div class="display numerado" id="es-eq:hjb"><div class="eqbody">\begin{equation}
+
+  \rho V(x)=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}.
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(6)</span></div></div>
+<div class="stmt proposicion" id="es-prop:hjb"><div class="head">Proposición 1.3</div><div class="body"><p><a class="xref" href="#es-eq:hjb">(6)</a> $\iff$ la desigualdad</p>
+<div class="display numerado" id="es-eq:hjb-ineq"><div class="eqbody">\begin{equation}
+
+  c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0,\qquad (x,a)\in E\times A,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(7)</span></div></div>
+<p>junto con que el ínfimo se alcance en cada $x$. Si $a\mapsto c(x,a)+\gen{a}V(x)$
+es continua $\rt$ el conjunto de minimizadores es no vacío y compacto, y toda
+política óptima cumple</p>
+<div class="display numerado" id="es-eq:selector"><div class="eqbody"><span class="v" data-var="std">\[\operatorname{supp}\pi_x\ \s\ \arg\min_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\},
+    \qquad \]</span><span class="v" data-var="fin">\[\pi_x^a\bigl(c(x,a)+\gen{a}V(x)\bigr)=\rho V(x),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(8)</span></div></div>
+<p>con igualdad en <a class="xref" href="#es-eq:hjb-ineq">?</a> sobre $\operatorname{supp}\pi_x$.</p></div></div>
+<p>Leída puntualmente, <a class="xref" href="#es-eq:hjb">(6)</a> presupone $V\in C^2$, porque $\gen{a}V$ lleva
+$\nabla V$ y $D^2V$. Nada de lo que sigue depende de resolverla en ese sentido:
+la teoría de existencia de la Sección <a class="xref" href="#es-sec:convexo">3</a> se monta sobre
+<a class="xref" href="#es-eq:lp">(8)</a> y nunca evalúa una función de valor, y <a class="xref" href="#es-eq:hjb">(6)</a> reaparece
+solo como la factibilidad dual <a class="xref" href="#es-eq:dual">(9)</a> y como un bloque del sistema de
+optimalidad de la Sección <a class="xref" href="#es-sec:pde">4</a>, ahí en forma débil.</p>
+<h4 id="es-sec:balance"><span class="secnum">1.2</span>Medidas de ocupación descontadas</h4>
+<div class="stmt definicion" id="es-def:ocupacion"><div class="head">Definición 1.4</div><div class="body"><p>Para una política relajada $\pi$ y $B\in\mathscr B(E\times A)$, la <span class="df">medida de
+ocupación descontada</span> es</p>
+<div class="display numerado" id="es-eq:ocupacion"><div class="eqbody"><span class="v" data-var="std">\[\eta_\pi(B)=\E\left[\int_0^\infty e^{-\rho t}\int_A
+    \mathbf 1_B(X_t,a)\,\pi_t(da)\,dt\right].\qquad \]</span><span class="v" data-var="fin">\[\eta_\pi(B)=\P\bigl(\lambda_\rho^t\,\pi_t^a\,\mathbf 1_B(X_t,a)\bigr).
+    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(9)</span></div></div></div></div>
+<p>Poniendo $c$ en lugar de $\mathbf 1_B$ en <button class="term" type="button" data-k="eta"><a class="xref" href="#es-eq:ocupacion">?</a></button> y comparando con
+<a class="xref" href="#es-eq:J">(5)</a>, sin cuenta ninguna,</p>
+<div class="display numerado" id="es-eq:lineal"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_{E\times A}c\,d\eta_\pi=\pair{c}{\eta_\pi}.\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\eta_\pi(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(10)</span><span class="num">(7)</span></div></div>
+<p>El lado derecho de <a class="xref" href="#es-eq:lineal">(7)</a> no lleva semigrupo, ni tiempo, ni condición
+inicial, así que todo lo que sigue pasa en $E\times A$, y el problema directo, no
+convexo en $\pi$, es lineal en $\eta$.</p>
+<p>Las medidas que salen así quedan caracterizadas por una sola familia de
+igualdades lineales.</p>
+<div class="stmt proposicion" id="es-prop:balance"><div class="head">Proposición 1.5</div><div class="body"><p><span class="src">[Borkar]</span>
+$\forall\varphi\in\dom(\gen{})$, la medida de ocupación de cualquier solución del
+problema de martingala controlado relajado cumple la <span class="df">identidad de balance
+débil</span></p>
+<div class="display numerado" id="es-eq:balance"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}\bigl(\rho\varphi(x)-\gen{a}\varphi(x)\bigr)\,\eta(dx,da)
+    =\int_E\varphi\,d\nu_0.\qquad \]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-\gen{}\varphi\bigr)=\nu_0(\varphi).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(11)</span></div></div>
+<p>Recíprocamente, todo $\eta\ge0$ que cumpla <a class="xref" href="#es-eq:balance">?</a> es la medida de
+ocupación de alguna solución.</p></div></div>
+<p>En forma de operadores <a class="xref" href="#es-eq:balance">?</a> es
+$(\rho-\gen{})^{*}\eta=\nu_0$, o sea $\eta$ es la ley inicial transportada por la
+resolvente adjunta; es el enunciado dual de la forma resolvente de $J_c$ que
+quedó tras la Proposición <a class="xref" href="#es-prop:semigrupo">1.2</a>.</p>
+<div class="stmt corolario" id="es-cor:masa"><div class="head">Corolario 1.6</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ para toda $\pi$. En particular $\eta_\pi$ no es de
+probabilidad.</p></div></div>
+<p>La masa es $1/\rho$ y no $1$ porque <a class="xref" href="#es-eq:ocupacion">?</a> no está normalizada, y
+las dos fuentes sí normalizan: Kurtz y Stockbridge definen
+$\widehat\pi=\rho \eta_\pi$ y recuperan el costo como $\rho^{-1}\widehat\pi(c)$,
+y la medida de ocupación descontada de Borkar lleva el mismo factor
+<span class="src">[Kurtz]</span>. Las tres identidades de balance coinciden tras ese reescalado, y
+$1/\rho$ es la única entrada de la cota del Lema <a class="xref" href="#es-lema:M-acotado">3.1</a>.</p>
+<p>Escribiendo <button class="term" type="button" data-k="M">$\M$</button> por las medidas no negativas en $E\times A$ que cumplen
+<a class="xref" href="#es-eq:balance">?</a>, el problema directo es el programa lineal</p>
+<div class="display numerado" id="es-eq:lp"><div class="eqbody"><span class="v" data-var="std">\[\inf_{\eta\in\M}\ \pair{c}{\eta},\qquad \]</span><span class="v" data-var="fin">\[\inf_{\eta\in\M}\ \eta(c),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(12)</span><span class="num">(8)</span></div></div>
+<p>cuyo dual formal es</p>
+<div class="display numerado" id="es-eq:dual"><div class="eqbody">\begin{equation}
+
+  \sup_V\ \nu_0(V)
+  \qquad\text{sujeto a}\qquad
+  c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0 .
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(13)</span><span class="num">(9)</span></div></div>
+<p>La desigualdad HJB <a class="xref" href="#es-eq:hjb-ineq">?</a> es entonces exactamente la factibilidad
+dual de <a class="xref" href="#es-eq:lp">(8)</a>, y la función de valor es la variable dual pegada a la
+restricción de balance.</p>
+<div class="stmt observacion" id="es-obs:test"><div class="head">Observación 1.7</div><div class="body"><p>$\M$ depende de la clase de funciones de prueba en <a class="xref" href="#es-eq:balance">?</a>, y la nota
+no fija $\dom(\gen{})$. Tomar $\mathscr C^2_c(E)$, $C^\infty_c(E)$ o
+$C^2_b(\overline E)$ da conjuntos distintos en cuanto $E$ tiene frontera, y la
+diferencia es exactamente el comportamiento en la frontera que
+<a class="xref" href="#es-eq:balance">?</a> alcanza a detectar. Para el generador diferencial
+<a class="xref" href="#es-eq:generator">(2)</a>, la elección con la que se tiene la caracterización de la
+Proposición <a class="xref" href="#es-prop:balance">1.5</a> es $\dom(\gen{})=\mathscr C^2_c(E)$ <span class="src">[Kurtz]</span>.</p></div></div></section>
+<section class="capitulo"><h3 id="es-sec:inverso"><span class="secnum">2</span>Control inverso con costo previo</h3>
+<p>Se observa un experto y se pregunta qué costo instantáneo lo explica. El experto
+es una política $\pi_E$ conocida solo por su medida de ocupación descontada
+<button class="term" type="button" data-k="etaE">$\eta_E\in\M$</button>, y se da un costo previo $\ch$. Pedir que el experto sea
+exactamente óptimo es demasiado rígido; la relajación que sí funciona mide cuánto
+le falta.</p>
+<div class="stmt definicion" id="es-def:gap"><div class="head">Definición 2.1</div><div class="body"><p>La <span class="df">brecha de subóptimalidad</span> del experto bajo un costo candidato $c$ es</p>
+<div class="display numerado" id="es-eq:gap"><div class="eqbody"><span class="v" data-var="std">\[\Gap(c):=\pair{c}{\eta_E}-\inf_{\eta\in\M}\pair{c}{\eta}
+    =\sup_{\eta\in\M}\pair{c}{\eta_E-\eta}.\qquad \]</span><span class="v" data-var="fin">\[\Gap(c):=\eta_E(c)-\inf_{\eta\in\M}\eta(c)
+    =\sup_{\eta\in\M}\,(\eta_E-\eta)(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(14)</span></div></div></div></div>
+<div class="stmt proposicion" id="es-prop:gap-basico"><div class="head">Proposición 2.2</div><div class="body"><p>$\Gap$ es convexa, positivamente homogénea y $\ge0$ en $\Hs$, con $\Gap(0)=0$, y
+$\Gap(c)=0\iff\eta_E$ minimiza $\pair{c}{\cdot}$ sobre $\M$.</p></div></div>
+<p>$\Gap$ es supremo de funcionales lineales en $c$, uno por cada $\eta\in\M$, luego
+convexa; la no negatividad solo usa $\eta_E\in\M$. Su ínfimo interior es el
+problema directo <a class="xref" href="#es-eq:lp">(8)</a> con el costo candidato del momento.</p>
+<p>Elegir el costo solo por la brecha está mal puesto, y más allá de las constantes
+la identidad de balance ya produce todo un subespacio de costos que ninguna
+observación distingue.</p>
+<div class="stmt proposicion" id="es-prop:shaping"><div class="head">Proposición 2.3</div><div class="body"><p>Si $\phi\in\dom(\gen{})$ y $q_\phi(x,a):=\rho\phi(x)-\gen{a}\phi(x)$ $\rt$</p>
+<div class="display numerado" id="es-eq:shaping"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}q_\phi\,d\eta=\int_E\phi\,d\nu_0
+    \qquad\forall\eta\in\M,\qquad \]</span><span class="v" data-var="fin">\[\eta(q_\phi)=\nu_0(\phi)\qquad\forall\eta\in\M,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(29)</span></div></div>
+<p>así que $c$ y $c+q_\phi$ tienen los mismos minimizadores sobre $\M$ y la misma
+brecha. Lo identificable es la clase de $c$ módulo
+$\{q_\phi:\phi\in\dom(\gen{})\}$.</p></div></div>
+<p>Es la forma en tiempo continuo del <em>potential-based shaping</em>, y es
+<a class="xref" href="#es-eq:balance">?</a> leída contra $c$. El previo elige un representante de la
+clase, así que vale la pena llevarlo incluso con el experto exactamente óptimo.</p>
+<div class="display numerado" id="es-eq:inverso"><div class="eqbody">\begin{equation}
+
+  \min_{c\in\Hs}\ \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\Gap(c)\right\},
+  \qquad\alpha&gt;0,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(15)</span><span class="num">(10)</span></div></div>
+<p>o, abriendo la brecha,</p>
+<div class="display numerado" id="es-eq:minmax"><div class="eqbody"><span class="v" data-var="std">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
+    \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\pair{c}{\eta_E-\eta}\right\}.
+    \qquad \]</span><span class="v" data-var="fin">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
+    \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+(\eta_E-\eta)(c)\right\}.
+    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(16)</span><span class="num">(11)</span></div></div>
+<p><button class="term" type="button" data-k="alpha">$\alpha$</button> interpola: $\alpha$ grande clava el costo recuperado al previo,
+$\alpha$ pequeño da prioridad a cerrar la brecha del experto. El efecto
+cuantitativo está en <a class="xref" href="#es-eq:alpha-bound">(15)</a>.</p>
+<h4 id="es-sec:espacio-costo"><span class="secnum">2.1</span>El espacio de costos</h4>
+<p>La medida de ocupación de una política determinista $u:E\to A$ se concentra en la
+gráfica $\{(x,u(x)):x\in E\}$, que es Lebesgue-nula en $E\times A$. Ese $\eta$ no
+tiene densidad, así que el emparejamiento $L^2$ $\int c \eta dx da$ no está
+definido y $c$ tiene que tener valores puntuales. Hay dos regímenes.</p>
+<ol class="lista"><li><p><span class="df">Formulación por medidas.</span> $\Hs$ encajado continuamente en
+$C(E\times A)$ $\rt$ toda medida signada finita define un funcional continuo
+sobre $\Hs$, o sea $\M\s\Hd$ y el emparejamiento es el de dualidad.</p></li><li><p><span class="df">Formulación por densidades.</span> Si toda medida de ocupación relevante
+tiene densidad $L^2$ $\rt$ se puede tomar $\Hs=H^1$ con el emparejamiento $L^2$.
+Es el régimen en el que se escriben la formulación PDE y la numérica.</p></li></ol>
+<p>El régimen (i) es el que sostiene la teoría de existencia, y el encaje que pide
+es un umbral de Sobolev.</p>
+<div class="stmt teorema" id="es-thm:encaje"><div class="head">Teorema 2.4</div><div class="body"><p><span class="src">[Folland]</span>
+Si $n=d+m$ y $s&gt;n/2$ $\rt$ $H^s(\R^n)\hookrightarrow C_0(\R^n)$ continuamente, y
+todo $f\in H^s$ tiene representante continuo con
+$\|f\|_\infty\le C_s\|f\|_{H^s}$.</p></div></div>
+<div class="stmt corolario" id="es-cor:umbral"><div class="head">Corolario 2.5</div><div class="body"><p>Si <button class="term" type="button" data-k="Hs">$\Hs=H^s(E\times A)$</button> con $s&gt;(d+m)/2$ sobre un dominio acotado de clase $C^1$
+$\rt$ $\Hs\hookrightarrow C(E\times A)$ y toda medida signada finita en
+$E\times A$ está en $\Hd$, con $\|\eta\|_{\Hd}\le C_\iota |\eta|(E\times A)$.</p></div></div>
+<p>La delta muestra que el umbral es óptimo: $\delta_{(x_0,a_0)}$ es funcional
+acotado sobre $H^s$ exactamente cuando $s&gt;n/2$. Luego $H^1$ solo es admisible si
+$d+m\le1$, y el régimen (ii) es una hipótesis sobre $\M$, no una elección de
+espacio.</p>
+<div class="stmt proposicion" id="es-prop:h1-nunca"><div class="head">Proposición 2.6</div><div class="body"><p>Si $n=d+m\ge2$ $\rt$ la delta en un punto de $E\times A$ no es funcional acotado
+sobre $H^1(E\times A)$. En particular las medidas de ocupación singulares de las
+políticas deterministas no están en $(H^1)^*$.</p></div></div>
+<p>Para la penalización se usa la norma de Sobolev con peso</p>
+<div class="display numerado" id="es-eq:penalizacion"><div class="eqbody">\begin{equation}
+
+  \tfrac12\|c-\ch\|_{\Hs}^2
+  =\tfrac12\int_{E\times A}\Bigl(|c-\ch|^2+\kappa\,
+   |\nabla_{x,a}(c-\ch)|^2\Bigr)dx\,da,
+  \qquad\kappa&gt;0,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(12)</span></div></div>
+<p>cuya aplicación de Riesz es $R=\mathrm{Id}-\kappa\Delta_{x,a}$.</p>
+<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.7</div><div class="body"><p>Con la norma <a class="xref" href="#es-eq:penalizacion">(12)</a> sobre $H^1(E\times A)$, el isomorfismo de
+Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es la forma débil de $\mathrm{Id}-\kappa\Delta_{x,a}$:</p>
+<div class="display numerado" id="es-eq:riesz"><div class="eqbody"><span class="v" data-var="std">\[\pair{Rc}{v}=\int_{E\times A}\bigl(cv+\kappa\nabla c\cdot\nabla v\bigr)
+    \,dx\,da\qquad\forall v\in H^1,\]</span><span class="v" data-var="fin">\[(Rc)(v)=\lambda^{(x,a)}\bigl(cv+\kappa\,\nabla c\cdot\nabla v\bigr)
+    \qquad\forall v\in H^1,\]</span></div></div>
+<p>y $R^{-1}$ es el operador solución del problema elíptico correspondiente. Las
+condiciones de frontera son las de la formulación variacional: periódicas en un
+toro, Neumann homogéneas cuando la variación de $c$ es libre en
+$\partial(E\times A)$.</p></div></div>
+<p>La condición de frontera la fija el modelo: la misma forma débil define un $R$
+distinto, y por tanto un costo recuperado distinto, para cada elección, y
+$R^{-1}$ aparece explícito en <a class="xref" href="#es-eq:cstar">?</a>.</p>
+<div class="stmt observacion" id="es-obs:dos-condiciones"><div class="head">Observación 2.8</div><div class="body"><p>Los dos regímenes piden cosas a objetos distintos. El (i) restringe $\Hs$,
+pidiendo $s&gt;(d+m)/2$, y luego acepta toda medida finita. El (ii) restringe $\M$,
+pidiendo densidades $L^2$ a sus elementos, y entonces admite el espacio más
+barato $H^1$. Solo el primero está disponible cuando hay políticas deterministas
+admisibles, que es el caso en cuanto el hamiltoniano de <a class="xref" href="#es-eq:selector">?</a> tiene
+minimizador único.</p></div></div></section>
+<section class="capitulo"><h3 id="es-sec:convexo"><span class="secnum">3</span>Estructura convexa, existencia y el problema reducido</h3>
+<p>El problema inverso tiene estructura convexa suficiente para dar existencia
+directamente, sin ninguna propiedad de continuidad del mapa de costos a políticas
+óptimas. Se trabaja en el régimen (i) de la Sección <a class="xref" href="#es-sec:espacio-costo">2.1</a>, o
+sea $\Hs\hookrightarrow C(E\times A)$ con norma de encaje $C_\iota$, y se escribe
+$\Phi$ por el funcional de silla, dejando $\mathcal L$ para el generador:</p>
+<div class="display numerado" id="es-eq:Phi"><div class="eqbody">\begin{equation}
+
+  \Phi(c,\eta)=\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\pair{c}{\eta_E-\eta},
+  \qquad
+  \inf_{c\in\Hs}\ \sup_{\eta\in\M}\ \Phi(c,\eta).
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(13)</span></div></div>
+<p>Tres de las hipótesis que carga la nota salen gratis aquí, y las tres se siguen
+de la masa del Corolario <a class="xref" href="#es-cor:masa">1.6</a>.</p>
+<div class="stmt lema" id="es-lema:M-acotado"><div class="head">Lema 3.1</div><div class="body"><p>Todo $\eta\in\M$ cumple $\|\eta\|_{\Hd}\le C_\iota/\rho$, y
+$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div></div>
+<div class="stmt corolario" id="es-cor:gap-lipschitz"><div class="head">Corolario 3.2</div><div class="body"><p>$\Gap$ es finita en todo $\Hs$ y Lipschitz con constante $2C_\iota/\rho$; en
+particular continua, luego semicontinua inferiormente.</p></div></div>
+<div class="stmt proposicion" id="es-prop:existencia-c"><div class="head">Proposición 3.3</div><div class="body"><p>Si $\M\ne\emptyset$ $\rt$ el objetivo de <a class="xref" href="#es-eq:inverso">(10)</a> es
+$\alpha$-fuertemente convexo, coercivo y semicontinuo inferiormente, luego tiene
+minimizador único $c_\star\in\Hs$.</p></div></div>
+<p>La convexidad fuerte viene de la norma hilbertiana al cuadrado y de la convexidad
+de $\Gap$; la coercividad de $\Gap\ge0$; la semicontinuidad inferior del
+Corolario <a class="xref" href="#es-cor:gap-lipschitz">3.2</a>. No se usa ninguna propiedad del mapa
+$c\mapsto\pi$.</p>
+<h4 id="es-control-inverso-x2">Eliminar el costo sin suponer intercambio minimax</h4>
+<p>Con $\eta$ fijo la minimización en $c$ es explícita. No se supone en este punto
+que el ínfimo y el supremo de <a class="xref" href="#es-eq:Phi">(13)</a> se puedan intercambiar.</p>
+<div class="stmt proposicion" id="es-prop:reduccion"><div class="head">Proposición 3.4</div><div class="body"><p>Para cada $\eta\in\M$, $c\mapsto\Phi(c,\eta)$ tiene minimizador único</p>
+<div class="display numerado" id="es-eq:c-de-eta"><div class="eqbody">\begin{equation}
+
+  c_\eta=\ch+\frac1\alpha R^{-1}(\eta-\eta_E),
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(20)</span></div></div>
+<p>y</p>
+<div class="display numerado" id="es-eq:reducido-valor"><div class="eqbody"><span class="v" data-var="std">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
+   \Psi(\eta):=\pair{\ch}{\eta-\eta_E}
+   +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span><span class="v" data-var="fin">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
+   \Psi(\eta):=(\eta-\eta_E)(\ch)
+   +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(21), (22)</span></div></div></div></div>
+<p>Esto sugiere el <span class="df">problema reducido</span></p>
+<div class="display numerado" id="es-eq:reducido"><div class="eqbody">\begin{equation}
+
+  \min_{\eta\in\M}\ \Psi(\eta),
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(23)</span><span class="num">(14)</span></div></div>
+<p>una minimización sobre medidas y no sobre costos. Por la desigualdad elemental
+$\sup_\eta\inf_c\Phi\le\inf_c\sup_\eta\Phi$, su valor es por ahora solo cota
+inferior de <a class="xref" href="#es-eq:Phi">(13)</a>. El Teorema <a class="xref" href="#es-thm:silla">3.6</a> cierra esa brecha: un
+minimizador de <a class="xref" href="#es-eq:reducido">(14)</a> construye un punto de silla, y de ahí sale la
+dualidad fuerte.</p>
+<p>La compacidad que pide el teorema la hereda del problema directo.</p>
+<div class="stmt proposicion" id="es-prop:compacidad-M"><div class="head">Proposición 3.5</div><div class="body"><p>Si $E\times A$ es compacto y $\gen{}$ manda $\dom(\gen{})$ en $C(E\times A)$
+$\rt$ $\M$ es convexo y débilmente compacto en $\Hd$. Si además el encaje
+$\iota:\Hs\to C(E\times A)$ es compacto, cosa que vale para $\Hs=H^s(E\times A)$
+con $s&gt;(d+m)/2$ sobre un dominio con operador de extensión $\rt$ $\M$ es compacto
+en la norma de $\Hd$.</p></div></div>
+<p>La convexidad es inmediata porque <a class="xref" href="#es-eq:balance">?</a> es una familia de igualdades
+lineales. La compacidad pasa por el conjunto normalizado
+$\widehat\M=\rho \M\s\mathscr P(E\times A)$, débil-$*$ compacto por
+Banach--Alaoglu y por ser cerradas las restricciones de balance, y luego se
+transporta a $\Hd$ con el adjunto del encaje. Con encaje compacto, Schauder da
+compacidad en norma y la existencia en <a class="xref" href="#es-eq:reducido">(14)</a> es Weierstrass.</p>
+<div class="stmt teorema" id="es-thm:silla"><div class="head">Teorema 3.6</div><div class="body"><p>Si $\Hs\hookrightarrow C(E\times A)$, $\M\s\Hd$ no vacío, convexo y débilmente
+compacto, y $\ch\in\Hs$ $\rt$ <a class="xref" href="#es-eq:reducido">(14)</a> tiene minimizador único
+$\eta_{A,\star}$. Poniendo</p>
+<div class="display numerado" id="es-eq:cstar"><div class="eqbody">\begin{equation}
+
+  c_\star=\ch+\frac1\alpha R^{-1}(\eta_{A,\star}-\eta_E),
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(24)</span></div></div>
+<p>se tiene $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$, el par
+$(c_\star,\eta_{A,\star})$ es punto de silla de $\Phi$,</p>
+<div class="display numerado" id="es-eq:silla"><div class="eqbody">\begin{equation}
+
+  \Phi(c_\star,\eta)\ \le\ \Phi(c_\star,\eta_{A,\star})\ \le\ \Phi(c,\eta_{A,\star})
+  \qquad\forall c\in\Hs,\ \eta\in\M,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(25)</span></div></div>
+<p>vale la dualidad minimax fuerte,</p>
+<div class="display numerado" id="es-eq:dualidad"><div class="eqbody">\begin{equation}
+
+  \inf_{c\in\Hs}\sup_{\eta\in\M}\Phi
+  =\Phi(c_\star,\eta_{A,\star})
+  =\sup_{\eta\in\M}\inf_{c\in\Hs}\Phi,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(26)</span></div></div>
+<p>y $c_\star$ es la solución única de <a class="xref" href="#es-eq:inverso">(10)</a>.</p></div></div>
+<div class="stmt observacion" id="es-obs:sion"><div class="head">Observación 3.7</div><div class="body"><p>Bajo hipótesis que den un teorema minimax, como las de Sion, <a class="xref" href="#es-eq:dualidad">?</a>
+se obtendría directamente de la convexidad en $c$, la afinidad en $\eta$ y la
+compacidad. El argumento de arriba es constructivo: el minimizador de
+<a class="xref" href="#es-eq:reducido">(14)</a> produce a la vez el punto de silla, $c_\star$ y
+<a class="xref" href="#es-eq:etaoptimal-set">?</a>.</p></div></div>
+<div class="stmt observacion" id="es-obs:selector"><div class="head">Observación 3.8</div><div class="body"><p>Un punto fijo del mapa de un costo a una política óptima puede no existir: el
+selector de <a class="xref" href="#es-eq:selector">?</a> salta donde el hamiltoniano tiene varios
+minimizadores. La relación de punto fijo <a class="xref" href="#es-eq:etaoptimal-set">?</a> es
+multivaluada y está puesta sobre $\M$, convexo y débilmente compacto, y
+$c_\star$ es único haya las políticas óptimas que haya.</p></div></div>
+<div class="stmt corolario" id="es-cor:puntofijo"><div class="head">Corolario 3.9</div><div class="body"><p>Con la notación del Teorema <a class="xref" href="#es-thm:silla">3.6</a>,</p>
+<div class="display numerado" id="es-eq:etaoptimal-set"><div class="eqbody">\begin{equation}
+
+  \eta_{A,\star}\in\Opt\!\left(\ch+\tfrac1\alpha R^{-1}
+   (\eta_{A,\star}-\eta_E)\right),
+  \qquad
+  \Opt(c):=\arg\min_{\eta\in\M}\pair{c}{\eta},
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span></div></div>
+<p>una relación de punto fijo multivaluada sobre $\M$.</p></div></div>
+<h4 id="es-control-inverso-x3">El papel de $\alpha$</h4>
+<p>Como $\eta_E\in\M$, comparar $\eta_{A,\star}$ con la elección admisible
+$\eta=\eta_E$ en <a class="xref" href="#es-eq:reducido">(14)</a> da
+$\pair{\ch}{\eta_{A,\star}-\eta_E}+\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$,
+y Cauchy--Schwarz lo convierte en</p>
+<div class="display numerado" id="es-eq:alpha-bound"><div class="eqbody">\begin{equation}
+
+  \|\eta_{A,\star}-\eta_E\|_{\Hd}\ \le\ 2\alpha\|\ch\|_{\Hs}.
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(28)</span><span class="num">(15)</span></div></div>
+<p>Con $\alpha\downarrow0$ la ocupación del aprendiz se va a la del experto a orden
+$O(\alpha)$ en la norma dual. En el otro sentido, si $\M$ es acotado en $\Hd$,
+cosa que garantiza el Lema <a class="xref" href="#es-lema:M-acotado">3.1</a>, <a class="xref" href="#es-eq:cstar">?</a> da
+$\|c_\star-\ch\|_{\Hs}=O(1/\alpha)$ y el costo recuperado colapsa al previo.</p></section>
+<section class="capitulo"><h3 id="es-sec:pde"><span class="secnum">4</span>El sistema de optimalidad</h3>
+<p>El Teorema <a class="xref" href="#es-thm:silla">3.6</a> identifica la solución como un par
+$(c_\star,\eta_{A,\star})$ caracterizado por una desigualdad variacional. Ahora se
+escribe esa caracterización como sistema de ecuaciones. No se supone nada nuevo
+sobre el problema inverso; lo que se supone es regularidad de las medidas de
+ocupación, para poder leer la identidad de balance como ecuación en derivadas
+parciales.</p>
+<h4 id="es-control-inverso-x4">Del balance débil a Fokker--Planck</h4>
+<p>En toda la sección $\pi$ es un control markoviano relajado y la medida de
+ocupación se desintegra como</p>
+<div class="display numerado" id="es-eq:desintegracion"><div class="eqbody">\begin{equation}
+
+  \eta_\pi(dx,da)=m_\pi(x)\,\pi_x(da)\,dx,
+\end{equation}</div><div class="eqside"><span class="num">(16)</span></div></div>
+<p>con $m_\pi\in L^1(E)$ la <span class="df">densidad de estado descontada</span>. La marginal en el
+estado carga toda la información que ve la identidad de balance, porque las
+funciones de prueba de <a class="xref" href="#es-eq:balance">?</a> dependen solo de $x$.</p>
+<div class="stmt proposicion" id="es-prop:fp-debil"><div class="head">Proposición 4.1</div><div class="body"><p>Si $\eta_\pi\in\M$ se desintegra como <a class="xref" href="#es-eq:desintegracion">(16)</a> $\rt$ $m_\pi$
+cumple, $\forall\varphi\in\dom(\gen{})$,</p>
+<div class="display numerado" id="es-eq:fp-debil"><div class="eqbody"><span class="v" data-var="std">\[\int_E\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)\,m_\pi\,dx
+    =\int_E\varphi\,d\nu_0,\]</span><span class="v" data-var="fin">\[m_\pi\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)=\nu_0(\varphi),\]</span></div></div>
+<p>o sea $(\rho \mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ en sentido de
+distribuciones. Si además $b_\pi$ y $\Sigma_\pi$ son suficientemente regulares
+para calcular el adjunto clásicamente $\rt$</p>
+<div class="display numerado" id="es-eq:fp"><div class="eqbody">\begin{equation}
+
+  \rho\,m_\pi+\nabla\!\cdot\!\bigl(b_\pi m_\pi\bigr)
+  -\tfrac12\sum_{i,j}\partial^2_{x_ix_j}\bigl(\Sigma_{\pi,ij}\,m_\pi\bigr)=\nu_0 .
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(36)</span></div></div></div></div>
+<p><a class="xref" href="#es-eq:fp">?</a> es la ecuación de Fokker--Planck estacionaria con descuento $\rho$
+y fuente $\nu_0$, obtenida de <a class="xref" href="#es-eq:balance">?</a> restringiendo a la marginal del
+estado e integrando por partes. Su masa total es $1/\rho$ por el
+Corolario <a class="xref" href="#es-cor:masa">1.6</a>, que es la normalización que toda discretización tiene
+que reproducir.</p>
+<div class="stmt observacion" id="es-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Escribir <a class="xref" href="#es-eq:fp">?</a> puntualmente pide dos derivadas de $\Sigma_\pi m_\pi$, y
+$m_\pi$ no tiene por qué tenerlas: con política determinista la medida de
+ocupación conjunta es singular, y aun cuando $m_\pi$ sea función su regularidad
+se hereda de los coeficientes vía regularidad elíptica, no se supone. Todo lo de
+abajo va en forma débil y <a class="xref" href="#es-eq:fp">?</a> queda solo como la forma clásica de la
+misma identidad.</p></div></div>
+<h4 id="es-control-inverso-x5">El sistema acoplado</h4>
+<p>Sea $\pi_E$ la política del experto con densidad de estado $m_E$, y $\pi_A$ una
+política óptima para el costo recuperado con densidad $m_A$. Juntando
+<a class="xref" href="#es-eq:hjb-ineq">?</a>, <a class="xref" href="#es-eq:selector">?</a>, la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a> y la
+ecuación del costo <a class="xref" href="#es-eq:cstar">?</a> sale el sistema de optimalidad</p>
+<div class="display numerado" id="es-eq:sistema"><div class="eqbody">\begin{equation}
+
+  \left\{
+  \begin{aligned}
+  \rho V(x)&amp;=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}, \\[1mm]
+  \operatorname{supp}\pi_{A,x}&amp;\s\arg\min_{a\in A}
+     \bigl\{c(x,a)+\gen{a}V(x)\bigr\}, \\[1mm]
+  (\rho\,\mathrm{Id}-\Gen{\pi_A})^{*}m_A&amp;=\nu_0, \\[1mm]
+  (\rho\,\mathrm{Id}-\Gen{\pi_E})^{*}m_E&amp;=\nu_0, \\[1mm]
+  \alpha\,R\,(c-\ch)&amp;=\eta_A-\eta_E,
+  \end{aligned}
+  \right.
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(37)</span><span class="num">(17)</span></div></div>
+<p>con $\eta_A=m_A\pi_A$ y $\eta_E=m_E\pi_E$ en el sentido de
+<a class="xref" href="#es-eq:desintegracion">(16)</a>. La última ecuación es la que hay que leer débilmente:</p>
+<div class="display numerado" id="es-eq:coste-debil"><div class="eqbody"><span class="v" data-var="std">\[\alpha\int_{E\times A}\Bigl[(c-\ch)h+\kappa\,\nabla(c-\ch)\cdot\nabla h\Bigr]
+    =\int_{E\times A}h\,d(\eta_A-\eta_E)
+    \qquad\forall h\in\Hs,\qquad \]</span><span class="v" data-var="fin">\[\alpha\,\lambda^{(x,a)}\Bigl[(c-\ch)h+\kappa\,\nabla(c-\ch)\cdot\nabla h\Bigr]
+    =(\eta_A-\eta_E)(h)
+    \qquad\forall h\in\Hs,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(38)</span><span class="num">(18)</span></div></div>
+<p>que tiene sentido en cuanto $\eta_A-\eta_E\in\Hd$, y por el
+Corolario <a class="xref" href="#es-cor:umbral">2.5</a> eso vale para cualquier par de medidas finitas en el
+régimen (i). Escribir $R=\mathrm{Id}-\kappa\Delta_{x,a}$ puntualmente pondría una
+distribución al lado derecho de una ecuación entre funciones.</p>
+<div class="stmt proposicion" id="es-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Bajo las hipótesis del Teorema <a class="xref" href="#es-thm:silla">3.6</a>, y si las medidas de ocupación de
+$\pi_E$ y de alguna $\pi_A$ óptima se desintegran como
+<a class="xref" href="#es-eq:desintegracion">(16)</a> $\rt$ $(c_\star,\eta_{A,\star})$ resuelve
+<a class="xref" href="#es-eq:sistema">(17)</a> en sentido débil, y recíprocamente toda solución débil de
+<a class="xref" href="#es-eq:sistema">(17)</a> con $\eta_A\in\M$ tiene $c=c_\star$.</p></div></div>
+<p>Los dos primeros bloques determinan el aprendiz a partir del costo del momento y
+son el problema directo. Las dos ecuaciones adjuntas transportan la ocupación del
+experto y la del aprendiz, y son lineales en $m$ una vez fijada la política. La
+última deforma el costo alejándolo del previo en proporción al desajuste de
+ocupación, y es lineal en $c$ una vez fijadas las medidas. La única no linealidad
+es el $\arg\min$.</p>
+<div class="stmt observacion" id="es-obs:sistema-vs-optimizacion"><div class="head">Observación 4.4</div><div class="body"><p><a class="xref" href="#es-eq:sistema">(17)</a> y <a class="xref" href="#es-eq:reducido">(14)</a> describen la misma solución, pero
+discretizan distinto. En <a class="xref" href="#es-eq:reducido">(14)</a> la incógnita es una medida
+restringida por <a class="xref" href="#es-eq:balance">?</a> y el objetivo es estrictamente convexo, así
+que una discretización hereda un programa estrictamente convexo de dimensión
+finita. En <a class="xref" href="#es-eq:sistema">(17)</a> las incógnitas son $V$, $m_A$, $m_E$ y $c$, y el
+acople es por el $\arg\min$; una discretización hereda una iteración de punto
+fijo cuyas propiedades de contracción no las da el Teorema <a class="xref" href="#es-thm:silla">3.6</a>.</p></div></div>
+<h4 id="es-control-inverso-x6">El modelo de estados finitos como referencia</h4>
+<p>Todo objeto de arriba tiene contraparte con estados finitos, lo que hace del
+modelo discreto una referencia para discretizar. Sean $S$ y $A$ finitos, $Q$ la
+matriz de tasas de una cadena en tiempo continuo y $\gamma$ o $\rho$ el
+descuento. El generador pasa a ser la matriz
+$(\gen{a}\varphi)(i)=\sum_j Q^a_{ij}\varphi(j)$, acotada, y la identidad de
+balance <a class="xref" href="#es-eq:balance">?</a> pasa a ser el sistema lineal</p>
+<div class="display numerado" id="es-eq:balance-discreto"><div class="eqbody"><span class="v" data-var="std">\[\sum_{i,a}\bigl(\rho\varphi_i-(Q^a\varphi)_i\bigr)\eta_{ia}
+    =\sum_i\varphi_i\nu_{0,i}\qquad\forall\varphi\in\R^S,\]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-Q^{a}\varphi\bigr)=\nu_0(\varphi)
+    \qquad\forall\varphi\in\R^S,\]</span></div><div class="eqside"><span class="num">(19)</span></div></div>
+<p>una ecuación por estado, así que $\M$ es un politopo en $\R^{S\times A}_{\ge0}$
+de masa $1/\rho$ y <a class="xref" href="#es-eq:lp">(8)</a> es un programa lineal finito.</p>
+<p>Tres rasgos del modelo discreto no sobreviven, y son exactamente los puntos donde
+la teoría continua necesita argumento propio. El generador es acotado, luego su
+exponencial es la exponencial de matrices y el semigrupo no pide condición de
+rango. Toda medida tiene densidad respecto de la de conteo, luego la distinción
+entre los regímenes (i) y (ii) de la Sección <a class="xref" href="#es-sec:espacio-costo">2.1</a> se cae y la
+elección de $\Hs$ da igual. Y las políticas deterministas son los vértices del
+politopo, caracterización sin contraparte aquí: $\M$ sigue siendo convexo y
+débilmente compacto por la Proposición <a class="xref" href="#es-prop:compacidad-M">3.5</a>, pero la
+extremalidad no es lo que selecciona el comportamiento determinista.</p></section>
+<section class="capitulo"><h3 id="es-sec:pruebas"><span class="secnum">5</span>Demostraciones</h3>
+<h4 id="es-control-inverso-x7">Problema directo</h4>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p1" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:semigrupo">1.2</a></button><div class="proof" id="es-control-inverso-p1"><p>Si $\pi_s=\pi(X_s)$, la integral interior de <a class="xref" href="#es-eq:mart">?</a> vale
+$\pi_{X_s}^a\gen{a}f(X_s)=\Gen{\pi}f(X_s)$, función de $X_s$ sola, luego
+$f(X_t)-\int_0^t\Gen{\pi}f(X_s) ds$ es martingala y $X$ por sí solo resuelve el
+problema de martingala para $(\Gen{\pi},\nu_0)$. Estar bien puesto hace a $X$
+markoviano con función de transición determinada por $\Gen{\pi}$ y $\nu_0$
+<span class="src">[Baudoin]</span>.</p>
+<p>Para el costo, la misma sustitución da $\pi_t^ac(X_t,a)=c_\pi(X_t)$ puntualmente
+en $\Omega$; no hace falta condicionar. En $\Omega\times[0,\infty)$ el mapa
+$(\omega,t)\mapsto c_\pi(X_t(\omega))$ es conjuntamente medible porque $X$ es
+progresivo, está acotado por $\|c\|_\infty$, y $\P\otimes\lambda_\rho$ es finita
+de masa $1/\rho$, luego Fubini intercambia $\P$ y $\lambda_\rho$. Con $t$ fijo el
+integrando involucra el proceso en un solo instante, así que solo entra la ley de
+$X_t$, y la propiedad de Markov aplicada en $s=0$ da
+$\P(c_\pi(X_t))=\nu_0^x P_{t,\pi,x}^y c_\pi(y)$. Intercambiar $\nu_0$ y
+$\lambda_\rho$, legítimo porque $\nu_0\otimes\lambda_\rho$ es finita, da
+<a class="xref" href="#es-eq:J-semigrupo">?</a>.</p>
+<p>El núcleo no se puede mover a través de $\lambda_\rho$: depende de $t$, así que
+$\lambda_\rho(dt)P_{t,\pi,x}(dy)$ es un producto semidirecto y no un producto.
+Por último $\lambda_\rho^t\Sg{t,\pi}=\int_0^\infty e^{-\rho t}\Sg{t,\pi} dt$ es
+la resolvente $(\rho \mathrm{Id}-\Gen{\pi})^{-1}$, que es la última identidad.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p2" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:hjb">1.3</a></button><div class="proof" id="es-control-inverso-p2"><p>Que <a class="xref" href="#es-eq:hjb">(6)</a> implique <a class="xref" href="#es-eq:hjb-ineq">?</a> es la definición de ínfimo, y el
+recíproco es <a class="xref" href="#es-eq:hjb-ineq">?</a> junto con que se alcance. La existencia de
+minimizador es Weierstrass sobre el compacto $A$, y el conjunto de minimizadores
+es la preimagen del valor mínimo por un mapa continuo, luego cerrado en un
+compacto. Integrando <a class="xref" href="#es-eq:hjb-ineq">?</a> contra $\pi_x$ sale
+$\pi_x^a(c(x,a)+\gen{a}V(x))\ge\rho V(x)$, con igualdad exactamente cuando
+$\pi_x$ no da masa a las acciones donde la desigualdad es estricta.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p3" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:balance">1.5</a></button><div class="proof" id="es-control-inverso-p3"><p>Por la Definición <a class="xref" href="#es-def:relajada">1.1</a> el proceso
+$M_t=\varphi(X_t)-\int_0^t\pi_s^a\gen{a}\varphi(X_s) ds$ es martingala, luego
+$\varphi(X_t)$ es semimartingala continua con esa descomposición. El descuento
+$t\mapsto e^{-\rho t}$ es determinista, continuo y de variación acotada, así que
+su covariación con $\varphi(X)$ es nula e integrar por partes da
+\display{e^{-\rho t}\varphi(X_t)=\varphi(X_0)+\int_0^te^{-\rho s} dM_s
+  +\int_0^te^{-\rho s}\pi_s^a\gen{a}\varphi(X_s) ds
+  -\rho\int_0^te^{-\rho s}\varphi(X_s) ds .}
+El integrando $e^{-\rho s}$ está acotado por $1$ y $M$ es martingala, luego la
+integral estocástica tiene esperanza nula. Tomando esperanzas, haciendo
+$t\to\infty$, y usando que $\varphi$ es acotada para que
+$e^{-\rho t}\E[\varphi(X_t)]\to0$, sale <a class="xref" href="#es-eq:balance">?</a> escrita con la
+Definición <a class="xref" href="#es-def:ocupacion">1.4</a>. El recíproco es la caracterización de las medidas
+de ocupación descontadas <span class="src">[Borkar, Thm.\ 2.2]</span>; para espacios de estados
+localmente compactos ver <span class="src">[Kurtz, Thm.\ 6.3]</span>.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p4" data-titulo="1">Ver: Demostración del Corolario <a class="xref" href="#es-cor:masa">1.6</a></button><div class="proof" id="es-control-inverso-p4"><p>Tomar $\varphi\equiv1$ en <a class="xref" href="#es-eq:balance">?</a>. Los dos términos de
+<a class="xref" href="#es-eq:generator">(2)</a> llevan derivadas de $\varphi$, luego $\gen{a}1=0$ y la
+identidad queda $\rho \eta(E\times A)=\nu_0(1)=1$.</p></div>
+<h4 id="es-control-inverso-x8">Problema inverso y espacio de costos</h4>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p5" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:gap-basico">2.2</a></button><div class="proof" id="es-control-inverso-p5"><p>Para cada $\eta\in\M$ el mapa $c\mapsto\pair{c}{\eta_E-\eta}$ es lineal y
+continuo, y un supremo puntual de mapas así es convexo, positivamente homogéneo y
+semicontinuo inferiormente. Tomando $\eta=\eta_E$, admisible porque
+$\eta_E\in\M$, sale $\Gap(c)\ge0$; la misma elección da $\Gap(0)=0$. Por último
+$\Gap(c)=0$ significa $\pair{c}{\eta_E}\le\pair{c}{\eta}$ para todo $\eta\in\M$,
+que es la optimalidad de $\eta_E$ para $c$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p6" data-titulo="1">Ver: Demostración del Corolario <a class="xref" href="#es-cor:umbral">2.5</a></button><div class="proof" id="es-control-inverso-p6"><p>Sea $\eta$ medida signada finita. Por el Teorema <a class="xref" href="#es-thm:encaje">2.4</a> todo $c\in\Hs$
+tiene representante continuo con $\|c\|_\infty\le C_\iota\|c\|_{\Hs}$, luego
+\display{|\pair{c}{\eta}|\le\|c\|_\infty |\eta|(E\times A)
+  \le C_\iota |\eta|(E\times A) \|c\|_{\Hs},}
+y tomando supremo sobre la bola unidad de $\Hs$ salen la pertenencia $\eta\in\Hd$
+y la cota.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p7" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:h1-nunca">2.6</a></button><div class="proof" id="es-control-inverso-p7"><p>Basta exhibir una función no acotada en $H^1$ cerca del punto. Para $n=2$ tomar
+$f(z)=\log\log(1+|z|^{-1})$ en una bola pequeña, y para $n\ge3$ tomar
+$f(z)=|z|^{-\beta}$ con $0&lt;\beta&lt;(n-2)/2$; en los dos casos $f\in H^1$ de un
+entorno mientras $f$ es no acotada en el origen. Multiplicando por un cutoff y
+trasladando a $(x_0,a_0)$ sale una sucesión $f_k\in H^1(E\times A)$ con
+$\|f_k\|_{H^1}$ acotada y $f_k(x_0,a_0)\to\infty$, luego evaluar en $(x_0,a_0)$
+no es funcional acotado. Y como la medida de ocupación de una política
+determinista carga una gráfica Lebesgue-nula, es una medida de ese tipo singular.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p8" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:riesz">2.7</a></button><div class="proof" id="es-control-inverso-p8"><p>Por definición la aplicación de Riesz manda $c$ al funcional
+$v\mapsto(c,v)_{\Hs}$, y con la norma <a class="xref" href="#es-eq:penalizacion">(12)</a> ese producto
+interno es $\int(cv+\kappa\nabla c\cdot\nabla v)$, que es <a class="xref" href="#es-eq:riesz">?</a>. Es
+acotada y coerciva en $H^1$, luego Lax--Milgram hace de $R$ un isomorfismo sobre
+$\Hd$. La identidad de Green reescribe la forma como
+$\int v(c-\kappa\Delta c)+\kappa\int_{\partial}v \partial_n c$ cuando $c$ es
+suficientemente regular, así que $R=\mathrm{Id}-\kappa\Delta$ en el interior, y
+el término de frontera se anula precisamente bajo las condiciones periódicas o de
+Neumann homogéneas.</p></div>
+<h4 id="es-control-inverso-x9">Estructura convexa</h4>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p9" data-titulo="1">Ver: Demostración del Lema <a class="xref" href="#es-lema:M-acotado">3.1</a></button><div class="proof" id="es-control-inverso-p9"><p>Sea $\eta\in\M$. Por el Corolario <a class="xref" href="#es-cor:masa">1.6</a> es no negativa con
+$\eta(E\times A)=1/\rho$, luego para todo $c\in\Hs$
+\display{|\pair{c}{\eta}|\le\|c\|_\infty \eta(E\times A)
+  =\frac{\|\iota c\|_\infty}{\rho}\le\frac{C_\iota}{\rho}\|c\|_{\Hs},}
+y el supremo sobre la bola unidad da $\|\eta\|_{\Hd}\le C_\iota/\rho$. La cota
+del diámetro es la desigualdad triangular.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p10" data-titulo="1">Ver: Demostración del Corolario <a class="xref" href="#es-cor:gap-lipschitz">3.2</a></button><div class="proof" id="es-control-inverso-p10"><p>De $|\sup_if_i-\sup_ig_i|\le\sup_i|f_i-g_i|$ aplicado a <a class="xref" href="#es-eq:gap">?</a>,
+\display{|\Gap(c)-\Gap(c&#x27;)|\le\sup_{\eta\in\M}|\pair{c-c&#x27;}{\eta_E-\eta}|
+  \le\|c-c&#x27;\|_{\Hs}\sup_{\eta\in\M}\|\eta_E-\eta\|_{\Hd}
+  \le\frac{2C_\iota}{\rho}\|c-c&#x27;\|_{\Hs}}
+por el Lema <a class="xref" href="#es-lema:M-acotado">3.1</a>. La finitud sale evaluando en $c&#x27;=0$, donde
+$\Gap(0)=0$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p11" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:existencia-c">3.3</a></button><div class="proof" id="es-control-inverso-p11"><p>La norma hilbertiana al cuadrado es $\alpha$-fuertemente convexa y $\Gap$ es
+convexa por la Proposición <a class="xref" href="#es-prop:gap-basico">2.2</a>, luego la suma es
+$\alpha$-fuertemente convexa y tiene a lo más un minimizador. Como $\Gap\ge0$, el
+objetivo domina a $\frac{\alpha}{2}\|c-\ch\|^2$ y por tanto es coercivo, y el
+Corolario <a class="xref" href="#es-cor:gap-lipschitz">3.2</a> da la semicontinuidad inferior. El método
+directo da la existencia.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p12" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:reduccion">3.4</a></button><div class="proof" id="es-control-inverso-p12"><p>Escribir $u=c-\ch$ y $w=R^{-1}(\eta_E-\eta)$, de modo que
+$\pair{u}{\eta_E-\eta}=(u,w)_{\Hs}$ y $\|w\|_{\Hs}=\|\eta_E-\eta\|_{\Hd}$.
+Entonces
+\display{\Phi(c,\eta)=\frac{\alpha}{2}\|u\|_{\Hs}^2+(u,w)_{\Hs}
+  +\pair{\ch}{\eta_E-\eta},}
+cuadrática fuertemente convexa en $u$ cuyo minimizador único es $u=-w/\alpha$,
+que es <a class="xref" href="#es-eq:c-de-eta">?</a>. Sustituyendo, el valor es
+$-\frac1{2\alpha}\|w\|_{\Hs}^2+\pair{\ch}{\eta_E-\eta}$, o sea $-\Psi(\eta)$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p13" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:compacidad-M">3.5</a></button><div class="proof" id="es-control-inverso-p13"><p>La convexidad vale porque <a class="xref" href="#es-eq:balance">?</a> es una familia de igualdades
+lineales y la restricción $\eta\ge0$ es convexa. Poner $\widehat\M=\rho \M$, que
+por el Corolario <a class="xref" href="#es-cor:masa">1.6</a> vive en $\mathscr P(E\times A)$. Con $E\times A$
+compacto, $\mathscr P(E\times A)$ es débil-$*$ compacto por Banach--Alaoglu, y
+$\widehat\M$ es débil-$*$ cerrado en él porque cada restricción
+$\mu\mapsto\mu(\rho\varphi-\gen{}\varphi)-\nu_0(\varphi)$ es débil-$*$ continua,
+al estar la función de prueba $\rho\varphi-\gen{}\varphi$ en $C(E\times A)$ por
+hipótesis. Luego $\widehat\M$ es débil-$*$ compacto.</p>
+<p>Sea $\iota:\Hs\to C(E\times A)$ el encaje y $\iota^{*}$ su adjunto. Con $c$ fijo,
+el mapa $\mu\mapsto\pair{\iota^{*}\mu}{c}=\mu(\iota c)$ es débil-$*$ continuo,
+luego $\iota^{*}$ es continuo de la topología débil-$*$ a $\sigma(\Hd,\Hs)$ y
+manda compactos en compactos. Como $\Hd$ es de Hilbert, $\sigma(\Hd,\Hs)$ es su
+topología débil, así que $\M=\rho^{-1}\iota^{*}(\widehat\M)$ es débilmente
+compacto.</p>
+<p>Si $\iota$ es compacto, también lo es $\iota^{*}$ por Schauder, luego manda el
+acotado $\widehat\M$ a un conjunto relativamente compacto en norma. Ese conjunto
+es débilmente compacto por el párrafo anterior, luego débilmente cerrado, luego
+cerrado en norma, y un cerrado relativamente compacto es compacto.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p14" data-titulo="1">Ver: Demostración del Teorema <a class="xref" href="#es-thm:silla">3.6</a></button><div class="proof" id="es-control-inverso-p14"><p>$\Psi$ de <a class="xref" href="#es-eq:reducido-valor">?</a> es estrictamente convexa, porque lo es la
+norma dual al cuadrado, y débilmente semicontinua inferiormente, así que la
+compacidad débil de $\M$ da un minimizador único $\eta_{A,\star}$.</p>
+<p>Como $\M$ es convexo, la condición de optimalidad de primer orden en el
+minimizador es la desigualdad variacional
+$\pair{\ch+\alpha^{-1}R^{-1}(\eta_{A,\star}-\eta_E)}{\eta-\eta_{A,\star}}\ge0$
+para todo $\eta\in\M$, que por <a class="xref" href="#es-eq:cstar">?</a> se lee
+$\pair{c_\star}{\eta-\eta_{A,\star}}\ge0$. Eso es exactamente la optimalidad de
+$\eta_{A,\star}$ para $c_\star$, y como el único término de
+$\Phi(c_\star,\cdot)$ que depende de $\eta$ es $-\pair{c_\star}{\eta}$, es la
+desigualdad izquierda de <a class="xref" href="#es-eq:silla">?</a>.</p>
+<p>Para la derecha, la derivada de $\Phi(\cdot,\eta_{A,\star})$ es
+$\alpha R(c-\ch)+\eta_E-\eta_{A,\star}$, que se anula en $c=c_\star$ por
+<a class="xref" href="#es-eq:cstar">?</a>; la convexidad fuerte en $c$ convierte el punto estacionario en
+mínimo global. Las dos desigualdades juntas son la relación de silla, y el
+argumento estándar de que un punto de silla cierra la brecha entre los dos
+órdenes da <a class="xref" href="#es-eq:dualidad">?</a>. La unicidad de $c_\star$ es la
+Proposición <a class="xref" href="#es-prop:existencia-c">3.3</a>.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p15" data-titulo="1">Ver: Demostración del Corolario <a class="xref" href="#es-cor:puntofijo">3.9</a></button><div class="proof" id="es-control-inverso-p15"><p>Inmediato de $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$ y de la
+definición <a class="xref" href="#es-eq:cstar">?</a> de $c_\star$.</p></div>
+<h4 id="es-control-inverso-x10">El sistema de optimalidad</h4>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p16" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:shaping">2.3</a></button><div class="proof" id="es-control-inverso-p16"><p>Aplicar <a class="xref" href="#es-eq:balance">?</a> a la función de prueba $\phi$: el lado izquierdo es
+$\eta(\rho\phi-\gen{}\phi)=\eta(q_\phi)$ y el derecho es $\nu_0(\phi)$, que es
+<a class="xref" href="#es-eq:shaping">?</a> y no depende de $\eta$. Luego para cualquier $c$ y cualquier
+$\eta\in\M$ se tiene $\pair{c+q_\phi}{\eta}=\pair{c}{\eta}+\nu_0(\phi)$, un
+corrimiento por una constante, así que los dos costos tienen los mismos
+minimizadores y, como $\eta_E\in\M$, la misma brecha.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p17" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a></button><div class="proof" id="es-control-inverso-p17"><p>Tomar $\varphi\in\dom(\gen{})$, función de $x$ sola, en <a class="xref" href="#es-eq:balance">?</a>. Con
+<a class="xref" href="#es-eq:desintegracion">(16)</a> e integrando primero la variable de acción,
+\display{\eta_\pi\bigl(\rho\varphi-\gen{}\varphi\bigr)
+  =\int_E\Bigl(\rho\varphi(x)-\pi_x^a\gen{a}\varphi(x)\Bigr)m_\pi(x) dx
+  =\int_E\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)m_\pi dx,}
+donde el paso intermedio es la definición <a class="xref" href="#es-eq:gen-pi">(4)</a> del generador
+promediado. Igualando con $\nu_0(\varphi)$ sale <a class="xref" href="#es-eq:fp-debil">?</a>, que es
+$(\rho \mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ como distribuciones.</p>
+<p>Para la forma clásica, integrar por partes dos veces en
+$\int(b_\pi\cdot\nabla\varphi)m_\pi$ y en
+$\tfrac12\int\operatorname{Tr}(\Sigma_\pi D^2\varphi)m_\pi$, descartando los
+términos de frontera bajo las condiciones del modelo, para pasar todas las
+derivadas a $m_\pi$; el resultado es <a class="xref" href="#es-eq:fp">?</a>.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p18" data-titulo="1">Ver: Demostración de la Proposición <a class="xref" href="#es-prop:sistema-equivalente">4.3</a></button><div class="proof" id="es-control-inverso-p18"><p>Por el Teorema <a class="xref" href="#es-thm:silla">3.6</a>, $\eta_{A,\star}$ minimiza $\pair{c_\star}{\cdot}$
+sobre $\M$, lo que por <a class="xref" href="#es-eq:lp">(8)</a> y su dual <a class="xref" href="#es-eq:dual">(9)</a> equivale a la
+existencia de $V$ que cumpla <a class="xref" href="#es-eq:hjb-ineq">?</a> con holgura complementaria en
+$\operatorname{supp}\eta_{A,\star}$; ese es el primer par de bloques, y la
+Proposición <a class="xref" href="#es-prop:hjb">1.3</a> convierte la holgura en <a class="xref" href="#es-eq:selector">?</a>. Las dos
+ecuaciones adjuntas son la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a> aplicada a $\pi_A$ y a
+$\pi_E$, las dos en $\M$. El último bloque es <a class="xref" href="#es-eq:cstar">?</a> reordenada, y su
+lectura débil es <a class="xref" href="#es-eq:coste-debil">(18)</a>.</p>
+<p>Recíprocamente, sea $(V,\pi_A,m_A,m_E,c)$ solución débil de <a class="xref" href="#es-eq:sistema">(17)</a>
+con $\eta_A\in\M$. El último bloque da
+$c=\ch+\alpha^{-1}R^{-1}(\eta_A-\eta_E)$, y los dos primeros dan la optimalidad
+de $\eta_A$ para $c$, luego $\pair{c}{\eta-\eta_A}\ge0$ para todo $\eta\in\M$.
+Esa es la desigualdad variacional que caracteriza al minimizador de $\Psi$, que
+es único, así que $\eta_A=\eta_{A,\star}$ y por tanto $c=c_\star$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p19" data-titulo="1">Ver: Demostración de <a class="xref" href="#es-eq:alpha-bound">(15)</a></button><div class="proof" id="es-control-inverso-p19"><p>Como $\eta_E\in\M$, la minimalidad de $\eta_{A,\star}$ y $\Psi(\eta_E)=0$ dan
+$\pair{\ch}{\eta_{A,\star}-\eta_E}
++\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$. Escribiendo
+$\Delta=\eta_{A,\star}-\eta_E$ y usando
+$|\pair{\ch}{\Delta}|\le\|\ch\|_{\Hs}\|\Delta\|_{\Hd}$,
+\display{\frac1{2\alpha}\|\Delta\|_{\Hd}^2\le\|\ch\|_{\Hs}\|\Delta\|_{\Hd},}
+que es <a class="xref" href="#es-eq:alpha-bound">(15)</a> tras dividir por $\|\Delta\|_{\Hd}$.</p></div></section></div>
+<div class="doc" data-lang="en"><section class="capitulo"><h3 id="en-sec:forward"><span class="secnum">1</span>Forward discounted stochastic control</h3>
+<p>Throughout, <button class="term" type="button" data-k="E">$E\s\R^d$</button> is the state space and <button class="term" type="button" data-k="A">$A\s\R^m$</button> is the
+action set, assumed compact. We fix a discount rate <button class="term" type="button" data-k="rho">$\rho&gt;0$</button> and a
+probability measure <button class="term" type="button" data-k="nu0">$\nu_0$</button> on $E$, the initial law of the state. The
+letter $\Omega$ is reserved for the sample space
+of a filtered probability space $(\Omega,\mathscr F,\{\mathscr F_t\},\P)$, and $W$
+denotes a Brownian motion in $\R^d$.</p>
+<div class="v" data-var="std"></div><div class="v" data-var="fin"><p>Integrals are written in de Finetti notation, a measure applied to a function:
+$\mu(f)=\int f d\mu$, with a superscript naming the variable of integration when
+several measures act in succession.</p></div>
+<p>The model of interest is the controlled diffusion</p>
+<div class="display numerado" id="en-eq:sde"><div class="eqbody">\begin{equation}
+
+  dX_t=b(X_t,a_t)\,dt+\sigma(X_t,a_t)\,dW_t,\qquad X_0\sim\nu_0,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(2)</span><span class="num">(1)</span></div></div>
+<p>whose generator at a frozen action $a\in A$ is the second-order operator</p>
+<div class="display numerado" id="en-eq:generator"><div class="eqbody">\begin{equation}
+
+  \gen{a}\varphi(x)=b(x,a)\cdot\nabla\varphi(x)
+  +\tfrac12\operatorname{Tr}\bigl(\sigma\sigma^\top(x,a)\,D^2\varphi(x)\bigr).
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(3)</span><span class="num">(2)</span></div></div>
+<p>We write <button class="term" type="button" data-k="gen">$\gen{}$</button> for the operator with $\dom(\gen{})\s C_b(E)$ and range in
+$C_b(E\times A)$ given by</p>
+<div class="display numerado" id="en-eq:gen-operador"><div class="eqbody">\begin{equation}
+
+  \gen{}\varphi:(x,a)\longmapsto\gen{a}\varphi(x).
+\end{equation}</div><div class="eqside"><span class="num">(3)</span></div></div>
+<p>Equation <a class="xref" href="#en-eq:sde">(1)</a> presupposes an action process $a_t$, and this is more than
+the theory needs. The formulation we adopt is the relaxed controlled martingale
+problem, which replaces the action process by a measure-valued one and is stable
+under the randomization that the linear-programming formulation requires.</p>
+<div class="stmt definicion" id="en-def:relajada"><div class="head">Definición 1.1</div><div class="body"><p><span class="src">[Borkar]</span>
+Let $V=\mathscr P(A)$, a compact metric space in the weak topology. A process
+$(X,\pi)$ with values in $E\times V$, progressively measurable with respect to
+$\{\mathscr F_t\}$ and with $X_0\sim\nu_0$, solves the <span class="df">relaxed controlled
+martingale problem</span> for $(\gen{},\nu_0)$ if for every $f\in\dom(\gen{})$ the
+process</p>
+<div class="display numerado" id="en-eq:mart"><div class="eqbody"><span class="v" data-var="std">\[f(X_t)-\int_0^t\!\!\int_A \gen{a}f(X_s)\,\pi_s(da)\,ds\]</span><span class="v" data-var="fin">\[f(X_t)-\lambda_{[0,t]}^{\,s}\,\pi_s^a\,\gen{a}f(X_s)\]</span></div></div>
+<p>is an $\{\mathscr F_t\}$-martingale.</p></div></div>
+<p>Here <button class="term" type="button" data-k="pi">$\pi=(\pi_t)_{t\ge0}$</button> is adapted with values in $\mathscr P(A)$, which is
+compact because $A$ is; no kernel $x\mapsto\pi_x$ is available at this stage.
+Taking $\pi_t=\delta_{a_t}$ returns <a class="xref" href="#en-eq:sde">(1)</a>, with the same law, the same
+occupation measure and the same cost.</p>
+<p>A relaxed policy averages the generator rather than the coefficients. For a kernel
+$\pi:E\to\mathscr P(A)$ we write</p>
+<div class="display numerado" id="en-eq:gen-pi"><div class="eqbody">\begin{equation}
+
+  \Gen{\pi}\varphi(x)=\pi_x^a\bigl(\gen{}\varphi(x,a)\bigr)
+  =b_\pi(x)\cdot\nabla\varphi(x)
+  +\tfrac12\operatorname{Tr}\bigl(\Sigma_\pi(x)D^2\varphi(x)\bigr),
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(33)–(35)</span><span class="num">(4)</span></div></div>
+<p>with $b_\pi(x)=\pi_x^a b(x,a)$ and $\Sigma_\pi(x)=\pi_x^a \sigma\sigma^\top(x,a)$.
+What <a class="xref" href="#en-eq:gen-pi">(4)</a> averages is $\sigma\sigma^\top$, and $\pi_x^a\sigma$ would
+give something else: for $d=m=1$, $A=\{-1,1\}$, $\sigma(x,a)=a$ and $\pi_x$
+uniform, $\pi_x^a\sigma=0$ while $\Sigma_\pi=1$, so
+$\Gen{\pi}=\tfrac12\partial_x^2$. The law of the diffusion is determined by
+$\sigma\sigma^\top$.</p>
+<p>Since $\Sigma_\pi$ is an average of positive semidefinite matrices it is again
+positive semidefinite, so $\Gen{\pi}$ retains the form <a class="xref" href="#en-eq:generator">(2)</a> and
+satisfies the positive maximum principle. Consequently $\Gen{\pi}$ generates a
+Feller--Dynkin semigroup $\Sg{t,\pi}$ as soon as the range condition
+$\mathcal R(\lambda \mathrm{Id}-\Gen{\pi})=\mathscr C_0(E)$ holds for some
+$\lambda&gt;0$ <span class="src">[Baudoin]</span>, and the associated transition function is written
+$P_{t,\pi,x}$, so that $P_{t,\pi,x}(\varphi)=\Sg{t,\pi}\varphi(x)$. We distinguish
+the operator from its pointwise values throughout: $\Sg{t,\pi}$ and $\Gen{\pi}$ act
+on functions, while $P_{t,\pi,x}$ is a measure on $E$.</p>
+<p>For a Borel bounded running cost $c:E\times A\to\R$ the discounted cost of a
+relaxed policy and the forward problem are</p>
+<div class="display numerado" id="en-eq:J"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\E\left[\int_0^\infty e^{-\rho t}\int_A c(X_t,a)\,\pi_t(da)\,dt\right],
+   \qquad \inf_\pi J_c(\pi),\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\P\bigl(\lambda_\rho^t\,\pi_t^a\,c(X_t,a)\bigr),
+   \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(5)</span></div></div>
+<p>where $\lambda_\rho=e^{-\rho t}dt$, of total mass $1/\rho$, and $\P$ is the measure
+of the solution $(X,\pi)$. The infimum in <a class="xref" href="#en-eq:J">(5)</a> runs over the solutions of
+Definition <a class="xref" href="#en-def:relajada">1.1</a>.</p>
+<p>When the policy is Markov the expectation opens into the semigroup.</p>
+<div class="stmt proposicion" id="en-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[Borkar]</span>
+Suppose $\pi_s=\pi(X_s)$ for a measurable kernel $\pi:E\to\mathscr P(A)$, a
+<span class="df">relaxed Markov control</span>. Then $X$ alone solves the martingale problem for
+$(\Gen{\pi},\nu_0)$; if that problem is well posed, $X$ is a Markov process with
+transition function $P_{t,\pi,x}$ and</p>
+<div class="display numerado" id="en-eq:J-semigrupo"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_E\!\int_0^\infty e^{-\rho t}\,
+    \Sg{t,\pi}c_\pi(x)\,dt\,\nu_0(dx),\qquad
+    c_\pi(y)=\int_Ac(y,a)\,\pi_y(da),\]</span><span class="v" data-var="fin">\[J_c(\pi)=\nu_0^x\,\lambda_\rho^t\,P_{t,\pi,x}^y\,\pi_y^a\,c(y,a)
+   =\nu_0^x\,\lambda_\rho^t\,\Sg{t,\pi}c_\pi(x).\]</span></div></div>
+<p>Equivalently $J_c(\pi)=\nu_0\bigl((\rho \mathrm{Id}-\Gen{\pi})^{-1}c_\pi\bigr)$.</p></div></div>
+<p>The last identity is the resolvent form of the cost: $\lambda_\rho^t\Sg{t,\pi}$ is
+the Laplace transform of the semigroup, hence $(\rho \mathrm{Id}-\Gen{\pi})^{-1}$,
+and evaluating $J_c$ amounts to solving the linear elliptic equation
+$\rho V_\pi-\Gen{\pi}V_\pi=c_\pi$ and integrating against $\nu_0$; the operator to
+be inverted is the one whose surjectivity was assumed above. The Markov form
+$\pi_t=\pi(X_t)$ is obtained by disintegrating an optimal occupation measure
+<a class="xref" href="#en-eq:desintegracion">(16)</a>, and until then $\pi_x$ is defined only on this
+subclass.</p>
+<h4 id="en-control-inverso-x1">HJB formulation</h4>
+<p>The value function <button class="term" type="button" data-k="V">$V(x)$</button> is the optimal cost started at $x$. Under dynamic
+programming it satisfies</p>
+<div class="display numerado" id="en-eq:hjb"><div class="eqbody">\begin{equation}
+
+  \rho V(x)=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}.
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(6)</span></div></div>
+<div class="stmt proposicion" id="en-prop:hjb"><div class="head">Proposición 1.3</div><div class="body"><p>Equation <a class="xref" href="#en-eq:hjb">(6)</a> is equivalent to the inequality</p>
+<div class="display numerado" id="en-eq:hjb-ineq"><div class="eqbody">\begin{equation}
+
+  c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0,\qquad (x,a)\in E\times A,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(7)</span></div></div>
+<p>together with attainment of the infimum at each $x$. If $a\mapsto c(x,a)+\gen{a}V(x)$
+is continuous, the set of minimizers is nonempty and compact, and any optimal
+policy satisfies</p>
+<div class="display numerado" id="en-eq:selector"><div class="eqbody"><span class="v" data-var="std">\[\operatorname{supp}\pi_x\ \s\ \arg\min_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\},
+    \qquad \]</span><span class="v" data-var="fin">\[\pi_x^a\bigl(c(x,a)+\gen{a}V(x)\bigr)=\rho V(x),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(8)</span></div></div>
+<p>with equality in <a class="xref" href="#en-eq:hjb-ineq">?</a> on the support of $\pi_x$.</p></div></div>
+<p>Read pointwise, <a class="xref" href="#en-eq:hjb">(6)</a> presupposes $V\in C^2$, since $\gen{a}V$ carries
+$\nabla V$ and $D^2V$. Nothing below depends on solving it in that sense: the
+existence theory of Section <a class="xref" href="#en-sec:convexo">3</a> is built on <a class="xref" href="#en-eq:lp">(8)</a> and never
+evaluates a value function, and <a class="xref" href="#en-eq:hjb">(6)</a> reappears only as the dual
+feasibility condition <a class="xref" href="#en-eq:dual">(9)</a> and as one block of the optimality system of
+Section <a class="xref" href="#en-sec:pde">4</a>, where it is used in weak form.</p>
+<h4 id="en-sec:balance"><span class="secnum">1.2</span>Discounted occupation measures</h4>
+<div class="stmt definicion" id="en-def:ocupacion"><div class="head">Definición 1.4</div><div class="body"><p>For a relaxed policy $\pi$ and $B\in\mathscr B(E\times A)$, the <span class="df">discounted
+occupation measure</span> is</p>
+<div class="display numerado" id="en-eq:ocupacion"><div class="eqbody"><span class="v" data-var="std">\[\eta_\pi(B)=\E\left[\int_0^\infty e^{-\rho t}\int_A
+    \mathbf 1_B(X_t,a)\,\pi_t(da)\,dt\right].\qquad \]</span><span class="v" data-var="fin">\[\eta_\pi(B)=\P\bigl(\lambda_\rho^t\,\pi_t^a\,\mathbf 1_B(X_t,a)\bigr).
+    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(9)</span></div></div></div></div>
+<p>Taking $c$ in place of $\mathbf 1_B$ in <button class="term" type="button" data-k="eta"><a class="xref" href="#en-eq:ocupacion">?</a></button> and comparing with
+<a class="xref" href="#en-eq:J">(5)</a> gives, with no computation,</p>
+<div class="display numerado" id="en-eq:lineal"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_{E\times A}c\,d\eta_\pi=\pair{c}{\eta_\pi}.\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\eta_\pi(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(10)</span><span class="num">(7)</span></div></div>
+<p>The right-hand side of <a class="xref" href="#en-eq:lineal">(7)</a> carries no semigroup, no time and no
+initial condition, so everything below takes place on $E\times A$, and the forward
+problem, nonconvex in $\pi$, is linear in $\eta$.</p>
+<p>The measures that arise this way are characterized by a single family of linear
+equalities.</p>
+<div class="stmt proposicion" id="en-prop:balance"><div class="head">Proposición 1.5</div><div class="body"><p><span class="src">[Borkar]</span>
+For every $\varphi\in\dom(\gen{})$, the occupation measure of any solution of the
+relaxed controlled martingale problem satisfies the <span class="df">weak balance identity</span></p>
+<div class="display numerado" id="en-eq:balance"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}\bigl(\rho\varphi(x)-\gen{a}\varphi(x)\bigr)\,\eta(dx,da)
+    =\int_E\varphi\,d\nu_0.\qquad \]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-\gen{}\varphi\bigr)=\nu_0(\varphi).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(11)</span></div></div>
+<p>Conversely, every $\eta\ge0$ satisfying <a class="xref" href="#en-eq:balance">?</a> is the occupation
+measure of some solution.</p></div></div>
+<p>In operator form <a class="xref" href="#en-eq:balance">?</a> reads $(\rho-\gen{})^{*}\eta=\nu_0$, so $\eta$
+is the initial law transported by the adjoint resolvent; this is the dual statement
+of the resolvent form of $J_c$ recorded after Proposition <a class="xref" href="#en-prop:semigrupo">1.2</a>.</p>
+<div class="stmt corolario" id="en-cor:masa"><div class="head">Corolario 1.6</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ for every $\pi$. In particular $\eta_\pi$ is not a
+probability measure.</p></div></div>
+<p>The mass is $1/\rho$ rather than $1$ because <a class="xref" href="#en-eq:ocupacion">?</a> is not
+normalized, and both sources normalize: Kurtz and Stockbridge define
+$\widehat\pi=\rho \eta_\pi$ and recover the cost as $\rho^{-1}\widehat\pi(c)$,
+while Borkar&#x27;s discounted occupation measure carries the same factor
+<span class="src">[Kurtz]</span>. The three balance identities coincide after that rescaling, and
+$1/\rho$ is the only input to the bound of Lemma <a class="xref" href="#en-lema:M-acotado">3.1</a>.</p>
+<p>Writing <button class="term" type="button" data-k="M">$\M$</button> for the nonnegative measures on $E\times A$ satisfying
+<a class="xref" href="#en-eq:balance">?</a>, the forward problem is the linear program</p>
+<div class="display numerado" id="en-eq:lp"><div class="eqbody"><span class="v" data-var="std">\[\inf_{\eta\in\M}\ \pair{c}{\eta},\qquad \]</span><span class="v" data-var="fin">\[\inf_{\eta\in\M}\ \eta(c),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(12)</span><span class="num">(8)</span></div></div>
+<p>whose formal dual is</p>
+<div class="display numerado" id="en-eq:dual"><div class="eqbody">\begin{equation}
+
+  \sup_V\ \nu_0(V)
+  \qquad\text{subject to}\qquad
+  c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0 .
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(13)</span><span class="num">(9)</span></div></div>
+<p>The HJB inequality <a class="xref" href="#en-eq:hjb-ineq">?</a> is therefore exactly dual feasibility for
+<a class="xref" href="#en-eq:lp">(8)</a>, and the value function is the dual variable attached to the balance
+constraint.</p>
+<div class="stmt observacion" id="en-obs:test"><div class="head">Observación 1.7</div><div class="body"><p>The set $\M$ depends on the class of test functions in <a class="xref" href="#en-eq:balance">?</a>, and the
+note does not fix $\dom(\gen{})$. Taking $\mathscr C^2_c(E)$, $C^\infty_c(E)$ or
+$C^2_b(\overline E)$ gives different sets whenever $E$ has a boundary, the
+difference being exactly the boundary behaviour that <a class="xref" href="#en-eq:balance">?</a> can detect.
+For the differential generator <a class="xref" href="#en-eq:generator">(2)</a> the choice
+$\dom(\gen{})=\mathscr C^2_c(E)$ is the one under which the characterization in
+Proposition <a class="xref" href="#en-prop:balance">1.5</a> is available <span class="src">[Kurtz]</span>.</p></div></div></section>
+<section class="capitulo"><h3 id="en-sec:inverso"><span class="secnum">2</span>Inverse control with a prior cost</h3>
+<p>We now observe an expert and ask which running cost explains it. The expert is a
+policy $\pi_E$, known only through its discounted occupation measure
+<button class="term" type="button" data-k="etaE">$\eta_E\in\M$</button>, and a prior running cost $\ch$ is given. Requiring the expert to be
+exactly optimal is too rigid, and the workable relaxation measures how far it is
+from optimal.</p>
+<div class="stmt definicion" id="en-def:gap"><div class="head">Definición 2.1</div><div class="body"><p>The <span class="df">suboptimality gap</span> of the expert under a candidate cost $c$ is</p>
+<div class="display numerado" id="en-eq:gap"><div class="eqbody"><span class="v" data-var="std">\[\Gap(c):=\pair{c}{\eta_E}-\inf_{\eta\in\M}\pair{c}{\eta}
+    =\sup_{\eta\in\M}\pair{c}{\eta_E-\eta}.\qquad \]</span><span class="v" data-var="fin">\[\Gap(c):=\eta_E(c)-\inf_{\eta\in\M}\eta(c)
+    =\sup_{\eta\in\M}\,(\eta_E-\eta)(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(14)</span></div></div></div></div>
+<div class="stmt proposicion" id="en-prop:gap-basico"><div class="head">Proposición 2.2</div><div class="body"><p>$\Gap$ is convex, positively homogeneous and nonnegative on $\Hs$, and
+$\Gap(c)=0$ if and only if $\eta_E$ minimizes $\pair{c}{\cdot}$ over $\M$.
+Moreover $\Gap(0)=0$.</p></div></div>
+<p>$\Gap$ is a supremum of functionals linear in $c$, one for each $\eta\in\M$, hence
+convex; nonnegativity uses only $\eta_E\in\M$. Its inner infimum is the forward
+problem <a class="xref" href="#en-eq:lp">(8)</a> at the current candidate cost.</p>
+<p>Selecting a cost by the gap alone is ill posed, and beyond the constants the
+balance identity already produces a whole subspace of costs that no observation
+distinguishes.</p>
+<div class="stmt proposicion" id="en-prop:shaping"><div class="head">Proposición 2.3</div><div class="body"><p>For $\phi\in\dom(\gen{})$ put $q_\phi(x,a):=\rho\phi(x)-\gen{a}\phi(x)$. Then</p>
+<div class="display numerado" id="en-eq:shaping"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}q_\phi\,d\eta=\int_E\phi\,d\nu_0
+    \qquad\text{for every }\eta\in\M,\qquad \]</span><span class="v" data-var="fin">\[\eta(q_\phi)=\nu_0(\phi)\qquad\text{for every }\eta\in\M,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(29)</span></div></div>
+<p>so $c$ and $c+q_\phi$ have the same minimizers over $\M$ and the same gap. The
+identifiable object is the class of $c$ modulo $\{q_\phi:\phi\in\dom(\gen{})\}$.</p></div></div>
+<p>This is the continuous-time form of potential-based shaping, and it is
+<a class="xref" href="#en-eq:balance">?</a> read against $c$. The prior selects one representative of the
+class, so it is worth carrying even when the expert is exactly optimal.</p>
+<div class="display numerado" id="en-eq:inverso"><div class="eqbody">\begin{equation}
+
+  \min_{c\in\Hs}\ \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\Gap(c)\right\},
+  \qquad\alpha&gt;0,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(15)</span><span class="num">(10)</span></div></div>
+<p>or, expanding the gap,</p>
+<div class="display numerado" id="en-eq:minmax"><div class="eqbody"><span class="v" data-var="std">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
+    \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\pair{c}{\eta_E-\eta}\right\}.
+    \qquad \]</span><span class="v" data-var="fin">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
+    \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+(\eta_E-\eta)(c)\right\}.
+    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(16)</span><span class="num">(11)</span></div></div>
+<p>The parameter <button class="term" type="button" data-k="alpha">$\alpha$</button> interpolates: large $\alpha$ pins the recovered cost to the
+prior, small $\alpha$ gives priority to closing the expert&#x27;s gap. Its quantitative
+effect is recorded in <a class="xref" href="#en-eq:alpha-bound">(15)</a>.</p>
+<h4 id="en-sec:espacio-costo"><span class="secnum">2.1</span>The cost space</h4>
+<p>The occupation measure of a deterministic policy $u:E\to A$ concentrates on the
+graph $\{(x,u(x)):x\in E\}$, which is Lebesgue-null in $E\times A$. Such an $\eta$
+has no density, so the $L^2$ pairing $\int c \eta dx da$ is undefined and $c$
+must have pointwise values. Two regimes resolve this.</p>
+<ol class="lista"><li><p><span class="df">Measure formulation.</span> Take $\Hs$ continuously embedded in
+$C(E\times A)$. Every finite signed measure then defines a continuous functional on
+$\Hs$, so $\M\s\Hd$ and the pairing is the duality pairing.</p></li><li><p><span class="df">Density formulation.</span> If every relevant occupation measure has an $L^2$
+density, one may take $\Hs=H^1$ with the $L^2$ pairing. This is the regime in which
+the PDE and numerical formulations are written.</p></li></ol>
+<p>Regime (i) is the one that supports the existence theory, and the embedding it
+requires is a Sobolev threshold.</p>
+<div class="stmt teorema" id="en-thm:encaje"><div class="head">Teorema 2.4</div><div class="body"><p><span class="src">[Folland]</span>
+Let $n=d+m$ and $s&gt;n/2$. Then $H^s(\R^n)\hookrightarrow C_0(\R^n)$ continuously,
+and every $f\in H^s$ has a continuous representative with
+$\|f\|_\infty\le C_s\|f\|_{H^s}$.</p></div></div>
+<div class="stmt corolario" id="en-cor:umbral"><div class="head">Corolario 2.5</div><div class="body"><p>If <button class="term" type="button" data-k="Hs">$\Hs=H^s(E\times A)$</button> with $s&gt;(d+m)/2$ on a bounded domain of class $C^1$, then
+$\Hs\hookrightarrow C(E\times A)$ and every finite signed measure on $E\times A$
+belongs to $\Hd$, with $\|\eta\|_{\Hd}\le C_\iota |\eta|(E\times A)$.</p></div></div>
+<p>The Dirac mass shows the threshold is sharp: $\delta_{(x_0,a_0)}$ is a bounded
+functional on $H^s$ exactly when $s&gt;n/2$. Hence $H^1$ is admissible only for
+$d+m\le1$, and regime (ii) is an assumption on $\M$, not a choice of space.</p>
+<div class="stmt proposicion" id="en-prop:h1-nunca"><div class="head">Proposición 2.6</div><div class="body"><p>For $n=d+m\ge2$ the Dirac mass at a point of $E\times A$ is not a bounded
+functional on $H^1(E\times A)$. In particular the singular occupation measures of
+deterministic policies do not lie in $(H^1)^*$.</p></div></div>
+<p>For the penalty we use the weighted Sobolev norm</p>
+<div class="display numerado" id="en-eq:penalizacion"><div class="eqbody">\begin{equation}
+
+  \tfrac12\|c-\ch\|_{\Hs}^2
+  =\tfrac12\int_{E\times A}\Bigl(|c-\ch|^2+\kappa\,
+   |\nabla_{x,a}(c-\ch)|^2\Bigr)dx\,da,
+  \qquad\kappa&gt;0,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(12)</span></div></div>
+<p>whose Riesz map is $R=\mathrm{Id}-\kappa\Delta_{x,a}$.</p>
+<div class="stmt proposicion" id="en-prop:riesz"><div class="head">Proposición 2.7</div><div class="body"><p>With the norm <a class="xref" href="#en-eq:penalizacion">(12)</a> on $H^1(E\times A)$, the Riesz isomorphism
+<button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> is the weak form of $\mathrm{Id}-\kappa\Delta_{x,a}$, that is</p>
+<div class="display numerado" id="en-eq:riesz"><div class="eqbody"><span class="v" data-var="std">\[\pair{Rc}{v}=\int_{E\times A}\bigl(cv+\kappa\nabla c\cdot\nabla v\bigr)
+    \,dx\,da\qquad\text{for all }v\in H^1,\]</span><span class="v" data-var="fin">\[(Rc)(v)=\lambda^{(x,a)}\bigl(cv+\kappa\,\nabla c\cdot\nabla v\bigr)
+    \qquad\text{for all }v\in H^1,\]</span></div></div>
+<p>and $R^{-1}$ is the solution operator of the corresponding elliptic problem. The
+boundary conditions are those of the variational formulation: periodic on a torus,
+and homogeneous Neumann when the variation of $c$ is free on $\partial(E\times A)$.</p></div></div>
+<p>The boundary condition is fixed by the model: the same weak form defines a
+different $R$, hence a different recovered cost, for each choice, and $R^{-1}$
+appears explicitly in <a class="xref" href="#en-eq:cstar">?</a>.</p>
+<div class="stmt observacion" id="en-obs:dos-condiciones"><div class="head">Observación 2.8</div><div class="body"><p>The two regimes place their demands on different objects. Regime (i) constrains
+$\Hs$, asking $s&gt;(d+m)/2$, and then accepts every finite measure. Regime (ii)
+constrains $\M$, asking that its elements have $L^2$ densities, and then accepts
+the cheaper space $H^1$. Only the first is available when deterministic policies
+are admissible, which is the case whenever the Hamiltonian in <a class="xref" href="#en-eq:selector">?</a>
+has a unique minimizer.</p></div></div></section>
+<section class="capitulo"><h3 id="en-sec:convexo"><span class="secnum">3</span>Convex structure, existence, and the reduced problem</h3>
+<p>The inverse problem has a convex structure strong enough to give existence
+directly, without any continuity property of a map from costs to optimal policies.
+We work in regime (i) of Section <a class="xref" href="#en-sec:espacio-costo">2.1</a>, so
+$\Hs\hookrightarrow C(E\times A)$ with embedding norm $C_\iota$, and we write
+$\Phi$ for the saddle functional, reserving $\mathcal L$ for the generator:</p>
+<div class="display numerado" id="en-eq:Phi"><div class="eqbody">\begin{equation}
+
+  \Phi(c,\eta)=\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\pair{c}{\eta_E-\eta},
+  \qquad
+  \inf_{c\in\Hs}\ \sup_{\eta\in\M}\ \Phi(c,\eta).
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(13)</span></div></div>
+<p>Three of the hypotheses the note carries are automatic here, and all three follow
+from the mass computed in Corollary <a class="xref" href="#en-cor:masa">1.6</a>.</p>
+<div class="stmt lema" id="en-lema:M-acotado"><div class="head">Lema 3.1</div><div class="body"><p>Every $\eta\in\M$ satisfies $\|\eta\|_{\Hd}\le C_\iota/\rho$, and
+$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div></div>
+<div class="stmt corolario" id="en-cor:gap-lipschitz"><div class="head">Corolario 3.2</div><div class="body"><p>$\Gap$ is finite on all of $\Hs$ and Lipschitz with constant $2C_\iota/\rho$; in
+particular it is continuous, hence lower semicontinuous.</p></div></div>
+<div class="stmt proposicion" id="en-prop:existencia-c"><div class="head">Proposición 3.3</div><div class="body"><p>If $\M\ne\emptyset$, the objective in <a class="xref" href="#en-eq:inverso">(10)</a> is $\alpha$-strongly
+convex, coercive and lower semicontinuous, so it has a unique minimizer
+$c_\star\in\Hs$.</p></div></div>
+<p>Strong convexity comes from the squared Hilbert norm and convexity of $\Gap$;
+coercivity from $\Gap\ge0$; lower semicontinuity from
+Corollary <a class="xref" href="#en-cor:gap-lipschitz">3.2</a>. No property of the map $c\mapsto\pi$ is used.</p>
+<h4 id="en-control-inverso-x2">Eliminating the cost without assuming a minimax interchange</h4>
+<p>For fixed $\eta$ the minimization in $c$ is explicit. We do <em>not</em> assume at
+this stage that the infimum and the supremum in <a class="xref" href="#en-eq:Phi">(13)</a> may be exchanged.</p>
+<div class="stmt proposicion" id="en-prop:reduccion"><div class="head">Proposición 3.4</div><div class="body"><p>For each $\eta\in\M$ the map $c\mapsto\Phi(c,\eta)$ has the unique minimizer</p>
+<div class="display numerado" id="en-eq:c-de-eta"><div class="eqbody">\begin{equation}
+
+  c_\eta=\ch+\frac1\alpha R^{-1}(\eta-\eta_E),
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(20)</span></div></div>
+<p>and</p>
+<div class="display numerado" id="en-eq:reducido-valor"><div class="eqbody"><span class="v" data-var="std">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
+   \Psi(\eta):=\pair{\ch}{\eta-\eta_E}
+   +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span><span class="v" data-var="fin">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
+   \Psi(\eta):=(\eta-\eta_E)(\ch)
+   +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(21), (22)</span></div></div></div></div>
+<p>This suggests the <span class="df">reduced problem</span></p>
+<div class="display numerado" id="en-eq:reducido"><div class="eqbody">\begin{equation}
+
+  \min_{\eta\in\M}\ \Psi(\eta),
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(23)</span><span class="num">(14)</span></div></div>
+<p>a minimization over measures rather than over costs. By the elementary inequality
+$\sup_\eta\inf_c\Phi\le\inf_c\sup_\eta\Phi$, its value is so far only a lower bound
+for <a class="xref" href="#en-eq:Phi">(13)</a>. Theorem <a class="xref" href="#en-thm:silla">3.6</a> closes the gap: a minimizer of
+<a class="xref" href="#en-eq:reducido">(14)</a> constructs a saddle point, and strong duality follows from it.</p>
+<p>The compactness the theorem needs is inherited from the forward problem.</p>
+<div class="stmt proposicion" id="en-prop:compacidad-M"><div class="head">Proposición 3.5</div><div class="body"><p>Suppose $E\times A$ is compact and $\gen{}$ maps $\dom(\gen{})$ into
+$C(E\times A)$. Then $\M$ is convex and weakly compact in $\Hd$. If moreover the
+embedding $\iota:\Hs\to C(E\times A)$ is compact, which holds for
+$\Hs=H^s(E\times A)$ with $s&gt;(d+m)/2$ on a domain admitting an extension operator,
+then $\M$ is compact in the norm of $\Hd$.</p></div></div>
+<p>Convexity is immediate because <a class="xref" href="#en-eq:balance">?</a> is a family of linear equalities.
+Compactness runs through the normalized set $\widehat\M=\rho \M\s\mathscr
+P(E\times A)$, which is weak-$*$ compact by Banach--Alaoglu and closedness of the
+balance constraints, and is then transported to $\Hd$ by the adjoint of the
+embedding. With a compact embedding, Schauder&#x27;s theorem gives norm compactness and
+existence in <a class="xref" href="#en-eq:reducido">(14)</a> is Weierstrass.</p>
+<div class="stmt teorema" id="en-thm:silla"><div class="head">Teorema 3.6</div><div class="body"><p>Assume $\Hs\hookrightarrow C(E\times A)$, that $\M\s\Hd$ is nonempty, convex and
+weakly compact, and that $\ch\in\Hs$. Then <a class="xref" href="#en-eq:reducido">(14)</a> has a unique
+minimizer $\eta_{A,\star}$. Setting</p>
+<div class="display numerado" id="en-eq:cstar"><div class="eqbody">\begin{equation}
+
+  c_\star=\ch+\frac1\alpha R^{-1}(\eta_{A,\star}-\eta_E),
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(24)</span></div></div>
+<p>we have $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$, the pair
+$(c_\star,\eta_{A,\star})$ is a saddle point of $\Phi$,</p>
+<div class="display numerado" id="en-eq:silla"><div class="eqbody">\begin{equation}
+
+  \Phi(c_\star,\eta)\ \le\ \Phi(c_\star,\eta_{A,\star})\ \le\ \Phi(c,\eta_{A,\star})
+  \qquad\text{for all }c\in\Hs,\ \eta\in\M,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(25)</span></div></div>
+<p>strong minimax duality holds,</p>
+<div class="display numerado" id="en-eq:dualidad"><div class="eqbody">\begin{equation}
+
+  \inf_{c\in\Hs}\sup_{\eta\in\M}\Phi
+  =\Phi(c_\star,\eta_{A,\star})
+  =\sup_{\eta\in\M}\inf_{c\in\Hs}\Phi,
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(26)</span></div></div>
+<p>and $c_\star$ is the unique solution of <a class="xref" href="#en-eq:inverso">(10)</a>.</p></div></div>
+<div class="stmt observacion" id="en-obs:sion"><div class="head">Observación 3.7</div><div class="body"><p>Under hypotheses ensuring a minimax theorem such as Sion&#x27;s, <a class="xref" href="#en-eq:dualidad">?</a>
+could be obtained directly from convexity in $c$, affinity in $\eta$ and
+compactness. The argument above is constructive: the minimizer of
+<a class="xref" href="#en-eq:reducido">(14)</a> produces the saddle point, $c_\star$ and
+<a class="xref" href="#en-eq:etaoptimal-set">?</a> at once.</p></div></div>
+<div class="stmt observacion" id="en-obs:selector"><div class="head">Observación 3.8</div><div class="body"><p>A fixed point of the map from a cost to an optimal policy need not exist: the
+selector in <a class="xref" href="#en-eq:selector">?</a> jumps where the Hamiltonian has several
+minimizers. The fixed-point relation <a class="xref" href="#en-eq:etaoptimal-set">?</a> is set-valued and
+posed on $\M$, which is convex and weakly compact, and $c_\star$ is unique however
+many optimal policies there are.</p></div></div>
+<div class="stmt corolario" id="en-cor:puntofijo"><div class="head">Corolario 3.9</div><div class="body"><p>With the notation of Theorem <a class="xref" href="#en-thm:silla">3.6</a>,</p>
+<div class="display numerado" id="en-eq:etaoptimal-set"><div class="eqbody">\begin{equation}
+
+  \eta_{A,\star}\in\Opt\!\left(\ch+\tfrac1\alpha R^{-1}
+   (\eta_{A,\star}-\eta_E)\right),
+  \qquad
+  \Opt(c):=\arg\min_{\eta\in\M}\pair{c}{\eta},
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span></div></div>
+<p>a set-valued fixed-point relation on $\M$.</p></div></div>
+<h4 id="en-control-inverso-x3">The role of $\alpha$</h4>
+<p>Because $\eta_E\in\M$, comparing $\eta_{A,\star}$ with the admissible choice
+$\eta=\eta_E$ in <a class="xref" href="#en-eq:reducido">(14)</a> gives
+$\pair{\ch}{\eta_{A,\star}-\eta_E}+\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$,
+and Cauchy--Schwarz turns this into</p>
+<div class="display numerado" id="en-eq:alpha-bound"><div class="eqbody">\begin{equation}
+
+  \|\eta_{A,\star}-\eta_E\|_{\Hd}\ \le\ 2\alpha\|\ch\|_{\Hs}.
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(28)</span><span class="num">(15)</span></div></div>
+<p>As $\alpha\downarrow0$ the apprentice occupation measure is driven to the expert&#x27;s
+at order $O(\alpha)$ in the dual norm. In the opposite direction, if $\M$ is
+bounded in $\Hd$, which Lemma <a class="xref" href="#en-lema:M-acotado">3.1</a> guarantees, then
+<a class="xref" href="#en-eq:cstar">?</a> gives $\|c_\star-\ch\|_{\Hs}=O(1/\alpha)$, so the recovered cost
+collapses onto the prior.</p></section>
+<section class="capitulo"><h3 id="en-sec:pde"><span class="secnum">4</span>The optimality system</h3>
+<p>Theorem <a class="xref" href="#en-thm:silla">3.6</a> identifies the solution as a pair $(c_\star,\eta_{A,\star})$
+characterized by a variational inequality. We now write that characterization as a
+system of equations. Nothing new is assumed about the inverse problem; what is
+assumed is regularity of the occupation measures, so that the balance identity can
+be read as a partial differential equation.</p>
+<h4 id="en-control-inverso-x4">From weak balance to Fokker--Planck</h4>
+<p>Throughout this section $\pi$ is a relaxed Markov control and the occupation
+measure disintegrates as</p>
+<div class="display numerado" id="en-eq:desintegracion"><div class="eqbody">\begin{equation}
+
+  \eta_\pi(dx,da)=m_\pi(x)\,\pi_x(da)\,dx,
+\end{equation}</div><div class="eqside"><span class="num">(16)</span></div></div>
+<p>with $m_\pi\in L^1(E)$ the <span class="df">discounted state density</span>. The state marginal
+carries all the information the balance identity sees, because the test functions
+in <a class="xref" href="#en-eq:balance">?</a> depend on $x$ alone.</p>
+<div class="stmt proposicion" id="en-prop:fp-debil"><div class="head">Proposición 4.1</div><div class="body"><p>Let $\eta_\pi\in\M$ disintegrate as <a class="xref" href="#en-eq:desintegracion">(16)</a>. Then $m_\pi$
+satisfies, for every $\varphi\in\dom(\gen{})$,</p>
+<div class="display numerado" id="en-eq:fp-debil"><div class="eqbody"><span class="v" data-var="std">\[\int_E\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)\,m_\pi\,dx
+    =\int_E\varphi\,d\nu_0,\]</span><span class="v" data-var="fin">\[m_\pi\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)=\nu_0(\varphi),\]</span></div></div>
+<p>that is, $(\rho \mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ in the sense of
+distributions. If moreover $b_\pi$ and $\Sigma_\pi$ are smooth enough for the
+adjoint to be computed classically, then</p>
+<div class="display numerado" id="en-eq:fp"><div class="eqbody">\begin{equation}
+
+  \rho\,m_\pi+\nabla\!\cdot\!\bigl(b_\pi m_\pi\bigr)
+  -\tfrac12\sum_{i,j}\partial^2_{x_ix_j}\bigl(\Sigma_{\pi,ij}\,m_\pi\bigr)=\nu_0 .
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(36)</span></div></div></div></div>
+<p>Equation <a class="xref" href="#en-eq:fp">?</a> is the stationary Fokker--Planck equation with discount
+$\rho$ and source $\nu_0$, obtained from <a class="xref" href="#en-eq:balance">?</a> by restricting to the
+state marginal and integrating by parts. Its total mass is $1/\rho$ by
+Corollary <a class="xref" href="#en-cor:masa">1.6</a>, which is the normalization that any discretization must
+reproduce.</p>
+<div class="stmt observacion" id="en-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Writing <a class="xref" href="#en-eq:fp">?</a> pointwise requires two derivatives of $\Sigma_\pi m_\pi$,
+and $m_\pi$ need not have them: for a
+deterministic policy the joint occupation measure is singular, and even when
+$m_\pi$ is a function its regularity is inherited from the coefficients through
+elliptic regularity rather than assumed. Every statement below is therefore given
+weakly, and <a class="xref" href="#en-eq:fp">?</a> is recorded only as the classical form of the same
+identity.</p></div></div>
+<h4 id="en-control-inverso-x5">The coupled system</h4>
+<p>Let $\pi_E$ be the expert policy with state density $m_E$, and let $\pi_A$ be an
+optimal policy for the recovered cost with state density $m_A$. Collecting
+<a class="xref" href="#en-eq:hjb-ineq">?</a>, <a class="xref" href="#en-eq:selector">?</a>, Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a> and the
+cost equation <a class="xref" href="#en-eq:cstar">?</a> gives the optimality system</p>
+<div class="display numerado" id="en-eq:sistema"><div class="eqbody">\begin{equation}
+
+  \left\{
+  \begin{aligned}
+  \rho V(x)&amp;=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}, \\[1mm]
+  \operatorname{supp}\pi_{A,x}&amp;\s\arg\min_{a\in A}
+     \bigl\{c(x,a)+\gen{a}V(x)\bigr\}, \\[1mm]
+  (\rho\,\mathrm{Id}-\Gen{\pi_A})^{*}m_A&amp;=\nu_0, \\[1mm]
+  (\rho\,\mathrm{Id}-\Gen{\pi_E})^{*}m_E&amp;=\nu_0, \\[1mm]
+  \alpha\,R\,(c-\ch)&amp;=\eta_A-\eta_E,
+  \end{aligned}
+  \right.
+  \qquad 
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(37)</span><span class="num">(17)</span></div></div>
+<p>where $\eta_A=m_A\pi_A$ and $\eta_E=m_E\pi_E$ in the sense of
+<a class="xref" href="#en-eq:desintegracion">(16)</a>. The last equation is the one that must be read weakly:</p>
+<div class="display numerado" id="en-eq:coste-debil"><div class="eqbody"><span class="v" data-var="std">\[\alpha\int_{E\times A}\Bigl[(c-\ch)h+\kappa\,\nabla(c-\ch)\cdot\nabla h\Bigr]
+    =\int_{E\times A}h\,d(\eta_A-\eta_E)
+    \qquad\text{for all }h\in\Hs,\qquad \]</span><span class="v" data-var="fin">\[\alpha\,\lambda^{(x,a)}\Bigl[(c-\ch)h+\kappa\,\nabla(c-\ch)\cdot\nabla h\Bigr]
+    =(\eta_A-\eta_E)(h)
+    \qquad\text{for all }h\in\Hs,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(38)</span><span class="num">(18)</span></div></div>
+<p>which is meaningful whenever $\eta_A-\eta_E\in\Hd$, and by
+Corollary <a class="xref" href="#en-cor:umbral">2.5</a> that holds for every pair of finite measures in
+regime (i). Writing $R=\mathrm{Id}-\kappa\Delta_{x,a}$ pointwise instead would put
+a distribution on the right-hand side of an equation between functions.</p>
+<div class="stmt proposicion" id="en-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Assume the hypotheses of Theorem <a class="xref" href="#en-thm:silla">3.6</a> and that the occupation measures
+of $\pi_E$ and of some optimal $\pi_A$ disintegrate as <a class="xref" href="#en-eq:desintegracion">(16)</a>.
+Then $(c_\star,\eta_{A,\star})$ solves <a class="xref" href="#en-eq:sistema">(17)</a> in the weak sense, and
+conversely any weak solution of <a class="xref" href="#en-eq:sistema">(17)</a> with $\eta_A\in\M$ has
+$c=c_\star$.</p></div></div>
+<p>The first two blocks determine the apprentice from the current cost and constitute
+the forward problem. The two adjoint equations transport expert and apprentice
+occupation, and are linear in $m$ once the policy is fixed. The last deforms the
+cost away from the prior in proportion to the occupation mismatch, and is linear in
+$c$ once the measures are fixed. The only nonlinearity is the $\arg\min$.</p>
+<div class="stmt observacion" id="en-obs:sistema-vs-optimizacion"><div class="head">Observación 4.4</div><div class="body"><p>The system <a class="xref" href="#en-eq:sistema">(17)</a> and the reduced problem <a class="xref" href="#en-eq:reducido">(14)</a> are two
+descriptions of the same solution, but they discretize differently. In
+<a class="xref" href="#en-eq:reducido">(14)</a> the unknown is a measure constrained by <a class="xref" href="#en-eq:balance">?</a> and
+the objective is strictly convex, so a discretization inherits a finite-dimensional
+strictly convex program. In <a class="xref" href="#en-eq:sistema">(17)</a> the unknowns are $V$, $m_A$, $m_E$
+and $c$, and the coupling is through the $\arg\min$; a discretization inherits a
+fixed-point iteration whose contraction properties are not supplied by
+Theorem <a class="xref" href="#en-thm:silla">3.6</a>.</p></div></div>
+<h4 id="en-control-inverso-x6">The finite-state model as a reference</h4>
+<p>Every object above has a finite-state counterpart, which makes the discrete model a
+reference for discretization. Let $S$ and $A$ be finite, let $Q$ be the rate matrix of
+a continuous-time chain and $\gamma$ or $\rho$ the discount. The generator becomes
+the matrix $(\gen{a}\varphi)(i)=\sum_j Q^a_{ij}\varphi(j)$, which is bounded, and
+the balance identity <a class="xref" href="#en-eq:balance">?</a> becomes the linear system</p>
+<div class="display numerado" id="en-eq:balance-discreto"><div class="eqbody"><span class="v" data-var="std">\[\sum_{i,a}\bigl(\rho\varphi_i-(Q^a\varphi)_i\bigr)\eta_{ia}
+    =\sum_i\varphi_i\nu_{0,i}\qquad\text{for all }\varphi\in\R^S,\]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-Q^{a}\varphi\bigr)=\nu_0(\varphi)
+    \qquad\text{for all }\varphi\in\R^S,\]</span></div><div class="eqside"><span class="num">(19)</span></div></div>
+<p>one equation per state, so $\M$ is a polytope in $\R^{S\times A}_{\ge0}$ of mass
+$1/\rho$ and <a class="xref" href="#en-eq:lp">(8)</a> is a finite linear program.</p>
+<p>Three features of the discrete model do not survive, and they are exactly the
+places where the continuous theory needs its own argument. The generator is
+bounded, so its exponential is the matrix exponential and the semigroup requires no
+range condition. Every measure has a density with respect to counting measure, so
+the distinction between regimes (i) and (ii) of Section <a class="xref" href="#en-sec:espacio-costo">2.1</a>
+collapses and the choice of $\Hs$ is immaterial. And the deterministic policies are
+the vertices of the polytope, a characterization with no counterpart here: $\M$
+remains convex and weakly compact by Proposition <a class="xref" href="#en-prop:compacidad-M">3.5</a>, but
+extremality is not what selects deterministic behaviour.</p></section>
+<section class="capitulo"><h3 id="en-sec:pruebas"><span class="secnum">5</span>Proofs</h3>
+<h4 id="en-control-inverso-x7">Forward problem</h4>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p1" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:semigrupo">1.2</a></button><div class="proof" id="en-control-inverso-p1"><p>If $\pi_s=\pi(X_s)$, the inner integral in <a class="xref" href="#en-eq:mart">?</a> equals
+$\pi_{X_s}^a\gen{a}f(X_s)=\Gen{\pi}f(X_s)$, a function of $X_s$ alone, so
+$f(X_t)-\int_0^t\Gen{\pi}f(X_s) ds$ is a martingale and $X$ by itself solves the
+martingale problem for $(\Gen{\pi},\nu_0)$. Well-posedness makes $X$ Markov with a
+transition function determined by $\Gen{\pi}$ and $\nu_0$ <span class="src">[Baudoin]</span>.</p>
+<p>For the cost, the same substitution gives $\pi_t^ac(X_t,a)=c_\pi(X_t)$ pointwise on
+$\Omega$; no conditioning is needed. On $\Omega\times[0,\infty)$ the map
+$(\omega,t)\mapsto c_\pi(X_t(\omega))$ is jointly measurable because $X$ is
+progressive, it is bounded by $\|c\|_\infty$, and $\P\otimes\lambda_\rho$ is finite
+of mass $1/\rho$, so Fubini exchanges $\P$ and $\lambda_\rho$. For fixed $t$ the
+integrand involves the process at a single instant, so only the law of $X_t$
+enters, and the Markov property applied at $s=0$ gives
+$\P(c_\pi(X_t))=\nu_0^x P_{t,\pi,x}^y c_\pi(y)$. Exchanging $\nu_0$ and
+$\lambda_\rho$, legitimate because $\nu_0\otimes\lambda_\rho$ is finite, gives
+<a class="xref" href="#en-eq:J-semigrupo">?</a>.</p>
+<p>The kernel cannot be moved across $\lambda_\rho$: it depends on $t$, so
+$\lambda_\rho(dt)P_{t,\pi,x}(dy)$ is a semidirect product and not a product
+measure. Finally $\lambda_\rho^t\Sg{t,\pi}=\int_0^\infty e^{-\rho t}\Sg{t,\pi} dt$
+is the resolvent $(\rho \mathrm{Id}-\Gen{\pi})^{-1}$, which is the last identity.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p2" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:hjb">1.3</a></button><div class="proof" id="en-control-inverso-p2"><p>That <a class="xref" href="#en-eq:hjb">(6)</a> implies <a class="xref" href="#en-eq:hjb-ineq">?</a> is the definition of an infimum,
+and the converse is <a class="xref" href="#en-eq:hjb-ineq">?</a> together with attainment. Existence of a
+minimizer is Weierstrass on the compact set $A$, and the set of minimizers is the
+preimage of the minimum value under a continuous map, hence closed in a compact
+set. Integrating <a class="xref" href="#en-eq:hjb-ineq">?</a> against $\pi_x$ gives
+$\pi_x^a(c(x,a)+\gen{a}V(x))\ge\rho V(x)$, with equality exactly when $\pi_x$ gives
+no mass to actions where the inequality is strict.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p3" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:balance">1.5</a></button><div class="proof" id="en-control-inverso-p3"><p>By Definition <a class="xref" href="#en-def:relajada">1.1</a> the process
+$M_t=\varphi(X_t)-\int_0^t\pi_s^a\gen{a}\varphi(X_s) ds$ is a martingale, so
+$\varphi(X_t)$ is a continuous semimartingale with that decomposition. The discount
+$t\mapsto e^{-\rho t}$ is deterministic, continuous and of bounded variation, so
+its covariation with $\varphi(X)$ vanishes and integration by parts gives
+\display{e^{-\rho t}\varphi(X_t)=\varphi(X_0)+\int_0^te^{-\rho s} dM_s
+  +\int_0^te^{-\rho s}\pi_s^a\gen{a}\varphi(X_s) ds
+  -\rho\int_0^te^{-\rho s}\varphi(X_s) ds .}
+The integrand $e^{-\rho s}$ is bounded by $1$ and $M$ is a martingale, so the
+stochastic integral has zero expectation. Taking expectations, letting
+$t\to\infty$, and using boundedness of $\varphi$ so that
+$e^{-\rho t}\E[\varphi(X_t)]\to0$, we obtain <a class="xref" href="#en-eq:balance">?</a> written with
+Definition <a class="xref" href="#en-def:ocupacion">1.4</a>. The converse is the characterization of discounted
+occupation measures <span class="src">[Borkar, Thm.\ 2.2]</span>; for locally compact state spaces
+see <span class="src">[Kurtz, Thm.\ 6.3]</span>.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p4" data-titulo="1">Ver: Proof of Corollary <a class="xref" href="#en-cor:masa">1.6</a></button><div class="proof" id="en-control-inverso-p4"><p>Take $\varphi\equiv1$ in <a class="xref" href="#en-eq:balance">?</a>. Both terms of <a class="xref" href="#en-eq:generator">(2)</a>
+carry derivatives of $\varphi$, so $\gen{a}1=0$ and the identity becomes
+$\rho \eta(E\times A)=\nu_0(1)=1$.</p></div>
+<h4 id="en-control-inverso-x8">Inverse problem and the cost space</h4>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p5" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:gap-basico">2.2</a></button><div class="proof" id="en-control-inverso-p5"><p>For each $\eta\in\M$ the map $c\mapsto\pair{c}{\eta_E-\eta}$ is linear and
+continuous, and a pointwise supremum of such maps is convex, positively homogeneous
+and lower semicontinuous. Taking $\eta=\eta_E$, which is admissible because
+$\eta_E\in\M$, gives $\Gap(c)\ge0$; the same choice gives $\Gap(0)=0$. Finally
+$\Gap(c)=0$ means $\pair{c}{\eta_E}\le\pair{c}{\eta}$ for all $\eta\in\M$, which is
+optimality of $\eta_E$ for $c$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p6" data-titulo="1">Ver: Proof of Corollary <a class="xref" href="#en-cor:umbral">2.5</a></button><div class="proof" id="en-control-inverso-p6"><p>Let $\eta$ be a finite signed measure. By Theorem <a class="xref" href="#en-thm:encaje">2.4</a> every $c\in\Hs$
+has a continuous representative with $\|c\|_\infty\le C_\iota\|c\|_{\Hs}$, so
+\display{|\pair{c}{\eta}|\le\|c\|_\infty |\eta|(E\times A)
+  \le C_\iota |\eta|(E\times A) \|c\|_{\Hs},}
+and taking the supremum over the unit ball of $\Hs$ gives both the membership
+$\eta\in\Hd$ and the bound.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p7" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:h1-nunca">2.6</a></button><div class="proof" id="en-control-inverso-p7"><p>It suffices to exhibit an unbounded function in $H^1$ near the point. For $n=2$
+take $f(z)=\log\log(1+|z|^{-1})$ on a small ball, and for $n\ge3$ take
+$f(z)=|z|^{-\beta}$ with $0&lt;\beta&lt;(n-2)/2$; in both cases $f\in H^1$ of a
+neighbourhood while $f$ is unbounded at the origin. Multiplying by a cutoff and
+translating to $(x_0,a_0)$ produces a sequence $f_k\in H^1(E\times A)$ with
+$\|f_k\|_{H^1}$ bounded and $f_k(x_0,a_0)\to\infty$, so evaluation at $(x_0,a_0)$
+is not a bounded functional. Since the occupation measure of a deterministic policy
+charges a Lebesgue-null graph, it is a measure of this singular type.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p8" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:riesz">2.7</a></button><div class="proof" id="en-control-inverso-p8"><p>By definition the Riesz map sends $c$ to the functional
+$v\mapsto(c,v)_{\Hs}$, and with the norm <a class="xref" href="#en-eq:penalizacion">(12)</a> that inner product
+is $\int(cv+\kappa\nabla c\cdot\nabla v)$, which is <a class="xref" href="#en-eq:riesz">?</a>. It is bounded
+and coercive on $H^1$, so Lax--Milgram makes $R$ an isomorphism onto $\Hd$. Green&#x27;s
+identity rewrites the form as $\int v(c-\kappa\Delta c)+\kappa\int_{\partial}
+v \partial_n c$ whenever $c$ is smooth enough, so $R=\mathrm{Id}-\kappa\Delta$ in
+the interior, and the boundary term vanishes precisely under the periodic or
+homogeneous Neumann conditions.</p></div>
+<h4 id="en-control-inverso-x9">Convex structure</h4>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p9" data-titulo="1">Ver: Proof of Lemma <a class="xref" href="#en-lema:M-acotado">3.1</a></button><div class="proof" id="en-control-inverso-p9"><p>Let $\eta\in\M$. By Corollary <a class="xref" href="#en-cor:masa">1.6</a> it is nonnegative with
+$\eta(E\times A)=1/\rho$, so for every $c\in\Hs$
+\display{|\pair{c}{\eta}|\le\|c\|_\infty \eta(E\times A)
+  =\frac{\|\iota c\|_\infty}{\rho}\le\frac{C_\iota}{\rho}\|c\|_{\Hs},}
+and the supremum over the unit ball gives $\|\eta\|_{\Hd}\le C_\iota/\rho$. The
+diameter bound is the triangle inequality.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p10" data-titulo="1">Ver: Proof of Corollary <a class="xref" href="#en-cor:gap-lipschitz">3.2</a></button><div class="proof" id="en-control-inverso-p10"><p>From $|\sup_if_i-\sup_ig_i|\le\sup_i|f_i-g_i|$ applied to <a class="xref" href="#en-eq:gap">?</a>,
+\display{|\Gap(c)-\Gap(c&#x27;)|\le\sup_{\eta\in\M}|\pair{c-c&#x27;}{\eta_E-\eta}|
+  \le\|c-c&#x27;\|_{\Hs}\sup_{\eta\in\M}\|\eta_E-\eta\|_{\Hd}
+  \le\frac{2C_\iota}{\rho}\|c-c&#x27;\|_{\Hs}}
+by Lemma <a class="xref" href="#en-lema:M-acotado">3.1</a>. Finiteness follows by evaluating at $c&#x27;=0$, where
+$\Gap(0)=0$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p11" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:existencia-c">3.3</a></button><div class="proof" id="en-control-inverso-p11"><p>The squared Hilbert norm is $\alpha$-strongly convex and $\Gap$ is convex by
+Proposition <a class="xref" href="#en-prop:gap-basico">2.2</a>, so the sum is $\alpha$-strongly convex and has
+at most one minimizer. Since $\Gap\ge0$, the objective dominates
+$\frac{\alpha}{2}\|c-\ch\|^2$ and is therefore coercive, and
+Corollary <a class="xref" href="#en-cor:gap-lipschitz">3.2</a> gives lower semicontinuity. The direct method
+supplies existence.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p12" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:reduccion">3.4</a></button><div class="proof" id="en-control-inverso-p12"><p>Write $u=c-\ch$ and $w=R^{-1}(\eta_E-\eta)$, so that
+$\pair{u}{\eta_E-\eta}=(u,w)_{\Hs}$ and $\|w\|_{\Hs}=\|\eta_E-\eta\|_{\Hd}$. Then
+\display{\Phi(c,\eta)=\frac{\alpha}{2}\|u\|_{\Hs}^2+(u,w)_{\Hs}
+  +\pair{\ch}{\eta_E-\eta},}
+a strongly convex quadratic in $u$ whose unique minimizer is $u=-w/\alpha$, which
+is <a class="xref" href="#en-eq:c-de-eta">?</a>. Substituting gives value
+$-\frac1{2\alpha}\|w\|_{\Hs}^2+\pair{\ch}{\eta_E-\eta}$, that is $-\Psi(\eta)$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p13" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:compacidad-M">3.5</a></button><div class="proof" id="en-control-inverso-p13"><p>Convexity holds because <a class="xref" href="#en-eq:balance">?</a> is a family of linear equalities and the
+constraint $\eta\ge0$ is convex. Put $\widehat\M=\rho \M$, which by
+Corollary <a class="xref" href="#en-cor:masa">1.6</a> lies in $\mathscr P(E\times A)$. With $E\times A$ compact,
+$\mathscr P(E\times A)$ is weak-$*$ compact by Banach--Alaoglu, and $\widehat\M$ is
+weak-$*$ closed in it because each constraint
+$\mu\mapsto\mu(\rho\varphi-\gen{}\varphi)-\nu_0(\varphi)$ is weak-$*$ continuous,
+the test function $\rho\varphi-\gen{}\varphi$ being in $C(E\times A)$ by
+hypothesis. Hence $\widehat\M$ is weak-$*$ compact.</p>
+<p>Let $\iota:\Hs\to C(E\times A)$ be the embedding and $\iota^{*}$ its adjoint. For
+fixed $c$, the map $\mu\mapsto\pair{\iota^{*}\mu}{c}=\mu(\iota c)$ is weak-$*$
+continuous, so $\iota^{*}$ is continuous from the weak-$*$ topology to
+$\sigma(\Hd,\Hs)$ and carries compact sets to compact sets. As $\Hd$ is a Hilbert
+space, $\sigma(\Hd,\Hs)$ is its weak topology, so $\M=\rho^{-1}\iota^{*}(\widehat\M)$
+is weakly compact.</p>
+<p>If $\iota$ is compact then so is $\iota^{*}$ by Schauder&#x27;s theorem, so it maps the
+bounded set $\widehat\M$ to a relatively norm-compact set. That set is weakly
+compact by the previous paragraph, hence weakly closed, hence norm closed, and a
+closed relatively compact set is compact.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p14" data-titulo="1">Ver: Proof of Theorem <a class="xref" href="#en-thm:silla">3.6</a></button><div class="proof" id="en-control-inverso-p14"><p>The functional $\Psi$ of <a class="xref" href="#en-eq:reducido-valor">?</a> is strictly convex, because the
+squared dual norm is, and weakly lower semicontinuous, so weak compactness of $\M$
+gives a unique minimizer $\eta_{A,\star}$.</p>
+<p>Since $\M$ is convex, the first-order optimality condition at the minimizer is the
+variational inequality
+$\pair{\ch+\alpha^{-1}R^{-1}(\eta_{A,\star}-\eta_E)}{\eta-\eta_{A,\star}}\ge0$ for
+all $\eta\in\M$, which by <a class="xref" href="#en-eq:cstar">?</a> reads
+$\pair{c_\star}{\eta-\eta_{A,\star}}\ge0$. This is exactly optimality of
+$\eta_{A,\star}$ for $c_\star$, and since the only $\eta$-dependent term of
+$\Phi(c_\star,\cdot)$ is $-\pair{c_\star}{\eta}$, it is the left inequality in
+<a class="xref" href="#en-eq:silla">?</a>.</p>
+<p>For the right inequality, the derivative of $\Phi(\cdot,\eta_{A,\star})$ is
+$\alpha R(c-\ch)+\eta_E-\eta_{A,\star}$, which vanishes at $c=c_\star$ by
+<a class="xref" href="#en-eq:cstar">?</a>; strong convexity in $c$ turns the stationary point into the
+global minimum. The two inequalities together are the saddle relation, and the
+standard argument that a saddle point closes the gap between the two orders gives
+<a class="xref" href="#en-eq:dualidad">?</a>. Uniqueness of $c_\star$ is
+Proposition <a class="xref" href="#en-prop:existencia-c">3.3</a>.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p15" data-titulo="1">Ver: Proof of Corollary <a class="xref" href="#en-cor:puntofijo">3.9</a></button><div class="proof" id="en-control-inverso-p15"><p>Immediate from $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$ and the
+definition <a class="xref" href="#en-eq:cstar">?</a> of $c_\star$.</p></div>
+<h4 id="en-control-inverso-x10">The optimality system</h4>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p16" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:shaping">2.3</a></button><div class="proof" id="en-control-inverso-p16"><p>Apply <a class="xref" href="#en-eq:balance">?</a> to the test function $\phi$: the left-hand side is
+$\eta(\rho\phi-\gen{}\phi)=\eta(q_\phi)$ and the right-hand side is $\nu_0(\phi)$,
+which is <a class="xref" href="#en-eq:shaping">?</a> and does not depend on $\eta$. Hence for any $c$ and
+any $\eta\in\M$ we have $\pair{c+q_\phi}{\eta}=\pair{c}{\eta}+\nu_0(\phi)$, a shift
+by a constant, so the two costs have the same minimizers and, since $\eta_E\in\M$,
+the same gap.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p17" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a></button><div class="proof" id="en-control-inverso-p17"><p>Take $\varphi\in\dom(\gen{})$, a function of $x$ alone, in <a class="xref" href="#en-eq:balance">?</a>.
+Using <a class="xref" href="#en-eq:desintegracion">(16)</a> and integrating out the action variable first,
+\display{\eta_\pi\bigl(\rho\varphi-\gen{}\varphi\bigr)
+  =\int_E\Bigl(\rho\varphi(x)-\pi_x^a\gen{a}\varphi(x)\Bigr)m_\pi(x) dx
+  =\int_E\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)m_\pi dx,}
+where the middle step is the definition <a class="xref" href="#en-eq:gen-pi">(4)</a> of the averaged
+generator. Equating with $\nu_0(\varphi)$ gives <a class="xref" href="#en-eq:fp-debil">?</a>, which is the
+statement that $(\rho \mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ as distributions.</p>
+<p>For the classical form, integrate by parts twice in
+$\int(b_\pi\cdot\nabla\varphi)m_\pi$ and
+$\tfrac12\int\operatorname{Tr}(\Sigma_\pi D^2\varphi)m_\pi$, discarding boundary
+terms under the conditions of the model, to move all derivatives onto $m_\pi$; the
+result is <a class="xref" href="#en-eq:fp">?</a>.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p18" data-titulo="1">Ver: Proof of Proposition <a class="xref" href="#en-prop:sistema-equivalente">4.3</a></button><div class="proof" id="en-control-inverso-p18"><p>By Theorem <a class="xref" href="#en-thm:silla">3.6</a>, $\eta_{A,\star}$ minimizes $\pair{c_\star}{\cdot}$ over
+$\M$, which by <a class="xref" href="#en-eq:lp">(8)</a> and its dual <a class="xref" href="#en-eq:dual">(9)</a> is equivalent to the
+existence of $V$ satisfying <a class="xref" href="#en-eq:hjb-ineq">?</a> with complementary slackness on
+$\operatorname{supp}\eta_{A,\star}$; that is the first pair of blocks, and
+Proposition <a class="xref" href="#en-prop:hjb">1.3</a> turns the slackness into <a class="xref" href="#en-eq:selector">?</a>. The two
+adjoint equations are Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a> applied to $\pi_A$ and to
+$\pi_E$, both of which lie in $\M$. The last block is <a class="xref" href="#en-eq:cstar">?</a> rearranged,
+and its weak reading is <a class="xref" href="#en-eq:coste-debil">(18)</a>.</p>
+<p>Conversely, let $(V,\pi_A,m_A,m_E,c)$ solve <a class="xref" href="#en-eq:sistema">(17)</a> weakly with
+$\eta_A\in\M$. The last block gives $c=\ch+\alpha^{-1}R^{-1}(\eta_A-\eta_E)$, and
+the first two give optimality of $\eta_A$ for $c$, hence
+$\pair{c}{\eta-\eta_A}\ge0$ for all $\eta\in\M$. That is the variational inequality
+characterizing the minimizer of $\Psi$, which is unique, so $\eta_A=\eta_{A,\star}$
+and therefore $c=c_\star$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p19" data-titulo="1">Ver: Proof of <a class="xref" href="#en-eq:alpha-bound">(15)</a></button><div class="proof" id="en-control-inverso-p19"><p>Since $\eta_E\in\M$, minimality of $\eta_{A,\star}$ and $\Psi(\eta_E)=0$ give
+$\pair{\ch}{\eta_{A,\star}-\eta_E}
++\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$. Writing
+$\Delta=\eta_{A,\star}-\eta_E$ and using
+$|\pair{\ch}{\Delta}|\le\|\ch\|_{\Hs}\|\Delta\|_{\Hd}$,
+\display{\frac1{2\alpha}\|\Delta\|_{\Hd}^2\le\|\ch\|_{\Hs}\|\Delta\|_{\Hd},}
+which is <a class="xref" href="#en-eq:alpha-bound">(15)</a> after dividing by $\|\Delta\|_{\Hd}$.</p></div></section></div>
+  <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
+</main>
+
+<div id="pop" role="tooltip"></div>
+<nav id="cuadernos" aria-label="Cuadernos">
+<h4>Cuadernos</h4>
+<a href="convexa.html"><span class="t">Optimización Convexa en Espacios de Hilbert</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a href="ejercicios-convexa.html"><span class="t">Ejercicios Opti Convexa</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a href="transporte-optimo.html"><span class="t">Lecture Notes on Optimal Transport</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a href="control-inverso.html" class="aqui"><span class="t">Control Óptimo Inverso en Tiempo Continuo</span><span class="c">Universidad de los Andes · Propuesta de tesis</span></a>
+<a class="portada" href="index.html">Todas las notas</a>
+</nav>
+<div class="tirador" id="cuadernos-tirador" aria-hidden="true"></div>
+<button class="pestana cerrada" id="cuadernos-pestana" aria-controls="cuadernos" aria-expanded="false"
+        title="Cuadernos">&#9666;</button>
+</div>
+
+<script>
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+
+/* Los rotulos y las notaciones los inyecta el generador, porque dependen de
+   que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
+   una de lecture notes dice «demostraciones». */
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "fin", "rotulo": "de Finetti"}, {"id": "std", "rotulo": "Integrales"}], "idiomas": [{"id": "es", "rotulo": "Español", "carpeta": "es"}, {"id": "en", "rotulo": "English", "carpeta": "en"}], "glosario": {"E": {"es": "$E\\s\\R^d$ abierto, el espacio de estados. La Prop.~\\ref{prop:compacidad-M} pide ademas $E\\times A$ compacto, y el Cor.~\\ref{cor:umbral} un dominio acotado de clase $C^1$.", "en": "$E\\s\\R^d$ open, the state space. Prop.~\\ref{prop:compacidad-M} further asks $E\\times A$ compact, and Cor.~\\ref{cor:umbral} a bounded domain of class $C^1$."}, "A": {"es": "$A\\s\\R^m$ compacto, las acciones. $A$ compacto $\\rt$ $\\mathscr P(A)$ compacto en la topologia debil.", "en": "$A\\s\\R^m$ compact, the action set. $A$ compact $\\rt$ $\\mathscr P(A)$ compact in the weak topology."}, "gen": {"es": "Operador con $\\dom(\\gen{})\\s C_b(E)$ y rango en $C_b(E\\times A)$, dado por $\\gen{}\\varphi:(x,a)\\mapsto\\gen{a}\\varphi(x)$.", "en": "Operator with $\\dom(\\gen{})\\s C_b(E)$ and range in $C_b(E\\times A)$, given by $\\gen{}\\varphi:(x,a)\\mapsto\\gen{a}\\varphi(x)$."}, "nu0": {"es": "$\\nu_0\\in\\mathscr P(E)$, la ley inicial: $X_0\\sim\\nu_0$. Es la fuente de \\eqref{eq:balance}.", "en": "$\\nu_0\\in\\mathscr P(E)$, the initial law: $X_0\\sim\\nu_0$. It is the source in \\eqref{eq:balance}."}, "rho": {"es": "$\\rho>0$, la tasa de descuento. $\\lambda_\\rho=e^{-\\rho t}dt$ tiene masa $1/\\rho$.", "en": "$\\rho>0$, the discount rate. $\\lambda_\\rho=e^{-\\rho t}dt$ has mass $1/\\rho$."}, "Hs": {"es": "$\\Hs=H^s(E\\times A)$ con $s>(d+m)/2$. Por Sobolev, $\\Hs\\hookrightarrow C(E\\times A)$, y entonces toda medida signada finita esta en $\\Hd$.", "en": "$\\Hs=H^s(E\\times A)$ with $s>(d+m)/2$. By Sobolev, $\\Hs\\hookrightarrow C(E\\times A)$, and then every finite signed measure lies in $\\Hd$."}, "M": {"es": "$\\M=\\{\\eta\\ge0$ en $E\\times A$ que cumple \\eqref{eq:balance}$\\}$. Convexo, y $\\eta(E\\times A)=1/\\rho$ para todo $\\eta\\in\\M$.", "en": "$\\M=\\{\\eta\\ge0$ on $E\\times A$ satisfying \\eqref{eq:balance}$\\}$. Convex, and $\\eta(E\\times A)=1/\\rho$ for every $\\eta\\in\\M$."}, "eta": {"es": "$\\eta_\\pi$ definida en \\eqref{eq:ocupacion}, medida en $E\\times A$ de masa $1/\\rho$. Empareja con el costo: $J_c(\\pi)=\\eta_\\pi(c)$.", "en": "$\\eta_\\pi$ as in \\eqref{eq:ocupacion}, a measure on $E\\times A$ of mass $1/\\rho$. It pairs with the cost: $J_c(\\pi)=\\eta_\\pi(c)$."}, "etaE": {"es": "$\\eta_E\\in\\M$, la ocupacion del experto. Es lo unico que se observa de $\\pi_E$.", "en": "$\\eta_E\\in\\M$, the expert's occupation measure. It is all that is observed of $\\pi_E$."}, "R": {"es": "$R:\\Hs\\to\\Hd$ el isomorfismo de Riesz de \\eqref{eq:penalizacion}, forma debil de $\\mathrm{Id}-\\kappa\\Delta_{x,a}$.", "en": "$R:\\Hs\\to\\Hd$ the Riesz isomorphism of \\eqref{eq:penalizacion}, the weak form of $\\mathrm{Id}-\\kappa\\Delta_{x,a}$."}, "alpha": {"es": "$\\alpha>0$ pesa el previo contra la brecha. Cota: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$.", "en": "$\\alpha>0$ weighs the prior against the gap. Bound: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$."}, "pi": {"es": "$\\pi=(\\pi_t)_{t\\ge0}$ adaptado a valores en $\\mathscr P(A)$. Con $\\pi_t=\\pi(X_t)$ es markoviano relajado y solo entonces hay nucleo $\\pi_x$.", "en": "$\\pi=(\\pi_t)_{t\\ge0}$ adapted with values in $\\mathscr P(A)$. When $\\pi_t=\\pi(X_t)$ it is relaxed Markov, and only then is there a kernel $\\pi_x$."}, "V": {"es": "$V(x)$ el costo optimo arrancando en $x$. Es la variable dual de la restriccion de balance en \\eqref{eq:dual}.", "en": "$V(x)$ the optimal cost started at $x$. It is the dual variable of the balance constraint in \\eqref{eq:dual}."}}};
+
+/* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
+   navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
+   en los valores por defecto. */
+function recuerda(k, v){ try{ localStorage.setItem("notas."+k, v); }catch(e){} }
+function recordado(k){ try{ return localStorage.getItem("notas."+k); }catch(e){ return null; } }
+
+/* --- letra y cuerpo -------------------------------------------------- */
+const FUENTES = {serif:"f-serif", sans:"f-sans", lm:"f-lm"};
+function setFuente(f){
+  document.documentElement.dataset.font = f;
+  for(const [k, id] of Object.entries(FUENTES))
+    $("#"+id).setAttribute("aria-pressed", k === f);
+  recuerda("font", f);
+}
+
+const FS_MIN = 13, FS_MAX = 26;
+let fs = 17;
+function setTam(n){
+  fs = Math.max(FS_MIN, Math.min(FS_MAX, n));
+  document.documentElement.style.setProperty("--fs", fs + "px");
+  $("#s-val").textContent = fs;
+  $("#s-menos").disabled = (fs === FS_MIN);
+  $("#s-mas").disabled   = (fs === FS_MAX);
+  recuerda("fs", fs);
+}
+
+/* --- notacion -------------------------------------------------------- */
+/* Las dos ramas de cada \fin estan las dos en el HTML; esto solo decide
+   cual se ve. «ambas» ensena las dos, que es el \notaAmbas del LaTeX. */
+function setNota(n){
+  if(!CFG.notaciones.length) return;
+  document.documentElement.dataset.nota = n;   // el CSS de «ambas» lo necesita
+  $$(".v[data-var]").forEach(v => {
+    v.dataset.on = (n === "ambas" || v.dataset.var === n) ? "true" : "false";
+  });
+  CFG.notaciones.forEach(x =>
+    $("#n-"+x.id).setAttribute("aria-pressed", String(x.id === n)));
+  recuerda("nota", n);
+}
+
+/* --- idioma ----------------------------------------------------------- */
+/* Los dos idiomas estan los dos en el HTML, con las MISMAS \label y por eso
+   con los id prefijados (es-, en-). Esto solo decide cual se ve, y despues
+   reconstruye el indice, que es del documento visible. */
+let idioma = (CFG.idiomas[0] || {}).id || "";
+
+function setIdioma(l){
+  if(CFG.idiomas.length < 2) return;
+  idioma = l;
+  $$(".doc").forEach(d => d.dataset.on = (d.dataset.lang === l) ? "true" : "false");
+  CFG.idiomas.forEach(x =>
+    $("#i-"+x.id).setAttribute("aria-pressed", String(x.id === l)));
+  document.documentElement.lang = l;
+  recuerda("idioma", l);
+  escondePop();
+  construyeIndice();
+  refrescaBotonGlobal();
+}
+
+/* --- cuadros del glosario --------------------------------------------- */
+/* El texto lo trae el generador desde el archivo de glosario de la nota. Una
+   nota sin glosario no tiene ningun \term{} marcado, asi que esto no corre. */
+const pop = $("#pop");
+let anclado = null;
+
+function muestraPop(el){
+  const d = CFG.glosario[el.dataset.k];
+  if(!d) return;
+  const txt = d[idioma] || d.es || d.en || "";
+  if(!txt) return;
+  pop.innerHTML = "<p>" + txt + "</p>";
+  pop.dataset.on = "true";
+  anclado = el;
+  colocaPop();
+  if(window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([pop]);
+}
+function colocaPop(){
+  if(!anclado) return;
+  const r = anclado.getBoundingClientRect();
+  const p = pop.getBoundingClientRect();
+  let x = r.left + r.width/2 - p.width/2;
+  x = Math.max(10, Math.min(x, window.innerWidth - p.width - 10));
+  let y = r.top - p.height - 9;
+  if(y < 8) y = r.bottom + 9;
+  pop.style.left = x + "px";
+  pop.style.top  = y + "px";
+}
+function escondePop(){ pop.dataset.on = "false"; anclado = null; }
+
+document.addEventListener("mouseover", e => {
+  const t = e.target.closest("button.term");
+  if(t) muestraPop(t);
+});
+document.addEventListener("mouseout", e => {
+  const t = e.target.closest("button.term");
+  if(t && !pop.contains(e.relatedTarget)) escondePop();
+});
+document.addEventListener("focusin", e => {
+  const t = e.target.closest("button.term");
+  if(t) muestraPop(t);
+});
+document.addEventListener("keydown", e => { if(e.key === "Escape") escondePop(); });
+window.addEventListener("scroll", () => { if(anclado) colocaPop(); }, {passive:true});
+window.addEventListener("resize", escondePop);
+
+/* --- indice ---------------------------------------------------------- */
+let observador = null;
+
+/* *** El indice es el del PDF: capitulos, secciones y subsecciones, y NADA
+   mas. *** Instruccion del usuario del 2026-08-14: «el toc debe ser el mismo
+   que del pdf real del overleaf».
+
+   Antes listaba tambien cada definicion y cada proposicion, copiado del
+   artefacto de la tesis. Alli tenia sentido porque aquel documento no tiene
+   secciones y su cuerpo son enunciados encadenados, asi que un indice de solo
+   encabezados habria quedado vacio. Aqui hay capitulos de verdad, y meter los
+   58 enunciados hace un indice que no se parece al del libro. */
+function construyeIndice(){
+  const lista = $("#toc-lista");
+  // Con idiomas hay DOS documentos en el DOM y solo uno se ve. El indice se
+  // construye del visible, asi que cambia solo al cambiar de idioma y no hay
+  // una segunda copia que se desincronice.
+  const raiz = $('.doc[data-on="true"]') || $("main");
+  const piezas = $$("h2, h3, h4", raiz);
+  let html = "", n = 0;
+  const dianas = [];
+  // Una nota `article` no tiene \chapter, asi que su primer nivel son los
+  // h3. Sin esto, todas sus entradas salen sangradas como si colgaran de un
+  // capitulo que no existe.
+  const hayCap = piezas.some(el => el.tagName === "H2");
+  const CLASE = hayCap ? {H2:"lvl-cap", H3:"lvl-sec", H4:"lvl-sub"}
+                       : {H3:"lvl-cap", H4:"lvl-sec"};
+  piezas.forEach(el => {
+    if(!el.id) el.id = "auto-" + (n++);
+    // data-toc es el [titulo corto] de \chapter[corto]{largo}, que es justo
+    // el que LaTeX pone en el indice del PDF.
+    const texto = el.dataset.toc || el.textContent.trim();
+    html += '<a class="' + CLASE[el.tagName] + '" href="#' + esc(el.id)
+          + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
+    dianas.push(el);
+  });
+  lista.innerHTML = html;
+  vigila(dianas);
+}
+
+/* Filtro del indice. Solo hace falta a partir de un puñado de entradas, pero
+   no cuesta nada tenerlo siempre: no reordena ni reconstruye nada, solo
+   oculta los <a> cuyo texto no matchea. */
+$("#toc-buscar").addEventListener("input", e => {
+  const q = e.target.value.trim().toLowerCase();
+  $$("#toc-lista a").forEach(a => {
+    a.hidden = q !== "" && !a.textContent.toLowerCase().includes(q);
+  });
+});
+
+function esc(s){
+  return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+}
+
+/* Resaltar donde esta el lector. Se marca la ultima pieza que ya paso por
+   arriba de la ventana, que es lo que hace un lector de PDF; con «la que se ve»
+   a secas, en un salto largo no se marca ninguna. */
+function vigila(dianas){
+  if(observador) observador.disconnect();
+  const vistas = new Set();
+  observador = new IntersectionObserver(entradas => {
+    entradas.forEach(e => e.isIntersecting ? vistas.add(e.target)
+                                           : vistas.delete(e.target));
+    let actual = null;
+    for(const d of dianas){
+      if(vistas.has(d)){ actual = d; break; }
+      if(d.getBoundingClientRect().top < 80) actual = d;
+    }
+    marca(actual);
+  }, {rootMargin: "-70px 0px -65% 0px", threshold: 0});
+  dianas.forEach(d => observador.observe(d));
+}
+
+function marca(el){
+  const toc = $("#toc");
+  toc.querySelectorAll("a.aqui").forEach(a => a.classList.remove("aqui"));
+  if(!el) return;
+  const a = toc.querySelector('a[data-d="' + CSS.escape(el.id) + '"]');
+  if(!a) return;
+  a.classList.add("aqui");
+  const r = a.getBoundingClientRect(), rt = toc.getBoundingClientRect();
+  if(r.top < rt.top || r.bottom > rt.bottom)
+    a.scrollIntoView({block:"nearest"});
+}
+
+/* --- los paneles laterales: TOC y cuadernos --------------------------- */
+/* Los dos se manejan igual, con dos mandos: la pestana (clic = pliega o
+   despliega del todo) y el tirador del borde (arrastre = elige el ancho, y
+   si se arrastra mas alla del minimo, pliega). La unica diferencia entre
+   los dos es de que lado cuelgan y hacia donde apunta la flecha cuando
+   estan abiertos: hacia su propio borde, que es hacia donde se va el panel
+   al plegarse. Instruccion del usuario del 2026-08-16.
+
+   Todo lo que cambia el ancho pasa por una sola variable CSS (--toc-w o
+   --cuadernos-w): el panel, la pestana y el tirador la leen los tres, asi
+   que moverla una vez los mueve a los tres a la vez. */
+function creaPanel(cfg){
+  const panel = $("#" + cfg.id);
+  const pestana = $("#" + cfg.id + "-pestana");
+  const tirador = $("#" + cfg.id + "-tirador");
+  const flechaAbierta = cfg.lado === "izq" ? "◂" : "▸";
+  const flechaCerrada = cfg.lado === "izq" ? "▸" : "◂";
+  const raiz = document.documentElement;
+  let abierto = true;
+  let ancho = cfg.defecto;
+
+  function aplicaAncho(px){
+    ancho = Math.max(cfg.min, Math.min(cfg.max, px));
+    raiz.style.setProperty(cfg.varW, ancho + "px");
+  }
+
+  function setAbierto(on, memoriza){
+    abierto = on;
+    raiz.dataset[cfg.dataset] = on ? "on" : "off";
+    // SIEMPRE los dos casos, no solo al abrir: la pestana y el tirador leen
+    // esta misma variable para su propia posicion (left/right:var(...)), y
+    // si al cerrar por clic se deja el valor de cuando estaba abierto, los
+    // dos se quedan clavados donde estaban en vez de irse al borde. Bug
+    // encontrado por el usuario el 2026-08-16: el arrastre SI la ponia a
+    // 0 al plegar en vivo, pero el clic en la pestana no.
+    raiz.style.setProperty(cfg.varW, (on ? ancho : 0) + "px");
+    pestana.classList.toggle("cerrada", !on);
+    pestana.setAttribute("aria-expanded", String(on));
+    pestana.textContent = on ? flechaAbierta : flechaCerrada;
+    pestana.title = on ? cfg.tituloOcultar : cfg.tituloMostrar;
+    // Cerrado, el panel sigue en el DOM con ancho 0: sin esto, Tab entra
+    // igual a sus enlaces aunque no se vean. inert los saca del todo.
+    panel.toggleAttribute("inert", !on);
+    if(memoriza){
+      recuerda(cfg.clave + ".on", on ? "1" : "0");
+      recuerda(cfg.clave + ".w", ancho);
+    }
+  }
+
+  pestana.addEventListener("click", () => setAbierto(!abierto, true));
+
+  // El arrastre vive en pointerdown/move/up, no en mouse-*, para que
+  // funcione igual con raton y con dedo.
+  let x0 = 0, w0 = 0, arrastrando = false;
+  tirador.addEventListener("pointerdown", e => {
+    arrastrando = true; x0 = e.clientX; w0 = abierto ? ancho : 0;
+    tirador.setPointerCapture(e.pointerId);
+    tirador.classList.add("activo");
+    document.body.classList.add("arrastrando");
+  });
+  tirador.addEventListener("pointermove", e => {
+    if(!arrastrando) return;
+    const dx = (e.clientX - x0) * (cfg.lado === "izq" ? 1 : -1);
+    const w = w0 + dx;
+    // Arrastrar mas alla del minimo pliega en vivo, como el explorer de
+    // VS Code al llevar el borde hasta el final.
+    if(w < cfg.min - 40){
+      if(abierto){ abierto = false; raiz.dataset[cfg.dataset] = "off"; panel.toggleAttribute("inert", true); }
+      raiz.style.setProperty(cfg.varW, "0px");
+      return;
+    }
+    if(!abierto){ abierto = true; raiz.dataset[cfg.dataset] = "on"; panel.toggleAttribute("inert", false); }
+    aplicaAncho(w);
+  });
+  function sueltaArrastre(){
+    if(!arrastrando) return;
+    arrastrando = false;
+    tirador.classList.remove("activo");
+    document.body.classList.remove("arrastrando");
+    pestana.classList.toggle("cerrada", !abierto);
+    pestana.setAttribute("aria-expanded", String(abierto));
+    pestana.textContent = abierto ? flechaAbierta : flechaCerrada;
+    recuerda(cfg.clave + ".on", abierto ? "1" : "0");
+    recuerda(cfg.clave + ".w", ancho);
+  }
+  tirador.addEventListener("pointerup", sueltaArrastre);
+  tirador.addEventListener("pointercancel", sueltaArrastre);
+  // Doble clic en el tirador: como en muchos editores, vuelve al ancho por
+  // defecto de un golpe en vez de tener que ajustarlo a ojo.
+  tirador.addEventListener("dblclick", () => {
+    aplicaAncho(cfg.defecto);
+    setAbierto(true, true);
+  });
+
+  function arranca(porDefectoAbierto){
+    const w = parseInt(recordado(cfg.clave + ".w"), 10);
+    if(w) ancho = Math.max(cfg.min, Math.min(cfg.max, w));
+    const memoria = recordado(cfg.clave + ".on");
+    setAbierto(memoria !== null ? memoria === "1" : porDefectoAbierto, false);
+  }
+
+  return {setAbierto, arranca};
+}
+
+const tocPanel = creaPanel({
+  id:"toc", lado:"izq", varW:"--toc-w", dataset:"toc", clave:"toc",
+  min:180, max:480, defecto:264,
+  tituloOcultar:"Ocultar el índice", tituloMostrar:"Mostrar el índice",
+});
+const cuadernosPanel = creaPanel({
+  id:"cuadernos", lado:"der", varW:"--cuadernos-w", dataset:"cuadernos",
+  clave:"cuadernos", min:180, max:420, defecto:248,
+  tituloOcultar:"Ocultar cuadernos", tituloMostrar:"Cuadernos",
+});
+
+/* Los cuadernos se SOBREPONEN al texto (peticion del 2026-08-16), asi que se
+   cierran solos con un clic fuera o con Escape, igual que el flyout de
+   OneNote que fue el modelo. El TOC no: empuja el texto en vez de taparlo,
+   asi que quedarse abierto no esconde nada y no hace falta cerrarlo solo. */
+document.addEventListener("pointerdown", e => {
+  if(document.documentElement.dataset.cuadernos !== "on") return;
+  if(e.target.closest("#cuadernos, #cuadernos-pestana, #cuadernos-tirador")) return;
+  cuadernosPanel.setAbierto(false, true);
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && document.documentElement.dataset.cuadernos === "on")
+    cuadernosPanel.setAbierto(false, true);
+});
+
+/* Atajos de teclado para las dos pestanas, para no depender de acertarle con
+   el raton a una franja de 18px. Se ignoran mientras se escribe en el
+   buscador del indice o en cualquier otro campo. */
+document.addEventListener("keydown", e => {
+  if(e.metaKey || e.ctrlKey || e.altKey) return;
+  const enCampo = /^(INPUT|TEXTAREA)$/.test(e.target.tagName);
+  if(enCampo) return;
+  if(e.key === "[") tocPanel.setAbierto(document.documentElement.dataset.toc !== "on", true);
+  else if(e.key === "]") cuadernosPanel.setAbierto(document.documentElement.dataset.cuadernos !== "on", true);
+});
+
+/* Plegar la barra devuelve su altura al texto. Arranca desplegada, que es donde
+   se ve que existe, y la eleccion se recuerda: quien la pliega la encuentra
+   plegada la proxima vez. */
+function setBarra(on){
+  document.documentElement.dataset.bar = on ? "on" : "off";
+  $("#b-bar").setAttribute("aria-expanded", String(on));
+  $("#volver").setAttribute("aria-expanded", String(on));
+  recuerda("bar", on ? "on" : "off");
+}
+
+/* --- demostraciones o soluciones -------------------------------------- */
+/* Con idiomas, «todas» son las del documento que se VE. Contando las dos
+   copias, el boton se quedaba en «abrir» despues de abrirlas todas, porque
+   las del idioma escondido seguian cerradas. */
+function botonesVisibles(){
+  const raiz = $('.doc[data-on="true"]');
+  return raiz ? $$(".proof-btn", raiz) : $$(".proof-btn");
+}
+function refrescaBotonGlobal(){
+  const bs = botonesVisibles();
+  const todas = bs.length > 0 && bs.every(b => b.getAttribute("aria-expanded") === "true");
+  $("#b-all").textContent = todas ? CFG.cerrarTodas : CFG.abrirTodas;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest(".proof-btn");
+  if(!b) return;
+  const caja = document.getElementById(b.dataset.t);
+  const abierto = b.getAttribute("aria-expanded") === "true";
+  b.setAttribute("aria-expanded", String(!abierto));
+  // Un boton con titulo propio («Ver: Demostración de la Proposición 1.8»)
+  // NO se reescribe: perderia lo unico que dice de que demostracion es.
+  if(!b.dataset.titulo) b.textContent = abierto ? CFG.ver : CFG.ocultar;
+  caja.dataset.open = String(!abierto);
+  refrescaBotonGlobal();
+});
+$("#b-all").addEventListener("click", () => {
+  const bs = botonesVisibles();
+  const abrir = !bs.every(b => b.getAttribute("aria-expanded") === "true");
+  bs.forEach(b => {
+    b.setAttribute("aria-expanded", String(abrir));
+    if(!b.dataset.titulo) b.textContent = abrir ? CFG.ocultar : CFG.ver;
+    document.getElementById(b.dataset.t).dataset.open = String(abrir);
+  });
+  refrescaBotonGlobal();
+});
+
+/* --- arranque -------------------------------------------------------- */
+$("#f-serif").addEventListener("click", () => setFuente("serif"));
+$("#f-sans").addEventListener("click",  () => setFuente("sans"));
+$("#f-lm").addEventListener("click",    () => setFuente("lm"));
+$("#s-menos").addEventListener("click", () => setTam(fs - 1));
+$("#s-mas").addEventListener("click",   () => setTam(fs + 1));
+$("#b-bar").addEventListener("click", () => setBarra(false));
+$("#volver").addEventListener("click", () => {
+  setBarra(true);
+  $("#b-bar").focus();   // el foco iba en un boton que acaba de desaparecer
+});
+CFG.notaciones.forEach(x =>
+  $("#n-"+x.id).addEventListener("click", () => setNota(x.id)));
+CFG.idiomas.forEach(x =>
+  $("#i-"+x.id).addEventListener("click", () => setIdioma(x.id)));
+
+/* En pantalla estrecha el TOC abierto tapa casi todo el texto, asi que al
+   pulsar un enlace se pliega solo. En ancha se queda, que es donde sirve de
+   mapa. Los cuadernos no necesitan este trato: son un enlace a OTRA pagina,
+   asi que la navegacion ya los deja atras. */
+const ancha = () => window.matchMedia("(min-width:900px)").matches;
+$("#toc").addEventListener("click", e => {
+  if(e.target.closest("a") && !ancha()) tocPanel.setAbierto(false, true);
+});
+
+/* El idioma va ANTES de construir el indice: decide de que documento se
+   construye. */
+if(CFG.idiomas.length > 1){
+  const g = recordado("idioma");
+  setIdioma(CFG.idiomas.some(x => x.id === g) ? g : CFG.idiomas[0].id);
+}
+construyeIndice();
+refrescaBotonGlobal();
+setFuente(FUENTES[recordado("font")] ? recordado("font") : "serif");
+setTam(parseInt(recordado("fs"), 10) || 17);
+tocPanel.arranca(ancha());
+cuadernosPanel.arranca(false);
+setBarra(recordado("bar") !== "off");
+if(CFG.notaciones.length){
+  const guardada = recordado("nota");
+  const valida = CFG.notaciones.some(x => x.id === guardada);
+  setNota(valida ? guardada : CFG.notaciones[0].id);
+}
+</script>
+</body>
+</html>

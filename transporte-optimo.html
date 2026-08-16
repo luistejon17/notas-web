@@ -171,6 +171,51 @@ a{color:var(--link)}
 code{font-family:ui-monospace,Consolas,monospace; font-size:.85em}
 
 /* --- ecuaciones ------------------------------------------------------ */
+/* Solo se ve el documento del idioma activo. Los dos estan en el DOM porque
+   comparten \label a proposito; sus id llevan el idioma delante. */
+.doc{display:none}
+.doc[data-on="true"]{display:block}
+
+/* Una ecuacion numerada: la formula ocupa el ancho y el numero se va al
+   margen derecho, como en el PDF. `.jn` es el numero que esa ecuacion tenia
+   en la nota original de Junca, para poder citarsela a el. */
+.display.numerado{display:flex; align-items:center; gap:12px; overflow:visible}
+.display.numerado .eqbody{flex:1; min-width:0; overflow-x:auto}
+.eqside{
+  flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:2px;
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:.72em;
+  font-variant-numeric:tabular-nums;
+}
+.eqside .num{color:var(--muted)}
+.eqside .jn{color:var(--faint); font-size:.9em; white-space:nowrap}
+
+/* El numero de seccion, delante del titulo y en su propia caja para que el
+   texto no baile entre una seccion de un digito y otra de dos. */
+.secnum{color:var(--faint); font-weight:400; margin-right:.5em;
+  font-variant-numeric:tabular-nums}
+
+/* Un termino con definicion emergente. Se marca poco: subrayar cada aparicion
+   llena el parrafo y el cuadro deja de significar «aqui esta la definicion». */
+button.term{
+  font:inherit; color:inherit; background:var(--def-bg);
+  border:0; border-bottom:1px dashed var(--def);
+  padding:0 2px; margin:0 -1px; cursor:help; border-radius:2px;
+}
+#pop{
+  position:fixed; z-index:60; max-width:min(32rem,calc(100vw - 24px));
+  display:none; padding:.6em .8em;
+  background:var(--paper); color:var(--ink);
+  border:1px solid var(--rule); border-radius:7px;
+  box-shadow:0 6px 22px var(--shadow);
+  font-family:var(--ff-body); font-size:.87em; line-height:1.5;
+}
+#pop[data-on="true"]{display:block}
+#pop p{margin:0}
+
+/* Una referencia cuyo destino no existe: se deja el rotulo y se le quita el
+   enlace. Un enlace muerto es peor, porque parece que funciona. */
+.xref.muerta{color:var(--muted); text-decoration:none}
+
 .display{overflow-x:auto; overflow-y:hidden; margin:1.1em 0; padding:.15em 0}
 
 /* Las dos ramas de \fin y \displayfin. Se emiten LAS DOS y se ensena una:
@@ -455,6 +500,7 @@ window.MathJax = {
 <body>
 
 <div class="bar" id="barra">
+
   <div class="grp">
     <label>Notación</label>
     <div class="seg">
@@ -566,7 +612,7 @@ queda
 <span class="v" data-var="std">$\int_{X\times Y}c\dd\gamma_T=\int_X c(x,T(x))\dd\mu(x)$</span><span class="v" data-var="fin">$\gamma_T(c)=\mu\big(c(\cdot,T(\cdot))\big)$</span>.</p></div>
 <p>De este modo $\min(\mathrm{KP})\le\min(\mathrm{MP})$, con desigualdad
 posiblemente estricta, que es el caso de la
-figura \ref{fig:reparto}. Cuándo hay igualdad se trata en §1.5.</p>
+figura <span class="xref muerta">&#167;</span>. Cuándo hay igualdad se trata en §1.5.</p>
 <!-- entorno omitido: figure -->
 <p>En lenguaje probabilista, un elemento de $\Adm(\mu,\nu)$ es un
 <strong>acoplamiento</strong> de $\mu$ y $\nu$, y $(\mathrm{KP})$ minimiza
@@ -951,12 +997,12 @@ derecho es un supremo de funcionales lineales en la pareja $(\mu,\nu)$, luego
 $\min(\mathrm{KP})$ es una función convexa de $(\mu,\nu)$. Del lado
 izquierdo, donde el valor está definido como un mínimo, no se deduce nada
 parecido.</p>
-<div class="stmt definicion" id="transporte-optimo-x29"><div class="head">Definición 1.12</div><div class="body"><p>Las funciones $\varphi$ que realizan el máximo en \eqref{eq:dpccon} se llaman
+<div class="stmt definicion" id="transporte-optimo-x29"><div class="head">Definición 1.12</div><div class="body"><p>Las funciones $\varphi$ que realizan el máximo en <a class="xref" href="#eq:dpccon">&#167;</a> se llaman
 <em>potenciales de Kantorovich</em> para el transporte de $\mu$ a $\nu$.</p></div></div>
 <p>El nombre es un pequeño abuso reconocido por el propio autor, porque
 tradicionalmente se reservaba al caso $c(x,y)=\abs{x-y}$, aunque hoy se entiende
 también en el caso general. (La fuente remite aquí a una ecuación (3.1) que en su
-capítulo 1 no existe; el máximo es el de \eqref{eq:dpccon}.)</p>
+capítulo 1 no existe; el máximo es el de <a class="xref" href="#eq:dpccon">&#167;</a>.)</p>
 <div class="stmt observacion" id="transporte-optimo-x30"><div class="head">Observación 1.13</div><div class="body"><p>El potencial $\varphi$ no tiene por qué ser $c$-cóncavo, pero coincide
 $\mu$-a.e.\ con la función $c$-cóncava $\varphi^{c\bar c}$, de modo que siempre
 se puede escoger uno que sí lo sea, y así se hará a menudo.</p></div></div>
@@ -1342,10 +1388,10 @@ sale gratis: basta ver sus soportes dentro de un cubo grande que se identifica c
 un toro, y si están lejos de la frontera del cubo las aplicaciones óptimas
 coinciden. Los capítulos 5 y 6 usan este hecho.</p>
 <p>El coste es $c(x,y)=\tfrac12\abs{[x-y]}^{2}$, donde</p>
-<div class="display">\begin{equation}\label{eq:distoro}
+<div class="display numerado" id="eq:distoro"><div class="eqbody">\begin{equation}
   \abs{[z]}:=\min\{\abs{z+k}:k\in\Z^{d}\}.
-\end{equation}</div>
-<p>El mínimo en \eqref{eq:distoro} se alcanza siempre. Tomando $z$ en el cubo
+\end{equation}</div></div>
+<p>El mínimo en <a class="xref" href="#eq:distoro">&#167;</a> se alcanza siempre. Tomando $z$ en el cubo
 $Q:=[-\tfrac12,\tfrac12]^{d}$, el $\bar k$ óptimo está en $\{-1,0,+1\}^{d}$ y es
 único, e igual a $0$, salvo que $z\in\partial Q$. Más aún, la función
 $\R^{d}\ni z\mapsto\tfrac12\abs{[z]}^{2}$ es semicóncava, por ser el ínfimo de una
@@ -2028,15 +2074,11 @@ Teorema 1.22.</p>
 <p>El segundo caso que falta es el de un coste que solo sea l.s.c. Se sabe que esa
 hipótesis basta para que exista un plan óptimo, y lo que se quiere ahora es la
 fórmula de dualidad</p>
-<div class="display"><span class="v" data-var="std">\begin{equation}\label{eq:dualcont}
+<div class="display numerado" id="eq:dualcont"><div class="eqbody">\begin{equation}
   \min(\mathrm{KP})=\sup\left\{
-    \int_X\varphi\dd\mu+\int_Y\psi\dd\nu
+    \fin{\int_X\varphi\dd\mu+\int_Y\psi\dd\nu}{\mu(\varphi)+\nu(\psi)}
     \;:\;\varphi\in C(X),\ \psi\in C(Y),\ \varphi\oplus\psi\le c\right\}.
-\end{equation}</span><span class="v" data-var="fin">\begin{equation}\label{eq:dualcont}
-  \min(\mathrm{KP})=\sup\left\{
-    \mu(\varphi)+\nu(\psi)
-    \;:\;\varphi\in C(X),\ \psi\in C(Y),\ \varphi\oplus\psi\le c\right\}.
-\end{equation}</span></div>
+\end{equation}</div></div>
 <p>Hasta aquí está establecida para $c$ uniformemente continua y acotada, con
 existencia de pareja maximizante, y se sabe que una desigualdad vale siempre. La
 restricción a costes uniformemente continuos venía de querer garantizar la
@@ -2410,11 +2452,14 @@ valor máximo, luego son potenciales de Kantorovich. Si el límite tiene potenci
 únicos, la convergencia vale sobre la sucesión entera.</p></div></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
+
+<div id="pop" role="tooltip"></div>
 <nav id="cuadernos" aria-label="Cuadernos">
 <h4>Cuadernos</h4>
 <a href="convexa.html"><span class="t">Optimización Convexa en Espacios de Hilbert</span><span class="c">Universidad de los Andes · 2026-20</span></a>
 <a href="ejercicios-convexa.html"><span class="t">Ejercicios Opti Convexa</span><span class="c">Universidad de los Andes · 2026-20</span></a>
 <a href="transporte-optimo.html" class="aqui"><span class="t">Lecture Notes on Optimal Transport</span><span class="c">Universidad de los Andes · 2026-20</span></a>
+<a href="control-inverso.html"><span class="t">Control Óptimo Inverso en Tiempo Continuo</span><span class="c">Universidad de los Andes · Propuesta de tesis</span></a>
 <a class="portada" href="index.html">Todas las notas</a>
 </nav>
 <div class="tirador" id="cuadernos-tirador" aria-hidden="true"></div>
@@ -2423,13 +2468,13 @@ valor máximo, luego son potenciales de Kantorovich. Si el límite tiene potenci
 </div>
 
 <script>
-const $ = s => document.querySelector(s);
-const $$ = s => Array.from(document.querySelectorAll(s));
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 
 /* Los rotulos y las notaciones los inyecta el generador, porque dependen de
    que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
    una de lecture notes dice «demostraciones». */
-const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "std", "rotulo": "Integrales"}, {"id": "fin", "rotulo": "de Finetti"}, {"id": "ambas", "rotulo": "Ambas"}]};
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "std", "rotulo": "Integrales"}, {"id": "fin", "rotulo": "de Finetti"}, {"id": "ambas", "rotulo": "Ambas"}], "idiomas": [], "glosario": {}};
 
 /* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
    navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
@@ -2471,6 +2516,71 @@ function setNota(n){
   recuerda("nota", n);
 }
 
+/* --- idioma ----------------------------------------------------------- */
+/* Los dos idiomas estan los dos en el HTML, con las MISMAS \label y por eso
+   con los id prefijados (es-, en-). Esto solo decide cual se ve, y despues
+   reconstruye el indice, que es del documento visible. */
+let idioma = (CFG.idiomas[0] || {}).id || "";
+
+function setIdioma(l){
+  if(CFG.idiomas.length < 2) return;
+  idioma = l;
+  $$(".doc").forEach(d => d.dataset.on = (d.dataset.lang === l) ? "true" : "false");
+  CFG.idiomas.forEach(x =>
+    $("#i-"+x.id).setAttribute("aria-pressed", String(x.id === l)));
+  document.documentElement.lang = l;
+  recuerda("idioma", l);
+  escondePop();
+  construyeIndice();
+  refrescaBotonGlobal();
+}
+
+/* --- cuadros del glosario --------------------------------------------- */
+/* El texto lo trae el generador desde el archivo de glosario de la nota. Una
+   nota sin glosario no tiene ningun \term{} marcado, asi que esto no corre. */
+const pop = $("#pop");
+let anclado = null;
+
+function muestraPop(el){
+  const d = CFG.glosario[el.dataset.k];
+  if(!d) return;
+  const txt = d[idioma] || d.es || d.en || "";
+  if(!txt) return;
+  pop.innerHTML = "<p>" + txt + "</p>";
+  pop.dataset.on = "true";
+  anclado = el;
+  colocaPop();
+  if(window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([pop]);
+}
+function colocaPop(){
+  if(!anclado) return;
+  const r = anclado.getBoundingClientRect();
+  const p = pop.getBoundingClientRect();
+  let x = r.left + r.width/2 - p.width/2;
+  x = Math.max(10, Math.min(x, window.innerWidth - p.width - 10));
+  let y = r.top - p.height - 9;
+  if(y < 8) y = r.bottom + 9;
+  pop.style.left = x + "px";
+  pop.style.top  = y + "px";
+}
+function escondePop(){ pop.dataset.on = "false"; anclado = null; }
+
+document.addEventListener("mouseover", e => {
+  const t = e.target.closest("button.term");
+  if(t) muestraPop(t);
+});
+document.addEventListener("mouseout", e => {
+  const t = e.target.closest("button.term");
+  if(t && !pop.contains(e.relatedTarget)) escondePop();
+});
+document.addEventListener("focusin", e => {
+  const t = e.target.closest("button.term");
+  if(t) muestraPop(t);
+});
+document.addEventListener("keydown", e => { if(e.key === "Escape") escondePop(); });
+window.addEventListener("scroll", () => { if(anclado) colocaPop(); }, {passive:true});
+window.addEventListener("resize", escondePop);
+
 /* --- indice ---------------------------------------------------------- */
 let observador = null;
 
@@ -2485,10 +2595,19 @@ let observador = null;
    58 enunciados hace un indice que no se parece al del libro. */
 function construyeIndice(){
   const lista = $("#toc-lista");
-  const piezas = $$("main h2, main h3, main h4");
+  // Con idiomas hay DOS documentos en el DOM y solo uno se ve. El indice se
+  // construye del visible, asi que cambia solo al cambiar de idioma y no hay
+  // una segunda copia que se desincronice.
+  const raiz = $('.doc[data-on="true"]') || $("main");
+  const piezas = $$("h2, h3, h4", raiz);
   let html = "", n = 0;
   const dianas = [];
-  const CLASE = {H2:"lvl-cap", H3:"lvl-sec", H4:"lvl-sub"};
+  // Una nota `article` no tiene \chapter, asi que su primer nivel son los
+  // h3. Sin esto, todas sus entradas salen sangradas como si colgaran de un
+  // capitulo que no existe.
+  const hayCap = piezas.some(el => el.tagName === "H2");
+  const CLASE = hayCap ? {H2:"lvl-cap", H3:"lvl-sec", H4:"lvl-sub"}
+                       : {H3:"lvl-cap", H4:"lvl-sec"};
   piezas.forEach(el => {
     if(!el.id) el.id = "auto-" + (n++);
     // data-toc es el [titulo corto] de \chapter[corto]{largo}, que es justo
@@ -2698,8 +2817,15 @@ function setBarra(on){
 }
 
 /* --- demostraciones o soluciones -------------------------------------- */
+/* Con idiomas, «todas» son las del documento que se VE. Contando las dos
+   copias, el boton se quedaba en «abrir» despues de abrirlas todas, porque
+   las del idioma escondido seguian cerradas. */
+function botonesVisibles(){
+  const raiz = $('.doc[data-on="true"]');
+  return raiz ? $$(".proof-btn", raiz) : $$(".proof-btn");
+}
 function refrescaBotonGlobal(){
-  const bs = $$(".proof-btn");
+  const bs = botonesVisibles();
   const todas = bs.length > 0 && bs.every(b => b.getAttribute("aria-expanded") === "true");
   $("#b-all").textContent = todas ? CFG.cerrarTodas : CFG.abrirTodas;
 }
@@ -2709,16 +2835,18 @@ document.addEventListener("click", e => {
   const caja = document.getElementById(b.dataset.t);
   const abierto = b.getAttribute("aria-expanded") === "true";
   b.setAttribute("aria-expanded", String(!abierto));
-  b.textContent = abierto ? CFG.ver : CFG.ocultar;
+  // Un boton con titulo propio («Ver: Demostración de la Proposición 1.8»)
+  // NO se reescribe: perderia lo unico que dice de que demostracion es.
+  if(!b.dataset.titulo) b.textContent = abierto ? CFG.ver : CFG.ocultar;
   caja.dataset.open = String(!abierto);
   refrescaBotonGlobal();
 });
 $("#b-all").addEventListener("click", () => {
-  const bs = $$(".proof-btn");
+  const bs = botonesVisibles();
   const abrir = !bs.every(b => b.getAttribute("aria-expanded") === "true");
   bs.forEach(b => {
     b.setAttribute("aria-expanded", String(abrir));
-    b.textContent = abrir ? CFG.ocultar : CFG.ver;
+    if(!b.dataset.titulo) b.textContent = abrir ? CFG.ocultar : CFG.ver;
     document.getElementById(b.dataset.t).dataset.open = String(abrir);
   });
   refrescaBotonGlobal();
@@ -2737,6 +2865,8 @@ $("#volver").addEventListener("click", () => {
 });
 CFG.notaciones.forEach(x =>
   $("#n-"+x.id).addEventListener("click", () => setNota(x.id)));
+CFG.idiomas.forEach(x =>
+  $("#i-"+x.id).addEventListener("click", () => setIdioma(x.id)));
 
 /* En pantalla estrecha el TOC abierto tapa casi todo el texto, asi que al
    pulsar un enlace se pliega solo. En ancha se queda, que es donde sirve de
@@ -2747,6 +2877,12 @@ $("#toc").addEventListener("click", e => {
   if(e.target.closest("a") && !ancha()) tocPanel.setAbierto(false, true);
 });
 
+/* El idioma va ANTES de construir el indice: decide de que documento se
+   construye. */
+if(CFG.idiomas.length > 1){
+  const g = recordado("idioma");
+  setIdioma(CFG.idiomas.some(x => x.id === g) ? g : CFG.idiomas[0].id);
+}
 construyeIndice();
 refrescaBotonGlobal();
 setFuente(FUENTES[recordado("font")] ? recordado("font") : "serif");
