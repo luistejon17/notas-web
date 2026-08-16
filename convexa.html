@@ -495,19 +495,6 @@ window.MathJax = {
   <p class="subtitle">Notas del curso de Mauricio Junca</p>
   <p class="byline">Universidad de los Andes · 2026-20</p>
 <section class="capitulo"><h2 id="cap:calculo">Preliminares de cálculo</h2>
-<p>En $\R^n$ la derivada de una función se calcula por coordenadas. Se derivan las
-$n$ funciones parciales, se apilan los resultados en un vector, y ese vector es
-el gradiente. Todo el cálculo diferencial de varias variables descansa sobre esa
-operación, y en un espacio de Hilbert de dimensión infinita no está disponible:
-no hay $n$ coordenadas que apilar, y aunque se fije una base ortonormal
-numerable, la sucesión de derivadas parciales no tiene por qué ser un elemento
-del espacio.</p>
-<p>Sobreviven, en cambio, las dos definiciones que no mencionan coordenadas. Una
-mide cómo cambia $f$ a lo largo de cada recta que pasa por el punto; la otra
-pide una aproximación afín uniforme en todas las direcciones a la vez. Son las
-derivadas de Gâteaux y de Fréchet. El gradiente reaparecerá, pero por una razón
-distinta de la de $\R^n$, y esa razón trae consigo una hipótesis que en
-dimensión finita no hacía falta escribir.</p>
 <p>A lo largo del capítulo $\Hs$ y $\Ks$ denotan espacios de Hilbert reales,
 $U\subset\Hs$ es abierto y no vacío, y $\Bop{\Hs,\Ks}$ es el espacio de los
 operadores lineales <em>acotados</em> de $\Hs$ en $\Ks$. Escribimos
@@ -541,16 +528,11 @@ $\nabla f(x)\in\Hs$ tal que</p>
 representación de Riesz y Fréchet le asocia un único $u\in\Hs$ con
 $\Dif f(x)d=\ip{u}{d}$ para toda $d$. Basta tomar $\nabla f(x)=u$.
 <span class="src">[Bauschke--Combettes, Fact 2.24]</span></p></div>
-<p>La dimensión cambia aquí el argumento y no el enunciado. En $\R^n$ el gradiente
-se construye: es el vector cuyas entradas son las derivadas parciales, y su
-existencia no requiere ningún teorema. En $\Hs$ no hay entradas, y el gradiente
-existe porque un funcional lineal continuo sobre un espacio de Hilbert
-<em>es</em> un producto interno contra un vector. Sin la continuidad el teorema de
+<p>Sin la continuidad el teorema de
 Riesz no se aplica y no hay gradiente ninguno: un funcional lineal no acotado
 $\ell:\Hs\to\R$ satisface $\dird{d}{\ell}(x)=\ell(d)$ para todo $x$ y todo $d$, de modo
 que es Gâteaux diferenciable en el sentido puramente algebraico en todos los
-puntos, y sin embargo no existe ningún $u$ con $\ell=\ip{u}{\cdot}$.</p>
-<p>Que la linealidad no sea automática se ve ya en el ejemplo más simple posible.</p>
+puntos, y sin embargo no existe ningún $u$ con $\ell=\ip{u}{\cdot}$. Por otro lado, la linealidad tampoco tiene por qué ocurrir:</p>
 <div class="stmt ejemplo" id="cap1:ej-norma"><div class="head">Ejemplo</div><div class="body"><p>Sea $f:\Hs\to\R$ dada por $f(x)=\norm{x}$, con $\Hs\neq\{0\}$. Para toda
 dirección $d$,</p>
 <div class="display">\[
@@ -614,9 +596,6 @@ cadena $\phi$ es diferenciable con
 $\phi&#x27;(t)=\ip{\nabla f(x+t(y-x))}{y-x}$, y el resultado es el teorema
 fundamental del cálculo aplicado a $\phi$, que es una función real de variable
 real.</p></div>
-<p>Observe que el enunciado no ha cambiado nada al pasar a $\Hs$. La integral que
-aparece es la de una función real sobre $[0,1]$, y el producto interno solo
-interviene evaluado punto a punto; ningún paso pide dimensión finita.</p>
 <h3 id="cap1:sec-segundo-orden">Derivadas de orden superior</h3>
 <p>Si $f:U\to\R$ es Gâteaux diferenciable en $U$, el gradiente es una aplicación
 $\nabla f:U\to\Hs$, y tiene sentido preguntar si a su vez es diferenciable. Su
@@ -626,8 +605,7 @@ $\nabla^2 f$ existe y es continua en $U$ escribimos $f\in C^2(U)$.</p>
 <div class="stmt proposicion" id="cap1:prop-autoadjunta"><div class="head">Proposición</div><div class="body"><p>Si $f$ es dos veces Fréchet diferenciable en $x$, entonces $\nabla^2 f(x)$ es
 autoadjunto.
 <span class="src">[Bauschke--Combettes, Fact 2.66 y Example 2.67]</span></p></div></div>
-<p>En $\R^n$ esta propiedad se lee sobre las entradas de la matriz y es la simetría
-de la hessiana. Sobre el operador la formulación no depende de la base.</p>
+<p>En $\R^n$ es la simetría de la matriz hessiana.</p>
 <div class="stmt ejemplo" id="cap1:ej-cuadratica"><div class="head">Ejemplo</div><div class="body"><p>Sean $L\in\Bop{\Hs,\Ks}$ y $r\in\Ks$, y sea $f:\Hs\to\R$ dada por
 $f(x)=\tfrac12\norm{Lx-r}^2$. Entonces $f$ es dos veces Fréchet diferenciable en
 todo punto, con</p>
@@ -635,22 +613,18 @@ todo punto, con</p>
   \nabla f(x)=L^{*}(Lx-r),\qquad \nabla^2 f(x)=L^{*}L .
 \]</div>
 <p><span class="src">[Bauschke--Combettes, Example 2.60]</span></p></div></div>
-<p>En $\R^n$ este es el problema de mínimos cuadrados $f(x)=\tfrac12\norm{Ax-b}^2$,
-con la traspuesta $A^{\top}$ en lugar del adjunto. El cálculo es el mismo en los
-dos casos,</p>
+<p>En $\R^n$ es el problema de mínimos cuadrados $f(x)=\tfrac12\norm{Ax-b}^2$, y el
+cálculo es el mismo:</p>
 <div class="display">\[
-  \dird{h}{f}(x)=\ip{Lx-r}{Lh}=\ip{L^{*}(Lx-r)}{h},
+  \dird{h}{f}(x)=\ip{Lx-r}{Lh}=\ip{L^{*}(Lx-r)}{h}.
 \]</div>
-<p>y el único paso con contenido es la definición de adjunto, que existe para todo
-operador acotado entre espacios de Hilbert.</p>
-<p>Dos ejemplos cercanos no admiten esa lectura. El producto interno de Frobenius
-$\ip{X}{Y}=\Tr(X^{\top}Y)$ sobre matrices $n\times n$ y la aplicación
-$F(X)=X^{-1}$ sobre las simétricas definidas positivas viven en un espacio de
-dimensión $n^2$. El primero tiene un análogo genuino en dimensión infinita, el
-producto interno de Hilbert--Schmidt. El segundo se generaliza mejor de lo que
-parece: derivar la identidad $(X+tH)(X+tH)^{-1}=I$ solo usa que la inversión
-esté definida en un entorno de $X$, y eso vale para operadores acotados
-invertibles.</p>
+<p>Dos ejemplos cercanos viven en dimensión $n^2$ y no admiten esa lectura: el
+producto interno de Frobenius $\ip{X}{Y}=\Tr(X^{\top}Y)$ sobre matrices
+$n\times n$, cuyo análogo en dimensión infinita es el producto de
+Hilbert--Schmidt, y la aplicación $F(X)=X^{-1}$ sobre las simétricas definidas
+positivas. Esta segunda se generaliza mejor de lo que parece: derivar
+$(X+tH)(X+tH)^{-1}=I$ solo usa que la inversión esté definida en un entorno de
+$X$, y eso vale para operadores acotados invertibles.</p>
 <h3 id="cap1:sec-optimalidad">Condiciones de optimalidad</h3>
 <p>Sea $f:U\to\R$. Decimos que $x\in U$ es un <span class="df">mínimo local</span> de $f$ si existe
 $r&gt;0$ tal que $f(x)\le f(y)$ para todo $y\in\Ball(x;r)\cap U$, y que es
@@ -663,8 +637,7 @@ bola donde $f(x)$ es mínimo, luego el cociente incremental es no negativo y por
 tanto $\dird{d}{f}(x)\ge 0$. Tomando $d=-\nabla f(x)$ se obtiene
 $0\le\ip{\nabla f(x)}{-\nabla f(x)}=-\norm{\nabla f(x)}^2$, de donde
 $\nabla f(x)=0$.</p></div>
-<p>La prueba no usa coordenadas, ni compacidad, ni la dimensión. Con las
-condiciones de segundo orden la situación es distinta, y hay que separarlas.</p>
+<p>Las condiciones de segundo orden se separan en dos, y solo una sobrevive.</p>
 <div class="stmt teorema" id="cap1:teo-segundo-necesaria"><div class="head">Teorema (Condición necesaria de segundo orden)</div><div class="body"><p>Sea $f\in C^2(U)$ y sea $x$ un mínimo local de $f$. Entonces
 $\ip{\nabla^2 f(x)h}{h}\ge 0$ para todo $h\in\Hs$.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p5">Ver demostración</button><div class="proof" id="convexa-p5"><p>Por la condición necesaria de primer orden se tiene $\nabla f(x)=0$, así que la
@@ -673,14 +646,12 @@ fórmula de Taylor de segundo orden da, para $t&gt;0$ pequeño,</p>
   0\le f(x+th)-f(x)=\frac{t^2}{2}\ip{\nabla^2 f(x)h}{h}+o(t^2).
 \]</div>
 <p>Divida por $t^2$ y haga $t\downarrow 0$.</p></div>
-<p>La condición suficiente es la que no se traslada. En $\R^n$ se enuncia así: si
-$x$ es un punto crítico y $\nabla^2 f(x)$ es definida positiva, entonces $x$ es
-un mínimo local estricto. Su prueba toma $\lambda&gt;0$ el menor valor propio de la
-hessiana y usa que $\ip{\nabla^2 f(x)h}{h}\ge\lambda\norm{h}^2$ para todo $h$.
-Ese paso es el que se rompe: el menor valor propio existe porque la esfera
-unidad de $\R^n$ es compacta y la forma cuadrática es continua, mientras que en
-dimensión infinita la esfera unidad no es compacta y un operador autoadjunto
-puede ser definido positivo con ínfimo espectral nulo.</p>
+<p>En $\R^n$ la suficiente dice que un punto crítico con $\nabla^2 f(x)$ definida
+positiva es un mínimo local estricto, y su prueba toma $\lambda&gt;0$ el menor
+valor propio para escribir $\ip{\nabla^2 f(x)h}{h}\ge\lambda\norm{h}^2$. Ese
+$\lambda$ existe porque la esfera unidad de $\R^n$ es compacta. En dimensión
+infinita no lo es, y un operador autoadjunto puede ser definido positivo con
+ínfimo espectral nulo.</p>
 <div class="stmt ejemplo" id="cap1:ej-diagonal"><div class="head">Ejemplo</div><div class="body"><p>Sea $\Hs=\ell^2$ y sea $A$ el operador diagonal $Ay=(y_n/n)_{n\ge1}$. Entonces
 $A$ es acotado y autoadjunto, y</p>
 <div class="display">\[
@@ -690,9 +661,7 @@ $A$ es acotado y autoadjunto, y</p>
 <p>así que $A$ es definido positivo. Pero tomando $y=e_n$ el $n$-ésimo vector de la
 base canónica se obtiene $\ip{Ae_n}{e_n}=1/n$, de donde
 $\inf_{\norm{y}=1}\ip{Ay}{y}=0$ y no existe ningún $\lambda&gt;0$ que sirva.</p></div></div>
-<p>Por consiguiente el enunciado correcto pide directamente lo que la demostración
-utiliza, que en dimensión finita es una consecuencia gratuita de la definitud y
-aquí no lo es.</p>
+<p>El enunciado correcto pide entonces lo que la demostración usa:</p>
 <div class="stmt teorema" id="cap1:teo-segundo-suficiente"><div class="head">Teorema (Condición suficiente de segundo orden)</div><div class="body"><p>Sea $f\in C^2(U)$ y sea $x\in U$ un punto crítico. Suponga que existe
 $\alpha&gt;0$ tal que</p>
 <div class="display">\[
@@ -713,16 +682,6 @@ homogeneidad $\ip{Hh}{h}\ge\alpha\norm{h}^2$ para todo $h$. La hipótesis del
 teorema anterior equivale entonces a la definitud, y lo que en $\R^n$ se deduce
 aquí hay que suponerlo.</p></div></div></section>
 <section class="capitulo"><h2 id="cap:taylor">Fórmulas de Taylor y los problemas del curso</h2>
-<p>Las fórmulas de Taylor del capítulo anterior admiten dos lecturas. Una es
-cualitativa y dice que el error de la aproximación afín es $o(\norm{h})$; la
-otra es cuantitativa y acota ese error por una constante explícita multiplicada
-por $\norm{h}^2$. La primera basta para las condiciones de optimalidad, y la
-segunda es la que hace falta para estimar cuánto baja una función al dar un
-paso, que es de lo que viven todos los métodos de descenso del curso.</p>
-<p>Esa versión cuantitativa se conoce como lema del descenso, y pasa a dimensión
-infinita sin fricción alguna: su demostración utiliza la desigualdad de Cauchy y
-Schwarz y una integral sobre $[0,1]$, y ninguna de las dos cosas sabe en qué
-espacio está.</p>
 <h3 id="cap2:sec-taylor">Las fórmulas y el lema del descenso</h3>
 <p>Recogemos primero las tres formas de la fórmula de Taylor. Sean
 $U\subset\Hs$ abierto, $f:U\to\R$ y $x,y\in U$ con $[x,y]\subset U$, y
@@ -759,12 +718,6 @@ Entonces, para todos $x,y\in U$,</p>
    &amp;\le\int_0^1\norm{y-x}\,\beta\,\norm{t(y-x)}\,dt\\
    &amp;=\frac{\beta}{2}\norm{y-x}^2 . 
 \end{align*}</div></div>
-<p>La convexidad de $U$ garantiza que el segmento $[x,y]$ esté contenido en $U$, y
-la acotación de $\nabla f$ es lo que vuelve estimable el integrando. El único
-paso con contenido geométrico es la desigualdad de Cauchy y Schwarz, que en un
-espacio con producto interno se demuestra a partir de los axiomas y no menciona
-ninguna base; todo lo demás es el teorema fundamental del cálculo aplicado a una
-función de $[0,1]$ en $\R$.</p>
 <h3 id="cap2:sec-ejemplos">Los problemas del curso</h3>
 <p>Los problemas siguientes reaparecerán a lo largo del curso. En cada uno se
 señala qué espacio necesita.</p>
@@ -795,11 +748,10 @@ $b\in\R^m$ y $\lambda&gt;0$,</p>
 <div class="display">\[
   \min_{x\in\R^n}\ \tfrac12\norm{Ax-b}_2^2+\lambda\norm{x}_1 .
 \]</div>
-<p>Aquí conviven dos normas distintas sobre el mismo espacio, y eso es lo que
-impide subir el problema a un Hilbert cualquiera sin más. La versión en
-dimensión infinita reemplaza $\norm{\cdot}_1$ por una función convexa propia y
-l.s.c. sobre $\Hs$ que toma el valor $+\infty$ fuera de un subconjunto, y no por
-una segunda norma del espacio.</p>
+<p>Conviven dos normas sobre el mismo espacio, y eso impide subirlo a un Hilbert
+cualquiera: la versión en dimensión infinita reemplaza $\norm{\cdot}_1$ por una
+función convexa propia y l.s.c. sobre $\Hs$ que vale $+\infty$ fuera de un
+subconjunto, no por una segunda norma.</p>
 <p>El cuarto es la <span class="df">regresión logística</span>. Dados $N$ pares $(a_i,y_i)$ con
 $a_i\in\R^n$ e $y_i\in\{-1,1\}$,</p>
 <div class="display">\[
@@ -826,8 +778,7 @@ a espacios de Hilbert, la programación cónica, en la que la desigualdad
 componente a componente se sustituye por el orden parcial inducido por un cono
 convexo cerrado; ese orden se construye en el capítulo siguiente.</p>
 <h3 id="cap2:sec-caratheodory">Combinaciones convexas y el teorema de Carathéodory</h3>
-<p>Aquí termina el cálculo y empieza la geometría convexa. Recuerde que dados
-$x_1,\dots,x_k$ en $\Hs$, una <span class="df">combinación convexa</span> suya es una suma
+<p>Dados $x_1,\dots,x_k$ en $\Hs$, una <span class="df">combinación convexa</span> suya es una suma
 $\sum_{i=1}^{k}\alpha_i x_i$ con $\alpha_i\ge0$ y
 $\sum_{i=1}^{k}\alpha_i=1$, y que la combinación es <span class="df">afín</span> si solo se pide
 $\sum_{i=1}^{k}\alpha_i=1$.</p>
@@ -893,15 +844,6 @@ límite. Lo que sí sigue siendo cierto es que la envolvente convexa <em>cerrada
 de un compacto es compacta, resultado debido a Mazur, cuya demostración no se da
 aquí y no se necesitará hasta los teoremas de separación.</p></section>
 <section class="capitulo"><h2 id="cap:conos">Conjuntos afines, conos y la proyección</h2>
-<p>Aquí aparecen por primera vez las dos caras de la dimensión infinita a la vez.
-Un resultado deja de ser cierto, y no por un defecto de su demostración sino
-porque el objeto que describe se desvanece; otro sigue siendo cierto palabra por
-palabra, y su demostración hay que rehacerla desde el principio.</p>
-<p>El primero es el interior relativo. En $\R^n$ todo conjunto convexo no vacío
-tiene interior relativo no vacío, y sobre ese hecho descansan media docena de
-resultados posteriores. El segundo es la existencia de la proyección sobre un
-convexo cerrado, que en $\R^n$ se obtiene de Weierstrass y aquí no puede
-obtenerse así, porque la bola cerrada no es compacta.</p>
 <h3 id="cap3:sec-afines">Conjuntos afines e interior relativo</h3>
 <div class="stmt definicion" id="cap3:def-afin"><div class="head">Definición</div><div class="body"><p>Un conjunto $A\subset\Hs$ es <span class="df">afín</span> si para todos $x,y\in A$ y todo
 $\alpha\in\R$ se tiene $\alpha x+(1-\alpha)y\in A$, es decir, si la recta que
@@ -1110,21 +1052,6 @@ vector deja a $C$ entero de un lado. Es un hiperplano soporte de $C$ en
 $\Proy_C z$, y es la herramienta que faltaba para cerrar la igualdad bipolar de
 la sección anterior.</p></div></div></section>
 <section class="capitulo"><h2 id="cap:separacion">Separación y funciones convexas</h2>
-<p>La proyección sobre un convexo cerrado se pagó cara en el capítulo anterior, y
-ahora empieza a rendir. De ella salen los dos teoremas de separación con los que
-abre esta sesión, y el primero de ellos sale gratis: su demostración es un
-renglón de la desigualdad variacional, y ese renglón no menciona la dimensión
-en ningún momento.</p>
-<p>El segundo teorema es otra historia. Separar un punto de un convexo cerrado
-disjunto de él es una cosa; apoyar un hiperplano en un punto de la frontera es
-otra, porque allí no hay distancia positiva de la que tirar. La demostración
-clásica construye una sucesión de hiperplanos que separan puntos exteriores cada
-vez más cercanos y pasa al límite, y para pasar al límite necesita que la esfera
-unidad sea compacta. En $\Hs$ no lo es, y el enunciado se queda abajo.</p>
-<p>La segunda mitad del capítulo cambia de objeto y empieza con las funciones
-convexas. Ahí la traducción vuelve a ser cómoda, porque el epígrafo convierte
-toda pregunta sobre una función en una pregunta sobre un conjunto de
-$\Hs\times\R$, y los conjuntos ya sabemos tratarlos.</p>
 <h3 id="cap4:sec-corolarios">Dos corolarios de la proyección</h3>
 <p>Recordemos el enunciado con el que cerró el capítulo anterior: si $C\subset\Hs$
 es convexo, cerrado y no vacío, si $z\in\Hs$ y si $p\in C$, entonces $p=\Proy_Cz$
@@ -1169,10 +1096,6 @@ Cauchy--Schwarz el miembro derecho está acotado por
 $\norm{x-y} \norm{\Proy_Cx-\Proy_Cy}$, y dividiendo por
 $\norm{\Proy_Cx-\Proy_Cy}$ cuando este número no es cero se obtiene la
 desigualdad de Lipschitz.</p></div>
-<p>Nada de esto ha usado la dimensión, y no es casualidad: los dos ingredientes son
-la desigualdad variacional y Cauchy--Schwarz, y los dos viven en cualquier
-espacio con producto interno. El teorema de la sección siguiente se comporta
-igual de bien; el de después, no.</p>
 <h3 id="cap4:sec-separacion">Separación y hiperplanos de soporte</h3>
 <p>Dado $a\in\Hs$ no nulo y $\gamma\in\R$, el conjunto $\{x\in\Hs:\ip{a}{x}=\gamma\}$
 es un <span class="df">hiperplano</span>, y los dos conjuntos que define, $\ip{a}{x}\le\gamma$ y
@@ -1194,17 +1117,10 @@ $\Proy_Cz=z-a$ esto es</p>
 <p>De aquí $\ip{a}{z}\ge\ip{a}{x}+\norm{a}^2$ para todo $x\in C$, y tomando supremo
 en $x$ queda $\ip{a}{z}\ge\sup_{x\in C}\ip{a}{x}+\norm{a}^2$, que es la
 desigualdad estricta porque $\norm{a}&gt;0$.</p></div>
-<p>Merece la pena mirar qué se ha usado: la existencia de $\Proy_Cz$, que es el
-teorema del capítulo anterior, y su desigualdad variacional. Ni compacidad, ni
-coordenadas, ni finitud de nada. La versión de este teorema en $\R^n$ y la
-versión en $\Hs$ son el mismo texto, y la única razón de que la de $\Hs$ sea
-verdadera es que la proyección existe, que es lo que costó trabajo probar.</p>
-<p>El resultado vale de hecho bastante más lejos, sin producto interno y sin
-proyección: en cualquier espacio normado, dos convexos disjuntos no vacíos con
-uno cerrado y el otro compacto se separan estrictamente por un hiperplano
-cerrado <span class="src">[Brezis, Teorema 1.7]</span>, y el caso de arriba es el de $B=\{z\}$.
-Esa demostración pasa por el teorema de Hahn--Banach, que reaparece dentro de un
-momento con el hiperplano de soporte.</p>
+<p>El resultado vale más lejos, sin producto interno y sin proyección: en cualquier
+espacio normado, dos convexos disjuntos no vacíos con uno cerrado y el otro
+compacto se separan estrictamente por un hiperplano cerrado
+<span class="src">[Brezis, Teorema 1.7]</span>, y el caso de arriba es el de $B=\{z\}$.</p>
 <p>Pasemos al punto de la frontera. Si $p\in C$, un hiperplano <span class="df">de soporte</span> de
 $C$ en $p$ es uno que pasa por $p$ y deja a $C$ entero de un lado, es decir, un
 $a\ne0$ con $\ip{a}{x-p}\le0$ para todo $x\in C$. En el lenguaje del capítulo
@@ -1248,21 +1164,14 @@ coincidiría con el interior y $p$ sería un punto interior de $C$, contra
 $p\in\partial C$. Luego $V$ es un subespacio propio y $\orth{V}\ne\{0\}$. Tome
 $a\in\orth{V}$ no nulo. Todo $x\in C$ cumple $x-p\in V$, así que $\ip{a}{x-p}=0$,
 y en particular la desigualdad se cumple.</p></div>
-<p>La demostración del apartado <em>(a)</em> usa la dimensión finita dos veces, y en
-dos sitios que no tienen nada que ver entre sí. El primero es la construcción de
-los $z_k$: se apoya en que un punto de $C$ que no esté en $\ri(C)$ se aproxima
-desde $\aff(C)\setminus C$, y detrás de eso está que $\ri(C)$ sea no vacío, que
-es el enunciado que el capítulo anterior dejó abajo. El segundo es el paso al
-límite de los $a_k$, que necesita que la esfera unidad de $V$ sea compacta. En $\Hs$ el
-subespacio $V$ puede ser de dimensión infinita, y entonces su esfera unidad no es
-compacta: la sucesión ortonormal $(e_n)$ vive en ella y no tiene ninguna
-subsucesión convergente en norma, porque $\norm{e_n-e_m}=\sqrt2$ para $n\ne m$.</p>
-<p>Arreglar uno de los dos fallos no arregla el otro. Si se supone que $C$ tiene
-interior no vacío en $\Hs$, el primer problema desaparece, porque entonces
-$\aff(C)=\Hs$ y $V=\Hs$; el segundo sigue en pie tal cual. El sustituto en
-dimensión infinita no es esta demostración con retoques, sino la forma
-geométrica del teorema de Hahn--Banach, que es un resultado de espacios
-normados y no usa la proyección en ningún sitio.</p>
+<p>El apartado <em>(a)</em> usa la dimensión finita dos veces. La construcción de los
+$z_k$ se apoya en que $\ri(C)$ sea no vacío, que es el enunciado que el capítulo
+anterior dejó abajo; y el paso al límite de los $a_k$ necesita que la esfera
+unidad de $V$ sea compacta, cosa que en $\Hs$ falla en cuanto $V$ es de dimensión
+infinita, porque la sucesión ortonormal $(e_n)$ cumple $\norm{e_n-e_m}=\sqrt2$ y
+no tiene subsucesión convergente.</p>
+<p>Suponer $\intr(C)\ne\varnothing$ mata el primer fallo, ya que entonces
+$\aff(C)=\Hs$, y deja el segundo intacto. El sustituto es otro teorema.</p>
 <div class="stmt teorema" id="cap4:teo-hb1"><div class="head">Teorema Hahn--Banach, primera forma geométrica</div><div class="body"><p>Sean $A$ y $B$ subconjuntos convexos, no vacíos y disjuntos de un espacio
 normado $E$, y suponga que uno de los dos es abierto. Entonces existe un
 hiperplano cerrado que los separa.
@@ -1301,10 +1210,10 @@ cualesquiera se separan sin ninguna hipótesis adicional.
 <h3 id="cap4:sec-funciones" data-toc="Funciones convexas">Funciones convexas y semicontinuidad inferior</h3>
 <p>A partir de aquí las funciones toman valores en $\R\cup\{+\infty\}$, y el
 <span class="df">dominio</span> de $f\colon\Hs\to\R\cup\{+\infty\}$ es
-$\dom f=\{x\in\Hs: f(x)&lt;+\infty\}$. Admitir el valor $+\infty$ no es un capricho
-de generalidad: es lo que permite tratar un problema con restricciones como uno
-sin ellas, sumándole a la función objetivo una que valga cero sobre el conjunto
-factible e infinito fuera. Una función es <span class="df">propia</span> si su dominio no es vacío.</p>
+$\dom f=\{x\in\Hs: f(x)&lt;+\infty\}$. Admitir el $+\infty$ es lo que permite
+tratar un problema con restricciones como uno sin ellas, sumando a la función
+objetivo una que valga cero sobre el conjunto factible e infinito fuera. Una
+función es <span class="df">propia</span> si su dominio no es vacío.</p>
 <div class="stmt definicion" id="cap4:def-convexa"><div class="head">Definición</div><div class="body"><p>Una función $f\colon\Hs\to\R\cup\{+\infty\}$ es <span class="df">convexa</span> si</p>
 <div class="display">\[
   f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)
@@ -1325,10 +1234,8 @@ nivel:</p>
   \lev_\alpha f=\{x\in\Hs: f(x)\le\alpha\} .
 \]</div>
 <p>El epígrafo vive en $\Hs\times\R$, que es de nuevo un espacio de Hilbert con el
-producto interno $\ip{(x,s)}{(y,t)}=\ip{x}{y}+st$, y de ahí sale su utilidad:
-traduce cada pregunta sobre $f$ en una pregunta sobre un subconjunto de un
-Hilbert, y de esas sabemos bastante desde el capítulo anterior. La primera
-traducción es la propia convexidad.</p>
+producto interno $\ip{(x,s)}{(y,t)}=\ip{x}{y}+st$, y traduce cada pregunta sobre
+$f$ en una pregunta sobre un convexo. La primera es la convexidad misma.</p>
 <div class="stmt proposicion" id="cap4:prop-epi"><div class="head">Proposición</div><div class="body"><p>$f$ es convexa si y solo si $\epi f$ es un subconjunto convexo de $\Hs\times\R$.
 <span class="src">[Bauschke--Combettes, Definición 8.1 y Proposición 8.4]</span></p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p21">Ver demostración</button><div class="proof" id="convexa-p21"><p>Suponga $f$ convexa y tome $(x,s)$ y $(y,t)$ en $\epi f$ y $\lambda\in[0,1]$.
@@ -1341,9 +1248,7 @@ convexo y sean $x,y\in\dom f$. Los puntos $(x,f(x))$ y $(y,f(y))$ están en
 $\epi f$, luego su combinación convexa también, y eso es precisamente
 $f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)$. Si alguno de los dos
 puntos no está en el dominio la desigualdad es trivial.</p></div>
-<p>Bauschke--Combettes toman este enunciado como definición de función convexa y
-demuestran la desigualdad a partir de él, que es el camino inverso al de aquí.
-Los conjuntos de nivel dan la mitad de un resultado análogo, y solo la mitad.</p>
+<p>Los conjuntos de nivel dan la mitad de un resultado análogo, y solo la mitad.</p>
 <div class="stmt proposicion" id="cap4:prop-nivel"><div class="head">Proposición</div><div class="body"><p>Si $f$ es convexa, entonces $\lev_\alpha f$ es convexo para todo $\alpha\in\R$.
 El recíproco es falso.
 <span class="src">[Bauschke--Combettes, Corolario 8.5]</span></p></div></div>
@@ -1355,8 +1260,7 @@ Sus conjuntos de nivel son $\lev_\alpha f=\{x:\norm{x}\le\alpha^2\}$ para
 $\alpha\ge0$ y vacíos para $\alpha&lt;0$, es decir bolas cerradas, que son convexas.
 Sin embargo $f$ no es convexa: fije $u$ con $\norm{u}=1$ y tome $x=u$, $y=0$ y
 $\lambda=1/2$. Entonces $f(u/2)=1/\sqrt2&gt;1/2=\tfrac12f(u)+\tfrac12f(0)$.</p></div>
-<p>De la convexidad del epígrafo sale la desigualdad de Jensen para combinaciones
-finitas, y sale sin esfuerzo.</p>
+<p>De la convexidad del epígrafo sale la desigualdad de Jensen.</p>
 <div class="stmt proposicion" id="cap4:prop-jensen"><div class="head">Proposición desigualdad de Jensen</div><div class="body"><p>Sea $f$ convexa, sean $x_1,\dots,x_k$ en $\dom f$ y sean $\lambda_1,\dots,
 \lambda_k$ no negativos con $\sum_{i=1}^k\lambda_i=1$. Entonces</p>
 <div class="display">\[
@@ -1369,14 +1273,12 @@ finitas, y sale sin esfuerzo.</p>
    =\Big(\sum_{i=1}^k\lambda_ix_i,\ \sum_{i=1}^k\lambda_if(x_i)\Big)\in\epi f,
 \]</div>
 <p>y pertenecer al epígrafo es exactamente la desigualdad del enunciado.</p></div>
-<p>La combinación es finita, y eso es lo único que la demostración necesita. La
-versión integral de la desigualdad, con una medida de probabilidad en lugar de
-los pesos $\lambda_i$, es un enunciado distinto y pide hipótesis propias.</p>
+<p>La versión integral, con una medida de probabilidad en lugar de los pesos
+$\lambda_i$, es un enunciado distinto y pide hipótesis propias.</p>
 <p>Veamos ejemplos. Toda función afín $f(x)=\ip{a}{x}+\beta$ es convexa, con
 igualdad en la desigualdad de definición, y la norma $f(x)=\norm{x}$ lo es por la
 desigualdad triangular y la homogeneidad
-<span class="src">[Bauschke--Combettes, Example 8.9]</span>. El tercero es el que cambia de aspecto
-al subir de dimensión.</p>
+<span class="src">[Bauschke--Combettes, Example 8.9]</span>.</p>
 <div class="stmt ejemplo" id="cap4:ej-cuadratica"><div class="head">Ejemplo</div><div class="body"><p>Sea $A\in\Bop{\Hs}$ autoadjunto, sea $b\in\Hs$ y sea $c\in\R$. La función</p>
 <div class="display">\[
   f(x)=\tfrac12\ip{Ax}{x}+\ip{b}{x}+c
@@ -1390,17 +1292,12 @@ afín no interviene y un cálculo directo da, para $\lambda\in[0,1]$,</p>
 <p>donde se ha usado que $A$ es autoadjunto para escribir $\ip{Ax}{y}=\ip{Ay}{x}$.
 El miembro izquierdo es no negativo para todos $x,y$ y todo $\lambda$ si y solo
 si lo es $\ip{A(x-y)}{x-y}$, y $x-y$ recorre todo $\Hs$.</p></div></div>
-<p>En $\R^n$ la condición es que la matriz simétrica $Q$ sea semidefinida positiva,
-y la traspuesta del enunciado de clase pasa aquí a ser el adjunto, como ya
-ocurrió con los mínimos cuadrados del capítulo 2. La identidad de arriba es
-exacta y no menciona la dimensión en ningún paso.</p>
 <div class="stmt ejemplo" id="cap4:ej-indicadora"><div class="head">Ejemplo</div><div class="body"><p>Sea $C\subset\Hs$ y sea $\delta_C$ su <span class="df">función indicadora</span>, que vale $0$ sobre
 $C$ y $+\infty$ fuera. Entonces $\epi\delta_C=C\times\R_+$, de manera que
 $\delta_C$ es convexa si y solo si $C$ es convexo.
 <span class="src">[Bauschke--Combettes, Example 8.3]</span></p></div></div>
-<p>Las operaciones que preservan la convexidad son las que permiten reconocerla sin
-volver a la definición, y todas las de la lista siguiente valen en $\Hs$ con la
-demostración de $\R^n$.</p>
+<p>Las operaciones siguientes preservan la convexidad, y todas valen en $\Hs$ con
+la demostración de $\R^n$.</p>
 <div class="stmt proposicion" id="cap4:prop-operaciones"><div class="head">Proposición</div><div class="body"><p>Sean $f$ y $(f_i)_{i\in I}$ funciones convexas de $\Hs$ en $\R\cup\{+\infty\}$.</p>
 <ol class="lista"><li><p>Si $\alpha_1,\dots,\alpha_m&gt;0$ y $g_1,\dots,g_m$ son convexas, entonces
         $\sum_{j}\alpha_jg_j$ es convexa.
@@ -1433,14 +1330,12 @@ $G(x_j,y_j)\le f(x_j)+\varepsilon$. Pero entonces:</p>
 <p>donde la primera desigualdad es la definición de $f$ como ínfimo y la segunda es
 la convexidad de $G$. El miembro derecho está acotado por
 $\lambda f(x_1)+(1-\lambda)f(x_2)+\varepsilon$, y basta hacer $\varepsilon\downarrow0$.</p></div>
-<p>El apartado <em>(iii)</em> tiene un caso particular que aparece todo el tiempo: el
-máximo de finitas funciones afines, $f(x)=\max_{i}\{\ip{c_i}{x}+\beta_i\}$, es
-convexo. El apartado <em>(v)</em> es el que más sorprende, porque un ínfimo de
-funciones convexas no tiene por qué ser convexo; lo que lo salva es que aquí el
-ínfimo se toma sobre una variable de una función conjuntamente convexa en las
-dos.</p>
-<p>Queda la última noción de la sesión, que es la que hace falta para que un
-problema de minimización tenga solución.</p>
+<p>De <em>(iii)</em> sale el máximo de finitas funciones afines,
+$f(x)=\max_{i}\{\ip{c_i}{x}+\beta_i\}$. Y en <em>(v)</em> la hipótesis que
+importa es que $G$ sea convexa en las dos variables a la vez: un ínfimo de
+funciones convexas no tiene por qué ser convexo.</p>
+<p>Queda la noción que hace falta para que un problema de minimización tenga
+solución.</p>
 <div class="stmt definicion" id="cap4:def-lsc"><div class="head">Definición</div><div class="body"><p>Una función $f\colon\Hs\to\R\cup\{+\infty\}$ es <span class="df">semicontinua inferiormente</span>
 (l.s.c.) en $x$ si para toda sucesión $x_k\to x$ se tiene</p>
 <div class="display">\[
@@ -1465,31 +1360,23 @@ $\mu&lt;+\infty$ y tome $\alpha&gt;\mu$. Existe una subsucesión con
 $f(x_{k_j})\le\alpha$ para todo $j$, es decir, contenida en $\lev_\alpha f$, y
 como este conjunto es cerrado y $x_{k_j}\to x$, se sigue $f(x)\le\alpha$.
 Haciendo $\alpha\downarrow\mu$ queda $f(x)\le\mu$.</p></div>
-<p>Esta demostración no ha usado ninguna propiedad de $\Hs$, ni siquiera la norma
-más allá de definir las sucesiones convergentes, y de hecho el resultado vale en
-cualquier espacio topológico de Hausdorff. La dimensión infinita entra por otro
-sitio, y es un sitio que en $\R^n$ no existe.</p>
-<p>En $\R^n$ hay una sola noción razonable de convergencia y la semicontinuidad
-inferior es una sola cosa. En $\Hs$ hay dos topologías en juego, la de la norma
-y la débil, y sobre la débil la definición por sucesiones y la definición por
-conjuntos de nivel cerrados dejan de coincidir, porque la topología débil no es
-metrizable. Esa distinción importa porque el argumento clásico para la existencia
-de un mínimo, tomar una sucesión minimizante y extraer una subsucesión
-convergente, en $\Hs$ solo funciona en la topología débil: es lo que la
-condición suficiente de segundo orden del capítulo 1 ya dejó ver, y es la razón
-de que la bola cerrada no sea compacta. Para funciones convexas, sin embargo,
-las cuatro nociones se colapsan en una.</p>
+<p>El resultado vale en cualquier espacio de Hausdorff, así que la dimensión
+infinita entra por otro sitio. En $\Hs$ hay dos topologías en juego, la de la
+norma y la débil, y sobre la débil la definición por sucesiones y la definición
+por conjuntos de nivel cerrados dejan de coincidir, porque la topología débil no
+es metrizable. La distinción importa porque el argumento clásico de existencia,
+tomar una sucesión minimizante y extraer una subsucesión convergente, en $\Hs$
+solo funciona en la débil. Para funciones convexas las cuatro nociones se
+colapsan en una.</p>
 <div class="stmt teorema" id="cap4:teo-lsc-debil"><div class="head">Teorema</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ convexa. Entonces las cuatro afirmaciones
 siguientes son equivalentes: $f$ es l.s.c. para la topología de la norma, $f$ es
 l.s.c. por sucesiones para la topología de la norma, $f$ es l.s.c. para la
 topología débil y $f$ es l.s.c. por sucesiones débiles.
 <span class="src">[Bauschke--Combettes, Teorema 9.1]</span></p></div></div>
-<p>La convexidad es lo que hace esto posible, y se ve bien en la formulación por
-epígrafos: el epígrafo de una función convexa es un conjunto convexo, y un
+<p>La razón se ve en el epígrafo: el de una función convexa es convexo, y un
 convexo cerrado en norma es débilmente cerrado. La l.s.c. respecto de la norma,
-que es barata de comprobar, se transporta gratis a la topología débil, que es la
-que tiene compacidad. Ese es el enunciado que sostiene la existencia de mínimos
-en dimensión infinita.</p></section>
+que es barata de comprobar, se transporta así a la topología débil, que es la
+que tiene compacidad.</p></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 <nav id="cuadernos" aria-label="Cuadernos">
