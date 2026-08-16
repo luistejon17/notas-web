@@ -1215,7 +1215,9 @@ para el subespacio director de $\aff(C)$, es decir, el único subespacio con
 $\aff(C)=p+V$ para $p\in C$ cualquiera.</p>
 <div class="stmt teorema" id="cap4:teo-soporte"><div class="head">Teorema del hiperplano de soporte</div><div class="body"><p>Sea $C\subset\R^n$ convexo, cerrado y no vacío, y sea $V$ el subespacio director
 de $\aff(C)$.</p>
-<!-- entorno omitido: enumerate -->
+<ol class="lista"><li><p>Si $p\in C\setminus\ri(C)$, existe $a\in V$, $a\ne0$, tal que
+        $\ip{a}{x-p}\le0$ para todo $x\in C$.</p></li><li><p>Si $p\in\partial C$, existe $a\ne0$ tal que $\ip{a}{x-p}\le0$ para todo
+        $x\in C$.</p></li></ol>
 <p><span class="src">[Junca, §6.2, para la variante con el interior]</span></p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p18">Ver demostración</button><div class="proof" id="convexa-p18"><p><em>(a)</em> Sea $E=\aff(C)=p+V$. Como $p$ no está en el interior relativo de $C$,
 ninguna bola de $E$ centrada en $p$ queda dentro de $C$, de manera que para cada
@@ -1400,7 +1402,17 @@ $\delta_C$ es convexa si y solo si $C$ es convexo.
 volver a la definición, y todas las de la lista siguiente valen en $\Hs$ con la
 demostración de $\R^n$.</p>
 <div class="stmt proposicion" id="cap4:prop-operaciones"><div class="head">Proposición</div><div class="body"><p>Sean $f$ y $(f_i)_{i\in I}$ funciones convexas de $\Hs$ en $\R\cup\{+\infty\}$.</p>
-<!-- entorno omitido: enumerate --></div></div>
+<ol class="lista"><li><p>Si $\alpha_1,\dots,\alpha_m&gt;0$ y $g_1,\dots,g_m$ son convexas, entonces
+        $\sum_{j}\alpha_jg_j$ es convexa.
+        <span class="src">[Bauschke--Combettes, Proposición 8.17]</span></p></li><li><p>Si $\Ks$ es un espacio de Hilbert, $L\colon\Hs\to\Ks$ es afín y
+        $g\colon\Ks\to\R\cup\{+\infty\}$ es convexa, entonces $g\circ L$ es
+        convexa. <span class="src">[Bauschke--Combettes, Proposición 8.20]</span></p></li><li><p>$\sup_{i\in I}f_i$ es convexa, sea cual sea el conjunto de índices $I$.
+        <span class="src">[Bauschke--Combettes, Proposición 8.16]</span></p></li><li><p>Si $h\colon\R\to\R\cup\{+\infty\}$ es convexa y <em>creciente</em> y $f$ es
+        convexa, entonces $h\circ f$ es convexa.
+        <span class="src">[Bauschke--Combettes, Proposición 8.21]</span></p></li><li><p>Si $\Ks$ es un espacio de Hilbert y $G\colon\Hs\times\Ks\to
+        \R\cup\{+\infty\}$ es convexa, entonces la inf-proyección
+        $f(x)=\inf_{y\in\Ks}G(x,y)$ es convexa siempre que sea propia.
+        <span class="src">[Bauschke--Combettes, Proposición 8.35]</span></p></li></ol></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p24">Ver demostración</button><div class="proof" id="convexa-p24"><p>Los apartados <em>(i)</em>, <em>(ii)</em> y <em>(iv)</em> se obtienen escribiendo la
 desigualdad de convexidad de la función construida y sustituyendo la de las
 funciones de partida; en <em>(iv)</em> el paso
@@ -1438,7 +1450,7 @@ problema de minimización tenga solución.</p>
 <span class="src">[Bauschke--Combettes, Lema 1.36]</span></p></div></div>
 <div class="stmt proposicion" id="cap4:prop-lsc"><div class="head">Proposición</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$. Las siguientes afirmaciones son
 equivalentes.</p>
-<!-- entorno omitido: enumerate -->
+<ol class="lista"><li><p>$f$ es l.s.c.</p></li><li><p>$\epi f$ es cerrado en $\Hs\times\R$.</p></li><li><p>$\lev_\alpha f$ es cerrado para todo $\alpha\in\R$.</p></li></ol>
 <p><span class="src">[Bauschke--Combettes, Lema 1.24]</span></p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p25">Ver demostración</button><div class="proof" id="convexa-p25"><p><em>(i)</em> implica <em>(ii)</em>: sea $(x_k,t_k)$ una sucesión de $\epi f$ que
 converge a $(x,t)$. Entonces $f(x)\le\liminf_kf(x_k)\le\liminf_kt_k=t$, luego
