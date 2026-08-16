@@ -442,22 +442,19 @@ $|f(y) - f(x) - \langle\nabla f(x), y-x\rangle| \leq \frac{L}{2}\lVert y-x\rVert
 \]</div>
 <p>si $x \neq 0$ y $0$ de lo contrario. Muestre que $f$ es Gâteaux diferenciable
 en el origen pero no continua.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p3">Ver solución</button><div class="proof" id="ejercicios-convexa-p3"><p>Sea $d = (d_{1}, d_{2})$. Si $d_{1}d_{2} = 0$ $\Rightarrow$ $f(td) = 0$ para
-todo $t$. Si $d_{1}d_{2} \neq 0$, escriba $m = d_{2}/d_{1}$; sobre la recta
-$y = mx$,</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p3">Ver solución</button><div class="proof" id="ejercicios-convexa-p3"><p>Sobre la recta $y = mx$ con $m \neq 0$,</p>
 <div class="display">\[
   |f(x, mx)| = \frac{|2mx\,e^{-x^{-2}}|}{m^{2}x^{2} + e^{-2x^{-2}}}
    \leq \frac{|2mx\,e^{-x^{-2}}|}{m^{2}x^{2}}
-   = \frac{2\,e^{-x^{-2}}}{|m||x|} ,
+   = \frac{2\,e^{-x^{-2}}}{|m||x|}
+  \quad\Rightarrow\quad
+  \left|\frac{f(x,mx)}{x}\right| \leq \frac{2\,e^{-x^{-2}}}{|m|x^{2}}
+   \xrightarrow{\ x \to 0\ } 0 ,
 \]</div>
-<p>y como $e^{-u^{-2}} = o(u^{k})$ para todo $k$, dividir por $t$ no cambia el
-límite:</p>
-<div class="display">\[
-  \left|\frac{f(td)}{t}\right| \leq \frac{2\,e^{-(td_{1})^{-2}}}{|m|\,|td_{1}|\,|t|}
-   \xrightarrow{\ t \to 0\ } 0 .
-\]</div>
-<p>$\Rightarrow \dird{d}{f}(0) = 0$ para todo $d \in \mathbb{R}^{2}$, y $d \mapsto 0$
-es lineal $\Rightarrow f$ es Gâteaux diferenciable en el origen.</p>
+<p>donde el límite es $0$ porque $e^{-u^{-2}} = o(u^{k})$ para todo $k$. Sobre
+$y = 0$ y sobre $x = 0$ se tiene $f \equiv 0$. Toda recta por el origen es una
+de estas $\Rightarrow \dird{d}{f}(0) = 0$ para todo $d \in \mathbb{R}^{2}$, y
+$d \mapsto 0$ es lineal $\Rightarrow f$ es Gâteaux diferenciable en el origen.</p>
 <p>Por otro lado, tome $y = e^{-x^{-2}}$:</p>
 <div class="display">\[
   f(x,y) = \frac{2\,e^{-2x^{-2}}}{2\,e^{-2x^{-2}}} = 1 ,
@@ -470,16 +467,19 @@ $\Rightarrow f$ no es continua. \qed</p></div>
 \]</div>
 <p>si $(x,y) \neq (0,0)$ y $0$ de lo contrario. Muestre que $f$ es Gâteaux
 diferenciable en el origen pero no es Fréchet diferenciable.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p4">Ver solución</button><div class="proof" id="ejercicios-convexa-p4"><p>Sea $d = (d_{1}, d_{2})$. Si $d_{2} = 0$ $\Rightarrow$ $f(td) = 0$ para todo
-$t$. Si $d_{2} \neq 0$,</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p4">Ver solución</button><div class="proof" id="ejercicios-convexa-p4"><p>Sobre la recta $y = mx$ con $m \neq 0$,</p>
 <div class="display">\[
-  \frac{f(td)}{t} = \frac{t^{4}d_{1}^{3}d_{2}}{t\,(t^{4}d_{1}^{4} + t^{2}d_{2}^{2})}
-   = \frac{t\,d_{1}^{3}d_{2}}{t^{2}d_{1}^{4} + d_{2}^{2}}
-   \xrightarrow{\ t \to 0\ } 0 .
+  |f(x, mx)| = \frac{|m|x^{4}}{x^{4} + m^{2}x^{2}}
+   \leq \frac{|m|x^{4}}{m^{2}x^{2}}
+   = \frac{x^{2}}{|m|}
+  \quad\Rightarrow\quad
+  \left|\frac{f(x,mx)}{x}\right| \leq \frac{|x|}{|m|}
+   \xrightarrow{\ x \to 0\ } 0 .
 \]</div>
-<p>$\Rightarrow \dird{d}{f}(0) = 0$ para todo $d \in \mathbb{R}^{2}$ $\Rightarrow f$
-es Gâteaux diferenciable en el origen, y si fuera Fréchet sería con
-$\nabla f(0,0) = 0$.</p>
+<p>Sobre $y = 0$ y sobre $x = 0$ se tiene $f \equiv 0$. Toda recta por el origen es
+una de estas $\Rightarrow \dird{d}{f}(0) = 0$ para todo $d \in \mathbb{R}^{2}$
+$\Rightarrow f$ es Gâteaux diferenciable en el origen, y si fuera Fréchet sería
+con $\nabla f(0,0) = 0$.</p>
 <p>Pero tome $y = x^{2}$, con $x &gt; 0$:</p>
 <div class="display">\[
   \frac{|f(x,x^{2}) - f(0,0) - \langle\nabla f(0,0), (x,x^{2})\rangle|}{\lVert (x,x^{2})\rVert}
