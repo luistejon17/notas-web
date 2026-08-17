@@ -589,7 +589,7 @@ $V=\mathscr P(A)$, compacto metrizable en la topología débil. Un proceso
 $(X,\pi)$ a valores en $E\times V$, progresivamente medible respecto de
 $\{\mathscr F_t\}$ y con $X_0\sim\nu_0$, resuelve el <span class="df">problema de martingala
 controlado relajado</span> para $(\gen{},\nu_0)$ si $\forall f\in\dom(\gen{})$</p>
-<div class="display numerado" id="es-eq:mart"><div class="eqbody"><span class="v" data-var="std">\[f(X_t)-\int_0^t\!\!\int_A \gen{a}f(X_s)\,\pi_s(da)\,ds\]</span><span class="v" data-var="fin">\[f(X_t)-\lambda_{[0,t]}^{\,s}\,\pi_s^a\,\gen{a}f(X_s)\]</span></div></div>
+<div class="display numerado" id="es-eq:mart"><div class="eqbody"><span class="v" data-var="std">\[f(X_t)-\int_0^t\!\!\int_A \gen{a}f(X_s)\,\pi_s(da)\,ds\]</span><span class="v" data-var="fin">\[f(X_t)-\lambda_{[0,t]}^{\,s}\,\pi_s^a\,\gen{a}f(X_s)\]</span></div><div class="eqside"><span class="num">(4)</span></div></div>
 <p>es $\{\mathscr F_t\}$-martingala.</p></div></div>
 <p><button class="term" type="button" data-k="pi">$\pi=(\pi_t)_{t\ge0}$</button> adaptado a valores en $\mathscr P(A)$, compacto porque $A$
 lo es; todavía no hay ningún núcleo $x\mapsto\pi_x$. Con $\pi_t=\delta_{a_t}$ se
@@ -603,9 +603,9 @@ $\pi:E\to\mathscr P(A)$,</p>
   =b_\pi(x)\cdot\nabla\varphi(x)
   +\tfrac12\operatorname{Tr}\bigl(\Sigma_\pi(x)D^2\varphi(x)\bigr),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(33)–(35)</span><span class="num">(4)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(33)–(35)</span><span class="num">(5)</span></div></div>
 <p>con $b_\pi(x)=\pi_x^a b(x,a)$ y $\Sigma_\pi(x)=\pi_x^a \sigma\sigma^\top(x,a)$.
-Lo que <a class="xref" href="#es-eq:gen-pi">(4)</a> promedia es $\sigma\sigma^\top$, y $\pi_x^a\sigma$ da
+Lo que <a class="xref" href="#es-eq:gen-pi">(5)</a> promedia es $\sigma\sigma^\top$, y $\pi_x^a\sigma$ da
 otra cosa: con $d=m=1$, $A=\{-1,1\}$, $\sigma(x,a)=a$ y $\pi_x$ uniforme,
 $\pi_x^a\sigma=0$ mientras $\Sigma_\pi=1$, o sea
 $\Gen{\pi}=\tfrac12\partial_x^2$. La ley de la difusión la determina
@@ -622,9 +622,9 @@ sobre funciones; $P_{t,\pi,x}$ es una medida en $E$.</p>
 descontado de una política relajada y el problema directo son</p>
 <div class="display numerado" id="es-eq:J"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\E\left[\int_0^\infty e^{-\rho t}\int_A c(X_t,a)\,\pi_t(da)\,dt\right],
    \qquad \inf_\pi J_c(\pi),\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\P\bigl(\lambda_\rho^t\,\pi_t^a\,c(X_t,a)\bigr),
-   \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(5)</span></div></div>
+   \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(6)</span></div></div>
 <p>con $\lambda_\rho=e^{-\rho t}dt$ de masa total $1/\rho$, y $\P$ la medida de la
-solución $(X,\pi)$. El ínfimo en <a class="xref" href="#es-eq:J">(5)</a> recorre las soluciones de la
+solución $(X,\pi)$. El ínfimo en <a class="xref" href="#es-eq:J">(6)</a> recorre las soluciones de la
 Definición <a class="xref" href="#es-def:relajada">1.1</a>.</p>
 <p>Con política markoviana la esperanza se abre en el semigrupo.</p>
 <div class="stmt proposicion" id="es-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[Borkar]</span>
@@ -635,8 +635,8 @@ es markoviano con función de transición $P_{t,\pi,x}$ y</p>
 <div class="display numerado" id="es-eq:J-semigrupo"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_E\!\int_0^\infty e^{-\rho t}\,
     \Sg{t,\pi}c_\pi(x)\,dt\,\nu_0(dx),\qquad
     c_\pi(y)=\int_Ac(y,a)\,\pi_y(da),\]</span><span class="v" data-var="fin">\[J_c(\pi)=\nu_0^x\,\lambda_\rho^t\,P_{t,\pi,x}^y\,\pi_y^a\,c(y,a)
-   =\nu_0^x\,\lambda_\rho^t\,\Sg{t,\pi}c_\pi(x).\]</span></div></div>
-<p>Equivalentemente $J_c(\pi)=\nu_0\bigl((\rho \mathrm{Id}-\Gen{\pi})^{-1}c_\pi\bigr)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p1">Ver demostración</button><div class="proof" id="es-control-inverso-p1"><p>Si $\pi_s=\pi(X_s)$, la integral interior de <a class="xref" href="#es-eq:mart">?</a> vale
+   =\nu_0^x\,\lambda_\rho^t\,\Sg{t,\pi}c_\pi(x).\]</span></div><div class="eqside"><span class="num">(7)</span></div></div>
+<p>Equivalentemente $J_c(\pi)=\nu_0\bigl((\rho \mathrm{Id}-\Gen{\pi})^{-1}c_\pi\bigr)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p1">Ver demostración</button><div class="proof" id="es-control-inverso-p1"><p>Si $\pi_s=\pi(X_s)$, la integral interior de <a class="xref" href="#es-eq:mart">(4)</a> vale
 $\pi_{X_s}^a\gen{a}f(X_s)=\Gen{\pi}f(X_s)$, función de $X_s$ sola, luego
 $f(X_t)-\int_0^t\Gen{\pi}f(X_s) ds$ es martingala y $X$ por sí solo resuelve el
 problema de martingala para $(\Gen{\pi},\nu_0)$. Estar bien puesto hace a $X$
@@ -651,7 +651,7 @@ integrando involucra el proceso en un solo instante, así que solo entra la ley 
 $X_t$, y la propiedad de Markov aplicada en $s=0$ da
 $\P(c_\pi(X_t))=\nu_0^x P_{t,\pi,x}^y c_\pi(y)$. Intercambiar $\nu_0$ y
 $\lambda_\rho$, legítimo porque $\nu_0\otimes\lambda_\rho$ es finita, da
-<a class="xref" href="#es-eq:J-semigrupo">?</a>.</p>
+<a class="xref" href="#es-eq:J-semigrupo">(7)</a>.</p>
 <p>El núcleo no se puede mover a través de $\lambda_\rho$: depende de $t$, así que
 $\lambda_\rho(dt)P_{t,\pi,x}(dy)$ es un producto semidirecto y no un producto.
 Por último $\lambda_\rho^t\Sg{t,\pi}=\int_0^\infty e^{-\rho t}\Sg{t,\pi} dt$ es
@@ -662,7 +662,7 @@ $(\rho \mathrm{Id}-\Gen{\pi})^{-1}$, así que evaluar $J_c$ es resolver la
 ecuación elíptica lineal $\rho V_\pi-\Gen{\pi}V_\pi=c_\pi$ e integrar contra
 $\nu_0$; el operador que hay que invertir es aquel cuya sobreyectividad se supuso
 arriba. La forma markoviana $\pi_t=\pi(X_t)$ sale de desintegrar una medida de
-ocupación óptima <a class="xref" href="#es-eq:desintegracion">(16)</a>, y hasta entonces $\pi_x$ solo está
+ocupación óptima <a class="xref" href="#es-eq:desintegracion">(31)</a>, y hasta entonces $\pi_x$ solo está
 definido en esta subclase.</p>
 <h4 id="es-control-inverso-x1">Formulación HJB</h4>
 <p><button class="term" type="button" data-k="V">$V(x)$</button> la función de valor, el costo óptimo arrancando en $x$. Bajo programación
@@ -671,41 +671,41 @@ dinámica cumple</p>
 
   \rho V(x)=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}.
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(6)</span></div></div>
-<div class="stmt proposicion" id="es-prop:hjb"><div class="head">Proposición 1.3</div><div class="body"><p><a class="xref" href="#es-eq:hjb">(6)</a> $\iff$ la desigualdad</p>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(8)</span></div></div>
+<div class="stmt proposicion" id="es-prop:hjb"><div class="head">Proposición 1.3</div><div class="body"><p><a class="xref" href="#es-eq:hjb">(8)</a> $\iff$ la desigualdad</p>
 <div class="display numerado" id="es-eq:hjb-ineq"><div class="eqbody">\begin{equation}
 
   c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0,\qquad (x,a)\in E\times A,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(7)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(7)</span><span class="num">(9)</span></div></div>
 <p>junto con que el ínfimo se alcance en cada $x$. Si $a\mapsto c(x,a)+\gen{a}V(x)$
 es continua $\rt$ el conjunto de minimizadores es no vacío y compacto, y toda
 política óptima cumple</p>
 <div class="display numerado" id="es-eq:selector"><div class="eqbody"><span class="v" data-var="std">\[\operatorname{supp}\pi_x\ \s\ \arg\min_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\},
-    \qquad \]</span><span class="v" data-var="fin">\[\pi_x^a\bigl(c(x,a)+\gen{a}V(x)\bigr)=\rho V(x),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(8)</span></div></div>
-<p>con igualdad en <a class="xref" href="#es-eq:hjb-ineq">?</a> sobre $\operatorname{supp}\pi_x$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p2">Ver demostración</button><div class="proof" id="es-control-inverso-p2"><p>Que <a class="xref" href="#es-eq:hjb">(6)</a> implique <a class="xref" href="#es-eq:hjb-ineq">?</a> es la definición de ínfimo, y el
-recíproco es <a class="xref" href="#es-eq:hjb-ineq">?</a> junto con que se alcance. La existencia de
+    \qquad \]</span><span class="v" data-var="fin">\[\pi_x^a\bigl(c(x,a)+\gen{a}V(x)\bigr)=\rho V(x),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(8)</span><span class="num">(10)</span></div></div>
+<p>con igualdad en <a class="xref" href="#es-eq:hjb-ineq">(9)</a> sobre $\operatorname{supp}\pi_x$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p2">Ver demostración</button><div class="proof" id="es-control-inverso-p2"><p>Que <a class="xref" href="#es-eq:hjb">(8)</a> implique <a class="xref" href="#es-eq:hjb-ineq">(9)</a> es la definición de ínfimo, y el
+recíproco es <a class="xref" href="#es-eq:hjb-ineq">(9)</a> junto con que se alcance. La existencia de
 minimizador es Weierstrass sobre el compacto $A$, y el conjunto de minimizadores
 es la preimagen del valor mínimo por un mapa continuo, luego cerrado en un
-compacto. Integrando <a class="xref" href="#es-eq:hjb-ineq">?</a> contra $\pi_x$ sale
+compacto. Integrando <a class="xref" href="#es-eq:hjb-ineq">(9)</a> contra $\pi_x$ sale
 $\pi_x^a(c(x,a)+\gen{a}V(x))\ge\rho V(x)$, con igualdad exactamente cuando
 $\pi_x$ no da masa a las acciones donde la desigualdad es estricta.</p></div></div>
-<p>Leída puntualmente, <a class="xref" href="#es-eq:hjb">(6)</a> presupone $V\in C^2$, porque $\gen{a}V$ lleva
+<p>Leída puntualmente, <a class="xref" href="#es-eq:hjb">(8)</a> presupone $V\in C^2$, porque $\gen{a}V$ lleva
 $\nabla V$ y $D^2V$. Nada de lo que sigue depende de resolverla en ese sentido:
 la teoría de existencia de la Sección <a class="xref" href="#es-sec:convexo">3</a> se monta sobre
-<a class="xref" href="#es-eq:lp">(8)</a> y nunca evalúa una función de valor, y <a class="xref" href="#es-eq:hjb">(6)</a> reaparece
-solo como la factibilidad dual <a class="xref" href="#es-eq:dual">(9)</a> y como un bloque del sistema de
+<a class="xref" href="#es-eq:lp">(14)</a> y nunca evalúa una función de valor, y <a class="xref" href="#es-eq:hjb">(8)</a> reaparece
+solo como la factibilidad dual <a class="xref" href="#es-eq:dual">(15)</a> y como un bloque del sistema de
 optimalidad de la Sección <a class="xref" href="#es-sec:pde">4</a>, ahí en forma débil.</p>
 <h4 id="es-sec:balance"><span class="secnum">1.2</span>Medidas de ocupación descontadas</h4>
 <div class="stmt definicion" id="es-def:ocupacion"><div class="head">Definición 1.4</div><div class="body"><p>Para una política relajada $\pi$ y $B\in\mathscr B(E\times A)$, la <span class="df">medida de
 ocupación descontada</span> es</p>
 <div class="display numerado" id="es-eq:ocupacion"><div class="eqbody"><span class="v" data-var="std">\[\eta_\pi(B)=\E\left[\int_0^\infty e^{-\rho t}\int_A
     \mathbf 1_B(X_t,a)\,\pi_t(da)\,dt\right].\qquad \]</span><span class="v" data-var="fin">\[\eta_\pi(B)=\P\bigl(\lambda_\rho^t\,\pi_t^a\,\mathbf 1_B(X_t,a)\bigr).
-    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(9)</span></div></div></div></div>
-<p>Poniendo $c$ en lugar de $\mathbf 1_B$ en <button class="term" type="button" data-k="eta"><a class="xref" href="#es-eq:ocupacion">?</a></button> y comparando con
-<a class="xref" href="#es-eq:J">(5)</a>, sin cuenta ninguna,</p>
-<div class="display numerado" id="es-eq:lineal"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_{E\times A}c\,d\eta_\pi=\pair{c}{\eta_\pi}.\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\eta_\pi(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(10)</span><span class="num">(7)</span></div></div>
-<p>El lado derecho de <a class="xref" href="#es-eq:lineal">(7)</a> no lleva semigrupo, ni tiempo, ni condición
+    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(9)</span><span class="num">(11)</span></div></div></div></div>
+<p>Poniendo $c$ en lugar de $\mathbf 1_B$ en <button class="term" type="button" data-k="eta"><a class="xref" href="#es-eq:ocupacion">(11)</a></button> y comparando con
+<a class="xref" href="#es-eq:J">(6)</a>, sin cuenta ninguna,</p>
+<div class="display numerado" id="es-eq:lineal"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_{E\times A}c\,d\eta_\pi=\pair{c}{\eta_\pi}.\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\eta_\pi(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(10)</span><span class="num">(12)</span></div></div>
+<p>El lado derecho de <a class="xref" href="#es-eq:lineal">(12)</a> no lleva semigrupo, ni tiempo, ni condición
 inicial, así que todo lo que sigue pasa en $E\times A$, y el problema directo, no
 convexo en $\pi$, es lineal en $\eta$.</p>
 <p>Las medidas que salen así quedan caracterizadas por una sola familia de
@@ -715,8 +715,8 @@ $\forall\varphi\in\dom(\gen{})$, la medida de ocupación de cualquier solución 
 problema de martingala controlado relajado cumple la <span class="df">identidad de balance
 débil</span></p>
 <div class="display numerado" id="es-eq:balance"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}\bigl(\rho\varphi(x)-\gen{a}\varphi(x)\bigr)\,\eta(dx,da)
-    =\int_E\varphi\,d\nu_0.\qquad \]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-\gen{}\varphi\bigr)=\nu_0(\varphi).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(11)</span></div></div>
-<p>Recíprocamente, todo $\eta\ge0$ que cumpla <a class="xref" href="#es-eq:balance">?</a> es la medida de
+    =\int_E\varphi\,d\nu_0.\qquad \]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-\gen{}\varphi\bigr)=\nu_0(\varphi).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(11)</span><span class="num">(13)</span></div></div>
+<p>Recíprocamente, todo $\eta\ge0$ que cumpla <a class="xref" href="#es-eq:balance">(13)</a> es la medida de
 ocupación de alguna solución.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p3">Ver demostración</button><div class="proof" id="es-control-inverso-p3"><p>Por la Definición <a class="xref" href="#es-def:relajada">1.1</a> el proceso
 $M_t=\varphi(X_t)-\int_0^t\pi_s^a\gen{a}\varphi(X_s) ds$ es martingala, luego
 $\varphi(X_t)$ es semimartingala continua con esa descomposición. El descuento
@@ -728,27 +728,27 @@ su covariación con $\varphi(X)$ es nula e integrar por partes da</p>
 <p>El integrando $e^{-\rho s}$ está acotado por $1$ y $M$ es martingala, luego la
 integral estocástica tiene esperanza nula. Tomando esperanzas, haciendo
 $t\to\infty$, y usando que $\varphi$ es acotada para que
-$e^{-\rho t}\E[\varphi(X_t)]\to0$, sale <a class="xref" href="#es-eq:balance">?</a> escrita con la
+$e^{-\rho t}\E[\varphi(X_t)]\to0$, sale <a class="xref" href="#es-eq:balance">(13)</a> escrita con la
 Definición <a class="xref" href="#es-def:ocupacion">1.4</a>. El recíproco es la caracterización de las medidas
 de ocupación descontadas <span class="src">[Borkar, Thm.\ 2.2]</span>; para espacios de estados
 localmente compactos ver <span class="src">[Kurtz, Thm.\ 6.3]</span>.</p></div></div>
-<p>En forma de operadores <a class="xref" href="#es-eq:balance">?</a> es
+<p>En forma de operadores <a class="xref" href="#es-eq:balance">(13)</a> es
 $(\rho-\gen{})^{*}\eta=\nu_0$, o sea $\eta$ es la ley inicial transportada por la
 resolvente adjunta; es el enunciado dual de la forma resolvente de $J_c$ que
 quedó tras la Proposición <a class="xref" href="#es-prop:semigrupo">1.2</a>.</p>
 <div class="stmt corolario" id="es-cor:masa"><div class="head">Corolario 1.6</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ para toda $\pi$. En particular $\eta_\pi$ no es de
-probabilidad.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p4">Ver demostración</button><div class="proof" id="es-control-inverso-p4"><p>Tomar $\varphi\equiv1$ en <a class="xref" href="#es-eq:balance">?</a>. Los dos términos de
+probabilidad.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p4">Ver demostración</button><div class="proof" id="es-control-inverso-p4"><p>Tomar $\varphi\equiv1$ en <a class="xref" href="#es-eq:balance">(13)</a>. Los dos términos de
 <a class="xref" href="#es-eq:generator">(2)</a> llevan derivadas de $\varphi$, luego $\gen{a}1=0$ y la
 identidad queda $\rho \eta(E\times A)=\nu_0(1)=1$.</p></div></div>
-<p>La masa es $1/\rho$ y no $1$ porque <a class="xref" href="#es-eq:ocupacion">?</a> no está normalizada, y
+<p>La masa es $1/\rho$ y no $1$ porque <a class="xref" href="#es-eq:ocupacion">(11)</a> no está normalizada, y
 las dos fuentes sí normalizan: Kurtz y Stockbridge definen
 $\widehat\pi=\rho \eta_\pi$ y recuperan el costo como $\rho^{-1}\widehat\pi(c)$,
 y la medida de ocupación descontada de Borkar lleva el mismo factor
 <span class="src">[Kurtz]</span>. Las tres identidades de balance coinciden tras ese reescalado, y
 $1/\rho$ es la única entrada de la cota del Lema <a class="xref" href="#es-lema:M-acotado">3.1</a>.</p>
 <p>Escribiendo <button class="term" type="button" data-k="M">$\M$</button> por las medidas no negativas en $E\times A$ que cumplen
-<a class="xref" href="#es-eq:balance">?</a>, el problema directo es el programa lineal</p>
-<div class="display numerado" id="es-eq:lp"><div class="eqbody"><span class="v" data-var="std">\[\inf_{\eta\in\M}\ \pair{c}{\eta},\qquad \]</span><span class="v" data-var="fin">\[\inf_{\eta\in\M}\ \eta(c),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(12)</span><span class="num">(8)</span></div></div>
+<a class="xref" href="#es-eq:balance">(13)</a>, el problema directo es el programa lineal</p>
+<div class="display numerado" id="es-eq:lp"><div class="eqbody"><span class="v" data-var="std">\[\inf_{\eta\in\M}\ \pair{c}{\eta},\qquad \]</span><span class="v" data-var="fin">\[\inf_{\eta\in\M}\ \eta(c),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(12)</span><span class="num">(14)</span></div></div>
 <p>cuyo dual formal es</p>
 <div class="display numerado" id="es-eq:dual"><div class="eqbody">\begin{equation}
 
@@ -756,15 +756,15 @@ $1/\rho$ es la única entrada de la cota del Lema <a class="xref" href="#es-lema
   \qquad\text{sujeto a}\qquad
   c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0 .
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(13)</span><span class="num">(9)</span></div></div>
-<p>La desigualdad HJB <a class="xref" href="#es-eq:hjb-ineq">?</a> es entonces exactamente la factibilidad
-dual de <a class="xref" href="#es-eq:lp">(8)</a>, y la función de valor es la variable dual pegada a la
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(13)</span><span class="num">(15)</span></div></div>
+<p>La desigualdad HJB <a class="xref" href="#es-eq:hjb-ineq">(9)</a> es entonces exactamente la factibilidad
+dual de <a class="xref" href="#es-eq:lp">(14)</a>, y la función de valor es la variable dual pegada a la
 restricción de balance.</p>
-<div class="stmt observacion" id="es-obs:test"><div class="head">Observación 1.7</div><div class="body"><p>$\M$ depende de la clase de funciones de prueba en <a class="xref" href="#es-eq:balance">?</a>, y la nota
+<div class="stmt observacion" id="es-obs:test"><div class="head">Observación 1.7</div><div class="body"><p>$\M$ depende de la clase de funciones de prueba en <a class="xref" href="#es-eq:balance">(13)</a>, y la nota
 no fija $\dom(\gen{})$. Tomar $\mathscr C^2_c(E)$, $C^\infty_c(E)$ o
 $C^2_b(\overline E)$ da conjuntos distintos en cuanto $E$ tiene frontera, y la
 diferencia es exactamente el comportamiento en la frontera que
-<a class="xref" href="#es-eq:balance">?</a> alcanza a detectar. Para el generador diferencial
+<a class="xref" href="#es-eq:balance">(13)</a> alcanza a detectar. Para el generador diferencial
 <a class="xref" href="#es-eq:generator">(2)</a>, la elección con la que se tiene la caracterización de la
 Proposición <a class="xref" href="#es-prop:balance">1.5</a> es $\dom(\gen{})=\mathscr C^2_c(E)$ <span class="src">[Kurtz]</span>.</p></div></div></section>
 <section class="capitulo"><h3 id="es-sec:inverso"><span class="secnum">2</span>Control inverso con costo previo</h3>
@@ -776,7 +776,7 @@ le falta.</p>
 <div class="stmt definicion" id="es-def:gap"><div class="head">Definición 2.1</div><div class="body"><p>La <span class="df">brecha de subóptimalidad</span> del experto bajo un costo candidato $c$ es</p>
 <div class="display numerado" id="es-eq:gap"><div class="eqbody"><span class="v" data-var="std">\[\Gap(c):=\pair{c}{\eta_E}-\inf_{\eta\in\M}\pair{c}{\eta}
     =\sup_{\eta\in\M}\pair{c}{\eta_E-\eta}.\qquad \]</span><span class="v" data-var="fin">\[\Gap(c):=\eta_E(c)-\inf_{\eta\in\M}\eta(c)
-    =\sup_{\eta\in\M}\,(\eta_E-\eta)(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(14)</span></div></div></div></div>
+    =\sup_{\eta\in\M}\,(\eta_E-\eta)(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(14)</span><span class="num">(16)</span></div></div></div></div>
 <div class="stmt proposicion" id="es-prop:gap-basico"><div class="head">Proposición 2.2</div><div class="body"><p>$\Gap$ es convexa, positivamente homogénea y $\ge0$ en $\Hs$, con $\Gap(0)=0$, y
 $\Gap(c)=0\iff\eta_E$ minimiza $\pair{c}{\cdot}$ sobre $\M$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p5">Ver demostración</button><div class="proof" id="es-control-inverso-p5"><p>Para cada $\eta\in\M$ el mapa $c\mapsto\pair{c}{\eta_E-\eta}$ es lineal y
 continuo, y un supremo puntual de mapas así es convexo, positivamente homogéneo y
@@ -786,39 +786,39 @@ $\Gap(c)=0$ significa $\pair{c}{\eta_E}\le\pair{c}{\eta}$ para todo $\eta\in\M$,
 que es la optimalidad de $\eta_E$ para $c$.</p></div></div>
 <p>$\Gap$ es supremo de funcionales lineales en $c$, uno por cada $\eta\in\M$, luego
 convexa; la no negatividad solo usa $\eta_E\in\M$. Su ínfimo interior es el
-problema directo <a class="xref" href="#es-eq:lp">(8)</a> con el costo candidato del momento.</p>
+problema directo <a class="xref" href="#es-eq:lp">(14)</a> con el costo candidato del momento.</p>
 <p>Elegir el costo solo por la brecha está mal puesto, y más allá de las constantes
 la identidad de balance ya produce todo un subespacio de costos que ninguna
 observación distingue.</p>
 <div class="stmt proposicion" id="es-prop:shaping"><div class="head">Proposición 2.3</div><div class="body"><p>Si $\phi\in\dom(\gen{})$ y $q_\phi(x,a):=\rho\phi(x)-\gen{a}\phi(x)$ $\rt$</p>
 <div class="display numerado" id="es-eq:shaping"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}q_\phi\,d\eta=\int_E\phi\,d\nu_0
-    \qquad\forall\eta\in\M,\qquad \]</span><span class="v" data-var="fin">\[\eta(q_\phi)=\nu_0(\phi)\qquad\forall\eta\in\M,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(29)</span></div></div>
+    \qquad\forall\eta\in\M,\qquad \]</span><span class="v" data-var="fin">\[\eta(q_\phi)=\nu_0(\phi)\qquad\forall\eta\in\M,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(29)</span><span class="num">(17)</span></div></div>
 <p>así que $c$ y $c+q_\phi$ tienen los mismos minimizadores sobre $\M$ y la misma
 brecha. Lo identificable es la clase de $c$ módulo
-$\{q_\phi:\phi\in\dom(\gen{})\}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p6">Ver demostración</button><div class="proof" id="es-control-inverso-p6"><p>Aplicar <a class="xref" href="#es-eq:balance">?</a> a la función de prueba $\phi$: el lado izquierdo es
+$\{q_\phi:\phi\in\dom(\gen{})\}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p6">Ver demostración</button><div class="proof" id="es-control-inverso-p6"><p>Aplicar <a class="xref" href="#es-eq:balance">(13)</a> a la función de prueba $\phi$: el lado izquierdo es
 $\eta(\rho\phi-\gen{}\phi)=\eta(q_\phi)$ y el derecho es $\nu_0(\phi)$, que es
-<a class="xref" href="#es-eq:shaping">?</a> y no depende de $\eta$. Luego para cualquier $c$ y cualquier
+<a class="xref" href="#es-eq:shaping">(17)</a> y no depende de $\eta$. Luego para cualquier $c$ y cualquier
 $\eta\in\M$ se tiene $\pair{c+q_\phi}{\eta}=\pair{c}{\eta}+\nu_0(\phi)$, un
 corrimiento por una constante, así que los dos costos tienen los mismos
 minimizadores y, como $\eta_E\in\M$, la misma brecha.</p></div></div>
 <p>Es la forma en tiempo continuo del <em>potential-based shaping</em>, y es
-<a class="xref" href="#es-eq:balance">?</a> leída contra $c$. El previo elige un representante de la
+<a class="xref" href="#es-eq:balance">(13)</a> leída contra $c$. El previo elige un representante de la
 clase, así que vale la pena llevarlo incluso con el experto exactamente óptimo.</p>
 <div class="display numerado" id="es-eq:inverso"><div class="eqbody">\begin{equation}
 
   \min_{c\in\Hs}\ \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\Gap(c)\right\},
   \qquad\alpha&gt;0,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(15)</span><span class="num">(10)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(15)</span><span class="num">(18)</span></div></div>
 <p>o, abriendo la brecha,</p>
 <div class="display numerado" id="es-eq:minmax"><div class="eqbody"><span class="v" data-var="std">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
     \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\pair{c}{\eta_E-\eta}\right\}.
     \qquad \]</span><span class="v" data-var="fin">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
     \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+(\eta_E-\eta)(c)\right\}.
-    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(16)</span><span class="num">(11)</span></div></div>
+    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(16)</span><span class="num">(19)</span></div></div>
 <p><button class="term" type="button" data-k="alpha">$\alpha$</button> interpola: $\alpha$ grande clava el costo recuperado al previo,
 $\alpha$ pequeño da prioridad a cerrar la brecha del experto. El efecto
-cuantitativo está en <a class="xref" href="#es-eq:alpha-bound">(15)</a>.</p>
+cuantitativo está en <a class="xref" href="#es-eq:alpha-bound">(30)</a>.</p>
 <h4 id="es-sec:espacio-costo"><span class="secnum">2.1</span>El espacio de costos</h4>
 <p>La medida de ocupación de una política determinista $u:E\to A$ se concentra en la
 gráfica $\{(x,u(x)):x\in E\}$, que es Lebesgue-nula en $E\times A$. Ese $\eta$ no
@@ -865,19 +865,19 @@ determinista carga una gráfica Lebesgue-nula, es una medida de ese tipo singula
    |\nabla_{x,a}(c-\ch)|^2\Bigr)dx\,da,
   \qquad\kappa&gt;0,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(12)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(20)</span></div></div>
 <p>cuya aplicación de Riesz es $R=\mathrm{Id}-\kappa\Delta_{x,a}$.</p>
-<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.7</div><div class="body"><p>Con la norma <a class="xref" href="#es-eq:penalizacion">(12)</a> sobre $H^1(E\times A)$, el isomorfismo de
+<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.7</div><div class="body"><p>Con la norma <a class="xref" href="#es-eq:penalizacion">(20)</a> sobre $H^1(E\times A)$, el isomorfismo de
 Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es la forma débil de $\mathrm{Id}-\kappa\Delta_{x,a}$:</p>
 <div class="display numerado" id="es-eq:riesz"><div class="eqbody"><span class="v" data-var="std">\[\pair{Rc}{v}=\int_{E\times A}\bigl(cv+\kappa\nabla c\cdot\nabla v\bigr)
     \,dx\,da\qquad\forall v\in H^1,\]</span><span class="v" data-var="fin">\[(Rc)(v)=\lambda^{(x,a)}\bigl(cv+\kappa\,\nabla c\cdot\nabla v\bigr)
-    \qquad\forall v\in H^1,\]</span></div></div>
+    \qquad\forall v\in H^1,\]</span></div><div class="eqside"><span class="num">(21)</span></div></div>
 <p>y $R^{-1}$ es el operador solución del problema elíptico correspondiente. Las
 condiciones de frontera son las de la formulación variacional: periódicas en un
 toro, Neumann homogéneas cuando la variación de $c$ es libre en
 $\partial(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p9">Ver demostración</button><div class="proof" id="es-control-inverso-p9"><p>Por definición la aplicación de Riesz manda $c$ al funcional
-$v\mapsto(c,v)_{\Hs}$, y con la norma <a class="xref" href="#es-eq:penalizacion">(12)</a> ese producto
-interno es $\int(cv+\kappa\nabla c\cdot\nabla v)$, que es <a class="xref" href="#es-eq:riesz">?</a>. Es
+$v\mapsto(c,v)_{\Hs}$, y con la norma <a class="xref" href="#es-eq:penalizacion">(20)</a> ese producto
+interno es $\int(cv+\kappa\nabla c\cdot\nabla v)$, que es <a class="xref" href="#es-eq:riesz">(21)</a>. Es
 acotada y coerciva en $H^1$, luego Lax--Milgram hace de $R$ un isomorfismo sobre
 $\Hd$. La identidad de Green reescribe la forma como
 $\int v(c-\kappa\Delta c)+\kappa\int_{\partial}v \partial_n c$ cuando $c$ es
@@ -886,12 +886,12 @@ el término de frontera se anula precisamente bajo las condiciones periódicas o
 Neumann homogéneas.</p></div></div>
 <p>La condición de frontera la fija el modelo: la misma forma débil define un $R$
 distinto, y por tanto un costo recuperado distinto, para cada elección, y
-$R^{-1}$ aparece explícito en <a class="xref" href="#es-eq:cstar">?</a>.</p>
+$R^{-1}$ aparece explícito en <a class="xref" href="#es-eq:cstar">(26)</a>.</p>
 <div class="stmt observacion" id="es-obs:dos-condiciones"><div class="head">Observación 2.8</div><div class="body"><p>Los dos regímenes piden cosas a objetos distintos. El (i) restringe $\Hs$,
 pidiendo $s&gt;(d+m)/2$, y luego acepta toda medida finita. El (ii) restringe $\M$,
 pidiendo densidades $L^2$ a sus elementos, y entonces admite el espacio más
 barato $H^1$. Solo el primero está disponible cuando hay políticas deterministas
-admisibles, que es el caso en cuanto el hamiltoniano de <a class="xref" href="#es-eq:selector">?</a> tiene
+admisibles, que es el caso en cuanto el hamiltoniano de <a class="xref" href="#es-eq:selector">(10)</a> tiene
 minimizador único.</p></div></div></section>
 <section class="capitulo"><h3 id="es-sec:convexo"><span class="secnum">3</span>Estructura convexa, existencia y el problema reducido</h3>
 <p>El problema inverso tiene estructura convexa suficiente para dar existencia
@@ -905,7 +905,7 @@ $\Phi$ por el funcional de silla, dejando $\mathcal L$ para el generador:</p>
   \qquad
   \inf_{c\in\Hs}\ \sup_{\eta\in\M}\ \Phi(c,\eta).
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(13)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(22)</span></div></div>
 <p>Tres de las hipótesis que carga la nota salen gratis aquí, y las tres se siguen
 de la masa del Corolario <a class="xref" href="#es-cor:masa">1.6</a>.</p>
 <div class="stmt lema" id="es-lema:M-acotado"><div class="head">Lema 3.1</div><div class="body"><p>Todo $\eta\in\M$ cumple $\|\eta\|_{\Hd}\le C_\iota/\rho$, y
@@ -916,13 +916,13 @@ $\eta(E\times A)=1/\rho$, luego para todo $c\in\Hs$</p>
 <p>y el supremo sobre la bola unidad da $\|\eta\|_{\Hd}\le C_\iota/\rho$. La cota
 del diámetro es la desigualdad triangular.</p></div></div>
 <div class="stmt corolario" id="es-cor:gap-lipschitz"><div class="head">Corolario 3.2</div><div class="body"><p>$\Gap$ es finita en todo $\Hs$ y Lipschitz con constante $2C_\iota/\rho$; en
-particular continua, luego semicontinua inferiormente.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p11">Ver demostración</button><div class="proof" id="es-control-inverso-p11"><p>De $|\sup_if_i-\sup_ig_i|\le\sup_i|f_i-g_i|$ aplicado a <a class="xref" href="#es-eq:gap">?</a>,</p>
+particular continua, luego semicontinua inferiormente.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p11">Ver demostración</button><div class="proof" id="es-control-inverso-p11"><p>De $|\sup_if_i-\sup_ig_i|\le\sup_i|f_i-g_i|$ aplicado a <a class="xref" href="#es-eq:gap">(16)</a>,</p>
 <div class="display">\[|\Gap(c)-\Gap(c&#x27;)|\le\sup_{\eta\in\M}|\pair{c-c&#x27;}{\eta_E-\eta}|
   \le\|c-c&#x27;\|_{\Hs}\sup_{\eta\in\M}\|\eta_E-\eta\|_{\Hd}
   \le\frac{2C_\iota}{\rho}\|c-c&#x27;\|_{\Hs}\]</div>
 <p>por el Lema <a class="xref" href="#es-lema:M-acotado">3.1</a>. La finitud sale evaluando en $c&#x27;=0$, donde
 $\Gap(0)=0$.</p></div></div>
-<div class="stmt proposicion" id="es-prop:existencia-c"><div class="head">Proposición 3.3</div><div class="body"><p>Si $\M\ne\emptyset$ $\rt$ el objetivo de <a class="xref" href="#es-eq:inverso">(10)</a> es
+<div class="stmt proposicion" id="es-prop:existencia-c"><div class="head">Proposición 3.3</div><div class="body"><p>Si $\M\ne\emptyset$ $\rt$ el objetivo de <a class="xref" href="#es-eq:inverso">(18)</a> es
 $\alpha$-fuertemente convexo, coercivo y semicontinuo inferiormente, luego tiene
 minimizador único $c_\star\in\Hs$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p12">Ver demostración</button><div class="proof" id="es-control-inverso-p12"><p>La norma hilbertiana al cuadrado es $\alpha$-fuertemente convexa y $\Gap$ es
 convexa por la Proposición <a class="xref" href="#es-prop:gap-basico">2.2</a>, luego la suma es
@@ -936,43 +936,43 @@ Corolario <a class="xref" href="#es-cor:gap-lipschitz">3.2</a>. No se usa ningun
 $c\mapsto\pi$.</p>
 <h4 id="es-control-inverso-x2">Eliminar el costo sin suponer intercambio minimax</h4>
 <p>Con $\eta$ fijo la minimización en $c$ es explícita. No se supone en este punto
-que el ínfimo y el supremo de <a class="xref" href="#es-eq:Phi">(13)</a> se puedan intercambiar.</p>
+que el ínfimo y el supremo de <a class="xref" href="#es-eq:Phi">(22)</a> se puedan intercambiar.</p>
 <div class="stmt proposicion" id="es-prop:reduccion"><div class="head">Proposición 3.4</div><div class="body"><p>Para cada $\eta\in\M$, $c\mapsto\Phi(c,\eta)$ tiene minimizador único</p>
 <div class="display numerado" id="es-eq:c-de-eta"><div class="eqbody">\begin{equation}
 
   c_\eta=\ch+\frac1\alpha R^{-1}(\eta-\eta_E),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(20)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(20)</span><span class="num">(23)</span></div></div>
 <p>y</p>
 <div class="display numerado" id="es-eq:reducido-valor"><div class="eqbody"><span class="v" data-var="std">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
    \Psi(\eta):=\pair{\ch}{\eta-\eta_E}
    +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span><span class="v" data-var="fin">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
    \Psi(\eta):=(\eta-\eta_E)(\ch)
-   +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(21), (22)</span></div></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p13">Ver demostración</button><div class="proof" id="es-control-inverso-p13"><p>Escribir $u=c-\ch$ y $w=R^{-1}(\eta_E-\eta)$, de modo que
+   +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(21), (22)</span><span class="num">(24)</span></div></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p13">Ver demostración</button><div class="proof" id="es-control-inverso-p13"><p>Escribir $u=c-\ch$ y $w=R^{-1}(\eta_E-\eta)$, de modo que
 $\pair{u}{\eta_E-\eta}=(u,w)_{\Hs}$ y $\|w\|_{\Hs}=\|\eta_E-\eta\|_{\Hd}$.
 Entonces</p>
 <div class="display">\[\Phi(c,\eta)=\frac{\alpha}{2}\|u\|_{\Hs}^2+(u,w)_{\Hs}
   +\pair{\ch}{\eta_E-\eta},\]</div>
 <p>cuadrática fuertemente convexa en $u$ cuyo minimizador único es $u=-w/\alpha$,
-que es <a class="xref" href="#es-eq:c-de-eta">?</a>. Sustituyendo, el valor es
+que es <a class="xref" href="#es-eq:c-de-eta">(23)</a>. Sustituyendo, el valor es
 $-\frac1{2\alpha}\|w\|_{\Hs}^2+\pair{\ch}{\eta_E-\eta}$, o sea $-\Psi(\eta)$.</p></div></div>
 <p>Esto sugiere el <span class="df">problema reducido</span></p>
 <div class="display numerado" id="es-eq:reducido"><div class="eqbody">\begin{equation}
 
   \min_{\eta\in\M}\ \Psi(\eta),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(23)</span><span class="num">(14)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(23)</span><span class="num">(25)</span></div></div>
 <p>una minimización sobre medidas y no sobre costos. Por la desigualdad elemental
 $\sup_\eta\inf_c\Phi\le\inf_c\sup_\eta\Phi$, su valor es por ahora solo cota
-inferior de <a class="xref" href="#es-eq:Phi">(13)</a>. El Teorema <a class="xref" href="#es-thm:silla">3.6</a> cierra esa brecha: un
-minimizador de <a class="xref" href="#es-eq:reducido">(14)</a> construye un punto de silla, y de ahí sale la
+inferior de <a class="xref" href="#es-eq:Phi">(22)</a>. El Teorema <a class="xref" href="#es-thm:silla">3.6</a> cierra esa brecha: un
+minimizador de <a class="xref" href="#es-eq:reducido">(25)</a> construye un punto de silla, y de ahí sale la
 dualidad fuerte.</p>
 <p>La compacidad que pide el teorema la hereda del problema directo.</p>
 <div class="stmt proposicion" id="es-prop:compacidad-M"><div class="head">Proposición 3.5</div><div class="body"><p>Si $E\times A$ es compacto y $\gen{}$ manda $\dom(\gen{})$ en $C(E\times A)$
 $\rt$ $\M$ es convexo y débilmente compacto en $\Hd$. Si además el encaje
 $\iota:\Hs\to C(E\times A)$ es compacto, cosa que vale para $\Hs=H^s(E\times A)$
 con $s&gt;(d+m)/2$ sobre un dominio con operador de extensión $\rt$ $\M$ es compacto
-en la norma de $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p14">Ver demostración</button><div class="proof" id="es-control-inverso-p14"><p>La convexidad vale porque <a class="xref" href="#es-eq:balance">?</a> es una familia de igualdades
+en la norma de $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p14">Ver demostración</button><div class="proof" id="es-control-inverso-p14"><p>La convexidad vale porque <a class="xref" href="#es-eq:balance">(13)</a> es una familia de igualdades
 lineales y la restricción $\eta\ge0$ es convexa. Poner $\widehat\M=\rho \M$, que
 por el Corolario <a class="xref" href="#es-cor:masa">1.6</a> vive en $\mathscr P(E\times A)$. Con $E\times A$
 compacto, $\mathscr P(E\times A)$ es débil-$*$ compacto por Banach--Alaoglu, y
@@ -990,20 +990,20 @@ compacto.</p>
 acotado $\widehat\M$ a un conjunto relativamente compacto en norma. Ese conjunto
 es débilmente compacto por el párrafo anterior, luego débilmente cerrado, luego
 cerrado en norma, y un cerrado relativamente compacto es compacto.</p></div></div>
-<p>La convexidad es inmediata porque <a class="xref" href="#es-eq:balance">?</a> es una familia de igualdades
+<p>La convexidad es inmediata porque <a class="xref" href="#es-eq:balance">(13)</a> es una familia de igualdades
 lineales. La compacidad pasa por el conjunto normalizado
 $\widehat\M=\rho \M\s\mathscr P(E\times A)$, débil-$*$ compacto por
 Banach--Alaoglu y por ser cerradas las restricciones de balance, y luego se
 transporta a $\Hd$ con el adjunto del encaje. Con encaje compacto, Schauder da
-compacidad en norma y la existencia en <a class="xref" href="#es-eq:reducido">(14)</a> es Weierstrass.</p>
+compacidad en norma y la existencia en <a class="xref" href="#es-eq:reducido">(25)</a> es Weierstrass.</p>
 <div class="stmt teorema" id="es-thm:silla"><div class="head">Teorema 3.6</div><div class="body"><p>Si $\Hs\hookrightarrow C(E\times A)$, $\M\s\Hd$ no vacío, convexo y débilmente
-compacto, y $\ch\in\Hs$ $\rt$ <a class="xref" href="#es-eq:reducido">(14)</a> tiene minimizador único
+compacto, y $\ch\in\Hs$ $\rt$ <a class="xref" href="#es-eq:reducido">(25)</a> tiene minimizador único
 $\eta_{A,\star}$. Poniendo</p>
 <div class="display numerado" id="es-eq:cstar"><div class="eqbody">\begin{equation}
 
   c_\star=\ch+\frac1\alpha R^{-1}(\eta_{A,\star}-\eta_E),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(24)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(24)</span><span class="num">(26)</span></div></div>
 <p>se tiene $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$, el par
 $(c_\star,\eta_{A,\star})$ es punto de silla de $\Phi$,</p>
 <div class="display numerado" id="es-eq:silla"><div class="eqbody">\begin{equation}
@@ -1011,7 +1011,7 @@ $(c_\star,\eta_{A,\star})$ es punto de silla de $\Phi$,</p>
   \Phi(c_\star,\eta)\ \le\ \Phi(c_\star,\eta_{A,\star})\ \le\ \Phi(c,\eta_{A,\star})
   \qquad\forall c\in\Hs,\ \eta\in\M,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(25)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(25)</span><span class="num">(27)</span></div></div>
 <p>vale la dualidad minimax fuerte,</p>
 <div class="display numerado" id="es-eq:dualidad"><div class="eqbody">\begin{equation}
 
@@ -1019,33 +1019,33 @@ $(c_\star,\eta_{A,\star})$ es punto de silla de $\Phi$,</p>
   =\Phi(c_\star,\eta_{A,\star})
   =\sup_{\eta\in\M}\inf_{c\in\Hs}\Phi,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(26)</span></div></div>
-<p>y $c_\star$ es la solución única de <a class="xref" href="#es-eq:inverso">(10)</a>.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p15">Ver demostración</button><div class="proof" id="es-control-inverso-p15"><p>$\Psi$ de <a class="xref" href="#es-eq:reducido-valor">?</a> es estrictamente convexa, porque lo es la
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(26)</span><span class="num">(28)</span></div></div>
+<p>y $c_\star$ es la solución única de <a class="xref" href="#es-eq:inverso">(18)</a>.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p15">Ver demostración</button><div class="proof" id="es-control-inverso-p15"><p>$\Psi$ de <a class="xref" href="#es-eq:reducido-valor">(24)</a> es estrictamente convexa, porque lo es la
 norma dual al cuadrado, y débilmente semicontinua inferiormente, así que la
 compacidad débil de $\M$ da un minimizador único $\eta_{A,\star}$.</p>
 <p>Como $\M$ es convexo, la condición de optimalidad de primer orden en el
 minimizador es la desigualdad variacional
 $\pair{\ch+\alpha^{-1}R^{-1}(\eta_{A,\star}-\eta_E)}{\eta-\eta_{A,\star}}\ge0$
-para todo $\eta\in\M$, que por <a class="xref" href="#es-eq:cstar">?</a> se lee
+para todo $\eta\in\M$, que por <a class="xref" href="#es-eq:cstar">(26)</a> se lee
 $\pair{c_\star}{\eta-\eta_{A,\star}}\ge0$. Eso es exactamente la optimalidad de
 $\eta_{A,\star}$ para $c_\star$, y como el único término de
 $\Phi(c_\star,\cdot)$ que depende de $\eta$ es $-\pair{c_\star}{\eta}$, es la
-desigualdad izquierda de <a class="xref" href="#es-eq:silla">?</a>.</p>
+desigualdad izquierda de <a class="xref" href="#es-eq:silla">(27)</a>.</p>
 <p>Para la derecha, la derivada de $\Phi(\cdot,\eta_{A,\star})$ es
 $\alpha R(c-\ch)+\eta_E-\eta_{A,\star}$, que se anula en $c=c_\star$ por
-<a class="xref" href="#es-eq:cstar">?</a>; la convexidad fuerte en $c$ convierte el punto estacionario en
+<a class="xref" href="#es-eq:cstar">(26)</a>; la convexidad fuerte en $c$ convierte el punto estacionario en
 mínimo global. Las dos desigualdades juntas son la relación de silla, y el
 argumento estándar de que un punto de silla cierra la brecha entre los dos
-órdenes da <a class="xref" href="#es-eq:dualidad">?</a>. La unicidad de $c_\star$ es la
+órdenes da <a class="xref" href="#es-eq:dualidad">(28)</a>. La unicidad de $c_\star$ es la
 Proposición <a class="xref" href="#es-prop:existencia-c">3.3</a>.</p></div></div>
-<div class="stmt observacion" id="es-obs:sion"><div class="head">Observación 3.7</div><div class="body"><p>Bajo hipótesis que den un teorema minimax, como las de Sion, <a class="xref" href="#es-eq:dualidad">?</a>
+<div class="stmt observacion" id="es-obs:sion"><div class="head">Observación 3.7</div><div class="body"><p>Bajo hipótesis que den un teorema minimax, como las de Sion, <a class="xref" href="#es-eq:dualidad">(28)</a>
 se obtendría directamente de la convexidad en $c$, la afinidad en $\eta$ y la
 compacidad. El argumento de arriba es constructivo: el minimizador de
-<a class="xref" href="#es-eq:reducido">(14)</a> produce a la vez el punto de silla, $c_\star$ y
-<a class="xref" href="#es-eq:etaoptimal-set">?</a>.</p></div></div>
+<a class="xref" href="#es-eq:reducido">(25)</a> produce a la vez el punto de silla, $c_\star$ y
+<a class="xref" href="#es-eq:etaoptimal-set">(29)</a>.</p></div></div>
 <div class="stmt observacion" id="es-obs:selector"><div class="head">Observación 3.8</div><div class="body"><p>Un punto fijo del mapa de un costo a una política óptima puede no existir: el
-selector de <a class="xref" href="#es-eq:selector">?</a> salta donde el hamiltoniano tiene varios
-minimizadores. La relación de punto fijo <a class="xref" href="#es-eq:etaoptimal-set">?</a> es
+selector de <a class="xref" href="#es-eq:selector">(10)</a> salta donde el hamiltoniano tiene varios
+minimizadores. La relación de punto fijo <a class="xref" href="#es-eq:etaoptimal-set">(29)</a> es
 multivaluada y está puesta sobre $\M$, convexo y débilmente compacto, y
 $c_\star$ es único haya las políticas óptimas que haya.</p></div></div>
 <div class="stmt corolario" id="es-cor:puntofijo"><div class="head">Corolario 3.9</div><div class="body"><p>Con la notación del Teorema <a class="xref" href="#es-thm:silla">3.6</a>,</p>
@@ -1056,28 +1056,28 @@ $c_\star$ es único haya las políticas óptimas que haya.</p></div></div>
   \qquad
   \Opt(c):=\arg\min_{\eta\in\M}\pair{c}{\eta},
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span><span class="num">(29)</span></div></div>
 <p>una relación de punto fijo multivaluada sobre $\M$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p16">Ver demostración</button><div class="proof" id="es-control-inverso-p16"><p>Inmediato de $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$ y de la
-definición <a class="xref" href="#es-eq:cstar">?</a> de $c_\star$.</p></div></div>
+definición <a class="xref" href="#es-eq:cstar">(26)</a> de $c_\star$.</p></div></div>
 <h4 id="es-control-inverso-x3">El papel de $\alpha$</h4>
 <p>Como $\eta_E\in\M$, comparar $\eta_{A,\star}$ con la elección admisible
-$\eta=\eta_E$ en <a class="xref" href="#es-eq:reducido">(14)</a> da
+$\eta=\eta_E$ en <a class="xref" href="#es-eq:reducido">(25)</a> da
 $\pair{\ch}{\eta_{A,\star}-\eta_E}+\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$,
 y Cauchy--Schwarz lo convierte en</p>
 <div class="display numerado" id="es-eq:alpha-bound"><div class="eqbody">\begin{equation}
 
   \|\eta_{A,\star}-\eta_E\|_{\Hd}\ \le\ 2\alpha\|\ch\|_{\Hs}.
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(28)</span><span class="num">(15)</span></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p17">Ver demostración</button><div class="proof" id="es-control-inverso-p17"><p>Como $\eta_E\in\M$, la minimalidad de $\eta_{A,\star}$ y $\Psi(\eta_E)=0$ dan
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(28)</span><span class="num">(30)</span></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p17">Ver demostración</button><div class="proof" id="es-control-inverso-p17"><p>Como $\eta_E\in\M$, la minimalidad de $\eta_{A,\star}$ y $\Psi(\eta_E)=0$ dan
 $\pair{\ch}{\eta_{A,\star}-\eta_E}
 +\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$. Escribiendo
 $\Delta=\eta_{A,\star}-\eta_E$ y usando
 $|\pair{\ch}{\Delta}|\le\|\ch\|_{\Hs}\|\Delta\|_{\Hd}$,</p>
 <div class="display">\[\frac1{2\alpha}\|\Delta\|_{\Hd}^2\le\|\ch\|_{\Hs}\|\Delta\|_{\Hd},\]</div>
-<p>que es <a class="xref" href="#es-eq:alpha-bound">(15)</a> tras dividir por $\|\Delta\|_{\Hd}$.</p></div>
+<p>que es <a class="xref" href="#es-eq:alpha-bound">(30)</a> tras dividir por $\|\Delta\|_{\Hd}$.</p></div>
 <p>Con $\alpha\downarrow0$ la ocupación del aprendiz se va a la del experto a orden
 $O(\alpha)$ en la norma dual. En el otro sentido, si $\M$ es acotado en $\Hd$,
-cosa que garantiza el Lema <a class="xref" href="#es-lema:M-acotado">3.1</a>, <a class="xref" href="#es-eq:cstar">?</a> da
+cosa que garantiza el Lema <a class="xref" href="#es-lema:M-acotado">3.1</a>, <a class="xref" href="#es-eq:cstar">(26)</a> da
 $\|c_\star-\ch\|_{\Hs}=O(1/\alpha)$ y el costo recuperado colapsa al previo.</p></section>
 <section class="capitulo"><h3 id="es-sec:pde"><span class="secnum">4</span>El sistema de optimalidad</h3>
 <p>El Teorema <a class="xref" href="#es-thm:silla">3.6</a> identifica la solución como un par
@@ -1092,14 +1092,14 @@ ocupación se desintegra como</p>
 <div class="display numerado" id="es-eq:desintegracion"><div class="eqbody">\begin{equation}
 
   \eta_\pi(dx,da)=m_\pi(x)\,\pi_x(da)\,dx,
-\end{equation}</div><div class="eqside"><span class="num">(16)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="num">(31)</span></div></div>
 <p>con $m_\pi\in L^1(E)$ la <span class="df">densidad de estado descontada</span>. La marginal en el
 estado carga toda la información que ve la identidad de balance, porque las
-funciones de prueba de <a class="xref" href="#es-eq:balance">?</a> dependen solo de $x$.</p>
-<div class="stmt proposicion" id="es-prop:fp-debil"><div class="head">Proposición 4.1</div><div class="body"><p>Si $\eta_\pi\in\M$ se desintegra como <a class="xref" href="#es-eq:desintegracion">(16)</a> $\rt$ $m_\pi$
+funciones de prueba de <a class="xref" href="#es-eq:balance">(13)</a> dependen solo de $x$.</p>
+<div class="stmt proposicion" id="es-prop:fp-debil"><div class="head">Proposición 4.1</div><div class="body"><p>Si $\eta_\pi\in\M$ se desintegra como <a class="xref" href="#es-eq:desintegracion">(31)</a> $\rt$ $m_\pi$
 cumple, $\forall\varphi\in\dom(\gen{})$,</p>
 <div class="display numerado" id="es-eq:fp-debil"><div class="eqbody"><span class="v" data-var="std">\[\int_E\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)\,m_\pi\,dx
-    =\int_E\varphi\,d\nu_0,\]</span><span class="v" data-var="fin">\[m_\pi\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)=\nu_0(\varphi),\]</span></div></div>
+    =\int_E\varphi\,d\nu_0,\]</span><span class="v" data-var="fin">\[m_\pi\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)=\nu_0(\varphi),\]</span></div><div class="eqside"><span class="num">(32)</span></div></div>
 <p>o sea $(\rho \mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ en sentido de
 distribuciones. Si además $b_\pi$ y $\Sigma_\pi$ son suficientemente regulares
 para calcular el adjunto clásicamente $\rt$</p>
@@ -1108,35 +1108,35 @@ para calcular el adjunto clásicamente $\rt$</p>
   \rho\,m_\pi+\nabla\!\cdot\!\bigl(b_\pi m_\pi\bigr)
   -\tfrac12\sum_{i,j}\partial^2_{x_ix_j}\bigl(\Sigma_{\pi,ij}\,m_\pi\bigr)=\nu_0 .
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(36)</span></div></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p18">Ver demostración</button><div class="proof" id="es-control-inverso-p18"><p>Tomar $\varphi\in\dom(\gen{})$, función de $x$ sola, en <a class="xref" href="#es-eq:balance">?</a>. Con
-<a class="xref" href="#es-eq:desintegracion">(16)</a> e integrando primero la variable de acción,</p>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(36)</span><span class="num">(33)</span></div></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p18">Ver demostración</button><div class="proof" id="es-control-inverso-p18"><p>Tomar $\varphi\in\dom(\gen{})$, función de $x$ sola, en <a class="xref" href="#es-eq:balance">(13)</a>. Con
+<a class="xref" href="#es-eq:desintegracion">(31)</a> e integrando primero la variable de acción,</p>
 <div class="display">\[\eta_\pi\bigl(\rho\varphi-\gen{}\varphi\bigr)
   =\int_E\Bigl(\rho\varphi(x)-\pi_x^a\gen{a}\varphi(x)\Bigr)m_\pi(x)\,dx
   =\int_E\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)m_\pi\,dx,\]</div>
-<p>donde el paso intermedio es la definición <a class="xref" href="#es-eq:gen-pi">(4)</a> del generador
-promediado. Igualando con $\nu_0(\varphi)$ sale <a class="xref" href="#es-eq:fp-debil">?</a>, que es
+<p>donde el paso intermedio es la definición <a class="xref" href="#es-eq:gen-pi">(5)</a> del generador
+promediado. Igualando con $\nu_0(\varphi)$ sale <a class="xref" href="#es-eq:fp-debil">(32)</a>, que es
 $(\rho \mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ como distribuciones.</p>
 <p>Para la forma clásica, integrar por partes dos veces en
 $\int(b_\pi\cdot\nabla\varphi)m_\pi$ y en
 $\tfrac12\int\operatorname{Tr}(\Sigma_\pi D^2\varphi)m_\pi$, descartando los
 términos de frontera bajo las condiciones del modelo, para pasar todas las
-derivadas a $m_\pi$; el resultado es <a class="xref" href="#es-eq:fp">?</a>.</p></div></div>
-<p><a class="xref" href="#es-eq:fp">?</a> es la ecuación de Fokker--Planck estacionaria con descuento $\rho$
-y fuente $\nu_0$, obtenida de <a class="xref" href="#es-eq:balance">?</a> restringiendo a la marginal del
+derivadas a $m_\pi$; el resultado es <a class="xref" href="#es-eq:fp">(33)</a>.</p></div></div>
+<p><a class="xref" href="#es-eq:fp">(33)</a> es la ecuación de Fokker--Planck estacionaria con descuento $\rho$
+y fuente $\nu_0$, obtenida de <a class="xref" href="#es-eq:balance">(13)</a> restringiendo a la marginal del
 estado e integrando por partes. Su masa total es $1/\rho$ por el
 Corolario <a class="xref" href="#es-cor:masa">1.6</a>, que es la normalización que toda discretización tiene
 que reproducir.</p>
-<div class="stmt observacion" id="es-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Escribir <a class="xref" href="#es-eq:fp">?</a> puntualmente pide dos derivadas de $\Sigma_\pi m_\pi$, y
+<div class="stmt observacion" id="es-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Escribir <a class="xref" href="#es-eq:fp">(33)</a> puntualmente pide dos derivadas de $\Sigma_\pi m_\pi$, y
 $m_\pi$ no tiene por qué tenerlas: con política determinista la medida de
 ocupación conjunta es singular, y aun cuando $m_\pi$ sea función su regularidad
 se hereda de los coeficientes vía regularidad elíptica, no se supone. Todo lo de
-abajo va en forma débil y <a class="xref" href="#es-eq:fp">?</a> queda solo como la forma clásica de la
+abajo va en forma débil y <a class="xref" href="#es-eq:fp">(33)</a> queda solo como la forma clásica de la
 misma identidad.</p></div></div>
 <h4 id="es-control-inverso-x5">El sistema acoplado</h4>
 <p>Sea $\pi_E$ la política del experto con densidad de estado $m_E$, y $\pi_A$ una
 política óptima para el costo recuperado con densidad $m_A$. Juntando
-<a class="xref" href="#es-eq:hjb-ineq">?</a>, <a class="xref" href="#es-eq:selector">?</a>, la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a> y la
-ecuación del costo <a class="xref" href="#es-eq:cstar">?</a> sale el sistema de optimalidad</p>
+<a class="xref" href="#es-eq:hjb-ineq">(9)</a>, <a class="xref" href="#es-eq:selector">(10)</a>, la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a> y la
+ecuación del costo <a class="xref" href="#es-eq:cstar">(26)</a> sale el sistema de optimalidad</p>
 <div class="display numerado" id="es-eq:sistema"><div class="eqbody">\begin{equation}
 
   \left\{
@@ -1150,31 +1150,31 @@ ecuación del costo <a class="xref" href="#es-eq:cstar">?</a> sale el sistema de
   \end{aligned}
   \right.
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(37)</span><span class="num">(17)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(37)</span><span class="num">(34)</span></div></div>
 <p>con $\eta_A=m_A\pi_A$ y $\eta_E=m_E\pi_E$ en el sentido de
-<a class="xref" href="#es-eq:desintegracion">(16)</a>. La última ecuación es la que hay que leer débilmente:</p>
+<a class="xref" href="#es-eq:desintegracion">(31)</a>. La última ecuación es la que hay que leer débilmente:</p>
 <div class="display numerado" id="es-eq:coste-debil"><div class="eqbody"><span class="v" data-var="std">\[\alpha\int_{E\times A}\Bigl[(c-\ch)h+\kappa\,\nabla(c-\ch)\cdot\nabla h\Bigr]
     =\int_{E\times A}h\,d(\eta_A-\eta_E)
     \qquad\forall h\in\Hs,\qquad \]</span><span class="v" data-var="fin">\[\alpha\,\lambda^{(x,a)}\Bigl[(c-\ch)h+\kappa\,\nabla(c-\ch)\cdot\nabla h\Bigr]
     =(\eta_A-\eta_E)(h)
-    \qquad\forall h\in\Hs,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(38)</span><span class="num">(18)</span></div></div>
+    \qquad\forall h\in\Hs,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(38)</span><span class="num">(35)</span></div></div>
 <p>que tiene sentido en cuanto $\eta_A-\eta_E\in\Hd$, y por el
 Corolario <a class="xref" href="#es-cor:umbral">2.5</a> eso vale para cualquier par de medidas finitas en el
 régimen (i). Escribir $R=\mathrm{Id}-\kappa\Delta_{x,a}$ puntualmente pondría una
 distribución al lado derecho de una ecuación entre funciones.</p>
 <div class="stmt proposicion" id="es-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Bajo las hipótesis del Teorema <a class="xref" href="#es-thm:silla">3.6</a>, y si las medidas de ocupación de
 $\pi_E$ y de alguna $\pi_A$ óptima se desintegran como
-<a class="xref" href="#es-eq:desintegracion">(16)</a> $\rt$ $(c_\star,\eta_{A,\star})$ resuelve
-<a class="xref" href="#es-eq:sistema">(17)</a> en sentido débil, y recíprocamente toda solución débil de
-<a class="xref" href="#es-eq:sistema">(17)</a> con $\eta_A\in\M$ tiene $c=c_\star$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p19">Ver demostración</button><div class="proof" id="es-control-inverso-p19"><p>Por el Teorema <a class="xref" href="#es-thm:silla">3.6</a>, $\eta_{A,\star}$ minimiza $\pair{c_\star}{\cdot}$
-sobre $\M$, lo que por <a class="xref" href="#es-eq:lp">(8)</a> y su dual <a class="xref" href="#es-eq:dual">(9)</a> equivale a la
-existencia de $V$ que cumpla <a class="xref" href="#es-eq:hjb-ineq">?</a> con holgura complementaria en
+<a class="xref" href="#es-eq:desintegracion">(31)</a> $\rt$ $(c_\star,\eta_{A,\star})$ resuelve
+<a class="xref" href="#es-eq:sistema">(34)</a> en sentido débil, y recíprocamente toda solución débil de
+<a class="xref" href="#es-eq:sistema">(34)</a> con $\eta_A\in\M$ tiene $c=c_\star$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p19">Ver demostración</button><div class="proof" id="es-control-inverso-p19"><p>Por el Teorema <a class="xref" href="#es-thm:silla">3.6</a>, $\eta_{A,\star}$ minimiza $\pair{c_\star}{\cdot}$
+sobre $\M$, lo que por <a class="xref" href="#es-eq:lp">(14)</a> y su dual <a class="xref" href="#es-eq:dual">(15)</a> equivale a la
+existencia de $V$ que cumpla <a class="xref" href="#es-eq:hjb-ineq">(9)</a> con holgura complementaria en
 $\operatorname{supp}\eta_{A,\star}$; ese es el primer par de bloques, y la
-Proposición <a class="xref" href="#es-prop:hjb">1.3</a> convierte la holgura en <a class="xref" href="#es-eq:selector">?</a>. Las dos
+Proposición <a class="xref" href="#es-prop:hjb">1.3</a> convierte la holgura en <a class="xref" href="#es-eq:selector">(10)</a>. Las dos
 ecuaciones adjuntas son la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a> aplicada a $\pi_A$ y a
-$\pi_E$, las dos en $\M$. El último bloque es <a class="xref" href="#es-eq:cstar">?</a> reordenada, y su
-lectura débil es <a class="xref" href="#es-eq:coste-debil">(18)</a>.</p>
-<p>Recíprocamente, sea $(V,\pi_A,m_A,m_E,c)$ solución débil de <a class="xref" href="#es-eq:sistema">(17)</a>
+$\pi_E$, las dos en $\M$. El último bloque es <a class="xref" href="#es-eq:cstar">(26)</a> reordenada, y su
+lectura débil es <a class="xref" href="#es-eq:coste-debil">(35)</a>.</p>
+<p>Recíprocamente, sea $(V,\pi_A,m_A,m_E,c)$ solución débil de <a class="xref" href="#es-eq:sistema">(34)</a>
 con $\eta_A\in\M$. El último bloque da
 $c=\ch+\alpha^{-1}R^{-1}(\eta_A-\eta_E)$, y los dos primeros dan la optimalidad
 de $\eta_A$ para $c$, luego $\pair{c}{\eta-\eta_A}\ge0$ para todo $\eta\in\M$.
@@ -1186,11 +1186,11 @@ experto y la del aprendiz, y son lineales en $m$ una vez fijada la política. La
 última deforma el costo alejándolo del previo en proporción al desajuste de
 ocupación, y es lineal en $c$ una vez fijadas las medidas. La única no linealidad
 es el $\arg\min$.</p>
-<div class="stmt observacion" id="es-obs:sistema-vs-optimizacion"><div class="head">Observación 4.4</div><div class="body"><p><a class="xref" href="#es-eq:sistema">(17)</a> y <a class="xref" href="#es-eq:reducido">(14)</a> describen la misma solución, pero
-discretizan distinto. En <a class="xref" href="#es-eq:reducido">(14)</a> la incógnita es una medida
-restringida por <a class="xref" href="#es-eq:balance">?</a> y el objetivo es estrictamente convexo, así
+<div class="stmt observacion" id="es-obs:sistema-vs-optimizacion"><div class="head">Observación 4.4</div><div class="body"><p><a class="xref" href="#es-eq:sistema">(34)</a> y <a class="xref" href="#es-eq:reducido">(25)</a> describen la misma solución, pero
+discretizan distinto. En <a class="xref" href="#es-eq:reducido">(25)</a> la incógnita es una medida
+restringida por <a class="xref" href="#es-eq:balance">(13)</a> y el objetivo es estrictamente convexo, así
 que una discretización hereda un programa estrictamente convexo de dimensión
-finita. En <a class="xref" href="#es-eq:sistema">(17)</a> las incógnitas son $V$, $m_A$, $m_E$ y $c$, y el
+finita. En <a class="xref" href="#es-eq:sistema">(34)</a> las incógnitas son $V$, $m_A$, $m_E$ y $c$, y el
 acople es por el $\arg\min$; una discretización hereda una iteración de punto
 fijo cuyas propiedades de contracción no las da el Teorema <a class="xref" href="#es-thm:silla">3.6</a>.</p></div></div>
 <h4 id="es-control-inverso-x6">El modelo de estados finitos como referencia</h4>
@@ -1199,12 +1199,12 @@ modelo discreto una referencia para discretizar. Sean $S$ y $A$ finitos, $Q$ la
 matriz de tasas de una cadena en tiempo continuo y $\gamma$ o $\rho$ el
 descuento. El generador pasa a ser la matriz
 $(\gen{a}\varphi)(i)=\sum_j Q^a_{ij}\varphi(j)$, acotada, y la identidad de
-balance <a class="xref" href="#es-eq:balance">?</a> pasa a ser el sistema lineal</p>
+balance <a class="xref" href="#es-eq:balance">(13)</a> pasa a ser el sistema lineal</p>
 <div class="display numerado" id="es-eq:balance-discreto"><div class="eqbody"><span class="v" data-var="std">\[\sum_{i,a}\bigl(\rho\varphi_i-(Q^a\varphi)_i\bigr)\eta_{ia}
     =\sum_i\varphi_i\nu_{0,i}\qquad\forall\varphi\in\R^S,\]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-Q^{a}\varphi\bigr)=\nu_0(\varphi)
-    \qquad\forall\varphi\in\R^S,\]</span></div><div class="eqside"><span class="num">(19)</span></div></div>
+    \qquad\forall\varphi\in\R^S,\]</span></div><div class="eqside"><span class="num">(36)</span></div></div>
 <p>una ecuación por estado, así que $\M$ es un politopo en $\R^{S\times A}_{\ge0}$
-de masa $1/\rho$ y <a class="xref" href="#es-eq:lp">(8)</a> es un programa lineal finito.</p>
+de masa $1/\rho$ y <a class="xref" href="#es-eq:lp">(14)</a> es un programa lineal finito.</p>
 <p>Tres rasgos del modelo discreto no sobreviven, y son exactamente los puntos donde
 la teoría continua necesita argumento propio. El generador es acotado, luego su
 exponencial es la exponencial de matrices y el semigrupo no pide condición de
@@ -1253,7 +1253,7 @@ $(X,\pi)$ with values in $E\times V$, progressively measurable with respect to
 $\{\mathscr F_t\}$ and with $X_0\sim\nu_0$, solves the <span class="df">relaxed controlled
 martingale problem</span> for $(\gen{},\nu_0)$ if for every $f\in\dom(\gen{})$ the
 process</p>
-<div class="display numerado" id="en-eq:mart"><div class="eqbody"><span class="v" data-var="std">\[f(X_t)-\int_0^t\!\!\int_A \gen{a}f(X_s)\,\pi_s(da)\,ds\]</span><span class="v" data-var="fin">\[f(X_t)-\lambda_{[0,t]}^{\,s}\,\pi_s^a\,\gen{a}f(X_s)\]</span></div></div>
+<div class="display numerado" id="en-eq:mart"><div class="eqbody"><span class="v" data-var="std">\[f(X_t)-\int_0^t\!\!\int_A \gen{a}f(X_s)\,\pi_s(da)\,ds\]</span><span class="v" data-var="fin">\[f(X_t)-\lambda_{[0,t]}^{\,s}\,\pi_s^a\,\gen{a}f(X_s)\]</span></div><div class="eqside"><span class="num">(4)</span></div></div>
 <p>is an $\{\mathscr F_t\}$-martingale.</p></div></div>
 <p>Here <button class="term" type="button" data-k="pi">$\pi=(\pi_t)_{t\ge0}$</button> is adapted with values in $\mathscr P(A)$, which is
 compact because $A$ is; no kernel $x\mapsto\pi_x$ is available at this stage.
@@ -1267,9 +1267,9 @@ $\pi:E\to\mathscr P(A)$ we write</p>
   =b_\pi(x)\cdot\nabla\varphi(x)
   +\tfrac12\operatorname{Tr}\bigl(\Sigma_\pi(x)D^2\varphi(x)\bigr),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(33)–(35)</span><span class="num">(4)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(33)–(35)</span><span class="num">(5)</span></div></div>
 <p>with $b_\pi(x)=\pi_x^a b(x,a)$ and $\Sigma_\pi(x)=\pi_x^a \sigma\sigma^\top(x,a)$.
-What <a class="xref" href="#en-eq:gen-pi">(4)</a> averages is $\sigma\sigma^\top$, and $\pi_x^a\sigma$ would
+What <a class="xref" href="#en-eq:gen-pi">(5)</a> averages is $\sigma\sigma^\top$, and $\pi_x^a\sigma$ would
 give something else: for $d=m=1$, $A=\{-1,1\}$, $\sigma(x,a)=a$ and $\pi_x$
 uniform, $\pi_x^a\sigma=0$ while $\Sigma_\pi=1$, so
 $\Gen{\pi}=\tfrac12\partial_x^2$. The law of the diffusion is determined by
@@ -1287,9 +1287,9 @@ on functions, while $P_{t,\pi,x}$ is a measure on $E$.</p>
 relaxed policy and the forward problem are</p>
 <div class="display numerado" id="en-eq:J"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\E\left[\int_0^\infty e^{-\rho t}\int_A c(X_t,a)\,\pi_t(da)\,dt\right],
    \qquad \inf_\pi J_c(\pi),\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\P\bigl(\lambda_\rho^t\,\pi_t^a\,c(X_t,a)\bigr),
-   \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(5)</span></div></div>
+   \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(6)</span></div></div>
 <p>where $\lambda_\rho=e^{-\rho t}dt$, of total mass $1/\rho$, and $\P$ is the measure
-of the solution $(X,\pi)$. The infimum in <a class="xref" href="#en-eq:J">(5)</a> runs over the solutions of
+of the solution $(X,\pi)$. The infimum in <a class="xref" href="#en-eq:J">(6)</a> runs over the solutions of
 Definition <a class="xref" href="#en-def:relajada">1.1</a>.</p>
 <p>When the policy is Markov the expectation opens into the semigroup.</p>
 <div class="stmt proposicion" id="en-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[Borkar]</span>
@@ -1300,8 +1300,8 @@ transition function $P_{t,\pi,x}$ and</p>
 <div class="display numerado" id="en-eq:J-semigrupo"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_E\!\int_0^\infty e^{-\rho t}\,
     \Sg{t,\pi}c_\pi(x)\,dt\,\nu_0(dx),\qquad
     c_\pi(y)=\int_Ac(y,a)\,\pi_y(da),\]</span><span class="v" data-var="fin">\[J_c(\pi)=\nu_0^x\,\lambda_\rho^t\,P_{t,\pi,x}^y\,\pi_y^a\,c(y,a)
-   =\nu_0^x\,\lambda_\rho^t\,\Sg{t,\pi}c_\pi(x).\]</span></div></div>
-<p>Equivalently $J_c(\pi)=\nu_0\bigl((\rho \mathrm{Id}-\Gen{\pi})^{-1}c_\pi\bigr)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p1">Ver demostración</button><div class="proof" id="en-control-inverso-p1"><p>If $\pi_s=\pi(X_s)$, the inner integral in <a class="xref" href="#en-eq:mart">?</a> equals
+   =\nu_0^x\,\lambda_\rho^t\,\Sg{t,\pi}c_\pi(x).\]</span></div><div class="eqside"><span class="num">(7)</span></div></div>
+<p>Equivalently $J_c(\pi)=\nu_0\bigl((\rho \mathrm{Id}-\Gen{\pi})^{-1}c_\pi\bigr)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p1">Ver demostración</button><div class="proof" id="en-control-inverso-p1"><p>If $\pi_s=\pi(X_s)$, the inner integral in <a class="xref" href="#en-eq:mart">(4)</a> equals
 $\pi_{X_s}^a\gen{a}f(X_s)=\Gen{\pi}f(X_s)$, a function of $X_s$ alone, so
 $f(X_t)-\int_0^t\Gen{\pi}f(X_s) ds$ is a martingale and $X$ by itself solves the
 martingale problem for $(\Gen{\pi},\nu_0)$. Well-posedness makes $X$ Markov with a
@@ -1315,7 +1315,7 @@ integrand involves the process at a single instant, so only the law of $X_t$
 enters, and the Markov property applied at $s=0$ gives
 $\P(c_\pi(X_t))=\nu_0^x P_{t,\pi,x}^y c_\pi(y)$. Exchanging $\nu_0$ and
 $\lambda_\rho$, legitimate because $\nu_0\otimes\lambda_\rho$ is finite, gives
-<a class="xref" href="#en-eq:J-semigrupo">?</a>.</p>
+<a class="xref" href="#en-eq:J-semigrupo">(7)</a>.</p>
 <p>The kernel cannot be moved across $\lambda_\rho$: it depends on $t$, so
 $\lambda_\rho(dt)P_{t,\pi,x}(dy)$ is a semidirect product and not a product
 measure. Finally $\lambda_\rho^t\Sg{t,\pi}=\int_0^\infty e^{-\rho t}\Sg{t,\pi} dt$
@@ -1326,7 +1326,7 @@ and evaluating $J_c$ amounts to solving the linear elliptic equation
 $\rho V_\pi-\Gen{\pi}V_\pi=c_\pi$ and integrating against $\nu_0$; the operator to
 be inverted is the one whose surjectivity was assumed above. The Markov form
 $\pi_t=\pi(X_t)$ is obtained by disintegrating an optimal occupation measure
-<a class="xref" href="#en-eq:desintegracion">(16)</a>, and until then $\pi_x$ is defined only on this
+<a class="xref" href="#en-eq:desintegracion">(31)</a>, and until then $\pi_x$ is defined only on this
 subclass.</p>
 <h4 id="en-control-inverso-x1">HJB formulation</h4>
 <p>The value function <button class="term" type="button" data-k="V">$V(x)$</button> is the optimal cost started at $x$. Under dynamic
@@ -1335,41 +1335,41 @@ programming it satisfies</p>
 
   \rho V(x)=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}.
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(6)</span></div></div>
-<div class="stmt proposicion" id="en-prop:hjb"><div class="head">Proposición 1.3</div><div class="body"><p>Equation <a class="xref" href="#en-eq:hjb">(6)</a> is equivalent to the inequality</p>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(8)</span></div></div>
+<div class="stmt proposicion" id="en-prop:hjb"><div class="head">Proposición 1.3</div><div class="body"><p>Equation <a class="xref" href="#en-eq:hjb">(8)</a> is equivalent to the inequality</p>
 <div class="display numerado" id="en-eq:hjb-ineq"><div class="eqbody">\begin{equation}
 
   c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0,\qquad (x,a)\in E\times A,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(7)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(7)</span><span class="num">(9)</span></div></div>
 <p>together with attainment of the infimum at each $x$. If $a\mapsto c(x,a)+\gen{a}V(x)$
 is continuous, the set of minimizers is nonempty and compact, and any optimal
 policy satisfies</p>
 <div class="display numerado" id="en-eq:selector"><div class="eqbody"><span class="v" data-var="std">\[\operatorname{supp}\pi_x\ \s\ \arg\min_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\},
-    \qquad \]</span><span class="v" data-var="fin">\[\pi_x^a\bigl(c(x,a)+\gen{a}V(x)\bigr)=\rho V(x),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(8)</span></div></div>
-<p>with equality in <a class="xref" href="#en-eq:hjb-ineq">?</a> on the support of $\pi_x$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p2">Ver demostración</button><div class="proof" id="en-control-inverso-p2"><p>That <a class="xref" href="#en-eq:hjb">(6)</a> implies <a class="xref" href="#en-eq:hjb-ineq">?</a> is the definition of an infimum,
-and the converse is <a class="xref" href="#en-eq:hjb-ineq">?</a> together with attainment. Existence of a
+    \qquad \]</span><span class="v" data-var="fin">\[\pi_x^a\bigl(c(x,a)+\gen{a}V(x)\bigr)=\rho V(x),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(8)</span><span class="num">(10)</span></div></div>
+<p>with equality in <a class="xref" href="#en-eq:hjb-ineq">(9)</a> on the support of $\pi_x$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p2">Ver demostración</button><div class="proof" id="en-control-inverso-p2"><p>That <a class="xref" href="#en-eq:hjb">(8)</a> implies <a class="xref" href="#en-eq:hjb-ineq">(9)</a> is the definition of an infimum,
+and the converse is <a class="xref" href="#en-eq:hjb-ineq">(9)</a> together with attainment. Existence of a
 minimizer is Weierstrass on the compact set $A$, and the set of minimizers is the
 preimage of the minimum value under a continuous map, hence closed in a compact
-set. Integrating <a class="xref" href="#en-eq:hjb-ineq">?</a> against $\pi_x$ gives
+set. Integrating <a class="xref" href="#en-eq:hjb-ineq">(9)</a> against $\pi_x$ gives
 $\pi_x^a(c(x,a)+\gen{a}V(x))\ge\rho V(x)$, with equality exactly when $\pi_x$ gives
 no mass to actions where the inequality is strict.</p></div></div>
-<p>Read pointwise, <a class="xref" href="#en-eq:hjb">(6)</a> presupposes $V\in C^2$, since $\gen{a}V$ carries
+<p>Read pointwise, <a class="xref" href="#en-eq:hjb">(8)</a> presupposes $V\in C^2$, since $\gen{a}V$ carries
 $\nabla V$ and $D^2V$. Nothing below depends on solving it in that sense: the
-existence theory of Section <a class="xref" href="#en-sec:convexo">3</a> is built on <a class="xref" href="#en-eq:lp">(8)</a> and never
-evaluates a value function, and <a class="xref" href="#en-eq:hjb">(6)</a> reappears only as the dual
-feasibility condition <a class="xref" href="#en-eq:dual">(9)</a> and as one block of the optimality system of
+existence theory of Section <a class="xref" href="#en-sec:convexo">3</a> is built on <a class="xref" href="#en-eq:lp">(14)</a> and never
+evaluates a value function, and <a class="xref" href="#en-eq:hjb">(8)</a> reappears only as the dual
+feasibility condition <a class="xref" href="#en-eq:dual">(15)</a> and as one block of the optimality system of
 Section <a class="xref" href="#en-sec:pde">4</a>, where it is used in weak form.</p>
 <h4 id="en-sec:balance"><span class="secnum">1.2</span>Discounted occupation measures</h4>
 <div class="stmt definicion" id="en-def:ocupacion"><div class="head">Definición 1.4</div><div class="body"><p>For a relaxed policy $\pi$ and $B\in\mathscr B(E\times A)$, the <span class="df">discounted
 occupation measure</span> is</p>
 <div class="display numerado" id="en-eq:ocupacion"><div class="eqbody"><span class="v" data-var="std">\[\eta_\pi(B)=\E\left[\int_0^\infty e^{-\rho t}\int_A
     \mathbf 1_B(X_t,a)\,\pi_t(da)\,dt\right].\qquad \]</span><span class="v" data-var="fin">\[\eta_\pi(B)=\P\bigl(\lambda_\rho^t\,\pi_t^a\,\mathbf 1_B(X_t,a)\bigr).
-    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(9)</span></div></div></div></div>
-<p>Taking $c$ in place of $\mathbf 1_B$ in <button class="term" type="button" data-k="eta"><a class="xref" href="#en-eq:ocupacion">?</a></button> and comparing with
-<a class="xref" href="#en-eq:J">(5)</a> gives, with no computation,</p>
-<div class="display numerado" id="en-eq:lineal"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_{E\times A}c\,d\eta_\pi=\pair{c}{\eta_\pi}.\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\eta_\pi(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(10)</span><span class="num">(7)</span></div></div>
-<p>The right-hand side of <a class="xref" href="#en-eq:lineal">(7)</a> carries no semigroup, no time and no
+    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(9)</span><span class="num">(11)</span></div></div></div></div>
+<p>Taking $c$ in place of $\mathbf 1_B$ in <button class="term" type="button" data-k="eta"><a class="xref" href="#en-eq:ocupacion">(11)</a></button> and comparing with
+<a class="xref" href="#en-eq:J">(6)</a> gives, with no computation,</p>
+<div class="display numerado" id="en-eq:lineal"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\int_{E\times A}c\,d\eta_\pi=\pair{c}{\eta_\pi}.\qquad \]</span><span class="v" data-var="fin">\[J_c(\pi)=\eta_\pi(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(10)</span><span class="num">(12)</span></div></div>
+<p>The right-hand side of <a class="xref" href="#en-eq:lineal">(12)</a> carries no semigroup, no time and no
 initial condition, so everything below takes place on $E\times A$, and the forward
 problem, nonconvex in $\pi$, is linear in $\eta$.</p>
 <p>The measures that arise this way are characterized by a single family of linear
@@ -1378,8 +1378,8 @@ equalities.</p>
 For every $\varphi\in\dom(\gen{})$, the occupation measure of any solution of the
 relaxed controlled martingale problem satisfies the <span class="df">weak balance identity</span></p>
 <div class="display numerado" id="en-eq:balance"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}\bigl(\rho\varphi(x)-\gen{a}\varphi(x)\bigr)\,\eta(dx,da)
-    =\int_E\varphi\,d\nu_0.\qquad \]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-\gen{}\varphi\bigr)=\nu_0(\varphi).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(11)</span></div></div>
-<p>Conversely, every $\eta\ge0$ satisfying <a class="xref" href="#en-eq:balance">?</a> is the occupation
+    =\int_E\varphi\,d\nu_0.\qquad \]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-\gen{}\varphi\bigr)=\nu_0(\varphi).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(11)</span><span class="num">(13)</span></div></div>
+<p>Conversely, every $\eta\ge0$ satisfying <a class="xref" href="#en-eq:balance">(13)</a> is the occupation
 measure of some solution.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p3">Ver demostración</button><div class="proof" id="en-control-inverso-p3"><p>By Definition <a class="xref" href="#en-def:relajada">1.1</a> the process
 $M_t=\varphi(X_t)-\int_0^t\pi_s^a\gen{a}\varphi(X_s) ds$ is a martingale, so
 $\varphi(X_t)$ is a continuous semimartingale with that decomposition. The discount
@@ -1391,26 +1391,26 @@ its covariation with $\varphi(X)$ vanishes and integration by parts gives</p>
 <p>The integrand $e^{-\rho s}$ is bounded by $1$ and $M$ is a martingale, so the
 stochastic integral has zero expectation. Taking expectations, letting
 $t\to\infty$, and using boundedness of $\varphi$ so that
-$e^{-\rho t}\E[\varphi(X_t)]\to0$, we obtain <a class="xref" href="#en-eq:balance">?</a> written with
+$e^{-\rho t}\E[\varphi(X_t)]\to0$, we obtain <a class="xref" href="#en-eq:balance">(13)</a> written with
 Definition <a class="xref" href="#en-def:ocupacion">1.4</a>. The converse is the characterization of discounted
 occupation measures <span class="src">[Borkar, Thm.\ 2.2]</span>; for locally compact state spaces
 see <span class="src">[Kurtz, Thm.\ 6.3]</span>.</p></div></div>
-<p>In operator form <a class="xref" href="#en-eq:balance">?</a> reads $(\rho-\gen{})^{*}\eta=\nu_0$, so $\eta$
+<p>In operator form <a class="xref" href="#en-eq:balance">(13)</a> reads $(\rho-\gen{})^{*}\eta=\nu_0$, so $\eta$
 is the initial law transported by the adjoint resolvent; this is the dual statement
 of the resolvent form of $J_c$ recorded after Proposition <a class="xref" href="#en-prop:semigrupo">1.2</a>.</p>
 <div class="stmt corolario" id="en-cor:masa"><div class="head">Corolario 1.6</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ for every $\pi$. In particular $\eta_\pi$ is not a
-probability measure.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p4">Ver demostración</button><div class="proof" id="en-control-inverso-p4"><p>Take $\varphi\equiv1$ in <a class="xref" href="#en-eq:balance">?</a>. Both terms of <a class="xref" href="#en-eq:generator">(2)</a>
+probability measure.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p4">Ver demostración</button><div class="proof" id="en-control-inverso-p4"><p>Take $\varphi\equiv1$ in <a class="xref" href="#en-eq:balance">(13)</a>. Both terms of <a class="xref" href="#en-eq:generator">(2)</a>
 carry derivatives of $\varphi$, so $\gen{a}1=0$ and the identity becomes
 $\rho \eta(E\times A)=\nu_0(1)=1$.</p></div></div>
-<p>The mass is $1/\rho$ rather than $1$ because <a class="xref" href="#en-eq:ocupacion">?</a> is not
+<p>The mass is $1/\rho$ rather than $1$ because <a class="xref" href="#en-eq:ocupacion">(11)</a> is not
 normalized, and both sources normalize: Kurtz and Stockbridge define
 $\widehat\pi=\rho \eta_\pi$ and recover the cost as $\rho^{-1}\widehat\pi(c)$,
 while Borkar&#x27;s discounted occupation measure carries the same factor
 <span class="src">[Kurtz]</span>. The three balance identities coincide after that rescaling, and
 $1/\rho$ is the only input to the bound of Lemma <a class="xref" href="#en-lema:M-acotado">3.1</a>.</p>
 <p>Writing <button class="term" type="button" data-k="M">$\M$</button> for the nonnegative measures on $E\times A$ satisfying
-<a class="xref" href="#en-eq:balance">?</a>, the forward problem is the linear program</p>
-<div class="display numerado" id="en-eq:lp"><div class="eqbody"><span class="v" data-var="std">\[\inf_{\eta\in\M}\ \pair{c}{\eta},\qquad \]</span><span class="v" data-var="fin">\[\inf_{\eta\in\M}\ \eta(c),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(12)</span><span class="num">(8)</span></div></div>
+<a class="xref" href="#en-eq:balance">(13)</a>, the forward problem is the linear program</p>
+<div class="display numerado" id="en-eq:lp"><div class="eqbody"><span class="v" data-var="std">\[\inf_{\eta\in\M}\ \pair{c}{\eta},\qquad \]</span><span class="v" data-var="fin">\[\inf_{\eta\in\M}\ \eta(c),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(12)</span><span class="num">(14)</span></div></div>
 <p>whose formal dual is</p>
 <div class="display numerado" id="en-eq:dual"><div class="eqbody">\begin{equation}
 
@@ -1418,14 +1418,14 @@ $1/\rho$ is the only input to the bound of Lemma <a class="xref" href="#en-lema:
   \qquad\text{subject to}\qquad
   c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0 .
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(13)</span><span class="num">(9)</span></div></div>
-<p>The HJB inequality <a class="xref" href="#en-eq:hjb-ineq">?</a> is therefore exactly dual feasibility for
-<a class="xref" href="#en-eq:lp">(8)</a>, and the value function is the dual variable attached to the balance
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(13)</span><span class="num">(15)</span></div></div>
+<p>The HJB inequality <a class="xref" href="#en-eq:hjb-ineq">(9)</a> is therefore exactly dual feasibility for
+<a class="xref" href="#en-eq:lp">(14)</a>, and the value function is the dual variable attached to the balance
 constraint.</p>
-<div class="stmt observacion" id="en-obs:test"><div class="head">Observación 1.7</div><div class="body"><p>The set $\M$ depends on the class of test functions in <a class="xref" href="#en-eq:balance">?</a>, and the
+<div class="stmt observacion" id="en-obs:test"><div class="head">Observación 1.7</div><div class="body"><p>The set $\M$ depends on the class of test functions in <a class="xref" href="#en-eq:balance">(13)</a>, and the
 note does not fix $\dom(\gen{})$. Taking $\mathscr C^2_c(E)$, $C^\infty_c(E)$ or
 $C^2_b(\overline E)$ gives different sets whenever $E$ has a boundary, the
-difference being exactly the boundary behaviour that <a class="xref" href="#en-eq:balance">?</a> can detect.
+difference being exactly the boundary behaviour that <a class="xref" href="#en-eq:balance">(13)</a> can detect.
 For the differential generator <a class="xref" href="#en-eq:generator">(2)</a> the choice
 $\dom(\gen{})=\mathscr C^2_c(E)$ is the one under which the characterization in
 Proposition <a class="xref" href="#en-prop:balance">1.5</a> is available <span class="src">[Kurtz]</span>.</p></div></div></section>
@@ -1438,7 +1438,7 @@ from optimal.</p>
 <div class="stmt definicion" id="en-def:gap"><div class="head">Definición 2.1</div><div class="body"><p>The <span class="df">suboptimality gap</span> of the expert under a candidate cost $c$ is</p>
 <div class="display numerado" id="en-eq:gap"><div class="eqbody"><span class="v" data-var="std">\[\Gap(c):=\pair{c}{\eta_E}-\inf_{\eta\in\M}\pair{c}{\eta}
     =\sup_{\eta\in\M}\pair{c}{\eta_E-\eta}.\qquad \]</span><span class="v" data-var="fin">\[\Gap(c):=\eta_E(c)-\inf_{\eta\in\M}\eta(c)
-    =\sup_{\eta\in\M}\,(\eta_E-\eta)(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(14)</span></div></div></div></div>
+    =\sup_{\eta\in\M}\,(\eta_E-\eta)(c).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(14)</span><span class="num">(16)</span></div></div></div></div>
 <div class="stmt proposicion" id="en-prop:gap-basico"><div class="head">Proposición 2.2</div><div class="body"><p>$\Gap$ is convex, positively homogeneous and nonnegative on $\Hs$, and
 $\Gap(c)=0$ if and only if $\eta_E$ minimizes $\pair{c}{\cdot}$ over $\M$.
 Moreover $\Gap(0)=0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p5">Ver demostración</button><div class="proof" id="en-control-inverso-p5"><p>For each $\eta\in\M$ the map $c\mapsto\pair{c}{\eta_E-\eta}$ is linear and
@@ -1449,38 +1449,38 @@ $\Gap(c)=0$ means $\pair{c}{\eta_E}\le\pair{c}{\eta}$ for all $\eta\in\M$, which
 optimality of $\eta_E$ for $c$.</p></div></div>
 <p>$\Gap$ is a supremum of functionals linear in $c$, one for each $\eta\in\M$, hence
 convex; nonnegativity uses only $\eta_E\in\M$. Its inner infimum is the forward
-problem <a class="xref" href="#en-eq:lp">(8)</a> at the current candidate cost.</p>
+problem <a class="xref" href="#en-eq:lp">(14)</a> at the current candidate cost.</p>
 <p>Selecting a cost by the gap alone is ill posed, and beyond the constants the
 balance identity already produces a whole subspace of costs that no observation
 distinguishes.</p>
 <div class="stmt proposicion" id="en-prop:shaping"><div class="head">Proposición 2.3</div><div class="body"><p>For $\phi\in\dom(\gen{})$ put $q_\phi(x,a):=\rho\phi(x)-\gen{a}\phi(x)$. Then</p>
 <div class="display numerado" id="en-eq:shaping"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}q_\phi\,d\eta=\int_E\phi\,d\nu_0
-    \qquad\text{for every }\eta\in\M,\qquad \]</span><span class="v" data-var="fin">\[\eta(q_\phi)=\nu_0(\phi)\qquad\text{for every }\eta\in\M,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(29)</span></div></div>
+    \qquad\text{for every }\eta\in\M,\qquad \]</span><span class="v" data-var="fin">\[\eta(q_\phi)=\nu_0(\phi)\qquad\text{for every }\eta\in\M,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(29)</span><span class="num">(17)</span></div></div>
 <p>so $c$ and $c+q_\phi$ have the same minimizers over $\M$ and the same gap. The
-identifiable object is the class of $c$ modulo $\{q_\phi:\phi\in\dom(\gen{})\}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p6">Ver demostración</button><div class="proof" id="en-control-inverso-p6"><p>Apply <a class="xref" href="#en-eq:balance">?</a> to the test function $\phi$: the left-hand side is
+identifiable object is the class of $c$ modulo $\{q_\phi:\phi\in\dom(\gen{})\}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p6">Ver demostración</button><div class="proof" id="en-control-inverso-p6"><p>Apply <a class="xref" href="#en-eq:balance">(13)</a> to the test function $\phi$: the left-hand side is
 $\eta(\rho\phi-\gen{}\phi)=\eta(q_\phi)$ and the right-hand side is $\nu_0(\phi)$,
-which is <a class="xref" href="#en-eq:shaping">?</a> and does not depend on $\eta$. Hence for any $c$ and
+which is <a class="xref" href="#en-eq:shaping">(17)</a> and does not depend on $\eta$. Hence for any $c$ and
 any $\eta\in\M$ we have $\pair{c+q_\phi}{\eta}=\pair{c}{\eta}+\nu_0(\phi)$, a shift
 by a constant, so the two costs have the same minimizers and, since $\eta_E\in\M$,
 the same gap.</p></div></div>
 <p>This is the continuous-time form of potential-based shaping, and it is
-<a class="xref" href="#en-eq:balance">?</a> read against $c$. The prior selects one representative of the
+<a class="xref" href="#en-eq:balance">(13)</a> read against $c$. The prior selects one representative of the
 class, so it is worth carrying even when the expert is exactly optimal.</p>
 <div class="display numerado" id="en-eq:inverso"><div class="eqbody">\begin{equation}
 
   \min_{c\in\Hs}\ \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\Gap(c)\right\},
   \qquad\alpha&gt;0,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(15)</span><span class="num">(10)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(15)</span><span class="num">(18)</span></div></div>
 <p>or, expanding the gap,</p>
 <div class="display numerado" id="en-eq:minmax"><div class="eqbody"><span class="v" data-var="std">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
     \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\pair{c}{\eta_E-\eta}\right\}.
     \qquad \]</span><span class="v" data-var="fin">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
     \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+(\eta_E-\eta)(c)\right\}.
-    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(16)</span><span class="num">(11)</span></div></div>
+    \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(16)</span><span class="num">(19)</span></div></div>
 <p>The parameter <button class="term" type="button" data-k="alpha">$\alpha$</button> interpolates: large $\alpha$ pins the recovered cost to the
 prior, small $\alpha$ gives priority to closing the expert&#x27;s gap. Its quantitative
-effect is recorded in <a class="xref" href="#en-eq:alpha-bound">(15)</a>.</p>
+effect is recorded in <a class="xref" href="#en-eq:alpha-bound">(30)</a>.</p>
 <h4 id="en-sec:espacio-costo"><span class="secnum">2.1</span>The cost space</h4>
 <p>The occupation measure of a deterministic policy $u:E\to A$ concentrates on the
 graph $\{(x,u(x)):x\in E\}$, which is Lebesgue-null in $E\times A$. Such an $\eta$
@@ -1526,18 +1526,18 @@ charges a Lebesgue-null graph, it is a measure of this singular type.</p></div><
    |\nabla_{x,a}(c-\ch)|^2\Bigr)dx\,da,
   \qquad\kappa&gt;0,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(12)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(20)</span></div></div>
 <p>whose Riesz map is $R=\mathrm{Id}-\kappa\Delta_{x,a}$.</p>
-<div class="stmt proposicion" id="en-prop:riesz"><div class="head">Proposición 2.7</div><div class="body"><p>With the norm <a class="xref" href="#en-eq:penalizacion">(12)</a> on $H^1(E\times A)$, the Riesz isomorphism
+<div class="stmt proposicion" id="en-prop:riesz"><div class="head">Proposición 2.7</div><div class="body"><p>With the norm <a class="xref" href="#en-eq:penalizacion">(20)</a> on $H^1(E\times A)$, the Riesz isomorphism
 <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> is the weak form of $\mathrm{Id}-\kappa\Delta_{x,a}$, that is</p>
 <div class="display numerado" id="en-eq:riesz"><div class="eqbody"><span class="v" data-var="std">\[\pair{Rc}{v}=\int_{E\times A}\bigl(cv+\kappa\nabla c\cdot\nabla v\bigr)
     \,dx\,da\qquad\text{for all }v\in H^1,\]</span><span class="v" data-var="fin">\[(Rc)(v)=\lambda^{(x,a)}\bigl(cv+\kappa\,\nabla c\cdot\nabla v\bigr)
-    \qquad\text{for all }v\in H^1,\]</span></div></div>
+    \qquad\text{for all }v\in H^1,\]</span></div><div class="eqside"><span class="num">(21)</span></div></div>
 <p>and $R^{-1}$ is the solution operator of the corresponding elliptic problem. The
 boundary conditions are those of the variational formulation: periodic on a torus,
 and homogeneous Neumann when the variation of $c$ is free on $\partial(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p9">Ver demostración</button><div class="proof" id="en-control-inverso-p9"><p>By definition the Riesz map sends $c$ to the functional
-$v\mapsto(c,v)_{\Hs}$, and with the norm <a class="xref" href="#en-eq:penalizacion">(12)</a> that inner product
-is $\int(cv+\kappa\nabla c\cdot\nabla v)$, which is <a class="xref" href="#en-eq:riesz">?</a>. It is bounded
+$v\mapsto(c,v)_{\Hs}$, and with the norm <a class="xref" href="#en-eq:penalizacion">(20)</a> that inner product
+is $\int(cv+\kappa\nabla c\cdot\nabla v)$, which is <a class="xref" href="#en-eq:riesz">(21)</a>. It is bounded
 and coercive on $H^1$, so Lax--Milgram makes $R$ an isomorphism onto $\Hd$. Green&#x27;s
 identity rewrites the form as $\int v(c-\kappa\Delta c)+\kappa\int_{\partial}
 v \partial_n c$ whenever $c$ is smooth enough, so $R=\mathrm{Id}-\kappa\Delta$ in
@@ -1545,12 +1545,12 @@ the interior, and the boundary term vanishes precisely under the periodic or
 homogeneous Neumann conditions.</p></div></div>
 <p>The boundary condition is fixed by the model: the same weak form defines a
 different $R$, hence a different recovered cost, for each choice, and $R^{-1}$
-appears explicitly in <a class="xref" href="#en-eq:cstar">?</a>.</p>
+appears explicitly in <a class="xref" href="#en-eq:cstar">(26)</a>.</p>
 <div class="stmt observacion" id="en-obs:dos-condiciones"><div class="head">Observación 2.8</div><div class="body"><p>The two regimes place their demands on different objects. Regime (i) constrains
 $\Hs$, asking $s&gt;(d+m)/2$, and then accepts every finite measure. Regime (ii)
 constrains $\M$, asking that its elements have $L^2$ densities, and then accepts
 the cheaper space $H^1$. Only the first is available when deterministic policies
-are admissible, which is the case whenever the Hamiltonian in <a class="xref" href="#en-eq:selector">?</a>
+are admissible, which is the case whenever the Hamiltonian in <a class="xref" href="#en-eq:selector">(10)</a>
 has a unique minimizer.</p></div></div></section>
 <section class="capitulo"><h3 id="en-sec:convexo"><span class="secnum">3</span>Convex structure, existence, and the reduced problem</h3>
 <p>The inverse problem has a convex structure strong enough to give existence
@@ -1564,7 +1564,7 @@ $\Phi$ for the saddle functional, reserving $\mathcal L$ for the generator:</p>
   \qquad
   \inf_{c\in\Hs}\ \sup_{\eta\in\M}\ \Phi(c,\eta).
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(13)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(22)</span></div></div>
 <p>Three of the hypotheses the note carries are automatic here, and all three follow
 from the mass computed in Corollary <a class="xref" href="#en-cor:masa">1.6</a>.</p>
 <div class="stmt lema" id="en-lema:M-acotado"><div class="head">Lema 3.1</div><div class="body"><p>Every $\eta\in\M$ satisfies $\|\eta\|_{\Hd}\le C_\iota/\rho$, and
@@ -1575,13 +1575,13 @@ $\eta(E\times A)=1/\rho$, so for every $c\in\Hs$</p>
 <p>and the supremum over the unit ball gives $\|\eta\|_{\Hd}\le C_\iota/\rho$. The
 diameter bound is the triangle inequality.</p></div></div>
 <div class="stmt corolario" id="en-cor:gap-lipschitz"><div class="head">Corolario 3.2</div><div class="body"><p>$\Gap$ is finite on all of $\Hs$ and Lipschitz with constant $2C_\iota/\rho$; in
-particular it is continuous, hence lower semicontinuous.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p11">Ver demostración</button><div class="proof" id="en-control-inverso-p11"><p>From $|\sup_if_i-\sup_ig_i|\le\sup_i|f_i-g_i|$ applied to <a class="xref" href="#en-eq:gap">?</a>,</p>
+particular it is continuous, hence lower semicontinuous.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p11">Ver demostración</button><div class="proof" id="en-control-inverso-p11"><p>From $|\sup_if_i-\sup_ig_i|\le\sup_i|f_i-g_i|$ applied to <a class="xref" href="#en-eq:gap">(16)</a>,</p>
 <div class="display">\[|\Gap(c)-\Gap(c&#x27;)|\le\sup_{\eta\in\M}|\pair{c-c&#x27;}{\eta_E-\eta}|
   \le\|c-c&#x27;\|_{\Hs}\sup_{\eta\in\M}\|\eta_E-\eta\|_{\Hd}
   \le\frac{2C_\iota}{\rho}\|c-c&#x27;\|_{\Hs}\]</div>
 <p>by Lemma <a class="xref" href="#en-lema:M-acotado">3.1</a>. Finiteness follows by evaluating at $c&#x27;=0$, where
 $\Gap(0)=0$.</p></div></div>
-<div class="stmt proposicion" id="en-prop:existencia-c"><div class="head">Proposición 3.3</div><div class="body"><p>If $\M\ne\emptyset$, the objective in <a class="xref" href="#en-eq:inverso">(10)</a> is $\alpha$-strongly
+<div class="stmt proposicion" id="en-prop:existencia-c"><div class="head">Proposición 3.3</div><div class="body"><p>If $\M\ne\emptyset$, the objective in <a class="xref" href="#en-eq:inverso">(18)</a> is $\alpha$-strongly
 convex, coercive and lower semicontinuous, so it has a unique minimizer
 $c_\star\in\Hs$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p12">Ver demostración</button><div class="proof" id="en-control-inverso-p12"><p>The squared Hilbert norm is $\alpha$-strongly convex and $\Gap$ is convex by
 Proposition <a class="xref" href="#en-prop:gap-basico">2.2</a>, so the sum is $\alpha$-strongly convex and has
@@ -1594,41 +1594,41 @@ coercivity from $\Gap\ge0$; lower semicontinuity from
 Corollary <a class="xref" href="#en-cor:gap-lipschitz">3.2</a>. No property of the map $c\mapsto\pi$ is used.</p>
 <h4 id="en-control-inverso-x2">Eliminating the cost without assuming a minimax interchange</h4>
 <p>For fixed $\eta$ the minimization in $c$ is explicit. We do <em>not</em> assume at
-this stage that the infimum and the supremum in <a class="xref" href="#en-eq:Phi">(13)</a> may be exchanged.</p>
+this stage that the infimum and the supremum in <a class="xref" href="#en-eq:Phi">(22)</a> may be exchanged.</p>
 <div class="stmt proposicion" id="en-prop:reduccion"><div class="head">Proposición 3.4</div><div class="body"><p>For each $\eta\in\M$ the map $c\mapsto\Phi(c,\eta)$ has the unique minimizer</p>
 <div class="display numerado" id="en-eq:c-de-eta"><div class="eqbody">\begin{equation}
 
   c_\eta=\ch+\frac1\alpha R^{-1}(\eta-\eta_E),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(20)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(20)</span><span class="num">(23)</span></div></div>
 <p>and</p>
 <div class="display numerado" id="en-eq:reducido-valor"><div class="eqbody"><span class="v" data-var="std">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
    \Psi(\eta):=\pair{\ch}{\eta-\eta_E}
    +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span><span class="v" data-var="fin">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
    \Psi(\eta):=(\eta-\eta_E)(\ch)
-   +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(21), (22)</span></div></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p13">Ver demostración</button><div class="proof" id="en-control-inverso-p13"><p>Write $u=c-\ch$ and $w=R^{-1}(\eta_E-\eta)$, so that
+   +\frac1{2\alpha}\|\eta-\eta_E\|_{\Hd}^2.\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(21), (22)</span><span class="num">(24)</span></div></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p13">Ver demostración</button><div class="proof" id="en-control-inverso-p13"><p>Write $u=c-\ch$ and $w=R^{-1}(\eta_E-\eta)$, so that
 $\pair{u}{\eta_E-\eta}=(u,w)_{\Hs}$ and $\|w\|_{\Hs}=\|\eta_E-\eta\|_{\Hd}$. Then</p>
 <div class="display">\[\Phi(c,\eta)=\frac{\alpha}{2}\|u\|_{\Hs}^2+(u,w)_{\Hs}
   +\pair{\ch}{\eta_E-\eta},\]</div>
 <p>a strongly convex quadratic in $u$ whose unique minimizer is $u=-w/\alpha$, which
-is <a class="xref" href="#en-eq:c-de-eta">?</a>. Substituting gives value
+is <a class="xref" href="#en-eq:c-de-eta">(23)</a>. Substituting gives value
 $-\frac1{2\alpha}\|w\|_{\Hs}^2+\pair{\ch}{\eta_E-\eta}$, that is $-\Psi(\eta)$.</p></div></div>
 <p>This suggests the <span class="df">reduced problem</span></p>
 <div class="display numerado" id="en-eq:reducido"><div class="eqbody">\begin{equation}
 
   \min_{\eta\in\M}\ \Psi(\eta),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(23)</span><span class="num">(14)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(23)</span><span class="num">(25)</span></div></div>
 <p>a minimization over measures rather than over costs. By the elementary inequality
 $\sup_\eta\inf_c\Phi\le\inf_c\sup_\eta\Phi$, its value is so far only a lower bound
-for <a class="xref" href="#en-eq:Phi">(13)</a>. Theorem <a class="xref" href="#en-thm:silla">3.6</a> closes the gap: a minimizer of
-<a class="xref" href="#en-eq:reducido">(14)</a> constructs a saddle point, and strong duality follows from it.</p>
+for <a class="xref" href="#en-eq:Phi">(22)</a>. Theorem <a class="xref" href="#en-thm:silla">3.6</a> closes the gap: a minimizer of
+<a class="xref" href="#en-eq:reducido">(25)</a> constructs a saddle point, and strong duality follows from it.</p>
 <p>The compactness the theorem needs is inherited from the forward problem.</p>
 <div class="stmt proposicion" id="en-prop:compacidad-M"><div class="head">Proposición 3.5</div><div class="body"><p>Suppose $E\times A$ is compact and $\gen{}$ maps $\dom(\gen{})$ into
 $C(E\times A)$. Then $\M$ is convex and weakly compact in $\Hd$. If moreover the
 embedding $\iota:\Hs\to C(E\times A)$ is compact, which holds for
 $\Hs=H^s(E\times A)$ with $s&gt;(d+m)/2$ on a domain admitting an extension operator,
-then $\M$ is compact in the norm of $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p14">Ver demostración</button><div class="proof" id="en-control-inverso-p14"><p>Convexity holds because <a class="xref" href="#en-eq:balance">?</a> is a family of linear equalities and the
+then $\M$ is compact in the norm of $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p14">Ver demostración</button><div class="proof" id="en-control-inverso-p14"><p>Convexity holds because <a class="xref" href="#en-eq:balance">(13)</a> is a family of linear equalities and the
 constraint $\eta\ge0$ is convex. Put $\widehat\M=\rho \M$, which by
 Corollary <a class="xref" href="#en-cor:masa">1.6</a> lies in $\mathscr P(E\times A)$. With $E\times A$ compact,
 $\mathscr P(E\times A)$ is weak-$*$ compact by Banach--Alaoglu, and $\widehat\M$ is
@@ -1646,20 +1646,20 @@ is weakly compact.</p>
 bounded set $\widehat\M$ to a relatively norm-compact set. That set is weakly
 compact by the previous paragraph, hence weakly closed, hence norm closed, and a
 closed relatively compact set is compact.</p></div></div>
-<p>Convexity is immediate because <a class="xref" href="#en-eq:balance">?</a> is a family of linear equalities.
+<p>Convexity is immediate because <a class="xref" href="#en-eq:balance">(13)</a> is a family of linear equalities.
 Compactness runs through the normalized set $\widehat\M=\rho \M\s\mathscr
 P(E\times A)$, which is weak-$*$ compact by Banach--Alaoglu and closedness of the
 balance constraints, and is then transported to $\Hd$ by the adjoint of the
 embedding. With a compact embedding, Schauder&#x27;s theorem gives norm compactness and
-existence in <a class="xref" href="#en-eq:reducido">(14)</a> is Weierstrass.</p>
+existence in <a class="xref" href="#en-eq:reducido">(25)</a> is Weierstrass.</p>
 <div class="stmt teorema" id="en-thm:silla"><div class="head">Teorema 3.6</div><div class="body"><p>Assume $\Hs\hookrightarrow C(E\times A)$, that $\M\s\Hd$ is nonempty, convex and
-weakly compact, and that $\ch\in\Hs$. Then <a class="xref" href="#en-eq:reducido">(14)</a> has a unique
+weakly compact, and that $\ch\in\Hs$. Then <a class="xref" href="#en-eq:reducido">(25)</a> has a unique
 minimizer $\eta_{A,\star}$. Setting</p>
 <div class="display numerado" id="en-eq:cstar"><div class="eqbody">\begin{equation}
 
   c_\star=\ch+\frac1\alpha R^{-1}(\eta_{A,\star}-\eta_E),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(24)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(24)</span><span class="num">(26)</span></div></div>
 <p>we have $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$, the pair
 $(c_\star,\eta_{A,\star})$ is a saddle point of $\Phi$,</p>
 <div class="display numerado" id="en-eq:silla"><div class="eqbody">\begin{equation}
@@ -1667,7 +1667,7 @@ $(c_\star,\eta_{A,\star})$ is a saddle point of $\Phi$,</p>
   \Phi(c_\star,\eta)\ \le\ \Phi(c_\star,\eta_{A,\star})\ \le\ \Phi(c,\eta_{A,\star})
   \qquad\text{for all }c\in\Hs,\ \eta\in\M,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(25)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(25)</span><span class="num">(27)</span></div></div>
 <p>strong minimax duality holds,</p>
 <div class="display numerado" id="en-eq:dualidad"><div class="eqbody">\begin{equation}
 
@@ -1675,33 +1675,33 @@ $(c_\star,\eta_{A,\star})$ is a saddle point of $\Phi$,</p>
   =\Phi(c_\star,\eta_{A,\star})
   =\sup_{\eta\in\M}\inf_{c\in\Hs}\Phi,
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(26)</span></div></div>
-<p>and $c_\star$ is the unique solution of <a class="xref" href="#en-eq:inverso">(10)</a>.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p15">Ver demostración</button><div class="proof" id="en-control-inverso-p15"><p>The functional $\Psi$ of <a class="xref" href="#en-eq:reducido-valor">?</a> is strictly convex, because the
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(26)</span><span class="num">(28)</span></div></div>
+<p>and $c_\star$ is the unique solution of <a class="xref" href="#en-eq:inverso">(18)</a>.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p15">Ver demostración</button><div class="proof" id="en-control-inverso-p15"><p>The functional $\Psi$ of <a class="xref" href="#en-eq:reducido-valor">(24)</a> is strictly convex, because the
 squared dual norm is, and weakly lower semicontinuous, so weak compactness of $\M$
 gives a unique minimizer $\eta_{A,\star}$.</p>
 <p>Since $\M$ is convex, the first-order optimality condition at the minimizer is the
 variational inequality
 $\pair{\ch+\alpha^{-1}R^{-1}(\eta_{A,\star}-\eta_E)}{\eta-\eta_{A,\star}}\ge0$ for
-all $\eta\in\M$, which by <a class="xref" href="#en-eq:cstar">?</a> reads
+all $\eta\in\M$, which by <a class="xref" href="#en-eq:cstar">(26)</a> reads
 $\pair{c_\star}{\eta-\eta_{A,\star}}\ge0$. This is exactly optimality of
 $\eta_{A,\star}$ for $c_\star$, and since the only $\eta$-dependent term of
 $\Phi(c_\star,\cdot)$ is $-\pair{c_\star}{\eta}$, it is the left inequality in
-<a class="xref" href="#en-eq:silla">?</a>.</p>
+<a class="xref" href="#en-eq:silla">(27)</a>.</p>
 <p>For the right inequality, the derivative of $\Phi(\cdot,\eta_{A,\star})$ is
 $\alpha R(c-\ch)+\eta_E-\eta_{A,\star}$, which vanishes at $c=c_\star$ by
-<a class="xref" href="#en-eq:cstar">?</a>; strong convexity in $c$ turns the stationary point into the
+<a class="xref" href="#en-eq:cstar">(26)</a>; strong convexity in $c$ turns the stationary point into the
 global minimum. The two inequalities together are the saddle relation, and the
 standard argument that a saddle point closes the gap between the two orders gives
-<a class="xref" href="#en-eq:dualidad">?</a>. Uniqueness of $c_\star$ is
+<a class="xref" href="#en-eq:dualidad">(28)</a>. Uniqueness of $c_\star$ is
 Proposition <a class="xref" href="#en-prop:existencia-c">3.3</a>.</p></div></div>
-<div class="stmt observacion" id="en-obs:sion"><div class="head">Observación 3.7</div><div class="body"><p>Under hypotheses ensuring a minimax theorem such as Sion&#x27;s, <a class="xref" href="#en-eq:dualidad">?</a>
+<div class="stmt observacion" id="en-obs:sion"><div class="head">Observación 3.7</div><div class="body"><p>Under hypotheses ensuring a minimax theorem such as Sion&#x27;s, <a class="xref" href="#en-eq:dualidad">(28)</a>
 could be obtained directly from convexity in $c$, affinity in $\eta$ and
 compactness. The argument above is constructive: the minimizer of
-<a class="xref" href="#en-eq:reducido">(14)</a> produces the saddle point, $c_\star$ and
-<a class="xref" href="#en-eq:etaoptimal-set">?</a> at once.</p></div></div>
+<a class="xref" href="#en-eq:reducido">(25)</a> produces the saddle point, $c_\star$ and
+<a class="xref" href="#en-eq:etaoptimal-set">(29)</a> at once.</p></div></div>
 <div class="stmt observacion" id="en-obs:selector"><div class="head">Observación 3.8</div><div class="body"><p>A fixed point of the map from a cost to an optimal policy need not exist: the
-selector in <a class="xref" href="#en-eq:selector">?</a> jumps where the Hamiltonian has several
-minimizers. The fixed-point relation <a class="xref" href="#en-eq:etaoptimal-set">?</a> is set-valued and
+selector in <a class="xref" href="#en-eq:selector">(10)</a> jumps where the Hamiltonian has several
+minimizers. The fixed-point relation <a class="xref" href="#en-eq:etaoptimal-set">(29)</a> is set-valued and
 posed on $\M$, which is convex and weakly compact, and $c_\star$ is unique however
 many optimal policies there are.</p></div></div>
 <div class="stmt corolario" id="en-cor:puntofijo"><div class="head">Corolario 3.9</div><div class="body"><p>With the notation of Theorem <a class="xref" href="#en-thm:silla">3.6</a>,</p>
@@ -1712,29 +1712,29 @@ many optimal policies there are.</p></div></div>
   \qquad
   \Opt(c):=\arg\min_{\eta\in\M}\pair{c}{\eta},
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span><span class="num">(29)</span></div></div>
 <p>a set-valued fixed-point relation on $\M$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p16">Ver demostración</button><div class="proof" id="en-control-inverso-p16"><p>Immediate from $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$ and the
-definition <a class="xref" href="#en-eq:cstar">?</a> of $c_\star$.</p></div></div>
+definition <a class="xref" href="#en-eq:cstar">(26)</a> of $c_\star$.</p></div></div>
 <h4 id="en-control-inverso-x3">The role of $\alpha$</h4>
 <p>Because $\eta_E\in\M$, comparing $\eta_{A,\star}$ with the admissible choice
-$\eta=\eta_E$ in <a class="xref" href="#en-eq:reducido">(14)</a> gives
+$\eta=\eta_E$ in <a class="xref" href="#en-eq:reducido">(25)</a> gives
 $\pair{\ch}{\eta_{A,\star}-\eta_E}+\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$,
 and Cauchy--Schwarz turns this into</p>
 <div class="display numerado" id="en-eq:alpha-bound"><div class="eqbody">\begin{equation}
 
   \|\eta_{A,\star}-\eta_E\|_{\Hd}\ \le\ 2\alpha\|\ch\|_{\Hs}.
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(28)</span><span class="num">(15)</span></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p17">Ver demostración</button><div class="proof" id="en-control-inverso-p17"><p>Since $\eta_E\in\M$, minimality of $\eta_{A,\star}$ and $\Psi(\eta_E)=0$ give
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(28)</span><span class="num">(30)</span></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p17">Ver demostración</button><div class="proof" id="en-control-inverso-p17"><p>Since $\eta_E\in\M$, minimality of $\eta_{A,\star}$ and $\Psi(\eta_E)=0$ give
 $\pair{\ch}{\eta_{A,\star}-\eta_E}
 +\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$. Writing
 $\Delta=\eta_{A,\star}-\eta_E$ and using
 $|\pair{\ch}{\Delta}|\le\|\ch\|_{\Hs}\|\Delta\|_{\Hd}$,</p>
 <div class="display">\[\frac1{2\alpha}\|\Delta\|_{\Hd}^2\le\|\ch\|_{\Hs}\|\Delta\|_{\Hd},\]</div>
-<p>which is <a class="xref" href="#en-eq:alpha-bound">(15)</a> after dividing by $\|\Delta\|_{\Hd}$.</p></div>
+<p>which is <a class="xref" href="#en-eq:alpha-bound">(30)</a> after dividing by $\|\Delta\|_{\Hd}$.</p></div>
 <p>As $\alpha\downarrow0$ the apprentice occupation measure is driven to the expert&#x27;s
 at order $O(\alpha)$ in the dual norm. In the opposite direction, if $\M$ is
 bounded in $\Hd$, which Lemma <a class="xref" href="#en-lema:M-acotado">3.1</a> guarantees, then
-<a class="xref" href="#en-eq:cstar">?</a> gives $\|c_\star-\ch\|_{\Hs}=O(1/\alpha)$, so the recovered cost
+<a class="xref" href="#en-eq:cstar">(26)</a> gives $\|c_\star-\ch\|_{\Hs}=O(1/\alpha)$, so the recovered cost
 collapses onto the prior.</p></section>
 <section class="capitulo"><h3 id="en-sec:pde"><span class="secnum">4</span>The optimality system</h3>
 <p>Theorem <a class="xref" href="#en-thm:silla">3.6</a> identifies the solution as a pair $(c_\star,\eta_{A,\star})$
@@ -1748,14 +1748,14 @@ measure disintegrates as</p>
 <div class="display numerado" id="en-eq:desintegracion"><div class="eqbody">\begin{equation}
 
   \eta_\pi(dx,da)=m_\pi(x)\,\pi_x(da)\,dx,
-\end{equation}</div><div class="eqside"><span class="num">(16)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="num">(31)</span></div></div>
 <p>with $m_\pi\in L^1(E)$ the <span class="df">discounted state density</span>. The state marginal
 carries all the information the balance identity sees, because the test functions
-in <a class="xref" href="#en-eq:balance">?</a> depend on $x$ alone.</p>
-<div class="stmt proposicion" id="en-prop:fp-debil"><div class="head">Proposición 4.1</div><div class="body"><p>Let $\eta_\pi\in\M$ disintegrate as <a class="xref" href="#en-eq:desintegracion">(16)</a>. Then $m_\pi$
+in <a class="xref" href="#en-eq:balance">(13)</a> depend on $x$ alone.</p>
+<div class="stmt proposicion" id="en-prop:fp-debil"><div class="head">Proposición 4.1</div><div class="body"><p>Let $\eta_\pi\in\M$ disintegrate as <a class="xref" href="#en-eq:desintegracion">(31)</a>. Then $m_\pi$
 satisfies, for every $\varphi\in\dom(\gen{})$,</p>
 <div class="display numerado" id="en-eq:fp-debil"><div class="eqbody"><span class="v" data-var="std">\[\int_E\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)\,m_\pi\,dx
-    =\int_E\varphi\,d\nu_0,\]</span><span class="v" data-var="fin">\[m_\pi\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)=\nu_0(\varphi),\]</span></div></div>
+    =\int_E\varphi\,d\nu_0,\]</span><span class="v" data-var="fin">\[m_\pi\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)=\nu_0(\varphi),\]</span></div><div class="eqside"><span class="num">(32)</span></div></div>
 <p>that is, $(\rho \mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ in the sense of
 distributions. If moreover $b_\pi$ and $\Sigma_\pi$ are smooth enough for the
 adjoint to be computed classically, then</p>
@@ -1764,36 +1764,36 @@ adjoint to be computed classically, then</p>
   \rho\,m_\pi+\nabla\!\cdot\!\bigl(b_\pi m_\pi\bigr)
   -\tfrac12\sum_{i,j}\partial^2_{x_ix_j}\bigl(\Sigma_{\pi,ij}\,m_\pi\bigr)=\nu_0 .
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(36)</span></div></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p18">Ver demostración</button><div class="proof" id="en-control-inverso-p18"><p>Take $\varphi\in\dom(\gen{})$, a function of $x$ alone, in <a class="xref" href="#en-eq:balance">?</a>.
-Using <a class="xref" href="#en-eq:desintegracion">(16)</a> and integrating out the action variable first,</p>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(36)</span><span class="num">(33)</span></div></div></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p18">Ver demostración</button><div class="proof" id="en-control-inverso-p18"><p>Take $\varphi\in\dom(\gen{})$, a function of $x$ alone, in <a class="xref" href="#en-eq:balance">(13)</a>.
+Using <a class="xref" href="#en-eq:desintegracion">(31)</a> and integrating out the action variable first,</p>
 <div class="display">\[\eta_\pi\bigl(\rho\varphi-\gen{}\varphi\bigr)
   =\int_E\Bigl(\rho\varphi(x)-\pi_x^a\gen{a}\varphi(x)\Bigr)m_\pi(x)\,dx
   =\int_E\bigl(\rho\varphi-\Gen{\pi}\varphi\bigr)m_\pi\,dx,\]</div>
-<p>where the middle step is the definition <a class="xref" href="#en-eq:gen-pi">(4)</a> of the averaged
-generator. Equating with $\nu_0(\varphi)$ gives <a class="xref" href="#en-eq:fp-debil">?</a>, which is the
+<p>where the middle step is the definition <a class="xref" href="#en-eq:gen-pi">(5)</a> of the averaged
+generator. Equating with $\nu_0(\varphi)$ gives <a class="xref" href="#en-eq:fp-debil">(32)</a>, which is the
 statement that $(\rho \mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ as distributions.</p>
 <p>For the classical form, integrate by parts twice in
 $\int(b_\pi\cdot\nabla\varphi)m_\pi$ and
 $\tfrac12\int\operatorname{Tr}(\Sigma_\pi D^2\varphi)m_\pi$, discarding boundary
 terms under the conditions of the model, to move all derivatives onto $m_\pi$; the
-result is <a class="xref" href="#en-eq:fp">?</a>.</p></div></div>
-<p>Equation <a class="xref" href="#en-eq:fp">?</a> is the stationary Fokker--Planck equation with discount
-$\rho$ and source $\nu_0$, obtained from <a class="xref" href="#en-eq:balance">?</a> by restricting to the
+result is <a class="xref" href="#en-eq:fp">(33)</a>.</p></div></div>
+<p>Equation <a class="xref" href="#en-eq:fp">(33)</a> is the stationary Fokker--Planck equation with discount
+$\rho$ and source $\nu_0$, obtained from <a class="xref" href="#en-eq:balance">(13)</a> by restricting to the
 state marginal and integrating by parts. Its total mass is $1/\rho$ by
 Corollary <a class="xref" href="#en-cor:masa">1.6</a>, which is the normalization that any discretization must
 reproduce.</p>
-<div class="stmt observacion" id="en-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Writing <a class="xref" href="#en-eq:fp">?</a> pointwise requires two derivatives of $\Sigma_\pi m_\pi$,
+<div class="stmt observacion" id="en-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Writing <a class="xref" href="#en-eq:fp">(33)</a> pointwise requires two derivatives of $\Sigma_\pi m_\pi$,
 and $m_\pi$ need not have them: for a
 deterministic policy the joint occupation measure is singular, and even when
 $m_\pi$ is a function its regularity is inherited from the coefficients through
 elliptic regularity rather than assumed. Every statement below is therefore given
-weakly, and <a class="xref" href="#en-eq:fp">?</a> is recorded only as the classical form of the same
+weakly, and <a class="xref" href="#en-eq:fp">(33)</a> is recorded only as the classical form of the same
 identity.</p></div></div>
 <h4 id="en-control-inverso-x5">The coupled system</h4>
 <p>Let $\pi_E$ be the expert policy with state density $m_E$, and let $\pi_A$ be an
 optimal policy for the recovered cost with state density $m_A$. Collecting
-<a class="xref" href="#en-eq:hjb-ineq">?</a>, <a class="xref" href="#en-eq:selector">?</a>, Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a> and the
-cost equation <a class="xref" href="#en-eq:cstar">?</a> gives the optimality system</p>
+<a class="xref" href="#en-eq:hjb-ineq">(9)</a>, <a class="xref" href="#en-eq:selector">(10)</a>, Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a> and the
+cost equation <a class="xref" href="#en-eq:cstar">(26)</a> gives the optimality system</p>
 <div class="display numerado" id="en-eq:sistema"><div class="eqbody">\begin{equation}
 
   \left\{
@@ -1807,31 +1807,31 @@ cost equation <a class="xref" href="#en-eq:cstar">?</a> gives the optimality sys
   \end{aligned}
   \right.
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(37)</span><span class="num">(17)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(37)</span><span class="num">(34)</span></div></div>
 <p>where $\eta_A=m_A\pi_A$ and $\eta_E=m_E\pi_E$ in the sense of
-<a class="xref" href="#en-eq:desintegracion">(16)</a>. The last equation is the one that must be read weakly:</p>
+<a class="xref" href="#en-eq:desintegracion">(31)</a>. The last equation is the one that must be read weakly:</p>
 <div class="display numerado" id="en-eq:coste-debil"><div class="eqbody"><span class="v" data-var="std">\[\alpha\int_{E\times A}\Bigl[(c-\ch)h+\kappa\,\nabla(c-\ch)\cdot\nabla h\Bigr]
     =\int_{E\times A}h\,d(\eta_A-\eta_E)
     \qquad\text{for all }h\in\Hs,\qquad \]</span><span class="v" data-var="fin">\[\alpha\,\lambda^{(x,a)}\Bigl[(c-\ch)h+\kappa\,\nabla(c-\ch)\cdot\nabla h\Bigr]
     =(\eta_A-\eta_E)(h)
-    \qquad\text{for all }h\in\Hs,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(38)</span><span class="num">(18)</span></div></div>
+    \qquad\text{for all }h\in\Hs,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(38)</span><span class="num">(35)</span></div></div>
 <p>which is meaningful whenever $\eta_A-\eta_E\in\Hd$, and by
 Corollary <a class="xref" href="#en-cor:umbral">2.5</a> that holds for every pair of finite measures in
 regime (i). Writing $R=\mathrm{Id}-\kappa\Delta_{x,a}$ pointwise instead would put
 a distribution on the right-hand side of an equation between functions.</p>
 <div class="stmt proposicion" id="en-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Assume the hypotheses of Theorem <a class="xref" href="#en-thm:silla">3.6</a> and that the occupation measures
-of $\pi_E$ and of some optimal $\pi_A$ disintegrate as <a class="xref" href="#en-eq:desintegracion">(16)</a>.
-Then $(c_\star,\eta_{A,\star})$ solves <a class="xref" href="#en-eq:sistema">(17)</a> in the weak sense, and
-conversely any weak solution of <a class="xref" href="#en-eq:sistema">(17)</a> with $\eta_A\in\M$ has
+of $\pi_E$ and of some optimal $\pi_A$ disintegrate as <a class="xref" href="#en-eq:desintegracion">(31)</a>.
+Then $(c_\star,\eta_{A,\star})$ solves <a class="xref" href="#en-eq:sistema">(34)</a> in the weak sense, and
+conversely any weak solution of <a class="xref" href="#en-eq:sistema">(34)</a> with $\eta_A\in\M$ has
 $c=c_\star$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p19">Ver demostración</button><div class="proof" id="en-control-inverso-p19"><p>By Theorem <a class="xref" href="#en-thm:silla">3.6</a>, $\eta_{A,\star}$ minimizes $\pair{c_\star}{\cdot}$ over
-$\M$, which by <a class="xref" href="#en-eq:lp">(8)</a> and its dual <a class="xref" href="#en-eq:dual">(9)</a> is equivalent to the
-existence of $V$ satisfying <a class="xref" href="#en-eq:hjb-ineq">?</a> with complementary slackness on
+$\M$, which by <a class="xref" href="#en-eq:lp">(14)</a> and its dual <a class="xref" href="#en-eq:dual">(15)</a> is equivalent to the
+existence of $V$ satisfying <a class="xref" href="#en-eq:hjb-ineq">(9)</a> with complementary slackness on
 $\operatorname{supp}\eta_{A,\star}$; that is the first pair of blocks, and
-Proposition <a class="xref" href="#en-prop:hjb">1.3</a> turns the slackness into <a class="xref" href="#en-eq:selector">?</a>. The two
+Proposition <a class="xref" href="#en-prop:hjb">1.3</a> turns the slackness into <a class="xref" href="#en-eq:selector">(10)</a>. The two
 adjoint equations are Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a> applied to $\pi_A$ and to
-$\pi_E$, both of which lie in $\M$. The last block is <a class="xref" href="#en-eq:cstar">?</a> rearranged,
-and its weak reading is <a class="xref" href="#en-eq:coste-debil">(18)</a>.</p>
-<p>Conversely, let $(V,\pi_A,m_A,m_E,c)$ solve <a class="xref" href="#en-eq:sistema">(17)</a> weakly with
+$\pi_E$, both of which lie in $\M$. The last block is <a class="xref" href="#en-eq:cstar">(26)</a> rearranged,
+and its weak reading is <a class="xref" href="#en-eq:coste-debil">(35)</a>.</p>
+<p>Conversely, let $(V,\pi_A,m_A,m_E,c)$ solve <a class="xref" href="#en-eq:sistema">(34)</a> weakly with
 $\eta_A\in\M$. The last block gives $c=\ch+\alpha^{-1}R^{-1}(\eta_A-\eta_E)$, and
 the first two give optimality of $\eta_A$ for $c$, hence
 $\pair{c}{\eta-\eta_A}\ge0$ for all $\eta\in\M$. That is the variational inequality
@@ -1842,11 +1842,11 @@ the forward problem. The two adjoint equations transport expert and apprentice
 occupation, and are linear in $m$ once the policy is fixed. The last deforms the
 cost away from the prior in proportion to the occupation mismatch, and is linear in
 $c$ once the measures are fixed. The only nonlinearity is the $\arg\min$.</p>
-<div class="stmt observacion" id="en-obs:sistema-vs-optimizacion"><div class="head">Observación 4.4</div><div class="body"><p>The system <a class="xref" href="#en-eq:sistema">(17)</a> and the reduced problem <a class="xref" href="#en-eq:reducido">(14)</a> are two
+<div class="stmt observacion" id="en-obs:sistema-vs-optimizacion"><div class="head">Observación 4.4</div><div class="body"><p>The system <a class="xref" href="#en-eq:sistema">(34)</a> and the reduced problem <a class="xref" href="#en-eq:reducido">(25)</a> are two
 descriptions of the same solution, but they discretize differently. In
-<a class="xref" href="#en-eq:reducido">(14)</a> the unknown is a measure constrained by <a class="xref" href="#en-eq:balance">?</a> and
+<a class="xref" href="#en-eq:reducido">(25)</a> the unknown is a measure constrained by <a class="xref" href="#en-eq:balance">(13)</a> and
 the objective is strictly convex, so a discretization inherits a finite-dimensional
-strictly convex program. In <a class="xref" href="#en-eq:sistema">(17)</a> the unknowns are $V$, $m_A$, $m_E$
+strictly convex program. In <a class="xref" href="#en-eq:sistema">(34)</a> the unknowns are $V$, $m_A$, $m_E$
 and $c$, and the coupling is through the $\arg\min$; a discretization inherits a
 fixed-point iteration whose contraction properties are not supplied by
 Theorem <a class="xref" href="#en-thm:silla">3.6</a>.</p></div></div>
@@ -1855,12 +1855,12 @@ Theorem <a class="xref" href="#en-thm:silla">3.6</a>.</p></div></div>
 reference for discretization. Let $S$ and $A$ be finite, let $Q$ be the rate matrix of
 a continuous-time chain and $\gamma$ or $\rho$ the discount. The generator becomes
 the matrix $(\gen{a}\varphi)(i)=\sum_j Q^a_{ij}\varphi(j)$, which is bounded, and
-the balance identity <a class="xref" href="#en-eq:balance">?</a> becomes the linear system</p>
+the balance identity <a class="xref" href="#en-eq:balance">(13)</a> becomes the linear system</p>
 <div class="display numerado" id="en-eq:balance-discreto"><div class="eqbody"><span class="v" data-var="std">\[\sum_{i,a}\bigl(\rho\varphi_i-(Q^a\varphi)_i\bigr)\eta_{ia}
     =\sum_i\varphi_i\nu_{0,i}\qquad\text{for all }\varphi\in\R^S,\]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-Q^{a}\varphi\bigr)=\nu_0(\varphi)
-    \qquad\text{for all }\varphi\in\R^S,\]</span></div><div class="eqside"><span class="num">(19)</span></div></div>
+    \qquad\text{for all }\varphi\in\R^S,\]</span></div><div class="eqside"><span class="num">(36)</span></div></div>
 <p>one equation per state, so $\M$ is a polytope in $\R^{S\times A}_{\ge0}$ of mass
-$1/\rho$ and <a class="xref" href="#en-eq:lp">(8)</a> is a finite linear program.</p>
+$1/\rho$ and <a class="xref" href="#en-eq:lp">(14)</a> is a finite linear program.</p>
 <p>Three features of the discrete model do not survive, and they are exactly the
 places where the continuous theory needs its own argument. The generator is
 bounded, so its exponential is the matrix exponential and the semigroup requires no
@@ -1894,7 +1894,7 @@ const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 /* Los rotulos y las notaciones los inyecta el generador, porque dependen de
    que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
    una de lecture notes dice «demostraciones». */
-const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "fin", "rotulo": "de Finetti"}, {"id": "std", "rotulo": "Integrales"}], "idiomas": [{"id": "es", "rotulo": "Español", "carpeta": "es"}, {"id": "en", "rotulo": "English", "carpeta": "en"}], "glosario": {"E": {"es": "$E\\s\\R^d$ abierto, el espacio de estados. La Prop.~\\ref{prop:compacidad-M} pide ademas $E\\times A$ compacto, y el Cor.~\\ref{cor:umbral} un dominio acotado de clase $C^1$.", "en": "$E\\s\\R^d$ open, the state space. Prop.~\\ref{prop:compacidad-M} further asks $E\\times A$ compact, and Cor.~\\ref{cor:umbral} a bounded domain of class $C^1$."}, "A": {"es": "$A\\s\\R^m$ compacto, las acciones. $A$ compacto $\\rt$ $\\mathscr P(A)$ compacto en la topologia debil.", "en": "$A\\s\\R^m$ compact, the action set. $A$ compact $\\rt$ $\\mathscr P(A)$ compact in the weak topology."}, "gen": {"es": "Operador con $\\dom(\\gen{})\\s C_b(E)$ y rango en $C_b(E\\times A)$, dado por $\\gen{}\\varphi:(x,a)\\mapsto\\gen{a}\\varphi(x)$.", "en": "Operator with $\\dom(\\gen{})\\s C_b(E)$ and range in $C_b(E\\times A)$, given by $\\gen{}\\varphi:(x,a)\\mapsto\\gen{a}\\varphi(x)$."}, "nu0": {"es": "$\\nu_0\\in\\mathscr P(E)$, la ley inicial: $X_0\\sim\\nu_0$. Es la fuente de \\eqref{eq:balance}.", "en": "$\\nu_0\\in\\mathscr P(E)$, the initial law: $X_0\\sim\\nu_0$. It is the source in \\eqref{eq:balance}."}, "rho": {"es": "$\\rho>0$, la tasa de descuento. $\\lambda_\\rho=e^{-\\rho t}dt$ tiene masa $1/\\rho$.", "en": "$\\rho>0$, the discount rate. $\\lambda_\\rho=e^{-\\rho t}dt$ has mass $1/\\rho$."}, "Hs": {"es": "$\\Hs=H^s(E\\times A)$ con $s>(d+m)/2$. Por Sobolev, $\\Hs\\hookrightarrow C(E\\times A)$, y entonces toda medida signada finita esta en $\\Hd$.", "en": "$\\Hs=H^s(E\\times A)$ with $s>(d+m)/2$. By Sobolev, $\\Hs\\hookrightarrow C(E\\times A)$, and then every finite signed measure lies in $\\Hd$."}, "M": {"es": "$\\M=\\{\\eta\\ge0$ en $E\\times A$ que cumple \\eqref{eq:balance}$\\}$. Convexo, y $\\eta(E\\times A)=1/\\rho$ para todo $\\eta\\in\\M$.", "en": "$\\M=\\{\\eta\\ge0$ on $E\\times A$ satisfying \\eqref{eq:balance}$\\}$. Convex, and $\\eta(E\\times A)=1/\\rho$ for every $\\eta\\in\\M$."}, "eta": {"es": "$\\eta_\\pi$ definida en \\eqref{eq:ocupacion}, medida en $E\\times A$ de masa $1/\\rho$. Empareja con el costo: $J_c(\\pi)=\\eta_\\pi(c)$.", "en": "$\\eta_\\pi$ as in \\eqref{eq:ocupacion}, a measure on $E\\times A$ of mass $1/\\rho$. It pairs with the cost: $J_c(\\pi)=\\eta_\\pi(c)$."}, "etaE": {"es": "$\\eta_E\\in\\M$, la ocupacion del experto. Es lo unico que se observa de $\\pi_E$.", "en": "$\\eta_E\\in\\M$, the expert's occupation measure. It is all that is observed of $\\pi_E$."}, "R": {"es": "$R:\\Hs\\to\\Hd$ el isomorfismo de Riesz de \\eqref{eq:penalizacion}, forma debil de $\\mathrm{Id}-\\kappa\\Delta_{x,a}$.", "en": "$R:\\Hs\\to\\Hd$ the Riesz isomorphism of \\eqref{eq:penalizacion}, the weak form of $\\mathrm{Id}-\\kappa\\Delta_{x,a}$."}, "alpha": {"es": "$\\alpha>0$ pesa el previo contra la brecha. Cota: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$.", "en": "$\\alpha>0$ weighs the prior against the gap. Bound: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$."}, "pi": {"es": "$\\pi=(\\pi_t)_{t\\ge0}$ adaptado a valores en $\\mathscr P(A)$. Con $\\pi_t=\\pi(X_t)$ es markoviano relajado y solo entonces hay nucleo $\\pi_x$.", "en": "$\\pi=(\\pi_t)_{t\\ge0}$ adapted with values in $\\mathscr P(A)$. When $\\pi_t=\\pi(X_t)$ it is relaxed Markov, and only then is there a kernel $\\pi_x$."}, "V": {"es": "$V(x)$ el costo optimo arrancando en $x$. Es la variable dual de la restriccion de balance en \\eqref{eq:dual}.", "en": "$V(x)$ the optimal cost started at $x$. It is the dual variable of the balance constraint in \\eqref{eq:dual}."}}};
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "fin", "rotulo": "de Finetti"}, {"id": "std", "rotulo": "Integrales"}], "idiomas": [{"id": "es", "rotulo": "Español", "carpeta": "es"}, {"id": "en", "rotulo": "English", "carpeta": "en"}], "glosario": {"E": {"es": "$E\\s\\R^d$ abierto, el espacio de estados. La Prop. \u003ca class=\"xref\" href=\"#es-prop:compacidad-M\">3.5\u003c/a> pide ademas $E\\times A$ compacto, y el Cor. \u003ca class=\"xref\" href=\"#es-cor:umbral\">2.5\u003c/a> un dominio acotado de clase $C^1$.", "en": "$E\\s\\R^d$ open, the state space. Prop. \u003ca class=\"xref\" href=\"#en-prop:compacidad-M\">3.5\u003c/a> further asks $E\\times A$ compact, and Cor. \u003ca class=\"xref\" href=\"#en-cor:umbral\">2.5\u003c/a> a bounded domain of class $C^1$."}, "A": {"es": "$A\\s\\R^m$ compacto, las acciones. $A$ compacto $\\rt$ $\\mathscr P(A)$ compacto en la topologia debil.", "en": "$A\\s\\R^m$ compact, the action set. $A$ compact $\\rt$ $\\mathscr P(A)$ compact in the weak topology."}, "gen": {"es": "Operador con $\\dom(\\gen{})\\s C_b(E)$ y rango en $C_b(E\\times A)$, dado por $\\gen{}\\varphi:(x,a)\\mapsto\\gen{a}\\varphi(x)$.", "en": "Operator with $\\dom(\\gen{})\\s C_b(E)$ and range in $C_b(E\\times A)$, given by $\\gen{}\\varphi:(x,a)\\mapsto\\gen{a}\\varphi(x)$."}, "nu0": {"es": "$\\nu_0\\in\\mathscr P(E)$, la ley inicial: $X_0\\sim\\nu_0$. Es la fuente de \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>.", "en": "$\\nu_0\\in\\mathscr P(E)$, the initial law: $X_0\\sim\\nu_0$. It is the source in \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>."}, "rho": {"es": "$\\rho&gt;0$, la tasa de descuento. $\\lambda_\\rho=e^{-\\rho t}dt$ tiene masa $1/\\rho$.", "en": "$\\rho&gt;0$, the discount rate. $\\lambda_\\rho=e^{-\\rho t}dt$ has mass $1/\\rho$."}, "Hs": {"es": "$\\Hs=H^s(E\\times A)$ con $s&gt;(d+m)/2$. Por Sobolev, $\\Hs\\hookrightarrow C(E\\times A)$, y entonces toda medida signada finita esta en $\\Hd$.", "en": "$\\Hs=H^s(E\\times A)$ with $s&gt;(d+m)/2$. By Sobolev, $\\Hs\\hookrightarrow C(E\\times A)$, and then every finite signed measure lies in $\\Hd$."}, "M": {"es": "$\\M=\\{\\eta\\ge0$ en $E\\times A$ que cumple \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>$\\}$. Convexo, y $\\eta(E\\times A)=1/\\rho$ para todo $\\eta\\in\\M$.", "en": "$\\M=\\{\\eta\\ge0$ on $E\\times A$ satisfying \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>$\\}$. Convex, and $\\eta(E\\times A)=1/\\rho$ for every $\\eta\\in\\M$."}, "eta": {"es": "$\\eta_\\pi$ definida en \u003ca class=\"xref\" href=\"#es-eq:ocupacion\">(11)\u003c/a>, medida en $E\\times A$ de masa $1/\\rho$. Empareja con el costo: $J_c(\\pi)=\\eta_\\pi(c)$.", "en": "$\\eta_\\pi$ as in \u003ca class=\"xref\" href=\"#en-eq:ocupacion\">(11)\u003c/a>, a measure on $E\\times A$ of mass $1/\\rho$. It pairs with the cost: $J_c(\\pi)=\\eta_\\pi(c)$."}, "etaE": {"es": "$\\eta_E\\in\\M$, la ocupacion del experto. Es lo unico que se observa de $\\pi_E$.", "en": "$\\eta_E\\in\\M$, the expert&#x27;s occupation measure. It is all that is observed of $\\pi_E$."}, "R": {"es": "$R:\\Hs\\to\\Hd$ el isomorfismo de Riesz de \u003ca class=\"xref\" href=\"#es-eq:penalizacion\">(20)\u003c/a>, forma debil de $\\mathrm{Id}-\\kappa\\Delta_{x,a}$.", "en": "$R:\\Hs\\to\\Hd$ the Riesz isomorphism of \u003ca class=\"xref\" href=\"#en-eq:penalizacion\">(20)\u003c/a>, the weak form of $\\mathrm{Id}-\\kappa\\Delta_{x,a}$."}, "alpha": {"es": "$\\alpha&gt;0$ pesa el previo contra la brecha. Cota: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$.", "en": "$\\alpha&gt;0$ weighs the prior against the gap. Bound: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$."}, "pi": {"es": "$\\pi=(\\pi_t)_{t\\ge0}$ adaptado a valores en $\\mathscr P(A)$. Con $\\pi_t=\\pi(X_t)$ es markoviano relajado y solo entonces hay nucleo $\\pi_x$.", "en": "$\\pi=(\\pi_t)_{t\\ge0}$ adapted with values in $\\mathscr P(A)$. When $\\pi_t=\\pi(X_t)$ it is relaxed Markov, and only then is there a kernel $\\pi_x$."}, "V": {"es": "$V(x)$ el costo optimo arrancando en $x$. Es la variable dual de la restriccion de balance en \u003ca class=\"xref\" href=\"#es-eq:dual\">(15)\u003c/a>.", "en": "$V(x)$ the optimal cost started at $x$. It is the dual variable of the balance constraint in \u003ca class=\"xref\" href=\"#en-eq:dual\">(15)\u003c/a>."}}};
 
 /* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
    navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
