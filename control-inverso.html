@@ -611,10 +611,14 @@ $\Gen{\pi}=\tfrac12\partial_x^2$. La ley de la difusión la determina
 $\sigma\sigma^\top$.</p>
 <p>$\Sigma_\pi$ es promedio de matrices semidefinidas positivas $\rt$ semidefinida
 positiva $\rt$ $\Gen{\pi}$ conserva la forma <a class="xref" href="#es-eq:generator">(2)</a> y cumple el
-principio del máximo positivo. Si además vale la condición de rango
-$\mathcal R(\lambda\,\mathrm{Id}-\Gen{\pi})=\mathscr C_0(E)$ para algún
-$\lambda&gt;0$ <span class="src">[Baudoin, Cor. 4.41]</span> $\rt$ $\Gen{\pi}$ genera un semigrupo de
-Feller–Dynkin $\Sg{t,\pi}$, con función de transición $P_{t,\pi,x}$ tq
+principio del máximo positivo $\rt$ disipativo. Si además vale la condición de
+rango $\mathcal R(\lambda\,\mathrm{Id}-\Gen{\pi})=\mathscr C_0(E)$ para algún
+$\lambda&gt;0$ $\rt$ $\Gen{\pi}$ genera un semigrupo de contracción fuertemente
+continuo <span class="src">[Baudoin, Cor. 4.41]</span>. Que ese semigrupo sea además de
+Feller–Dynkin, es decir que preserve la positividad y $\mathscr C_0(E)$, es
+Hille–Yosida–Ray \remarcar{[incierto: Ethier–Kurtz Thm. 4.2.2, que no está
+en el material fichado]}. Se escribe $\Sg{t,\pi}$, con función de transición
+$P_{t,\pi,x}$ tq
 $P_{t,\pi,x}(\varphi)=\Sg{t,\pi}\varphi(x)$. $\Sg{t,\pi}$ y $\Gen{\pi}$ actúan
 sobre funciones; $P_{t,\pi,x}$ es una medida en $E$.</p>
 <p>Para un costo instantáneo boreliano acotado $c:E\times A\to\R$, el costo
@@ -625,8 +629,12 @@ descontado de una política relajada y el problema directo son</p>
 <p>con $\lambda_\rho=e^{-\rho t}dt$ de masa total $1/\rho$, y $\P$ la medida de la
 solución $(X,\pi)$. El ínfimo en <a class="xref" href="#es-eq:J">(6)</a> recorre las soluciones de la
 Definición <a class="xref" href="#es-def:relajada">1.1</a>.</p>
-<p>Con política markoviana la esperanza se abre en el semigrupo.</p>
-<div class="stmt proposicion" id="es-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[Bhatt–Borkar, §2.1]</span>
+<p>La clase markoviana no pierde el óptimo: para el problema descontado del filtro
+no lineal existe solución óptima con control markoviano relajado
+<span class="src">[Bhatt–Borkar, §3.2, vía Cor. 2.2]</span>, y para las demás familias de
+ejemplos lo dan por análogo sin escribirlo. Dentro de la clase, la esperanza se
+abre en el semigrupo.</p>
+<div class="stmt proposicion" id="es-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[\remarcar{Lectura propia}]</span>
 Si $\pi_s=\pi(X_s)$ para un núcleo medible $\pi:E\to\mathscr P(A)$, un
 <span class="df">control markoviano relajado</span> $\rt$ $X$ solo resuelve el problema de
 martingala para $(\Gen{\pi},\nu_0)$; si ese problema está bien puesto $\rt$ $X$
@@ -847,7 +855,8 @@ tiene representante continuo con $\|c\|_\infty\le C_\iota\|c\|_{\Hs}$, luego</p>
 y la cota.</p></div></div>
 <p>La delta muestra que el umbral es óptimo: $\delta_{(x_0,a_0)}$ es funcional
 acotado sobre $H^s$ exactamente cuando $s&gt;n/2$
-<span class="src">[Folland, Prop. 9.16 y §9.3]</span>. Luego $H^1$ solo es admisible si
+<span class="src">[Folland, Prop. 9.16 y el cálculo de $\widehat\delta$ que la precede]</span>.
+Luego $H^1$ solo es admisible si
 $d+m\le1$, y el régimen (ii) es una hipótesis sobre $\M$, no una elección de
 espacio.</p>
 <div class="stmt proposicion" id="es-prop:h1-nunca"><div class="head">Proposición 2.6</div><div class="body"><p>Si $n=d+m\ge2$ $\rt$ la delta en un punto de $E\times A$ no es funcional acotado
@@ -1279,11 +1288,15 @@ $\Gen{\pi}=\tfrac12\partial_x^2$. The law of the diffusion is determined by
 $\sigma\sigma^\top$.</p>
 <p>Since $\Sigma_\pi$ is an average of positive semidefinite matrices it is again
 positive semidefinite, so $\Gen{\pi}$ retains the form <a class="xref" href="#en-eq:generator">(2)</a> and
-satisfies the positive maximum principle. Consequently $\Gen{\pi}$ generates a
-Feller–Dynkin semigroup $\Sg{t,\pi}$ as soon as the range condition
-$\mathcal R(\lambda\,\mathrm{Id}-\Gen{\pi})=\mathscr C_0(E)$ holds for some
-$\lambda&gt;0$ <span class="src">[Baudoin, Cor. 4.41]</span>, and the associated transition function is written
-$P_{t,\pi,x}$, so that $P_{t,\pi,x}(\varphi)=\Sg{t,\pi}\varphi(x)$. We distinguish
+satisfies the positive maximum principle, hence is dissipative. Consequently
+$\Gen{\pi}$ generates a strongly continuous contraction semigroup as soon as the
+range condition $\mathcal R(\lambda\,\mathrm{Id}-\Gen{\pi})=\mathscr C_0(E)$
+holds for some $\lambda&gt;0$ <span class="src">[Baudoin, Cor. 4.41]</span>. That this semigroup is
+moreover Feller–Dynkin, that is, that it preserves positivity and
+$\mathscr C_0(E)$, is the Hille–Yosida–Ray theorem
+\remarcar{[uncertain: Ethier–Kurtz Thm. 4.2.2, which is not among the fiched
+material]}. We write it $\Sg{t,\pi}$, and the associated transition function is
+written $P_{t,\pi,x}$, so that $P_{t,\pi,x}(\varphi)=\Sg{t,\pi}\varphi(x)$. We distinguish
 the operator from its pointwise values throughout: $\Sg{t,\pi}$ and $\Gen{\pi}$ act
 on functions, while $P_{t,\pi,x}$ is a measure on $E$.</p>
 <p>For a Borel bounded running cost $c:E\times A\to\R$ the discounted cost of a
@@ -1294,8 +1307,12 @@ relaxed policy and the forward problem are</p>
 <p>where $\lambda_\rho=e^{-\rho t}dt$, of total mass $1/\rho$, and $\P$ is the measure
 of the solution $(X,\pi)$. The infimum in <a class="xref" href="#en-eq:J">(6)</a> runs over the solutions of
 Definition <a class="xref" href="#en-def:relajada">1.1</a>.</p>
-<p>When the policy is Markov the expectation opens into the semigroup.</p>
-<div class="stmt proposicion" id="en-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[Bhatt–Borkar, §2.1]</span>
+<p>Restricting to Markov policies is no loss of optimality: for the discounted
+problem for the nonlinear filter an optimal solution with relaxed Markov control
+exists <span class="src">[Bhatt–Borkar, §3.2, via Cor. 2.2]</span>, and for the remaining
+families of examples the argument is asserted to be analogous but is not written
+out. Within the class, the expectation opens into the semigroup.</p>
+<div class="stmt proposicion" id="en-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[\remarcar{Own reading}]</span>
 Suppose $\pi_s=\pi(X_s)$ for a measurable kernel $\pi:E\to\mathscr P(A)$, a
 <span class="df">relaxed Markov control</span>. Then $X$ alone solves the martingale problem for
 $(\Gen{\pi},\nu_0)$; if that problem is well posed, $X$ is a Markov process with
@@ -1514,7 +1531,8 @@ has a continuous representative with $\|c\|_\infty\le C_\iota\|c\|_{\Hs}$, so</p
 $\eta\in\Hd$ and the bound.</p></div></div>
 <p>The Dirac mass shows the threshold is sharp: $\delta_{(x_0,a_0)}$ is a bounded
 functional on $H^s$ exactly when $s&gt;n/2$
-<span class="src">[Folland, Prop. 9.16 and §9.3]</span>. Hence $H^1$ is admissible only for
+<span class="src">[Folland, Prop. 9.16 and the computation of $\widehat\delta$ preceding
+it]</span>. Hence $H^1$ is admissible only for
 $d+m\le1$, and regime (ii) is an assumption on $\M$, not a choice of space.</p>
 <div class="stmt proposicion" id="en-prop:h1-nunca"><div class="head">Proposición 2.6</div><div class="body"><p>For $n=d+m\ge2$ the Dirac mass at a point of $E\times A$ is not a bounded
 functional on $H^1(E\times A)$. In particular the singular occupation measures of
