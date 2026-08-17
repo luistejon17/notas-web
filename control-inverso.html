@@ -726,19 +726,31 @@ débil</span></p>
 <div class="display numerado" id="es-eq:balance"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}\bigl(\rho\varphi(x)-\gen{a}\varphi(x)\bigr)\,\eta(dx,da)
     =\int_E\varphi\,d\nu_0.\qquad \]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-\gen{}\varphi\bigr)=\nu_0(\varphi).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(11)</span><span class="num">(13)</span></div></div>
 <p>Recíprocamente, todo $\eta\ge0$ que cumpla <a class="xref" href="#es-eq:balance">(13)</a> es la medida de
-ocupación de alguna solución.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p3">Ver demostración</button><div class="proof" id="es-control-inverso-p3"><p>Por la Definición <a class="xref" href="#es-def:relajada">1.1</a> el proceso
-$M_t=\varphi(X_t)-\int_0^t\pi_s^a\gen{a}\varphi(X_s)\,ds$ es martingala, luego
-$\varphi(X_t)$ es semimartingala continua con esa descomposición. El descuento
-$t\mapsto e^{-\rho t}$ es determinista, continuo y de variación acotada, así que
-su covariación con $\varphi(X)$ es nula e integrar por partes da</p>
-<div class="display">\[e^{-\rho t}\varphi(X_t)=\varphi(X_0)+\int_0^te^{-\rho s}\,dM_s
-  +\int_0^te^{-\rho s}\pi_s^a\gen{a}\varphi(X_s)\,ds
-  -\rho\int_0^te^{-\rho s}\varphi(X_s)\,ds .\]</div>
-<p>El integrando $e^{-\rho s}$ está acotado por $1$ y $M$ es martingala, luego la
-integral estocástica tiene esperanza nula. Tomando esperanzas, haciendo
-$t\to\infty$, y usando que $\varphi$ es acotada para que
-$e^{-\rho t}\E[\varphi(X_t)]\to0$, sale <a class="xref" href="#es-eq:balance">(13)</a> escrita con la
-Definición <a class="xref" href="#es-def:ocupacion">1.4</a>. El recíproco es la caracterización de las medidas
+ocupación de alguna solución.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p3">Ver demostración</button><div class="proof" id="es-control-inverso-p3"><p>Las hipótesis son las de <a class="xref" href="#es-eq:gen-operador">(3)</a> y ninguna más:
+$\varphi\in\dom(\gen{})\s C_b(E)$ y $\gen{}\varphi\in C_b(E\times A)$. No se
+supone que $\gen{}$ sea el generador diferencial <a class="xref" href="#es-eq:generator">(2)</a>, ni que
+$X$ tenga trayectorias continuas: la Definición <a class="xref" href="#es-def:relajada">1.1</a> vive en un
+espacio polaco y sus soluciones son càdlàg. Por eso el argumento es determinista
+y no toca el cálculo estocástico.</p>
+<p>Tomando esperanzas en la martingala de la Definición <a class="xref" href="#es-def:relajada">1.1</a> entre
+$0$ y $t$,</p>
+<div class="display">\[\E[\varphi(X_t)]-\nu_0(\varphi)
+  =\E\Bigl[\int_0^t\pi_s^a\gen{a}\varphi(X_s)\,ds\Bigr]
+  \qquad\forall t\ge0 .\]</div>
+<p>Multiplicar por $\rho e^{-\rho t}$ e integrar en $t\in(0,\infty)$. Los dos
+integrandos están acotados por $\|\varphi\|_\infty$ y
+$\|\gen{}\varphi\|_\infty$, y $\rho e^{-\rho t}dt$ es de probabilidad $\rt$
+Fubini. A la izquierda queda $\rho\,\eta(\varphi)-\nu_0(\varphi)$ con la
+Definición <a class="xref" href="#es-def:ocupacion">1.4</a>. A la derecha, intercambiando $s$ y $t$,</p>
+<div class="display">\[\int_0^\infty\!\!\rho e^{-\rho t}\!\int_0^t(\cdot)\,ds\,dt
+  =\int_0^\infty\!(\cdot)\int_s^\infty\!\!\rho e^{-\rho t}dt\,ds
+  =\int_0^\infty\!\!e^{-\rho s}(\cdot)\,ds ,\]</div>
+<p>o sea $\eta(\gen{}\varphi)$. Igualando sale <a class="xref" href="#es-eq:balance">(13)</a>.</p>
+<p>Integrar por partes contra $e^{-\rho t}$ y anular
+$\E\int_0^te^{-\rho s}dM_s$ sería más corto y pide más: un integrando acotado
+contra martingala da martingala <em>local</em>, cuya esperanza no se anula sin una
+condición de integrabilidad adicional.</p>
+<p>El recíproco es la caracterización de las medidas
 de ocupación descontadas <span class="src">[Bhatt–Borkar, Thm. 2.2]</span>; para espacios de
 estados localmente compactos ver <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span>.</p></div></div>
 <p>En forma de operadores <a class="xref" href="#es-eq:balance">(13)</a> es
@@ -812,8 +824,8 @@ $\eta\in\M$ se tiene $\pair{c+q_\phi}{\eta}=\pair{c}{\eta}+\nu_0(\phi)$, un
 corrimiento por una constante, así que los dos costos tienen los mismos
 minimizadores y, como $\eta_E\in\M$, la misma brecha.</p></div></div>
 <p>Es la forma en tiempo continuo del <em>potential-based shaping</em>, y es
-<a class="xref" href="#es-eq:balance">(13)</a> leída contra $c$. El previo elige un representante de la
-clase, así que vale la pena llevarlo incluso con el experto exactamente óptimo.</p>
+<a class="xref" href="#es-eq:balance">(13)</a> leída contra $c$.</p>
+<!-- entorno omitido: abierto -->
 <div class="display numerado" id="es-eq:inverso"><div class="eqbody">\begin{equation}
 
   \min_{c\in\Hs}\ \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\Gap(c)\right\},
@@ -839,8 +851,8 @@ $C(E\times A)$ $\rt$ toda medida signada finita define un funcional continuo
 sobre $\Hs$, o sea $\M\s\Hd$ y el emparejamiento es el de dualidad.</p></li><li><p><span class="df">Formulación por densidades.</span> Si toda medida de ocupación relevante
 tiene densidad $L^2$ $\rt$ se puede tomar $\Hs=H^1$ con el emparejamiento $L^2$.
 Es el régimen en el que se escriben la formulación PDE y la numérica.</p></li></ol>
-<p>El régimen (i) es el que sostiene la teoría de existencia, y el encaje que pide
-es un umbral de Sobolev.</p>
+<p>El régimen (i) es el que sostiene la teoría de existencia, y la inyección que
+pide es un umbral de Sobolev.</p>
 <div class="stmt teorema" id="es-thm:encaje"><div class="head">Teorema 2.4</div><div class="body"><p><span class="src">[Folland, Thm. 9.17]</span>
 Si $n=d+m$ y $s&gt;n/2$ $\rt$ $H^s(\R^n)\hookrightarrow C_0(\R^n)$ continuamente, y
 todo $f\in H^s$ tiene representante continuo con
@@ -909,7 +921,8 @@ minimizador único.</p></div></div></section>
 <p>El problema inverso tiene estructura convexa suficiente para dar existencia
 directamente, sin ninguna propiedad de continuidad del mapa de costos a políticas
 óptimas. Se trabaja en el régimen (i) de la Sección <a class="xref" href="#es-sec:espacio-costo">2.1</a>, o
-sea $\Hs\hookrightarrow C(E\times A)$ con norma de encaje $C_\iota$, y se escribe
+sea $\Hs\hookrightarrow C(E\times A)$ con norma de inyección $C_\iota$, y se
+escribe
 $\Phi$ por el funcional de silla, dejando $\mathcal L$ para el generador:</p>
 <div class="display numerado" id="es-eq:Phi"><div class="eqbody">\begin{equation}
 
@@ -981,8 +994,8 @@ minimizador de <a class="xref" href="#es-eq:reducido">(25)</a> construye un punt
 dualidad fuerte.</p>
 <p>La compacidad que pide el teorema la hereda del problema directo.</p>
 <div class="stmt proposicion" id="es-prop:compacidad-M"><div class="head">Proposición 3.5</div><div class="body"><p>Si $E\times A$ es compacto y $\gen{}$ manda $\dom(\gen{})$ en $C(E\times A)$
-$\rt$ $\M$ es convexo y débilmente compacto en $\Hd$. Si además el encaje
-$\iota:\Hs\to C(E\times A)$ es compacto, cosa que vale para $\Hs=H^s(E\times A)$
+$\rt$ $\M$ es convexo y débilmente compacto en $\Hd$. Si además la inyección
+$\iota:\Hs\to C(E\times A)$ es compacta, cosa que vale para $\Hs=H^s(E\times A)$
 con $s&gt;(d+m)/2$ sobre un dominio con operador de extensión $\rt$ $\M$ es compacto
 en la norma de $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p14">Ver demostración</button><div class="proof" id="es-control-inverso-p14"><p>La convexidad vale porque <a class="xref" href="#es-eq:balance">(13)</a> es una familia de igualdades
 lineales y la restricción $\eta\ge0$ es convexa. Poner $\widehat\M=\rho\,\M$, que
@@ -992,7 +1005,8 @@ $\widehat\M$ es débil-$*$ cerrado en él porque cada restricción
 $\mu\mapsto\mu(\rho\varphi-\gen{}\varphi)-\nu_0(\varphi)$ es débil-$*$ continua,
 al estar la función de prueba $\rho\varphi-\gen{}\varphi$ en $C(E\times A)$ por
 hipótesis. Luego $\widehat\M$ es débil-$*$ compacto.</p>
-<p>Sea $\iota:\Hs\to C(E\times A)$ el encaje y $\iota^{*}$ su adjunto. Con $c$ fijo,
+<p>Sea $\iota:\Hs\to C(E\times A)$ la inyección y $\iota^{*}$ su adjunto. Con $c$
+fijo,
 el mapa $\mu\mapsto\pair{\iota^{*}\mu}{c}=\mu(\iota c)$ es débil-$*$ continuo,
 luego $\iota^{*}$ es continuo de la topología débil-$*$ a $\sigma(\Hd,\Hs)$ y
 manda compactos en compactos. Como $\Hd$ es de Hilbert, $\sigma(\Hd,\Hs)$ es su
@@ -1006,7 +1020,8 @@ cerrado en norma, y un cerrado relativamente compacto es compacto.</p></div></di
 lineales. La compacidad pasa por el conjunto normalizado
 $\widehat\M=\rho\,\M\s\mathscr P(E\times A)$, débil-$*$ compacto por
 Banach–Alaoglu y por ser cerradas las restricciones de balance, y luego se
-transporta a $\Hd$ con el adjunto del encaje. Con encaje compacto, Schauder da
+transporta a $\Hd$ con el adjunto de la inyección. Con inyección compacta,
+Schauder da
 compacidad en norma y la existencia en <a class="xref" href="#es-eq:reducido">(25)</a> es Weierstrass.</p>
 <div class="stmt teorema" id="es-thm:silla"><div class="head">Teorema 3.6</div><div class="body"><p>Si $\Hs\hookrightarrow C(E\times A)$, $\M\s\Hd$ no vacío, convexo y débilmente
 compacto, y $\ch\in\Hs$ $\rt$ <a class="xref" href="#es-eq:reducido">(25)</a> tiene minimizador único
@@ -1403,19 +1418,34 @@ relaxed controlled martingale problem satisfies the <span class="df">weak balanc
 <div class="display numerado" id="en-eq:balance"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}\bigl(\rho\varphi(x)-\gen{a}\varphi(x)\bigr)\,\eta(dx,da)
     =\int_E\varphi\,d\nu_0.\qquad \]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-\gen{}\varphi\bigr)=\nu_0(\varphi).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(11)</span><span class="num">(13)</span></div></div>
 <p>Conversely, every $\eta\ge0$ satisfying <a class="xref" href="#en-eq:balance">(13)</a> is the occupation
-measure of some solution.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p3">Ver demostración</button><div class="proof" id="en-control-inverso-p3"><p>By Definition <a class="xref" href="#en-def:relajada">1.1</a> the process
-$M_t=\varphi(X_t)-\int_0^t\pi_s^a\gen{a}\varphi(X_s)\,ds$ is a martingale, so
-$\varphi(X_t)$ is a continuous semimartingale with that decomposition. The discount
-$t\mapsto e^{-\rho t}$ is deterministic, continuous and of bounded variation, so
-its covariation with $\varphi(X)$ vanishes and integration by parts gives</p>
-<div class="display">\[e^{-\rho t}\varphi(X_t)=\varphi(X_0)+\int_0^te^{-\rho s}\,dM_s
-  +\int_0^te^{-\rho s}\pi_s^a\gen{a}\varphi(X_s)\,ds
-  -\rho\int_0^te^{-\rho s}\varphi(X_s)\,ds .\]</div>
-<p>The integrand $e^{-\rho s}$ is bounded by $1$ and $M$ is a martingale, so the
-stochastic integral has zero expectation. Taking expectations, letting
-$t\to\infty$, and using boundedness of $\varphi$ so that
-$e^{-\rho t}\E[\varphi(X_t)]\to0$, we obtain <a class="xref" href="#en-eq:balance">(13)</a> written with
-Definition <a class="xref" href="#en-def:ocupacion">1.4</a>. The converse is the characterization of discounted
+measure of some solution.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p3">Ver demostración</button><div class="proof" id="en-control-inverso-p3"><p>The hypotheses are those of <a class="xref" href="#en-eq:gen-operador">(3)</a> and no others:
+$\varphi\in\dom(\gen{})\s C_b(E)$ and $\gen{}\varphi\in C_b(E\times A)$. In
+particular $\gen{}$ is not assumed to be the differential generator
+<a class="xref" href="#en-eq:generator">(2)</a>, nor is $X$ assumed to have continuous paths:
+Definition <a class="xref" href="#en-def:relajada">1.1</a> is posed on a Polish space and its solutions are
+càdlàg. Accordingly the argument below is deterministic and uses no stochastic
+calculus.</p>
+<p>Taking expectations in the martingale of Definition <a class="xref" href="#en-def:relajada">1.1</a> between
+$0$ and $t$,</p>
+<div class="display">\[\E[\varphi(X_t)]-\nu_0(\varphi)
+  =\E\Bigl[\int_0^t\pi_s^a\gen{a}\varphi(X_s)\,ds\Bigr]
+  \qquad\text{for every }t\ge0 .\]</div>
+<p>Multiply by $\rho e^{-\rho t}$ and integrate over $t\in(0,\infty)$. Both
+integrands are bounded, by $\|\varphi\|_\infty$ and
+$\|\gen{}\varphi\|_\infty$ respectively, and $\rho e^{-\rho t}dt$ is a
+probability measure, so Fubini applies. The left-hand side becomes
+$\rho\,\eta(\varphi)-\nu_0(\varphi)$ by Definition <a class="xref" href="#en-def:ocupacion">1.4</a>, and on
+the right, interchanging $s$ and $t$,</p>
+<div class="display">\[\int_0^\infty\!\!\rho e^{-\rho t}\!\int_0^t(\cdot)\,ds\,dt
+  =\int_0^\infty\!(\cdot)\int_s^\infty\!\!\rho e^{-\rho t}dt\,ds
+  =\int_0^\infty\!\!e^{-\rho s}(\cdot)\,ds ,\]</div>
+<p>which is $\eta(\gen{}\varphi)$. Equating the two sides gives
+<a class="xref" href="#en-eq:balance">(13)</a>.</p>
+<p>Integrating by parts against $e^{-\rho t}$ and discarding
+$\E\int_0^te^{-\rho s}dM_s$ would be shorter and assumes more: a bounded
+integrand against a martingale yields a <em>local</em> martingale, whose
+expectation need not vanish without a further integrability condition.</p>
+<p>The converse is the characterization of discounted
 occupation measures <span class="src">[Bhatt–Borkar, Thm. 2.2]</span>; for locally compact
 state spaces see <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span>.</p></div></div>
 <p>In operator form <a class="xref" href="#en-eq:balance">(13)</a> reads $(\rho-\gen{})^{*}\eta=\nu_0$, so $\eta$
@@ -1488,8 +1518,8 @@ any $\eta\in\M$ we have $\pair{c+q_\phi}{\eta}=\pair{c}{\eta}+\nu_0(\phi)$, a sh
 by a constant, so the two costs have the same minimizers and, since $\eta_E\in\M$,
 the same gap.</p></div></div>
 <p>This is the continuous-time form of potential-based shaping, and it is
-<a class="xref" href="#en-eq:balance">(13)</a> read against $c$. The prior selects one representative of the
-class, so it is worth carrying even when the expert is exactly optimal.</p>
+<a class="xref" href="#en-eq:balance">(13)</a> read against $c$.</p>
+<!-- entorno omitido: abierto -->
 <div class="display numerado" id="en-eq:inverso"><div class="eqbody">\begin{equation}
 
   \min_{c\in\Hs}\ \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\Gap(c)\right\},
