@@ -585,11 +585,44 @@ rango en $C_b(E\times A)$ dado por</p>
 
   \gen{}\varphi:(x,a)\longmapsto\gen{a}\varphi(x).
 \end{equation}</div><div class="eqside"><span class="num">(3)</span></div></div>
+<p>El proceso reflejado toma valores en $\overline E$, compacto, y es
+$\overline E\times A$ el que lleva el problema de control.</p>
+<div class="stmt proposicion" id="es-prop:condiciones"><div class="head">Proposición 1.1</div><div class="body"><p>$\overline E$, $A$ y $\dom(\gen{})$ cumplen las hipótesis permanentes de las dos
+fuentes: $\dom(\gen{})$ es álgebra, densa en $C(\overline E)$, con las constantes
+y separando puntos; $\gen{}\mathbf 1=0$; cada $\gen{a}$ cumple el principio del
+máximo positivo; y la condición de crecimiento vale con $\psi\equiv1$.
+<span class="src">[Kurtz–Stockbridge, §1.1 (i)–(vi); Bhatt–Borkar, Cond. 1–2]</span></p></div></div>
+<p>Dos de ellas no son automáticas. Que $\dom(\gen{})$ sea álgebra es la regla del
+producto, $\partial_n(\varphi\psi)=\varphi\,\partial_n\psi+\psi\,\partial_n\varphi$,
+y es la (v) de Kurtz–Stockbridge. El principio del máximo positivo vale en un
+máximo de frontera porque $\partial_n\varphi=0$ deja a $\varphi$ decreciendo
+hacia dentro de $\overline E$ también en la normal $\rt$ $D^2\varphi\le0$ como
+forma y $\operatorname{Tr}(\sigma\sigma^\top D^2\varphi)\le0$. La compacidad de
+$\overline E\times A$ admite $\psi\equiv1$, y da además los subniveles compactos
+que el Teorema 6.3 de Kurtz–Stockbridge le pide al costo.</p>
+<p>Y la reflexión es el único comportamiento de frontera estándar que sobrevive a
+esas condiciones. El dominio de Dirichlet y $\mathscr C^2_c(E)$ son álgebras pero
+no tienen las constantes $\rt$ no hay $\gen{}\mathbf 1=0$ y falla la Condición 2
+de Bhatt–Borkar; y matando en $\tau=\inf\{t:X_t\in\partial E\}$ sale
+$\rho\,\eta(\overline E\times A)=1-\E[e^{-\rho\tau}]&lt;1$, luego el
+Corolario <a class="xref" href="#es-cor:masa">1.8</a> y <a class="xref" href="#es-eq:balance">(13)</a> ganan los dos un término de
+frontera. Si $\sigma\sigma^\top$ es no degenerada $\rt$
+$\eta_\pi(\partial E\times A)=0$, y la distinción entre $E$ y $\overline E$ no
+llega nunca a $\eta$.</p>
+<div class="stmt observacion" id="es-obs:reflexion-incierta"><div class="head">Observación 1.2</div><div class="body"><p>Detrás de la Proposición <a class="xref" href="#es-prop:condiciones">1.1</a> hay dos pasos estándar y
+\remarcar{[inciertos: no están en el material fichado]}. Que la difusión
+reflejada resuelva el problema de martingala para $\dom(\gen{})$ es la
+descomposición de Skorokhod $dX_t=b\,dt+\sigma\,dW_t-n(X_t)\,dL_t$, donde el
+tiempo local entra en $d\varphi(X_t)$ por $\partial_n\varphi\,dL_t$ y por tanto
+desaparece sobre $\dom(\gen{})$; y su existencia desde cada punto, que es la
+Condición 3 de Bhatt–Borkar, es el problema de submartingala de
+Stroock–Varadhan o Lions–Sznitman. Ninguna de las dos referencias está en el
+proyecto.</p></div></div>
 <p><a class="xref" href="#es-eq:sde">(1)</a> presupone un proceso de acciones $a_t$, y eso es más de lo que
 hace falta. La formulación que se adopta es el problema de martingala controlado
 relajado, que cambia el proceso de acciones por uno a valores medida y aguanta la
 aleatorización que pide la formulación de programación lineal.</p>
-<div class="stmt definicion" id="es-def:relajada"><div class="head">Definición 1.1</div><div class="body"><p><span class="src">[Bhatt–Borkar, Def. 1.2]</span>
+<div class="stmt definicion" id="es-def:relajada"><div class="head">Definición 1.3</div><div class="body"><p><span class="src">[Bhatt–Borkar, Def. 1.2]</span>
 $V=\mathscr P(A)$, compacto metrizable en la topología débil. Un proceso
 $(X,\pi)$ a valores en $E\times V$, progresivamente medible respecto de
 $\{\mathscr F_t\}$ y con $X_0\sim\nu_0$, resuelve el <span class="df">problema de martingala
@@ -634,13 +667,13 @@ descontado de una política relajada y el problema directo son</p>
    \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(6)</span></div></div>
 <p>con $\lambda_\rho=e^{-\rho t}dt$ de masa total $1/\rho$, y $\P$ la medida de la
 solución $(X,\pi)$. El ínfimo en <a class="xref" href="#es-eq:J">(6)</a> recorre las soluciones de la
-Definición <a class="xref" href="#es-def:relajada">1.1</a>.</p>
+Definición <a class="xref" href="#es-def:relajada">1.3</a>.</p>
 <p>La clase markoviana no pierde el óptimo: para el problema descontado del filtro
 no lineal existe solución óptima con control markoviano relajado
 <span class="src">[Bhatt–Borkar, §3.2, vía Cor. 2.2]</span>, y para las demás familias de
 ejemplos lo dan por análogo sin escribirlo. Dentro de la clase, la esperanza se
 abre en el semigrupo.</p>
-<div class="stmt proposicion" id="es-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[Lectura propia]</span>
+<div class="stmt proposicion" id="es-prop:semigrupo"><div class="head">Proposición 1.4</div><div class="body"><p><span class="src">[Lectura propia]</span>
 Si $\pi_s=\pi(X_s)$ para un núcleo medible $\pi:E\to\mathscr P(A)$, un
 <span class="df">control markoviano relajado</span> $\rt$ $X$ solo resuelve el problema de
 martingala para $(\Gen{\pi},\nu_0)$; si ese problema está bien puesto $\rt$ $X$
@@ -686,7 +719,7 @@ dinámica cumple</p>
   \rho V(x)=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}.
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(8)</span></div></div>
-<div class="stmt proposicion" id="es-prop:hjb"><div class="head">Proposición 1.3</div><div class="body"><p><a class="xref" href="#es-eq:hjb">(8)</a> $\iff$ la desigualdad</p>
+<div class="stmt proposicion" id="es-prop:hjb"><div class="head">Proposición 1.5</div><div class="body"><p><a class="xref" href="#es-eq:hjb">(8)</a> $\iff$ la desigualdad</p>
 <div class="display numerado" id="es-eq:hjb-ineq"><div class="eqbody">\begin{equation}
 
   c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0,\qquad (x,a)\in E\times A,
@@ -711,7 +744,7 @@ la teoría de existencia de la Sección <a class="xref" href="#es-sec:convexo">3
 solo como la factibilidad dual <a class="xref" href="#es-eq:dual">(15)</a> y como un bloque del sistema de
 optimalidad de la Sección <a class="xref" href="#es-sec:pde">4</a>, ahí en forma débil.</p>
 <h4 id="es-sec:balance"><span class="secnum">1.2</span>Medidas de ocupación descontadas</h4>
-<div class="stmt definicion" id="es-def:ocupacion"><div class="head">Definición 1.4</div><div class="body"><p><span class="src">[Bhatt–Borkar, (1.6)]</span>
+<div class="stmt definicion" id="es-def:ocupacion"><div class="head">Definición 1.6</div><div class="body"><p><span class="src">[Bhatt–Borkar, (1.6)]</span>
 Para una política relajada $\pi$ y $B\in\mathscr B(E\times A)$, la <span class="df">medida de
 ocupación descontada</span> es</p>
 <div class="display numerado" id="es-eq:ocupacion"><div class="eqbody"><span class="v" data-var="std">\[\eta_\pi(B)=\E\left[\int_0^\infty e^{-\rho t}\int_A
@@ -725,7 +758,7 @@ inicial, así que todo lo que sigue pasa en $E\times A$, y el problema directo, 
 convexo en $\pi$, es lineal en $\eta$.</p>
 <p>Las medidas que salen así quedan caracterizadas por una sola familia de
 igualdades lineales.</p>
-<div class="stmt proposicion" id="es-prop:balance"><div class="head">Proposición 1.5</div><div class="body"><p><span class="src">[Bhatt–Borkar, (2.13) y Thm. 2.2]</span>
+<div class="stmt proposicion" id="es-prop:balance"><div class="head">Proposición 1.7</div><div class="body"><p><span class="src">[Bhatt–Borkar, (2.13) y Thm. 2.2]</span>
 $\forall\varphi\in\dom(\gen{})$, la medida de ocupación de cualquier solución del
 problema de martingala controlado relajado cumple la <span class="df">identidad de balance
 débil</span></p>
@@ -735,10 +768,10 @@ débil</span></p>
 ocupación de alguna solución.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p3">Ver demostración</button><div class="proof" id="es-control-inverso-p3"><p>Las hipótesis son las de <a class="xref" href="#es-eq:gen-operador">(3)</a> y ninguna más:
 $\varphi\in\dom(\gen{})\s C_b(E)$ y $\gen{}\varphi\in C_b(E\times A)$. No se
 supone que $\gen{}$ sea el generador diferencial <a class="xref" href="#es-eq:generator">(2)</a>, ni que
-$X$ tenga trayectorias continuas: la Definición <a class="xref" href="#es-def:relajada">1.1</a> vive en un
+$X$ tenga trayectorias continuas: la Definición <a class="xref" href="#es-def:relajada">1.3</a> vive en un
 espacio polaco y sus soluciones son càdlàg. Por eso el argumento es determinista
 y no toca el cálculo estocástico.</p>
-<p>Tomando esperanzas en la martingala de la Definición <a class="xref" href="#es-def:relajada">1.1</a> entre
+<p>Tomando esperanzas en la martingala de la Definición <a class="xref" href="#es-def:relajada">1.3</a> entre
 $0$ y $t$,</p>
 <div class="display">\[\E[\varphi(X_t)]-\nu_0(\varphi)
   =\E\Bigl[\int_0^t\pi_s^a\gen{a}\varphi(X_s)\,ds\Bigr]
@@ -747,7 +780,7 @@ $0$ y $t$,</p>
 integrandos están acotados por $\|\varphi\|_\infty$ y
 $\|\gen{}\varphi\|_\infty$, y $\rho e^{-\rho t}dt$ es de probabilidad $\rt$
 Fubini. A la izquierda queda $\rho\,\eta(\varphi)-\nu_0(\varphi)$ con la
-Definición <a class="xref" href="#es-def:ocupacion">1.4</a>. A la derecha, intercambiando $s$ y $t$,</p>
+Definición <a class="xref" href="#es-def:ocupacion">1.6</a>. A la derecha, intercambiando $s$ y $t$,</p>
 <div class="display">\[\int_0^\infty\!\!\rho e^{-\rho t}\!\int_0^t(\cdot)\,ds\,dt
   =\int_0^\infty\!(\cdot)\int_s^\infty\!\!\rho e^{-\rho t}dt\,ds
   =\int_0^\infty\!\!e^{-\rho s}(\cdot)\,ds ,\]</div>
@@ -762,8 +795,8 @@ estados localmente compactos ver <span class="src">[Kurtz–Stockbridge, Thm. 6.
 <p>En forma de operadores <a class="xref" href="#es-eq:balance">(13)</a> es
 $(\rho-\gen{})^{*}\eta=\nu_0$, o sea $\eta$ es la ley inicial transportada por la
 resolvente adjunta; es el enunciado dual de la forma resolvente de $J_c$ que
-quedó tras la Proposición <a class="xref" href="#es-prop:semigrupo">1.2</a>.</p>
-<div class="stmt corolario" id="es-cor:masa"><div class="head">Corolario 1.6</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ para toda $\pi$. En particular $\eta_\pi$ no es de
+quedó tras la Proposición <a class="xref" href="#es-prop:semigrupo">1.4</a>.</p>
+<div class="stmt corolario" id="es-cor:masa"><div class="head">Corolario 1.8</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ para toda $\pi$. En particular $\eta_\pi$ no es de
 probabilidad.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p4">Ver demostración</button><div class="proof" id="es-control-inverso-p4"><p>Tomar $\varphi\equiv1$ en <a class="xref" href="#es-eq:balance">(13)</a>. Los dos términos de
 <a class="xref" href="#es-eq:generator">(2)</a> llevan derivadas de $\varphi$, luego $\gen{a}1=0$ y la
 identidad queda $\rho\,\eta(E\times A)=\nu_0(1)=1$.</p></div></div>
@@ -787,13 +820,15 @@ $1/\rho$ es la única entrada de la cota del Lema <a class="xref" href="#es-lema
 <p>La desigualdad HJB <a class="xref" href="#es-eq:hjb-ineq">(9)</a> es entonces exactamente la factibilidad
 dual de <a class="xref" href="#es-eq:lp">(14)</a>, y la función de valor es la variable dual pegada a la
 restricción de balance.</p>
-<div class="stmt observacion" id="es-obs:test"><div class="head">Observación 1.7</div><div class="body"><p>$\M$ depende de la clase de prueba de <a class="xref" href="#es-eq:balance">(13)</a>, y $\mathscr C^2_c(E)$,
+<div class="stmt observacion" id="es-obs:test"><div class="head">Observación 1.9</div><div class="body"><p>$\M$ depende de la clase de prueba de <a class="xref" href="#es-eq:balance">(13)</a>, y $\mathscr C^2_c(E)$,
 $C^\infty_c(E)$ y $C^2_b(\overline E)$ dan conjuntos distintos en cuanto $E$
 tiene frontera; la diferencia es el comportamiento en la frontera que
 <a class="xref" href="#es-eq:balance">(13)</a> alcanza a detectar. La reflexión selecciona
-$\{\varphi\in C^2(\overline E):\partial_n\varphi=0\}$, y es bajo una elección de
-ese tipo que se tiene la caracterización de la Proposición <a class="xref" href="#es-prop:balance">1.5</a>
-<span class="src">[Kurtz–Stockbridge, Ej. 3.4]</span>.</p></div></div></section>
+$\{\varphi\in C^2(\overline E):\partial_n\varphi=0\}$, y la
+Proposición <a class="xref" href="#es-prop:condiciones">1.1</a> es lo que hace admisible esa elección. El
+ejemplo de difusión de <span class="src">[Kurtz–Stockbridge, Ej. 3.4]</span> toma
+$\mathscr C^2_c(\R^d)$, sobre un espacio de estados sin frontera, así que fija
+el dominio solo en el interior.</p></div></div></section>
 <section class="capitulo"><h3 id="es-sec:inverso"><span class="secnum">2</span>Control inverso con costo previo</h3>
 <p>Se observa un experto y se pregunta qué costo instantáneo lo explica. El experto
 es una política $\pi_E$ conocida solo por su medida de ocupación descontada
@@ -975,9 +1010,9 @@ $\Phi$ por el funcional de silla, dejando $\mathcal L$ para el generador:</p>
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(22)</span></div></div>
 <p>Tres de las hipótesis que carga la nota salen gratis aquí, y las tres se siguen
-de la masa del Corolario <a class="xref" href="#es-cor:masa">1.6</a>.</p>
+de la masa del Corolario <a class="xref" href="#es-cor:masa">1.8</a>.</p>
 <div class="stmt lema" id="es-lema:M-acotado"><div class="head">Lema 3.1</div><div class="body"><p>Todo $\eta\in\M$ cumple $\|\eta\|_{\Hd}\le C_\iota/\rho$, y
-$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p11">Ver demostración</button><div class="proof" id="es-control-inverso-p11"><p>Sea $\eta\in\M$. Por el Corolario <a class="xref" href="#es-cor:masa">1.6</a> es no negativa con
+$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p11">Ver demostración</button><div class="proof" id="es-control-inverso-p11"><p>Sea $\eta\in\M$. Por el Corolario <a class="xref" href="#es-cor:masa">1.8</a> es no negativa con
 $\eta(E\times A)=1/\rho$, luego para todo $c\in\Hs$</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,\eta(E\times A)
   =\frac{\|\iota c\|_\infty}{\rho}\le\frac{C_\iota}{\rho}\|c\|_{\Hs},\]</div>
@@ -1041,7 +1076,7 @@ $\rt$ $\M$ es convexo y débilmente compacto en $\Hd$. Si además la inyección
 $\iota:\Hs\to C(E\times A)$ es compacta, cosa que vale para el espacio de la
 Definición <a class="xref" href="#es-def:espacio">2.7</a> $\rt$ $\M$ es compacto en la norma de $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p15">Ver demostración</button><div class="proof" id="es-control-inverso-p15"><p>La convexidad vale porque <a class="xref" href="#es-eq:balance">(13)</a> es una familia de igualdades
 lineales y la restricción $\eta\ge0$ es convexa. Poner $\widehat\M=\rho\,\M$, que
-por el Corolario <a class="xref" href="#es-cor:masa">1.6</a> vive en $\mathscr P(E\times A)$. Con $E\times A$
+por el Corolario <a class="xref" href="#es-cor:masa">1.8</a> vive en $\mathscr P(E\times A)$. Con $E\times A$
 compacto, $\mathscr P(E\times A)$ es débil-$*$ compacto por Banach–Alaoglu, y
 $\widehat\M$ es débil-$*$ cerrado en él porque cada restricción
 $\mu\mapsto\mu(\rho\varphi-\gen{}\varphi)-\nu_0(\varphi)$ es débil-$*$ continua,
@@ -1194,7 +1229,7 @@ anula en $\dom(\gen{})$ por <a class="xref" href="#es-eq:gen-operador">(3)</a>. 
 <p><a class="xref" href="#es-eq:fp">(33)</a> es la ecuación de Fokker–Planck estacionaria con descuento $\rho$
 y fuente $\nu_0$, obtenida de <a class="xref" href="#es-eq:balance">(13)</a> restringiendo a la marginal del
 estado e integrando por partes. Su masa total es $1/\rho$ por el
-Corolario <a class="xref" href="#es-cor:masa">1.6</a>, que es la normalización que toda discretización tiene
+Corolario <a class="xref" href="#es-cor:masa">1.8</a>, que es la normalización que toda discretización tiene
 que reproducir.</p>
 <div class="stmt observacion" id="es-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Escribir <a class="xref" href="#es-eq:fp">(33)</a> puntualmente pide dos derivadas de $\Sigma_\pi m_\pi$, y
 $m_\pi$ no tiene por qué tenerlas: con política determinista la medida de
@@ -1238,7 +1273,7 @@ $\pi_E$ y de alguna $\pi_A$ óptima se desintegran como
 sobre $\M$, lo que por <a class="xref" href="#es-eq:lp">(14)</a> y su dual <a class="xref" href="#es-eq:dual">(15)</a> equivale a la
 existencia de $V$ que cumpla <a class="xref" href="#es-eq:hjb-ineq">(9)</a> con holgura complementaria en
 $\operatorname{supp}\eta_{A,\star}$; ese es el primer par de bloques, y la
-Proposición <a class="xref" href="#es-prop:hjb">1.3</a> convierte la holgura en <a class="xref" href="#es-eq:selector">(10)</a>. Las dos
+Proposición <a class="xref" href="#es-prop:hjb">1.5</a> convierte la holgura en <a class="xref" href="#es-eq:selector">(10)</a>. Las dos
 ecuaciones adjuntas son la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a> aplicada a $\pi_A$ y a
 $\pi_E$, las dos en $\M$. El último bloque es <a class="xref" href="#es-eq:cstar">(26)</a> reordenada, y su
 lectura débil es <a class="xref" href="#es-eq:coste-debil">(35)</a>.</p>
@@ -1318,11 +1353,44 @@ range in $C_b(E\times A)$ given by</p>
 
   \gen{}\varphi:(x,a)\longmapsto\gen{a}\varphi(x).
 \end{equation}</div><div class="eqside"><span class="num">(3)</span></div></div>
+<p>The reflected process takes values in $\overline E$, which is compact, and it is
+$\overline E\times A$ that carries the control problem.</p>
+<div class="stmt proposicion" id="en-prop:condiciones"><div class="head">Proposición 1.1</div><div class="body"><p>$\overline E$, $A$ and $\dom(\gen{})$ satisfy the standing hypotheses of both
+sources: $\dom(\gen{})$ is an algebra, dense in $C(\overline E)$, containing the
+constants and separating points; $\gen{}\mathbf 1=0$; each $\gen{a}$ satisfies
+the positive maximum principle; and the growth condition holds with
+$\psi\equiv1$.
+<span class="src">[Kurtz–Stockbridge, §1.1 (i)–(vi); Bhatt–Borkar, Cond. 1–2]</span></p></div></div>
+<p>Two of these are not automatic. That $\dom(\gen{})$ is an algebra is the product
+rule, $\partial_n(\varphi\psi)=\varphi\,\partial_n\psi+\psi\,\partial_n\varphi$,
+and it is Kurtz–Stockbridge (v). The positive maximum principle holds at a
+boundary maximum because $\partial_n\varphi=0$ leaves $\varphi$ decreasing into
+$\overline E$ along the normal as well as tangentially, so $D^2\varphi\le0$ as a
+form and $\operatorname{Tr}(\sigma\sigma^\top D^2\varphi)\le0$. Compactness of
+$\overline E\times A$ makes $\psi\equiv1$ admissible, and it also gives the
+compact sublevel sets that Theorem 6.3 of Kurtz–Stockbridge requires of the
+cost.</p>
+<p>Reflection is moreover the only standard boundary behaviour that survives these
+conditions. The Dirichlet domain and $\mathscr C^2_c(E)$ are algebras but hold no
+constants, so $\gen{}\mathbf 1=0$ is unavailable and Bhatt–Borkar&#x27;s Condition 2
+fails; and under killing at $\tau=\inf\{t:X_t\in\partial E\}$ one gets
+$\rho\,\eta(\overline E\times A)=1-\E[e^{-\rho\tau}]&lt;1$, so
+Corollary <a class="xref" href="#en-cor:masa">1.8</a> and <a class="xref" href="#en-eq:balance">(13)</a> both acquire a boundary term. If
+$\sigma\sigma^\top$ is nondegenerate then $\eta_\pi(\partial E\times A)=0$, and
+the distinction between $E$ and $\overline E$ never reaches $\eta$.</p>
+<div class="stmt observacion" id="en-obs:reflexion-incierta"><div class="head">Observación 1.2</div><div class="body"><p>Two steps behind Proposition <a class="xref" href="#en-prop:condiciones">1.1</a> are standard and are
+\remarcar{[uncertain: absent from the fiched material]}. That the reflected
+diffusion solves the martingale problem for $\dom(\gen{})$ is the Skorokhod
+decomposition $dX_t=b\,dt+\sigma\,dW_t-n(X_t)\,dL_t$, in which the local time
+enters $d\varphi(X_t)$ through $\partial_n\varphi\,dL_t$ and hence drops out on
+$\dom(\gen{})$; and its existence for every starting point, which is
+Bhatt–Borkar&#x27;s Condition 3, is Stroock–Varadhan&#x27;s submartingale problem or
+Lions–Sznitman. Neither reference is in the project.</p></div></div>
 <p>Equation <a class="xref" href="#en-eq:sde">(1)</a> presupposes an action process $a_t$, and this is more than
 the theory needs. The formulation we adopt is the relaxed controlled martingale
 problem, which replaces the action process by a measure-valued one and is stable
 under the randomization that the linear-programming formulation requires.</p>
-<div class="stmt definicion" id="en-def:relajada"><div class="head">Definición 1.1</div><div class="body"><p><span class="src">[Bhatt–Borkar, Def. 1.2]</span>
+<div class="stmt definicion" id="en-def:relajada"><div class="head">Definición 1.3</div><div class="body"><p><span class="src">[Bhatt–Borkar, Def. 1.2]</span>
 Let $V=\mathscr P(A)$, a compact metric space in the weak topology. A process
 $(X,\pi)$ with values in $E\times V$, progressively measurable with respect to
 $\{\mathscr F_t\}$ and with $X_0\sim\nu_0$, solves the <span class="df">relaxed controlled
@@ -1369,13 +1437,13 @@ relaxed policy and the forward problem are</p>
    \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(6)</span></div></div>
 <p>where $\lambda_\rho=e^{-\rho t}dt$, of total mass $1/\rho$, and $\P$ is the measure
 of the solution $(X,\pi)$. The infimum in <a class="xref" href="#en-eq:J">(6)</a> runs over the solutions of
-Definition <a class="xref" href="#en-def:relajada">1.1</a>.</p>
+Definition <a class="xref" href="#en-def:relajada">1.3</a>.</p>
 <p>Restricting to Markov policies is no loss of optimality: for the discounted
 problem for the nonlinear filter an optimal solution with relaxed Markov control
 exists <span class="src">[Bhatt–Borkar, §3.2, via Cor. 2.2]</span>, and for the remaining
 families of examples the argument is asserted to be analogous but is not written
 out. Within the class, the expectation opens into the semigroup.</p>
-<div class="stmt proposicion" id="en-prop:semigrupo"><div class="head">Proposición 1.2</div><div class="body"><p><span class="src">[Own reading]</span>
+<div class="stmt proposicion" id="en-prop:semigrupo"><div class="head">Proposición 1.4</div><div class="body"><p><span class="src">[Own reading]</span>
 Suppose $\pi_s=\pi(X_s)$ for a measurable kernel $\pi:E\to\mathscr P(A)$, a
 <span class="df">relaxed Markov control</span>. Then $X$ alone solves the martingale problem for
 $(\Gen{\pi},\nu_0)$; if that problem is well posed, $X$ is a Markov process with
@@ -1421,7 +1489,7 @@ programming it satisfies</p>
   \rho V(x)=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}.
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(8)</span></div></div>
-<div class="stmt proposicion" id="en-prop:hjb"><div class="head">Proposición 1.3</div><div class="body"><p>Equation <a class="xref" href="#en-eq:hjb">(8)</a> is equivalent to the inequality</p>
+<div class="stmt proposicion" id="en-prop:hjb"><div class="head">Proposición 1.5</div><div class="body"><p>Equation <a class="xref" href="#en-eq:hjb">(8)</a> is equivalent to the inequality</p>
 <div class="display numerado" id="en-eq:hjb-ineq"><div class="eqbody">\begin{equation}
 
   c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0,\qquad (x,a)\in E\times A,
@@ -1446,7 +1514,7 @@ evaluates a value function, and <a class="xref" href="#en-eq:hjb">(8)</a> reappe
 feasibility condition <a class="xref" href="#en-eq:dual">(15)</a> and as one block of the optimality system of
 Section <a class="xref" href="#en-sec:pde">4</a>, where it is used in weak form.</p>
 <h4 id="en-sec:balance"><span class="secnum">1.2</span>Discounted occupation measures</h4>
-<div class="stmt definicion" id="en-def:ocupacion"><div class="head">Definición 1.4</div><div class="body"><p><span class="src">[Bhatt–Borkar, (1.6)]</span>
+<div class="stmt definicion" id="en-def:ocupacion"><div class="head">Definición 1.6</div><div class="body"><p><span class="src">[Bhatt–Borkar, (1.6)]</span>
 For a relaxed policy $\pi$ and $B\in\mathscr B(E\times A)$, the <span class="df">discounted
 occupation measure</span> is</p>
 <div class="display numerado" id="en-eq:ocupacion"><div class="eqbody"><span class="v" data-var="std">\[\eta_\pi(B)=\E\left[\int_0^\infty e^{-\rho t}\int_A
@@ -1460,7 +1528,7 @@ initial condition, so everything below takes place on $E\times A$, and the forwa
 problem, nonconvex in $\pi$, is linear in $\eta$.</p>
 <p>The measures that arise this way are characterized by a single family of linear
 equalities.</p>
-<div class="stmt proposicion" id="en-prop:balance"><div class="head">Proposición 1.5</div><div class="body"><p><span class="src">[Bhatt–Borkar, (2.13) and Thm. 2.2]</span>
+<div class="stmt proposicion" id="en-prop:balance"><div class="head">Proposición 1.7</div><div class="body"><p><span class="src">[Bhatt–Borkar, (2.13) and Thm. 2.2]</span>
 For every $\varphi\in\dom(\gen{})$, the occupation measure of any solution of the
 relaxed controlled martingale problem satisfies the <span class="df">weak balance identity</span></p>
 <div class="display numerado" id="en-eq:balance"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}\bigl(\rho\varphi(x)-\gen{a}\varphi(x)\bigr)\,\eta(dx,da)
@@ -1470,10 +1538,10 @@ measure of some solution.</p></div><button class="proof-btn" type="button" aria-
 $\varphi\in\dom(\gen{})\s C_b(E)$ and $\gen{}\varphi\in C_b(E\times A)$. In
 particular $\gen{}$ is not assumed to be the differential generator
 <a class="xref" href="#en-eq:generator">(2)</a>, nor is $X$ assumed to have continuous paths:
-Definition <a class="xref" href="#en-def:relajada">1.1</a> is posed on a Polish space and its solutions are
+Definition <a class="xref" href="#en-def:relajada">1.3</a> is posed on a Polish space and its solutions are
 càdlàg. Accordingly the argument below is deterministic and uses no stochastic
 calculus.</p>
-<p>Taking expectations in the martingale of Definition <a class="xref" href="#en-def:relajada">1.1</a> between
+<p>Taking expectations in the martingale of Definition <a class="xref" href="#en-def:relajada">1.3</a> between
 $0$ and $t$,</p>
 <div class="display">\[\E[\varphi(X_t)]-\nu_0(\varphi)
   =\E\Bigl[\int_0^t\pi_s^a\gen{a}\varphi(X_s)\,ds\Bigr]
@@ -1482,7 +1550,7 @@ $0$ and $t$,</p>
 integrands are bounded, by $\|\varphi\|_\infty$ and
 $\|\gen{}\varphi\|_\infty$ respectively, and $\rho e^{-\rho t}dt$ is a
 probability measure, so Fubini applies. The left-hand side becomes
-$\rho\,\eta(\varphi)-\nu_0(\varphi)$ by Definition <a class="xref" href="#en-def:ocupacion">1.4</a>, and on
+$\rho\,\eta(\varphi)-\nu_0(\varphi)$ by Definition <a class="xref" href="#en-def:ocupacion">1.6</a>, and on
 the right, interchanging $s$ and $t$,</p>
 <div class="display">\[\int_0^\infty\!\!\rho e^{-\rho t}\!\int_0^t(\cdot)\,ds\,dt
   =\int_0^\infty\!(\cdot)\int_s^\infty\!\!\rho e^{-\rho t}dt\,ds
@@ -1498,8 +1566,8 @@ occupation measures <span class="src">[Bhatt–Borkar, Thm. 2.2]</span>; for loc
 state spaces see <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span>.</p></div></div>
 <p>In operator form <a class="xref" href="#en-eq:balance">(13)</a> reads $(\rho-\gen{})^{*}\eta=\nu_0$, so $\eta$
 is the initial law transported by the adjoint resolvent; this is the dual statement
-of the resolvent form of $J_c$ recorded after Proposition <a class="xref" href="#en-prop:semigrupo">1.2</a>.</p>
-<div class="stmt corolario" id="en-cor:masa"><div class="head">Corolario 1.6</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ for every $\pi$. In particular $\eta_\pi$ is not a
+of the resolvent form of $J_c$ recorded after Proposition <a class="xref" href="#en-prop:semigrupo">1.4</a>.</p>
+<div class="stmt corolario" id="en-cor:masa"><div class="head">Corolario 1.8</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ for every $\pi$. In particular $\eta_\pi$ is not a
 probability measure.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p4">Ver demostración</button><div class="proof" id="en-control-inverso-p4"><p>Take $\varphi\equiv1$ in <a class="xref" href="#en-eq:balance">(13)</a>. Both terms of <a class="xref" href="#en-eq:generator">(2)</a>
 carry derivatives of $\varphi$, so $\gen{a}1=0$ and the identity becomes
 $\rho\,\eta(E\times A)=\nu_0(1)=1$.</p></div></div>
@@ -1523,13 +1591,15 @@ $1/\rho$ is the only input to the bound of Lemma <a class="xref" href="#en-lema:
 <p>The HJB inequality <a class="xref" href="#en-eq:hjb-ineq">(9)</a> is therefore exactly dual feasibility for
 <a class="xref" href="#en-eq:lp">(14)</a>, and the value function is the dual variable attached to the balance
 constraint.</p>
-<div class="stmt observacion" id="en-obs:test"><div class="head">Observación 1.7</div><div class="body"><p>The set $\M$ depends on the class of test functions in <a class="xref" href="#en-eq:balance">(13)</a>, and
+<div class="stmt observacion" id="en-obs:test"><div class="head">Observación 1.9</div><div class="body"><p>The set $\M$ depends on the class of test functions in <a class="xref" href="#en-eq:balance">(13)</a>, and
 $\mathscr C^2_c(E)$, $C^\infty_c(E)$ and $C^2_b(\overline E)$ give different sets
 whenever $E$ has a boundary; the difference is exactly the boundary behaviour
 that <a class="xref" href="#en-eq:balance">(13)</a> can detect. Reflection selects
-$\{\varphi\in C^2(\overline E):\partial_n\varphi=0\}$, and it is under a choice
-of this kind that the characterization in Proposition <a class="xref" href="#en-prop:balance">1.5</a> is
-available <span class="src">[Kurtz–Stockbridge, Ex. 3.4]</span>.</p></div></div></section>
+$\{\varphi\in C^2(\overline E):\partial_n\varphi=0\}$, and
+Proposition <a class="xref" href="#en-prop:condiciones">1.1</a> is what makes that choice admissible. The
+diffusion example of <span class="src">[Kurtz–Stockbridge, Ex. 3.4]</span> takes
+$\mathscr C^2_c(\R^d)$ instead, on a state space without boundary, so it
+prescribes the domain only in the interior.</p></div></div></section>
 <section class="capitulo"><h3 id="en-sec:inverso"><span class="secnum">2</span>Inverse control with a prior cost</h3>
 <p>We now observe an expert and ask which running cost explains it. The expert is a
 policy $\pi_E$, known only through its discounted occupation measure
@@ -1711,9 +1781,9 @@ $\Phi$ for the saddle functional, reserving $\mathcal L$ for the generator:</p>
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(22)</span></div></div>
 <p>Three of the hypotheses the note carries are automatic here, and all three follow
-from the mass computed in Corollary <a class="xref" href="#en-cor:masa">1.6</a>.</p>
+from the mass computed in Corollary <a class="xref" href="#en-cor:masa">1.8</a>.</p>
 <div class="stmt lema" id="en-lema:M-acotado"><div class="head">Lema 3.1</div><div class="body"><p>Every $\eta\in\M$ satisfies $\|\eta\|_{\Hd}\le C_\iota/\rho$, and
-$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p11">Ver demostración</button><div class="proof" id="en-control-inverso-p11"><p>Let $\eta\in\M$. By Corollary <a class="xref" href="#en-cor:masa">1.6</a> it is nonnegative with
+$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p11">Ver demostración</button><div class="proof" id="en-control-inverso-p11"><p>Let $\eta\in\M$. By Corollary <a class="xref" href="#en-cor:masa">1.8</a> it is nonnegative with
 $\eta(E\times A)=1/\rho$, so for every $c\in\Hs$</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,\eta(E\times A)
   =\frac{\|\iota c\|_\infty}{\rho}\le\frac{C_\iota}{\rho}\|c\|_{\Hs},\]</div>
@@ -1774,7 +1844,7 @@ $C(E\times A)$. Then $\M$ is convex and weakly compact in $\Hd$. If moreover the
 embedding $\iota:\Hs\to C(E\times A)$ is compact, which holds for the space of
 Definition <a class="xref" href="#en-def:espacio">2.7</a>, then $\M$ is compact in the norm of $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p15">Ver demostración</button><div class="proof" id="en-control-inverso-p15"><p>Convexity holds because <a class="xref" href="#en-eq:balance">(13)</a> is a family of linear equalities and the
 constraint $\eta\ge0$ is convex. Put $\widehat\M=\rho\,\M$, which by
-Corollary <a class="xref" href="#en-cor:masa">1.6</a> lies in $\mathscr P(E\times A)$. With $E\times A$ compact,
+Corollary <a class="xref" href="#en-cor:masa">1.8</a> lies in $\mathscr P(E\times A)$. With $E\times A$ compact,
 $\mathscr P(E\times A)$ is weak-$*$ compact by Banach–Alaoglu, and $\widehat\M$ is
 weak-$*$ closed in it because each constraint
 $\mu\mapsto\mu(\rho\varphi-\gen{}\varphi)-\nu_0(\varphi)$ is weak-$*$ continuous,
@@ -1925,7 +1995,7 @@ vanishes on $\dom(\gen{})$ by <a class="xref" href="#en-eq:gen-operador">(3)</a>
 <p>Equation <a class="xref" href="#en-eq:fp">(33)</a> is the stationary Fokker–Planck equation with discount
 $\rho$ and source $\nu_0$, obtained from <a class="xref" href="#en-eq:balance">(13)</a> by restricting to the
 state marginal and integrating by parts. Its total mass is $1/\rho$ by
-Corollary <a class="xref" href="#en-cor:masa">1.6</a>, which is the normalization that any discretization must
+Corollary <a class="xref" href="#en-cor:masa">1.8</a>, which is the normalization that any discretization must
 reproduce.</p>
 <div class="stmt observacion" id="en-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Writing <a class="xref" href="#en-eq:fp">(33)</a> pointwise requires two derivatives of $\Sigma_\pi m_\pi$,
 and $m_\pi$ need not have them: for a
@@ -1971,7 +2041,7 @@ $c=c_\star$.</p></div><button class="proof-btn" type="button" aria-expanded="fal
 $\M$, which by <a class="xref" href="#en-eq:lp">(14)</a> and its dual <a class="xref" href="#en-eq:dual">(15)</a> is equivalent to the
 existence of $V$ satisfying <a class="xref" href="#en-eq:hjb-ineq">(9)</a> with complementary slackness on
 $\operatorname{supp}\eta_{A,\star}$; that is the first pair of blocks, and
-Proposition <a class="xref" href="#en-prop:hjb">1.3</a> turns the slackness into <a class="xref" href="#en-eq:selector">(10)</a>. The two
+Proposition <a class="xref" href="#en-prop:hjb">1.5</a> turns the slackness into <a class="xref" href="#en-eq:selector">(10)</a>. The two
 adjoint equations are Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a> applied to $\pi_A$ and to
 $\pi_E$, both of which lie in $\M$. The last block is <a class="xref" href="#en-eq:cstar">(26)</a> rearranged,
 and its weak reading is <a class="xref" href="#en-eq:coste-debil">(35)</a>.</p>
