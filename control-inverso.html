@@ -600,13 +600,17 @@ hacia dentro de $\overline E$ también en la normal $\rt$ $D^2\varphi\le0$ como
 forma y $\operatorname{Tr}(\sigma\sigma^\top D^2\varphi)\le0$. La compacidad de
 $\overline E\times A$ admite $\psi\equiv1$, y da además los subniveles compactos
 que el Teorema 6.3 de Kurtz–Stockbridge le pide al costo.</p>
-<p>Y la reflexión es el único comportamiento de frontera estándar que sobrevive a
-esas condiciones. El dominio de Dirichlet y $\mathscr C^2_c(E)$ son álgebras pero
-no tienen las constantes $\rt$ no hay $\gen{}\mathbf 1=0$ y falla la Condición 2
-de Bhatt–Borkar; y matando en $\tau=\inf\{t:X_t\in\partial E\}$ sale
-$\rho\,\eta(\overline E\times A)=1-\E[e^{-\rho\tau}]&lt;1$, luego el
+<p>La reflexión es una decisión de modelado y no una herencia. Los ejemplos de
+difusión de las dos fuentes están sobre $\R^d$, sin frontera ninguna y con
+dominios $C_0^2(\R^d)$ y $\mathscr C^2_c(\R^d)$
+<span class="src">[Bhatt–Borkar, Ej. 1; Kurtz–Stockbridge, Ej. 3.4]</span>, y sobre un $E$
+acotado la <a class="xref" href="#es-eq:sde">(1)</a> por sí sola no determina el proceso más allá del tiempo
+de salida. De las terminaciones, $\mathscr C^2_c(E)$ es la que describe la muerte
+en $\tau=\inf\{t:X_t\in\partial E\}$, con la cual
+$\rho\,\eta(\overline E\times A)=1-\E[e^{-\rho\tau}]&lt;1$ y el
 Corolario <a class="xref" href="#es-cor:masa">1.8</a> y <a class="xref" href="#es-eq:balance">(13)</a> ganan los dos un término de
-frontera. Si $\sigma\sigma^\top$ es no degenerada $\rt$
+frontera. La reflexión es la terminación que los deja intactos, y esa es la razón
+de elegirla. Si $\sigma\sigma^\top$ es no degenerada $\rt$
 $\eta_\pi(\partial E\times A)=0$, y la distinción entre $E$ y $\overline E$ no
 llega nunca a $\eta$.</p>
 <div class="stmt observacion" id="es-obs:reflexion-incierta"><div class="head">Observación 1.2</div><div class="body"><p>Detrás de la Proposición <a class="xref" href="#es-prop:condiciones">1.1</a> hay dos pasos estándar y
@@ -1370,14 +1374,19 @@ form and $\operatorname{Tr}(\sigma\sigma^\top D^2\varphi)\le0$. Compactness of
 $\overline E\times A$ makes $\psi\equiv1$ admissible, and it also gives the
 compact sublevel sets that Theorem 6.3 of Kurtz–Stockbridge requires of the
 cost.</p>
-<p>Reflection is moreover the only standard boundary behaviour that survives these
-conditions. The Dirichlet domain and $\mathscr C^2_c(E)$ are algebras but hold no
-constants, so $\gen{}\mathbf 1=0$ is unavailable and Bhatt–Borkar&#x27;s Condition 2
-fails; and under killing at $\tau=\inf\{t:X_t\in\partial E\}$ one gets
-$\rho\,\eta(\overline E\times A)=1-\E[e^{-\rho\tau}]&lt;1$, so
-Corollary <a class="xref" href="#en-cor:masa">1.8</a> and <a class="xref" href="#en-eq:balance">(13)</a> both acquire a boundary term. If
-$\sigma\sigma^\top$ is nondegenerate then $\eta_\pi(\partial E\times A)=0$, and
-the distinction between $E$ and $\overline E$ never reaches $\eta$.</p>
+<p>Reflection is a modelling decision, not an inheritance. The diffusion examples of
+both sources are posed on $\R^d$, with no boundary at all and with domains
+$C_0^2(\R^d)$ and $\mathscr C^2_c(\R^d)$
+<span class="src">[Bhatt–Borkar, Ex. 1; Kurtz–Stockbridge, Ex. 3.4]</span>, and on a bounded
+$E$ equation <a class="xref" href="#en-eq:sde">(1)</a> by itself does not determine the process past the
+exit time. Among the completions, $\mathscr C^2_c(E)$ is the one describing
+killing at $\tau=\inf\{t:X_t\in\partial E\}$, under which
+$\rho\,\eta(\overline E\times A)=1-\E[e^{-\rho\tau}]&lt;1$ and both
+Corollary <a class="xref" href="#en-cor:masa">1.8</a> and <a class="xref" href="#en-eq:balance">(13)</a> acquire a boundary term.
+Reflection is the completion that leaves them intact, and that is the reason for
+choosing it. If $\sigma\sigma^\top$ is nondegenerate then
+$\eta_\pi(\partial E\times A)=0$, so the distinction between $E$ and
+$\overline E$ never reaches $\eta$.</p>
 <div class="stmt observacion" id="en-obs:reflexion-incierta"><div class="head">Observación 1.2</div><div class="body"><p>Two steps behind Proposition <a class="xref" href="#en-prop:condiciones">1.1</a> are standard and are
 \remarcar{[uncertain: absent from the fiched material]}. That the reflected
 diffusion solves the martingale problem for $\dom(\gen{})$ is the Skorokhod
