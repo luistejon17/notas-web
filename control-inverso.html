@@ -1030,15 +1030,23 @@ compacto.</p>
 acotado $\widehat\M$ a un conjunto relativamente compacto en norma. Ese conjunto
 es débilmente compacto por el párrafo anterior, luego débilmente cerrado, luego
 cerrado en norma, y un cerrado relativamente compacto es compacto.</p></div></div>
-<div class="stmt observacion" id="es-obs:tension"><div class="head">Observación 3.6</div><div class="body"><p>La tensión es hipótesis, y es el precio de $E=\R^d$: sobre un $E\times A$
-compacto sale de Banach–Alaoglu y no hay que suponer nada. Para el problema
-descontado la primera fuente la saca de la tensión de las leyes solución
-<span class="src">[Bhatt–Borkar, §3.2]</span>, citando a Borkar (1989), Lema 3.7,
-\remarcar{[incierto: no está en el material fichado]}. Dos consecuencias más:
-$\iota$ deja de ser compacta, luego $\M$ no tiene por qué serlo en norma; y el
-Teorema 6.3 de Kurtz–Stockbridge pide en su (6.2) subniveles compactos del
-costo, cosa que una $c$ acotada sobre $\R^d$ no tiene, así que en $\R^d$ es el
-Teorema 2.2 de Bhatt–Borkar el que sostiene la Proposición <a class="xref" href="#es-prop:balance">1.6</a>.</p></div></div>
+<div class="stmt observacion" id="es-obs:tension"><div class="head">Observación 3.6</div><div class="body"><p>Ninguna de las dos fuentes supone $E$ compacto, y ninguna tiene $\M$ compacto de
+balde: las dos compactifican, Kurtz–Stockbridge por $E^\Delta$ y Bhatt–Borkar
+metiendo el problema en un producto de intervalos, y el trabajo es ver que no se
+escapa masa a los puntos añadidos. Su ejemplo es una difusión que sale por
+$+\infty$ y vuelve a entrar por $-\infty$
+<span class="src">[Kurtz–Stockbridge, Obs. 2.3]</span>. Dos vías cierran el hueco: pedirle al
+costo que sea coercivo, que es su (6.2); o probar que las medidas de ocupación
+son tensas, que es lo que hace <span class="src">[Bhatt–Borkar, §3.2]</span> en el descontado,
+citando a Borkar (1989), Lema 3.7
+\remarcar{[incierto: no está en el material fichado]}.</p>
+<p>La primera vía está cerrada aquí. La Definición <a class="xref" href="#es-def:espacio">2.7</a> mete $\Hs$
+dentro de $C_0$ $\rt$ toda $c\in\Hs$ se anula en el infinito y ningún subnivel
+suyo es compacto; y lo mismo le pasa a $\ch$. La tensión no es entonces una
+elección sino lo único que queda, y es hipótesis sobre $b$ y $\sigma$, no sobre
+el costo. Cuesta además la compacidad de $\iota$, luego la de $\M$ en norma, y
+es el Teorema 2.2 de Bhatt–Borkar, no el 6.3 de Kurtz–Stockbridge, el que
+sostiene la Proposición <a class="xref" href="#es-prop:balance">1.6</a> sobre $\R^d$.</p></div></div>
 <p>La convexidad es inmediata porque <a class="xref" href="#es-eq:balance">(13)</a> es una familia de igualdades
 lineales. La compacidad pasa por el conjunto normalizado
 $\widehat\M=\rho\,\M\s\mathscr P(E\times A)$, débil-$*$ compacto por Prokhorov y
@@ -1740,15 +1748,22 @@ is weakly compact.</p>
 bounded set $\widehat\M$ to a relatively norm-compact set. That set is weakly
 compact by the previous paragraph, hence weakly closed, hence norm closed, and a
 closed relatively compact set is compact.</p></div></div>
-<div class="stmt observacion" id="en-obs:tension"><div class="head">Observación 3.6</div><div class="body"><p>Tightness is a hypothesis, and it is the price of $E=\R^d$: on a compact
-$E\times A$ it follows from Banach–Alaoglu and nothing need be assumed. For the
-discounted problem the first source derives it from tightness of the solution
-laws <span class="src">[Bhatt–Borkar, §3.2]</span>, citing Borkar (1989), Lemma 3.7,
-\remarcar{[uncertain: not among the fiched material]}. Two further consequences:
-$\iota$ is no longer compact, so $\M$ need not be compact in norm; and
-Theorem 6.3 of Kurtz–Stockbridge asks in its (6.2) for compact sublevel sets of
-the cost, which a bounded $c$ on $\R^d$ does not have, so on $\R^d$ it is
-Bhatt–Borkar&#x27;s Theorem 2.2 that carries Proposition <a class="xref" href="#en-prop:balance">1.6</a>.</p></div></div>
+<div class="stmt observacion" id="en-obs:tension"><div class="head">Observación 3.6</div><div class="body"><p>Neither source assumes $E$ compact, and neither gets $\M$ compact for free: both
+compactify, Kurtz–Stockbridge through $E^\Delta$ and Bhatt–Borkar through an
+embedding into a product of intervals, and the work is to show that no mass
+escapes to the added points. Their example is a diffusion that goes out at
+$+\infty$ and returns at $-\infty$ <span class="src">[Kurtz–Stockbridge, Rem. 2.3]</span>. Two
+routes close the gap: make the cost coercive, which is their (6.2); or show the
+occupation measures tight, which is <span class="src">[Bhatt–Borkar, §3.2]</span> for the
+discounted problem, citing Borkar (1989), Lemma 3.7
+\remarcar{[uncertain: not among the fiched material]}.</p>
+<p>The first route is closed here. Definition <a class="xref" href="#en-def:espacio">2.7</a> puts $\Hs$ inside
+$C_0$, so every $c\in\Hs$ vanishes at infinity and no sublevel set of it is
+compact; the same applies to $\ch$. Tightness is therefore forced rather than
+chosen, and it is a hypothesis on $b$ and $\sigma$, not on the cost. It also
+costs the compactness of $\iota$, hence norm compactness of $\M$, and it is
+Theorem 2.2 of Bhatt–Borkar, not Theorem 6.3 of Kurtz–Stockbridge, that carries
+Proposition <a class="xref" href="#en-prop:balance">1.6</a> on $\R^d$.</p></div></div>
 <p>Convexity is immediate because <a class="xref" href="#en-eq:balance">(13)</a> is a family of linear equalities.
 Compactness runs through the normalized set $\widehat\M=\rho\,\M\s\mathscr
 P(E\times A)$, which is weak-$*$ compact by Prokhorov and closedness of the
