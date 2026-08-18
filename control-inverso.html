@@ -552,11 +552,9 @@ window.MathJax = {
   <p class="subtitle">La formulación por medidas de ocupación, a partir de la nota de Mauricio Junca</p>
   <p class="byline">Universidad de los Andes · Propuesta de tesis</p>
 <div class="doc" data-lang="es" data-on="true"><section class="capitulo"><h3 id="es-sec:forward"><span class="secnum">1</span>Control estocástico descontado directo</h3>
-<p><button class="term" type="button" data-k="E">$E\s\R^d$</button> el espacio de estados, dominio acotado tq exista extensión
-$W^{1,p}(E)\to W^{1,p}(\R^d)$ acotada $\forall p$; sirven los de clase $C^1$
-<span class="src">[Brezis, Thm. 9.7]</span> y las cajas <span class="src">[Brezis, Obs. 9]</span>. <button class="term" type="button" data-k="A">$A$</button>
-las acciones, variedad riemanniana compacta <span class="df">sin frontera</span> de dimensión $m$:
-la esfera de direcciones, el toro, sus productos. Se escribe $n=d+m$. Fijos
+<p><button class="term" type="button" data-k="E">$E=\R^d$</button> el espacio de estados y <button class="term" type="button" data-k="A">$A$</button> las acciones, variedad
+riemanniana compacta <span class="df">sin frontera</span> de dimensión $m$: una esfera de
+direcciones, un toro, un producto de esos. Se escribe $n=d+m$. Fijos
 <button class="term" type="button" data-k="rho">$\rho&gt;0$</button> la tasa de descuento y
 <button class="term" type="button" data-k="nu0">$\nu_0\in\mathscr P(E)$</button> la ley inicial. La letra
 $\Omega$ queda reservada al espacio muestral de $(\Omega,\mathscr F,\{\mathscr
@@ -568,7 +566,6 @@ cuando actúan varias medidas seguidas.</p></div>
 <div class="display numerado" id="es-eq:sde"><div class="eqbody">\begin{equation}
 
   dX_t=b(X_t,a_t)\,dt+\sigma(X_t,a_t)\,dW_t,\qquad X_0\sim\nu_0,
-  \qquad\text{reflejada en }\partial E,
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(2)</span><span class="num">(1)</span></div></div>
 <p>cuyo generador con la acción $a\in A$ congelada es</p>
@@ -578,55 +575,24 @@ cuando actúan varias medidas seguidas.</p></div>
   +\tfrac12\operatorname{Tr}\bigl(\sigma\sigma^\top(x,a)\,D^2\varphi(x)\bigr).
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(3)</span><span class="num">(2)</span></div></div>
-<p>La reflexión fija el dominio, y $\gen{}$ es el operador con
-$\dom(\gen{})=\{\varphi\in C^2(\overline E):\partial_n\varphi=0\}\s C_b(E)$ y
-rango en $C_b(E\times A)$ dado por</p>
+<p>$\gen{}$ es el operador con $\dom(\gen{})=C_0^2(\R^d)\s C_b(E)$ y rango en
+$C_b(E\times A)$ dado por</p>
 <div class="display numerado" id="es-eq:gen-operador"><div class="eqbody">\begin{equation}
 
   \gen{}\varphi:(x,a)\longmapsto\gen{a}\varphi(x).
 \end{equation}</div><div class="eqside"><span class="num">(3)</span></div></div>
-<p>El proceso reflejado toma valores en $\overline E$, compacto, y es
-$\overline E\times A$ el que lleva el problema de control.</p>
-<div class="stmt proposicion" id="es-prop:condiciones"><div class="head">Proposición 1.1</div><div class="body"><p>$\overline E$, $A$ y $\dom(\gen{})$ cumplen las hipótesis permanentes de las dos
-fuentes: $\dom(\gen{})$ es álgebra, densa en $C(\overline E)$, con las constantes
-y separando puntos; $\gen{}\mathbf 1=0$; cada $\gen{a}$ cumple el principio del
-máximo positivo; y la condición de crecimiento vale con $\psi\equiv1$.
-<span class="src">[Kurtz–Stockbridge, §1.1 (i)–(vi); Bhatt–Borkar, Cond. 1–2]</span></p></div></div>
-<p>Dos de ellas no son automáticas. Que $\dom(\gen{})$ sea álgebra es la regla del
-producto, $\partial_n(\varphi\psi)=\varphi\,\partial_n\psi+\psi\,\partial_n\varphi$,
-y es la (v) de Kurtz–Stockbridge. El principio del máximo positivo vale en un
-máximo de frontera porque $\partial_n\varphi=0$ deja a $\varphi$ decreciendo
-hacia dentro de $\overline E$ también en la normal $\rt$ $D^2\varphi\le0$ como
-forma y $\operatorname{Tr}(\sigma\sigma^\top D^2\varphi)\le0$. La compacidad de
-$\overline E\times A$ admite $\psi\equiv1$, y da además los subniveles compactos
-que el Teorema 6.3 de Kurtz–Stockbridge le pide al costo.</p>
-<p>La reflexión es una decisión de modelado y no una herencia. Los ejemplos de
-difusión de las dos fuentes están sobre $\R^d$, sin frontera ninguna y con
-dominios $C_0^2(\R^d)$ y $\mathscr C^2_c(\R^d)$
-<span class="src">[Bhatt–Borkar, Ej. 1; Kurtz–Stockbridge, Ej. 3.4]</span>, y sobre un $E$
-acotado la <a class="xref" href="#es-eq:sde">(1)</a> por sí sola no determina el proceso más allá del tiempo
-de salida. De las terminaciones, $\mathscr C^2_c(E)$ es la que describe la muerte
-en $\tau=\inf\{t:X_t\in\partial E\}$, con la cual
-$\rho\,\eta(\overline E\times A)=1-\E[e^{-\rho\tau}]&lt;1$ y el
-Corolario <a class="xref" href="#es-cor:masa">1.8</a> y <a class="xref" href="#es-eq:balance">(13)</a> ganan los dos un término de
-frontera. La reflexión es la terminación que los deja intactos, y esa es la razón
-de elegirla. Si $\sigma\sigma^\top$ es no degenerada $\rt$
-$\eta_\pi(\partial E\times A)=0$, y la distinción entre $E$ y $\overline E$ no
-llega nunca a $\eta$.</p>
-<div class="stmt observacion" id="es-obs:reflexion-incierta"><div class="head">Observación 1.2</div><div class="body"><p>Detrás de la Proposición <a class="xref" href="#es-prop:condiciones">1.1</a> hay dos pasos estándar y
-\remarcar{[inciertos: no están en el material fichado]}. Que la difusión
-reflejada resuelva el problema de martingala para $\dom(\gen{})$ es la
-descomposición de Skorokhod $dX_t=b\,dt+\sigma\,dW_t-n(X_t)\,dL_t$, donde el
-tiempo local entra en $d\varphi(X_t)$ por $\partial_n\varphi\,dL_t$ y por tanto
-desaparece sobre $\dom(\gen{})$; y su existencia desde cada punto, que es la
-Condición 3 de Bhatt–Borkar, es el problema de submartingala de
-Stroock–Varadhan o Lions–Sznitman. Ninguna de las dos referencias está en el
-proyecto.</p></div></div>
+<p>Es el Ejemplo 1 de la primera fuente y el Ejemplo 3.4 de la segunda.</p>
+<div class="stmt proposicion" id="es-prop:condiciones"><div class="head">Proposición 1.1</div><div class="body"><p>$E$, $A$ y $\dom(\gen{})$ cumplen las hipótesis permanentes de las dos fuentes,
+con $\psi\equiv1$ en la condición de crecimiento.
+<span class="src">[Bhatt–Borkar, Ej. 1 y Cond. 1–3;
+Kurtz–Stockbridge, §1.1 (i)–(vi)]</span></p></div></div>
+<p>$A$ compacta es lo que admite $\psi\equiv1$, porque entonces $\gen{}\varphi$ es
+acotada en $E\times A$ para cada $\varphi\in\dom(\gen{})$.</p>
 <p><a class="xref" href="#es-eq:sde">(1)</a> presupone un proceso de acciones $a_t$, y eso es más de lo que
 hace falta. La formulación que se adopta es el problema de martingala controlado
 relajado, que cambia el proceso de acciones por uno a valores medida y aguanta la
 aleatorización que pide la formulación de programación lineal.</p>
-<div class="stmt definicion" id="es-def:relajada"><div class="head">Definición 1.3</div><div class="body"><p><span class="src">[Bhatt–Borkar, Def. 1.2]</span>
+<div class="stmt definicion" id="es-def:relajada"><div class="head">Definición 1.2</div><div class="body"><p><span class="src">[Bhatt–Borkar, Def. 1.2]</span>
 $V=\mathscr P(A)$, compacto metrizable en la topología débil. Un proceso
 $(X,\pi)$ a valores en $E\times V$, progresivamente medible respecto de
 $\{\mathscr F_t\}$ y con $X_0\sim\nu_0$, resuelve el <span class="df">problema de martingala
@@ -671,13 +637,13 @@ descontado de una política relajada y el problema directo son</p>
    \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(6)</span></div></div>
 <p>con $\lambda_\rho=e^{-\rho t}dt$ de masa total $1/\rho$, y $\P$ la medida de la
 solución $(X,\pi)$. El ínfimo en <a class="xref" href="#es-eq:J">(6)</a> recorre las soluciones de la
-Definición <a class="xref" href="#es-def:relajada">1.3</a>.</p>
+Definición <a class="xref" href="#es-def:relajada">1.2</a>.</p>
 <p>La clase markoviana no pierde el óptimo: para el problema descontado del filtro
 no lineal existe solución óptima con control markoviano relajado
 <span class="src">[Bhatt–Borkar, §3.2, vía Cor. 2.2]</span>, y para las demás familias de
 ejemplos lo dan por análogo sin escribirlo. Dentro de la clase, la esperanza se
 abre en el semigrupo.</p>
-<div class="stmt proposicion" id="es-prop:semigrupo"><div class="head">Proposición 1.4</div><div class="body"><p><span class="src">[Lectura propia]</span>
+<div class="stmt proposicion" id="es-prop:semigrupo"><div class="head">Proposición 1.3</div><div class="body"><p><span class="src">[Lectura propia]</span>
 Si $\pi_s=\pi(X_s)$ para un núcleo medible $\pi:E\to\mathscr P(A)$, un
 <span class="df">control markoviano relajado</span> $\rt$ $X$ solo resuelve el problema de
 martingala para $(\Gen{\pi},\nu_0)$; si ese problema está bien puesto $\rt$ $X$
@@ -723,7 +689,7 @@ dinámica cumple</p>
   \rho V(x)=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}.
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(8)</span></div></div>
-<div class="stmt proposicion" id="es-prop:hjb"><div class="head">Proposición 1.5</div><div class="body"><p><a class="xref" href="#es-eq:hjb">(8)</a> $\iff$ la desigualdad</p>
+<div class="stmt proposicion" id="es-prop:hjb"><div class="head">Proposición 1.4</div><div class="body"><p><a class="xref" href="#es-eq:hjb">(8)</a> $\iff$ la desigualdad</p>
 <div class="display numerado" id="es-eq:hjb-ineq"><div class="eqbody">\begin{equation}
 
   c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0,\qquad (x,a)\in E\times A,
@@ -748,7 +714,7 @@ la teoría de existencia de la Sección <a class="xref" href="#es-sec:convexo">3
 solo como la factibilidad dual <a class="xref" href="#es-eq:dual">(15)</a> y como un bloque del sistema de
 optimalidad de la Sección <a class="xref" href="#es-sec:pde">4</a>, ahí en forma débil.</p>
 <h4 id="es-sec:balance"><span class="secnum">1.2</span>Medidas de ocupación descontadas</h4>
-<div class="stmt definicion" id="es-def:ocupacion"><div class="head">Definición 1.6</div><div class="body"><p><span class="src">[Bhatt–Borkar, (1.6)]</span>
+<div class="stmt definicion" id="es-def:ocupacion"><div class="head">Definición 1.5</div><div class="body"><p><span class="src">[Bhatt–Borkar, (1.6)]</span>
 Para una política relajada $\pi$ y $B\in\mathscr B(E\times A)$, la <span class="df">medida de
 ocupación descontada</span> es</p>
 <div class="display numerado" id="es-eq:ocupacion"><div class="eqbody"><span class="v" data-var="std">\[\eta_\pi(B)=\E\left[\int_0^\infty e^{-\rho t}\int_A
@@ -762,7 +728,7 @@ inicial, así que todo lo que sigue pasa en $E\times A$, y el problema directo, 
 convexo en $\pi$, es lineal en $\eta$.</p>
 <p>Las medidas que salen así quedan caracterizadas por una sola familia de
 igualdades lineales.</p>
-<div class="stmt proposicion" id="es-prop:balance"><div class="head">Proposición 1.7</div><div class="body"><p><span class="src">[Bhatt–Borkar, (2.13) y Thm. 2.2]</span>
+<div class="stmt proposicion" id="es-prop:balance"><div class="head">Proposición 1.6</div><div class="body"><p><span class="src">[Bhatt–Borkar, (2.13) y Thm. 2.2]</span>
 $\forall\varphi\in\dom(\gen{})$, la medida de ocupación de cualquier solución del
 problema de martingala controlado relajado cumple la <span class="df">identidad de balance
 débil</span></p>
@@ -772,10 +738,10 @@ débil</span></p>
 ocupación de alguna solución.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p3">Ver demostración</button><div class="proof" id="es-control-inverso-p3"><p>Las hipótesis son las de <a class="xref" href="#es-eq:gen-operador">(3)</a> y ninguna más:
 $\varphi\in\dom(\gen{})\s C_b(E)$ y $\gen{}\varphi\in C_b(E\times A)$. No se
 supone que $\gen{}$ sea el generador diferencial <a class="xref" href="#es-eq:generator">(2)</a>, ni que
-$X$ tenga trayectorias continuas: la Definición <a class="xref" href="#es-def:relajada">1.3</a> vive en un
+$X$ tenga trayectorias continuas: la Definición <a class="xref" href="#es-def:relajada">1.2</a> vive en un
 espacio polaco y sus soluciones son càdlàg. Por eso el argumento es determinista
 y no toca el cálculo estocástico.</p>
-<p>Tomando esperanzas en la martingala de la Definición <a class="xref" href="#es-def:relajada">1.3</a> entre
+<p>Tomando esperanzas en la martingala de la Definición <a class="xref" href="#es-def:relajada">1.2</a> entre
 $0$ y $t$,</p>
 <div class="display">\[\E[\varphi(X_t)]-\nu_0(\varphi)
   =\E\Bigl[\int_0^t\pi_s^a\gen{a}\varphi(X_s)\,ds\Bigr]
@@ -784,7 +750,7 @@ $0$ y $t$,</p>
 integrandos están acotados por $\|\varphi\|_\infty$ y
 $\|\gen{}\varphi\|_\infty$, y $\rho e^{-\rho t}dt$ es de probabilidad $\rt$
 Fubini. A la izquierda queda $\rho\,\eta(\varphi)-\nu_0(\varphi)$ con la
-Definición <a class="xref" href="#es-def:ocupacion">1.6</a>. A la derecha, intercambiando $s$ y $t$,</p>
+Definición <a class="xref" href="#es-def:ocupacion">1.5</a>. A la derecha, intercambiando $s$ y $t$,</p>
 <div class="display">\[\int_0^\infty\!\!\rho e^{-\rho t}\!\int_0^t(\cdot)\,ds\,dt
   =\int_0^\infty\!(\cdot)\int_s^\infty\!\!\rho e^{-\rho t}dt\,ds
   =\int_0^\infty\!\!e^{-\rho s}(\cdot)\,ds ,\]</div>
@@ -793,14 +759,15 @@ Definición <a class="xref" href="#es-def:ocupacion">1.6</a>. A la derecha, inte
 $\E\int_0^te^{-\rho s}dM_s$ sería más corto y pide más: un integrando acotado
 contra martingala da martingala <em>local</em>, cuya esperanza no se anula sin una
 condición de integrabilidad adicional.</p>
-<p>El recíproco es la caracterización de las medidas
-de ocupación descontadas <span class="src">[Bhatt–Borkar, Thm. 2.2]</span>; para espacios de
-estados localmente compactos ver <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span>.</p></div></div>
+<p>El recíproco es la caracterización de las medidas de ocupación descontadas
+<span class="src">[Bhatt–Borkar, Thm. 2.2]</span>, que no le pide a $E$ más que ser polaco; el
+análogo de <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span> pide además su (6.2)
+(Observación <a class="xref" href="#es-obs:tension">3.6</a>).</p></div></div>
 <p>En forma de operadores <a class="xref" href="#es-eq:balance">(13)</a> es
 $(\rho-\gen{})^{*}\eta=\nu_0$, o sea $\eta$ es la ley inicial transportada por la
 resolvente adjunta; es el enunciado dual de la forma resolvente de $J_c$ que
-quedó tras la Proposición <a class="xref" href="#es-prop:semigrupo">1.4</a>.</p>
-<div class="stmt corolario" id="es-cor:masa"><div class="head">Corolario 1.8</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ para toda $\pi$. En particular $\eta_\pi$ no es de
+quedó tras la Proposición <a class="xref" href="#es-prop:semigrupo">1.3</a>.</p>
+<div class="stmt corolario" id="es-cor:masa"><div class="head">Corolario 1.7</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ para toda $\pi$. En particular $\eta_\pi$ no es de
 probabilidad.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p4">Ver demostración</button><div class="proof" id="es-control-inverso-p4"><p>Tomar $\varphi\equiv1$ en <a class="xref" href="#es-eq:balance">(13)</a>. Los dos términos de
 <a class="xref" href="#es-eq:generator">(2)</a> llevan derivadas de $\varphi$, luego $\gen{a}1=0$ y la
 identidad queda $\rho\,\eta(E\times A)=\nu_0(1)=1$.</p></div></div>
@@ -824,15 +791,10 @@ $1/\rho$ es la única entrada de la cota del Lema <a class="xref" href="#es-lema
 <p>La desigualdad HJB <a class="xref" href="#es-eq:hjb-ineq">(9)</a> es entonces exactamente la factibilidad
 dual de <a class="xref" href="#es-eq:lp">(14)</a>, y la función de valor es la variable dual pegada a la
 restricción de balance.</p>
-<div class="stmt observacion" id="es-obs:test"><div class="head">Observación 1.9</div><div class="body"><p>$\M$ depende de la clase de prueba de <a class="xref" href="#es-eq:balance">(13)</a>, y $\mathscr C^2_c(E)$,
-$C^\infty_c(E)$ y $C^2_b(\overline E)$ dan conjuntos distintos en cuanto $E$
-tiene frontera; la diferencia es el comportamiento en la frontera que
-<a class="xref" href="#es-eq:balance">(13)</a> alcanza a detectar. La reflexión selecciona
-$\{\varphi\in C^2(\overline E):\partial_n\varphi=0\}$, y la
-Proposición <a class="xref" href="#es-prop:condiciones">1.1</a> es lo que hace admisible esa elección. El
-ejemplo de difusión de <span class="src">[Kurtz–Stockbridge, Ej. 3.4]</span> toma
-$\mathscr C^2_c(\R^d)$, sobre un espacio de estados sin frontera, así que fija
-el dominio solo en el interior.</p></div></div></section>
+<div class="stmt observacion" id="es-obs:test"><div class="head">Observación 1.8</div><div class="body"><p>En $\R^d$ las clases $C_0^2$, $\mathscr C^2_c$ y $C^\infty_c$ dan el mismo $\M$,
+porque cada una es bp-densa en las otras y <a class="xref" href="#es-eq:balance">(13)</a> es bp-cerrada.
+Sobre un espacio de estados con frontera no, y la diferencia es el
+comportamiento en la frontera que <a class="xref" href="#es-eq:balance">(13)</a> alcanza a detectar.</p></div></div></section>
 <section class="capitulo"><h3 id="es-sec:inverso"><span class="secnum">2</span>Control inverso con costo previo</h3>
 <p>Se observa un experto y se pregunta qué costo instantáneo lo explica. El experto
 es una política $\pi_E$ conocida solo por su medida de ocupación descontada
@@ -901,26 +863,12 @@ pide es un umbral de Sobolev.</p>
 Si $n=d+m$ y $s&gt;n/2$ $\rt$ $H^s(\R^n)\hookrightarrow C_0(\R^n)$ continuamente, y
 todo $f\in H^s$ tiene representante continuo con
 $\|f\|_\infty\le C_s\|f\|_{H^s}$.</p></div></div>
-<p>El Teorema <a class="xref" href="#es-thm:encaje">2.4</a> está en $\R^n$ y $E$ tiene frontera; el puente es la
-extensión del §<a class="xref" href="#es-sec:forward">1</a>, iterada de una derivada en una.</p>
-<div class="stmt corolario" id="es-cor:umbral"><div class="head">Corolario 2.5</div><div class="body"><p>Si $s&gt;d/2$ entero $\rt$ $H^s(E)\hookrightarrow C(\overline E)$ continuamente.
-<span class="src">[Brezis, Cor. 9.15 y 9.14]</span></p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p7">Ver demostración</button><div class="proof" id="es-control-inverso-p7"><p>Inducción en $s$, extendiendo, aplicando el Teorema <a class="xref" href="#es-thm:encaje">2.4</a> en $\R^d$ y
-restringiendo. Si $u\in H^s(E)$, entonces $u$ y sus primeras derivadas están en
-$H^{s-1}(E)$, y un paso de la inyección de orden uno sube la integrabilidad de
-las dos; tras finitos pasos $u\in W^{1,q}(E)$ con $q&gt;d$, donde esa inyección cae
-en $C(\overline E)$. Cada paso gasta solo la extensión del Teorema 9.7, nunca una
-de orden $s$.</p></div></div>
-<p>Una extensión de orden $s$ pediría $E$ de clase $C^s$; iterar la de orden uno no
-<span class="src">[Brezis, cap. 9, nota 17]</span>, y ahí es donde se gasta que $s$ sea entero. Es
-también lo que quita la ambigüedad de $H^s(\overline E)$: para $s$ entero la
-definición intrínseca $\{u:\partial^\alpha u\in L^2,\ |\alpha|\le s\}$ no pasa por
-Fourier ni pide nada de $E$.</p>
-<p>La delta muestra que el umbral es óptimo: $\delta_{(x_0,a_0)}$ es funcional
-acotado sobre $H^s$ exactamente cuando $s&gt;n/2$
-<span class="src">[Folland, Prop. 9.16 y el cálculo de $\widehat\delta$ que la precede]</span>.
-Luego $H^1$ solo es admisible si
-$d+m\le1$, y el régimen (ii) es una hipótesis sobre $\M$, no una elección de
-espacio.</p>
+<p>La delta muestra que el umbral es agudo.</p>
+<div class="stmt corolario" id="es-cor:umbral"><div class="head">Corolario 2.5</div><div class="body"><p>$\delta_{x_0}\in H^{-s}(\R^d)$, uniformemente en $x_0$, $\iff$ $s&gt;d/2$.
+<span class="src">[Folland, Prop. 9.16 y el cálculo de $\widehat\delta$ que la precede]</span></p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p7">Ver demostración</button><div class="proof" id="es-control-inverso-p7"><p>$\widehat\delta_{x_0}(\xi)=e^{-2\pi i x_0\cdot\xi}$ tiene módulo uno, luego
+$\|\delta_{x_0}\|_{(-s)}^2=\int(1+|\xi|^2)^{-s}d\xi$, que no depende de $x_0$ y
+es finita exactamente cuando $2s&gt;d$. La identificación de $H^{-s}$ con
+$(H^s)^{*}$ es la Proposición 9.16 de la fuente.</p></div></div>
 <div class="stmt proposicion" id="es-prop:h1-nunca"><div class="head">Proposición 2.6</div><div class="body"><p>Si $n=d+m\ge2$ $\rt$ la delta en un punto de $E\times A$ no es funcional acotado
 sobre $H^1(E\times A)$. En particular las medidas de ocupación singulares de las
 políticas deterministas no están en $(H^1)^*$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p8">Ver demostración</button><div class="proof" id="es-control-inverso-p8"><p>Basta exhibir una función no acotada en $H^1$ cerca del punto. Para $n=2$ tomar
@@ -931,22 +879,20 @@ trasladando a $(x_0,a_0)$ sale una sucesión $f_k\in H^1(E\times A)$ con
 $\|f_k\|_{H^1}$ acotada y $f_k(x_0,a_0)\to\infty$, luego evaluar en $(x_0,a_0)$
 no es funcional acotado. Y como la medida de ocupación de una política
 determinista carga una gráfica Lebesgue-nula, es una medida de ese tipo singular.</p></div></div>
-<p>$A$ es cerrada $\rt$ su escala es espectral y no pide umbral del mismo tipo. Los
-dos factores se penalizan por separado.</p>
-<div class="stmt definicion" id="es-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Fijos $s_x&gt;d/2$ entero, $s_a&gt;m/2$ y $\kappa_x,\kappa_a&gt;0$. El <span class="df">espacio del
-costo</span> es $\Hs=H^{s_x}(E)\otimes H^{s_a}(A)$ con la norma cruzada hilbertiana de</p>
+<p>Luego el régimen (ii) es una hipótesis sobre $\M$, no una elección de espacio.
+Los dos factores llevan escala espectral, así que se penalizan por separado.</p>
+<div class="stmt definicion" id="es-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Fijos $s_x&gt;d/2$, $s_a&gt;m/2$ y $\kappa_x,\kappa_a&gt;0$. El <span class="df">espacio del costo</span> es
+$\Hs=H^{s_x}(\R^d)\otimes H^{s_a}(A)$ con la norma cruzada hilbertiana de</p>
 <div class="display numerado" id="es-eq:penalizacion"><div class="eqbody">\begin{equation}
 
-  \|u\|_{s_x}^2=\!\!\sum_{|\alpha|\le s_x}\!\!\binom{s_x}{|\alpha|}
-    \frac{|\alpha|!}{\alpha!}\,\kappa_x^{|\alpha|}\!\int_E\!|\partial^\alpha u|^2,
+  \|u\|_{s_x}^2=\int_{\R^d}(1+\kappa_x|\xi|^2)^{s_x}|\widehat u(\xi)|^2\,d\xi,
   \qquad
   \|w\|_{s_a}^2=\sum_k(1+\kappa_a\mu_k)^{s_a}|w_k|^2,
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(20)</span></div></div>
-<p>tq $-\Delta_A\psi_k=\mu_k\psi_k$ y $w_k=\pair{w}{\psi_k}_{L^2(A)}$. Los pesos son
-los de $(1+\kappa_x|\xi|^2)^{s_x}$ y $(1+\kappa_a\mu)^{s_a}$.</p></div></div>
-<p>En $E$ la definición es intrínseca y no impone condición de frontera; en $A$ es
-espectral, luego $s_a$ puede ser real.</p>
+<p>tq $-\Delta_A\psi_k=\mu_k\psi_k$ y $w_k=\pair{w}{\psi_k}_{L^2(A)}$.</p></div></div>
+<p>Ninguno de los dos exponentes tiene que ser entero: las dos escalas son
+espectrales, en $\R^d$ por Fourier y en $A$ por $\Delta_A$.</p>
 <div class="stmt proposicion" id="es-prop:delta"><div class="head">Proposición 2.8</div><div class="body"><p><button class="term" type="button" data-k="Hs">$\Hs$</button> el de la Definición <a class="xref" href="#es-def:espacio">2.7</a> $\rt$
 $\delta_{(x_0,a_0)}\in\Hd$ uniformemente en $(x_0,a_0)$, y toda medida signada
 finita en $E\times A$ está en $\Hd$ con
@@ -954,43 +900,32 @@ $\|\eta\|_{\Hd}\le C_\iota\,|\eta|(E\times A)$.</p></div><button class="proof-bt
 hilbertiano tiene norma $\|\delta_{x_0}\|\,\|\delta_{a_0}\|$, y los dos factores
 son finitos por el Corolario <a class="xref" href="#es-cor:umbral">2.5</a> y por
 $\sum_k(1+\kappa_a\mu_k)^{-s_a}|\psi_k(a_0)|^2&lt;\infty$, que es la ley de Weyl
-$\mu_k\sim ck^{2/m}$ junto con $s_a&gt;m/2$. Los dos son uniformes: en $x_0$ por la
-constante de la inyección, en $a_0$ por compacidad de $A$. Luego
+$\mu_k\sim ck^{2/m}$ junto con $s_a&gt;m/2$. Los dos son uniformes: en $x_0$ por
+invariancia por traslación, en $a_0$ por compacidad de $A$. Luego
 $\|c\|_\infty=\sup_{(x,a)}|\delta_{(x,a)}(c)|\le C_\iota\|c\|_{\Hs}$, y</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,|\eta|(E\times A)
   \le C_\iota\,|\eta|(E\times A)\,\|c\|_{\Hs}\]</div>
 <p>da la cota tomando supremo sobre la bola unidad.</p></div></div>
-<p>$\delta_{(x_0,a_0)}=\delta_{x_0}\otimes\delta_{a_0}$ y la norma de un funcional
-producto es el producto de las normas $\rt$ el umbral se parte en uno por factor,
-y $C_\iota=C_xC_a$. Pedir $s_x,s_a&gt;n/2$ también valdría, y es lo que
-<a class="xref" href="#es-eq:penalizacion">(20)</a> evita.</p>
-<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>El isomorfismo de Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es $R=R_x\otimes R_a$, con $R_a$
-el multiplicador $(1+\kappa_a\mu_k)^{s_a}$ y $R_x$ la forma débil de
-$(\mathrm{Id}-\kappa_x\Delta_E)^{s_x}$,</p>
-<div class="display numerado" id="es-eq:riesz"><div class="eqbody"><span class="v" data-var="std">\[\pair{R_xc}{v}=\!\!\sum_{|\alpha|\le s_x}\!\!\binom{s_x}{|\alpha|}
-    \frac{|\alpha|!}{\alpha!}\,\kappa_x^{|\alpha|}\!
-    \int_E\partial^\alpha c\,\partial^\alpha v
-    \qquad\forall v\in H^{s_x}(E),\]</span><span class="v" data-var="fin">\[(R_xc)(v)=\!\!\sum_{|\alpha|\le s_x}\!\!\binom{s_x}{|\alpha|}
-    \frac{|\alpha|!}{\alpha!}\,\kappa_x^{|\alpha|}\,
-    \lambda^x\bigl(\partial^\alpha c\,\partial^\alpha v\bigr)
-    \qquad\forall v\in H^{s_x}(E),\]</span></div><div class="eqside"><span class="num">(21)</span></div></div>
-<p>de símbolo $(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu)^{s_a}$. Su orden es $2s_x$
-en $x$ y $2s_a$ en $a$, y lleva $s_x$ condiciones naturales sobre $\partial E$ y
-ninguna sobre $A$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p10">Ver demostración</button><div class="proof" id="es-control-inverso-p10"><p>La aplicación de Riesz manda $c$ a $v\mapsto(c,v)_{\Hs}$, que con la norma
-<a class="xref" href="#es-eq:penalizacion">(20)</a> es <a class="xref" href="#es-eq:riesz">(21)</a>, acotada y coerciva en
-$H^{s_x}(E)\otimes H^{s_a}(A)$; Lax–Milgram la hace isomorfismo sobre $\Hd$. En
-$A$ la forma es diagonal en $\{\psi_k\}$ con entradas $(1+\kappa_a\mu_k)^{s_a}$,
-que es el multiplicador. En $E$, los desarrollos
-$(1+\kappa_x|\xi|^2)^{s_x}=\sum_j\binom{s_x}{j}\kappa_x^j|\xi|^{2j}$ y
-$|\xi|^{2j}=\sum_{|\alpha|=j}(j!/\alpha!)\xi^{2\alpha}$ identifican el símbolo,
-luego $R_x=(\mathrm{Id}-\kappa_x\Delta_E)^{s_x}$ en el interior, de orden $2s_x$
-porque el símbolo crece como $\kappa_x^{s_x}|\xi|^{2s_x}$. Cada una de las $s_x$
-integraciones por partes deja un término de frontera, y probar contra todo
-$H^{s_x}(E)$ y no contra $H^{s_x}_0(E)$ obliga a que cada uno se anule, que es el
-recuento de condiciones naturales.</p></div></div>
+<p>Aquí $\delta_{(x_0,a_0)}=\delta_{x_0}\otimes\delta_{a_0}$ y la norma de un
+funcional producto es el producto de las normas $\rt$ el umbral se parte en uno
+por factor, y $C_\iota=C_xC_a$.</p>
+<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>El isomorfismo de Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es el multiplicador</p>
+<div class="display numerado" id="es-eq:riesz"><div class="eqbody">\begin{equation}
+
+  R=(\mathrm{Id}-\kappa_x\Delta_x)^{s_x}(\mathrm{Id}-\kappa_a\Delta_A)^{s_a},
+  \qquad
+  \text{símbolo}\quad(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu_k)^{s_a},
+\end{equation}</div><div class="eqside"><span class="num">(21)</span></div></div>
+<p>de orden $2s_x$ en $x$ y $2s_a$ en $a$, sin condiciones de frontera.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p10">Ver demostración</button><div class="proof" id="es-control-inverso-p10"><p>La aplicación de Riesz manda $c$ a $v\mapsto(c,v)_{\Hs}$, y por Plancherel en
+$\R^d$ y Parseval en $\{\psi_k\}$ sobre $A$ ese producto interno es diagonal con
+entradas $(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu_k)^{s_a}$. Un multiplicador
+acotado por arriba y por abajo en cada corona diádica es isomorfismo sobre la
+escala dual, y el símbolo crece como $\kappa_x^{s_x}|\xi|^{2s_x}$ en $\xi$ y
+$\kappa_a^{s_a}\mu_k^{s_a}$ en $k$, que es el orden. No hay frontera, luego no
+hay término de frontera.</p></div></div>
 <p>El orden no se elige: $R^{-1}$ tiene que devolver $\Hd$ a $\Hs$, y es eso lo que
 hace de $c_\star$ de <a class="xref" href="#es-eq:cstar">(26)</a> una función continua de $(x,a)$. Con
-$s_x=1$ sale $\mathrm{Id}-\kappa_x\Delta_E$, admisible solo si $d=1$ por la
+$s_x=1$ sale $\mathrm{Id}-\kappa_x\Delta_x$, admisible solo si $d=1$ por la
 Proposición <a class="xref" href="#es-prop:h1-nunca">2.6</a>.</p>
 <div class="stmt observacion" id="es-obs:dos-condiciones"><div class="head">Observación 2.10</div><div class="body"><p>Los dos regímenes piden cosas a objetos distintos. El (i) restringe $\Hs$,
 pidiendo $s_x&gt;d/2$ y $s_a&gt;m/2$, y luego acepta toda medida finita. El (ii)
@@ -1014,9 +949,9 @@ $\Phi$ por el funcional de silla, dejando $\mathcal L$ para el generador:</p>
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(22)</span></div></div>
 <p>Tres de las hipótesis que carga la nota salen gratis aquí, y las tres se siguen
-de la masa del Corolario <a class="xref" href="#es-cor:masa">1.8</a>.</p>
+de la masa del Corolario <a class="xref" href="#es-cor:masa">1.7</a>.</p>
 <div class="stmt lema" id="es-lema:M-acotado"><div class="head">Lema 3.1</div><div class="body"><p>Todo $\eta\in\M$ cumple $\|\eta\|_{\Hd}\le C_\iota/\rho$, y
-$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p11">Ver demostración</button><div class="proof" id="es-control-inverso-p11"><p>Sea $\eta\in\M$. Por el Corolario <a class="xref" href="#es-cor:masa">1.8</a> es no negativa con
+$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p11">Ver demostración</button><div class="proof" id="es-control-inverso-p11"><p>Sea $\eta\in\M$. Por el Corolario <a class="xref" href="#es-cor:masa">1.7</a> es no negativa con
 $\eta(E\times A)=1/\rho$, luego para todo $c\in\Hs$</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,\eta(E\times A)
   =\frac{\|\iota c\|_\infty}{\rho}\le\frac{C_\iota}{\rho}\|c\|_{\Hs},\]</div>
@@ -1071,18 +1006,16 @@ $-\frac1{2\alpha}\|w\|_{\Hs}^2+\pair{\ch}{\eta_E-\eta}$, o sea $-\Psi(\eta)$.</p
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(23)</span><span class="num">(25)</span></div></div>
 <p>una minimización sobre medidas y no sobre costos. Por la desigualdad elemental
 $\sup_\eta\inf_c\Phi\le\inf_c\sup_\eta\Phi$, su valor es por ahora solo cota
-inferior de <a class="xref" href="#es-eq:Phi">(22)</a>. El Teorema <a class="xref" href="#es-thm:silla">3.6</a> cierra esa brecha: un
+inferior de <a class="xref" href="#es-eq:Phi">(22)</a>. El Teorema <a class="xref" href="#es-thm:silla">3.7</a> cierra esa brecha: un
 minimizador de <a class="xref" href="#es-eq:reducido">(25)</a> construye un punto de silla, y de ahí sale la
 dualidad fuerte.</p>
 <p>La compacidad que pide el teorema la hereda del problema directo.</p>
-<div class="stmt proposicion" id="es-prop:compacidad-M"><div class="head">Proposición 3.5</div><div class="body"><p>Si $E\times A$ es compacto y $\gen{}$ manda $\dom(\gen{})$ en $C(E\times A)$
-$\rt$ $\M$ es convexo y débilmente compacto en $\Hd$. Si además la inyección
-$\iota:\Hs\to C(E\times A)$ es compacta, cosa que vale para el espacio de la
-Definición <a class="xref" href="#es-def:espacio">2.7</a> $\rt$ $\M$ es compacto en la norma de $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p15">Ver demostración</button><div class="proof" id="es-control-inverso-p15"><p>La convexidad vale porque <a class="xref" href="#es-eq:balance">(13)</a> es una familia de igualdades
+<div class="stmt proposicion" id="es-prop:compacidad-M"><div class="head">Proposición 3.5</div><div class="body"><p>Si $\rho\,\M$ es tenso y $\gen{}$ manda $\dom(\gen{})$ en $C(E\times A)$ $\rt$
+$\M$ es convexo y débilmente compacto en $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p15">Ver demostración</button><div class="proof" id="es-control-inverso-p15"><p>La convexidad vale porque <a class="xref" href="#es-eq:balance">(13)</a> es una familia de igualdades
 lineales y la restricción $\eta\ge0$ es convexa. Poner $\widehat\M=\rho\,\M$, que
-por el Corolario <a class="xref" href="#es-cor:masa">1.8</a> vive en $\mathscr P(E\times A)$. Con $E\times A$
-compacto, $\mathscr P(E\times A)$ es débil-$*$ compacto por Banach–Alaoglu, y
-$\widehat\M$ es débil-$*$ cerrado en él porque cada restricción
+por el Corolario <a class="xref" href="#es-cor:masa">1.7</a> vive en $\mathscr P(E\times A)$. La tensión y el
+teorema de Prokhorov lo hacen relativamente débil-$*$ compacto, y es débil-$*$
+cerrado porque cada restricción
 $\mu\mapsto\mu(\rho\varphi-\gen{}\varphi)-\nu_0(\varphi)$ es débil-$*$ continua,
 al estar la función de prueba $\rho\varphi-\gen{}\varphi$ en $C(E\times A)$ por
 hipótesis. Luego $\widehat\M$ es débil-$*$ compacto.</p>
@@ -1097,14 +1030,23 @@ compacto.</p>
 acotado $\widehat\M$ a un conjunto relativamente compacto en norma. Ese conjunto
 es débilmente compacto por el párrafo anterior, luego débilmente cerrado, luego
 cerrado en norma, y un cerrado relativamente compacto es compacto.</p></div></div>
+<div class="stmt observacion" id="es-obs:tension"><div class="head">Observación 3.6</div><div class="body"><p>La tensión es hipótesis, y es el precio de $E=\R^d$: sobre un $E\times A$
+compacto sale de Banach–Alaoglu y no hay que suponer nada. Para el problema
+descontado la primera fuente la saca de la tensión de las leyes solución
+<span class="src">[Bhatt–Borkar, §3.2]</span>, citando a Borkar (1989), Lema 3.7,
+\remarcar{[incierto: no está en el material fichado]}. Dos consecuencias más:
+$\iota$ deja de ser compacta, luego $\M$ no tiene por qué serlo en norma; y el
+Teorema 6.3 de Kurtz–Stockbridge pide en su (6.2) subniveles compactos del
+costo, cosa que una $c$ acotada sobre $\R^d$ no tiene, así que en $\R^d$ es el
+Teorema 2.2 de Bhatt–Borkar el que sostiene la Proposición <a class="xref" href="#es-prop:balance">1.6</a>.</p></div></div>
 <p>La convexidad es inmediata porque <a class="xref" href="#es-eq:balance">(13)</a> es una familia de igualdades
 lineales. La compacidad pasa por el conjunto normalizado
-$\widehat\M=\rho\,\M\s\mathscr P(E\times A)$, débil-$*$ compacto por
-Banach–Alaoglu y por ser cerradas las restricciones de balance, y luego se
-transporta a $\Hd$ con el adjunto de la inyección. Con inyección compacta,
+$\widehat\M=\rho\,\M\s\mathscr P(E\times A)$, débil-$*$ compacto por Prokhorov y
+por ser cerradas las restricciones de balance, y luego se transporta a $\Hd$ con
+el adjunto de la inyección. Con inyección compacta,
 Schauder da
 compacidad en norma y la existencia en <a class="xref" href="#es-eq:reducido">(25)</a> es Weierstrass.</p>
-<div class="stmt teorema" id="es-thm:silla"><div class="head">Teorema 3.6</div><div class="body"><p>Si $\Hs\hookrightarrow C(E\times A)$, $\M\s\Hd$ no vacío, convexo y débilmente
+<div class="stmt teorema" id="es-thm:silla"><div class="head">Teorema 3.7</div><div class="body"><p>Si $\Hs\hookrightarrow C(E\times A)$, $\M\s\Hd$ no vacío, convexo y débilmente
 compacto, y $\ch\in\Hs$ $\rt$ <a class="xref" href="#es-eq:reducido">(25)</a> tiene minimizador único
 $\eta_{A,\star}$. Poniendo</p>
 <div class="display numerado" id="es-eq:cstar"><div class="eqbody">\begin{equation}
@@ -1146,17 +1088,17 @@ mínimo global. Las dos desigualdades juntas son la relación de silla, y el
 argumento estándar de que un punto de silla cierra la brecha entre los dos
 órdenes da <a class="xref" href="#es-eq:dualidad">(28)</a>. La unicidad de $c_\star$ es la
 Proposición <a class="xref" href="#es-prop:existencia-c">3.3</a>.</p></div></div>
-<div class="stmt observacion" id="es-obs:sion"><div class="head">Observación 3.7</div><div class="body"><p>Bajo hipótesis que den un teorema minimax, como las de Sion, <a class="xref" href="#es-eq:dualidad">(28)</a>
+<div class="stmt observacion" id="es-obs:sion"><div class="head">Observación 3.8</div><div class="body"><p>Bajo hipótesis que den un teorema minimax, como las de Sion, <a class="xref" href="#es-eq:dualidad">(28)</a>
 se obtendría directamente de la convexidad en $c$, la afinidad en $\eta$ y la
 compacidad. El argumento de arriba es constructivo: el minimizador de
 <a class="xref" href="#es-eq:reducido">(25)</a> produce a la vez el punto de silla, $c_\star$ y
 <a class="xref" href="#es-eq:etaoptimal-set">(29)</a>.</p></div></div>
-<div class="stmt observacion" id="es-obs:selector"><div class="head">Observación 3.8</div><div class="body"><p>Un punto fijo del mapa de un costo a una política óptima puede no existir: el
+<div class="stmt observacion" id="es-obs:selector"><div class="head">Observación 3.9</div><div class="body"><p>Un punto fijo del mapa de un costo a una política óptima puede no existir: el
 selector de <a class="xref" href="#es-eq:selector">(10)</a> salta donde el hamiltoniano tiene varios
 minimizadores. La relación de punto fijo <a class="xref" href="#es-eq:etaoptimal-set">(29)</a> es
 multivaluada y está puesta sobre $\M$, convexo y débilmente compacto, y
 $c_\star$ es único haya las políticas óptimas que haya.</p></div></div>
-<div class="stmt corolario" id="es-cor:puntofijo"><div class="head">Corolario 3.9</div><div class="body"><p>Con la notación del Teorema <a class="xref" href="#es-thm:silla">3.6</a>,</p>
+<div class="stmt corolario" id="es-cor:puntofijo"><div class="head">Corolario 3.10</div><div class="body"><p>Con la notación del Teorema <a class="xref" href="#es-thm:silla">3.7</a>,</p>
 <div class="display numerado" id="es-eq:etaoptimal-set"><div class="eqbody">\begin{equation}
 
   \eta_{A,\star}\in\Opt\!\left(\ch+\tfrac1\alpha R^{-1}
@@ -1188,7 +1130,7 @@ $O(\alpha)$ en la norma dual. En el otro sentido, si $\M$ es acotado en $\Hd$,
 cosa que garantiza el Lema <a class="xref" href="#es-lema:M-acotado">3.1</a>, <a class="xref" href="#es-eq:cstar">(26)</a> da
 $\|c_\star-\ch\|_{\Hs}=O(1/\alpha)$ y el costo recuperado colapsa al previo.</p></section>
 <section class="capitulo"><h3 id="es-sec:pde"><span class="secnum">4</span>El sistema de optimalidad</h3>
-<p>El Teorema <a class="xref" href="#es-thm:silla">3.6</a> identifica la solución como un par
+<p>El Teorema <a class="xref" href="#es-thm:silla">3.7</a> identifica la solución como un par
 $(c_\star,\eta_{A,\star})$ caracterizado por una desigualdad variacional. Ahora se
 escribe esa caracterización como sistema de ecuaciones. No se supone nada nuevo
 sobre el problema inverso; lo que se supone es regularidad de las medidas de
@@ -1227,13 +1169,12 @@ $(\rho\,\mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ como distribuciones.</p>
 <p>Para la forma clásica, integrar por partes dos veces en
 $\int(b_\pi\cdot\nabla\varphi)m_\pi$ y en
 $\tfrac12\int\operatorname{Tr}(\Sigma_\pi D^2\varphi)m_\pi$, pasando todas las
-derivadas a $m_\pi$; los términos de frontera llevan $\partial_n\varphi$, que se
-anula en $\dom(\gen{})$ por <a class="xref" href="#es-eq:gen-operador">(3)</a>. El resultado es
-<a class="xref" href="#es-eq:fp">(33)</a>.</p></div></div>
+derivadas a $m_\pi$; no hay términos de frontera, porque $\varphi$ y sus dos
+primeras derivadas se anulan en el infinito. El resultado es <a class="xref" href="#es-eq:fp">(33)</a>.</p></div></div>
 <p><a class="xref" href="#es-eq:fp">(33)</a> es la ecuación de Fokker–Planck estacionaria con descuento $\rho$
 y fuente $\nu_0$, obtenida de <a class="xref" href="#es-eq:balance">(13)</a> restringiendo a la marginal del
 estado e integrando por partes. Su masa total es $1/\rho$ por el
-Corolario <a class="xref" href="#es-cor:masa">1.8</a>, que es la normalización que toda discretización tiene
+Corolario <a class="xref" href="#es-cor:masa">1.7</a>, que es la normalización que toda discretización tiene
 que reproducir.</p>
 <div class="stmt observacion" id="es-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Escribir <a class="xref" href="#es-eq:fp">(33)</a> puntualmente pide dos derivadas de $\Sigma_\pi m_\pi$, y
 $m_\pi$ no tiene por qué tenerlas: con política determinista la medida de
@@ -1269,15 +1210,15 @@ ecuación del costo <a class="xref" href="#es-eq:cstar">(26)</a> sale el sistema
 cuanto $\eta_A-\eta_E\in\Hd$, y por la Proposición <a class="xref" href="#es-prop:delta">2.8</a> eso vale para
 cualquier par de medidas finitas en el régimen (i). Escribir $R$ puntualmente
 pondría una distribución al lado derecho de una ecuación entre funciones.</p>
-<div class="stmt proposicion" id="es-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Bajo las hipótesis del Teorema <a class="xref" href="#es-thm:silla">3.6</a>, y si las medidas de ocupación de
+<div class="stmt proposicion" id="es-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Bajo las hipótesis del Teorema <a class="xref" href="#es-thm:silla">3.7</a>, y si las medidas de ocupación de
 $\pi_E$ y de alguna $\pi_A$ óptima se desintegran como
 <a class="xref" href="#es-eq:desintegracion">(31)</a> $\rt$ $(c_\star,\eta_{A,\star})$ resuelve
 <a class="xref" href="#es-eq:sistema">(34)</a> en sentido débil, y recíprocamente toda solución débil de
-<a class="xref" href="#es-eq:sistema">(34)</a> con $\eta_A\in\M$ tiene $c=c_\star$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p20">Ver demostración</button><div class="proof" id="es-control-inverso-p20"><p>Por el Teorema <a class="xref" href="#es-thm:silla">3.6</a>, $\eta_{A,\star}$ minimiza $\pair{c_\star}{\cdot}$
+<a class="xref" href="#es-eq:sistema">(34)</a> con $\eta_A\in\M$ tiene $c=c_\star$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p20">Ver demostración</button><div class="proof" id="es-control-inverso-p20"><p>Por el Teorema <a class="xref" href="#es-thm:silla">3.7</a>, $\eta_{A,\star}$ minimiza $\pair{c_\star}{\cdot}$
 sobre $\M$, lo que por <a class="xref" href="#es-eq:lp">(14)</a> y su dual <a class="xref" href="#es-eq:dual">(15)</a> equivale a la
 existencia de $V$ que cumpla <a class="xref" href="#es-eq:hjb-ineq">(9)</a> con holgura complementaria en
 $\operatorname{supp}\eta_{A,\star}$; ese es el primer par de bloques, y la
-Proposición <a class="xref" href="#es-prop:hjb">1.5</a> convierte la holgura en <a class="xref" href="#es-eq:selector">(10)</a>. Las dos
+Proposición <a class="xref" href="#es-prop:hjb">1.4</a> convierte la holgura en <a class="xref" href="#es-eq:selector">(10)</a>. Las dos
 ecuaciones adjuntas son la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a> aplicada a $\pi_A$ y a
 $\pi_E$, las dos en $\M$. El último bloque es <a class="xref" href="#es-eq:cstar">(26)</a> reordenada, y su
 lectura débil es <a class="xref" href="#es-eq:coste-debil">(35)</a>.</p>
@@ -1299,7 +1240,7 @@ restringida por <a class="xref" href="#es-eq:balance">(13)</a> y el objetivo es 
 que una discretización hereda un programa estrictamente convexo de dimensión
 finita. En <a class="xref" href="#es-eq:sistema">(34)</a> las incógnitas son $V$, $m_A$, $m_E$ y $c$, y el
 acople es por el $\arg\min$; una discretización hereda una iteración de punto
-fijo cuyas propiedades de contracción no las da el Teorema <a class="xref" href="#es-thm:silla">3.6</a>.</p></div></div>
+fijo cuyas propiedades de contracción no las da el Teorema <a class="xref" href="#es-thm:silla">3.7</a>.</p></div></div>
 <h4 id="es-control-inverso-x6">El modelo de estados finitos como referencia</h4>
 <p>Todo objeto de arriba tiene contraparte con estados finitos, lo que hace del
 modelo discreto una referencia para discretizar. Sean $S$ y $A$ finitos, $Q$ la
@@ -1322,12 +1263,9 @@ politopo, caracterización sin contraparte aquí: $\M$ sigue siendo convexo y
 débilmente compacto por la Proposición <a class="xref" href="#es-prop:compacidad-M">3.5</a>, pero la
 extremalidad no es lo que selecciona el comportamiento determinista.</p></section></div>
 <div class="doc" data-lang="en"><section class="capitulo"><h3 id="en-sec:forward"><span class="secnum">1</span>Forward discounted stochastic control</h3>
-<p>Throughout, <button class="term" type="button" data-k="E">$E\s\R^d$</button> is the state space, a bounded domain admitting a
-bounded extension $W^{1,p}(E)\to W^{1,p}(\R^d)$ for every $p$; domains of class
-$C^1$ <span class="src">[Brezis, Thm. 9.7]</span> and boxes <span class="src">[Brezis, Rem. 9]</span> qualify.
-<button class="term" type="button" data-k="A">$A$</button> is the action space, a compact Riemannian manifold <span class="df">without
-boundary</span> of dimension $m$: the sphere of directions, the torus, their products.
-We write $n=d+m$. We fix a discount rate <button class="term" type="button" data-k="rho">$\rho&gt;0$</button> and a
+<p>Throughout, <button class="term" type="button" data-k="E">$E=\R^d$</button> is the state space and <button class="term" type="button" data-k="A">$A$</button> is the action
+space, a compact Riemannian manifold <span class="df">without boundary</span> of dimension $m$: a
+sphere of directions, a torus, a product of these. We write $n=d+m$ and fix a
 probability measure <button class="term" type="button" data-k="nu0">$\nu_0$</button> on $E$, the initial law of the state. The
 letter $\Omega$ is reserved for the sample space
 of a filtered probability space $(\Omega,\mathscr F,\{\mathscr F_t\},\P)$, and $W$
@@ -1339,7 +1277,6 @@ several measures act in succession.</p></div>
 <div class="display numerado" id="en-eq:sde"><div class="eqbody">\begin{equation}
 
   dX_t=b(X_t,a_t)\,dt+\sigma(X_t,a_t)\,dW_t,\qquad X_0\sim\nu_0,
-  \qquad\text{reflected at }\partial E,
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(2)</span><span class="num">(1)</span></div></div>
 <p>whose generator at a frozen action $a\in A$ is the second-order operator</p>
@@ -1349,57 +1286,24 @@ several measures act in succession.</p></div>
   +\tfrac12\operatorname{Tr}\bigl(\sigma\sigma^\top(x,a)\,D^2\varphi(x)\bigr).
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(3)</span><span class="num">(2)</span></div></div>
-<p>Reflection at $\partial E$ fixes the domain, and we write $\gen{}$ for the
-operator with
-$\dom(\gen{})=\{\varphi\in C^2(\overline E):\partial_n\varphi=0\}\s C_b(E)$ and
+<p>We write $\gen{}$ for the operator with $\dom(\gen{})=C_0^2(\R^d)\s C_b(E)$ and
 range in $C_b(E\times A)$ given by</p>
 <div class="display numerado" id="en-eq:gen-operador"><div class="eqbody">\begin{equation}
 
   \gen{}\varphi:(x,a)\longmapsto\gen{a}\varphi(x).
 \end{equation}</div><div class="eqside"><span class="num">(3)</span></div></div>
-<p>The reflected process takes values in $\overline E$, which is compact, and it is
-$\overline E\times A$ that carries the control problem.</p>
-<div class="stmt proposicion" id="en-prop:condiciones"><div class="head">Proposición 1.1</div><div class="body"><p>$\overline E$, $A$ and $\dom(\gen{})$ satisfy the standing hypotheses of both
-sources: $\dom(\gen{})$ is an algebra, dense in $C(\overline E)$, containing the
-constants and separating points; $\gen{}\mathbf 1=0$; each $\gen{a}$ satisfies
-the positive maximum principle; and the growth condition holds with
-$\psi\equiv1$.
-<span class="src">[Kurtz–Stockbridge, §1.1 (i)–(vi); Bhatt–Borkar, Cond. 1–2]</span></p></div></div>
-<p>Two of these are not automatic. That $\dom(\gen{})$ is an algebra is the product
-rule, $\partial_n(\varphi\psi)=\varphi\,\partial_n\psi+\psi\,\partial_n\varphi$,
-and it is Kurtz–Stockbridge (v). The positive maximum principle holds at a
-boundary maximum because $\partial_n\varphi=0$ leaves $\varphi$ decreasing into
-$\overline E$ along the normal as well as tangentially, so $D^2\varphi\le0$ as a
-form and $\operatorname{Tr}(\sigma\sigma^\top D^2\varphi)\le0$. Compactness of
-$\overline E\times A$ makes $\psi\equiv1$ admissible, and it also gives the
-compact sublevel sets that Theorem 6.3 of Kurtz–Stockbridge requires of the
-cost.</p>
-<p>Reflection is a modelling decision, not an inheritance. The diffusion examples of
-both sources are posed on $\R^d$, with no boundary at all and with domains
-$C_0^2(\R^d)$ and $\mathscr C^2_c(\R^d)$
-<span class="src">[Bhatt–Borkar, Ex. 1; Kurtz–Stockbridge, Ex. 3.4]</span>, and on a bounded
-$E$ equation <a class="xref" href="#en-eq:sde">(1)</a> by itself does not determine the process past the
-exit time. Among the completions, $\mathscr C^2_c(E)$ is the one describing
-killing at $\tau=\inf\{t:X_t\in\partial E\}$, under which
-$\rho\,\eta(\overline E\times A)=1-\E[e^{-\rho\tau}]&lt;1$ and both
-Corollary <a class="xref" href="#en-cor:masa">1.8</a> and <a class="xref" href="#en-eq:balance">(13)</a> acquire a boundary term.
-Reflection is the completion that leaves them intact, and that is the reason for
-choosing it. If $\sigma\sigma^\top$ is nondegenerate then
-$\eta_\pi(\partial E\times A)=0$, so the distinction between $E$ and
-$\overline E$ never reaches $\eta$.</p>
-<div class="stmt observacion" id="en-obs:reflexion-incierta"><div class="head">Observación 1.2</div><div class="body"><p>Two steps behind Proposition <a class="xref" href="#en-prop:condiciones">1.1</a> are standard and are
-\remarcar{[uncertain: absent from the fiched material]}. That the reflected
-diffusion solves the martingale problem for $\dom(\gen{})$ is the Skorokhod
-decomposition $dX_t=b\,dt+\sigma\,dW_t-n(X_t)\,dL_t$, in which the local time
-enters $d\varphi(X_t)$ through $\partial_n\varphi\,dL_t$ and hence drops out on
-$\dom(\gen{})$; and its existence for every starting point, which is
-Bhatt–Borkar&#x27;s Condition 3, is Stroock–Varadhan&#x27;s submartingale problem or
-Lions–Sznitman. Neither reference is in the project.</p></div></div>
+<p>This is Example 1 of the first source and Example 3.4 of the second.</p>
+<div class="stmt proposicion" id="en-prop:condiciones"><div class="head">Proposición 1.1</div><div class="body"><p>$E$, $A$ and $\dom(\gen{})$ satisfy the standing hypotheses of both sources, with
+$\psi\equiv1$ in the growth condition.
+<span class="src">[Bhatt–Borkar, Ex. 1 and Cond. 1–3;
+Kurtz–Stockbridge, §1.1 (i)–(vi)]</span></p></div></div>
+<p>Compactness of $A$ is what makes $\psi\equiv1$ admissible, since $\gen{}\varphi$
+is then bounded on $E\times A$ for each $\varphi\in\dom(\gen{})$.</p>
 <p>Equation <a class="xref" href="#en-eq:sde">(1)</a> presupposes an action process $a_t$, and this is more than
 the theory needs. The formulation we adopt is the relaxed controlled martingale
 problem, which replaces the action process by a measure-valued one and is stable
 under the randomization that the linear-programming formulation requires.</p>
-<div class="stmt definicion" id="en-def:relajada"><div class="head">Definición 1.3</div><div class="body"><p><span class="src">[Bhatt–Borkar, Def. 1.2]</span>
+<div class="stmt definicion" id="en-def:relajada"><div class="head">Definición 1.2</div><div class="body"><p><span class="src">[Bhatt–Borkar, Def. 1.2]</span>
 Let $V=\mathscr P(A)$, a compact metric space in the weak topology. A process
 $(X,\pi)$ with values in $E\times V$, progressively measurable with respect to
 $\{\mathscr F_t\}$ and with $X_0\sim\nu_0$, solves the <span class="df">relaxed controlled
@@ -1446,13 +1350,13 @@ relaxed policy and the forward problem are</p>
    \qquad \inf_\pi J_c(\pi),\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(4), (5)</span><span class="num">(6)</span></div></div>
 <p>where $\lambda_\rho=e^{-\rho t}dt$, of total mass $1/\rho$, and $\P$ is the measure
 of the solution $(X,\pi)$. The infimum in <a class="xref" href="#en-eq:J">(6)</a> runs over the solutions of
-Definition <a class="xref" href="#en-def:relajada">1.3</a>.</p>
+Definition <a class="xref" href="#en-def:relajada">1.2</a>.</p>
 <p>Restricting to Markov policies is no loss of optimality: for the discounted
 problem for the nonlinear filter an optimal solution with relaxed Markov control
 exists <span class="src">[Bhatt–Borkar, §3.2, via Cor. 2.2]</span>, and for the remaining
 families of examples the argument is asserted to be analogous but is not written
 out. Within the class, the expectation opens into the semigroup.</p>
-<div class="stmt proposicion" id="en-prop:semigrupo"><div class="head">Proposición 1.4</div><div class="body"><p><span class="src">[Own reading]</span>
+<div class="stmt proposicion" id="en-prop:semigrupo"><div class="head">Proposición 1.3</div><div class="body"><p><span class="src">[Own reading]</span>
 Suppose $\pi_s=\pi(X_s)$ for a measurable kernel $\pi:E\to\mathscr P(A)$, a
 <span class="df">relaxed Markov control</span>. Then $X$ alone solves the martingale problem for
 $(\Gen{\pi},\nu_0)$; if that problem is well posed, $X$ is a Markov process with
@@ -1498,7 +1402,7 @@ programming it satisfies</p>
   \rho V(x)=\inf_{a\in A}\bigl\{c(x,a)+\gen{a}V(x)\bigr\}.
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(6)</span><span class="num">(8)</span></div></div>
-<div class="stmt proposicion" id="en-prop:hjb"><div class="head">Proposición 1.5</div><div class="body"><p>Equation <a class="xref" href="#en-eq:hjb">(8)</a> is equivalent to the inequality</p>
+<div class="stmt proposicion" id="en-prop:hjb"><div class="head">Proposición 1.4</div><div class="body"><p>Equation <a class="xref" href="#en-eq:hjb">(8)</a> is equivalent to the inequality</p>
 <div class="display numerado" id="en-eq:hjb-ineq"><div class="eqbody">\begin{equation}
 
   c(x,a)+\gen{a}V(x)-\rho V(x)\ \ge\ 0,\qquad (x,a)\in E\times A,
@@ -1523,7 +1427,7 @@ evaluates a value function, and <a class="xref" href="#en-eq:hjb">(8)</a> reappe
 feasibility condition <a class="xref" href="#en-eq:dual">(15)</a> and as one block of the optimality system of
 Section <a class="xref" href="#en-sec:pde">4</a>, where it is used in weak form.</p>
 <h4 id="en-sec:balance"><span class="secnum">1.2</span>Discounted occupation measures</h4>
-<div class="stmt definicion" id="en-def:ocupacion"><div class="head">Definición 1.6</div><div class="body"><p><span class="src">[Bhatt–Borkar, (1.6)]</span>
+<div class="stmt definicion" id="en-def:ocupacion"><div class="head">Definición 1.5</div><div class="body"><p><span class="src">[Bhatt–Borkar, (1.6)]</span>
 For a relaxed policy $\pi$ and $B\in\mathscr B(E\times A)$, the <span class="df">discounted
 occupation measure</span> is</p>
 <div class="display numerado" id="en-eq:ocupacion"><div class="eqbody"><span class="v" data-var="std">\[\eta_\pi(B)=\E\left[\int_0^\infty e^{-\rho t}\int_A
@@ -1537,7 +1441,7 @@ initial condition, so everything below takes place on $E\times A$, and the forwa
 problem, nonconvex in $\pi$, is linear in $\eta$.</p>
 <p>The measures that arise this way are characterized by a single family of linear
 equalities.</p>
-<div class="stmt proposicion" id="en-prop:balance"><div class="head">Proposición 1.7</div><div class="body"><p><span class="src">[Bhatt–Borkar, (2.13) and Thm. 2.2]</span>
+<div class="stmt proposicion" id="en-prop:balance"><div class="head">Proposición 1.6</div><div class="body"><p><span class="src">[Bhatt–Borkar, (2.13) and Thm. 2.2]</span>
 For every $\varphi\in\dom(\gen{})$, the occupation measure of any solution of the
 relaxed controlled martingale problem satisfies the <span class="df">weak balance identity</span></p>
 <div class="display numerado" id="en-eq:balance"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}\bigl(\rho\varphi(x)-\gen{a}\varphi(x)\bigr)\,\eta(dx,da)
@@ -1547,10 +1451,10 @@ measure of some solution.</p></div><button class="proof-btn" type="button" aria-
 $\varphi\in\dom(\gen{})\s C_b(E)$ and $\gen{}\varphi\in C_b(E\times A)$. In
 particular $\gen{}$ is not assumed to be the differential generator
 <a class="xref" href="#en-eq:generator">(2)</a>, nor is $X$ assumed to have continuous paths:
-Definition <a class="xref" href="#en-def:relajada">1.3</a> is posed on a Polish space and its solutions are
+Definition <a class="xref" href="#en-def:relajada">1.2</a> is posed on a Polish space and its solutions are
 càdlàg. Accordingly the argument below is deterministic and uses no stochastic
 calculus.</p>
-<p>Taking expectations in the martingale of Definition <a class="xref" href="#en-def:relajada">1.3</a> between
+<p>Taking expectations in the martingale of Definition <a class="xref" href="#en-def:relajada">1.2</a> between
 $0$ and $t$,</p>
 <div class="display">\[\E[\varphi(X_t)]-\nu_0(\varphi)
   =\E\Bigl[\int_0^t\pi_s^a\gen{a}\varphi(X_s)\,ds\Bigr]
@@ -1559,7 +1463,7 @@ $0$ and $t$,</p>
 integrands are bounded, by $\|\varphi\|_\infty$ and
 $\|\gen{}\varphi\|_\infty$ respectively, and $\rho e^{-\rho t}dt$ is a
 probability measure, so Fubini applies. The left-hand side becomes
-$\rho\,\eta(\varphi)-\nu_0(\varphi)$ by Definition <a class="xref" href="#en-def:ocupacion">1.6</a>, and on
+$\rho\,\eta(\varphi)-\nu_0(\varphi)$ by Definition <a class="xref" href="#en-def:ocupacion">1.5</a>, and on
 the right, interchanging $s$ and $t$,</p>
 <div class="display">\[\int_0^\infty\!\!\rho e^{-\rho t}\!\int_0^t(\cdot)\,ds\,dt
   =\int_0^\infty\!(\cdot)\int_s^\infty\!\!\rho e^{-\rho t}dt\,ds
@@ -1570,13 +1474,14 @@ the right, interchanging $s$ and $t$,</p>
 $\E\int_0^te^{-\rho s}dM_s$ would be shorter and assumes more: a bounded
 integrand against a martingale yields a <em>local</em> martingale, whose
 expectation need not vanish without a further integrability condition.</p>
-<p>The converse is the characterization of discounted
-occupation measures <span class="src">[Bhatt–Borkar, Thm. 2.2]</span>; for locally compact
-state spaces see <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span>.</p></div></div>
+<p>The converse is the characterization of discounted occupation measures
+<span class="src">[Bhatt–Borkar, Thm. 2.2]</span>, which asks nothing of $E$ beyond Polish; the
+analogue in <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span> needs its (6.2) as well
+(Remark <a class="xref" href="#en-obs:tension">3.6</a>).</p></div></div>
 <p>In operator form <a class="xref" href="#en-eq:balance">(13)</a> reads $(\rho-\gen{})^{*}\eta=\nu_0$, so $\eta$
 is the initial law transported by the adjoint resolvent; this is the dual statement
-of the resolvent form of $J_c$ recorded after Proposition <a class="xref" href="#en-prop:semigrupo">1.4</a>.</p>
-<div class="stmt corolario" id="en-cor:masa"><div class="head">Corolario 1.8</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ for every $\pi$. In particular $\eta_\pi$ is not a
+of the resolvent form of $J_c$ recorded after Proposition <a class="xref" href="#en-prop:semigrupo">1.3</a>.</p>
+<div class="stmt corolario" id="en-cor:masa"><div class="head">Corolario 1.7</div><div class="body"><p>$\eta_\pi(E\times A)=1/\rho$ for every $\pi$. In particular $\eta_\pi$ is not a
 probability measure.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p4">Ver demostración</button><div class="proof" id="en-control-inverso-p4"><p>Take $\varphi\equiv1$ in <a class="xref" href="#en-eq:balance">(13)</a>. Both terms of <a class="xref" href="#en-eq:generator">(2)</a>
 carry derivatives of $\varphi$, so $\gen{a}1=0$ and the identity becomes
 $\rho\,\eta(E\times A)=\nu_0(1)=1$.</p></div></div>
@@ -1600,15 +1505,10 @@ $1/\rho$ is the only input to the bound of Lemma <a class="xref" href="#en-lema:
 <p>The HJB inequality <a class="xref" href="#en-eq:hjb-ineq">(9)</a> is therefore exactly dual feasibility for
 <a class="xref" href="#en-eq:lp">(14)</a>, and the value function is the dual variable attached to the balance
 constraint.</p>
-<div class="stmt observacion" id="en-obs:test"><div class="head">Observación 1.9</div><div class="body"><p>The set $\M$ depends on the class of test functions in <a class="xref" href="#en-eq:balance">(13)</a>, and
-$\mathscr C^2_c(E)$, $C^\infty_c(E)$ and $C^2_b(\overline E)$ give different sets
-whenever $E$ has a boundary; the difference is exactly the boundary behaviour
-that <a class="xref" href="#en-eq:balance">(13)</a> can detect. Reflection selects
-$\{\varphi\in C^2(\overline E):\partial_n\varphi=0\}$, and
-Proposition <a class="xref" href="#en-prop:condiciones">1.1</a> is what makes that choice admissible. The
-diffusion example of <span class="src">[Kurtz–Stockbridge, Ex. 3.4]</span> takes
-$\mathscr C^2_c(\R^d)$ instead, on a state space without boundary, so it
-prescribes the domain only in the interior.</p></div></div></section>
+<div class="stmt observacion" id="en-obs:test"><div class="head">Observación 1.8</div><div class="body"><p>On $\R^d$ the classes $C_0^2$, $\mathscr C^2_c$ and $C^\infty_c$ all give the
+same $\M$, since each is bp-dense in the others and <a class="xref" href="#en-eq:balance">(13)</a> is
+bp-closed. On a state space with a boundary they do not, and the difference is
+the boundary behaviour that <a class="xref" href="#en-eq:balance">(13)</a> detects.</p></div></div></section>
 <section class="capitulo"><h3 id="en-sec:inverso"><span class="secnum">2</span>Inverse control with a prior cost</h3>
 <p>We now observe an expert and ask which running cost explains it. The expert is a
 policy $\pi_E$, known only through its discounted occupation measure
@@ -1677,27 +1577,13 @@ requires is a Sobolev threshold.</p>
 Let $n=d+m$ and $s&gt;n/2$. Then $H^s(\R^n)\hookrightarrow C_0(\R^n)$ continuously,
 and every $f\in H^s$ has a continuous representative with
 $\|f\|_\infty\le C_s\|f\|_{H^s}$.</p></div></div>
-<p>Theorem <a class="xref" href="#en-thm:encaje">2.4</a> is stated on $\R^n$, and $E$ has a boundary; the bridge
-is the extension of \S<a class="xref" href="#en-sec:forward">1</a>, iterated one derivative at a time.</p>
-<div class="stmt corolario" id="en-cor:umbral"><div class="head">Corolario 2.5</div><div class="body"><p>Let $s&gt;d/2$ be an integer. Then $H^s(E)\hookrightarrow C(\overline E)$
-continuously.
-<span class="src">[Brezis, Cor. 9.15 y 9.14]</span></p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p7">Ver demostración</button><div class="proof" id="en-control-inverso-p7"><p>Induct on $s$, extending, applying Theorem <a class="xref" href="#en-thm:encaje">2.4</a> on $\R^d$ and
-restricting. If $u\in H^s(E)$ then $u$ and its first derivatives lie in
-$H^{s-1}(E)$, and one step of the first-order embedding raises the integrability
-of both; after finitely many steps $u\in W^{1,q}(E)$ for some $q&gt;d$, where the
-first-order embedding lands in $C(\overline E)$. Only the extension of
-Theorem 9.7 is used at each step, never one of order $s$.</p></div></div>
-<p>An extension of order $s$ would require $E$ of class $C^s$; iterating the
-first-order one does not <span class="src">[Brezis, cap. 9, nota 17]</span>, and this is where
-integrality of $s$ is spent. It is also what removes the ambiguity in
-$H^s(\overline E)$: for integer $s$ the intrinsic definition
-$\{u:\partial^\alpha u\in L^2,\ |\alpha|\le s\}$ needs no Fourier transform and
-no hypothesis on $E$.</p>
-<p>The Dirac mass shows the threshold is sharp: $\delta_{(x_0,a_0)}$ is a bounded
-functional on $H^s$ exactly when $s&gt;n/2$
+<p>The Dirac mass shows the threshold is sharp.</p>
+<div class="stmt corolario" id="en-cor:umbral"><div class="head">Corolario 2.5</div><div class="body"><p>$\delta_{x_0}\in H^{-s}(\R^d)$, uniformly in $x_0$, if and only if $s&gt;d/2$.
 <span class="src">[Folland, Prop. 9.16 and the computation of $\widehat\delta$ preceding
-it]</span>. Hence $H^1$ is admissible only for
-$d+m\le1$, and regime (ii) is an assumption on $\M$, not a choice of space.</p>
+it]</span></p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p7">Ver demostración</button><div class="proof" id="en-control-inverso-p7"><p>$\widehat\delta_{x_0}(\xi)=e^{-2\pi i x_0\cdot\xi}$ has modulus one, so
+$\|\delta_{x_0}\|_{(-s)}^2=\int(1+|\xi|^2)^{-s}d\xi$, independent of $x_0$ and
+finite exactly when $2s&gt;d$. The identification of $H^{-s}$ with $(H^s)^{*}$ is
+Proposition 9.16 of the source.</p></div></div>
 <div class="stmt proposicion" id="en-prop:h1-nunca"><div class="head">Proposición 2.6</div><div class="body"><p>For $n=d+m\ge2$ the Dirac mass at a point of $E\times A$ is not a bounded
 functional on $H^1(E\times A)$. In particular the singular occupation measures of
 deterministic policies do not lie in $(H^1)^*$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p8">Ver demostración</button><div class="proof" id="en-control-inverso-p8"><p>It suffices to exhibit an unbounded function in $H^1$ near the point. For $n=2$
@@ -1708,22 +1594,20 @@ translating to $(x_0,a_0)$ produces a sequence $f_k\in H^1(E\times A)$ with
 $\|f_k\|_{H^1}$ bounded and $f_k(x_0,a_0)\to\infty$, so evaluation at $(x_0,a_0)$
 is not a bounded functional. Since the occupation measure of a deterministic policy
 charges a Lebesgue-null graph, it is a measure of this singular type.</p></div></div>
-<p>Since $A$ is closed, its scale is spectral and needs no threshold of its own kind;
-the two factors are therefore penalized separately.</p>
-<div class="stmt definicion" id="en-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Let $s_x&gt;d/2$ be an integer, $s_a&gt;m/2$, and $\kappa_x,\kappa_a&gt;0$. The <span class="df">cost
-space</span> is $\Hs=H^{s_x}(E)\otimes H^{s_a}(A)$ with the Hilbert cross norm of</p>
+<p>Hence regime (ii) is an assumption on $\M$, not a choice of space. Both factors
+carry a spectral scale, so they are penalized separately.</p>
+<div class="stmt definicion" id="en-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Let $s_x&gt;d/2$, $s_a&gt;m/2$ and $\kappa_x,\kappa_a&gt;0$. The <span class="df">cost space</span> is
+$\Hs=H^{s_x}(\R^d)\otimes H^{s_a}(A)$ with the Hilbert cross norm of</p>
 <div class="display numerado" id="en-eq:penalizacion"><div class="eqbody">\begin{equation}
 
-  \|u\|_{s_x}^2=\!\!\sum_{|\alpha|\le s_x}\!\!\binom{s_x}{|\alpha|}
-    \frac{|\alpha|!}{\alpha!}\,\kappa_x^{|\alpha|}\!\int_E\!|\partial^\alpha u|^2,
+  \|u\|_{s_x}^2=\int_{\R^d}(1+\kappa_x|\xi|^2)^{s_x}|\widehat u(\xi)|^2\,d\xi,
   \qquad
   \|w\|_{s_a}^2=\sum_k(1+\kappa_a\mu_k)^{s_a}|w_k|^2,
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(20)</span></div></div>
-<p>where $-\Delta_A\psi_k=\mu_k\psi_k$ and $w_k=\pair{w}{\psi_k}_{L^2(A)}$. The
-weights are those of $(1+\kappa_x|\xi|^2)^{s_x}$ and $(1+\kappa_a\mu)^{s_a}$.</p></div></div>
-<p>On $E$ the definition is intrinsic and imposes no boundary condition; on $A$ it
-is spectral, so $s_a$ may be any real.</p>
+<p>where $-\Delta_A\psi_k=\mu_k\psi_k$ and $w_k=\pair{w}{\psi_k}_{L^2(A)}$.</p></div></div>
+<p>Neither exponent need be an integer: both scales are defined by a spectral
+decomposition, on $\R^d$ by the Fourier transform and on $A$ by $\Delta_A$.</p>
 <div class="stmt proposicion" id="en-prop:delta"><div class="head">Proposición 2.8</div><div class="body"><p>Write <button class="term" type="button" data-k="Hs">$\Hs$</button> for the space of Definition <a class="xref" href="#en-def:espacio">2.7</a>. Then
 $\delta_{(x_0,a_0)}\in\Hd$ uniformly in $(x_0,a_0)$, and every finite signed
 measure on $E\times A$ belongs to $\Hd$ with
@@ -1731,44 +1615,33 @@ $\|\eta\|_{\Hd}\le C_\iota|\eta|(E\times A)$.</p></div><button class="proof-btn"
 norm $\|\delta_{x_0}\|\,\|\delta_{a_0}\|$, and the two factors are finite by
 Corollary <a class="xref" href="#en-cor:umbral">2.5</a> and by
 $\sum_k(1+\kappa_a\mu_k)^{-s_a}|\psi_k(a_0)|^2&lt;\infty$, which is Weyl&#x27;s law
-$\mu_k\sim ck^{2/m}$ together with $s_a&gt;m/2$. Both are uniform, in $x_0$ by the
-embedding constant and in $a_0$ by compactness of $A$. Hence
+$\mu_k\sim ck^{2/m}$ together with $s_a&gt;m/2$. Both are uniform, in $x_0$ by
+translation invariance and in $a_0$ by compactness of $A$. Hence
 $\|c\|_\infty=\sup_{(x,a)}|\delta_{(x,a)}(c)|\le C_\iota\|c\|_{\Hs}$, and</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,|\eta|(E\times A)
   \le C_\iota\,|\eta|(E\times A)\,\|c\|_{\Hs}\]</div>
 <p>gives the bound after taking the supremum over the unit ball.</p></div></div>
-<p>The point is that $\delta_{(x_0,a_0)}=\delta_{x_0}\otimes\delta_{a_0}$ and the
-norm of a product functional is the product of the norms, so the threshold splits
-into one per factor and $C_\iota=C_xC_a$. Taking $s_x$ and $s_a$ both larger than
-$n/2$ would also work and is what <a class="xref" href="#en-eq:penalizacion">(20)</a> avoids.</p>
-<div class="stmt proposicion" id="en-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>The Riesz isomorphism <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> is $R=R_x\otimes R_a$, where $R_a$
-acts by the multiplier $(1+\kappa_a\mu_k)^{s_a}$ and $R_x$ is the weak form of
-$(\mathrm{Id}-\kappa_x\Delta_E)^{s_x}$,</p>
-<div class="display numerado" id="en-eq:riesz"><div class="eqbody"><span class="v" data-var="std">\[\pair{R_xc}{v}=\!\!\sum_{|\alpha|\le s_x}\!\!\binom{s_x}{|\alpha|}
-    \frac{|\alpha|!}{\alpha!}\,\kappa_x^{|\alpha|}\!
-    \int_E\partial^\alpha c\,\partial^\alpha v
-    \qquad\text{for all }v\in H^{s_x}(E),\]</span><span class="v" data-var="fin">\[(R_xc)(v)=\!\!\sum_{|\alpha|\le s_x}\!\!\binom{s_x}{|\alpha|}
-    \frac{|\alpha|!}{\alpha!}\,\kappa_x^{|\alpha|}\,
-    \lambda^x\bigl(\partial^\alpha c\,\partial^\alpha v\bigr)
-    \qquad\text{for all }v\in H^{s_x}(E),\]</span></div><div class="eqside"><span class="num">(21)</span></div></div>
-<p>with symbol $(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu)^{s_a}$. Its order is $2s_x$
-in $x$ and $2s_a$ in $a$, and it carries $s_x$ natural boundary conditions on
-$\partial E$ and none on $A$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p10">Ver demostración</button><div class="proof" id="en-control-inverso-p10"><p>The Riesz map sends $c$ to $v\mapsto(c,v)_{\Hs}$, which for the norm
-<a class="xref" href="#en-eq:penalizacion">(20)</a> is <a class="xref" href="#en-eq:riesz">(21)</a>, bounded and coercive on
-$H^{s_x}(E)\otimes H^{s_a}(A)$; Lax–Milgram makes it an isomorphism onto $\Hd$.
-On $A$ the form is diagonal in $\{\psi_k\}$ with entries $(1+\kappa_a\mu_k)^{s_a}$,
-which is the multiplier. On $E$, the multinomial expansions
-$(1+\kappa_x|\xi|^2)^{s_x}=\sum_j\binom{s_x}{j}\kappa_x^j|\xi|^{2j}$ and
-$|\xi|^{2j}=\sum_{|\alpha|=j}(j!/\alpha!)\xi^{2\alpha}$ identify the symbol, so
-$R_x=(\mathrm{Id}-\kappa_x\Delta_E)^{s_x}$ in the interior; it is of order
-$2s_x$ because the symbol grows like $\kappa_x^{s_x}|\xi|^{2s_x}$. Each of the
-$s_x$ integrations by parts leaves one boundary term, and testing against all of
-$H^{s_x}(E)$ rather than $H^{s_x}_0(E)$ forces each to vanish, which is the
-count of natural conditions.</p></div></div>
-<p>The order is forced rather than chosen: $R^{-1}$ must return $\Hd$ to $\Hs$, which
-is what makes $c_\star$ of <a class="xref" href="#en-eq:cstar">(26)</a> a continuous function of $(x,a)$. With
-$s_x=1$ one recovers $\mathrm{Id}-\kappa_x\Delta_E$, admissible only for $d=1$ by
-Proposition <a class="xref" href="#en-prop:h1-nunca">2.6</a>.</p>
+<p>Here $\delta_{(x_0,a_0)}=\delta_{x_0}\otimes\delta_{a_0}$ and the norm of a
+product functional is the product of the norms, so the threshold splits into one
+per factor and $C_\iota=C_xC_a$.</p>
+<div class="stmt proposicion" id="en-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>The Riesz isomorphism <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> is the multiplier</p>
+<div class="display numerado" id="en-eq:riesz"><div class="eqbody">\begin{equation}
+
+  R=(\mathrm{Id}-\kappa_x\Delta_x)^{s_x}(\mathrm{Id}-\kappa_a\Delta_A)^{s_a},
+  \qquad
+  \text{symbol}\quad(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu_k)^{s_a},
+\end{equation}</div><div class="eqside"><span class="num">(21)</span></div></div>
+<p>of order $2s_x$ in $x$ and $2s_a$ in $a$, with no boundary conditions.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p10">Ver demostración</button><div class="proof" id="en-control-inverso-p10"><p>The Riesz map sends $c$ to $v\mapsto(c,v)_{\Hs}$, and by Plancherel on $\R^d$
+and Parseval in $\{\psi_k\}$ on $A$ that inner product is diagonal with entries
+$(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu_k)^{s_a}$. A multiplier bounded above
+and below on each dyadic shell is an isomorphism onto the dual scale, and the
+symbol grows like $\kappa_x^{s_x}|\xi|^{2s_x}$ in $\xi$ and
+$\kappa_a^{s_a}\mu_k^{s_a}$ in $k$, which is the order. There is no boundary and
+hence no boundary term.</p></div></div>
+<p>The order is forced rather than chosen: $R^{-1}$ must return $\Hd$ to $\Hs$,
+which is what makes $c_\star$ of <a class="xref" href="#en-eq:cstar">(26)</a> a continuous function of
+$(x,a)$. With $s_x=1$ one recovers $\mathrm{Id}-\kappa_x\Delta_x$, admissible
+only for $d=1$ by Proposition <a class="xref" href="#en-prop:h1-nunca">2.6</a>.</p>
 <div class="stmt observacion" id="en-obs:dos-condiciones"><div class="head">Observación 2.10</div><div class="body"><p>The two regimes place their demands on different objects. Regime (i) constrains
 $\Hs$, asking $s_x&gt;d/2$ and $s_a&gt;m/2$, and then accepts every finite measure.
 Regime (ii)
@@ -1790,9 +1663,9 @@ $\Phi$ for the saddle functional, reserving $\mathcal L$ for the generator:</p>
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(18)</span><span class="num">(22)</span></div></div>
 <p>Three of the hypotheses the note carries are automatic here, and all three follow
-from the mass computed in Corollary <a class="xref" href="#en-cor:masa">1.8</a>.</p>
+from the mass computed in Corollary <a class="xref" href="#en-cor:masa">1.7</a>.</p>
 <div class="stmt lema" id="en-lema:M-acotado"><div class="head">Lema 3.1</div><div class="body"><p>Every $\eta\in\M$ satisfies $\|\eta\|_{\Hd}\le C_\iota/\rho$, and
-$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p11">Ver demostración</button><div class="proof" id="en-control-inverso-p11"><p>Let $\eta\in\M$. By Corollary <a class="xref" href="#en-cor:masa">1.8</a> it is nonnegative with
+$\operatorname{diam}_{\Hd}(\M)\le 2C_\iota/\rho$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p11">Ver demostración</button><div class="proof" id="en-control-inverso-p11"><p>Let $\eta\in\M$. By Corollary <a class="xref" href="#en-cor:masa">1.7</a> it is nonnegative with
 $\eta(E\times A)=1/\rho$, so for every $c\in\Hs$</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,\eta(E\times A)
   =\frac{\|\iota c\|_\infty}{\rho}\le\frac{C_\iota}{\rho}\|c\|_{\Hs},\]</div>
@@ -1845,17 +1718,15 @@ $-\frac1{2\alpha}\|w\|_{\Hs}^2+\pair{\ch}{\eta_E-\eta}$, that is $-\Psi(\eta)$.<
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(23)</span><span class="num">(25)</span></div></div>
 <p>a minimization over measures rather than over costs. By the elementary inequality
 $\sup_\eta\inf_c\Phi\le\inf_c\sup_\eta\Phi$, its value is so far only a lower bound
-for <a class="xref" href="#en-eq:Phi">(22)</a>. Theorem <a class="xref" href="#en-thm:silla">3.6</a> closes the gap: a minimizer of
+for <a class="xref" href="#en-eq:Phi">(22)</a>. Theorem <a class="xref" href="#en-thm:silla">3.7</a> closes the gap: a minimizer of
 <a class="xref" href="#en-eq:reducido">(25)</a> constructs a saddle point, and strong duality follows from it.</p>
 <p>The compactness the theorem needs is inherited from the forward problem.</p>
-<div class="stmt proposicion" id="en-prop:compacidad-M"><div class="head">Proposición 3.5</div><div class="body"><p>Suppose $E\times A$ is compact and $\gen{}$ maps $\dom(\gen{})$ into
-$C(E\times A)$. Then $\M$ is convex and weakly compact in $\Hd$. If moreover the
-embedding $\iota:\Hs\to C(E\times A)$ is compact, which holds for the space of
-Definition <a class="xref" href="#en-def:espacio">2.7</a>, then $\M$ is compact in the norm of $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p15">Ver demostración</button><div class="proof" id="en-control-inverso-p15"><p>Convexity holds because <a class="xref" href="#en-eq:balance">(13)</a> is a family of linear equalities and the
+<div class="stmt proposicion" id="en-prop:compacidad-M"><div class="head">Proposición 3.5</div><div class="body"><p>Suppose $\rho\,\M$ is tight and $\gen{}$ maps $\dom(\gen{})$ into
+$C(E\times A)$. Then $\M$ is convex and weakly compact in $\Hd$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p15">Ver demostración</button><div class="proof" id="en-control-inverso-p15"><p>Convexity holds because <a class="xref" href="#en-eq:balance">(13)</a> is a family of linear equalities and the
 constraint $\eta\ge0$ is convex. Put $\widehat\M=\rho\,\M$, which by
-Corollary <a class="xref" href="#en-cor:masa">1.8</a> lies in $\mathscr P(E\times A)$. With $E\times A$ compact,
-$\mathscr P(E\times A)$ is weak-$*$ compact by Banach–Alaoglu, and $\widehat\M$ is
-weak-$*$ closed in it because each constraint
+Corollary <a class="xref" href="#en-cor:masa">1.7</a> lies in $\mathscr P(E\times A)$. Tightness and
+Prokhorov&#x27;s theorem make $\widehat\M$ relatively weak-$*$ compact, and it is
+weak-$*$ closed because each constraint
 $\mu\mapsto\mu(\rho\varphi-\gen{}\varphi)-\nu_0(\varphi)$ is weak-$*$ continuous,
 the test function $\rho\varphi-\gen{}\varphi$ being in $C(E\times A)$ by
 hypothesis. Hence $\widehat\M$ is weak-$*$ compact.</p>
@@ -1869,13 +1740,22 @@ is weakly compact.</p>
 bounded set $\widehat\M$ to a relatively norm-compact set. That set is weakly
 compact by the previous paragraph, hence weakly closed, hence norm closed, and a
 closed relatively compact set is compact.</p></div></div>
+<div class="stmt observacion" id="en-obs:tension"><div class="head">Observación 3.6</div><div class="body"><p>Tightness is a hypothesis, and it is the price of $E=\R^d$: on a compact
+$E\times A$ it follows from Banach–Alaoglu and nothing need be assumed. For the
+discounted problem the first source derives it from tightness of the solution
+laws <span class="src">[Bhatt–Borkar, §3.2]</span>, citing Borkar (1989), Lemma 3.7,
+\remarcar{[uncertain: not among the fiched material]}. Two further consequences:
+$\iota$ is no longer compact, so $\M$ need not be compact in norm; and
+Theorem 6.3 of Kurtz–Stockbridge asks in its (6.2) for compact sublevel sets of
+the cost, which a bounded $c$ on $\R^d$ does not have, so on $\R^d$ it is
+Bhatt–Borkar&#x27;s Theorem 2.2 that carries Proposition <a class="xref" href="#en-prop:balance">1.6</a>.</p></div></div>
 <p>Convexity is immediate because <a class="xref" href="#en-eq:balance">(13)</a> is a family of linear equalities.
 Compactness runs through the normalized set $\widehat\M=\rho\,\M\s\mathscr
-P(E\times A)$, which is weak-$*$ compact by Banach–Alaoglu and closedness of the
+P(E\times A)$, which is weak-$*$ compact by Prokhorov and closedness of the
 balance constraints, and is then transported to $\Hd$ by the adjoint of the
 embedding. With a compact embedding, Schauder&#x27;s theorem gives norm compactness and
 existence in <a class="xref" href="#en-eq:reducido">(25)</a> is Weierstrass.</p>
-<div class="stmt teorema" id="en-thm:silla"><div class="head">Teorema 3.6</div><div class="body"><p>Assume $\Hs\hookrightarrow C(E\times A)$, that $\M\s\Hd$ is nonempty, convex and
+<div class="stmt teorema" id="en-thm:silla"><div class="head">Teorema 3.7</div><div class="body"><p>Assume $\Hs\hookrightarrow C(E\times A)$, that $\M\s\Hd$ is nonempty, convex and
 weakly compact, and that $\ch\in\Hs$. Then <a class="xref" href="#en-eq:reducido">(25)</a> has a unique
 minimizer $\eta_{A,\star}$. Setting</p>
 <div class="display numerado" id="en-eq:cstar"><div class="eqbody">\begin{equation}
@@ -1917,17 +1797,17 @@ global minimum. The two inequalities together are the saddle relation, and the
 standard argument that a saddle point closes the gap between the two orders gives
 <a class="xref" href="#en-eq:dualidad">(28)</a>. Uniqueness of $c_\star$ is
 Proposition <a class="xref" href="#en-prop:existencia-c">3.3</a>.</p></div></div>
-<div class="stmt observacion" id="en-obs:sion"><div class="head">Observación 3.7</div><div class="body"><p>Under hypotheses ensuring a minimax theorem such as Sion&#x27;s, <a class="xref" href="#en-eq:dualidad">(28)</a>
+<div class="stmt observacion" id="en-obs:sion"><div class="head">Observación 3.8</div><div class="body"><p>Under hypotheses ensuring a minimax theorem such as Sion&#x27;s, <a class="xref" href="#en-eq:dualidad">(28)</a>
 could be obtained directly from convexity in $c$, affinity in $\eta$ and
 compactness. The argument above is constructive: the minimizer of
 <a class="xref" href="#en-eq:reducido">(25)</a> produces the saddle point, $c_\star$ and
 <a class="xref" href="#en-eq:etaoptimal-set">(29)</a> at once.</p></div></div>
-<div class="stmt observacion" id="en-obs:selector"><div class="head">Observación 3.8</div><div class="body"><p>A fixed point of the map from a cost to an optimal policy need not exist: the
+<div class="stmt observacion" id="en-obs:selector"><div class="head">Observación 3.9</div><div class="body"><p>A fixed point of the map from a cost to an optimal policy need not exist: the
 selector in <a class="xref" href="#en-eq:selector">(10)</a> jumps where the Hamiltonian has several
 minimizers. The fixed-point relation <a class="xref" href="#en-eq:etaoptimal-set">(29)</a> is set-valued and
 posed on $\M$, which is convex and weakly compact, and $c_\star$ is unique however
 many optimal policies there are.</p></div></div>
-<div class="stmt corolario" id="en-cor:puntofijo"><div class="head">Corolario 3.9</div><div class="body"><p>With the notation of Theorem <a class="xref" href="#en-thm:silla">3.6</a>,</p>
+<div class="stmt corolario" id="en-cor:puntofijo"><div class="head">Corolario 3.10</div><div class="body"><p>With the notation of Theorem <a class="xref" href="#en-thm:silla">3.7</a>,</p>
 <div class="display numerado" id="en-eq:etaoptimal-set"><div class="eqbody">\begin{equation}
 
   \eta_{A,\star}\in\Opt\!\left(\ch+\tfrac1\alpha R^{-1}
@@ -1960,7 +1840,7 @@ bounded in $\Hd$, which Lemma <a class="xref" href="#en-lema:M-acotado">3.1</a> 
 <a class="xref" href="#en-eq:cstar">(26)</a> gives $\|c_\star-\ch\|_{\Hs}=O(1/\alpha)$, so the recovered cost
 collapses onto the prior.</p></section>
 <section class="capitulo"><h3 id="en-sec:pde"><span class="secnum">4</span>The optimality system</h3>
-<p>Theorem <a class="xref" href="#en-thm:silla">3.6</a> identifies the solution as a pair $(c_\star,\eta_{A,\star})$
+<p>Theorem <a class="xref" href="#en-thm:silla">3.7</a> identifies the solution as a pair $(c_\star,\eta_{A,\star})$
 characterized by a variational inequality. We now write that characterization as a
 system of equations. Nothing new is assumed about the inverse problem; what is
 assumed is regularity of the occupation measures, so that the balance identity can
@@ -1998,13 +1878,12 @@ statement that $(\rho\,\mathrm{Id}-\Gen{\pi})^{*}m_\pi=\nu_0$ as distributions.<
 <p>For the classical form, integrate by parts twice in
 $\int(b_\pi\cdot\nabla\varphi)m_\pi$ and
 $\tfrac12\int\operatorname{Tr}(\Sigma_\pi D^2\varphi)m_\pi$ to move all
-derivatives onto $m_\pi$; the boundary terms carry $\partial_n\varphi$, which
-vanishes on $\dom(\gen{})$ by <a class="xref" href="#en-eq:gen-operador">(3)</a>. The result is
-<a class="xref" href="#en-eq:fp">(33)</a>.</p></div></div>
+derivatives onto $m_\pi$; there are no boundary terms, since $\varphi$ and its
+first two derivatives vanish at infinity. The result is <a class="xref" href="#en-eq:fp">(33)</a>.</p></div></div>
 <p>Equation <a class="xref" href="#en-eq:fp">(33)</a> is the stationary Fokker–Planck equation with discount
 $\rho$ and source $\nu_0$, obtained from <a class="xref" href="#en-eq:balance">(13)</a> by restricting to the
 state marginal and integrating by parts. Its total mass is $1/\rho$ by
-Corollary <a class="xref" href="#en-cor:masa">1.8</a>, which is the normalization that any discretization must
+Corollary <a class="xref" href="#en-cor:masa">1.7</a>, which is the normalization that any discretization must
 reproduce.</p>
 <div class="stmt observacion" id="en-obs:fp-regularidad"><div class="head">Observación 4.2</div><div class="body"><p>Writing <a class="xref" href="#en-eq:fp">(33)</a> pointwise requires two derivatives of $\Sigma_\pi m_\pi$,
 and $m_\pi$ need not have them: for a
@@ -2042,15 +1921,15 @@ whenever $\eta_A-\eta_E\in\Hd$, and by Proposition <a class="xref" href="#en-pro
 for every pair of finite measures in regime (i). Writing $R$ pointwise instead
 would put a distribution on the right-hand side of an equation between
 functions.</p>
-<div class="stmt proposicion" id="en-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Assume the hypotheses of Theorem <a class="xref" href="#en-thm:silla">3.6</a> and that the occupation measures
+<div class="stmt proposicion" id="en-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Assume the hypotheses of Theorem <a class="xref" href="#en-thm:silla">3.7</a> and that the occupation measures
 of $\pi_E$ and of some optimal $\pi_A$ disintegrate as <a class="xref" href="#en-eq:desintegracion">(31)</a>.
 Then $(c_\star,\eta_{A,\star})$ solves <a class="xref" href="#en-eq:sistema">(34)</a> in the weak sense, and
 conversely any weak solution of <a class="xref" href="#en-eq:sistema">(34)</a> with $\eta_A\in\M$ has
-$c=c_\star$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p20">Ver demostración</button><div class="proof" id="en-control-inverso-p20"><p>By Theorem <a class="xref" href="#en-thm:silla">3.6</a>, $\eta_{A,\star}$ minimizes $\pair{c_\star}{\cdot}$ over
+$c=c_\star$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p20">Ver demostración</button><div class="proof" id="en-control-inverso-p20"><p>By Theorem <a class="xref" href="#en-thm:silla">3.7</a>, $\eta_{A,\star}$ minimizes $\pair{c_\star}{\cdot}$ over
 $\M$, which by <a class="xref" href="#en-eq:lp">(14)</a> and its dual <a class="xref" href="#en-eq:dual">(15)</a> is equivalent to the
 existence of $V$ satisfying <a class="xref" href="#en-eq:hjb-ineq">(9)</a> with complementary slackness on
 $\operatorname{supp}\eta_{A,\star}$; that is the first pair of blocks, and
-Proposition <a class="xref" href="#en-prop:hjb">1.5</a> turns the slackness into <a class="xref" href="#en-eq:selector">(10)</a>. The two
+Proposition <a class="xref" href="#en-prop:hjb">1.4</a> turns the slackness into <a class="xref" href="#en-eq:selector">(10)</a>. The two
 adjoint equations are Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a> applied to $\pi_A$ and to
 $\pi_E$, both of which lie in $\M$. The last block is <a class="xref" href="#en-eq:cstar">(26)</a> rearranged,
 and its weak reading is <a class="xref" href="#en-eq:coste-debil">(35)</a>.</p>
@@ -2072,7 +1951,7 @@ the objective is strictly convex, so a discretization inherits a finite-dimensio
 strictly convex program. In <a class="xref" href="#en-eq:sistema">(34)</a> the unknowns are $V$, $m_A$, $m_E$
 and $c$, and the coupling is through the $\arg\min$; a discretization inherits a
 fixed-point iteration whose contraction properties are not supplied by
-Theorem <a class="xref" href="#en-thm:silla">3.6</a>.</p></div></div>
+Theorem <a class="xref" href="#en-thm:silla">3.7</a>.</p></div></div>
 <h4 id="en-control-inverso-x6">The finite-state model as a reference</h4>
 <p>Every object above has a finite-state counterpart, which makes the discrete model a
 reference for discretization. Let $S$ and $A$ be finite, let $Q$ be the rate matrix of
@@ -2117,7 +1996,7 @@ const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 /* Los rotulos y las notaciones los inyecta el generador, porque dependen de
    que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
    una de lecture notes dice «demostraciones». */
-const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "fin", "rotulo": "de Finetti"}, {"id": "std", "rotulo": "Integrales"}], "idiomas": [{"id": "es", "rotulo": "Español", "carpeta": "es"}, {"id": "en", "rotulo": "English", "carpeta": "en"}], "glosario": {"E": {"es": "$E\\s\\R^d$ dominio acotado con extension $W^{1,p}(E)\\to W^{1,p}(\\R^d)$, el espacio de estados. Sirven los de clase $C^1$ y las cajas. La difusion se refleja en $\\partial E$.", "en": "$E\\s\\R^d$ a bounded domain with an extension $W^{1,p}(E)\\to W^{1,p}(\\R^d)$, the state space. Domains of class $C^1$ and boxes qualify. The diffusion reflects at $\\partial E$."}, "A": {"es": "$A$ variedad riemanniana compacta sin frontera, $\\dim A=m$: la esfera de direcciones, el toro. Compacta $\\rt$ $\\mathscr P(A)$ compacto en la topologia debil.", "en": "$A$ a compact Riemannian manifold without boundary, $\\dim A=m$: the sphere of directions, the torus. Compact $\\rt$ $\\mathscr P(A)$ compact in the weak topology."}, "nu0": {"es": "$\\nu_0\\in\\mathscr P(E)$, la ley inicial: $X_0\\sim\\nu_0$. Es la fuente de \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>.", "en": "$\\nu_0\\in\\mathscr P(E)$, the initial law: $X_0\\sim\\nu_0$. It is the source in \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>."}, "rho": {"es": "$\\rho&gt;0$, la tasa de descuento. $\\lambda_\\rho=e^{-\\rho t}dt$ tiene masa $1/\\rho$.", "en": "$\\rho&gt;0$, the discount rate. $\\lambda_\\rho=e^{-\\rho t}dt$ has mass $1/\\rho$."}, "Hs": {"es": "$\\Hs=H^{s_x}(E)\\otimes H^{s_a}(A)$ con $s_x&gt;d/2$ entero y $s_a&gt;m/2$. Por Sobolev, $\\Hs\\hookrightarrow C(E\\times A)$, y entonces toda medida signada finita esta en $\\Hd$.", "en": "$\\Hs=H^{s_x}(E)\\otimes H^{s_a}(A)$ with $s_x&gt;d/2$ an integer and $s_a&gt;m/2$. By Sobolev, $\\Hs\\hookrightarrow C(E\\times A)$, and then every finite signed measure lies in $\\Hd$."}, "M": {"es": "$\\M=\\{\\eta\\ge0$ en $E\\times A$ que cumple \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>$\\}$. Convexo, y $\\eta(E\\times A)=1/\\rho$ para todo $\\eta\\in\\M$.", "en": "$\\M=\\{\\eta\\ge0$ on $E\\times A$ satisfying \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>$\\}$. Convex, and $\\eta(E\\times A)=1/\\rho$ for every $\\eta\\in\\M$."}, "eta": {"es": "$\\eta_\\pi\\ge0$ en $E\\times A$ con $\\eta_\\pi(E\\times A)=1/\\rho$.", "en": "$\\eta_\\pi\\ge0$ on $E\\times A$ with $\\eta_\\pi(E\\times A)=1/\\rho$."}, "etaE": {"es": "$\\eta_E\\in\\M$, la ocupacion del experto. Es lo unico que se observa de $\\pi_E$.", "en": "$\\eta_E\\in\\M$, the expert&#x27;s occupation measure. It is all that is observed of $\\pi_E$."}, "R": {"es": "$R:\\Hs\\to\\Hd$ el isomorfismo de Riesz de \u003ca class=\"xref\" href=\"#es-eq:penalizacion\">(20)\u003c/a>, forma debil de $(\\mathrm{Id}-\\kappa_x\\Delta_E)^{s_x}(\\mathrm{Id}-\\kappa_a\\Delta_A)^{s_a}$. Orden $2s_x$ en $x$.", "en": "$R:\\Hs\\to\\Hd$ the Riesz isomorphism of \u003ca class=\"xref\" href=\"#en-eq:penalizacion\">(20)\u003c/a>, the weak form of $(\\mathrm{Id}-\\kappa_x\\Delta_E)^{s_x}(\\mathrm{Id}-\\kappa_a\\Delta_A)^{s_a}$. Order $2s_x$ in $x$."}, "alpha": {"es": "$\\alpha&gt;0$ pesa el previo contra la brecha. Cota: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$.", "en": "$\\alpha&gt;0$ weighs the prior against the gap. Bound: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$."}, "V": {"es": "Variable dual de la restriccion de balance en \u003ca class=\"xref\" href=\"#es-eq:dual\">(15)\u003c/a>.", "en": "Dual variable of the balance constraint in \u003ca class=\"xref\" href=\"#en-eq:dual\">(15)\u003c/a>."}}};
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "fin", "rotulo": "de Finetti"}, {"id": "std", "rotulo": "Integrales"}], "idiomas": [{"id": "es", "rotulo": "Español", "carpeta": "es"}, {"id": "en", "rotulo": "English", "carpeta": "en"}], "glosario": {"E": {"es": "$E=\\R^d$, el espacio de estados. Sin frontera $\\rt$ no hay condicion que elegir, y $H^s$ se define por Fourier. Es el marco de los ejemplos de las dos fuentes.", "en": "$E=\\R^d$, the state space. No boundary $\\rt$ no condition to choose, and $H^s$ is defined by the Fourier transform. This is the setting of both sources&#x27; examples."}, "A": {"es": "$A$ variedad riemanniana compacta sin frontera, $\\dim A=m$: la esfera de direcciones, el toro. Compacta $\\rt$ $\\mathscr P(A)$ compacto en la topologia debil.", "en": "$A$ a compact Riemannian manifold without boundary, $\\dim A=m$: the sphere of directions, the torus. Compact $\\rt$ $\\mathscr P(A)$ compact in the weak topology."}, "nu0": {"es": "$\\nu_0\\in\\mathscr P(E)$, la ley inicial: $X_0\\sim\\nu_0$. Es la fuente de \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>.", "en": "$\\nu_0\\in\\mathscr P(E)$, the initial law: $X_0\\sim\\nu_0$. It is the source in \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>."}, "rho": {"es": "$\\rho&gt;0$, la tasa de descuento. $\\lambda_\\rho=e^{-\\rho t}dt$ tiene masa $1/\\rho$.", "en": "$\\rho&gt;0$, the discount rate. $\\lambda_\\rho=e^{-\\rho t}dt$ has mass $1/\\rho$."}, "Hs": {"es": "$\\Hs=H^{s_x}(\\R^d)\\otimes H^{s_a}(A)$ con $s_x&gt;d/2$ y $s_a&gt;m/2$, ninguno entero necesariamente. Por Sobolev toda medida signada finita esta en $\\Hd$.", "en": "$\\Hs=H^{s_x}(\\R^d)\\otimes H^{s_a}(A)$ with $s_x&gt;d/2$ and $s_a&gt;m/2$, neither necessarily an integer. By Sobolev every finite signed measure lies in $\\Hd$."}, "M": {"es": "$\\M=\\{\\eta\\ge0$ en $E\\times A$ que cumple \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>$\\}$. Convexo, y $\\eta(E\\times A)=1/\\rho$ para todo $\\eta\\in\\M$.", "en": "$\\M=\\{\\eta\\ge0$ on $E\\times A$ satisfying \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>$\\}$. Convex, and $\\eta(E\\times A)=1/\\rho$ for every $\\eta\\in\\M$."}, "eta": {"es": "$\\eta_\\pi\\ge0$ en $E\\times A$ con $\\eta_\\pi(E\\times A)=1/\\rho$.", "en": "$\\eta_\\pi\\ge0$ on $E\\times A$ with $\\eta_\\pi(E\\times A)=1/\\rho$."}, "etaE": {"es": "$\\eta_E\\in\\M$, la ocupacion del experto. Es lo unico que se observa de $\\pi_E$.", "en": "$\\eta_E\\in\\M$, the expert&#x27;s occupation measure. It is all that is observed of $\\pi_E$."}, "R": {"es": "$R:\\Hs\\to\\Hd$ el isomorfismo de Riesz de \u003ca class=\"xref\" href=\"#es-eq:penalizacion\">(20)\u003c/a>, el multiplicador $(\\mathrm{Id}-\\kappa_x\\Delta_x)^{s_x}(\\mathrm{Id}-\\kappa_a\\Delta_A)^{s_a}$. Orden $2s_x$ en $x$, sin condiciones de frontera.", "en": "$R:\\Hs\\to\\Hd$ the Riesz isomorphism of \u003ca class=\"xref\" href=\"#en-eq:penalizacion\">(20)\u003c/a>, the multiplier $(\\mathrm{Id}-\\kappa_x\\Delta_x)^{s_x}(\\mathrm{Id}-\\kappa_a\\Delta_A)^{s_a}$. Order $2s_x$ in $x$, with no boundary conditions."}, "alpha": {"es": "$\\alpha&gt;0$ pesa el previo contra la brecha. Cota: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$.", "en": "$\\alpha&gt;0$ weighs the prior against the gap. Bound: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$."}, "V": {"es": "Variable dual de la restriccion de balance en \u003ca class=\"xref\" href=\"#es-eq:dual\">(15)\u003c/a>.", "en": "Dual variable of the balance constraint in \u003ca class=\"xref\" href=\"#en-eq:dual\">(15)\u003c/a>."}}};
 
 /* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
    navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
