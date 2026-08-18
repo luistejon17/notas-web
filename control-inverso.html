@@ -879,56 +879,61 @@ trasladando a $(x_0,a_0)$ sale una sucesión $f_k\in H^1(E\times A)$ con
 $\|f_k\|_{H^1}$ acotada y $f_k(x_0,a_0)\to\infty$, luego evaluar en $(x_0,a_0)$
 no es funcional acotado. Y como la medida de ocupación de una política
 determinista carga una gráfica Lebesgue-nula, es una medida de ese tipo singular.</p></div></div>
-<p>Luego el régimen (ii) es una hipótesis sobre $\M$, no una elección de espacio.
-Los dos factores llevan escala espectral, así que se penalizan por separado.</p>
-<div class="stmt definicion" id="es-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Fijos $s_x&gt;d/2$, $s_a&gt;m/2$ y $\kappa_x,\kappa_a&gt;0$. El <span class="df">espacio del costo</span> es
-$\Hs=H^{s_x}(\R^d)\otimes H^{s_a}(A)$ con la norma cruzada hilbertiana de</p>
+<p>Luego el régimen (ii) es una hipótesis sobre $\M$, no una elección de espacio. La
+penalización conserva la forma que tenía para $H^1$, con
+$\Delta=\Delta_x+\Delta_A$ el laplaciano de $E\times A$ y más derivadas.</p>
+<div class="stmt definicion" id="es-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Fijos $s$ entero con $s&gt;n/2$ y $\kappa&gt;0$. El <span class="df">espacio del costo</span> es
+$\Hs=H^s(E\times A)$ con</p>
 <div class="display numerado" id="es-eq:penalizacion"><div class="eqbody">\begin{equation}
 
-  \|u\|_{s_x}^2=\int_{\R^d}(1+\kappa_x|\xi|^2)^{s_x}|\widehat u(\xi)|^2\,d\xi,
-  \qquad
-  \|w\|_{s_a}^2=\sum_k(1+\kappa_a\mu_k)^{s_a}|w_k|^2,
+  \|c\|_{\Hs}^2=\int_{E\times A}c\,(\mathrm{Id}-\kappa\Delta)^s c
+  =\sum_{j=0}^{s}\binom{s}{j}\kappa^j\!\int_{E\times A}\!c\,(-\Delta)^j c .
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(20)</span></div></div>
-<p>tq $-\Delta_A\psi_k=\mu_k\psi_k$ y $w_k=\pair{w}{\psi_k}_{L^2(A)}$.</p></div></div>
-<p>Ninguno de los dos exponentes tiene que ser entero: las dos escalas son
-espectrales, en $\R^d$ por Fourier y en $A$ por $\Delta_A$.</p>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(20)</span></div></div></div></div>
+<p>Con $s=1$ es $\int(|c|^2+\kappa|\nabla c|^2)$, que es lo que escribe la nota; el
+menor exponente admisible es $\lfloor n/2\rfloor+1$.</p>
 <div class="stmt proposicion" id="es-prop:delta"><div class="head">Proposición 2.8</div><div class="body"><p><button class="term" type="button" data-k="Hs">$\Hs$</button> el de la Definición <a class="xref" href="#es-def:espacio">2.7</a> $\rt$
 $\delta_{(x_0,a_0)}\in\Hd$ uniformemente en $(x_0,a_0)$, y toda medida signada
 finita en $E\times A$ está en $\Hd$ con
-$\|\eta\|_{\Hd}\le C_\iota\,|\eta|(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p9">Ver demostración</button><div class="proof" id="es-control-inverso-p9"><p>El funcional $\delta_{x_0}\otimes\delta_{a_0}$ sobre un producto tensorial
-hilbertiano tiene norma $\|\delta_{x_0}\|\,\|\delta_{a_0}\|$, y los dos factores
-son finitos por el Corolario <a class="xref" href="#es-cor:umbral">2.5</a> y por
-$\sum_k(1+\kappa_a\mu_k)^{-s_a}|\psi_k(a_0)|^2&lt;\infty$, que es la ley de Weyl
-$\mu_k\sim ck^{2/m}$ junto con $s_a&gt;m/2$. Los dos son uniformes: en $x_0$ por
-invariancia por traslación, en $a_0$ por compacidad de $A$. Luego
+$\|\eta\|_{\Hd}\le C_\iota\,|\eta|(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p9">Ver demostración</button><div class="proof" id="es-control-inverso-p9"><p>Desarrollando $\delta_{(x_0,a_0)}$ en la resolución espectral conjunta,</p>
+<div class="display">\[\|\delta_{(x_0,a_0)}\|_{\Hd}^2=\sum_k|\psi_k(a_0)|^2\!
+  \int_{\R^d}\bigl(1+\kappa(|\xi|^2+\mu_k)\bigr)^{-s}d\xi ,\]</div>
+<p>que por la ley de Weyl $\mu_k\sim ck^{2/m}$ converge exactamente cuando $s&gt;n/2$;
+no depende de $x_0$ por invariancia por traslación y está acotada en $a_0$ por
+compacidad de $A$. Luego
 $\|c\|_\infty=\sup_{(x,a)}|\delta_{(x,a)}(c)|\le C_\iota\|c\|_{\Hs}$, y</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,|\eta|(E\times A)
   \le C_\iota\,|\eta|(E\times A)\,\|c\|_{\Hs}\]</div>
 <p>da la cota tomando supremo sobre la bola unidad.</p></div></div>
-<p>Aquí $\delta_{(x_0,a_0)}=\delta_{x_0}\otimes\delta_{a_0}$ y la norma de un
-funcional producto es el producto de las normas $\rt$ el umbral se parte en uno
-por factor, y $C_\iota=C_xC_a$.</p>
-<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>El isomorfismo de Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es el multiplicador</p>
+<p>Es el Teorema <a class="xref" href="#es-thm:encaje">2.4</a> leído sobre $E\times A$, con la ley de Weyl
+$\mu_k\sim ck^{2/m}$ poniendo el recuento en las direcciones de $A$.</p>
+<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>El isomorfismo de Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es</p>
 <div class="display numerado" id="es-eq:riesz"><div class="eqbody">\begin{equation}
 
-  R=(\mathrm{Id}-\kappa_x\Delta_x)^{s_x}(\mathrm{Id}-\kappa_a\Delta_A)^{s_a},
+  R=(\mathrm{Id}-\kappa\Delta)^{s},
   \qquad
-  \text{símbolo}\quad(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu_k)^{s_a},
+  \text{símbolo}\quad\bigl(1+\kappa(|\xi|^2+\mu_k)\bigr)^{s},
 \end{equation}</div><div class="eqside"><span class="num">(21)</span></div></div>
-<p>de orden $2s_x$ en $x$ y $2s_a$ en $a$, sin condiciones de frontera.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p10">Ver demostración</button><div class="proof" id="es-control-inverso-p10"><p>La aplicación de Riesz manda $c$ a $v\mapsto(c,v)_{\Hs}$, y por Plancherel en
-$\R^d$ y Parseval en $\{\psi_k\}$ sobre $A$ ese producto interno es diagonal con
-entradas $(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu_k)^{s_a}$. Un multiplicador
-acotado por arriba y por abajo en cada corona diádica es isomorfismo sobre la
-escala dual, y el símbolo crece como $\kappa_x^{s_x}|\xi|^{2s_x}$ en $\xi$ y
-$\kappa_a^{s_a}\mu_k^{s_a}$ en $k$, que es el orden. No hay frontera, luego no
-hay término de frontera.</p></div></div>
+<p>operador elíptico de orden $2s$, sin condiciones de frontera.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p10">Ver demostración</button><div class="proof" id="es-control-inverso-p10"><p>La aplicación de Riesz manda $c$ a $v\mapsto(c,v)_{\Hs}$, que por
+<a class="xref" href="#es-eq:penalizacion">(20)</a> es $v\mapsto\int c\,(\mathrm{Id}-\kappa\Delta)^sv$. En la
+resolución espectral conjunta es diagonal con entradas
+$(1+\kappa(|\xi|^2+\mu_k))^{s}$, acotadas por arriba y por abajo en cada corona
+diádica, luego isomorfismo sobre la escala dual; el símbolo crece como
+$\kappa^s(|\xi|^2+\mu_k)^{s}$, que es el orden. No hay frontera, luego no hay
+término de frontera.</p></div></div>
 <p>El orden no se elige: $R^{-1}$ tiene que devolver $\Hd$ a $\Hs$, y es eso lo que
-hace de $c_\star$ de <a class="xref" href="#es-eq:cstar">(26)</a> una función continua de $(x,a)$. Con
-$s_x=1$ sale $\mathrm{Id}-\kappa_x\Delta_x$, admisible solo si $d=1$ por la
+hace de $c_\star$ de <a class="xref" href="#es-eq:cstar">(26)</a> una función continua de $(x,a)$. Con $s=1$
+sale $\mathrm{Id}-\kappa\Delta$, admisible solo si $n=1$ por la
 Proposición <a class="xref" href="#es-prop:h1-nunca">2.6</a>.</p>
-<div class="stmt observacion" id="es-obs:dos-condiciones"><div class="head">Observación 2.10</div><div class="body"><p>Los dos regímenes piden cosas a objetos distintos. El (i) restringe $\Hs$,
-pidiendo $s_x&gt;d/2$ y $s_a&gt;m/2$, y luego acepta toda medida finita. El (ii)
+<div class="stmt observacion" id="es-obs:mixta"><div class="head">Observación 2.10</div><div class="body"><p>Hay dos variantes y ninguna se usa abajo. Dejar $s$ real baja el orden de
+$2\lfloor n/2\rfloor+2$ a $n+2\varepsilon$, al precio de que la norma deje de ser
+una integral de derivadas. Y como
+$\delta_{(x_0,a_0)}=\delta_{x_0}\otimes\delta_{a_0}$, el umbral en realidad se
+parte: $H^{s_x}(\R^d)\otimes H^{s_a}(A)$ con $s_x&gt;d/2$ y $s_a&gt;m/2$ también
+carga toda medida finita, con orden $2s_x$ en $x$ y $2s_a$ en $a$, y con dos
+escalas de suavizado independientes.</p></div></div>
+<div class="stmt observacion" id="es-obs:dos-condiciones"><div class="head">Observación 2.11</div><div class="body"><p>Los dos regímenes piden cosas a objetos distintos. El (i) restringe $\Hs$,
+pidiendo $s&gt;n/2$, y luego acepta toda medida finita. El (ii)
 restringe $\M$,
 pidiendo densidades $L^2$ a sus elementos, y entonces admite el espacio más
 barato $H^1$. Solo el primero está disponible cuando hay políticas deterministas
@@ -1602,56 +1607,61 @@ translating to $(x_0,a_0)$ produces a sequence $f_k\in H^1(E\times A)$ with
 $\|f_k\|_{H^1}$ bounded and $f_k(x_0,a_0)\to\infty$, so evaluation at $(x_0,a_0)$
 is not a bounded functional. Since the occupation measure of a deterministic policy
 charges a Lebesgue-null graph, it is a measure of this singular type.</p></div></div>
-<p>Hence regime (ii) is an assumption on $\M$, not a choice of space. Both factors
-carry a spectral scale, so they are penalized separately.</p>
-<div class="stmt definicion" id="en-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Let $s_x&gt;d/2$, $s_a&gt;m/2$ and $\kappa_x,\kappa_a&gt;0$. The <span class="df">cost space</span> is
-$\Hs=H^{s_x}(\R^d)\otimes H^{s_a}(A)$ with the Hilbert cross norm of</p>
+<p>Hence regime (ii) is an assumption on $\M$, not a choice of space. The penalty
+keeps the shape it had for $H^1$, with $\Delta=\Delta_x+\Delta_A$ the Laplacian
+of $E\times A$ and more derivatives.</p>
+<div class="stmt definicion" id="en-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Let $s$ be an integer with $s&gt;n/2$, and $\kappa&gt;0$. The <span class="df">cost space</span> is
+$\Hs=H^s(E\times A)$ with</p>
 <div class="display numerado" id="en-eq:penalizacion"><div class="eqbody">\begin{equation}
 
-  \|u\|_{s_x}^2=\int_{\R^d}(1+\kappa_x|\xi|^2)^{s_x}|\widehat u(\xi)|^2\,d\xi,
-  \qquad
-  \|w\|_{s_a}^2=\sum_k(1+\kappa_a\mu_k)^{s_a}|w_k|^2,
+  \|c\|_{\Hs}^2=\int_{E\times A}c\,(\mathrm{Id}-\kappa\Delta)^s c
+  =\sum_{j=0}^{s}\binom{s}{j}\kappa^j\!\int_{E\times A}\!c\,(-\Delta)^j c .
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(20)</span></div></div>
-<p>where $-\Delta_A\psi_k=\mu_k\psi_k$ and $w_k=\pair{w}{\psi_k}_{L^2(A)}$.</p></div></div>
-<p>Neither exponent need be an integer: both scales are defined by a spectral
-decomposition, on $\R^d$ by the Fourier transform and on $A$ by $\Delta_A$.</p>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(20)</span></div></div></div></div>
+<p>For $s=1$ this is $\int(|c|^2+\kappa|\nabla c|^2)$, which is what the note
+writes; the smallest admissible exponent is $\lfloor n/2\rfloor+1$.</p>
 <div class="stmt proposicion" id="en-prop:delta"><div class="head">Proposición 2.8</div><div class="body"><p>Write <button class="term" type="button" data-k="Hs">$\Hs$</button> for the space of Definition <a class="xref" href="#en-def:espacio">2.7</a>. Then
 $\delta_{(x_0,a_0)}\in\Hd$ uniformly in $(x_0,a_0)$, and every finite signed
 measure on $E\times A$ belongs to $\Hd$ with
-$\|\eta\|_{\Hd}\le C_\iota|\eta|(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p9">Ver demostración</button><div class="proof" id="en-control-inverso-p9"><p>The functional $\delta_{x_0}\otimes\delta_{a_0}$ on a Hilbert tensor product has
-norm $\|\delta_{x_0}\|\,\|\delta_{a_0}\|$, and the two factors are finite by
-Corollary <a class="xref" href="#en-cor:umbral">2.5</a> and by
-$\sum_k(1+\kappa_a\mu_k)^{-s_a}|\psi_k(a_0)|^2&lt;\infty$, which is Weyl&#x27;s law
-$\mu_k\sim ck^{2/m}$ together with $s_a&gt;m/2$. Both are uniform, in $x_0$ by
-translation invariance and in $a_0$ by compactness of $A$. Hence
+$\|\eta\|_{\Hd}\le C_\iota|\eta|(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p9">Ver demostración</button><div class="proof" id="en-control-inverso-p9"><p>Expanding $\delta_{(x_0,a_0)}$ in the joint spectral resolution,</p>
+<div class="display">\[\|\delta_{(x_0,a_0)}\|_{\Hd}^2=\sum_k|\psi_k(a_0)|^2\!
+  \int_{\R^d}\bigl(1+\kappa(|\xi|^2+\mu_k)\bigr)^{-s}d\xi ,\]</div>
+<p>which by Weyl&#x27;s law $\mu_k\sim ck^{2/m}$ converges exactly when $s&gt;n/2$; it is
+independent of $x_0$ by translation invariance and bounded in $a_0$ by
+compactness of $A$. Hence
 $\|c\|_\infty=\sup_{(x,a)}|\delta_{(x,a)}(c)|\le C_\iota\|c\|_{\Hs}$, and</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,|\eta|(E\times A)
   \le C_\iota\,|\eta|(E\times A)\,\|c\|_{\Hs}\]</div>
 <p>gives the bound after taking the supremum over the unit ball.</p></div></div>
-<p>Here $\delta_{(x_0,a_0)}=\delta_{x_0}\otimes\delta_{a_0}$ and the norm of a
-product functional is the product of the norms, so the threshold splits into one
-per factor and $C_\iota=C_xC_a$.</p>
-<div class="stmt proposicion" id="en-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>The Riesz isomorphism <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> is the multiplier</p>
+<p>This is Theorem <a class="xref" href="#en-thm:encaje">2.4</a> read on $E\times A$, with Weyl&#x27;s law
+$\mu_k\sim ck^{2/m}$ supplying the count in the $A$ directions.</p>
+<div class="stmt proposicion" id="en-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>The Riesz isomorphism <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> is</p>
 <div class="display numerado" id="en-eq:riesz"><div class="eqbody">\begin{equation}
 
-  R=(\mathrm{Id}-\kappa_x\Delta_x)^{s_x}(\mathrm{Id}-\kappa_a\Delta_A)^{s_a},
+  R=(\mathrm{Id}-\kappa\Delta)^{s},
   \qquad
-  \text{symbol}\quad(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu_k)^{s_a},
+  \text{symbol}\quad\bigl(1+\kappa(|\xi|^2+\mu_k)\bigr)^{s},
 \end{equation}</div><div class="eqside"><span class="num">(21)</span></div></div>
-<p>of order $2s_x$ in $x$ and $2s_a$ in $a$, with no boundary conditions.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p10">Ver demostración</button><div class="proof" id="en-control-inverso-p10"><p>The Riesz map sends $c$ to $v\mapsto(c,v)_{\Hs}$, and by Plancherel on $\R^d$
-and Parseval in $\{\psi_k\}$ on $A$ that inner product is diagonal with entries
-$(1+\kappa_x|\xi|^2)^{s_x}(1+\kappa_a\mu_k)^{s_a}$. A multiplier bounded above
-and below on each dyadic shell is an isomorphism onto the dual scale, and the
-symbol grows like $\kappa_x^{s_x}|\xi|^{2s_x}$ in $\xi$ and
-$\kappa_a^{s_a}\mu_k^{s_a}$ in $k$, which is the order. There is no boundary and
+<p>an elliptic operator of order $2s$, with no boundary conditions.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p10">Ver demostración</button><div class="proof" id="en-control-inverso-p10"><p>The Riesz map sends $c$ to $v\mapsto(c,v)_{\Hs}$, which by
+<a class="xref" href="#en-eq:penalizacion">(20)</a> is $v\mapsto\int c\,(\mathrm{Id}-\kappa\Delta)^sv$. In
+the joint spectral resolution it is diagonal with entries
+$(1+\kappa(|\xi|^2+\mu_k))^{s}$, bounded above and below on each dyadic shell,
+hence an isomorphism onto the dual scale; the symbol grows like
+$\kappa^s(|\xi|^2+\mu_k)^{s}$, which is the order. There is no boundary and
 hence no boundary term.</p></div></div>
 <p>The order is forced rather than chosen: $R^{-1}$ must return $\Hd$ to $\Hs$,
 which is what makes $c_\star$ of <a class="xref" href="#en-eq:cstar">(26)</a> a continuous function of
-$(x,a)$. With $s_x=1$ one recovers $\mathrm{Id}-\kappa_x\Delta_x$, admissible
-only for $d=1$ by Proposition <a class="xref" href="#en-prop:h1-nunca">2.6</a>.</p>
-<div class="stmt observacion" id="en-obs:dos-condiciones"><div class="head">Observación 2.10</div><div class="body"><p>The two regimes place their demands on different objects. Regime (i) constrains
-$\Hs$, asking $s_x&gt;d/2$ and $s_a&gt;m/2$, and then accepts every finite measure.
+$(x,a)$. With $s=1$ one recovers $\mathrm{Id}-\kappa\Delta$, admissible only for
+$n=1$ by Proposition <a class="xref" href="#en-prop:h1-nunca">2.6</a>.</p>
+<div class="stmt observacion" id="en-obs:mixta"><div class="head">Observación 2.10</div><div class="body"><p>Two variants are available and neither is used below. Allowing $s$ to be a real
+number lowers the order from $2\lfloor n/2\rfloor+2$ to $n+2\varepsilon$, at the
+cost of a norm that is no longer an integral of derivatives. And since
+$\delta_{(x_0,a_0)}=\delta_{x_0}\otimes\delta_{a_0}$, the threshold in fact
+splits: $H^{s_x}(\R^d)\otimes H^{s_a}(A)$ with $s_x&gt;d/2$ and $s_a&gt;m/2$ also
+carries every finite measure, at order $2s_x$ in $x$ and $2s_a$ in $a$, and with
+two independent smoothing scales.</p></div></div>
+<div class="stmt observacion" id="en-obs:dos-condiciones"><div class="head">Observación 2.11</div><div class="body"><p>The two regimes place their demands on different objects. Regime (i) constrains
+$\Hs$, asking $s&gt;n/2$, and then accepts every finite measure.
 Regime (ii)
 constrains $\M$, asking that its elements have $L^2$ densities, and then accepts
 the cheaper space $H^1$. Only the first is available when deterministic policies
@@ -2011,7 +2021,7 @@ const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 /* Los rotulos y las notaciones los inyecta el generador, porque dependen de
    que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
    una de lecture notes dice «demostraciones». */
-const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "fin", "rotulo": "de Finetti"}, {"id": "std", "rotulo": "Integrales"}], "idiomas": [{"id": "es", "rotulo": "Español", "carpeta": "es"}, {"id": "en", "rotulo": "English", "carpeta": "en"}], "glosario": {"E": {"es": "$E=\\R^d$, el espacio de estados. Sin frontera $\\rt$ no hay condicion que elegir, y $H^s$ se define por Fourier. Es el marco de los ejemplos de las dos fuentes.", "en": "$E=\\R^d$, the state space. No boundary $\\rt$ no condition to choose, and $H^s$ is defined by the Fourier transform. This is the setting of both sources&#x27; examples."}, "A": {"es": "$A$ variedad riemanniana compacta sin frontera, $\\dim A=m$: la esfera de direcciones, el toro. Compacta $\\rt$ $\\mathscr P(A)$ compacto en la topologia debil.", "en": "$A$ a compact Riemannian manifold without boundary, $\\dim A=m$: the sphere of directions, the torus. Compact $\\rt$ $\\mathscr P(A)$ compact in the weak topology."}, "nu0": {"es": "$\\nu_0\\in\\mathscr P(E)$, la ley inicial: $X_0\\sim\\nu_0$. Es la fuente de \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>.", "en": "$\\nu_0\\in\\mathscr P(E)$, the initial law: $X_0\\sim\\nu_0$. It is the source in \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>."}, "rho": {"es": "$\\rho&gt;0$, la tasa de descuento. $\\lambda_\\rho=e^{-\\rho t}dt$ tiene masa $1/\\rho$.", "en": "$\\rho&gt;0$, the discount rate. $\\lambda_\\rho=e^{-\\rho t}dt$ has mass $1/\\rho$."}, "Hs": {"es": "$\\Hs=H^{s_x}(\\R^d)\\otimes H^{s_a}(A)$ con $s_x&gt;d/2$ y $s_a&gt;m/2$, ninguno entero necesariamente. Por Sobolev toda medida signada finita esta en $\\Hd$.", "en": "$\\Hs=H^{s_x}(\\R^d)\\otimes H^{s_a}(A)$ with $s_x&gt;d/2$ and $s_a&gt;m/2$, neither necessarily an integer. By Sobolev every finite signed measure lies in $\\Hd$."}, "M": {"es": "$\\M=\\{\\eta\\ge0$ en $E\\times A$ que cumple \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>$\\}$. Convexo, y $\\eta(E\\times A)=1/\\rho$ para todo $\\eta\\in\\M$.", "en": "$\\M=\\{\\eta\\ge0$ on $E\\times A$ satisfying \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>$\\}$. Convex, and $\\eta(E\\times A)=1/\\rho$ for every $\\eta\\in\\M$."}, "eta": {"es": "$\\eta_\\pi\\ge0$ en $E\\times A$ con $\\eta_\\pi(E\\times A)=1/\\rho$.", "en": "$\\eta_\\pi\\ge0$ on $E\\times A$ with $\\eta_\\pi(E\\times A)=1/\\rho$."}, "etaE": {"es": "$\\eta_E\\in\\M$, la ocupacion del experto. Es lo unico que se observa de $\\pi_E$.", "en": "$\\eta_E\\in\\M$, the expert&#x27;s occupation measure. It is all that is observed of $\\pi_E$."}, "R": {"es": "$R:\\Hs\\to\\Hd$ el isomorfismo de Riesz de \u003ca class=\"xref\" href=\"#es-eq:penalizacion\">(20)\u003c/a>, el multiplicador $(\\mathrm{Id}-\\kappa_x\\Delta_x)^{s_x}(\\mathrm{Id}-\\kappa_a\\Delta_A)^{s_a}$. Orden $2s_x$ en $x$, sin condiciones de frontera.", "en": "$R:\\Hs\\to\\Hd$ the Riesz isomorphism of \u003ca class=\"xref\" href=\"#en-eq:penalizacion\">(20)\u003c/a>, the multiplier $(\\mathrm{Id}-\\kappa_x\\Delta_x)^{s_x}(\\mathrm{Id}-\\kappa_a\\Delta_A)^{s_a}$. Order $2s_x$ in $x$, with no boundary conditions."}, "alpha": {"es": "$\\alpha&gt;0$ pesa el previo contra la brecha. Cota: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$.", "en": "$\\alpha&gt;0$ weighs the prior against the gap. Bound: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$."}, "V": {"es": "Variable dual de la restriccion de balance en \u003ca class=\"xref\" href=\"#es-eq:dual\">(15)\u003c/a>.", "en": "Dual variable of the balance constraint in \u003ca class=\"xref\" href=\"#en-eq:dual\">(15)\u003c/a>."}}};
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "fin", "rotulo": "de Finetti"}, {"id": "std", "rotulo": "Integrales"}], "idiomas": [{"id": "es", "rotulo": "Español", "carpeta": "es"}, {"id": "en", "rotulo": "English", "carpeta": "en"}], "glosario": {"E": {"es": "$E=\\R^d$, el espacio de estados. Sin frontera $\\rt$ no hay condicion que elegir, y $H^s$ se define por Fourier. Es el marco de los ejemplos de las dos fuentes.", "en": "$E=\\R^d$, the state space. No boundary $\\rt$ no condition to choose, and $H^s$ is defined by the Fourier transform. This is the setting of both sources&#x27; examples."}, "A": {"es": "$A$ variedad riemanniana compacta sin frontera, $\\dim A=m$: la esfera de direcciones, el toro. Compacta $\\rt$ $\\mathscr P(A)$ compacto en la topologia debil.", "en": "$A$ a compact Riemannian manifold without boundary, $\\dim A=m$: the sphere of directions, the torus. Compact $\\rt$ $\\mathscr P(A)$ compact in the weak topology."}, "nu0": {"es": "$\\nu_0\\in\\mathscr P(E)$, la ley inicial: $X_0\\sim\\nu_0$. Es la fuente de \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>.", "en": "$\\nu_0\\in\\mathscr P(E)$, the initial law: $X_0\\sim\\nu_0$. It is the source in \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>."}, "rho": {"es": "$\\rho&gt;0$, la tasa de descuento. $\\lambda_\\rho=e^{-\\rho t}dt$ tiene masa $1/\\rho$.", "en": "$\\rho&gt;0$, the discount rate. $\\lambda_\\rho=e^{-\\rho t}dt$ has mass $1/\\rho$."}, "Hs": {"es": "$\\Hs=H^s(E\\times A)$ con $s&gt;n/2$ entero. Por Sobolev toda medida signada finita esta en $\\Hd$.", "en": "$\\Hs=H^s(E\\times A)$ with $s&gt;n/2$ an integer. By Sobolev every finite signed measure lies in $\\Hd$."}, "M": {"es": "$\\M=\\{\\eta\\ge0$ en $E\\times A$ que cumple \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>$\\}$. Convexo, y $\\eta(E\\times A)=1/\\rho$ para todo $\\eta\\in\\M$.", "en": "$\\M=\\{\\eta\\ge0$ on $E\\times A$ satisfying \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>$\\}$. Convex, and $\\eta(E\\times A)=1/\\rho$ for every $\\eta\\in\\M$."}, "eta": {"es": "$\\eta_\\pi\\ge0$ en $E\\times A$ con $\\eta_\\pi(E\\times A)=1/\\rho$.", "en": "$\\eta_\\pi\\ge0$ on $E\\times A$ with $\\eta_\\pi(E\\times A)=1/\\rho$."}, "etaE": {"es": "$\\eta_E\\in\\M$, la ocupacion del experto. Es lo unico que se observa de $\\pi_E$.", "en": "$\\eta_E\\in\\M$, the expert&#x27;s occupation measure. It is all that is observed of $\\pi_E$."}, "R": {"es": "$R:\\Hs\\to\\Hd$ el isomorfismo de Riesz de \u003ca class=\"xref\" href=\"#es-eq:penalizacion\">(20)\u003c/a>, $(\\mathrm{Id}-\\kappa\\Delta)^{s}$. Orden $2s$, sin condiciones de frontera.", "en": "$R:\\Hs\\to\\Hd$ the Riesz isomorphism of \u003ca class=\"xref\" href=\"#en-eq:penalizacion\">(20)\u003c/a>, $(\\mathrm{Id}-\\kappa\\Delta)^{s}$. Order $2s$, with no boundary conditions."}, "alpha": {"es": "$\\alpha&gt;0$ pesa el previo contra la brecha. Cota: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$.", "en": "$\\alpha&gt;0$ weighs the prior against the gap. Bound: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$."}, "V": {"es": "Variable dual de la restriccion de balance en \u003ca class=\"xref\" href=\"#es-eq:dual\">(15)\u003c/a>.", "en": "Dual variable of the balance constraint in \u003ca class=\"xref\" href=\"#en-eq:dual\">(15)\u003c/a>."}}};
 
 /* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
    navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
