@@ -2569,16 +2569,19 @@ function construyeIndice(){
     // margen de CSS no existe: sin esto salia «1Control estocastico»
     // pegado. Encontrado el 2026-08-19 en control-inverso, la unica nota
     // que numera.
+    // El numero se antepone SIEMPRE, venga el titulo de data-toc o del DOM.
+    // Mirandolo solo cuando no hay data-toc, un \section[corto]{largo} de una
+    // nota numerada salia sin numero entre hermanos que si lo tenian.
+    const num = el.querySelector(".secnum");
     let texto = el.dataset.toc;
-    if(!texto){
-      const num = el.querySelector(".secnum");
-      if(num){
-        const resto = Array.from(el.childNodes)
-          .filter(x => x !== num).map(x => x.textContent).join("");
-        texto = num.textContent.trim() + " " + resto.trim();
-      } else {
-        texto = el.textContent.trim();
-      }
+    if(texto){
+      if(num) texto = num.textContent.trim() + " " + texto.trim();
+    } else if(num){
+      const resto = Array.from(el.childNodes)
+        .filter(x => x !== num).map(x => x.textContent).join("");
+      texto = num.textContent.trim() + " " + resto.trim();
+    } else {
+      texto = el.textContent.trim();
     }
     html += '<a class="' + CLASE[el.tagName] + '" href="#' + esc(el.id)
           + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
@@ -2588,6 +2591,13 @@ function construyeIndice(){
   vigila(dianas);
   // Reconstruir tira el filtro que hubiera escrito: se vuelve a aplicar.
   if($("#toc-buscar").value) filtraIndice();
+  // Y hay que componer lo que se acaba de escribir. El titulo puede traer
+  // formula -data-toc es el [corto] del .tex, con su LaTeX tal cual-, y este
+  // innerHTML es posterior a la pasada de MathJax sobre la pagina: sin esto,
+  // «Convexidad para funciones de clase $C^1$» se queda con los dolares a la
+  // vista en el indice de convexa.
+  if(window.MathJax && MathJax.typesetPromise)
+    MathJax.typesetPromise([lista]).catch(() => {});
 }
 /* La llama MathJax al terminar de componer, para que los encabezados con
    formula entren en el indice ya compuestos y no como LaTeX crudo. */

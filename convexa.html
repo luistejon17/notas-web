@@ -628,7 +628,7 @@ $\norm{T(x+h)-T(x)-Lh}\le\varepsilon\norm{h}$ para todo $h$ con
 $\norm{h}\le\delta$. Pero entonces:</p>
 <div class="display">\[
   \norm{T(x+h)-T(x)}\le\varepsilon\norm{h}+\norm{L}\norm{h}
-   \le\delta(\varepsilon+\norm{L})\le\varepsilon .\qedhere
+   \le\delta(\varepsilon+\norm{L})\le\varepsilon .
 \]</div></div>
 <p>El recíproco es falso, y el contraejemplo habitual vive en $\R^2$.</p>
 <div class="stmt ejemplo" id="cap1:ej-noconti"><div class="head">Ejemplo</div><div class="body"><p>Sea $f:\R^2\to\R$ definida por $f(x,y)=x^3y/(x^6+y^2)$ si $(x,y)\neq(0,0)$ y
@@ -780,7 +780,7 @@ Entonces, para todos $x,y\in U$,</p>
   \abs{f(y)-f(x)-\ip{\nabla f(x)}{y-x}}
    &amp;=\Bigl|\int_0^1\ip{\nabla f(x+t(y-x))-\nabla f(x)}{y-x}\,dt\Bigr|\\
    &amp;\le\int_0^1\norm{y-x}\,\beta\,\norm{t(y-x)}\,dt\\
-   &amp;=\frac{\beta}{2}\norm{y-x}^2 . \qedhere
+   &amp;=\frac{\beta}{2}\norm{y-x}^2 . 
 \end{align*}</div></div>
 <h3 id="cap2:sec-ejemplos">Los problemas del curso</h3>
 <p>Los problemas siguientes reaparecerán a lo largo del curso. En cada uno se
@@ -1690,7 +1690,7 @@ $(t-s)(y-x)$, da $\phi&#x27;(s)\le\phi&#x27;(t)$. Por la representación integra
 incremento del capítulo 1,</p>
 <div class="display">\[
   f(y)-f(x)=\phi(1)-\phi(0)=\int_0^1\phi&#x27;(t)\dd t\ \ge\ \phi&#x27;(0)
-    =\ip{\nabla f(x)}{y-x} . \qedhere
+    =\ip{\nabla f(x)}{y-x} . 
 \]</div></div></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
@@ -1861,16 +1861,19 @@ function construyeIndice(){
     // margen de CSS no existe: sin esto salia «1Control estocastico»
     // pegado. Encontrado el 2026-08-19 en control-inverso, la unica nota
     // que numera.
+    // El numero se antepone SIEMPRE, venga el titulo de data-toc o del DOM.
+    // Mirandolo solo cuando no hay data-toc, un \section[corto]{largo} de una
+    // nota numerada salia sin numero entre hermanos que si lo tenian.
+    const num = el.querySelector(".secnum");
     let texto = el.dataset.toc;
-    if(!texto){
-      const num = el.querySelector(".secnum");
-      if(num){
-        const resto = Array.from(el.childNodes)
-          .filter(x => x !== num).map(x => x.textContent).join("");
-        texto = num.textContent.trim() + " " + resto.trim();
-      } else {
-        texto = el.textContent.trim();
-      }
+    if(texto){
+      if(num) texto = num.textContent.trim() + " " + texto.trim();
+    } else if(num){
+      const resto = Array.from(el.childNodes)
+        .filter(x => x !== num).map(x => x.textContent).join("");
+      texto = num.textContent.trim() + " " + resto.trim();
+    } else {
+      texto = el.textContent.trim();
     }
     html += '<a class="' + CLASE[el.tagName] + '" href="#' + esc(el.id)
           + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
@@ -1880,6 +1883,13 @@ function construyeIndice(){
   vigila(dianas);
   // Reconstruir tira el filtro que hubiera escrito: se vuelve a aplicar.
   if($("#toc-buscar").value) filtraIndice();
+  // Y hay que componer lo que se acaba de escribir. El titulo puede traer
+  // formula -data-toc es el [corto] del .tex, con su LaTeX tal cual-, y este
+  // innerHTML es posterior a la pasada de MathJax sobre la pagina: sin esto,
+  // «Convexidad para funciones de clase $C^1$» se queda con los dolares a la
+  // vista en el indice de convexa.
+  if(window.MathJax && MathJax.typesetPromise)
+    MathJax.typesetPromise([lista]).catch(() => {});
 }
 /* La llama MathJax al terminar de componer, para que los encabezados con
    formula entren en el indice ya compuestos y no como LaTeX crudo. */
