@@ -163,6 +163,10 @@ p{margin:0 0 .85em}
 
 a{color:var(--link)}
 .df{color:var(--def); font-weight:600}
+/* \remarcar del Overleaf, que en el PDF es \textcolor{dunkelmagenta}: un
+   resaltado de prosa, no un enunciado. Usa el token --mark, que ya existia
+   para los ejemplos, asi que se resuelve solo en modo oscuro. */
+.mark{color:var(--mark)}
 /* La atribucion. Gris y pequena: tiene que estar, no que leerse. */
 .src{
   color:var(--faint); font-family:"Segoe UI",system-ui,sans-serif;
@@ -491,7 +495,22 @@ window.MathJax = {
     processEnvironments: true,
     macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1]}
   },
-  options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+  options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
+  startup: {
+    // El indice se construye con textContent de cada encabezado, y hasta que
+    // MathJax no ha compuesto, ese texto es el LaTeX crudo: en el TOC de
+    // control-inverso salia «El papel de $\alpha$». Cuando MathJax termina se
+    // reconstruye, y entonces el mismo textContent ya da «El papel de α».
+    //
+    // El indice se construye ADEMAS al arrancar, sin esperar a nadie: si la
+    // CDN de MathJax no responde, esto no llega a correr nunca y el TOC tiene
+    // que existir igual.
+    pageReady(){
+      return MathJax.startup.defaultPageReady().then(() => {
+        if(window.reconstruyeIndice) window.reconstruyeIndice();
+      });
+    }
+  }
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -609,7 +628,7 @@ $\norm{T(x+h)-T(x)-Lh}\le\varepsilon\norm{h}$ para todo $h$ con
 $\norm{h}\le\delta$. Pero entonces:</p>
 <div class="display">\[
   \norm{T(x+h)-T(x)}\le\varepsilon\norm{h}+\norm{L}\norm{h}
-   \le\delta(\varepsilon+\norm{L})\le\varepsilon .
+   \le\delta(\varepsilon+\norm{L})\le\varepsilon .\qedhere
 \]</div></div>
 <p>El recíproco es falso, y el contraejemplo habitual vive en $\R^2$.</p>
 <div class="stmt ejemplo" id="cap1:ej-noconti"><div class="head">Ejemplo</div><div class="body"><p>Sea $f:\R^2\to\R$ definida por $f(x,y)=x^3y/(x^6+y^2)$ si $(x,y)\neq(0,0)$ y
@@ -761,7 +780,7 @@ Entonces, para todos $x,y\in U$,</p>
   \abs{f(y)-f(x)-\ip{\nabla f(x)}{y-x}}
    &amp;=\Bigl|\int_0^1\ip{\nabla f(x+t(y-x))-\nabla f(x)}{y-x}\,dt\Bigr|\\
    &amp;\le\int_0^1\norm{y-x}\,\beta\,\norm{t(y-x)}\,dt\\
-   &amp;=\frac{\beta}{2}\norm{y-x}^2 . 
+   &amp;=\frac{\beta}{2}\norm{y-x}^2 . \qedhere
 \end{align*}</div></div>
 <h3 id="cap2:sec-ejemplos">Los problemas del curso</h3>
 <p>Los problemas siguientes reaparecerán a lo largo del curso. En cada uno se
@@ -1504,7 +1523,7 @@ $\alpha\in\R$. Entonces</p>
 \]</div>
 <p>es no vacío y convexo, y si $f$ es estrictamente convexa sobre $C\cap\dom f$
 entonces $S$ se reduce a un punto.
-<span class="src">[Bauschke–Combettes, \S11.3]</span></p></div></div>
+<span class="src">[Bauschke–Combettes, §11.3]</span></p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p29">Ver demostración</button><div class="proof" id="convexa-p29"><p>Que $S$ es no vacío es el corolario anterior. Llamando $\mu$ al valor mínimo,
 $S=\lev_\mu(f+\delta_C)$ es un conjunto de nivel de una función convexa y por
 tanto es convexo. Suponga ahora $f$ estrictamente convexa y sean $x,y\in S$
@@ -1629,13 +1648,13 @@ $K$ a lo sumo $\delta$, luego está en $K_\delta$, y el cálculo de la proposici
 anterior con $\varepsilon=\delta$ da la misma cota.</p></div>
 <p>Con $f$ además l.s.c. y $K$ compacto dentro de $\intr(\dom f)$ el mismo
 argumento vale en $\Hs$, porque entonces la continuidad está garantizada.</p>
-<h3 id="cap5:sec-c1" data-toc="Convexidad para funciones de clase \texorpdfstring{$C^1$}{C1}">Caracterizaciones de la convexidad para funciones de clase
-         \texorpdfstring{$C^1$}{C1}</h3>
+<h3 id="cap5:sec-c1" data-toc="Convexidad para funciones de clase $C^1$">Caracterizaciones de la convexidad para funciones de clase
+         $C^1$</h3>
 <div class="stmt teorema" id="cap5:teo-c1"><div class="head">Teorema</div><div class="body"><p>Sea $U\subset\Hs$ abierto y convexo y sea $f\in C^1(U)$. Las siguientes
 afirmaciones son equivalentes.</p>
 <ol class="lista"><li><p>$f$ es convexa.</p></li><li><p>$f(y)\ge f(x)+\ip{\nabla f(x)}{y-x}$ para todos $x,y\in U$.</p></li><li><p>$\nabla f$ es monótono, es decir,
         $\ip{\nabla f(x)-\nabla f(y)}{x-y}\ge0$ para todos $x,y\in U$.</p></li></ol>
-<p><span class="src">[Bauschke–Combettes, \S17.2]</span></p></div></div>
+<p><span class="src">[Bauschke–Combettes, §17.2]</span></p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p34">Ver demostración</button><div class="proof" id="convexa-p34"><p><em>(i)</em> implica <em>(ii)</em>: fije $x,y\in U$ y defina
 $q\colon\,]0,1]\to\R$ por</p>
 <div class="display">\[
@@ -1671,7 +1690,7 @@ $(t-s)(y-x)$, da $\phi&#x27;(s)\le\phi&#x27;(t)$. Por la representación integra
 incremento del capítulo 1,</p>
 <div class="display">\[
   f(y)-f(x)=\phi(1)-\phi(0)=\int_0^1\phi&#x27;(t)\dd t\ \ge\ \phi&#x27;(0)
-    =\ip{\nabla f(x)}{y-x} . 
+    =\ip{\nabla f(x)}{y-x} . \qedhere
 \]</div></div></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
@@ -1835,24 +1854,47 @@ function construyeIndice(){
     if(!el.id) el.id = "auto-" + (n++);
     // data-toc es el [titulo corto] de \chapter[corto]{largo}, que es justo
     // el que LaTeX pone en el indice del PDF.
-    const texto = el.dataset.toc || el.textContent.trim();
+    //
+    // El numero de seccion se lee APARTE y se une con un espacio de verdad.
+    // En el encabezado del cuerpo la separacion la da el margin-right de
+    // .secnum, pero aqui el indice se construye con textContent, donde un
+    // margen de CSS no existe: sin esto salia «1Control estocastico»
+    // pegado. Encontrado el 2026-08-19 en control-inverso, la unica nota
+    // que numera.
+    let texto = el.dataset.toc;
+    if(!texto){
+      const num = el.querySelector(".secnum");
+      if(num){
+        const resto = Array.from(el.childNodes)
+          .filter(x => x !== num).map(x => x.textContent).join("");
+        texto = num.textContent.trim() + " " + resto.trim();
+      } else {
+        texto = el.textContent.trim();
+      }
+    }
     html += '<a class="' + CLASE[el.tagName] + '" href="#' + esc(el.id)
           + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
     dianas.push(el);
   });
   lista.innerHTML = html;
   vigila(dianas);
+  // Reconstruir tira el filtro que hubiera escrito: se vuelve a aplicar.
+  if($("#toc-buscar").value) filtraIndice();
 }
+/* La llama MathJax al terminar de componer, para que los encabezados con
+   formula entren en el indice ya compuestos y no como LaTeX crudo. */
+window.reconstruyeIndice = construyeIndice;
 
 /* Filtro del indice. Solo hace falta a partir de un puñado de entradas, pero
    no cuesta nada tenerlo siempre: no reordena ni reconstruye nada, solo
    oculta los <a> cuyo texto no matchea. */
-$("#toc-buscar").addEventListener("input", e => {
-  const q = e.target.value.trim().toLowerCase();
+function filtraIndice(){
+  const q = $("#toc-buscar").value.trim().toLowerCase();
   $$("#toc-lista a").forEach(a => {
     a.hidden = q !== "" && !a.textContent.toLowerCase().includes(q);
   });
-});
+}
+$("#toc-buscar").addEventListener("input", filtraIndice);
 
 function esc(s){
   return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));

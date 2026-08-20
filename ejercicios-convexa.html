@@ -163,6 +163,10 @@ p{margin:0 0 .85em}
 
 a{color:var(--link)}
 .df{color:var(--def); font-weight:600}
+/* \remarcar del Overleaf, que en el PDF es \textcolor{dunkelmagenta}: un
+   resaltado de prosa, no un enunciado. Usa el token --mark, que ya existia
+   para los ejemplos, asi que se resuelve solo en modo oscuro. */
+.mark{color:var(--mark)}
 /* La atribucion. Gris y pequena: tiene que estar, no que leerse. */
 .src{
   color:var(--faint); font-family:"Segoe UI",system-ui,sans-serif;
@@ -491,7 +495,22 @@ window.MathJax = {
     processEnvironments: true,
     macros: {"aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "rint": "\\operatorname{ri}", "cl": "\\operatorname{cl}", "tr": "\\operatorname{tr}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1], "trans": "^{\\mathsf{T}}", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2]}
   },
-  options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+  options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
+  startup: {
+    // El indice se construye con textContent de cada encabezado, y hasta que
+    // MathJax no ha compuesto, ese texto es el LaTeX crudo: en el TOC de
+    // control-inverso salia «El papel de $\alpha$». Cuando MathJax termina se
+    // reconstruye, y entonces el mismo textContent ya da «El papel de α».
+    //
+    // El indice se construye ADEMAS al arrancar, sin esperar a nadie: si la
+    // CDN de MathJax no responde, esto no llega a correr nunca y el TOC tiene
+    // que existir igual.
+    pageReady(){
+      return MathJax.startup.defaultPageReady().then(() => {
+        if(window.reconstruyeIndice) window.reconstruyeIndice();
+      });
+    }
+  }
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -548,7 +567,7 @@ para todo $x$. Muestre que $f$ es Fréchet diferenciable en $0$.</p></div></div>
   \frac{|f(h) - f(0)|}{\lVert h\rVert} = \frac{|f(h)|}{\lVert h\rVert}
   \leq \lVert h\rVert \xrightarrow{\ h \to 0\ } 0 .
 \]</div>
-<p>$\Rightarrow f$ es Fréchet en $0$ con $\Dif f(0) = 0$. \qed</p></div>
+<p>$\Rightarrow f$ es Fréchet en $0$ con $\Dif f(0) = 0$.  □</p></div>
 <div class="stmt ejercicio" id="ej:t1-2"><div class="head">Ejercicio 2</div><div class="body"><p>Derive la fórmula de Taylor de segundo orden con resto integral para una
 función $C^{2}$. Úsela para probar el lema de descenso cuando la Hessiana está
 acotada por $LI$.</p></div></div>
@@ -574,7 +593,7 @@ Pero entonces:</p>
    = \frac{L}{2}\lVert h\rVert^{2},
 \]</div>
 <p>y con $y = x+h$ $\Rightarrow$
-$|f(y) - f(x) - \langle\nabla f(x), y-x\rangle| \leq \frac{L}{2}\lVert y-x\rVert^{2}$. \qed</p></div>
+$|f(y) - f(x) - \langle\nabla f(x), y-x\rangle| \leq \frac{L}{2}\lVert y-x\rVert^{2}$.  □</p></div>
 <div class="stmt ejercicio" id="ej:t1-3"><div class="head">Ejercicio 3</div><div class="body"><p>Sea $f : \mathbb{R}^{2} \mapsto \mathbb{R}$ dada por</p>
 <div class="display">\[
   f(x) = \frac{2y\exp(-x^{-2})}{y^{2}+\exp(-2x^{-2})}
@@ -599,7 +618,7 @@ $d \mapsto 0$ es lineal $\Rightarrow f$ es Gâteaux diferenciable en el origen.<
   f(x,y) = \frac{2\,e^{-2x^{-2}}}{2\,e^{-2x^{-2}}} = 1 ,
 \]</div>
 <p>y $(x, e^{-x^{-2}}) \to (0,0)$ cuando $x \to 0$, mientras que $f(0,0) = 0$
-$\Rightarrow f$ no es continua. \qed</p></div>
+$\Rightarrow f$ no es continua.  □</p></div>
 <div class="stmt ejercicio" id="ej:t1-4"><div class="head">Ejercicio 4</div><div class="body"><p>Sea $f : \mathbb{R}^{2} \mapsto \mathbb{R}$ dada por</p>
 <div class="display">\[
   f(x) = \frac{x^{3}y}{x^{4}+y^{2}}
@@ -627,7 +646,7 @@ con $\nabla f(0,0) = 0$.</p>
    \xrightarrow{\ x \downarrow 0\ } \frac{1}{2} \neq 0 .
 \]</div>
 <p>$\Rightarrow f(h) - f(0) - \langle\nabla f(0,0), h\rangle$ no es $o(\lVert h\rVert)$
-$\Rightarrow f$ no es Fréchet diferenciable en el origen. \qed</p></div>
+$\Rightarrow f$ no es Fréchet diferenciable en el origen.  □</p></div>
 <div class="stmt ejercicio" id="ej:t1-5"><div class="head">Ejercicio 5$^{*}$</div><div class="body"><p>Calcule las primeras dos derivadas de la función $f(X) = -\log\det(X)$ para $X$
 matriz definida positiva de $n \times n$.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p5">Ver solución</button><div class="proof" id="ejercicios-convexa-p5"><p>Sea $U = \{X \in \Sym{n} : X \succ 0\}$ y $f : U \to \mathbb{R}$ dada por
@@ -654,7 +673,7 @@ $g(X) = X^{-1}$, es decir $g = -\nabla f$. De $X+H = X(I + X^{-1}H)$:</p>
 <p>$\Rightarrow \lVert g(X+H) - g(X) + X^{-1}HX^{-1}\rVert = O(\lVert H\rVert^{2})$
 $\Rightarrow \Dif g(X)(H) = -X^{-1}HX^{-1}$. Pero entonces:</p>
 <div class="display">\[
-  \nabla^{2} f(X) = -\Dif g(X) = \bigl(H \mapsto X^{-1}HX^{-1}\bigr). \qed
+  \nabla^{2} f(X) = -\Dif g(X) = \bigl(H \mapsto X^{-1}HX^{-1}\bigr). 
 \]</div></div>
 <h4 id="ejercicios-convexa-x3">Tarea 2</h4>
 <div class="stmt ejercicio" id="ej:t2-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sea $A \in \Sym{n}$, $b \in \mathbb{R}^{n}$, $c \in \mathbb{R}$ y considere</p>
@@ -858,24 +877,47 @@ function construyeIndice(){
     if(!el.id) el.id = "auto-" + (n++);
     // data-toc es el [titulo corto] de \chapter[corto]{largo}, que es justo
     // el que LaTeX pone en el indice del PDF.
-    const texto = el.dataset.toc || el.textContent.trim();
+    //
+    // El numero de seccion se lee APARTE y se une con un espacio de verdad.
+    // En el encabezado del cuerpo la separacion la da el margin-right de
+    // .secnum, pero aqui el indice se construye con textContent, donde un
+    // margen de CSS no existe: sin esto salia «1Control estocastico»
+    // pegado. Encontrado el 2026-08-19 en control-inverso, la unica nota
+    // que numera.
+    let texto = el.dataset.toc;
+    if(!texto){
+      const num = el.querySelector(".secnum");
+      if(num){
+        const resto = Array.from(el.childNodes)
+          .filter(x => x !== num).map(x => x.textContent).join("");
+        texto = num.textContent.trim() + " " + resto.trim();
+      } else {
+        texto = el.textContent.trim();
+      }
+    }
     html += '<a class="' + CLASE[el.tagName] + '" href="#' + esc(el.id)
           + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
     dianas.push(el);
   });
   lista.innerHTML = html;
   vigila(dianas);
+  // Reconstruir tira el filtro que hubiera escrito: se vuelve a aplicar.
+  if($("#toc-buscar").value) filtraIndice();
 }
+/* La llama MathJax al terminar de componer, para que los encabezados con
+   formula entren en el indice ya compuestos y no como LaTeX crudo. */
+window.reconstruyeIndice = construyeIndice;
 
 /* Filtro del indice. Solo hace falta a partir de un puñado de entradas, pero
    no cuesta nada tenerlo siempre: no reordena ni reconstruye nada, solo
    oculta los <a> cuyo texto no matchea. */
-$("#toc-buscar").addEventListener("input", e => {
-  const q = e.target.value.trim().toLowerCase();
+function filtraIndice(){
+  const q = $("#toc-buscar").value.trim().toLowerCase();
   $$("#toc-lista a").forEach(a => {
     a.hidden = q !== "" && !a.textContent.toLowerCase().includes(q);
   });
-});
+}
+$("#toc-buscar").addEventListener("input", filtraIndice);
 
 function esc(s){
   return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));

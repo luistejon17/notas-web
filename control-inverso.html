@@ -163,6 +163,10 @@ p{margin:0 0 .85em}
 
 a{color:var(--link)}
 .df{color:var(--def); font-weight:600}
+/* \remarcar del Overleaf, que en el PDF es \textcolor{dunkelmagenta}: un
+   resaltado de prosa, no un enunciado. Usa el token --mark, que ya existia
+   para los ejemplos, asi que se resuelve solo en modo oscuro. */
+.mark{color:var(--mark)}
 /* La atribucion. Gris y pequena: tiene que estar, no que leerse. */
 .src{
   color:var(--faint); font-family:"Segoe UI",system-ui,sans-serif;
@@ -491,7 +495,22 @@ window.MathJax = {
     processEnvironments: true,
     macros: {"resaltar": ["\\textcolor{amaObs}{#1}", 1], "bd": "\\bullethang{verdee}", "bh": "\\bullethang{bluePropo}", "bent": "\\bullethang{blueThm}", "bej": "\\bullethang{olive}", "brem": "\\bullethang{dunkelmagenta}", "s": "\\subseteq", "rt": "\\Longrightarrow", "lt": "\\Longleftarrow", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "P": "\\mathbb{P}", "E": "\\mathbb{E}", "Tor": "\\mathbb{T}", "gen": ["\\mathcal{L}_{#1}", 1], "Gen": ["\\boldsymbol{\\mathcal{L}}_{#1}", 1], "Sg": ["\\boldsymbol{P}_{#1}", 1], "Hs": "\\mathcal{H}", "Hd": "\\mathcal{H}^{*}", "M": "\\mathcal{M}", "ch": "\\widehat{c}", "Gap": "\\operatorname{Gap}_E", "Opt": "\\operatorname{Opt}", "dom": "\\mathcal{D}", "pair": ["\\langle #1,#2\\rangle", 2], "qv": ["\\langle #1\\rangle", 1], "qc": ["\\langle #1,#2\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "tIntuicion": "Intuition", "tOjo": "Warning", "tConexion": "Connection", "tVive": "Where it lives", "tAbierto": "Where it lives is still open", "tConexP": "Personal connection", "carpeta": "en"}
   },
-  options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+  options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
+  startup: {
+    // El indice se construye con textContent de cada encabezado, y hasta que
+    // MathJax no ha compuesto, ese texto es el LaTeX crudo: en el TOC de
+    // control-inverso salia «El papel de $\alpha$». Cuando MathJax termina se
+    // reconstruye, y entonces el mismo textContent ya da «El papel de α».
+    //
+    // El indice se construye ADEMAS al arrancar, sin esperar a nadie: si la
+    // CDN de MathJax no responde, esto no llega a correr nunca y el TOC tiene
+    // que existir igual.
+    pageReady(){
+      return MathJax.startup.defaultPageReady().then(() => {
+        if(window.reconstruyeIndice) window.reconstruyeIndice();
+      });
+    }
+  }
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -625,8 +644,8 @@ rango $\mathcal R(\lambda\,\mathrm{Id}-\Gen{\pi})=\mathscr C_0(E)$ para algún
 $\lambda&gt;0$ $\rt$ $\Gen{\pi}$ genera un semigrupo de contracción fuertemente
 continuo <span class="src">[Baudoin, Cor. 4.41]</span>. Que ese semigrupo sea además de
 Feller–Dynkin, es decir que preserve la positividad y $\mathscr C_0(E)$, es
-Hille–Yosida–Ray \remarcar{[incierto: Ethier–Kurtz Thm. 4.2.2, que no está
-en el material fichado]}. Se escribe $\Sg{t,\pi}$, con función de transición
+Hille–Yosida–Ray <span class="mark">[incierto: Ethier–Kurtz Thm. 4.2.2, que no está
+en el material fichado]</span>. Se escribe $\Sg{t,\pi}$, con función de transición
 $P_{t,\pi,x}$ tq
 $P_{t,\pi,x}(\varphi)=\Sg{t,\pi}\varphi(x)$. $\Sg{t,\pi}$ y $\Gen{\pi}$ actúan
 sobre funciones; $P_{t,\pi,x}$ es una medida en $E$.</p>
@@ -657,8 +676,8 @@ $\pi_{X_s}^a\gen{a}f(X_s)=\Gen{\pi}f(X_s)$, función de $X_s$ sola, luego
 $f(X_t)-\int_0^t\Gen{\pi}f(X_s)\,ds$ es martingala y $X$ por sí solo resuelve el
 problema de martingala para $(\Gen{\pi},\nu_0)$. Estar bien puesto hace a $X$
 markoviano con función de transición determinada por $\Gen{\pi}$ y $\nu_0$
-\remarcar{[incierto: la referencia estándar es Ethier–Kurtz, cap. 4, que no
-está en el material fichado; Baudoin no trata el problema de martingala]}.</p>
+<span class="mark">[incierto: la referencia estándar es Ethier–Kurtz, cap. 4, que no
+está en el material fichado; Baudoin no trata el problema de martingala]</span>.</p>
 <p>Para el costo, la misma sustitución da $\pi_t^ac(X_t,a)=c_\pi(X_t)$ puntualmente
 en $\Omega$; no hace falta condicionar. En $\Omega\times[0,\infty)$ el mapa
 $(\omega,t)\mapsto c_\pi(X_t(\omega))$ es conjuntamente medible porque $X$ es
@@ -681,7 +700,7 @@ $\nu_0$; el operador que hay que invertir es aquel cuya sobreyectividad se supus
 arriba. La forma markoviana $\pi_t=\pi(X_t)$ sale de desintegrar una medida de
 ocupación óptima <a class="xref" href="#es-eq:desintegracion">(31)</a>, y hasta entonces $\pi_x$ solo está
 definido en esta subclase.</p>
-<h4 id="es-control-inverso-x1">Formulación HJB</h4>
+<h4 id="es-control-inverso-x1"><span class="secnum">1.1</span>Formulación HJB</h4>
 <p><button class="term" type="button" data-k="V">$V(x)$</button> la función de valor, el costo óptimo arrancando en $x$. Bajo programación
 dinámica cumple</p>
 <div class="display numerado" id="es-eq:hjb"><div class="eqbody">\begin{equation}
@@ -978,7 +997,7 @@ directo da la existencia.</p></div></div>
 de $\Gap$; la coercividad de $\Gap\ge0$; la semicontinuidad inferior del
 Corolario <a class="xref" href="#es-cor:gap-lipschitz">3.2</a>. No se usa ninguna propiedad del mapa
 $c\mapsto\pi$.</p>
-<h4 id="es-control-inverso-x2">Eliminar el costo sin suponer intercambio minimax</h4>
+<h4 id="es-control-inverso-x2"><span class="secnum">3.1</span>Eliminar el costo sin suponer intercambio minimax</h4>
 <p>Con $\eta$ fijo la minimización en $c$ es explícita. No se supone en este punto
 que el ínfimo y el supremo de <a class="xref" href="#es-eq:Phi">(22)</a> se puedan intercambiar.</p>
 <div class="stmt proposicion" id="es-prop:reduccion"><div class="head">Proposición 3.4</div><div class="body"><p>Para cada $\eta\in\M$, $c\mapsto\Phi(c,\eta)$ tiene minimizador único</p>
@@ -1041,7 +1060,7 @@ $+\infty$ y vuelve a entrar por $-\infty$
 costo que sea coercivo, que es su (6.2); o probar que las medidas de ocupación
 son tensas, que es lo que hace <span class="src">[Bhatt–Borkar, §3.2]</span> en el descontado,
 citando a Borkar (1989), Lema 3.7
-\remarcar{[incierto: no está en el material fichado]}.</p>
+<span class="mark">[incierto: no está en el material fichado]</span>.</p>
 <p>La primera vía está cerrada aquí. La Definición <a class="xref" href="#es-def:espacio">2.7</a> mete $\Hs$
 dentro de $C_0$ $\rt$ toda $c\in\Hs$ se anula en el infinito y ningún subnivel
 suyo es compacto; y lo mismo le pasa a $\ch$. La tensión no es entonces una
@@ -1119,7 +1138,7 @@ $c_\star$ es único haya las políticas óptimas que haya.</p></div></div>
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span><span class="num">(29)</span></div></div>
 <p>una relación de punto fijo multivaluada sobre $\M$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p17">Ver demostración</button><div class="proof" id="es-control-inverso-p17"><p>Inmediato de $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$ y de la
 definición <a class="xref" href="#es-eq:cstar">(26)</a> de $c_\star$.</p></div></div>
-<h4 id="es-control-inverso-x3">El papel de $\alpha$</h4>
+<h4 id="es-control-inverso-x3"><span class="secnum">3.2</span>El papel de $\alpha$</h4>
 <p>Como $\eta_E\in\M$, comparar $\eta_{A,\star}$ con la elección admisible
 $\eta=\eta_E$ en <a class="xref" href="#es-eq:reducido">(25)</a> da
 $\pair{\ch}{\eta_{A,\star}-\eta_E}+\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$,
@@ -1146,7 +1165,7 @@ escribe esa caracterización como sistema de ecuaciones. No se supone nada nuevo
 sobre el problema inverso; lo que se supone es regularidad de las medidas de
 ocupación, para poder leer la identidad de balance como ecuación en derivadas
 parciales.</p>
-<h4 id="es-control-inverso-x4">Del balance débil a Fokker–Planck</h4>
+<h4 id="es-control-inverso-x4"><span class="secnum">4.1</span>Del balance débil a Fokker–Planck</h4>
 <p>En toda la sección $\pi$ es un control markoviano relajado y la medida de
 ocupación se desintegra como</p>
 <div class="display numerado" id="es-eq:desintegracion"><div class="eqbody">\begin{equation}
@@ -1192,7 +1211,7 @@ ocupación conjunta es singular, y aun cuando $m_\pi$ sea función su regularida
 se hereda de los coeficientes vía regularidad elíptica, no se supone. Todo lo de
 abajo va en forma débil y <a class="xref" href="#es-eq:fp">(33)</a> queda solo como la forma clásica de la
 misma identidad.</p></div></div>
-<h4 id="es-control-inverso-x5">El sistema acoplado</h4>
+<h4 id="es-control-inverso-x5"><span class="secnum">4.2</span>El sistema acoplado</h4>
 <p>Sea $\pi_E$ la política del experto con densidad de estado $m_E$, y $\pi_A$ una
 política óptima para el costo recuperado con densidad $m_A$. Juntando
 <a class="xref" href="#es-eq:hjb-ineq">(9)</a>, <a class="xref" href="#es-eq:selector">(10)</a>, la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a> y la
@@ -1251,7 +1270,7 @@ que una discretización hereda un programa estrictamente convexo de dimensión
 finita. En <a class="xref" href="#es-eq:sistema">(34)</a> las incógnitas son $V$, $m_A$, $m_E$ y $c$, y el
 acople es por el $\arg\min$; una discretización hereda una iteración de punto
 fijo cuyas propiedades de contracción no las da el Teorema <a class="xref" href="#es-thm:silla">3.7</a>.</p></div></div>
-<h4 id="es-control-inverso-x6">El modelo de estados finitos como referencia</h4>
+<h4 id="es-control-inverso-x6"><span class="secnum">4.3</span>El modelo de estados finitos como referencia</h4>
 <p>Todo objeto de arriba tiene contraparte con estados finitos, lo que hace del
 modelo discreto una referencia para discretizar. Sean $S$ y $A$ finitos, $Q$ la
 matriz de tasas de una cadena en tiempo continuo y $\gamma$ o $\rho$ el
@@ -1348,8 +1367,8 @@ range condition $\mathcal R(\lambda\,\mathrm{Id}-\Gen{\pi})=\mathscr C_0(E)$
 holds for some $\lambda&gt;0$ <span class="src">[Baudoin, Cor. 4.41]</span>. That this semigroup is
 moreover Feller–Dynkin, that is, that it preserves positivity and
 $\mathscr C_0(E)$, is the Hille–Yosida–Ray theorem
-\remarcar{[uncertain: Ethier–Kurtz Thm. 4.2.2, which is not among the fiched
-material]}. We write it $\Sg{t,\pi}$, and the associated transition function is
+<span class="mark">[uncertain: Ethier–Kurtz Thm. 4.2.2, which is not among the fiched
+material]</span>. We write it $\Sg{t,\pi}$, and the associated transition function is
 written $P_{t,\pi,x}$, so that $P_{t,\pi,x}(\varphi)=\Sg{t,\pi}\varphi(x)$. We distinguish
 the operator from its pointwise values throughout: $\Sg{t,\pi}$ and $\Gen{\pi}$ act
 on functions, while $P_{t,\pi,x}$ is a measure on $E$.</p>
@@ -1380,8 +1399,8 @@ $\pi_{X_s}^a\gen{a}f(X_s)=\Gen{\pi}f(X_s)$, a function of $X_s$ alone, so
 $f(X_t)-\int_0^t\Gen{\pi}f(X_s)\,ds$ is a martingale and $X$ by itself solves the
 martingale problem for $(\Gen{\pi},\nu_0)$. Well-posedness makes $X$ Markov with a
 transition function determined by $\Gen{\pi}$ and $\nu_0$
-\remarcar{[uncertain: the standard reference is Ethier–Kurtz, ch. 4, which is
-not among the filed sources; Baudoin does not treat the martingale problem]}.</p>
+<span class="mark">[uncertain: the standard reference is Ethier–Kurtz, ch. 4, which is
+not among the filed sources; Baudoin does not treat the martingale problem]</span>.</p>
 <p>For the cost, the same substitution gives $\pi_t^ac(X_t,a)=c_\pi(X_t)$ pointwise on
 $\Omega$; no conditioning is needed. On $\Omega\times[0,\infty)$ the map
 $(\omega,t)\mapsto c_\pi(X_t(\omega))$ is jointly measurable because $X$ is
@@ -1404,7 +1423,7 @@ be inverted is the one whose surjectivity was assumed above. The Markov form
 $\pi_t=\pi(X_t)$ is obtained by disintegrating an optimal occupation measure
 <a class="xref" href="#en-eq:desintegracion">(31)</a>, and until then $\pi_x$ is defined only on this
 subclass.</p>
-<h4 id="en-control-inverso-x1">HJB formulation</h4>
+<h4 id="en-control-inverso-x1"><span class="secnum">1.1</span>HJB formulation</h4>
 <p>The value function <button class="term" type="button" data-k="V">$V(x)$</button> is the optimal cost started at $x$. Under dynamic
 programming it satisfies</p>
 <div class="display numerado" id="en-eq:hjb"><div class="eqbody">\begin{equation}
@@ -1701,7 +1720,7 @@ supplies existence.</p></div></div>
 <p>Strong convexity comes from the squared Hilbert norm and convexity of $\Gap$;
 coercivity from $\Gap\ge0$; lower semicontinuity from
 Corollary <a class="xref" href="#en-cor:gap-lipschitz">3.2</a>. No property of the map $c\mapsto\pi$ is used.</p>
-<h4 id="en-control-inverso-x2">Eliminating the cost without assuming a minimax interchange</h4>
+<h4 id="en-control-inverso-x2"><span class="secnum">3.1</span>Eliminating the cost without assuming a minimax interchange</h4>
 <p>For fixed $\eta$ the minimization in $c$ is explicit. We do <em>not</em> assume at
 this stage that the infimum and the supremum in <a class="xref" href="#en-eq:Phi">(22)</a> may be exchanged.</p>
 <div class="stmt proposicion" id="en-prop:reduccion"><div class="head">Proposición 3.4</div><div class="body"><p>For each $\eta\in\M$ the map $c\mapsto\Phi(c,\eta)$ has the unique minimizer</p>
@@ -1760,7 +1779,7 @@ $+\infty$ and returns at $-\infty$ <span class="src">[Kurtz–Stockbridge, Rem. 
 routes close the gap: make the cost coercive, which is their (6.2); or show the
 occupation measures tight, which is <span class="src">[Bhatt–Borkar, §3.2]</span> for the
 discounted problem, citing Borkar (1989), Lemma 3.7
-\remarcar{[uncertain: not among the fiched material]}.</p>
+<span class="mark">[uncertain: not among the fiched material]</span>.</p>
 <p>The first route is closed here. Definition <a class="xref" href="#en-def:espacio">2.7</a> puts $\Hs$ inside
 $C_0$, so every $c\in\Hs$ vanishes at infinity and no sublevel set of it is
 compact; the same applies to $\ch$. Tightness is therefore forced rather than
@@ -1837,7 +1856,7 @@ many optimal policies there are.</p></div></div>
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span><span class="num">(29)</span></div></div>
 <p>a set-valued fixed-point relation on $\M$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p17">Ver demostración</button><div class="proof" id="en-control-inverso-p17"><p>Immediate from $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$ and the
 definition <a class="xref" href="#en-eq:cstar">(26)</a> of $c_\star$.</p></div></div>
-<h4 id="en-control-inverso-x3">The role of $\alpha$</h4>
+<h4 id="en-control-inverso-x3"><span class="secnum">3.2</span>The role of $\alpha$</h4>
 <p>Because $\eta_E\in\M$, comparing $\eta_{A,\star}$ with the admissible choice
 $\eta=\eta_E$ in <a class="xref" href="#en-eq:reducido">(25)</a> gives
 $\pair{\ch}{\eta_{A,\star}-\eta_E}+\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$,
@@ -1864,7 +1883,7 @@ characterized by a variational inequality. We now write that characterization as
 system of equations. Nothing new is assumed about the inverse problem; what is
 assumed is regularity of the occupation measures, so that the balance identity can
 be read as a partial differential equation.</p>
-<h4 id="en-control-inverso-x4">From weak balance to Fokker–Planck</h4>
+<h4 id="en-control-inverso-x4"><span class="secnum">4.1</span>From weak balance to Fokker–Planck</h4>
 <p>Throughout this section $\pi$ is a relaxed Markov control and the occupation
 measure disintegrates as</p>
 <div class="display numerado" id="en-eq:desintegracion"><div class="eqbody">\begin{equation}
@@ -1911,7 +1930,7 @@ $m_\pi$ is a function its regularity is inherited from the coefficients through
 elliptic regularity rather than assumed. Every statement below is therefore given
 weakly, and <a class="xref" href="#en-eq:fp">(33)</a> is recorded only as the classical form of the same
 identity.</p></div></div>
-<h4 id="en-control-inverso-x5">The coupled system</h4>
+<h4 id="en-control-inverso-x5"><span class="secnum">4.2</span>The coupled system</h4>
 <p>Let $\pi_E$ be the expert policy with state density $m_E$, and let $\pi_A$ be an
 optimal policy for the recovered cost with state density $m_A$. Collecting
 <a class="xref" href="#en-eq:hjb-ineq">(9)</a>, <a class="xref" href="#en-eq:selector">(10)</a>, Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a> and the
@@ -1971,7 +1990,7 @@ strictly convex program. In <a class="xref" href="#en-eq:sistema">(34)</a> the u
 and $c$, and the coupling is through the $\arg\min$; a discretization inherits a
 fixed-point iteration whose contraction properties are not supplied by
 Theorem <a class="xref" href="#en-thm:silla">3.7</a>.</p></div></div>
-<h4 id="en-control-inverso-x6">The finite-state model as a reference</h4>
+<h4 id="en-control-inverso-x6"><span class="secnum">4.3</span>The finite-state model as a reference</h4>
 <p>Every object above has a finite-state counterpart, which makes the discrete model a
 reference for discretization. Let $S$ and $A$ be finite, let $Q$ be the rate matrix of
 a continuous-time chain and $\gamma$ or $\rho$ the discount. The generator becomes
@@ -2153,24 +2172,47 @@ function construyeIndice(){
     if(!el.id) el.id = "auto-" + (n++);
     // data-toc es el [titulo corto] de \chapter[corto]{largo}, que es justo
     // el que LaTeX pone en el indice del PDF.
-    const texto = el.dataset.toc || el.textContent.trim();
+    //
+    // El numero de seccion se lee APARTE y se une con un espacio de verdad.
+    // En el encabezado del cuerpo la separacion la da el margin-right de
+    // .secnum, pero aqui el indice se construye con textContent, donde un
+    // margen de CSS no existe: sin esto salia «1Control estocastico»
+    // pegado. Encontrado el 2026-08-19 en control-inverso, la unica nota
+    // que numera.
+    let texto = el.dataset.toc;
+    if(!texto){
+      const num = el.querySelector(".secnum");
+      if(num){
+        const resto = Array.from(el.childNodes)
+          .filter(x => x !== num).map(x => x.textContent).join("");
+        texto = num.textContent.trim() + " " + resto.trim();
+      } else {
+        texto = el.textContent.trim();
+      }
+    }
     html += '<a class="' + CLASE[el.tagName] + '" href="#' + esc(el.id)
           + '" data-d="' + esc(el.id) + '">' + esc(texto) + "</a>";
     dianas.push(el);
   });
   lista.innerHTML = html;
   vigila(dianas);
+  // Reconstruir tira el filtro que hubiera escrito: se vuelve a aplicar.
+  if($("#toc-buscar").value) filtraIndice();
 }
+/* La llama MathJax al terminar de componer, para que los encabezados con
+   formula entren en el indice ya compuestos y no como LaTeX crudo. */
+window.reconstruyeIndice = construyeIndice;
 
 /* Filtro del indice. Solo hace falta a partir de un puñado de entradas, pero
    no cuesta nada tenerlo siempre: no reordena ni reconstruye nada, solo
    oculta los <a> cuyo texto no matchea. */
-$("#toc-buscar").addEventListener("input", e => {
-  const q = e.target.value.trim().toLowerCase();
+function filtraIndice(){
+  const q = $("#toc-buscar").value.trim().toLowerCase();
   $$("#toc-lista a").forEach(a => {
     a.hidden = q !== "" && !a.textContent.toLowerCase().includes(q);
   });
-});
+}
+$("#toc-buscar").addEventListener("input", filtraIndice);
 
 function esc(s){
   return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
