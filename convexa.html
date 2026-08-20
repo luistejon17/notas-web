@@ -489,7 +489,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "lev": "\\operatorname{lev}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "dist": ["d_{#1}", 1], "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']}
 };
@@ -1422,6 +1422,257 @@ topología débil y $f$ es l.s.c. por sucesiones débiles.
 convexo cerrado en norma es débilmente cerrado. La l.s.c. respecto de la norma,
 que es barata de comprobar, se transporta así a la topología débil, que es la
 que tiene compacidad.</p></section>
+<section class="capitulo"><h2 id="cap:existencia">Existencia de minimizadores y regularidad</h2>
+<h3 id="cap5:sec-existencia">Existencia de minimizadores</h3>
+<p>De las tres formulaciones equivalentes de la semicontinuidad inferior, la que se
+usa aquí es la de los conjuntos de nivel cerrados, porque convierte una
+hipótesis sobre la función en una hipótesis sobre unos conjuntos, y de los
+conjuntos se puede pedir compacidad.</p>
+<div class="stmt teorema" id="cap5:teo-weierstrass-Rn"><div class="head">Teorema Weierstrass</div><div class="body"><p>Sea $f\colon\R^n\to\R\cup\{+\infty\}$ propia y l.s.c. y suponga que existe
+$\alpha\in\R$ tal que $\lev_\alpha f$ es acotado y no vacío. Entonces $f$ alcanza
+su mínimo.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p26">Ver demostración</button><div class="proof" id="convexa-p26"><p>Ponga $f^{*}=\inf f$ y tome una sucesión minimizante $(x_k)$, es decir, con
+$f(x_k)\to f^{*}$. Descartando finitos términos se puede suponer
+$f(x_k)\le\alpha$ para todo $k$, o sea $(x_k)\subset\lev_\alpha f$, que es
+cerrado por ser $f$ l.s.c. y acotado por hipótesis, luego compacto. Existe
+entonces una subsucesión $x_{k_j}\to x&#x27;\in\lev_\alpha f$, y la semicontinuidad
+inferior da</p>
+<div class="display">\[
+  f(x&#x27;)\le\liminf_j f(x_{k_j})=f^{*}\le f(x&#x27;) ,
+\]</div>
+<p>de modo que $f(x&#x27;)=f^{*}$.</p></div>
+<p>El único paso que no es formal es «cerrado y acotado, luego compacto», y esa
+implicación no es un detalle de la prueba: caracteriza la dimensión finita. En
+$\Hs$ de dimensión infinita la bola cerrada no es compacta, y el teorema es
+falso tal como está enunciado.</p>
+<div class="stmt ejemplo" id="cap5:ej-weierstrass-falla"><div class="head">Ejemplo</div><div class="body"><p>Sea $(e_n)_{n\ge1}$ una sucesión ortonormal de $\Hs$ y sea</p>
+<div class="display">\[
+  S=\Bigl\{\bigl(1+\tfrac1n\bigr)e_n:\ n\ge1\Bigr\},\qquad
+  f=\norm{\cdot}+\delta_S .
+\]</div>
+<p>Dos elementos distintos de $S$ distan al menos $\sqrt2$, así que $S$ es cerrado y
+discreto y por tanto $f$ es propia y l.s.c. Sus conjuntos de nivel están
+contenidos en bolas, luego son acotados y no vacíos para $\alpha\ge2$. Sin
+embargo $\inf f=\inf_n(1+1/n)=1$ y ningún punto de $S$ tiene norma $1$: el
+mínimo no se alcanza.</p></div></div>
+<p>Lo que la convexidad aporta es que devuelve la compacidad por otra puerta. Un
+convexo cerrado y acotado de $\Hs$ es débilmente compacto, y una función convexa
+y l.s.c. es débilmente l.s.c., que es el teorema con el que cerró el capítulo
+anterior. Los dos hechos juntos reponen exactamente la prueba de arriba.</p>
+<div class="stmt teorema" id="cap5:teo-weierstrass-H"><div class="head">Teorema Weierstrass en un espacio de Hilbert</div><div class="body"><p>Sea $A\subset\Hs$ no vacío, cerrado y convexo y sea
+$f\colon A\to\R\cup\{+\infty\}$ convexa, l.s.c. y propia. Suponga que $A$ es
+acotado, o bien que</p>
+<div class="display">\[
+  \lim_{\substack{x\in A\\ \norm{x}\to\infty}}f(x)=+\infty .
+\]</div>
+<p>Entonces $f$ alcanza su mínimo sobre $A$.
+<span class="src">[Brezis, Corolario 3.23]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p27">Ver demostración</button><div class="proof" id="convexa-p27"><p>Fije $a\in A$ con $f(a)&lt;+\infty$ y ponga $\tilde A=\{x\in A: f(x)\le f(a)\}$, que
+es no vacío, cerrado y convexo, y acotado por hipótesis. Como $\Hs$ es
+reflexivo, $\tilde A$ es compacto para la topología débil, y $f$ es débilmente
+l.s.c. por ser convexa y l.s.c. Una función l.s.c. sobre un compacto alcanza su
+ínfimo, así que existe $x_0\in\tilde A$ con $f(x_0)\le f(x)$ para todo
+$x\in\tilde A$. Si $x\in A\setminus\tilde A$ entonces $f(x)&gt;f(a)\ge f(x_0)$, y la
+desigualdad vale sobre todo $A$.</p></div>
+<p>La convexidad se usa dos veces, y por motivos distintos: hace que $\tilde A$ sea
+débilmente compacto y hace que $f$ sea débilmente l.s.c. En $\R^n$ no hace falta
+ninguna de las dos cosas, porque allí la topología débil y la de la norma
+coinciden.</p>
+<div class="stmt definicion" id="cap5:def-coerciva"><div class="head">Definición</div><div class="body"><p>Una función $f$ es <span class="df">coerciva</span> si $f(x)\to+\infty$ cuando
+$\norm{x}\to\infty$.</p></div></div>
+<div class="stmt corolario" id="cap5:cor-coerciva"><div class="head">Corolario</div><div class="body"><p>Toda función propia, l.s.c., convexa y coerciva sobre $\Hs$ alcanza su mínimo.</p></div></div>
+<p>Para minimizar sobre un conjunto no hace falta un enunciado aparte. La función
+indicadora reduce el problema con restricción al problema libre, y lo hace sin
+tocar ninguna de las hipótesis: $\tilde f=f+\delta_C$ es propia si $f$ lo es
+sobre $C$, es l.s.c. si $f$ lo es y $C$ es cerrado, y es convexa si las dos cosas
+son convexas.</p>
+<div class="stmt corolario" id="cap5:cor-restringido"><div class="head">Corolario</div><div class="body"><p>Sea $C\subset\Hs$ no vacío, cerrado y convexo y sea
+$f\colon C\to\R\cup\{+\infty\}$ propia, l.s.c. y convexa. Si para algún
+$\alpha\in\R$ el conjunto $C\cap\lev_\alpha f$ es acotado y no vacío, entonces
+$f$ alcanza su mínimo sobre $C$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p28">Ver demostración</button><div class="proof" id="convexa-p28"><p>Aplique el teorema anterior a $\tilde f=f+\delta_C$, cuyos conjuntos de nivel son
+los $C\cap\lev_\alpha f$.</p></div>
+<p>Sin convexidad el mínimo puede alcanzarse y aun así el conjunto donde se alcanza
+ser un puñado de puntos aislados, con otros tantos mínimos locales que no lo
+son globales; con convexidad eso no ocurre:</p>
+<div class="stmt corolario" id="cap5:cor-argmin"><div class="head">Corolario</div><div class="body"><p>Sea $C\subset\Hs$ no vacío, cerrado y convexo y sea
+$f\colon\Hs\to\R\cup\{+\infty\}$ propia, l.s.c. y convexa. Suponga que $f$ es
+coerciva, o bien que $C\cap\lev_\alpha f$ es acotado y no vacío para algún
+$\alpha\in\R$. Entonces</p>
+<div class="display">\[
+  S=\argmin_{x\in C}f(x)
+\]</div>
+<p>es no vacío y convexo, y si $f$ es estrictamente convexa sobre $C\cap\dom f$
+entonces $S$ se reduce a un punto.
+<span class="src">[Bauschke–Combettes, \S11.3]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p29">Ver demostración</button><div class="proof" id="convexa-p29"><p>Que $S$ es no vacío es el corolario anterior. Llamando $\mu$ al valor mínimo,
+$S=\lev_\mu(f+\delta_C)$ es un conjunto de nivel de una función convexa y por
+tanto es convexo. Suponga ahora $f$ estrictamente convexa y sean $x,y\in S$
+distintos. Entonces $(x+y)/2\in C$ y
+$f\bigl((x+y)/2\bigr)&lt;\tfrac12f(x)+\tfrac12f(y)=\mu$, lo que contradice la
+minimalidad de $\mu$.</p></div>
+<div class="stmt ejemplo" id="cap5:ej-proyeccion"><div class="head">Ejemplo</div><div class="body"><p>Sean $C\subset\Hs$ no vacío, cerrado y convexo y $z\in\Hs$, y considere</p>
+<div class="display">\[
+  \min_{x\in C}\ \norm{x-z}^2 .
+\]</div>
+<p>La función $f=\norm{\cdot-z}^2$ es continua, luego l.s.c., y es coerciva. La ley
+del paralelogramo da</p>
+<div class="display">\[
+  \Bigl\|\frac{x+y}{2}-z\Bigr\|^2
+    =\tfrac12\norm{x-z}^2+\tfrac12\norm{y-z}^2-\tfrac14\norm{x-y}^2 ,
+\]</div>
+<p>de donde $f$ es estrictamente convexa. El corolario anterior da entonces un
+único minimizador, que es $\Proy_Cz$. La existencia y la unicidad de la
+proyección, que en el capítulo 3 se probaron a mano, son un caso particular.</p></div></div>
+<h3 id="cap5:sec-regularidad">Regularidad de las funciones convexas</h3>
+<p>Sea $f\colon\R^n\to\R\cup\{+\infty\}$ convexa y propia, y escriba</p>
+<div class="display">\[
+  E=\aff(\dom f),\qquad V=E-E,\qquad d=\dim V ,
+\]</div>
+<p>de manera que $V$ es el subespacio director de $E$, es decir, $E=x_0+V$ para
+cualquier $x_0\in\dom f$. Dentro de $E$ se usan las bolas relativas</p>
+<div class="display">\[
+  \Ball_E(x;r)=\{y\in E:\ \norm{y-x}\le r\} .
+\]</div>
+<p>Todo el argumento que sigue transcurre dentro de $E$, porque fuera de él $f$ vale
+$+\infty$ y no hay nada que discutir.</p>
+<div class="stmt lema" id="cap5:lema-cubo"><div class="head">Lema</div><div class="body"><p>Sea $\bar x\in\ri(\dom f)$. Entonces existe $a&gt;0$ tal que el cubo
+$Q=\bar x+a[-1,1]^d$, tomado dentro de $E$ respecto de una base de $V$, está
+contenido en $\dom f$, y llamando</p>
+<div class="display">\[
+  M_f=\max\{f(x):\ x\ \text{es vértice de}\ Q\}
+\]</div>
+<p>se tiene $f(x)\le M_f$ para todo $x\in Q$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p30">Ver demostración</button><div class="proof" id="convexa-p30"><p>La existencia de $a$ es la definición de interior relativo, y $M_f&lt;+\infty$
+porque el cubo tiene $2^d$ vértices y todos están en $\dom f$. Todo punto de $Q$
+es una combinación convexa de sus vértices, así que la desigualdad de Jensen da
+$f(x)\le M_f$.
+<span class="src">[Bauschke–Combettes, Proposición 8.11]</span></p></div>
+<p>Los dos ingredientes del lema son de dimensión finita, y no por el mismo motivo:
+que $\ri(\dom f)$ no sea vacío solo vale en $\R^n$, y que un cubo tenga finitos
+vértices es la dimensión en persona.</p>
+<div class="stmt lema" id="cap5:lema-acotada"><div class="head">Lema</div><div class="body"><p>Con la notación anterior, existen $r&gt;0$ y $M&gt;0$ tales que
+$\abs{f(x)}\le M$ para todo $x\in\Ball_E(\bar x;r)$.
+<span class="src">[Bauschke–Combettes, Proposición 8.37(i)]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p31">Ver demostración</button><div class="proof" id="convexa-p31"><p>Sea $x\in Q_{1/2}=\bar x+\frac a2[-1,1]^d$. El punto reflejado $2\bar x-x$ está
+también en $Q_{1/2}$, y $\bar x$ es el punto medio de los dos, así que</p>
+<div class="display">\[
+  f(\bar x)\le\tfrac12f(x)+\tfrac12f(2\bar x-x)\le\tfrac12f(x)+\tfrac12M_f ,
+\]</div>
+<p>lo que equivale a $2f(\bar x)-M_f\le f(x)$. Junto con el lema anterior queda</p>
+<div class="display">\[
+  2f(\bar x)-M_f\ \le\ f(x)\ \le\ M_f
+  \qquad\text{para todo}\ x\in Q_{1/2},
+\]</div>
+<p>y basta tomar $r&gt;0$ con $\Ball_E(\bar x;r)\subset Q_{1/2}$ y
+$M=\max\{\abs{M_f},\abs{2f(\bar x)-M_f}\}$.</p></div>
+<div class="stmt proposicion" id="cap5:prop-lipschitz-local"><div class="head">Proposición</div><div class="body"><p>Sean $r&gt;0$ y $M&gt;0$ como en el lema anterior y sea $0&lt;\varepsilon&lt;r$. Entonces</p>
+<div class="display">\[
+  \abs{f(y)-f(x)}\le\frac{2M}{\varepsilon}\norm{x-y}
+  \qquad\text{para todos}\ x,y\in\Ball_E(\bar x;r-\varepsilon).
+\]</div>
+<p><span class="src">[Bauschke–Combettes, Proposición 8.37(ii)]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p32">Ver demostración</button><div class="proof" id="convexa-p32"><p>Sean $x\neq y$ en $\Ball_E(\bar x;r-\varepsilon)$ y ponga</p>
+<div class="display">\[
+  z=y+\frac{\varepsilon}{\norm{x-y}}(y-x) .
+\]</div>
+<p>Entonces $\norm{z-\bar x}\le\norm{y-\bar x}+\varepsilon\le r$, luego
+$z\in\Ball_E(\bar x;r)$. Despejando, $y$ es la combinación convexa</p>
+<div class="display">\[
+  y=\frac{\varepsilon}{\varepsilon+\norm{x-y}}\,x
+   +\frac{\norm{x-y}}{\varepsilon+\norm{x-y}}\,z ,
+\]</div>
+<p>de donde</p>
+<div class="display">\[
+  f(y)\le\frac{\varepsilon}{\varepsilon+\norm{x-y}}f(x)
+       +\frac{\norm{x-y}}{\varepsilon+\norm{x-y}}f(z) .
+\]</div>
+<p>Multiplicando por $\varepsilon+\norm{x-y}$ y agrupando,</p>
+<div class="display">\[
+  \varepsilon\bigl(f(y)-f(x)\bigr)\le\norm{x-y}\bigl(f(z)-f(y)\bigr)
+    \le 2M\norm{x-y} .
+\]</div>
+<p>Intercambiando los papeles de $x$ e $y$ se obtiene la otra desigualdad.</p></div>
+<p>Los tres resultados encadenados dicen que $f$ es continua, y de hecho localmente
+Lipschitz, en $\ri(\dom f)$. En $\Hs$ falla el primer eslabón, y el enunciado no
+se cae a medias:</p>
+<div class="stmt ejemplo" id="cap5:ej-lineal-discontinua"><div class="head">Ejemplo</div><div class="body"><p>Sea $\Hs$ de dimensión infinita y sea $f\colon\Hs\to\R$ un funcional lineal
+discontinuo en todo punto. Entonces $f$ y $-f$ son convexas, $\dom f=\Hs$ y sin
+embargo $f$ no es continua en ningún punto, ni es l.s.c. ni u.s.c. En cada
+abierto no vacío de $\Hs$ es no acotada por arriba y por abajo.
+<span class="src">[Bauschke–Combettes, Ejemplo 8.42]</span></p></div></div>
+<p>Lo que sobrevive en $\Hs$ es la equivalencia local: para $f$ convexa y propia y
+$x_0\in\dom f$, ser localmente
+Lipschitz cerca de $x_0$, ser continua en $x_0$, ser acotada cerca de $x_0$ y ser
+acotada superiormente cerca de $x_0$ son la misma cosa, y si alguna se cumple
+entonces $f$ es localmente Lipschitz en todo $\intr(\dom f)$
+<span class="src">[Bauschke–Combettes, Teorema 8.38]</span>. La hipótesis que restituye el
+enunciado global es la semicontinuidad inferior: si $f$ es convexa y l.s.c.,
+entonces $f$ es continua exactamente en $\intr(\dom f)$
+<span class="src">[Bauschke–Combettes, Corolario 8.39(ii)]</span>, con el interior de verdad y no
+el relativo.</p>
+<div class="stmt proposicion" id="cap5:prop-lipschitz-compacto"><div class="head">Proposición</div><div class="body"><p>Sea $f\colon\R^n\to\R\cup\{+\infty\}$ convexa y propia y sea $K\subset\ri(\dom f)$
+compacto. Entonces $f$ es Lipschitz sobre $K$.
+<span class="src">[Bauschke–Combettes, Corolario 8.41]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p33">Ver demostración</button><div class="proof" id="convexa-p33"><p>Como $K$ es compacto y está contenido en $\ri(\dom f)$, existe $\delta&gt;0$ con</p>
+<div class="display">\[
+  K\subset K_\delta:=\{z\in E:\ \dist(z,K)\le\delta\}\subset\dom f,
+\]</div>
+<p>y $K_\delta$ es a su vez compacto, así que por la continuidad de $f$ existe
+$M_K&gt;0$ con $\abs{f(x)}\le M_K$ para todo $x\in K_\delta$. Sean $x,y\in K$
+distintos. Si $\norm{x-y}\ge\delta$ entonces</p>
+<div class="display">\[
+  \abs{f(x)-f(y)}\le 2M_K\le\frac{2M_K}{\delta}\norm{x-y} .
+\]</div>
+<p>Si $\norm{x-y}\le\delta$, el punto $z=y+\frac{\delta}{\norm{x-y}}(y-x)$ dista de
+$K$ a lo sumo $\delta$, luego está en $K_\delta$, y el cálculo de la proposición
+anterior con $\varepsilon=\delta$ da la misma cota.</p></div>
+<p>Con $f$ además l.s.c. y $K$ compacto dentro de $\intr(\dom f)$ el mismo
+argumento vale en $\Hs$, porque entonces la continuidad está garantizada.</p>
+<h3 id="cap5:sec-c1" data-toc="Convexidad para funciones de clase \texorpdfstring{$C^1$}{C1}">Caracterizaciones de la convexidad para funciones de clase
+         \texorpdfstring{$C^1$}{C1}</h3>
+<div class="stmt teorema" id="cap5:teo-c1"><div class="head">Teorema</div><div class="body"><p>Sea $U\subset\Hs$ abierto y convexo y sea $f\in C^1(U)$. Las siguientes
+afirmaciones son equivalentes.</p>
+<ol class="lista"><li><p>$f$ es convexa.</p></li><li><p>$f(y)\ge f(x)+\ip{\nabla f(x)}{y-x}$ para todos $x,y\in U$.</p></li><li><p>$\nabla f$ es monótono, es decir,
+        $\ip{\nabla f(x)-\nabla f(y)}{x-y}\ge0$ para todos $x,y\in U$.</p></li></ol>
+<p><span class="src">[Bauschke–Combettes, \S17.2]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p34">Ver demostración</button><div class="proof" id="convexa-p34"><p><em>(i)</em> implica <em>(ii)</em>: fije $x,y\in U$ y defina
+$q\colon\,]0,1]\to\R$ por</p>
+<div class="display">\[
+  q(t)=\frac{f\bigl(x+t(y-x)\bigr)-f(x)}{t} .
+\]</div>
+<p>Para $0&lt;s\le t$ el punto $x+s(y-x)$ es la combinación convexa
+$\bigl(1-\frac st\bigr)x+\frac st\bigl(x+t(y-x)\bigr)$, así que la convexidad da</p>
+<div class="display">\[
+  f\bigl(x+s(y-x)\bigr)\le\Bigl(1-\frac st\Bigr)f(x)
+    +\frac st f\bigl(x+t(y-x)\bigr) ,
+\]</div>
+<p>y restando $f(x)$ y dividiendo por $s$ queda $q(s)\le q(t)$: la función $q$ es no
+decreciente. Su límite cuando $t\downarrow0$ es $\ip{\nabla f(x)}{y-x}$ y su
+valor en $t=1$ es $f(y)-f(x)$, luego
+$\ip{\nabla f(x)}{y-x}\le f(y)-f(x)$.</p>
+<p><em>(ii)</em> implica <em>(i)</em>: sean $x,y\in U$, sea $\lambda\in[0,1]$ y ponga
+$z=\lambda x+(1-\lambda)y$. Aplicando <em>(ii)</em> en $z$ hacia $x$ y hacia $y$,</p>
+<div class="display">\[
+  \begin{aligned}
+    \lambda f(x)&amp;\ge\lambda f(z)+\lambda\ip{\nabla f(z)}{x-z},\\
+    (1-\lambda)f(y)&amp;\ge(1-\lambda)f(z)+(1-\lambda)\ip{\nabla f(z)}{y-z},
+  \end{aligned}
+\]</div>
+<p>y sumando, como $\lambda(x-z)+(1-\lambda)(y-z)=0$, se obtiene
+$\lambda f(x)+(1-\lambda)f(y)\ge f(z)$.</p>
+<p><em>(ii)</em> implica <em>(iii)</em>: escriba <em>(ii)</em> en $x$ hacia $y$ y en $y$
+hacia $x$ y sume las dos desigualdades.</p>
+<p><em>(iii)</em> implica <em>(ii)</em>: defina $\phi(t)=f\bigl(x+t(y-x)\bigr)$ sobre
+$[0,1]$, que es derivable con
+$\phi&#x27;(t)=\ip{\nabla f(x+t(y-x))}{y-x}$. Si $0\le s\le t\le1$, la monotonía de
+$\nabla f$ aplicada a los puntos $x+t(y-x)$ y $x+s(y-x)$, cuya diferencia es
+$(t-s)(y-x)$, da $\phi&#x27;(s)\le\phi&#x27;(t)$. Por la representación integral del
+incremento del capítulo 1,</p>
+<div class="display">\[
+  f(y)-f(x)=\phi(1)-\phi(0)=\int_0^1\phi&#x27;(t)\dd t\ \ge\ \phi&#x27;(0)
+    =\ip{\nabla f(x)}{y-x} . 
+\]</div></div></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
