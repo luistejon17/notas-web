@@ -23,6 +23,10 @@
   --paper:#fcfcfd; --ink:#16191f; --muted:#5a636f; --faint:#8a93a0;
   --rule:#dde1e7; --raise:#f1f4f8; --raise2:#e7ecf2;
   --def:#1c6b3c; --def-bg:#e6f1ea; --mark:#8f1d3f;
+  /* Las cajas de contenido, con los colores que ya tienen en el .tex:
+     `vive` es violeta y `abierto` naranja. */
+  --vive:#6b3fa0; --vive-bg:#f4effb;
+  --abierto:#a05a00; --abierto-bg:#fdf3e6;
   --link:#1d4f87; --shadow:rgba(16,25,40,.15);
   --btn:#eef1f6; --btn-on:#16324f; --btn-on-ink:#ffffff;
 
@@ -75,6 +79,7 @@
     --paper:#131619; --ink:#e2e6eb; --muted:#98a1ac; --faint:#727c88;
     --rule:#282e35; --raise:#1a1e23; --raise2:#232930;
     --def:#68be8b; --def-bg:#18271e; --mark:#df8199;
+    --vive:#bda3e6; --vive-bg:#211a2c; --abierto:#e0a55f; --abierto-bg:#2a2015;
     --link:#79a9dd; --shadow:rgba(0,0,0,.55);
     --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
   }
@@ -83,6 +88,7 @@
   --paper:#131619; --ink:#e2e6eb; --muted:#98a1ac; --faint:#727c88;
   --rule:#282e35; --raise:#1a1e23; --raise2:#232930;
   --def:#68be8b; --def-bg:#18271e; --mark:#df8199;
+  --vive:#bda3e6; --vive-bg:#211a2c; --abierto:#e0a55f; --abierto-bg:#2a2015;
   --link:#79a9dd; --shadow:rgba(0,0,0,.55);
   --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
 }
@@ -250,6 +256,25 @@ div.v[data-on="true"]{display:block}
   font-weight:700; letter-spacing:.03em; text-transform:uppercase;
   color:var(--muted); margin-bottom:.4em;
 }
+
+/* Cajas de contenido. A diferencia de .stmt no se numeran y llevan fondo,
+   que es como estan en el PDF (tcolorbox violeta y naranja). */
+.caja{
+  margin:1.5em 0; padding:.8em 1.05em; border-radius:3px;
+  border-left:3px solid var(--rule); background:var(--raise);
+  scroll-margin-top:var(--arriba-ancla);
+}
+.caja .head{
+  font-family:"Segoe UI",system-ui,sans-serif; font-size:.79em;
+  font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:.4em;
+}
+.caja>.body>:first-child{margin-top:0}
+.caja>.body>:last-child{margin-bottom:0}
+.caja.vive{border-left-color:var(--vive); background:var(--vive-bg)}
+.caja.vive .head{color:var(--vive)}
+.caja.abierto{border-left-color:var(--abierto); background:var(--abierto-bg)}
+.caja.abierto .head{color:var(--abierto)}
 .stmt.definicion,.stmt.problema{border-left-color:var(--def)}
 .stmt.definicion .head,.stmt.problema .head{color:var(--def)}
 .stmt.teorema,.stmt.proposicion,.stmt.lema,.stmt.corolario{
@@ -867,7 +892,22 @@ $\eta_E$ afirma.</p></div></div>
 continua; invariante por $q_\phi$ porque <a class="xref" href="#es-eq:shaping">(17)</a> hace
 $\pair{q_\phi}{\cdot}$ constante sobre $\M$. Y $0\in\CE$ dice que la ambigüedad
 no se agota en el <em>shaping</em>: el costo nulo explica a cualquier experto.</p>
-<!-- entorno omitido: abierto -->
+<div class="caja abierto" id="es-control-inverso-x2"><div class="head">Todavía no sabemos dónde vive</div><div class="body"><p><strong>Qué se supone del previo.</strong> Sobre $\ch$ el documento no afirma ninguna
+hipótesis, y <em>el previo elige un representante</em> presupone un costo del
+experto $\cE$ que los datos no dan: lo que dan es $\CE$.</p>
+<p>La selección sí está bien puesta, y sin $\cE$. Si $\ch\in\CE$, o sea si el previo
+ya explica al experto, el objetivo de <a class="xref" href="#es-eq:inverso">(18)</a> se anula en $\ch$ $\rt$
+$c_\star=\ch$ para todo $\alpha$ y no hay nada que recuperar. Si no, la
+Proposición <a class="xref" href="#es-prop:proyeccion">3.11</a> da $c_\star\to P_{\CE}(\ch)$, que existe y es
+único sin hipótesis.</p>
+<p>Lo abierto es si eso basta. Por la Observación <a class="xref" href="#es-obs:cono-vs-clase">3.12</a> la
+proyección puede caer en una clase distinta de la de $\cE$, así que recuperar
+<em>un</em> costo que explique al experto y recuperar <em>la clase de $\cE$</em> son
+objetivos distintos y el documento no dice cuál persigue. Y $\cE$, si se postula,
+va antes que $\ch$: definirlo como el costo que resuelve <a class="xref" href="#es-eq:inverso">(18)</a> sería
+circular, porque ese es $c_\star$ y <a class="xref" href="#es-eq:c-de-eta">(23)</a> lo escribe en función de
+$\ch$. Cerrarlo pide fijar el objetivo, y si es el segundo, caracterizar el rango
+de $\rho-\gen{}$ dentro de $\Hs$, que es donde reaparecen $Q\s\Hs$ y $Q$ cerrado.</p></div></div>
 <div class="display numerado" id="es-eq:inverso"><div class="eqbody">\begin{equation}
 
   \min_{c\in\Hs}\ \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\Gap(c)\right\},
@@ -1014,7 +1054,7 @@ directo da la existencia.</p></div></div>
 de $\Gap$; la coercividad de $\Gap\ge0$; la semicontinuidad inferior del
 Corolario <a class="xref" href="#es-cor:gap-lipschitz">3.2</a>. No se usa ninguna propiedad del mapa
 $c\mapsto\pi$.</p>
-<h4 id="es-control-inverso-x2"><span class="secnum">3.1</span>Eliminar el costo sin suponer intercambio minimax</h4>
+<h4 id="es-control-inverso-x4"><span class="secnum">3.1</span>Eliminar el costo sin suponer intercambio minimax</h4>
 <p>Con $\eta$ fijo la minimización en $c$ es explícita. No se supone en este punto
 que el ínfimo y el supremo de <a class="xref" href="#es-eq:Phi">(22)</a> se puedan intercambiar.</p>
 <div class="stmt proposicion" id="es-prop:reduccion"><div class="head">Proposición 3.4</div><div class="body"><p>Para cada $\eta\in\M$, $c\mapsto\Phi(c,\eta)$ tiene minimizador único</p>
@@ -1155,7 +1195,7 @@ $c_\star$ es único haya las políticas óptimas que haya.</p></div></div>
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span><span class="num">(29)</span></div></div>
 <p>una relación de punto fijo multivaluada sobre $\M$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p18">Ver demostración</button><div class="proof" id="es-control-inverso-p18"><p>Inmediato de $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$ y de la
 definición <a class="xref" href="#es-eq:cstar">(26)</a> de $c_\star$.</p></div></div>
-<h4 id="es-control-inverso-x3"><span class="secnum">3.2</span>El papel de $\alpha$</h4>
+<h4 id="es-control-inverso-x5"><span class="secnum">3.2</span>El papel de $\alpha$</h4>
 <p>Como $\eta_E\in\M$, comparar $\eta_{A,\star}$ con la elección admisible
 $\eta=\eta_E$ en <a class="xref" href="#es-eq:reducido">(25)</a> da
 $\pair{\ch}{\eta_{A,\star}-\eta_E}+\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$,
@@ -1221,7 +1261,7 @@ escribe esa caracterización como sistema de ecuaciones. No se supone nada nuevo
 sobre el problema inverso; lo que se supone es regularidad de las medidas de
 ocupación, para poder leer la identidad de balance como ecuación en derivadas
 parciales.</p>
-<h4 id="es-control-inverso-x4"><span class="secnum">4.1</span>Del balance débil a Fokker–Planck</h4>
+<h4 id="es-control-inverso-x6"><span class="secnum">4.1</span>Del balance débil a Fokker–Planck</h4>
 <p>En toda la sección $\pi$ es un control markoviano relajado y la medida de
 ocupación se desintegra como</p>
 <div class="display numerado" id="es-eq:desintegracion"><div class="eqbody">\begin{equation}
@@ -1267,7 +1307,7 @@ ocupación conjunta es singular, y aun cuando $m_\pi$ sea función su regularida
 se hereda de los coeficientes vía regularidad elíptica, no se supone. Todo lo de
 abajo va en forma débil y <a class="xref" href="#es-eq:fp">(34)</a> queda solo como la forma clásica de la
 misma identidad.</p></div></div>
-<h4 id="es-control-inverso-x5"><span class="secnum">4.2</span>El sistema acoplado</h4>
+<h4 id="es-control-inverso-x7"><span class="secnum">4.2</span>El sistema acoplado</h4>
 <p>Sea $\pi_E$ la política del experto con densidad de estado $m_E$, y $\pi_A$ una
 política óptima para el costo recuperado con densidad $m_A$. Juntando
 <a class="xref" href="#es-eq:hjb-ineq">(9)</a>, <a class="xref" href="#es-eq:selector">(10)</a>, la Proposición <a class="xref" href="#es-prop:fp-debil">4.1</a> y la
@@ -1326,7 +1366,7 @@ que una discretización hereda un programa estrictamente convexo de dimensión
 finita. En <a class="xref" href="#es-eq:sistema">(35)</a> las incógnitas son $V$, $m_A$, $m_E$ y $c$, y el
 acople es por el $\arg\min$; una discretización hereda una iteración de punto
 fijo cuyas propiedades de contracción no las da el Teorema <a class="xref" href="#es-thm:silla">3.7</a>.</p></div></div>
-<h4 id="es-control-inverso-x6"><span class="secnum">4.3</span>El modelo de estados finitos como referencia</h4>
+<h4 id="es-control-inverso-x8"><span class="secnum">4.3</span>El modelo de estados finitos como referencia</h4>
 <p>Todo objeto de arriba tiene contraparte con estados finitos, lo que hace del
 modelo discreto una referencia para discretizar. Sean $S$ y $A$ finitos, $Q$ la
 matriz de tasas de una cadena en tiempo continuo y $\gamma$ o $\rho$ el
@@ -1647,7 +1687,29 @@ nonnegative and continuous, and invariant under $q_\phi$ because
 <a class="xref" href="#en-eq:shaping">(17)</a> makes $\pair{q_\phi}{\cdot}$ constant on $\M$. That
 $0\in\CE$ says the ambiguity is not exhausted by shaping: the zero cost explains
 every expert.</p>
-<!-- entorno omitido: abierto -->
+<div class="caja abierto" id="en-control-inverso-x2"><div class="head">Where it lives is still open</div><div class="body"><p><strong>What is assumed about the prior.</strong> No hypothesis on $\ch$ is asserted
+anywhere in this document, and <em>the prior selects a representative</em>
+presupposes an expert cost $\cE$ that the data do not supply: what they supply
+is $\CE$. Granting $\cE$, the phrase admits two readings.</p>
+<p><span class="df">That $\ch$ explain the expert</span>, that is $\ch\in\CE$. The objective of
+<a class="xref" href="#en-eq:inverso">(18)</a> then vanishes at $\ch$, and being nonnegative and
+$\alpha$-strongly convex it forces $c_\star=\ch$ for every $\alpha$: the inverse
+problem returns the prior unchanged and there is nothing to recover. This is
+weaker than requiring $\ch\in\cE+Q$ and yields the same thing.</p>
+<p><span class="df">That $\ch$ be arbitrary.</span> Selecting a representative is then projecting onto
+$\cE+Q$, with $Q=\{q_\phi:\phi\in\dom(\gen{})\}$, and a projection onto a
+subspace exists and is unique if and only if the subspace is closed. Both fail
+to be established: $Q\s\Hs$, whereas $\phi\in C_b(E)$ need not decay in $x$ and
+a generic $q_\phi$ is not in $H^s(\R^d\times A)$; and $Q$ closed, whereas it is
+the range of $\phi\mapsto\rho\phi-\gen{}\phi$, which is unbounded. The selection
+is then made by the $\alpha$-strongly convex term over all of $\Hs$, where
+uniqueness does hold, and not by a projection onto $\cE+Q$.</p>
+<p>$\cE$ must be a postulate of the model, prior to $\ch$. Defining it as the cost
+that solves <a class="xref" href="#en-eq:inverso">(18)</a> would make it circular: that cost is $c_\star$,
+and <a class="xref" href="#en-eq:c-de-eta">(23)</a> writes it in terms of $\ch$, so «$\ch$ lies in the class
+of $\cE$» would cease to be a hypothesis and become a fixed-point condition.
+Settling this requires saying which reading is taken, and under the second one
+characterizing the range of $\rho-\gen{}$ inside $\Hs$.</p></div></div>
 <div class="display numerado" id="en-eq:inverso"><div class="eqbody">\begin{equation}
 
   \min_{c\in\Hs}\ \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\Gap(c)\right\},
@@ -1793,7 +1855,7 @@ supplies existence.</p></div></div>
 <p>Strong convexity comes from the squared Hilbert norm and convexity of $\Gap$;
 coercivity from $\Gap\ge0$; lower semicontinuity from
 Corollary <a class="xref" href="#en-cor:gap-lipschitz">3.2</a>. No property of the map $c\mapsto\pi$ is used.</p>
-<h4 id="en-control-inverso-x2"><span class="secnum">3.1</span>Eliminating the cost without assuming a minimax interchange</h4>
+<h4 id="en-control-inverso-x4"><span class="secnum">3.1</span>Eliminating the cost without assuming a minimax interchange</h4>
 <p>For fixed $\eta$ the minimization in $c$ is explicit. We do <em>not</em> assume at
 this stage that the infimum and the supremum in <a class="xref" href="#en-eq:Phi">(22)</a> may be exchanged.</p>
 <div class="stmt proposicion" id="en-prop:reduccion"><div class="head">Proposición 3.4</div><div class="body"><p>For each $\eta\in\M$ the map $c\mapsto\Phi(c,\eta)$ has the unique minimizer</p>
@@ -1929,7 +1991,7 @@ many optimal policies there are.</p></div></div>
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(27)</span><span class="num">(29)</span></div></div>
 <p>a set-valued fixed-point relation on $\M$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p18">Ver demostración</button><div class="proof" id="en-control-inverso-p18"><p>Immediate from $\eta_{A,\star}\in\arg\min_{\eta\in\M}\pair{c_\star}{\eta}$ and the
 definition <a class="xref" href="#en-eq:cstar">(26)</a> of $c_\star$.</p></div></div>
-<h4 id="en-control-inverso-x3"><span class="secnum">3.2</span>The role of $\alpha$</h4>
+<h4 id="en-control-inverso-x5"><span class="secnum">3.2</span>The role of $\alpha$</h4>
 <p>Because $\eta_E\in\M$, comparing $\eta_{A,\star}$ with the admissible choice
 $\eta=\eta_E$ in <a class="xref" href="#en-eq:reducido">(25)</a> gives
 $\pair{\ch}{\eta_{A,\star}-\eta_E}+\frac1{2\alpha}\|\eta_{A,\star}-\eta_E\|_{\Hd}^2\le0$,
@@ -1994,7 +2056,7 @@ characterized by a variational inequality. We now write that characterization as
 system of equations. Nothing new is assumed about the inverse problem; what is
 assumed is regularity of the occupation measures, so that the balance identity can
 be read as a partial differential equation.</p>
-<h4 id="en-control-inverso-x4"><span class="secnum">4.1</span>From weak balance to Fokker–Planck</h4>
+<h4 id="en-control-inverso-x6"><span class="secnum">4.1</span>From weak balance to Fokker–Planck</h4>
 <p>Throughout this section $\pi$ is a relaxed Markov control and the occupation
 measure disintegrates as</p>
 <div class="display numerado" id="en-eq:desintegracion"><div class="eqbody">\begin{equation}
@@ -2041,7 +2103,7 @@ $m_\pi$ is a function its regularity is inherited from the coefficients through
 elliptic regularity rather than assumed. Every statement below is therefore given
 weakly, and <a class="xref" href="#en-eq:fp">(34)</a> is recorded only as the classical form of the same
 identity.</p></div></div>
-<h4 id="en-control-inverso-x5"><span class="secnum">4.2</span>The coupled system</h4>
+<h4 id="en-control-inverso-x7"><span class="secnum">4.2</span>The coupled system</h4>
 <p>Let $\pi_E$ be the expert policy with state density $m_E$, and let $\pi_A$ be an
 optimal policy for the recovered cost with state density $m_A$. Collecting
 <a class="xref" href="#en-eq:hjb-ineq">(9)</a>, <a class="xref" href="#en-eq:selector">(10)</a>, Proposition <a class="xref" href="#en-prop:fp-debil">4.1</a> and the
@@ -2101,7 +2163,7 @@ strictly convex program. In <a class="xref" href="#en-eq:sistema">(35)</a> the u
 and $c$, and the coupling is through the $\arg\min$; a discretization inherits a
 fixed-point iteration whose contraction properties are not supplied by
 Theorem <a class="xref" href="#en-thm:silla">3.7</a>.</p></div></div>
-<h4 id="en-control-inverso-x6"><span class="secnum">4.3</span>The finite-state model as a reference</h4>
+<h4 id="en-control-inverso-x8"><span class="secnum">4.3</span>The finite-state model as a reference</h4>
 <p>Every object above has a finite-state counterpart, which makes the discrete model a
 reference for discretization. Let $S$ and $A$ be finite, let $Q$ be the rate matrix of
 a continuous-time chain and $\gamma$ or $\rho$ the discount. The generator becomes
