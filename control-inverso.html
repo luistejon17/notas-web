@@ -493,7 +493,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"resaltar": ["\\textcolor{amaObs}{#1}", 1], "bd": "\\bullethang{verdee}", "bh": "\\bullethang{bluePropo}", "bent": "\\bullethang{blueThm}", "bej": "\\bullethang{olive}", "brem": "\\bullethang{dunkelmagenta}", "s": "\\subseteq", "rt": "\\Longrightarrow", "lt": "\\Longleftarrow", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "P": "\\mathbb{P}", "E": "\\mathbb{E}", "Tor": "\\mathbb{T}", "gen": ["\\mathcal{L}_{#1}", 1], "Gen": ["\\boldsymbol{\\mathcal{L}}_{#1}", 1], "Sg": ["\\boldsymbol{P}_{#1}", 1], "Hs": "\\mathcal{H}", "Hd": "\\mathcal{H}^{*}", "M": "\\mathcal{M}", "ch": "\\widehat{c}", "Gap": "\\operatorname{Gap}_E", "Opt": "\\operatorname{Opt}", "dom": "\\mathcal{D}", "pair": ["\\langle #1,#2\\rangle", 2], "qv": ["\\langle #1\\rangle", 1], "qc": ["\\langle #1,#2\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "tIntuicion": "Intuition", "tOjo": "Warning", "tConexion": "Connection", "tVive": "Where it lives", "tAbierto": "Where it lives is still open", "tConexP": "Personal connection", "carpeta": "en"}
+    macros: {"resaltar": ["\\textcolor{amaObs}{#1}", 1], "bd": "\\bullethang{verdee}", "bh": "\\bullethang{bluePropo}", "bent": "\\bullethang{blueThm}", "bej": "\\bullethang{olive}", "brem": "\\bullethang{dunkelmagenta}", "s": "\\subseteq", "rt": "\\Longrightarrow", "lt": "\\Longleftarrow", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "P": "\\mathbb{P}", "E": "\\mathbb{E}", "Tor": "\\mathbb{T}", "gen": ["\\mathcal{L}_{#1}", 1], "Gen": ["\\boldsymbol{\\mathcal{L}}_{#1}", 1], "Sg": ["\\boldsymbol{P}_{#1}", 1], "Hs": "\\mathcal{H}", "Hd": "\\mathcal{H}^{*}", "M": "\\mathcal{M}", "ch": "\\widehat{c}", "cE": "c_{E}", "CE": "\\mathcal{C}_{E}", "Gap": "\\operatorname{Gap}_E", "Opt": "\\operatorname{Opt}", "dom": "\\mathcal{D}", "pair": ["\\langle #1,#2\\rangle", 2], "qv": ["\\langle #1\\rangle", 1], "qc": ["\\langle #1,#2\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "tIntuicion": "Intuition", "tOjo": "Warning", "tConexion": "Connection", "tVive": "Where it lives", "tAbierto": "Where it lives is still open", "tConexP": "Personal connection", "carpeta": "en"}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
   startup: {
@@ -841,15 +841,23 @@ observación distingue.</p>
 <div class="display numerado" id="es-eq:shaping"><div class="eqbody"><span class="v" data-var="std">\[\rt\int_{E\times A}q_\phi\,d\eta=\int_E\phi\,d\nu_0
     \qquad\forall\eta\in\M,\qquad \]</span><span class="v" data-var="fin">\[\rt\eta(q_\phi)=\nu_0(\phi)\qquad\forall\eta\in\M,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(29)</span><span class="num">(17)</span></div></div>
 <p>así que $c$ y $c+q_\phi$ tienen los mismos minimizadores sobre $\M$ y la misma
-brecha. Lo identificable es la clase de $c$ módulo
-$\{q_\phi:\phi\in\dom(\gen{})\}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p6">Ver demostración</button><div class="proof" id="es-control-inverso-p6"><p>Aplicar <a class="xref" href="#es-eq:balance">(13)</a> a la función de prueba $\phi$: el lado izquierdo es
+brecha.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p6">Ver demostración</button><div class="proof" id="es-control-inverso-p6"><p>Aplicar <a class="xref" href="#es-eq:balance">(13)</a> a la función de prueba $\phi$: el lado izquierdo es
 $\eta(\rho\phi-\gen{}\phi)=\eta(q_\phi)$ y el derecho es $\nu_0(\phi)$, que es
 <a class="xref" href="#es-eq:shaping">(17)</a> y no depende de $\eta$. Luego para cualquier $c$ y cualquier
 $\eta\in\M$ se tiene $\pair{c+q_\phi}{\eta}=\pair{c}{\eta}+\nu_0(\phi)$, un
 corrimiento por una constante, así que los dos costos tienen los mismos
 minimizadores y, como $\eta_E\in\M$, la misma brecha.</p></div></div>
 <p>Es la forma en tiempo continuo del <em>potential-based shaping</em>, y es
-<a class="xref" href="#es-eq:balance">(13)</a> leída contra $c$.</p>
+<a class="xref" href="#es-eq:balance">(13)</a> leída contra $c$. Pero desplazar por $q_\phi$ no es la única
+ambigüedad, y conviene nombrar lo que los datos sí determinan.</p>
+<div class="stmt proposicion" id="es-prop:identificado"><div class="head">Proposición 2.4</div><div class="body"><p><button class="term" type="button" data-k="CE">$\CE:=\{c\in\Hs:\Gap(c)=0\}$</button>, los costos para los que el experto es óptimo, es
+un cono convexo cerrado con $0\in\CE$ y $\CE+q_\phi=\CE$ para todo
+$\phi\in\dom(\gen{})$. Observar $\eta_E$ determina $\CE$, y dos costos suyos no
+se distinguen entre sí.</p></div></div>
+<p>Cono convexo cerrado porque $\Gap$ es convexa, positivamente homogénea, $\ge0$ y
+continua; invariante por $q_\phi$ porque <a class="xref" href="#es-eq:shaping">(17)</a> hace
+$\pair{q_\phi}{\cdot}$ constante sobre $\M$. Y $0\in\CE$ dice que la ambigüedad
+no se agota en el <em>shaping</em>: el costo nulo explica a cualquier experto.</p>
 <!-- entorno omitido: abierto -->
 <div class="display numerado" id="es-eq:inverso"><div class="eqbody">\begin{equation}
 
@@ -878,17 +886,17 @@ tiene densidad $L^2$ $\rt$ se puede tomar $\Hs=H^1$ con el emparejamiento $L^2$.
 Es el régimen en el que se escriben la formulación PDE y la numérica.</p></li></ol>
 <p>El régimen (i) es el que sostiene la teoría de existencia, y la inyección que
 pide es un umbral de Sobolev.</p>
-<div class="stmt teorema" id="es-thm:encaje"><div class="head">Teorema 2.4</div><div class="body"><p><span class="src">[Folland, Thm. 9.17]</span>
+<div class="stmt teorema" id="es-thm:encaje"><div class="head">Teorema 2.5</div><div class="body"><p><span class="src">[Folland, Thm. 9.17]</span>
 Si $n=d+m$ y $s&gt;n/2$ $\rt$ $H^s(\R^n)\hookrightarrow C_0(\R^n)$ continuamente, y
 todo $f\in H^s$ tiene representante continuo con
 $\|f\|_\infty\le C_s\|f\|_{H^s}$.</p></div></div>
 <p>La delta muestra que el umbral es agudo.</p>
-<div class="stmt corolario" id="es-cor:umbral"><div class="head">Corolario 2.5</div><div class="body"><p>$\delta_{x_0}\in H^{-s}(\R^d)$, uniformemente en $x_0$, $\iff$ $s&gt;d/2$.
+<div class="stmt corolario" id="es-cor:umbral"><div class="head">Corolario 2.6</div><div class="body"><p>$\delta_{x_0}\in H^{-s}(\R^d)$, uniformemente en $x_0$, $\iff$ $s&gt;d/2$.
 <span class="src">[Folland, Prop. 9.16 y el cálculo de $\widehat\delta$ que la precede]</span></p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p7">Ver demostración</button><div class="proof" id="es-control-inverso-p7"><p>$\widehat\delta_{x_0}(\xi)=e^{-2\pi i x_0\cdot\xi}$ tiene módulo uno, luego
 $\|\delta_{x_0}\|_{(-s)}^2=\int(1+|\xi|^2)^{-s}d\xi$, que no depende de $x_0$ y
 es finita exactamente cuando $2s&gt;d$. La identificación de $H^{-s}$ con
 $(H^s)^{*}$ es la Proposición 9.16 de la fuente.</p></div></div>
-<div class="stmt proposicion" id="es-prop:h1-nunca"><div class="head">Proposición 2.6</div><div class="body"><p>Si $n=d+m\ge2$ $\rt$ la delta en un punto de $E\times A$ no es funcional acotado
+<div class="stmt proposicion" id="es-prop:h1-nunca"><div class="head">Proposición 2.7</div><div class="body"><p>Si $n=d+m\ge2$ $\rt$ la delta en un punto de $E\times A$ no es funcional acotado
 sobre $H^1(E\times A)$. En particular las medidas de ocupación singulares de las
 políticas deterministas no están en $(H^1)^*$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p8">Ver demostración</button><div class="proof" id="es-control-inverso-p8"><p>Basta exhibir una función no acotada en $H^1$ cerca del punto. Para $n=2$ tomar
 $f(z)=\log\log(1+|z|^{-1})$ en una bola pequeña, y para $n\ge3$ tomar
@@ -901,7 +909,7 @@ determinista carga una gráfica Lebesgue-nula, es una medida de ese tipo singula
 <p>Luego el régimen (ii) es una hipótesis sobre $\M$, no una elección de espacio. La
 penalización conserva la forma que tenía para $H^1$, con
 $\Delta=\Delta_x+\Delta_A$ el laplaciano de $E\times A$ y más derivadas.</p>
-<div class="stmt definicion" id="es-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Fijos $s$ entero con $s&gt;n/2$ y $\kappa&gt;0$. El <span class="df">espacio del costo</span> es
+<div class="stmt definicion" id="es-def:espacio"><div class="head">Definición 2.8</div><div class="body"><p>Fijos $s$ entero con $s&gt;n/2$ y $\kappa&gt;0$. El <span class="df">espacio del costo</span> es
 $\Hs=H^s(E\times A)$ con</p>
 <div class="display numerado" id="es-eq:penalizacion"><div class="eqbody">\begin{equation}
 
@@ -915,7 +923,7 @@ $\sum_{|\alpha|\le s}\kappa^{|\alpha|}\int|\partial^\alpha c|^2$, es una norma
 equivalente sobre el mismo espacio, y en $\R^n$ no habría razón para preferir
 ninguna de las dos; aquí $\partial^\alpha$ pide una carta en las direcciones de
 $A$ y $\Delta_A$ no.</p>
-<div class="stmt proposicion" id="es-prop:delta"><div class="head">Proposición 2.8</div><div class="body"><p><button class="term" type="button" data-k="Hs">$\Hs$</button> el de la Definición <a class="xref" href="#es-def:espacio">2.7</a> $\rt$
+<div class="stmt proposicion" id="es-prop:delta"><div class="head">Proposición 2.9</div><div class="body"><p><button class="term" type="button" data-k="Hs">$\Hs$</button> el de la Definición <a class="xref" href="#es-def:espacio">2.8</a> $\rt$
 $\delta_{(x_0,a_0)}\in\Hd$ uniformemente en $(x_0,a_0)$, y toda medida signada
 finita en $E\times A$ está en $\Hd$ con
 $\|\eta\|_{\Hd}\le C_\iota\,|\eta|(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p9">Ver demostración</button><div class="proof" id="es-control-inverso-p9"><p>Desarrollando $\delta_{(x_0,a_0)}$ en la resolución espectral conjunta,</p>
@@ -928,9 +936,9 @@ $\|c\|_\infty=\sup_{(x,a)}|\delta_{(x,a)}(c)|\le C_\iota\|c\|_{\Hs}$, y</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,|\eta|(E\times A)
   \le C_\iota\,|\eta|(E\times A)\,\|c\|_{\Hs}\]</div>
 <p>da la cota tomando supremo sobre la bola unidad.</p></div></div>
-<p>Es el Teorema <a class="xref" href="#es-thm:encaje">2.4</a> leído sobre $E\times A$, con la ley de Weyl
+<p>Es el Teorema <a class="xref" href="#es-thm:encaje">2.5</a> leído sobre $E\times A$, con la ley de Weyl
 $\mu_k\sim ck^{2/m}$ poniendo el recuento en las direcciones de $A$.</p>
-<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>El isomorfismo de Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es</p>
+<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.10</div><div class="body"><p>El isomorfismo de Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es</p>
 <div class="display numerado" id="es-eq:riesz"><div class="eqbody">\begin{equation}
 
   R=(\mathrm{Id}-\kappa\Delta)^{s},
@@ -947,8 +955,8 @@ término de frontera.</p></div></div>
 <p>El orden no se elige: $R^{-1}$ tiene que devolver $\Hd$ a $\Hs$, y es eso lo que
 hace de $c_\star$ de <a class="xref" href="#es-eq:cstar">(26)</a> una función continua de $(x,a)$. Con $s=1$
 sale $\mathrm{Id}-\kappa\Delta$, admisible solo si $n=1$ por la
-Proposición <a class="xref" href="#es-prop:h1-nunca">2.6</a>.</p>
-<div class="stmt observacion" id="es-obs:dos-condiciones"><div class="head">Observación 2.10</div><div class="body"><p>Los dos regímenes piden cosas a objetos distintos. El (i) restringe $\Hs$,
+Proposición <a class="xref" href="#es-prop:h1-nunca">2.7</a>.</p>
+<div class="stmt observacion" id="es-obs:dos-condiciones"><div class="head">Observación 2.11</div><div class="body"><p>Los dos regímenes piden cosas a objetos distintos. El (i) restringe $\Hs$,
 pidiendo $s&gt;n/2$, y luego acepta toda medida finita. El (ii)
 restringe $\M$,
 pidiendo densidades $L^2$ a sus elementos, y entonces admite el espacio más
@@ -1005,7 +1013,7 @@ que el ínfimo y el supremo de <a class="xref" href="#es-eq:Phi">(22)</a> se pue
 
   c_\eta=\ch+\frac1\alpha R^{-1}(\eta-\eta_E),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(20)</span><span class="num">(23)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(19)</span><span class="num">(23)</span></div></div>
 <p>y</p>
 <div class="display numerado" id="es-eq:reducido-valor"><div class="eqbody"><span class="v" data-var="std">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
    \Psi(\eta):=\pair{\ch}{\eta-\eta_E}
@@ -1061,7 +1069,7 @@ costo que sea coercivo, que es su (6.2); o probar que las medidas de ocupación
 son tensas, que es lo que hace <span class="src">[Bhatt–Borkar, §3.2]</span> en el descontado,
 citando a Borkar (1989), Lema 3.7
 <span class="mark">[incierto: no está en el material fichado]</span>.</p>
-<p>La primera vía está cerrada aquí. La Definición <a class="xref" href="#es-def:espacio">2.7</a> mete $\Hs$
+<p>La primera vía está cerrada aquí. La Definición <a class="xref" href="#es-def:espacio">2.8</a> mete $\Hs$
 dentro de $C_0$ $\rt$ toda $c\in\Hs$ se anula en el infinito y ningún subnivel
 suyo es compacto; y lo mismo le pasa a $\ch$. La tensión no es entonces una
 elección sino lo único que queda, y es hipótesis sobre $b$ y $\sigma$, no sobre
@@ -1235,8 +1243,8 @@ ecuación del costo <a class="xref" href="#es-eq:cstar">(26)</a> sale el sistema
 <div class="display numerado" id="es-eq:coste-debil"><div class="eqbody"><span class="v" data-var="std">\[\alpha\,(c-\ch,h)_{\Hs}=\int_{E\times A}h\,d(\eta_A-\eta_E)
     \qquad\forall h\in\Hs,\qquad \]</span><span class="v" data-var="fin">\[\alpha\,(c-\ch,h)_{\Hs}=(\eta_A-\eta_E)(h)
     \qquad\forall h\in\Hs,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(38)</span><span class="num">(35)</span></div></div>
-<p>con el producto interno de la Definición <a class="xref" href="#es-def:espacio">2.7</a>, que tiene sentido en
-cuanto $\eta_A-\eta_E\in\Hd$, y por la Proposición <a class="xref" href="#es-prop:delta">2.8</a> eso vale para
+<p>con el producto interno de la Definición <a class="xref" href="#es-def:espacio">2.8</a>, que tiene sentido en
+cuanto $\eta_A-\eta_E\in\Hd$, y por la Proposición <a class="xref" href="#es-prop:delta">2.9</a> eso vale para
 cualquier par de medidas finitas en el régimen (i). Escribir $R$ puntualmente
 pondría una distribución al lado derecho de una ecuación entre funciones.</p>
 <div class="stmt proposicion" id="es-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Bajo las hipótesis del Teorema <a class="xref" href="#es-thm:silla">3.7</a>, y si las medidas de ocupación de
@@ -1565,15 +1573,23 @@ distinguishes.</p>
 <div class="stmt proposicion" id="en-prop:shaping"><div class="head">Proposición 2.3</div><div class="body"><p>For $\phi\in\dom(\gen{})$ put $q_\phi(x,a):=\rho\phi(x)-\gen{a}\phi(x)$. Then</p>
 <div class="display numerado" id="en-eq:shaping"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}q_\phi\,d\eta=\int_E\phi\,d\nu_0
     \qquad\text{for every }\eta\in\M,\qquad \]</span><span class="v" data-var="fin">\[\eta(q_\phi)=\nu_0(\phi)\qquad\text{for every }\eta\in\M,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(29)</span><span class="num">(17)</span></div></div>
-<p>so $c$ and $c+q_\phi$ have the same minimizers over $\M$ and the same gap. The
-identifiable object is the class of $c$ modulo $\{q_\phi:\phi\in\dom(\gen{})\}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p6">Ver demostración</button><div class="proof" id="en-control-inverso-p6"><p>Apply <a class="xref" href="#en-eq:balance">(13)</a> to the test function $\phi$: the left-hand side is
+<p>so $c$ and $c+q_\phi$ have the same minimizers over $\M$ and the same gap.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p6">Ver demostración</button><div class="proof" id="en-control-inverso-p6"><p>Apply <a class="xref" href="#en-eq:balance">(13)</a> to the test function $\phi$: the left-hand side is
 $\eta(\rho\phi-\gen{}\phi)=\eta(q_\phi)$ and the right-hand side is $\nu_0(\phi)$,
 which is <a class="xref" href="#en-eq:shaping">(17)</a> and does not depend on $\eta$. Hence for any $c$ and
 any $\eta\in\M$ we have $\pair{c+q_\phi}{\eta}=\pair{c}{\eta}+\nu_0(\phi)$, a shift
 by a constant, so the two costs have the same minimizers and, since $\eta_E\in\M$,
 the same gap.</p></div></div>
 <p>This is the continuous-time form of potential-based shaping, and it is
-<a class="xref" href="#en-eq:balance">(13)</a> read against $c$.</p>
+<a class="xref" href="#en-eq:balance">(13)</a> read against $c$. Shifting by $q_\phi$ is not the only
+ambiguity, however, and it is worth naming what the data do determine.</p>
+<div class="stmt proposicion" id="en-prop:identificado"><div class="head">Proposición 2.4</div><div class="body"><p>Let <button class="term" type="button" data-k="CE">$\CE:=\{c\in\Hs:\Gap(c)=0\}$</button>, the costs for which the expert is optimal.
+Then $\CE$ is a closed convex cone, $0\in\CE$, and $\CE+q_\phi=\CE$ for every
+$\phi\in\dom(\gen{})$. Observing $\eta_E$ determines $\CE$ and nothing finer.</p></div></div>
+<p>It is a closed convex cone because $\Gap$ is convex, positively homogeneous,
+nonnegative and continuous, and invariant under $q_\phi$ because
+<a class="xref" href="#en-eq:shaping">(17)</a> makes $\pair{q_\phi}{\cdot}$ constant on $\M$. That
+$0\in\CE$ says the ambiguity is not exhausted by shaping: the zero cost explains
+every expert.</p>
 <!-- entorno omitido: abierto -->
 <div class="display numerado" id="en-eq:inverso"><div class="eqbody">\begin{equation}
 
@@ -1602,18 +1618,18 @@ density, one may take $\Hs=H^1$ with the $L^2$ pairing. This is the regime in wh
 the PDE and numerical formulations are written.</p></li></ol>
 <p>Regime (i) is the one that supports the existence theory, and the embedding it
 requires is a Sobolev threshold.</p>
-<div class="stmt teorema" id="en-thm:encaje"><div class="head">Teorema 2.4</div><div class="body"><p><span class="src">[Folland, Thm. 9.17]</span>
+<div class="stmt teorema" id="en-thm:encaje"><div class="head">Teorema 2.5</div><div class="body"><p><span class="src">[Folland, Thm. 9.17]</span>
 Let $n=d+m$ and $s&gt;n/2$. Then $H^s(\R^n)\hookrightarrow C_0(\R^n)$ continuously,
 and every $f\in H^s$ has a continuous representative with
 $\|f\|_\infty\le C_s\|f\|_{H^s}$.</p></div></div>
 <p>The Dirac mass shows the threshold is sharp.</p>
-<div class="stmt corolario" id="en-cor:umbral"><div class="head">Corolario 2.5</div><div class="body"><p>$\delta_{x_0}\in H^{-s}(\R^d)$, uniformly in $x_0$, if and only if $s&gt;d/2$.
+<div class="stmt corolario" id="en-cor:umbral"><div class="head">Corolario 2.6</div><div class="body"><p>$\delta_{x_0}\in H^{-s}(\R^d)$, uniformly in $x_0$, if and only if $s&gt;d/2$.
 <span class="src">[Folland, Prop. 9.16 and the computation of $\widehat\delta$ preceding
 it]</span></p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p7">Ver demostración</button><div class="proof" id="en-control-inverso-p7"><p>$\widehat\delta_{x_0}(\xi)=e^{-2\pi i x_0\cdot\xi}$ has modulus one, so
 $\|\delta_{x_0}\|_{(-s)}^2=\int(1+|\xi|^2)^{-s}d\xi$, independent of $x_0$ and
 finite exactly when $2s&gt;d$. The identification of $H^{-s}$ with $(H^s)^{*}$ is
 Proposition 9.16 of the source.</p></div></div>
-<div class="stmt proposicion" id="en-prop:h1-nunca"><div class="head">Proposición 2.6</div><div class="body"><p>For $n=d+m\ge2$ the Dirac mass at a point of $E\times A$ is not a bounded
+<div class="stmt proposicion" id="en-prop:h1-nunca"><div class="head">Proposición 2.7</div><div class="body"><p>For $n=d+m\ge2$ the Dirac mass at a point of $E\times A$ is not a bounded
 functional on $H^1(E\times A)$. In particular the singular occupation measures of
 deterministic policies do not lie in $(H^1)^*$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p8">Ver demostración</button><div class="proof" id="en-control-inverso-p8"><p>It suffices to exhibit an unbounded function in $H^1$ near the point. For $n=2$
 take $f(z)=\log\log(1+|z|^{-1})$ on a small ball, and for $n\ge3$ take
@@ -1626,7 +1642,7 @@ charges a Lebesgue-null graph, it is a measure of this singular type.</p></div><
 <p>Hence regime (ii) is an assumption on $\M$, not a choice of space. The penalty
 keeps the shape it had for $H^1$, with $\Delta=\Delta_x+\Delta_A$ the Laplacian
 of $E\times A$ and more derivatives.</p>
-<div class="stmt definicion" id="en-def:espacio"><div class="head">Definición 2.7</div><div class="body"><p>Let $s$ be an integer with $s&gt;n/2$, and $\kappa&gt;0$. The <span class="df">cost space</span> is
+<div class="stmt definicion" id="en-def:espacio"><div class="head">Definición 2.8</div><div class="body"><p>Let $s$ be an integer with $s&gt;n/2$, and $\kappa&gt;0$. The <span class="df">cost space</span> is
 $\Hs=H^s(E\times A)$ with</p>
 <div class="display numerado" id="en-eq:penalizacion"><div class="eqbody">\begin{equation}
 
@@ -1640,7 +1656,7 @@ definition, $\sum_{|\alpha|\le s}\kappa^{|\alpha|}\int|\partial^\alpha c|^2$, is
 an equivalent norm on the same space, and on $\R^n$ there would be no reason to
 prefer either; here $\partial^\alpha$ needs a chart in the $A$ directions and
 $\Delta_A$ does not.</p>
-<div class="stmt proposicion" id="en-prop:delta"><div class="head">Proposición 2.8</div><div class="body"><p>Write <button class="term" type="button" data-k="Hs">$\Hs$</button> for the space of Definition <a class="xref" href="#en-def:espacio">2.7</a>. Then
+<div class="stmt proposicion" id="en-prop:delta"><div class="head">Proposición 2.9</div><div class="body"><p>Write <button class="term" type="button" data-k="Hs">$\Hs$</button> for the space of Definition <a class="xref" href="#en-def:espacio">2.8</a>. Then
 $\delta_{(x_0,a_0)}\in\Hd$ uniformly in $(x_0,a_0)$, and every finite signed
 measure on $E\times A$ belongs to $\Hd$ with
 $\|\eta\|_{\Hd}\le C_\iota|\eta|(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="en-control-inverso-p9">Ver demostración</button><div class="proof" id="en-control-inverso-p9"><p>Expanding $\delta_{(x_0,a_0)}$ in the joint spectral resolution,</p>
@@ -1653,9 +1669,9 @@ $\|c\|_\infty=\sup_{(x,a)}|\delta_{(x,a)}(c)|\le C_\iota\|c\|_{\Hs}$, and</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,|\eta|(E\times A)
   \le C_\iota\,|\eta|(E\times A)\,\|c\|_{\Hs}\]</div>
 <p>gives the bound after taking the supremum over the unit ball.</p></div></div>
-<p>This is Theorem <a class="xref" href="#en-thm:encaje">2.4</a> read on $E\times A$, with Weyl&#x27;s law
+<p>This is Theorem <a class="xref" href="#en-thm:encaje">2.5</a> read on $E\times A$, with Weyl&#x27;s law
 $\mu_k\sim ck^{2/m}$ supplying the count in the $A$ directions.</p>
-<div class="stmt proposicion" id="en-prop:riesz"><div class="head">Proposición 2.9</div><div class="body"><p>The Riesz isomorphism <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> is</p>
+<div class="stmt proposicion" id="en-prop:riesz"><div class="head">Proposición 2.10</div><div class="body"><p>The Riesz isomorphism <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> is</p>
 <div class="display numerado" id="en-eq:riesz"><div class="eqbody">\begin{equation}
 
   R=(\mathrm{Id}-\kappa\Delta)^{s},
@@ -1672,8 +1688,8 @@ hence no boundary term.</p></div></div>
 <p>The order is forced rather than chosen: $R^{-1}$ must return $\Hd$ to $\Hs$,
 which is what makes $c_\star$ of <a class="xref" href="#en-eq:cstar">(26)</a> a continuous function of
 $(x,a)$. With $s=1$ one recovers $\mathrm{Id}-\kappa\Delta$, admissible only for
-$n=1$ by Proposition <a class="xref" href="#en-prop:h1-nunca">2.6</a>.</p>
-<div class="stmt observacion" id="en-obs:dos-condiciones"><div class="head">Observación 2.10</div><div class="body"><p>The two regimes place their demands on different objects. Regime (i) constrains
+$n=1$ by Proposition <a class="xref" href="#en-prop:h1-nunca">2.7</a>.</p>
+<div class="stmt observacion" id="en-obs:dos-condiciones"><div class="head">Observación 2.11</div><div class="body"><p>The two regimes place their demands on different objects. Regime (i) constrains
 $\Hs$, asking $s&gt;n/2$, and then accepts every finite measure.
 Regime (ii)
 constrains $\M$, asking that its elements have $L^2$ densities, and then accepts
@@ -1728,7 +1744,7 @@ this stage that the infimum and the supremum in <a class="xref" href="#en-eq:Phi
 
   c_\eta=\ch+\frac1\alpha R^{-1}(\eta-\eta_E),
   \qquad 
-\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(20)</span><span class="num">(23)</span></div></div>
+\end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(19)</span><span class="num">(23)</span></div></div>
 <p>and</p>
 <div class="display numerado" id="en-eq:reducido-valor"><div class="eqbody"><span class="v" data-var="std">\[\inf_{c\in\Hs}\Phi(c,\eta)=-\Psi(\eta),\qquad
    \Psi(\eta):=\pair{\ch}{\eta-\eta_E}
@@ -1780,7 +1796,7 @@ routes close the gap: make the cost coercive, which is their (6.2); or show the
 occupation measures tight, which is <span class="src">[Bhatt–Borkar, §3.2]</span> for the
 discounted problem, citing Borkar (1989), Lemma 3.7
 <span class="mark">[uncertain: not among the fiched material]</span>.</p>
-<p>The first route is closed here. Definition <a class="xref" href="#en-def:espacio">2.7</a> puts $\Hs$ inside
+<p>The first route is closed here. Definition <a class="xref" href="#en-def:espacio">2.8</a> puts $\Hs$ inside
 $C_0$, so every $c\in\Hs$ vanishes at infinity and no sublevel set of it is
 compact; the same applies to $\ch$. Tightness is therefore forced rather than
 chosen, and it is a hypothesis on $b$ and $\sigma$, not on the cost. It also
@@ -1954,8 +1970,8 @@ cost equation <a class="xref" href="#en-eq:cstar">(26)</a> gives the optimality 
 <div class="display numerado" id="en-eq:coste-debil"><div class="eqbody"><span class="v" data-var="std">\[\alpha\,(c-\ch,h)_{\Hs}=\int_{E\times A}h\,d(\eta_A-\eta_E)
     \qquad\text{for all }h\in\Hs,\qquad \]</span><span class="v" data-var="fin">\[\alpha\,(c-\ch,h)_{\Hs}=(\eta_A-\eta_E)(h)
     \qquad\text{for all }h\in\Hs,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(38)</span><span class="num">(35)</span></div></div>
-<p>with the inner product of Definition <a class="xref" href="#en-def:espacio">2.7</a>, which is meaningful
-whenever $\eta_A-\eta_E\in\Hd$, and by Proposition <a class="xref" href="#en-prop:delta">2.8</a> that holds
+<p>with the inner product of Definition <a class="xref" href="#en-def:espacio">2.8</a>, which is meaningful
+whenever $\eta_A-\eta_E\in\Hd$, and by Proposition <a class="xref" href="#en-prop:delta">2.9</a> that holds
 for every pair of finite measures in regime (i). Writing $R$ pointwise instead
 would put a distribution on the right-hand side of an equation between
 functions.</p>
@@ -2034,7 +2050,7 @@ const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 /* Los rotulos y las notaciones los inyecta el generador, porque dependen de
    que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
    una de lecture notes dice «demostraciones». */
-const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "fin", "rotulo": "de Finetti"}, {"id": "std", "rotulo": "Integrales"}], "idiomas": [{"id": "es", "rotulo": "Español", "carpeta": "es"}, {"id": "en", "rotulo": "English", "carpeta": "en"}], "glosario": {"E": {"es": "$E=\\R^d$, el espacio de estados. Sin frontera $\\rt$ no hay condicion que elegir, y $H^s$ se define por Fourier. Es el marco de los ejemplos de las dos fuentes.", "en": "$E=\\R^d$, the state space. No boundary $\\rt$ no condition to choose, and $H^s$ is defined by the Fourier transform. This is the setting of both sources&#x27; examples."}, "A": {"es": "$A$ variedad riemanniana compacta sin frontera, $\\dim A=m$: la esfera de direcciones, el toro. Compacta $\\rt$ $\\mathscr P(A)$ compacto en la topologia debil.", "en": "$A$ a compact Riemannian manifold without boundary, $\\dim A=m$: the sphere of directions, the torus. Compact $\\rt$ $\\mathscr P(A)$ compact in the weak topology."}, "nu0": {"es": "$\\nu_0\\in\\mathscr P(E)$, la ley inicial: $X_0\\sim\\nu_0$. Es la fuente de \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>.", "en": "$\\nu_0\\in\\mathscr P(E)$, the initial law: $X_0\\sim\\nu_0$. It is the source in \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>."}, "rho": {"es": "$\\rho&gt;0$, la tasa de descuento. $\\lambda_\\rho=e^{-\\rho t}dt$ tiene masa $1/\\rho$.", "en": "$\\rho&gt;0$, the discount rate. $\\lambda_\\rho=e^{-\\rho t}dt$ has mass $1/\\rho$."}, "Hs": {"es": "$\\Hs=H^s(E\\times A)$ con $s&gt;n/2$ entero. Por Sobolev toda medida signada finita esta en $\\Hd$.", "en": "$\\Hs=H^s(E\\times A)$ with $s&gt;n/2$ an integer. By Sobolev every finite signed measure lies in $\\Hd$."}, "M": {"es": "$\\M=\\{\\eta\\ge0$ en $E\\times A$ que cumple \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>$\\}$. Convexo, y $\\eta(E\\times A)=1/\\rho$ para todo $\\eta\\in\\M$.", "en": "$\\M=\\{\\eta\\ge0$ on $E\\times A$ satisfying \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>$\\}$. Convex, and $\\eta(E\\times A)=1/\\rho$ for every $\\eta\\in\\M$."}, "eta": {"es": "$\\eta_\\pi\\ge0$ en $E\\times A$ con $\\eta_\\pi(E\\times A)=1/\\rho$.", "en": "$\\eta_\\pi\\ge0$ on $E\\times A$ with $\\eta_\\pi(E\\times A)=1/\\rho$."}, "etaE": {"es": "$\\eta_E\\in\\M$, la ocupacion del experto. Es lo unico que se observa de $\\pi_E$.", "en": "$\\eta_E\\in\\M$, the expert&#x27;s occupation measure. It is all that is observed of $\\pi_E$."}, "R": {"es": "$R:\\Hs\\to\\Hd$ el isomorfismo de Riesz de \u003ca class=\"xref\" href=\"#es-eq:penalizacion\">(20)\u003c/a>, $(\\mathrm{Id}-\\kappa\\Delta)^{s}$. Orden $2s$, sin condiciones de frontera.", "en": "$R:\\Hs\\to\\Hd$ the Riesz isomorphism of \u003ca class=\"xref\" href=\"#en-eq:penalizacion\">(20)\u003c/a>, $(\\mathrm{Id}-\\kappa\\Delta)^{s}$. Order $2s$, with no boundary conditions."}, "alpha": {"es": "$\\alpha&gt;0$ pesa el previo contra la brecha. Cota: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$.", "en": "$\\alpha&gt;0$ weighs the prior against the gap. Bound: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$."}, "V": {"es": "Variable dual de la restriccion de balance en \u003ca class=\"xref\" href=\"#es-eq:dual\">(15)\u003c/a>.", "en": "Dual variable of the balance constraint in \u003ca class=\"xref\" href=\"#en-eq:dual\">(15)\u003c/a>."}}};
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [{"id": "fin", "rotulo": "de Finetti"}, {"id": "std", "rotulo": "Integrales"}], "idiomas": [{"id": "es", "rotulo": "Español", "carpeta": "es"}, {"id": "en", "rotulo": "English", "carpeta": "en"}], "glosario": {"E": {"es": "$E=\\R^d$, el espacio de estados. Sin frontera $\\rt$ no hay condicion que elegir, y $H^s$ se define por Fourier. Es el marco de los ejemplos de las dos fuentes.", "en": "$E=\\R^d$, the state space. No boundary $\\rt$ no condition to choose, and $H^s$ is defined by the Fourier transform. This is the setting of both sources&#x27; examples."}, "A": {"es": "$A$ variedad riemanniana compacta sin frontera, $\\dim A=m$: la esfera de direcciones, el toro. Compacta $\\rt$ $\\mathscr P(A)$ compacto en la topologia debil.", "en": "$A$ a compact Riemannian manifold without boundary, $\\dim A=m$: the sphere of directions, the torus. Compact $\\rt$ $\\mathscr P(A)$ compact in the weak topology."}, "nu0": {"es": "$\\nu_0\\in\\mathscr P(E)$, la ley inicial: $X_0\\sim\\nu_0$. Es la fuente de \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>.", "en": "$\\nu_0\\in\\mathscr P(E)$, the initial law: $X_0\\sim\\nu_0$. It is the source in \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>."}, "rho": {"es": "$\\rho&gt;0$, la tasa de descuento. $\\lambda_\\rho=e^{-\\rho t}dt$ tiene masa $1/\\rho$.", "en": "$\\rho&gt;0$, the discount rate. $\\lambda_\\rho=e^{-\\rho t}dt$ has mass $1/\\rho$."}, "Hs": {"es": "$\\Hs=H^s(E\\times A)$ con $s&gt;n/2$ entero. Por Sobolev toda medida signada finita esta en $\\Hd$.", "en": "$\\Hs=H^s(E\\times A)$ with $s&gt;n/2$ an integer. By Sobolev every finite signed measure lies in $\\Hd$."}, "M": {"es": "$\\M=\\{\\eta\\ge0$ en $E\\times A$ que cumple \u003ca class=\"xref\" href=\"#es-eq:balance\">(13)\u003c/a>$\\}$. Convexo, y $\\eta(E\\times A)=1/\\rho$ para todo $\\eta\\in\\M$.", "en": "$\\M=\\{\\eta\\ge0$ on $E\\times A$ satisfying \u003ca class=\"xref\" href=\"#en-eq:balance\">(13)\u003c/a>$\\}$. Convex, and $\\eta(E\\times A)=1/\\rho$ for every $\\eta\\in\\M$."}, "eta": {"es": "$\\eta_\\pi\\ge0$ en $E\\times A$ con $\\eta_\\pi(E\\times A)=1/\\rho$.", "en": "$\\eta_\\pi\\ge0$ on $E\\times A$ with $\\eta_\\pi(E\\times A)=1/\\rho$."}, "CE": {"es": "$\\CE=\\{c:\\Gap(c)=0\\}$, cono convexo cerrado con $0\\in\\CE$ y $\\CE+q_\\phi=\\CE$. Es lo que $\\eta_E$ determina.", "en": "$\\CE=\\{c:\\Gap(c)=0\\}$, a closed convex cone with $0\\in\\CE$ and $\\CE+q_\\phi=\\CE$. It is what $\\eta_E$ determines."}, "etaE": {"es": "$\\eta_E\\in\\M$, la ocupacion del experto. Es lo unico que se observa de $\\pi_E$.", "en": "$\\eta_E\\in\\M$, the expert&#x27;s occupation measure. It is all that is observed of $\\pi_E$."}, "R": {"es": "$R:\\Hs\\to\\Hd$ el isomorfismo de Riesz de \u003ca class=\"xref\" href=\"#es-eq:penalizacion\">(20)\u003c/a>, $(\\mathrm{Id}-\\kappa\\Delta)^{s}$. Orden $2s$, sin condiciones de frontera.", "en": "$R:\\Hs\\to\\Hd$ the Riesz isomorphism of \u003ca class=\"xref\" href=\"#en-eq:penalizacion\">(20)\u003c/a>, $(\\mathrm{Id}-\\kappa\\Delta)^{s}$. Order $2s$, with no boundary conditions."}, "alpha": {"es": "$\\alpha&gt;0$ pesa el previo contra la brecha. Cota: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$.", "en": "$\\alpha&gt;0$ weighs the prior against the gap. Bound: $\\|\\eta_{A,\\star}-\\eta_E\\|_{\\Hd}\\le2\\alpha\\|\\ch\\|_{\\Hs}$."}, "V": {"es": "Variable dual de la restriccion de balance en \u003ca class=\"xref\" href=\"#es-eq:dual\">(15)\u003c/a>.", "en": "Dual variable of the balance constraint in \u003ca class=\"xref\" href=\"#en-eq:dual\">(15)\u003c/a>."}}};
 
 /* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
    navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
