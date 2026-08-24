@@ -757,8 +757,8 @@ problema de martingala controlado relajado cumple la <span class="df">identidad 
 débil</span></p>
 <div class="display numerado" id="es-eq:balance"><div class="eqbody"><span class="v" data-var="std">\[\int_{E\times A}\bigl(\rho\varphi(x)-\gen{a}\varphi(x)\bigr)\,\eta(dx,da)
     =\int_E\varphi\,d\nu_0.\qquad \]</span><span class="v" data-var="fin">\[\eta\bigl(\rho\varphi-\gen{}\varphi\bigr)=\nu_0(\varphi).\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(11)</span><span class="num">(12)</span></div></div>
-<p>Recíprocamente, todo $\eta\ge0$ <span class="df">con $\rho\,\eta\in\mathscr P(E\times A)$</span> que
-cumpla <a class="xref" href="#es-eq:balance">(12)</a> es la medida de ocupación de alguna solución.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p2">Ver demostración</button><div class="proof" id="es-control-inverso-p2"><p>Las hipótesis son las de <a class="xref" href="#es-eq:gen-operador">(3)</a> y ninguna más:
+<p>Recíprocamente, todo $\eta\ge0$ <span class="df">finita</span> que cumpla <a class="xref" href="#es-eq:balance">(12)</a> es la
+medida de ocupación de alguna solución.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p2">Ver demostración</button><div class="proof" id="es-control-inverso-p2"><p>Las hipótesis son las de <a class="xref" href="#es-eq:gen-operador">(3)</a> y ninguna más:
 $\varphi\in\dom(\gen{})\s C_b(E)$ y $\gen{}\varphi\in C_b(E\times A)$. No se
 supone que $\gen{}$ sea el generador diferencial <a class="xref" href="#es-eq:generator">(2)</a>, ni que
 $X$ tenga trayectorias continuas: la Definición <a class="xref" href="#es-def:relajada">1.3</a> vive en un
@@ -790,14 +790,19 @@ contra martingala da martingala <em>local</em>, cuya esperanza no se anula sin u
 condición de integrabilidad adicional.</p>
 <p>El recíproco es la caracterización de las medidas de ocupación descontadas
 <span class="src">[Bhatt–Borkar, Thm. 2.2]</span>, que no le pide a $E$ más que ser polaco; el
-análogo de <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span> pide además su (6.2)
-(Observación <a class="xref" href="#es-obs:tension">3.6</a>).</p></div></div>
-<p>La condición $\rho\,\eta\in\mathscr P(E\times A)$ del recíproco no se puede
-suprimir. Con $\varphi\equiv1$, <a class="xref" href="#es-eq:balance">(12)</a> daría
-$\rho\,\eta(E\times A)=1$ y la masa saldría sola; pero
-$\dom(\gen{})=C_0^2(\R^d)$ no contiene las constantes, así que $\varphi\equiv1$
-no es función de prueba y <a class="xref" href="#es-eq:balance">(12)</a> no dice nada sobre
-$\eta(E\times A)$.</p>
+análogo de <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span> pide además la compacidad de
+los subniveles del costo (Observación <a class="xref" href="#es-obs:tension">3.6</a>). La fuente lo enuncia
+sobre una medida de probabilidad, y con $\eta$ solo finita la normalización sale
+del paso al límite de arriba.</p></div></div>
+<p>$\varphi\equiv1$ no está en $\dom(\gen{})=C_0^2(\R^d)$, pero sí en la
+bp-clausura de su gráfica: con $\varphi_k(x)=\chi(x/k)$ y $\chi$ un corte suave,
+$\varphi_k\to\mathbf 1$ acotada y puntualmente, y
+$\|\gen{}\varphi_k\|_\infty=O(1/k)$ porque $b$ y $\sigma$ son acotados. Si $\eta$
+es finita, convergencia dominada pasa <a class="xref" href="#es-eq:balance">(12)</a> al límite y da
+$\rho\,\eta(E\times A)=1$. La finitud es entonces la hipótesis y la masa es
+consecuencia; la fuente lo enuncia ya normalizado, sobre
+$\rho\,\eta\in\mathscr P(E\times A)$.
+<span class="mark">[Lectura propia.]</span></p>
 <p>En forma de operadores <a class="xref" href="#es-eq:balance">(12)</a> es
 $(\rho-\gen{})^{*}\eta=\nu_0$, o sea $\eta$ es la ley inicial transportada por la
 resolvente adjunta.</p>
@@ -805,10 +810,9 @@ resolvente adjunta.</p>
 probabilidad.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p3">Ver demostración</button><div class="proof" id="es-control-inverso-p3"><p>Directo de la Definición <a class="xref" href="#es-def:ocupacion">1.5</a> con $B=E\times A$: ahí
 $\mathbf 1_B\equiv1$, la integral interior vale $\pi_t(A)=1$ y queda
 $\eta_\pi(E\times A)=\int_0^\infty e^{-\rho t}dt=1/\rho$.</p>
-<p><span class="mark">No</span> sirve poner $\varphi\equiv1$ en <a class="xref" href="#es-eq:balance">(12)</a>, que sería más
-corto: $\dom(\gen{})=C_0^2(\R^d)$ no contiene las constantes. Por eso la masa es
-hipótesis en el recíproco de la Proposición <a class="xref" href="#es-prop:balance">1.6</a> y no se deduce
-de la identidad de balance.</p></div></div>
+<p>Poner $\varphi\equiv1$ en <a class="xref" href="#es-eq:balance">(12)</a> da lo mismo y es más corto, pero
+$\varphi\equiv1\notin\dom(\gen{})$ y hay que llegar a ella por corte suave, como
+en la Proposición <a class="xref" href="#es-prop:balance">1.6</a>.</p></div></div>
 <p>La masa es $1/\rho$ y no $1$ porque <a class="xref" href="#es-eq:ocupacion">(10)</a> no está normalizada, y
 las dos fuentes sí normalizan: Kurtz y Stockbridge definen
 $\widehat\pi=\rho\,\eta_\pi$ y recuperan el costo como
