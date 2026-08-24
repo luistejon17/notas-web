@@ -667,7 +667,11 @@ Para el LP &amp; $\rho\,\eta\in\mathscr P(E\times A)$
 <p>Bhatt y Borkar le piden poco a $\gen{}$ y ponen la existencia como hipótesis;
 Kurtz y Stockbridge le piden decaimiento y máximo positivo, y a cambio la
 existencia les sale. La convergencia bp está en la
-Observación <a class="xref" href="#es-obs:test">1.8</a>.</p>
+Observación <a class="xref" href="#es-obs:test">1.8</a>. Y $C_0^2(\R^d)$ <em>no</em> contiene las constantes,
+como tampoco las contiene el dominio de su Ejemplo 1: lo que hace su papel es
+que $(\mathbf 1,0)$ esté en la bp-clausura de la gráfica, y eso se prueba en la
+Proposición <a class="xref" href="#es-prop:balance">1.6</a>.
+<span class="mark">[Lectura propia.]</span></p>
 <div class="stmt observacion" id="es-obs:psi"><div class="head">Observación 1.2</div><div class="body"><p><span class="df">$A$ compacto hace vacua la condición de crecimiento.</span> Sobre un compacto toda
 $\psi$ continua está acotada, luego $b_\varphi\psi$ se absorbe en $a_\varphi$ y
 sirve $\psi\equiv1$.</p></div></div>
@@ -837,8 +841,12 @@ dual de <a class="xref" href="#es-eq:lp">(13)</a>, y la función de valor es la 
 restricción de balance.</p>
 <div class="stmt observacion" id="es-obs:test"><div class="head">Observación 1.8</div><div class="body"><p>$f_k\to_{\mathrm{bp}}f$ (<span class="df">acotada y puntualmente</span>) si $\sup_k\|f_k\|_\infty&lt;\infty$
 y $f_k(x)\to f(x)$ para todo $x$.
-<span class="src">[Bhatt–Borkar, §1.2]</span>. Como en $\R^d$ las clases $C_0^2$, $\mathscr C^2_c$ y
-$C^\infty_c$ son bp-densas dan el mismo $\M$ <span class="mark">[Verificar]</span>.</p></div></div></section>
+<span class="src">[Bhatt–Borkar, §1.2]</span>. En $\R^d$ las clases $C_0^2$, $\mathscr C^2_c$ y
+$C^\infty_c$ dan el mismo $\M$: cortar por $\chi(\cdot/k)$ y regularizar dejan a
+la vez $\varphi_k\to_{\mathrm{bp}}\varphi$ y
+$\gen{}\varphi_k\to_{\mathrm{bp}}\gen{}\varphi$, que es lo que hace falta porque
+<a class="xref" href="#es-eq:balance">(12)</a> evalúa las dos.
+<span class="mark">[Lectura propia; usa $b$ y $\sigma\sigma^\top$ acotadas.]</span></p></div></div></section>
 <section class="capitulo"><h3 id="es-sec:inverso"><span class="secnum">2</span>Control inverso con costo previo</h3>
 <p>Se observa un experto y se pregunta qué costo instantáneo lo explica. El experto
 es una política $\pi_E$ conocida solo por su medida de ocupación descontada
@@ -878,8 +886,8 @@ corrimiento por una constante, así que los dos costos tienen los mismos
 minimizadores y, como $\eta_E\in\M$, la misma brecha.</p></div></div>
 <p>Es la forma en tiempo continuo del <em>potential-based shaping</em>, y es
 <a class="xref" href="#es-eq:balance">(12)</a> leída contra $c$. Pero desplazar por $q_\phi$ no es la única
-ambigüedad, y conviene nombrar lo que los datos sí determinan.</p>
-<div class="stmt proposicion" id="es-prop:identificado"><div class="head">Proposición 2.4</div><div class="body"><p><button class="term" type="button" data-k="CE">$\CE:=\{c\in\Hs:\Gap(c)=0\}$</button>, los costos para los que el experto es óptimo, es
+ambigüedad:</p>
+<div class="stmt proposicion" id="es-prop:identificado"><div class="head">Proposición 2.4</div><div class="body"><p>Sea <button class="term" type="button" data-k="CE">$\CE:=\{c\in\Hs:\Gap(c)=0\}$</button>, los costos para los que el experto es óptimo, es
 un cono convexo cerrado con $0\in\CE$ y $\CE+q_\phi=\CE$ para todo
 $\phi\in\dom(\gen{})$. Observar $\eta_E$ determina $\CE$, y dos costos suyos no
 se distinguen entre sí.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p6">Ver demostración</button><div class="proof" id="es-control-inverso-p6"><p>$\CE$ es el conjunto de nivel cero de $\Gap$, que por la
@@ -905,14 +913,14 @@ distancia a él en vez de imponer una restricción:</p>
   \qquad\alpha&gt;0,
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(15)</span><span class="num">(17)</span></div></div>
-<p>o, abriendo la brecha,</p>
+<p>o, abriendo el Gap,</p>
 <div class="display numerado" id="es-eq:minmax"><div class="eqbody"><span class="v" data-var="std">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
     \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+\pair{c}{\eta_E-\eta}\right\}.
     \qquad \]</span><span class="v" data-var="fin">\[\min_{c\in\Hs}\ \max_{\eta\in\M}\
     \left\{\frac{\alpha}{2}\|c-\ch\|_{\Hs}^2+(\eta_E-\eta)(c)\right\}.
     \qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(16)</span><span class="num">(18)</span></div></div>
 <p><button class="term" type="button" data-k="alpha">$\alpha$</button> interpola: $\alpha$ grande clava el costo recuperado al previo,
-$\alpha$ pequeño da prioridad a cerrar la brecha del experto. El efecto
+$\alpha$ pequeño da prioridad a cerrar el gap con el experto. El efecto
 cuantitativo está en <a class="xref" href="#es-eq:alpha-bound">(30)</a>.</p>
 <h4 id="es-sec:espacio-costo"><span class="secnum">2.1</span>El espacio de costos</h4>
 <p>La medida de ocupación de una política determinista $u:E\to A$ se concentra en la
