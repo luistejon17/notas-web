@@ -596,9 +596,9 @@ window.MathJax = {
   <p class="subtitle">La formulación por medidas de ocupación, a partir de la nota de Mauricio Junca</p>
   <p class="byline">Universidad de los Andes · Propuesta de tesis</p>
 <div class="doc" data-lang="es" data-on="true"><section class="capitulo"><h3 id="es-sec:forward"><span class="secnum">1</span>Control estocástico descontado directo</h3>
-<p><button class="term" type="button" data-k="E">$E=\R^d$</button> el espacio de estados y <button class="term" type="button" data-k="A">$A$</button> las acciones, variedad
-riemanniana compacta <span class="df">sin frontera</span> de dimensión $m$: una esfera de
-direcciones, un toro, un producto de esos. Se escribe $n=d+m$. Fijos
+<p><button class="term" type="button" data-k="E">$E=\R^d$</button> el espacio de estados y <button class="term" type="button" data-k="A">$A\s\R^m$</button> las acciones,
+<span class="df">compacto</span>: una bola de aceleraciones, una caja de controles. El caso guía es
+la partícula en $\R^2$ o $\R^3$. Así $E\times A\s\R^n$ con $n=d+m$. Fijos
 <button class="term" type="button" data-k="rho">$\rho&gt;0$</button> la tasa de descuento y
 <button class="term" type="button" data-k="nu0">$\nu_0\in\mathscr P(E)$</button> la ley inicial. La letra
 $\Omega$ queda reservada al espacio muestral de $(\Omega,\mathscr F,\{\mathscr
@@ -967,95 +967,93 @@ $\|f_k\|_{H^1}$ acotada y $f_k(x_0,a_0)\to\infty$, luego evaluar en $(x_0,a_0)$
 no es funcional acotado. Y como la medida de ocupación de una política
 determinista carga una gráfica Lebesgue-nula, es una medida de ese tipo singular.</p></div></div>
 <p>Luego $H^1$ queda descartado en cuanto $n\ge2$, y la penalización tiene que subir
-de orden. Conserva la forma, con $\Delta=\Delta_x+\Delta_A$ el laplaciano de
-$E\times A$ y más derivadas.</p>
-<div class="stmt definicion" id="es-def:espacio"><div class="head">Definición 2.8</div><div class="body"><p>Fijos $s$ entero con $s&gt;n/2$ y $\kappa&gt;0$. El <span class="df">espacio del costo</span> es
-$\Hs=H^s(E\times A)$ con</p>
+de orden. Como $E\times A\s\R^n$, el espacio se toma sobre todo $\R^n$ y el costo
+se mira restringido, lo que evita hablar de la frontera de $A$.</p>
+<div class="stmt definicion" id="es-def:espacio"><div class="head">Definición 2.8</div><div class="body"><p>Fijos $s&gt;n/2$ y $\kappa&gt;0$. El <span class="df">espacio del costo</span> es $\Hs=H^s(\R^n)$ con</p>
 <div class="display numerado" id="es-eq:penalizacion"><div class="eqbody">\begin{equation}
 
-  \|c\|_{\Hs}^2=\int_{E\times A}c\,(\mathrm{Id}-\kappa\Delta)^s c
-  =\sum_{j=0}^{s}\binom{s}{j}\kappa^j\!\int_{E\times A}\!c\,(-\Delta)^j c .
+  \|c\|_{\Hs}^2=\int_{\R^n}\bigl(1+\kappa|\xi|^2\bigr)^{s}\,|\widehat c(\xi)|^2\,d\xi
+  =\int_{\R^n}c\,(\mathrm{Id}-\kappa\Delta)^s c .
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(17)</span><span class="num">(20)</span></div></div></div></div>
-<p>Con $s=1$ es $\int(|c|^2+\kappa|\nabla c|^2)$, que es lo que escribe la nota; el
-menor exponente admisible es $\lfloor n/2\rfloor+1$. La definición de siempre,
-$\sum_{|\alpha|\le s}\kappa^{|\alpha|}\int|\partial^\alpha c|^2$, es una norma
-equivalente sobre el mismo espacio, y en $\R^n$ no habría razón para preferir
-ninguna de las dos; aquí $\partial^\alpha$ pide una carta en las direcciones de
-$A$ y $\Delta_A$ no.</p>
-<div class="stmt proposicion" id="es-prop:delta"><div class="head">Proposición 2.9</div><div class="body"><p><button class="term" type="button" data-k="Hs">$\Hs$</button> el de la Definición <a class="xref" href="#es-def:espacio">2.8</a> $\rt$
-$\delta_{(x_0,a_0)}\in\Hd$ uniformemente en $(x_0,a_0)$, y toda medida signada
-finita en $E\times A$ está en $\Hd$ con
-$\|\eta\|_{\Hd}\le C_\iota\,|\eta|(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p10">Ver demostración</button><div class="proof" id="es-control-inverso-p10"><p>Desarrollando $\delta_{(x_0,a_0)}$ en la resolución espectral conjunta,</p>
-<div class="display">\[\|\delta_{(x_0,a_0)}\|_{\Hd}^2=\sum_k|\psi_k(a_0)|^2\!
-  \int_{\R^d}\bigl(1+\kappa(|\xi|^2+\mu_k)\bigr)^{-s}d\xi ,\]</div>
-<p>que por la ley de Weyl $\mu_k\sim ck^{2/m}$ converge exactamente cuando $s&gt;n/2$;
-no depende de $x_0$ por invariancia por traslación y está acotada en $a_0$ por
-compacidad de $A$. Luego
+<p>Con $s=1$ es $\int(|c|^2+\kappa|\nabla c|^2)$, que es lo que escribe la nota. Al
+estar sobre $\R^n$ el exponente no tiene que ser entero, y la segunda igualdad de
+<a class="xref" href="#es-eq:penalizacion">(20)</a> es la lectura diferencial cuando lo es.</p>
+<div class="stmt observacion" id="es-obs:restriccion"><div class="head">Observación 2.9</div><div class="body"><p>El costo solo se observa en $E\times A$, así que dos elementos de $\Hs$ que
+coincidan ahí son indistinguibles para $\Gap$. Esa ambigüedad se suma a la de
+<a class="xref" href="#es-eq:shaping">(17)</a> y la absorbe $\CE$, que ya es unión de clases. Tomar $\Hs$
+sobre $\R^n$ en vez de sobre $E\times A$ ahorra a cambio el operador de extensión
+y las tres definiciones de $H^s$ sobre un dominio.</p></div></div>
+<div class="stmt proposicion" id="es-prop:delta"><div class="head">Proposición 2.10</div><div class="body"><p><button class="term" type="button" data-k="Hs">$\Hs$</button> el de la Definición <a class="xref" href="#es-def:espacio">2.8</a> $\rt$
+$\delta_{z}\in\Hd$ con $\|\delta_z\|_{\Hd}=C_\iota$ para todo $z$, y toda medida
+signada finita en $E\times A$ está en $\Hd$ con
+$\|\eta\|_{\Hd}\le C_\iota\,|\eta|(E\times A)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p10">Ver demostración</button><div class="proof" id="es-control-inverso-p10"><p>$\widehat{\delta_z}(\xi)=e^{-2\pi i z\cdot\xi}$ tiene módulo uno, luego</p>
+<div class="display">\[\|\delta_z\|_{\Hd}^2
+  =\int_{\R^n}\bigl(1+\kappa|\xi|^2\bigr)^{-s}d\xi=:C_\iota^2 ,\]</div>
+<p>que no depende de $z$ y converge exactamente cuando $2s&gt;n$. Luego
 $\|c\|_\infty=\sup_{(x,a)}|\delta_{(x,a)}(c)|\le C_\iota\|c\|_{\Hs}$, y</p>
 <div class="display">\[|\pair{c}{\eta}|\le\|c\|_\infty\,|\eta|(E\times A)
   \le C_\iota\,|\eta|(E\times A)\,\|c\|_{\Hs}\]</div>
 <p>da la cota tomando supremo sobre la bola unidad.</p></div></div>
-<p>Es el Teorema <a class="xref" href="#es-thm:encaje">2.5</a> leído sobre $E\times A$, con la ley de Weyl
-$\mu_k\sim ck^{2/m}$ poniendo el recuento en las direcciones de $A$.</p>
-<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.10</div><div class="body"><p>El isomorfismo de Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es</p>
+<p>Es el Teorema <a class="xref" href="#es-thm:encaje">2.5</a> y nada más: una sola integral sobre $\R^n$, sin
+separar las direcciones de $E$ de las de $A$. La constante no depende de $z$
+porque la norma es invariante por traslación.</p>
+<div class="stmt proposicion" id="es-prop:riesz"><div class="head">Proposición 2.11</div><div class="body"><p>El isomorfismo de Riesz <button class="term" type="button" data-k="R">$R:\Hs\to\Hd$</button> es</p>
 <div class="display numerado" id="es-eq:riesz"><div class="eqbody">\begin{equation}
 
   R=(\mathrm{Id}-\kappa\Delta)^{s},
   \qquad
-  \text{símbolo}\quad\bigl(1+\kappa(|\xi|^2+\mu_k)\bigr)^{s},
+  \text{símbolo}\quad\bigl(1+\kappa|\xi|^2\bigr)^{s},
+  \qquad \xi\in\R^n,
 \end{equation}</div><div class="eqside"><span class="num">(21)</span></div></div>
-<p>operador elíptico de orden $2s$, sin condiciones de frontera.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p11">Ver demostración</button><div class="proof" id="es-control-inverso-p11"><p>La aplicación de Riesz manda $c$ a $v\mapsto(c,v)_{\Hs}$, que por
-<a class="xref" href="#es-eq:penalizacion">(20)</a> es $v\mapsto\int c\,(\mathrm{Id}-\kappa\Delta)^sv$. En la
-resolución espectral conjunta es diagonal con entradas
-$(1+\kappa(|\xi|^2+\mu_k))^{s}$, acotadas por arriba y por abajo en cada corona
-diádica, luego isomorfismo sobre la escala dual; el símbolo crece como
-$\kappa^s(|\xi|^2+\mu_k)^{s}$, que es el orden. No hay frontera, luego no hay
-término de frontera.</p></div></div>
+<p>un multiplicador de Fourier de orden $2s$, sin condiciones de frontera.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="es-control-inverso-p11">Ver demostración</button><div class="proof" id="es-control-inverso-p11"><p>La aplicación de Riesz manda $c$ a $v\mapsto(c,v)_{\Hs}$, que por
+<a class="xref" href="#es-eq:penalizacion">(20)</a> es $v\mapsto\int c\,(\mathrm{Id}-\kappa\Delta)^sv$. En
+Fourier es la multiplicación por $(1+\kappa|\xi|^2)^{s}$, que es positiva y
+comparable a $\kappa^s|\xi|^{2s}$ para $|\xi|$ grande, luego isomorfismo de
+$H^s$ sobre $H^{-s}$; ese crecimiento es el orden. Al estar sobre $\R^n$ no hay
+frontera, luego no hay término de frontera.</p></div></div>
 <p>El orden no se elige: $R^{-1}$ tiene que devolver $\Hd$ a $\Hs$, y es eso lo que
 hace de $c_\star$ de <a class="xref" href="#es-eq:cstar">(26)</a> una función continua de $(x,a)$. Con $s=1$
 sale $\mathrm{Id}-\kappa\Delta$, admisible solo si $n=1$ por la
 Proposición <a class="xref" href="#es-prop:h1-nunca">2.7</a>.</p>
-<div class="stmt observacion" id="es-obs:dos-condiciones"><div class="head">Observación 2.11</div><div class="body"><p>La alternativa sería restringir $\M$ en vez de $\Hs$: pidiéndole densidad $L^2$ a
+<div class="stmt observacion" id="es-obs:dos-condiciones"><div class="head">Observación 2.12</div><div class="body"><p>La alternativa sería restringir $\M$ en vez de $\Hs$: pidiéndole densidad $L^2$ a
 toda medida de ocupación relevante, el emparejamiento sería el de $L^2$ y $H^1$
 bastaría. No está disponible aquí, porque en cuanto el hamiltoniano de
 <a class="xref" href="#es-eq:selector">(10)</a> tiene minimizador único hay políticas deterministas
 admisibles y su ocupación es singular. Pedirle $s&gt;n/2$ a $\Hs$ y aceptar toda
 medida finita es lo que queda.</p></div></div>
 <h4 id="es-sec:nucleo"><span class="secnum">2.2</span>El espacio por su núcleo</h4>
-<p>La Proposición <a class="xref" href="#es-prop:delta">2.9</a> dice que la evaluación puntual es acotada, y eso
+<p>La Proposición <a class="xref" href="#es-prop:delta">2.10</a> dice que la evaluación puntual es acotada, y eso
 es la definición de que $\Hs$ tenga <span class="df">núcleo reproductor</span>: hay
 $k:(E\times A)^2\to\R$ con $k_z:=k(\cdot,z)\in\Hs$ y $f(z)=(f,k_z)_{\Hs}$. Leído
 así, el $\S$<a class="xref" href="#es-sec:espacio-costo">2.1</a> se abrevia.</p>
-<div class="stmt proposicion" id="es-prop:nucleo"><div class="head">Proposición 2.12</div><div class="body"><p><span class="src">[<span class="mark">Lectura propia</span>]</span>
-$\Hs$ de la Definición <a class="xref" href="#es-def:espacio">2.8</a> $\rt$ su núcleo es
-$k(z,z&#x27;)=G(z-z&#x27;)$ en las direcciones de $\R^d$ y el de $(\mathrm{Id}-\kappa\Delta)^{-s}$
-en las de $A$, con símbolo $\bigl(1+\kappa(|\xi|^2+\mu_k)\bigr)^{-s}$; existe
-$\iff$ $s&gt;n/2$, y entonces $\|\delta_z\|_{\Hd}^2=k(z,z)\le C_\iota^2$, con
-igualdad para todo $z$ si $A$ es homogénea.</p></div></div>
-<p>Es la Proposición <a class="xref" href="#es-prop:riesz">2.10</a> invertida, y el $\iff$ es la convergencia de
-$\int(1+\kappa|\xi|^2)^{-s}d\xi$ con la ley de Weyl en $A$. Dos consecuencias, y
-la segunda ahorra trabajo numérico.</p>
-<div class="stmt observacion" id="es-obs:nu"><div class="head">Observación 2.13</div><div class="body"><p>En procesos gaussianos ese núcleo es el de <span class="df">Matérn</span>, parametrizado por una
+<div class="stmt proposicion" id="es-prop:nucleo"><div class="head">Proposición 2.13</div><div class="body"><p><span class="src">[<span class="mark">Lectura propia</span>]</span>
+$\Hs$ de la Definición <a class="xref" href="#es-def:espacio">2.8</a> $\rt$ su núcleo es $k(z,z&#x27;)=G(z-z&#x27;)$ con
+$\widehat G=(1+\kappa|\xi|^2)^{-s}$, el potencial de Bessel; existe $\iff$
+$s&gt;n/2$, y entonces $k(z,z)=G(0)=C_\iota^2$ para todo $z$.</p></div></div>
+<p>Es la Proposición <a class="xref" href="#es-prop:riesz">2.11</a> invertida, y el $\iff$ es la convergencia de
+$\int_{\R^n}(1+\kappa|\xi|^2)^{-s}d\xi$. Dos consecuencias, y la segunda ahorra
+trabajo numérico.</p>
+<div class="stmt observacion" id="es-obs:nu"><div class="head">Observación 2.14</div><div class="body"><p>En procesos gaussianos ese núcleo es el de <span class="df">Matérn</span>, parametrizado por una
 suavidad $\nu$ en vez de por $s$, con $\nu=s-n/2$. Escrito así el umbral
 <em>no es una condición</em>: $s&gt;n/2$ es $\nu&gt;0$, que es lo único que hace falta
-para que la familia exista. El Teorema <a class="xref" href="#es-thm:encaje">2.5</a>, el
-Corolario <a class="xref" href="#es-cor:umbral">2.6</a> y el recuento de Weyl son la misma integral, y la
-dimensión deja de aparecer como algo que verificar.
+para que la familia exista. El Teorema <a class="xref" href="#es-thm:encaje">2.5</a> y el
+Corolario <a class="xref" href="#es-cor:umbral">2.6</a> son la misma integral, y la dimensión deja de
+aparecer como algo que verificar.
 <span class="mark">[Lectura propia sobre la identificación de las dos parametrizaciones.]</span></p></div></div>
-<div class="stmt observacion" id="es-obs:riesz-integral"><div class="head">Observación 2.14</div><div class="body"><p>Sobre una medida, $R^{-1}$ no resuelve ninguna ecuación:
+<div class="stmt observacion" id="es-obs:riesz-integral"><div class="head">Observación 2.15</div><div class="body"><p>Sobre una medida, $R^{-1}$ no resuelve ninguna ecuación:
 $R^{-1}\eta=\int k_z\,d\eta(z)$, por la propiedad reproductora. El orden $2s$ de
-la Proposición <a class="xref" href="#es-prop:riesz">2.10</a> mide entonces la suavidad de $R^{-1}\eta$, no el
+la Proposición <a class="xref" href="#es-prop:riesz">2.11</a> mide entonces la suavidad de $R^{-1}\eta$, no el
 orden de un operador que haya que invertir numéricamente.
 <span class="mark">[Lectura propia.]</span></p></div></div>
-<div class="stmt observacion" id="es-obs:caracteristico"><div class="head">Observación 2.15</div><div class="body"><p>El emparejamiento separa. Como el símbolo del núcleo es positivo en todo punto,
+<div class="stmt observacion" id="es-obs:caracteristico"><div class="head">Observación 2.16</div><div class="body"><p>El emparejamiento separa. Como el símbolo del núcleo es positivo en todo punto,
 $\iint k\,d\eta\,d\eta&gt;0$ para toda medida signada finita $\eta\ne0$ por
 Plancherel, luego $\|\eta-\eta_E\|_{\Hd}=0$ solo si $\eta=\eta_E$. Es lo que
 sostiene la unicidad de $\eta_{A,\star}$ del Teorema <a class="xref" href="#es-thm:silla">3.7</a>. Y basta
 la versión sobre probabilidades, porque por el Corolario <a class="xref" href="#es-cor:masa">1.7</a> las
 ocupaciones tienen masa $1/\rho$ y $\rho\eta$ es una probabilidad.
 <span class="mark">[Lectura propia.]</span></p></div></div>
-<div class="stmt observacion" id="es-obs:c0-del-nucleo"><div class="head">Observación 2.16</div><div class="body"><p>La inyección en $C_0$ sale del núcleo, no de Sobolev: de
+<div class="stmt observacion" id="es-obs:c0-del-nucleo"><div class="head">Observación 2.17</div><div class="body"><p>La inyección en $C_0$ sale del núcleo, no de Sobolev: de
 $\|f\|_\infty\le C_\iota\|f\|_{\Hs}$ la convergencia en $\Hs$ es uniforme, y
 $\Hs$ es la clausura del generado por los $k_z$, que están en $C_0$. La comparte
 por tanto todo espacio con núcleo acotado cuyas secciones decaigan, y subir $s$
@@ -1170,7 +1168,7 @@ son tensas, que es lo que hace <span class="src">[Bhatt–Borkar, §3.2]</span> 
 citando a Borkar (1989), Lema 3.7
 <span class="mark">[incierto: no está en el material fichado]</span>.</p>
 <p>La primera vía está cerrada aquí, y no por la Definición <a class="xref" href="#es-def:espacio">2.8</a> sino
-por la Observación <a class="xref" href="#es-obs:c0-del-nucleo">2.16</a>: la acotación del núcleo mete $\Hs$
+por la Observación <a class="xref" href="#es-obs:c0-del-nucleo">2.17</a>: la acotación del núcleo mete $\Hs$
 dentro de $C_0$ $\rt$ toda $c\in\Hs$ se anula en el infinito y ningún subnivel
 suyo es compacto; y lo mismo le pasa a $\ch$. Cerrarla es entonces propiedad de
 todo espacio con núcleo acotado, y reabrirla pide un núcleo que no lo sea. La
@@ -1393,7 +1391,7 @@ ecuación del costo <a class="xref" href="#es-eq:cstar">(26)</a> sale el sistema
     \qquad\forall h\in\Hs,\qquad \]</span><span class="v" data-var="fin">\[\alpha\,(c-\ch,h)_{\Hs}=(\eta_A-\eta_E)(h)
     \qquad\forall h\in\Hs,\qquad \]</span></div><div class="eqside"><span class="jn">v2:&nbsp;(38)</span><span class="num">(36)</span></div></div>
 <p>con el producto interno de la Definición <a class="xref" href="#es-def:espacio">2.8</a>, que tiene sentido en
-cuanto $\eta_A-\eta_E\in\Hd$, y por la Proposición <a class="xref" href="#es-prop:delta">2.9</a> eso vale para
+cuanto $\eta_A-\eta_E\in\Hd$, y por la Proposición <a class="xref" href="#es-prop:delta">2.10</a> eso vale para
 cualquier par de medidas finitas. Escribir $R$ puntualmente
 pondría una distribución al lado derecho de una ecuación entre funciones.</p>
 <div class="stmt proposicion" id="es-prop:sistema-equivalente"><div class="head">Proposición 4.3</div><div class="body"><p>Bajo las hipótesis del Teorema <a class="xref" href="#es-thm:silla">3.7</a>, y si las medidas de ocupación de
@@ -1431,7 +1429,7 @@ fijo cuyas propiedades de contracción no las da el Teorema <a class="xref" href
 la dificultad. El orden $2s\ge4$ de $R$ no pone ninguna ecuación de cuarto orden
 en el camino. La ecuación <a class="xref" href="#es-eq:coste-debil">(36)</a> se despeja como
 $c=\ch+\alpha^{-1}R^{-1}(\eta_A-\eta_E)$, y ahí $R^{-1}$ actúa sobre una medida,
-donde por la Observación <a class="xref" href="#es-obs:riesz-integral">2.14</a> es una integral contra el
+donde por la Observación <a class="xref" href="#es-obs:riesz-integral">2.15</a> es una integral contra el
 núcleo. No hay elementos finitos $C^1$ ni formulación mixta: subir $s$ cambia la
 suavidad de $c$, no el tipo de objeto que hay que calcular.</p>
 <p>Eso además elimina un paso. Si $\eta_E$ es empírica con $N$ átomos y la
