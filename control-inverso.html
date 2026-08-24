@@ -632,9 +632,7 @@ $C_b(E\times A)$ dado por</p>
 con $\psi\equiv1$ en la condición de crecimiento.
 <span class="src">[Bhatt–Borkar, Ej. 1 y Cond. 1–3;
 Kurtz–Stockbridge, §1.1 (i)–(vi)]</span></p></div></div>
-<p>Qué pide cada una, <span class="mark">traducido a la notación de aquí</span>: donde ellas
-escriben $A$ para el generador y $U$ para las acciones, esta tabla escribe
-$\gen{}$ y $A$. La numeración sí es la suya.</p>
+<p>Qué pide cada una:</p>
 <p>\small
 \begin{tabular}{@{}p{1.9cm}p{5.2cm}p{6.5cm}@{}}
 \toprule
@@ -665,18 +663,17 @@ Para el LP &amp; Thm. 2.2: $\rho\,\eta\in\mathscr P(E\times A)$ &amp;
   (6.2) subniveles de $c$ compactos \\
 \bottomrule
 \end{tabular}</p>
-<p>El reparto es distinto y conviene verlo: Bhatt y Borkar le piden poco a $\gen{}$
-y ponen la existencia como hipótesis; Kurtz y Stockbridge le piden decaimiento y
-principio del máximo, y a cambio la existencia les sale. La convergencia bp de su
-Condición 1 está en la Observación <a class="xref" href="#es-obs:test">1.8</a>.</p>
+<p>Bhatt y Borkar le piden poco a $\gen{}$ y ponen la existencia como hipótesis;
+Kurtz y Stockbridge le piden decaimiento y principio del máximo, y a cambio la
+existencia les sale. La convergencia bp está en la
+Observación <a class="xref" href="#es-obs:test">1.8</a>.</p>
 <div class="stmt observacion" id="es-obs:psi"><div class="head">Observación 1.2</div><div class="body"><p><span class="df">$A$ compacto hace vacua la condición de crecimiento.</span> La (vi) pide
 $\psi\in C(A)$ positiva con $|\gen{a}\varphi(x)|\le a_\varphi+b_\varphi\psi(a)$,
 y sobre un compacto toda continua está acotada, luego $b_\varphi\psi$ se absorbe
-en $a_\varphi$ y sirve $\psi\equiv1$. Sale de que $A$ sea compacto, <span class="mark">no</span>
-de que $\gen{}\varphi$ sea acotada, que es hipótesis de <a class="xref" href="#es-eq:gen-operador">(3)</a>.</p>
-<p>De ahí que las dos condiciones sobre el costo no corran la misma suerte: con
-$\psi\equiv1$ la (6.1) se cumple con $a=1$ y $b=0$, mientras que la (6.2) no
-menciona a $\psi$ y es la que la Observación <a class="xref" href="#es-obs:tension">3.6</a> declara cerrada.</p></div></div>
+en $a_\varphi$ y sirve $\psi\equiv1$.</p>
+<p>Las dos condiciones sobre el costo no corren entonces la misma suerte: la (6.1)
+se cumple con $a=1$ y $b=0$, mientras que la (6.2) no menciona a $\psi$ y es la
+que la Observación <a class="xref" href="#es-obs:tension">3.6</a> declara cerrada.</p></div></div>
 <div class="stmt definicion" id="es-def:relajada"><div class="head">Definición 1.3</div><div class="body"><p><span class="src">[Bhatt–Borkar, Def. 1.2]</span>
 $V=\mathscr P(A)$, compacto metrizable en la topología débil. Un proceso
 $(X,\pi)$ a valores en $E\times V$, progresivamente medible respecto de
@@ -699,8 +696,7 @@ $\pi:E\to\mathscr P(A)$,</p>
   \qquad 
 \end{equation}</div><div class="eqside"><span class="jn">v2:&nbsp;(33)–(35)</span><span class="num">(5)</span></div></div>
 <p>con <span class="v" data-var="std">$b_\pi(x)=\int_Ab(x,a)\,\pi_x(da)$</span><span class="v" data-var="fin">$b_\pi(x)=\pi_x^a\,b(x,a)$</span> y
-<span class="v" data-var="std">$\Sigma_\pi(x)=\int_A\sigma\sigma^\top(x,a)\,\pi_x(da)$</span><span class="v" data-var="fin">$\Sigma_\pi(x)=\pi_x^a\,\sigma\sigma^\top(x,a)$</span>. Lo que se promedia es $\sigma\sigma^\top$ y
-no $\sigma$. El §<a class="xref" href="#es-sec:pde">4</a> usa $\Gen{\pi}$, $b_\pi$ y $\Sigma_\pi$.</p>
+<span class="v" data-var="std">$\Sigma_\pi(x)=\int_A\sigma\sigma^\top(x,a)\,\pi_x(da)$</span><span class="v" data-var="fin">$\Sigma_\pi(x)=\pi_x^a\,\sigma\sigma^\top(x,a)$</span>. Lo que se promedia es $\sigma\sigma^\top$.</p>
 <p>Para un costo instantáneo boreliano acotado $c:E\times A\to\R$, el costo
 descontado de una política relajada y el problema directo son</p>
 <div class="display numerado" id="es-eq:J"><div class="eqbody"><span class="v" data-var="std">\[J_c(\pi)=\E\left[\int_0^\infty e^{-\rho t}\int_A c(X_t,a)\,\pi_t(da)\,dt\right],
@@ -797,12 +793,9 @@ condición de integrabilidad adicional.</p>
 <span class="src">[Bhatt–Borkar, Thm. 2.2]</span>, que no le pide a $E$ más que ser polaco; el
 análogo de <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span> pide además su (6.2)
 (Observación <a class="xref" href="#es-obs:tension">3.6</a>).</p></div></div>
-<p>La condición de masa es hipótesis y no conclusión, y hay que decirlo porque
-$\dom(\gen{})=C_0^2(\R^d)$ <span class="mark">no contiene las constantes</span>: $\varphi\equiv1$
-no es función de prueba admisible, así que <a class="xref" href="#es-eq:balance">(12)</a> sola no determina
-la masa de $\eta$. La fuente lo pide en el enunciado, sobre la medida ya
-normalizada <span class="src">[Bhatt–Borkar, Thm. 2.2, cuya hipótesis es
-$\rho\,\eta\in\mathscr P(E\times A)$]</span>.</p>
+<p>La masa es hipótesis porque $\dom(\gen{})=C_0^2(\R^d)$ no contiene las
+constantes: $\varphi\equiv1$ no es función de prueba admisible, así que
+<a class="xref" href="#es-eq:balance">(12)</a> sola no determina la masa de $\eta$.</p>
 <p>En forma de operadores <a class="xref" href="#es-eq:balance">(12)</a> es
 $(\rho-\gen{})^{*}\eta=\nu_0$, o sea $\eta$ es la ley inicial transportada por la
 resolvente adjunta.</p>
@@ -944,8 +937,8 @@ $\|f_k\|_{H^1}$ acotada y $f_k(x_0,a_0)\to\infty$, luego evaluar en $(x_0,a_0)$
 no es funcional acotado. Y como la medida de ocupación de una política
 determinista carga una gráfica Lebesgue-nula, es una medida de ese tipo singular.</p></div></div>
 <p>Luego $H^1$ queda descartado en cuanto $n\ge2$, y la penalización tiene que subir
-de orden. Como $E\times A\s\R^n$, el espacio se toma sobre todo $\R^n$ y el costo
-se mira restringido, lo que evita hablar de la frontera de $A$.</p>
+de orden. Como $E\times A\s\R^n$, el espacio se toma sobre $\R^n$ y el costo se
+mira restringido.</p>
 <div class="stmt definicion" id="es-def:espacio"><div class="head">Definición 2.8</div><div class="body"><p>Fijos $s&gt;n/2$ y $\kappa&gt;0$. El <span class="df">espacio del costo</span> es $\Hs=H^s(\R^n)$ con</p>
 <div class="display numerado" id="es-eq:penalizacion"><div class="eqbody">\begin{equation}
 
@@ -958,9 +951,7 @@ estar sobre $\R^n$ el exponente no tiene que ser entero, y la segunda igualdad d
 <a class="xref" href="#es-eq:penalizacion">(19)</a> es la lectura diferencial cuando lo es.</p>
 <div class="stmt observacion" id="es-obs:restriccion"><div class="head">Observación 2.9</div><div class="body"><p>El costo solo se observa en $E\times A$, así que dos elementos de $\Hs$ que
 coincidan ahí son indistinguibles para $\Gap$. Esa ambigüedad se suma a la de
-<a class="xref" href="#es-eq:shaping">(16)</a> y la absorbe $\CE$, que ya es unión de clases. Tomar $\Hs$
-sobre $\R^n$ en vez de sobre $E\times A$ ahorra a cambio el operador de extensión
-y las tres definiciones de $H^s$ sobre un dominio.</p></div></div>
+<a class="xref" href="#es-eq:shaping">(16)</a> y la absorbe $\CE$, que ya es unión de clases.</p></div></div>
 <div class="stmt proposicion" id="es-prop:delta"><div class="head">Proposición 2.10</div><div class="body"><p><button class="term" type="button" data-k="Hs">$\Hs$</button> el de la Definición <a class="xref" href="#es-def:espacio">2.8</a> $\rt$
 $\delta_{z}\in\Hd$ con $\|\delta_z\|_{\Hd}=C_\iota$ para todo $z$, y toda medida
 signada finita en $E\times A$ está en $\Hd$ con
