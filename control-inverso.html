@@ -791,18 +791,19 @@ condición de integrabilidad adicional.</p>
 <p>El recíproco es la caracterización de las medidas de ocupación descontadas
 <span class="src">[Bhatt–Borkar, Thm. 2.2]</span>, que no le pide a $E$ más que ser polaco; el
 análogo de <span class="src">[Kurtz–Stockbridge, Thm. 6.3]</span> pide además la compacidad de
-los subniveles del costo (Observación <a class="xref" href="#es-obs:tension">3.6</a>). La fuente lo enuncia
-sobre una medida de probabilidad, y con $\eta$ solo finita la normalización sale
-del paso al límite de arriba.</p></div></div>
-<p>$\varphi\equiv1$ no está en $\dom(\gen{})=C_0^2(\R^d)$, pero sí en la
-bp-clausura de su gráfica: con $\varphi_k(x)=\chi(x/k)$ y $\chi$ un corte suave,
-$\varphi_k\to\mathbf 1$ acotada y puntualmente, y
-$\|\gen{}\varphi_k\|_\infty=O(1/k)$ porque $b$ y $\sigma$ son acotados. Si $\eta$
-es finita, convergencia dominada pasa <a class="xref" href="#es-eq:balance">(12)</a> al límite y da
-$\rho\,\eta(E\times A)=1$. La finitud es entonces la hipótesis y la masa es
-consecuencia; la fuente lo enuncia ya normalizado, sobre
-$\rho\,\eta\in\mathscr P(E\times A)$.
-<span class="mark">[Lectura propia.]</span></p>
+los subniveles del costo (Observación <a class="xref" href="#es-obs:tension">3.6</a>).</p>
+<p>La fuente lo enuncia sobre $\rho\,\eta\in\mathscr P(E\times A)$, y basta pedir
+$\eta$ finita, porque entonces la masa sale de <a class="xref" href="#es-eq:balance">(12)</a>. Aunque
+$\varphi\equiv1\notin\dom(\gen{})=C_0^2(\R^d)$, sí está en la bp-clausura de la
+gráfica: fíjese $\chi\in\mathscr C^\infty_c(\R^d)$ con $0\le\chi\le1$ y
+$\chi\equiv1$ en la bola unidad, y póngase $\varphi_k(x)=\chi(x/k)$. Entonces
+$0\le\varphi_k\le1$ y $\varphi_k\to\mathbf 1$ puntualmente, mientras que
+$\nabla\varphi_k=O(1/k)$ y $D^2\varphi_k=O(1/k^2)$ uniformemente, luego
+$\|\gen{}\varphi_k\|_\infty=O(1/k)\to0$ porque $b$ y $\sigma\sigma^\top$ son
+acotados. Aplicando <a class="xref" href="#es-eq:balance">(12)</a> a $\varphi_k$, con los dos integrandos
+uniformemente acotados y $\eta$ y $\nu_0$ finitas, convergencia dominada da
+$\rho\,\eta(E\times A)=\nu_0(\mathbf 1)=1$.
+<span class="mark">[Lectura propia.]</span></p></div></div>
 <p>En forma de operadores <a class="xref" href="#es-eq:balance">(12)</a> es
 $(\rho-\gen{})^{*}\eta=\nu_0$, o sea $\eta$ es la ley inicial transportada por la
 resolvente adjunta.</p>
