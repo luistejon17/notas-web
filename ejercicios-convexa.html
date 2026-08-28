@@ -714,23 +714,180 @@ $\Rightarrow \Dif g(X)(H) = -X^{-1}HX^{-1}$. Pero entonces:</p>
     añadirse a la desigualdad el término $\lambda(g\trans x + h)^{2}$ sin
     modificar el conjunto.</p></li><li><p>Analice los conversos de los dos apartados anteriores: determine si son
     verdaderos y, cuando fallen, construya contraejemplos.</p></li></ol></div></div>
-<p><em>Solución pendiente.</em></p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p6">Ver solución</button><div class="proof" id="ejercicios-convexa-p6"><p><em>a)</em> Como $A \succeq 0 \Rightarrow$ existe $B \in \Sym{n}$ con $A = B^{2}$
+$\Rightarrow x\trans A x = x\trans B\trans B x = \lVert Bx\rVert^{2}$. Tome</p>
+<div class="display">\[
+  f(x) := \lVert Bx\rVert^{2} + b\trans x + c .
+\]</div>
+<p>Como $x \mapsto Bx$ es lineal y $\lVert\cdot\rVert^{2}$ es convexa
+$\Rightarrow x \mapsto \lVert Bx\rVert^{2}$ es convexa $\Rightarrow f$ es
+convexa. Note que $C = \{x : f(x) \leq 0\}$, de modo que si $x, y \in C$
+$\Rightarrow f(x) \leq 0$ y $f(y) \leq 0$. Pero entonces:</p>
+<div class="display">\[
+  f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda)f(y) \leq 0
+  \qquad \forall \lambda \in [0,1],
+\]</div>
+<p>$\Rightarrow \lambda x + (1-\lambda)y \in C$. $\therefore$ $C$ es convexo.  □</p></div>
+<p>\temporal{<em>Apartados b) y c): pendientes.</em>}</p>
 <div class="stmt ejercicio" id="ej:t2-2"><div class="head">Ejercicio 2</div><div class="body"><p>Calcule $\aff(C)$, $\rint(C)$ y la clausura relativa para:</p>
 <ol class="lista"><li><p>un segmento no degenerado en $\mathbb{R}^{3}$;</p></li><li><p>el simplex $\Delta_{n}$;</p></li><li><p>$C = \{x \in \mathbb{R}^{n} : Ax = b,\ x \geq 0\}$, suponiendo que
     existe un punto estrictamente positivo;</p></li><li><p>el cono $\PSD{n}$ visto en el espacio de matrices simétricas.</p></li></ol></div></div>
-<p><em>Solución pendiente.</em></p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p7">Ver solución</button><div class="proof" id="ejercicios-convexa-p7"><p><em>a)</em> Sea $C = [x,y] \subseteq \mathbb{R}^{3}$ con $x \neq y$
+$\Rightarrow \aff(C) = \operatorname{gen}(x-y) + y$ trivialmente, y
+$\rint(C) = (x,y)$. En efecto, si $z \in C$, entonces
+$z = \lambda x + (1-\lambda)y$ con $\lambda \in (0,1)$
+$\Longleftrightarrow$ existe $r &gt; 0$ tal que $B_{r}(z) \cap \{x,y\} = \varnothing$
+$\Longleftrightarrow B_{r}(z) \cap \aff(C) \subseteq (x,y)$.</p>
+<p><em>b)</em> Sea $\mathbf{1} = (1,\ldots,1)\trans$ y $V = \mathbf{1}^{\perp}$
+$\Rightarrow \aff \Delta_{n} = V + e_{1}$. En efecto, $e_{1},\ldots,e_{n} \in \Delta_{n}$
+son afínmente independientes y por tanto $\dim(\aff \Delta_{n}) \geq n-1$. Pero
+$\mathbf{1} \perp (v - e_{1})$ para todo $v \in \Delta_{n}$, de modo que
+$\mathbf{1}$ no es dirección de $\aff \Delta_{n}$
+$\Rightarrow \dim(\aff \Delta_{n}) = n-1$. $\therefore \aff(\Delta_{n}) = V + e_{1}$,
+y</p>
+<div class="display">\[
+  \rint(\Delta_{n}) = \Bigl\{x : x_{i} &gt; 0 \ \text{ y } \ \textstyle\sum_{i} x_{i} = 1\Bigr\} .
+\]</div>
+<p><em>c)</em> Por hipótesis existe $x_{0} &gt; 0$ con $Ax_{0} = b$
+$\Rightarrow H = \{x : Ax = b\} = \ker A + x_{0}$ es afín
+$\Rightarrow C = H \cap \{x : x \geq 0\}$ y $\aff C = H$. De este modo
+$\rint(C) = \{x : Ax = b \ \text{ y } \ x &gt; 0\}$.</p>
+<p><em>d)</em> Como $0 \in \PSD{n} \Rightarrow \aff(\PSD{n}) = \operatorname{gen}(\PSD{n}) = \Sym{n}$.
+En efecto, $\Sym{n}$ tiene $\frac{n(n+1)}{2}$ elementos linealmente
+independientes. Por otro lado, $\rint(\PSD{n}) = \operatorname{int}(\PSD{n})$, y
+note que</p>
+<div class="display">\[
+  \operatorname{int}(\PSD{n})
+   = \operatorname{int}\Bigl(\bigcap_{x \neq 0} \{A : \langle A, xx\trans\rangle \geq 0\}\Bigr)
+   \subseteq \bigcap_{x \neq 0} \{A : \langle A, xx\trans\rangle &gt; 0\}
+   = \{A \in \Sym{n} : A \succ 0\} ,
+\]</div>
+<p>pero este último es abierto
+$\Rightarrow \operatorname{int}(\PSD{n}) = \{A \in \PSD{n} : A \succ 0\}$.  □</p></div>
+<p>\temporal{<em>La clausura relativa de los cuatro apartados: pendiente.</em>}</p>
 <div class="stmt ejercicio" id="ej:t2-3"><div class="head">Ejercicio 3</div><div class="body"><p>Sean $K_{1}, K_{2} \subseteq \mathbb{R}^{n}$ conos convexos. Pruebe que
 $K_{1} + K_{2} = \conv(K_{1} \cup K_{2})$.</p></div></div>
 <p><em>Solución pendiente.</em></p>
 <div class="stmt ejercicio" id="ej:t2-4"><div class="head">Ejercicio 4</div><div class="body"><p>Calcule el cono dual de:</p>
 <ol class="lista"><li><p>$\mathbb{R}^{n}_{+}$;</p></li><li><p>un subespacio vectorial $V$;</p></li><li><p>el cono de segundo orden $\Qcono{n+1}$;</p></li><li><p>el cono semidefinido positivo $\PSD{n}$.</p></li></ol>
 <p>En los dos últimos casos demuestre la autodualidad.</p></div></div>
-<p><em>Solución pendiente.</em></p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p8">Ver solución</button><div class="proof" id="ejercicios-convexa-p8"><p><em>a)</em> $(\mathbb{R}^{n}_{+})^{\circ}
+ = \{y \in \mathbb{R}^{n} : \langle y, x\rangle \geq 0 \ \ \forall x \in \mathbb{R}^{n}_{+}\}$.
+Si $y \in \mathbb{R}^{n}_{+} \Rightarrow y_{i} \geq 0$ para todo $i$
+$\Rightarrow y_{i}x_{i} \geq 0$ para todo $x \in \mathbb{R}^{n}_{+}$
+$\Rightarrow \langle y, x\rangle \geq 0$.
+$\therefore y \in (\mathbb{R}^{n}_{+})^{\circ}$. Por otro lado, si
+$y \notin \mathbb{R}^{n}_{+} \Rightarrow$ existe $i \in [n]$ con $y_{i} &lt; 0$
+$\Rightarrow \langle y, e_{i}\rangle = y_{i} &lt; 0
+ \Rightarrow y \notin (\mathbb{R}^{n}_{+})^{\circ}$.
+$\therefore (\mathbb{R}^{n}_{+})^{\circ} = \mathbb{R}^{n}_{+}$.</p>
+<p><em>b)</em> $V^{\circ} = \{y \in \mathbb{R}^{n} : \langle y, x\rangle \geq 0 \ \ \forall x \in V\}$.
+Si $y \in V^{\circ}$, como $v \in V \Rightarrow -v \in V$, se tiene
+$\langle y, v\rangle \geq 0$ y $\langle y, -v\rangle \geq 0$ para todo $v \in V$
+$\Rightarrow \langle y, v\rangle = 0$ para todo $v \in V$. La contenencia
+recíproca es clara. $\therefore V^{\circ} = V^{\perp}$.</p>
+<p><em>c)</em> $(\Qcono{n+1})^{\circ}
+ = \{y \in \mathbb{R}^{n+1} : \langle y, x\rangle \geq 0 \ \ \forall x \in \Qcono{n+1}\}$,
+esto es, $(\alpha, y) \in (\Qcono{n+1})^{\circ}
+ \Longleftrightarrow \alpha t + \langle y, x\rangle \geq 0$ para todo
+$(t,x) \in \Qcono{n+1}$.</p>
+<p>Si $(\alpha, y) \in \mathbb{R} \times \mathbb{R}^{n}$ es tal que
+$\lVert y\rVert &gt; \alpha$, i.e. $(\alpha, y) \notin \Qcono{n+1}$, tome
+$(\lVert y\rVert, -y) \in \Qcono{n+1}$. Pero entonces:</p>
+<div class="display">\[
+  \alpha\lVert y\rVert + \langle y, -y\rangle &lt; 0
+  \Longleftrightarrow \alpha\lVert y\rVert &lt; \lVert y\rVert^{2}
+  \Longleftrightarrow \alpha &lt; \lVert y\rVert ,
+\]</div>
+<p>$\therefore (\alpha, y) \notin (\Qcono{n+1})^{\circ}$.</p>
+<p>Similarmente, si $(\alpha, y) \notin (\Qcono{n+1})^{\circ} \Rightarrow$ existe
+$(t,x) \in \Qcono{n+1}$ tal que $\alpha t + \langle y, x\rangle &lt; 0$; de hecho,
+como $t \geq 0$ y $\alpha &gt; 0$, puedo tomar $t = \lVert x\rVert$ y
+$\alpha\lVert x\rVert + \langle y, x\rangle &lt; 0$. Pero entonces:</p>
+<div class="display">\[
+  \alpha\lVert x\rVert &lt; \langle y, -x\rangle \leq \lVert y\rVert \m \lVert x\rVert
+  \ \Rightarrow \ \alpha &lt; \lVert y\rVert
+  \ \Rightarrow \ (\alpha, y) \notin \Qcono{n+1} .
+\]</div>
+<p>$\therefore (\alpha, y) \in \Qcono{n+1}
+ \Longleftrightarrow (\alpha, y) \in (\Qcono{n+1})^{\circ}$.</p>
+<p><em>d)</em> $(\PSD{n})^{\circ}
+ = \{A \in \Sym{n} : \tr(AX) \geq 0 \ \ \forall X \in \PSD{n}\}$, y recuerde que</p>
+<div class="display">\[
+  \PSD{n} = \bigcap_{v \in \mathbb{R}^{n}}
+   \{X \in \Sym{n} : \tr(X vv\trans) \geq 0\} .
+\]</div>
+<p>$(\supseteq)$ Si $A \notin \PSD{n} \Rightarrow$ tome $v$ con
+$\tr(A vv\trans) &lt; 0$. Note que $X = vv\trans \in \PSD{n}$, pues</p>
+<div class="display">\[
+  \langle vv\trans w, w\rangle = w\trans v v\trans w
+   = (v\trans w)\trans (v\trans w) = (v\trans w)^{2} \geq 0 ,
+\]</div>
+<p>$\Rightarrow A \notin (\PSD{n})^{\circ}$, porque $\langle A, X\rangle &lt; 0$.</p>
+<p>$(\subseteq)$ Si $X \in \PSD{n} \Rightarrow X = QDQ\trans$ con $D$ diagonal.
+Como $D = \sum_{i} \lambda_{i} e_{i}e_{i}\trans
+ \Rightarrow X = \sum_{i} \lambda_{i} (Qe_{i})(Qe_{i})\trans$, y tomando
+$v_{i} = \sqrt{\lambda_{i}}\,Qe_{i} \Rightarrow X = \sum_{i} v_{i}v_{i}\trans$,
+i.e.</p>
+<div class="display">\[
+  \PSD{n} = \operatorname{cone}\bigl(\{vv\trans : v \in \mathbb{R}^{n}\}\bigr).
+\]</div>
+<p>Como cada matriz $vv\trans$ satisface
+$\tr(A vv\trans) = v\trans A v \geq 0$ para todo $A \in \PSD{n}$
+$\Rightarrow$ toda matriz $vv\trans$ está en $(\PSD{n})^{\circ}$, y este es un
+cono convexo
+$\Rightarrow \PSD{n} = \operatorname{cone}\{vv\trans\} \subseteq (\PSD{n})^{\circ}$.
+$\therefore (\PSD{n})^{\circ} = \PSD{n}$.  □</p></div>
 <div class="stmt ejercicio" id="ej:t2-5"><div class="head">Ejercicio 5$^{*}$</div><div class="body"><p>Sean $C \subset \mathbb{R}^{n}$ y $D \subset \mathbb{R}^{m}$ conjuntos convexos
 no vacíos. Pruebe que se cumplen las propiedades siguientes:</p>
 <ol class="lista"><li><p>$\rint(\cl C) = \rint C$.</p></li><li><p>Si $T(x) = Ax + b$ es una aplicación afín, entonces
     $T(\rint C) = \rint(T(C))$.</p></li><li><p>$\rint(C \times D) = \rint C \times \rint D$.</p></li><li><p>Concluya que $\rint(C - D) = \rint C - \rint D$.</p></li></ol></div></div>
-<p><em>Solución pendiente.</em></p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p9">Ver solución</button><div class="proof" id="ejercicios-convexa-p9"><p><em>a)</em> Sea $H = \aff C = \aff \cl C$
+$\Rightarrow \rint A = \operatorname{int}_{H}(A)$ para todo $A \subseteq H$, así
+que basta mostrar que $\operatorname{int}_{H}(\cl C) = \operatorname{int}_{H}(C)$.
+La contenencia $\supseteq$ es trivial. Si $x \in \operatorname{int}_{H} \cl C$,
+tome $y \in \operatorname{int}_{H} C \neq \varnothing$ y sea
+$z_{\alpha} = (1-\alpha)y + \alpha x$. Con $\alpha \downarrow 1$ se tiene
+$z_{\alpha} \to x$, y para algún $a &gt; 1$, $z_{a} \in \operatorname{int}_{H} \cl C$.
+Pero entonces:</p>
+<div class="display">\[
+  x = \tfrac{1}{a} z_{a} + \tfrac{a-1}{a}\, y ,
+\]</div>
+<p>y si $\lambda = \frac{1}{a} \Rightarrow 1 - \lambda = \frac{a-1}{a}$
+$\Rightarrow x \in (z_{a}, y]$, de modo que por el lema del segmento
+$x \in \operatorname{int}_{H} C$.  □</p>
+<p><em>b)</em> Sea $E = \aff C$. Note primero que</p>
+<div class="display">\begin{equation}
+  x \in \rint(C)
+   \Longleftrightarrow \exists r &gt; 0 : B_{r}(x) \cap E \subseteq C
+   \Longleftrightarrow \forall y \in C \ \exists \mu &gt; 1 : \mu x + (1-\mu)y \in C .
+  \tag{$*$}
+\end{equation}</div>
+<p>En efecto, suponga la condición de la derecha y tome $y \in \rint C$, y sea
+$z = \mu x + (1-\mu)y \in C$. Con $\lambda = \frac{1}{\mu} \in (0,1)$
+$\Rightarrow x = \lambda z + (1-\lambda)y$, y por el lema del segmento, como
+$y \in \rint C$ y $z \in C \Rightarrow x \in \rint C$.  □</p>
+<p><em>c)</em> Por $(*)$,</p>
+<div class="display">\[
+  \binom{x_{0}}{x_{1}} \in \rint(C \times D)
+   \Longleftrightarrow \forall \binom{y_{0}}{y_{1}} \in C \times D \
+   \exists \mu &gt; 1 : \binom{\mu x_{0} + (1-\mu)y_{0}}{\mu x_{1} + (1-\mu)y_{1}}
+   \in C \times D .
+\]</div>
+<p>Ahora bien, esto equivale a que cada coordenada cumpla $(*)$ por separado: una
+dirección es clara tomando $y_{1}$, resp. $y_{0}$, fijo, y para la otra basta
+tomar $\mu = \min\{\mu_{0}, \mu_{1}\} &gt; 1$, pues por convexidad
+$\mu x_{i} + (1-\mu)y_{i} \in C$ para todo $\mu \in (1, \mu_{i}]$.
+$\therefore (x_{0}, x_{1}) \in \rint C \times \rint D$.  □</p>
+<p><em>d)</em> Note que $C - D$ y $C \times D$ son convexos. Tome
+$T : \mathbb{R}^{n} \times \mathbb{R}^{n} \to \mathbb{R}^{n}$ dada por
+$(x_{0}, x_{1}) \mapsto x_{0} - x_{1}$. Pero entonces:</p>
+<div class="display">\[
+  \rint(C - D) = \rint(T(C \times D)) = T(\rint(C \times D))
+   = T(\rint C \times \rint D) = \rint C - \rint D . \qquad 
+\]</div></div>
+<p>\temporal{<em>La cadena que concluye $T(\rint C) = \rint(T(C))$ en b):
+pendiente.</em>}</p>
 <div class="stmt ejercicio" id="ej:t2-6"><div class="head">Ejercicio 6$^{*}$</div><div class="body"><p>Sea $\Delta_{n} = \{x \geq 0 : \mathbf{1}\trans x = 1\}$. Muestre que la
 proyección euclidiana de $y \in \mathbb{R}^{n}$ sobre $\Delta_{n}$ tiene la
 forma</p>
