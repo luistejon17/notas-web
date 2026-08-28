@@ -518,7 +518,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{*}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{*}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
   startup: {
@@ -1777,6 +1777,444 @@ incremento del capítulo 1,</p>
   f(y)-f(x)=\phi(1)-\phi(0)=\int_0^1\phi&#x27;(t)\dd t\ \ge\ \phi&#x27;(0)
     =\ip{\nabla f(x)}{y-x} . 
 \]</div></div></section>
+<section class="capitulo"><h2 id="cap:subdiferencial">El subdiferencial y la función soporte</h2>
+<h3 id="cap6:sec-subdif">Subgradientes donde la función no es diferenciable</h3>
+<p>El capítulo anterior terminó caracterizando la convexidad de una función de
+clase $C^1$ por la desigualdad
+$f(y)\ge f(x)+\ip{\nabla f(x)}{y-x}$, que dice que la función queda por encima
+de cada uno de sus planos tangentes. La desigualdad tiene sentido aunque no haya
+gradiente, y basta con no exigir que el vector que aparece en ella sea único.</p>
+<div class="stmt definicion" id="cap6:def-subdif"><div class="head">Definición</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ propia y sea $x\in\dom f$. Un vector
+$g\in\Hs$ es un <span class="df">subgradiente</span> de $f$ en $x$ si</p>
+<div class="display">\[
+  f(y)\ \ge\ f(x)+\ip{g}{y-x}\qquad\text{para todo } y\in\Hs .
+\]</div>
+<p>El conjunto de todos ellos es el <span class="df">subdiferencial</span> $\subdif f(x)$.</p></div></div>
+<p>De la definición se sigue de inmediato que $\subdif f(x)$ es cerrado y convexo,
+por ser intersección de los semiespacios cerrados que cada $y$ impone. Lo que no
+se sigue es que sea no vacío, y ese es el problema del que se ocupa la primera
+mitad del capítulo.</p>
+<p>Conviene ver antes que el subdiferencial se deja describir con la derivada
+direccional del capítulo anterior, que para una función convexa existe siempre
+en $[-\infty,+\infty]$.</p>
+<div class="stmt proposicion" id="cap6:prop-subdif-dird"><div class="head">Proposición</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ propia y convexa y sea $x\in\dom f$.
+Entonces $g\in\subdif f(x)$ si y solo si $\ip{g}{d}\le f&#x27;(x;d)$ para todo
+$d\in\Hs$.
+<span class="src">[Bauschke–Combettes, Proposición 17.17, que lo escribe con la conjugada
+de $f&#x27;(x;\cdot)$]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p36">Ver demostración</button><div class="proof" id="convexa-p36"><p>La idea es que la desigualdad de subgradiente es homogénea en la dirección, y
+por tanto solo mira lo que pasa cerca de $x$.</p>
+<p>Suponga $g\in\subdif f(x)$ y tome $d\in\Hs$ y $t&gt;0$. Aplicando la definición a
+$y=x+td$ queda $f(x+td)-f(x)\ge t\ip{g}{d}$, es decir</p>
+<div class="display">\[
+  \frac{f(x+td)-f(x)}{t}\ \ge\ \ip{g}{d},
+\]</div>
+<p>y haciendo $t\downarrow0$ se obtiene $f&#x27;(x;d)\ge\ip{g}{d}$. Recíprocamente,
+suponga $\ip{g}{d}\le f&#x27;(x;d)$ para todo $d$ y tome $y\in\dom f$. Con $d=y-x$, el
+cociente incremental es no decreciente en $t$ por convexidad, así que su límite
+cuando $t\downarrow0$ es menor o igual que su valor en $t=1$:</p>
+<div class="display">\[
+  \ip{g}{y-x}\ \le\ f&#x27;(x;y-x)\ \le\ f(y)-f(x). 
+\]</div></div>
+<h3 id="cap6:sec-lema">El lema de sublinealidad</h3>
+<p>La proposición anterior traslada la existencia de subgradientes a una pregunta
+sobre la función $d\mapsto f&#x27;(x;d)$, que es sublineal, es decir positivamente
+homogénea y subaditiva. La pregunta pasa a ser si una función sublineal admite
+una minorante lineal que además la toque en una dirección prefijada.</p>
+<div class="stmt teorema" id="cap6:teo-sublineal"><div class="head">Teorema</div><div class="body"><p>Sea $p\colon\Hs\to\R$ sublineal y continua y sea $d_0\in\Hs$. Entonces existe
+$g\in\Hs$ tal que</p>
+<div class="display">\[
+  \ip{g}{d}\le p(d)\quad\text{para todo } d\in\Hs,
+  \qquad\text{y}\qquad
+  \ip{g}{d_0}=p(d_0).
+\]</div>
+<p><span class="src">[Brezis, Teorema 1.6]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p37">Ver demostración</button><div class="proof" id="convexa-p37"><p>La idea es geométrica: el epígrafo de $p$ es un cono convexo, el punto
+$(d_0,p(d_0))$ está en su frontera, y un hiperplano de soporte ahí es justamente
+la minorante buscada.</p>
+<p>Sea $E=\epi p=\{(d,t)\in\Hs\times\R: p(d)\le t\}$, que es un cono convexo y
+cerrado, y note que $(d_0,p(d_0))\in\fr E$. Como $p$ es continua, $E$ tiene
+interior no vacío, así que existe un hiperplano de soporte en ese punto: hay
+$(a,\beta)\neq(0,0)$ con</p>
+<div class="display">\[
+  \ip{a}{d-d_0}+\beta\bigl(t-p(d_0)\bigr)\ \le\ 0
+  \qquad\text{para todo } (d,t)\in E .
+\]</div>
+<p>Tomando $t\to+\infty$ con $d$ fijo se obtiene $\beta\le0$. Si fuera $\beta=0$,
+quedaría $\ip{a}{d}\le\ip{a}{d_0}$ para todo $d\in\Hs$, y eligiendo
+$d=d_0+\lambda a$ con $\lambda&gt;0$ resultaría $\lambda\norm{a}^2\le0$, luego
+$a=0$, lo que contradice $(a,\beta)\neq(0,0)$. Por lo tanto $\beta&lt;0$.</p>
+<p>Ponga $g=-a/\beta$. Dividiendo la desigualdad por $-\beta&gt;0$ queda</p>
+<div class="display">\[
+  \ip{g}{d-d_0}-t+p(d_0)\ \le\ 0
+  \qquad\text{para todo } (d,t)\in E ,
+\]</div>
+<p>y tomando $t=p(d)$ se obtiene $\ip{g}{d-d_0}+p(d_0)\le p(d)$. Con $d=\lambda d_0$
+y $\lambda&gt;0$, la homogeneidad de $p$ da
+$(\lambda-1)\ip{g}{d_0}+p(d_0)\le\lambda p(d_0)$, es decir</p>
+<div class="display">\[
+  (\lambda-1)\bigl(\ip{g}{d_0}-p(d_0)\bigr)\ \le\ 0
+  \qquad\text{para todo }\lambda&gt;0 .
+\]</div>
+<p>El signo del factor $\lambda-1$ cambia según $\lambda$ sea mayor o menor que $1$,
+así que el otro factor tiene que anularse: $\ip{g}{d_0}=p(d_0)$. Sustituyendo
+esto en la desigualdad anterior queda $\ip{g}{d}\le p(d)$ para todo $d$.</p></div>
+<p>En clase el lema se enunció sin pedir continuidad, y en $\R^n$ está bien: una
+función sublineal con valores finitos es automáticamente continua, porque es
+convexa y finita en todo el espacio. Aquí la hipótesis hay que ponerla, y no es
+un tecnicismo. Un funcional lineal no acotado es sublineal, tiene valores
+finitos y su epígrafo es un semiespacio denso con interior vacío, de modo que no
+hay hiperplano de soporte que tocar. La continuidad es exactamente lo que
+devuelve el interior no vacío que la demostración necesita.</p>
+<h3 id="cap6:sec-existencia">Existencia de subgradientes</h3>
+<p>Con el lema, la existencia de subgradientes se reduce a que la derivada
+direccional sea continua, y esa es la propiedad que el capítulo anterior
+estableció en el interior del dominio.</p>
+<div class="stmt teorema" id="cap6:teo-subdif-novacio"><div class="head">Teorema</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ propia y convexa y sea $x$ un punto donde
+$f$ es continua. Entonces $\subdif f(x)$ es no vacío y débilmente compacto, y
+existe $\rho&gt;0$ tal que $\subdif f$ está acotado sobre $\Ball(x;\rho)$.
+<span class="src">[Bauschke–Combettes, Proposición 16.17(ii) y (iii)]</span></p></div></div>
+<p>Aquí hay dos diferencias con lo que se ve en dimensión finita, y ninguna es
+cosmética.</p>
+<p>La primera es la hipótesis. En $\R^n$ el enunciado se pide sobre
+$\ri(\dom f)$, el interior relativo, y eso basta porque todo convexo no vacío de
+$\R^n$ tiene interior relativo no vacío: la hipótesis nunca es vacía. En un
+espacio de dimensión infinita un convexo puede tener interior vacío y también
+interior relativo vacío, de manera que $\ri$ deja de ser una herramienta y hay
+que pedir continuidad de verdad. Para una función de $\Gamma_0(\Hs)$ el conjunto
+de puntos de continuidad coincide con $\intr(\dom f)$, así que la hipótesis se
+puede leer de las dos maneras.</p>
+<p>La segunda es la conclusión. En $\R^n$ se concluye que $\subdif f(x)$ es
+compacto; aquí, que es <em>débilmente</em> compacto. La distinción no se aprecia
+abajo porque en dimensión finita las dos topologías coinciden, pero arriba es
+esencial: un subdiferencial acotado, cerrado y convexo no tiene por qué ser
+compacto en norma, y de hecho casi nunca lo es.</p>
+<div class="stmt observacion" id="cap6:obs-subdif-relativo"><div class="head">Observación</div><div class="body"><p>En dimensión finita se puede hacer más, y en clase se hizo. Escribiendo
+$E=\aff(\dom f)$ y $V=\paral(E)$ el subespacio paralelo, el
+<span class="df">subdiferencial relativo</span></p>
+<div class="display">\[
+  \subdifV f(x)=\bigl\{g\in V:\ f(y)\ge f(x)+\ip{g}{y-x}\ \text{para todo }
+  y\in\dom f\bigr\}
+\]</div>
+<p>es no vacío y compacto en cuanto $x\in\ri(\dom f)$, y el subdiferencial completo
+se recupera como $\subdif f(x)=\subdifV f(x)+\orth{V}$. La construcción rescata
+el caso $\intr(\dom f)=\varnothing$ trabajando dentro del afín generado, donde el
+dominio sí tiene interior.</p>
+<p>Ese rescate es de dimensión finita de principio a fin, y no por un paso de la
+demostración sino por lo que la construcción presupone. Descansa en que
+$\ri(\dom f)$ sea no vacío, que arriba es falso. Y aunque lo fuera, $V$ puede ser
+un subespacio denso de $\Hs$, en cuyo caso $\orth{V}=\{0\}$ y la descomposición
+no aporta nada: el subdiferencial relativo coincide con el completo y el problema
+sigue donde estaba.</p></div></div>
+<h3 id="cap6:sec-soporte">La función soporte y la fórmula del máximo</h3>
+<div class="stmt definicion" id="cap6:def-soporte"><div class="head">Definición</div><div class="body"><p>Sea $C\subset\Hs$ no vacío. La <span class="df">función soporte</span> de $C$ es</p>
+<div class="display">\[
+  \sop_C(d)=\sup_{x\in C}\ip{x}{d},\qquad d\in\Hs .
+\]</div>
+<p><span class="src">[Bauschke–Combettes, Definición 7.8]</span></p></div></div>
+<p>Es un supremo de funciones lineales, así que es convexa, l.s.c. y positivamente
+homogénea sin que haya que pedirle nada a $C$. Lo interesante es que recorre el
+camino de vuelta: describe el conjunto tan bien como el conjunto se describe a
+sí mismo.</p>
+<div class="stmt proposicion" id="cap6:prop-soporte"><div class="head">Proposición</div><div class="body"><p>Sean $C,D\subset\Hs$ no vacíos, sea $L\in\Bop{\Hs,\Ks}$ y sea $d\in\Hs$.
+Entonces</p>
+<ol class="lista"><li><p>$\sop_{C+D}=\sop_C+\sop_D$.</p></li><li><p>$\sop_{L(C)}(e)=\sop_C(L^{*}e)$ para todo $e\in\Ks$.</p></li><li><p>$\sop_C=\sop_{\cl C}=\sop_{\conv C}=\sop_{\cl(\conv C)}$.</p></li><li><p>Si $C$ y $D$ son cerrados y convexos, entonces $C=D$ si y solo si
+        $\sop_C=\sop_D$.</p></li></ol>
+<p><span class="src">[Bauschke–Combettes, Proposición 7.13 y Proposición 7.16]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p38">Ver demostración</button><div class="proof" id="convexa-p38"><p>La idea de las tres primeras es que un supremo no distingue un conjunto de su
+clausura ni de su envolvente convexa, y la de la última es separación.</p>
+<p>Para <em>(i)</em>, el supremo de $\ip{x+y}{d}$ sobre $x\in C$ e $y\in D$ se parte
+porque las dos variables son independientes. Para <em>(ii)</em>, la definición del
+adjunto da $\ip{Lx}{e}=\ip{x}{L^{*}e}$, y tomar supremo sobre $x\in C$ a un lado
+y a otro es lo mismo. Para <em>(iii)</em>, la función $\ip{\cdot}{d}$ es continua,
+así que su supremo sobre $C$ y sobre $\cl C$ coinciden; y es lineal, así que su
+supremo sobre $C$ y sobre $\conv C$ también.</p>
+<p>Para <em>(iv)</em>, una implicación es trivial. Para la otra, suponga
+$\sop_C=\sop_D$ y sea $z\in C\setminus D$. Como $D$ es cerrado y convexo y $z$ no
+está en él, el teorema de separación del capítulo <a class="xref" href="#cap:separacion">&#167;</a> da $a\neq0$
+y $\gamma\in\R$ con $\ip{a}{y}\le\gamma&lt;\ip{a}{z}$ para todo $y\in D$, de donde
+$\sop_D(a)\le\gamma&lt;\ip{a}{z}\le\sop_C(a)$, contra la hipótesis.</p></div>
+<p>El nombre está justificado por el capítulo anterior: la desigualdad
+$\ip{a}{y}\le\sop_C(a)$ es la que define un semiespacio de soporte, y <em>(iv)</em>
+dice que un cerrado convexo es exactamente la intersección de todos los suyos.</p>
+<p>Con este vocabulario, el resultado central del capítulo se enuncia en una línea.</p>
+<div class="stmt teorema" id="cap6:teo-max"><div class="head">Teorema (Fórmula del máximo)</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ propia y convexa y sea $x$ un punto donde
+$f$ es continua. Entonces</p>
+<div class="display">\[
+  f&#x27;(x;d)=\max_{g\in\subdif f(x)}\ip{g}{d}=\sop_{\subdif f(x)}(d)
+  \qquad\text{para todo } d\in\Hs .
+\]</div>
+<p><span class="src">[Bauschke–Combettes, Teorema 17.18]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p39">Ver demostración</button><div class="proof" id="convexa-p39"><p>La idea es que las dos desigualdades ya están probadas por separado y lo único
+que falta es que el supremo se alcance.</p>
+<p>Una desigualdad es la caracterización del subdiferencial por la derivada
+direccional: todo $g\in\subdif f(x)$ cumple $\ip{g}{d}\le f&#x27;(x;d)$, luego
+$\sop_{\subdif f(x)}(d)\le f&#x27;(x;d)$. Para la otra, fije $d_0$ y aplique el lema
+de sublinealidad a $p=f&#x27;(x;\cdot)$, que es sublineal y continua por serlo $f$ en
+$x$: se obtiene $g$ con $\ip{g}{d}\le f&#x27;(x;d)$ para todo $d$, o sea
+$g\in\subdif f(x)$, y con $\ip{g}{d_0}=f&#x27;(x;d_0)$.</p>
+<p>Ese $g$ hace las veces de maximizador, así que el supremo se alcanza y es un
+máximo.</p></div>
+<div class="stmt observacion" id="cap6:obs-max-debil"><div class="head">Observación</div><div class="body"><p>Que el supremo sea un máximo merece una palabra, porque en dimensión infinita no
+es gratis. La demostración de arriba lo obtiene construyendo el maximizador, pero
+hay una segunda razón, más estructural: $\subdif f(x)$ es débilmente compacto y
+la función $g\mapsto\ip{g}{d}$ es débilmente continua, de modo que alcanza su
+máximo sobre él. Es el mismo mecanismo que sostuvo el teorema de Weierstrass en
+el capítulo <a class="xref" href="#cap:existencia">&#167;</a>, y aparece aquí por el mismo motivo: la
+compacidad que se necesita es la débil, no la de la norma.</p></div></div>
+<h3 id="cap6:sec-diferenciable">Cuándo el subdiferencial se reduce a un punto</h3>
+<div class="stmt proposicion" id="cap6:prop-dif-punto"><div class="head">Proposición</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ convexa y sea $x\in\dom f$ un punto donde
+$f$ es Gâteaux diferenciable. Entonces $\subdif f(x)=\{\nabla f(x)\}$.
+<span class="src">[Bauschke–Combettes, Proposición 17.31(i)]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p40">Ver demostración</button><div class="proof" id="convexa-p40"><p>Si $f$ es Gâteaux diferenciable en $x$ entonces $f&#x27;(x;d)=\ip{\nabla f(x)}{d}$
+para todo $d$, y por la caracterización con la derivada direccional un vector $g$
+está en $\subdif f(x)$ exactamente cuando $\ip{g}{d}\le\ip{\nabla f(x)}{d}$ para
+todo $d$. Cambiando $d$ por $-d$ se obtiene la igualdad, luego
+$g=\nabla f(x)$.</p></div>
+<p>El recíproco también vale, y hay que enunciarlo con cuidado porque es donde el
+tamaño del espacio se nota.</p>
+<div class="stmt proposicion" id="cap6:prop-reciproco"><div class="head">Proposición</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ propia y convexa, sea $x$ un punto donde $f$
+es continua y suponga que $\subdif f(x)$ consta de un solo vector $u$. Entonces
+$f$ es Gâteaux diferenciable en $x$ y $u=\nabla f(x)$.
+<span class="src">[Bauschke–Combettes, Proposición 17.31(ii)]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p41">Ver demostración</button><div class="proof" id="convexa-p41"><p>Por la fórmula del máximo, $f&#x27;(x;d)=\max_{g\in\subdif f(x)}\ip{g}{d}=\ip{u}{d}$
+para todo $d$, y que la derivada direccional sea lineal y continua en la
+dirección es la definición de la diferenciabilidad de Gâteaux.</p></div>
+<div class="stmt observacion" id="cap6:obs-reciproco-finito"><div class="head">Observación</div><div class="body"><p>En clase el par de resultados anteriores se enunció junto y como una sola
+equivalencia, «$f$ es diferenciable en $x$ si y solo si $\subdif f(x)$ es un
+punto», y en $\R^n$ eso está bien. Aquí conviene separar dos cosas que allí no se
+distinguen.</p>
+<p>La primera es que el recíproco necesita la continuidad en $x$, que arriba es una
+hipótesis y abajo se cumple sola en el interior relativo del dominio. La segunda
+es más de fondo: lo que se obtiene del subdiferencial es la diferenciabilidad de
+Gâteaux, y en $\R^n$ eso equivale a la de Fréchet para una función de
+$\Gamma_0$, mientras que en dimensión infinita no.
+<span class="src">[Bauschke–Combettes, Corolario 17.44 para la equivalencia en dimensión
+finita, y Proposición 17.45 para la versión con Fréchet, que la enuncia con esa
+hipótesis]</span></p>
+<p>Lo que caracteriza a la diferenciabilidad de Fréchet en un punto interior del
+dominio no es que el subdiferencial se reduzca a un punto, sino que alguna
+selección del subdiferencial sea continua ahí.
+<span class="src">[Bauschke–Combettes, Proposición 17.41]</span>
+Que $\subdif f(x)$ sea un único vector es una condición sobre un punto, y la
+diferenciabilidad de Fréchet es una condición sobre un entorno; abajo la
+diferencia se borra y arriba no.</p></div></div>
+<h3 id="cap6:sec-reglas">Dos reglas de cálculo</h3>
+<p>La clase cerró con tres reglas para calcular subdiferenciales. Dos de ellas
+suben, y la tercera se queda esperando.</p>
+<div class="stmt proposicion" id="cap6:prop-suma-inclusion"><div class="head">Proposición</div><div class="body"><p>Sean $f_1,\dots,f_m$ funciones propias y convexas sobre $\Hs$ y sea
+$x\in\bigcap_i\dom f_i$. Entonces</p>
+<div class="display">\[
+  \sum_{i=1}^{m}\subdif f_i(x)\ \subset\ \subdif\Bigl(\sum_{i=1}^{m}f_i\Bigr)(x).
+\]</div>
+<p><span class="src">[Bauschke–Combettes, Proposición 16.6(ii)]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p42">Ver demostración</button><div class="proof" id="convexa-p42"><p>Tome $g_i\in\subdif f_i(x)$ para cada $i$ y ponga $g=\sum_i g_i$. Cada uno cumple
+$f_i(y)\ge f_i(x)+\ip{g_i}{y-x}$ para todo $y$, y sumando las $m$ desigualdades
+queda $\sum_i f_i(y)\ge\sum_i f_i(x)+\ip{g}{y-x}$, que es lo pedido.</p></div>
+<p>La inclusión contraria es el asunto del capítulo siguiente, y no es gratuita:
+hace falta una hipótesis sobre cómo se cortan los dominios.</p>
+<div class="stmt teorema" id="cap6:teo-cadena"><div class="head">Teorema (Regla de la cadena afín)</div><div class="body"><p>Sean $\Hs$ y $\Ks$ espacios de Hilbert, sea $L\in\Bop{\Hs,\Ks}$, sea $b\in\Ks$ y
+sea $h\in\Gamma_0(\Ks)$. Ponga $\varphi(x)=h(Lx+b)$ y suponga que</p>
+<div class="display">\[
+  0\in\sri\bigl(\dom h-b-L(\Hs)\bigr).
+\]</div>
+<p>Entonces $\subdif\varphi(x)=L^{*}\,\subdif h(Lx+b)$ para todo $x\in\dom\varphi$.
+<span class="src">[Bauschke–Combettes, Teorema 16.47]</span></p></div></div>
+<p>La inclusión $\supset$ no necesita ninguna hipótesis y se prueba como la de la
+suma: si $v\in\subdif h(Lx+b)$, la desigualdad de subgradiente para $h$ evaluada
+en $Ly+b$ da, usando $\ip{Ly-Lx}{v}=\ip{y-x}{L^{*}v}$, la desigualdad de
+subgradiente para $\varphi$ con el vector $L^{*}v$. Lo que la hipótesis compra es
+la otra.</p>
+<p>En clase la hipótesis fue $Lx+b\in\ri(\dom h)$, que es la forma que toma en
+$\R^n$. Arriba el interior relativo no sirve y su lugar lo ocupa el interior
+relativo <em>fuerte</em> $\sri$, que coincide con $\ri$ en dimensión finita y que en
+general es más exigente. Basta, por ejemplo, con que $\dom h$ tenga interior de
+verdad y que este corte al rango de la aplicación afín.</p>
+<div class="stmt observacion" id="cap6:obs-max-incierto"><div class="head">Observación</div><div class="body"><p>La tercera regla de la clase fue la del máximo. Si $f_1,\dots,f_m$ son propias y
+convexas, si $x$ está en la intersección de los $\ri(\dom f_i)$ y si
+$f=\max_i f_i$, entonces, escribiendo $I(x)=\{i: f_i(x)=f(x)\}$ para el conjunto
+de índices activos,</p>
+<div class="display">\[
+  \subdif f(x)=\conv\Bigl(\bigcup_{i\in I(x)}\subdif f_i(x)\Bigr).
+\]</div>
+<p>La demostración de clase pasa por la fórmula del máximo y por la
+proposición <a class="xref" href="#cap6:prop-soporte">&#167;</a>: la derivada direccional de un máximo es el
+máximo de las derivadas direccionales sobre los índices activos, y una función
+soporte determina el cerrado convexo que la genera.</p>
+<p><strong>En dimensión infinita este enunciado queda pendiente en este libro</strong>, y no
+porque haya motivo para dudarlo. La demostración de arriba sugiere que la versión
+correcta lleva una clausura, $\cl\conv$, porque la envolvente convexa de una
+unión finita de convexos débilmente compactos no tiene por qué ser cerrada.
+Escribirla sin fuente sería exactamente lo que este libro no hace.</p></div></div></section>
+<section class="capitulo"><h2 id="cap:calculo-subdif">La regla de la suma y las condiciones de optimalidad</h2>
+<h3 id="cap7:sec-suma">La regla de la suma</h3>
+<p>El capítulo anterior dejó probada la inclusión fácil,
+$\subdif f(x)+\subdif h(x)\subset\subdif(f+h)(x)$, que no pide ninguna hipótesis.
+La contraria es un teorema, y su demostración es la pieza más larga de la
+semana.</p>
+<div class="stmt teorema" id="cap7:teo-suma"><div class="head">Teorema (Regla de la suma)</div><div class="body"><p>Sean $f$ y $h$ funciones de $\Gamma_0(\Hs)$ y suponga que se cumple una de las
+condiciones siguientes:</p>
+<ol class="lista"><li><p>$0\in\sri(\dom f-\dom h)$;</p></li><li><p>$\dom f\cap\intr(\dom h)\neq\varnothing$;</p></li><li><p>$\dom h=\Hs$;</p></li><li><p>$\Hs$ tiene dimensión finita y
+        $\ri(\dom f)\cap\ri(\dom h)\neq\varnothing$.</p></li></ol>
+<p>Entonces $\subdif(f+h)=\subdif f+\subdif h$.
+<span class="src">[Bauschke–Combettes, Corolario 16.48]</span></p></div></div>
+<p>La condición que se usó en clase es la <em>(iv)</em>, y la fuente la enuncia con la
+hipótesis de dimensión finita puesta delante. Las tres primeras son lo que ocupa
+su lugar cuando el espacio es grande, ordenadas de la más general a la más
+cómoda: la <em>(i)</em> pide que el origen esté en el interior relativo fuerte de
+la diferencia de los dominios, la <em>(ii)</em> basta en cuanto uno de los dominios
+tenga interior de verdad, y la <em>(iii)</em> cubre el caso frecuente en que uno de
+los dos sumandos es finito en todo el espacio.</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p43">Ver demostración</button><div class="proof" id="convexa-p43"><p>La idea es reducirlo a separar dos convexos: el epígrafo de una de las funciones
+y el hipógrafo de la otra, que solo se tocan porque la desigualdad de subgradiente
+de la suma les impide cruzarse.</p>
+<p>Basta con la inclusión $\subdif(f+h)(x)\subset\subdif f(x)+\subdif h(x)$, que es
+la que falta. Tome $g\in\subdif(f+h)(x)$, de modo que</p>
+<div class="display">\[
+  f(y)+h(y)\ \ge\ f(x)+h(x)+\ip{g}{y-x}\qquad\text{para todo } y\in\Hs ,
+\]</div>
+<p>y defina</p>
+<div class="display">\[
+  \varphi(y)=f(y)-f(x),
+  \qquad
+  \psi(y)=h(x)-h(y)+\ip{g}{y-x} .
+\]</div>
+<p>Las dos son convexas, valen $0$ en $x$, y la desigualdad de arriba dice
+exactamente que $\varphi\ge\psi$ en todo punto. Ponga</p>
+<div class="display">\[
+  A=\epi\varphi,
+  \qquad
+  B=\{(y,t)\in\Hs\times\R:\ t\le\psi(y)\},
+\]</div>
+<p>que son convexos no vacíos, y note que $\varphi\ge\psi$ impide que los interiores
+se corten. La condición de cualificación permite separarlos: existe
+$(a,\beta)\neq(0,0)$ y $\alpha\in\R$ con</p>
+<div class="display">\[
+  \ip{a}{y}+\beta t\ \le\ \alpha\ \le\ \ip{a}{z}+\beta s
+\]</div>
+<p>para todo $(y,t)\in B$ y todo $(z,s)\in A$. Como $A$ contiene puntos con $s$
+arbitrariamente grande y $B$ puntos con $t$ arbitrariamente negativo, resulta
+$\beta\ge0$.</p>
+<p>Suponga primero $\beta&gt;0$. Dividiendo por $\beta$ y escribiendo $u=a/\beta$, la
+desigualdad de la derecha con $(y,\varphi(y))\in A$ y el punto $(x,0)$, que está
+en los dos conjuntos, dan</p>
+<div class="display">\[
+  \ip{u}{y}+\varphi(y)\ \ge\ \ip{u}{x}
+  \qquad\text{para todo } y ,
+\]</div>
+<p>es decir $f(y)\ge f(x)+\ip{-u}{y-x}$, o sea $g_f=-u\in\subdif f(x)$. La
+desigualdad de la izquierda con $(y,\psi(y))\in B$ da, del mismo modo,</p>
+<div class="display">\[
+  h(y)\ \ge\ h(x)+\ip{g-g_f}{y-x},
+\]</div>
+<p>luego $g-g_f\in\subdif h(x)$, y la descomposición $g=g_f+(g-g_f)$ es la buscada.</p>
+<p>Falta descartar $\beta=0$, que es donde entra la hipótesis. Con $\beta=0$ la
+separación se reduce a $\ip{a}{y}\le\alpha\le\ip{a}{z}$ para $y\in\dom h$ y
+$z\in\dom f$, con $a\neq0$: un hiperplano que separa los dos dominios. La
+condición de cualificación lo prohíbe. En el caso <em>(ii)</em>, por ejemplo, hay
+un punto de $\dom f$ interior a $\dom h$, y ningún hiperplano puede dejar a un
+lado un entorno de ese punto y al otro el punto mismo.</p></div>
+<div class="stmt observacion" id="cap7:obs-separacion-ri"><div class="head">Observación</div><div class="body"><p>En dimensión finita el paso de la separación se apoya en un teorema que no pide
+interiores de verdad sino solo interiores relativos: si $C$ y $D$ son convexos no
+vacíos de $\R^n$ con $\ri(C)\cap\ri(D)=\varnothing$, entonces existen $a\neq0$ y
+$\alpha\in\R$ con $\ip{a}{x}\le\alpha\le\ip{a}{y}$ para todos $x\in C$ e $y\in D$.
+La demostración toma $S=C-D$, observa que $\ri(S)=\ri(C)-\ri(D)$ y por tanto que
+$0\notin\ri(S)$, y separa el origen de $S$ proyectándolo sobre $\cl S$.</p>
+<p><strong>Ese teorema es de dimensión finita, y por partida doble.</strong> La identidad
+$\ri(C-D)=\ri(C)-\ri(D)$ es falsa arriba, empezando porque los tres interiores
+relativos pueden ser vacíos; y aunque no lo fueran, separar un punto de la
+frontera de un convexo cerrado necesita más hipótesis, que es lo que se vio en el
+capítulo <a class="xref" href="#cap:separacion">&#167;</a>. Es la razón por la que el teorema de la suma se
+enunció aquí con condiciones de cualificación y no con interiores relativos.</p></div></div>
+<h3 id="cap7:sec-optimalidad">Condiciones de optimalidad</h3>
+<p>Con la regla de la suma, el problema con restricción del
+capítulo <a class="xref" href="#cap:taylor">&#167;</a> admite una caracterización exacta de sus soluciones. El
+punto de partida es un enunciado que no pide nada.</p>
+<div class="stmt teorema" id="cap7:teo-fermat"><div class="head">Teorema (Regla de Fermat)</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ propia. Entonces</p>
+<div class="display">\[
+  \argmin f=\{x\in\Hs:\ 0\in\subdif f(x)\}.
+\]</div>
+<p><span class="src">[Bauschke–Combettes, Teorema 16.3]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p44">Ver demostración</button><div class="proof" id="convexa-p44"><p>Que $0\in\subdif f(x)$ significa $f(y)\ge f(x)+\ip{0}{y-x}=f(x)$ para todo $y$, y
+eso es exactamente que $x$ minimice $f$.</p></div>
+<p>Conviene detenerse un segundo en lo que este enunciado no pide. No pide
+convexidad, no pide semicontinuidad y no pide nada sobre la dimensión del
+espacio: es una reformulación de la definición de mínimo, y por eso vale tal cual
+en cualquier espacio de Hilbert. Todo el trabajo del capítulo está en el paso
+siguiente, que es partir el subdiferencial de una suma.</p>
+<div class="stmt teorema" id="cap7:teo-optimalidad"><div class="head">Teorema</div><div class="body"><p>Sea $C\subset\Hs$ no vacío, cerrado y convexo, sea $f\in\Gamma_0(\Hs)$ y suponga
+que $\dom f\cap\intr C\neq\varnothing$. Entonces $x^{*}\in C$ minimiza $f$ sobre
+$C$ si y solo si</p>
+<div class="display">\[
+  0\in\subdif f(x^{*})+\Ncono_C(x^{*}),
+\]</div>
+<p>y esto equivale a que exista $g\in\subdif f(x^{*})$ con</p>
+<div class="display">\[
+  \ip{g}{y-x^{*}}\ \ge\ 0\qquad\text{para todo } y\in C .
+\]</div>
+<p><span class="src">[Bauschke–Combettes, Teorema 16.3 y Corolario 16.48, con el Ejemplo 16.13]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p45">Ver demostración</button><div class="proof" id="convexa-p45"><p>La idea es que la indicadora convierte la restricción en un sumando, y que su
+subdiferencial es el cono normal.</p>
+<p>Minimizar $f$ sobre $C$ es minimizar $f+\delta_C$ sobre $\Hs$, según el
+capítulo <a class="xref" href="#cap:taylor">&#167;</a>. Por la regla de Fermat, $x^{*}$ es solución si y solo
+si $0\in\subdif(f+\delta_C)(x^{*})$. La hipótesis
+$\dom f\cap\intr C\neq\varnothing$ es la condición <em>(ii)</em> de la regla de la
+suma con $h=\delta_C$, cuyo dominio es $C$, así que
+$\subdif(f+\delta_C)=\subdif f+\subdif\delta_C$. Falta identificar
+$\subdif\delta_C$: un vector $v$ está en $\subdif\delta_C(x)$ cuando
+$\delta_C(y)\ge\delta_C(x)+\ip{v}{y-x}$ para todo $y$, lo que para $x\in C$ dice
+$\ip{v}{y-x}\le0$ para todo $y\in C$, es decir $v\in\Ncono_C(x)$.
+<span class="src">[Bauschke–Combettes, Ejemplo 16.13]</span></p>
+<p>Para la segunda forma, $0\in\subdif f(x^{*})+\Ncono_C(x^{*})$ equivale a que
+exista $g\in\subdif f(x^{*})$ con $-g\in\Ncono_C(x^{*})$, y por la definición del
+cono normal eso es $\ip{-g}{y-x^{*}}\le0$ para todo $y\in C$.</p></div>
+<p>Cuando $f$ es diferenciable el subdiferencial se reduce al gradiente y la
+condición toma la forma que se reconoce de los cursos de cálculo: el gradiente
+apunta hacia dentro del conjunto, o dicho con precisión,
+$\ip{\nabla f(x^{*})}{y-x^{*}}\ge0$ para todo $y\in C$. En clase esta condición
+se enunció con la hipótesis $\ri(C)\cap\ri(\dom f)\neq\varnothing$, que es la
+forma que toma en $\R^n$; aquí se ha escrito con interior de verdad, que es la
+condición <em>(ii)</em> del teorema de la suma.</p>
+<h3 id="cap7:sec-lagrange">Restricciones afines y multiplicadores</h3>
+<p>El caso en que $C$ es una variedad afín es el que produce los multiplicadores de
+Lagrange, y es también donde la traducción tropieza con un obstáculo que no se
+parece a los anteriores.</p>
+<div class="stmt proposicion" id="cap7:prop-normal-afin"><div class="head">Proposición</div><div class="body"><p>Sean $\Hs$ y $\Ks$ espacios de Hilbert, sea $L\in\Bop{\Hs,\Ks}$, sea $b\in\Ks$ y
+sea $C=\{x\in\Hs:\ Lx=b\}$ no vacío. Entonces, para todo $x\in C$,</p>
+<div class="display">\[
+  \Ncono_C(x)=\cl\bigl(\operatorname{ran}L^{*}\bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p46">Ver demostración</button><div class="proof" id="convexa-p46"><p>Para $x\in C$ se tiene $C-x=\ker L$, y el cono normal de un subespacio cerrado es
+su complemento ortogonal, así que $\Ncono_C(x)=\orth{(\ker L)}$. La relación
+entre núcleo y rango del adjunto da
+$\orth{(\ker L)}=\cl(\operatorname{ran}L^{*})$.</p></div>
+<div class="stmt teorema" id="cap7:teo-lagrange"><div class="head">Teorema</div><div class="body"><p>En las condiciones anteriores, suponga además que $f\colon\Hs\to\R$ es convexa y
+Gâteaux diferenciable y que $\operatorname{ran}L^{*}$ es cerrado. Entonces
+$x^{*}\in C$ resuelve $\min\{f(x): Lx=b\}$ si y solo si existe
+$\lambda\in\Ks$ con</p>
+<div class="display">\[
+  \nabla f(x^{*})+L^{*}\lambda=0,
+  \qquad
+  Lx^{*}=b .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p47">Ver demostración</button><div class="proof" id="convexa-p47"><p>La función $f$ es finita y continua en todo $\Hs$, así que la condición
+<em>(iii)</em> de la regla de la suma se cumple con $h=\delta_C$, y el teorema
+anterior da que $x^{*}$ es solución si y solo si
+$0\in\nabla f(x^{*})+\Ncono_C(x^{*})$. Por la proposición precedente y la
+hipótesis de rango cerrado, $\Ncono_C(x^{*})=\operatorname{ran}L^{*}$, de modo que
+la condición dice que $-\nabla f(x^{*})=L^{*}\lambda$ para algún $\lambda\in\Ks$.</p></div>
+<div class="stmt observacion" id="cap7:obs-rango-cerrado"><div class="head">Observación</div><div class="body"><p>La hipótesis de rango cerrado es la única novedad respecto de lo que se hizo en
+clase, y conviene ver por qué allí no hacía falta. Con $C=\{x\in\R^n: Ax=b\}$, el
+cono normal es el espacio de columnas de $A^{\top}$, que por ser un subespacio de
+$\R^m$ es cerrado sin que haya que pedirlo, y la existencia del multiplicador
+$\lambda$ sale sola.</p>
+<p>En un espacio de Hilbert el rango de un operador acotado puede no ser cerrado, y
+entonces el cono normal es la <em>clausura</em> del rango del adjunto. La condición
+de optimalidad sigue siendo cierta con esa clausura, pero deja de producir un
+multiplicador: dice que $-\nabla f(x^{*})$ se aproxima por vectores de la forma
+$L^{*}\lambda$, no que sea uno de ellos. El multiplicador puede sencillamente no
+existir, y lo que lo repone es exactamente la hipótesis de rango cerrado, que en
+dimensión finita es un teorema y aquí es una hipótesis.</p></div></div></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
