@@ -2030,22 +2030,41 @@ $\R^n$. Arriba el interior relativo no sirve y su lugar lo ocupa el interior
 relativo <em>fuerte</em> $\sri$, que coincide con $\ri$ en dimensión finita y que en
 general es más exigente. Basta, por ejemplo, con que $\dom h$ tenga interior de
 verdad y que este corte al rango de la aplicación afín.</p>
-<div class="stmt observacion" id="cap6:obs-max-incierto"><div class="head">Observación</div><div class="body"><p>La tercera regla de la clase fue la del máximo. Si $f_1,\dots,f_m$ son propias y
-convexas, si $x$ está en la intersección de los $\ri(\dom f_i)$ y si
-$f=\max_i f_i$, entonces, escribiendo $I(x)=\{i: f_i(x)=f(x)\}$ para el conjunto
-de índices activos,</p>
+<div class="stmt teorema" id="cap6:teo-max-subdif"><div class="head">Teorema (Dubovitskii y Milyutin)</div><div class="body"><p>Sean $f_1,\dots,f_m$ funciones convexas de $\Hs$ en $\R\cup\{+\infty\}$, sea $x$
+un punto donde todas ellas son continuas y ponga $f=\max_i f_i$. Escribiendo
+$I(x)=\{i: f_i(x)=f(x)\}$ para el conjunto de índices activos,</p>
 <div class="display">\[
   \subdif f(x)=\conv\Bigl(\bigcup_{i\in I(x)}\subdif f_i(x)\Bigr).
 \]</div>
-<p>La demostración de clase pasa por la fórmula del máximo y por la
-proposición <a class="xref" href="#cap6:prop-soporte">&#167;</a>: la derivada direccional de un máximo es el
-máximo de las derivadas direccionales sobre los índices activos, y una función
-soporte determina el cerrado convexo que la genera.</p>
-<p><strong>En dimensión infinita este enunciado queda pendiente en este libro</strong>, y no
-porque haya motivo para dudarlo. La demostración de arriba sugiere que la versión
-correcta lleva una clausura, $\cl\conv$, porque la envolvente convexa de una
-unión finita de convexos débilmente compactos no tiene por qué ser cerrada.
-Escribirla sin fuente sería exactamente lo que este libro no hace.</p></div></div></section>
+<p><span class="src">[Bauschke–Combettes, Teorema 18.5]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p43">Ver demostración</button><div class="proof" id="convexa-p43"><p>La idea es que una inclusión es inmediata y la otra se obtiene separando, para lo
+cual hace falta saber de antemano que el conjunto de la derecha es cerrado.</p>
+<p>Para la inclusión fácil, sea $i\in I(x)$ y sea $u\in\subdif f_i(x)$. Entonces
+$\ip{u}{y-x}\le f_i(y)-f_i(x)\le f(y)-f(x)$ para todo $y$, porque $f_i(x)=f(x)$ y
+$f_i\le f$, luego $u\in\subdif f(x)$. Como $\subdif f(x)$ es convexo, contiene a
+la envolvente convexa de la unión.</p>
+<p>Para la contraria, lo primero es observar que
+$\conv\bigcup_{i\in I(x)}\subdif f_i(x)$ es débilmente compacto y cerrado: cada
+$\subdif f_i(x)$ lo es por el teorema de existencia de subgradientes, y la
+envolvente convexa de una unión <em>finita</em> de convexos débilmente compactos
+conserva las dos propiedades.
+<span class="src">[Bauschke–Combettes, Proposición 3.39(ii) y Teorema 3.34]</span>
+Siendo cerrado y convexo, si la inclusión fuera estricta habría un
+$u\in\subdif f(x)$ fuera de él y un hiperplano que lo separa, y evaluando la
+fórmula del máximo en la dirección que da la separación se llega a una
+contradicción con que $u$ sea subgradiente de $f$.</p></div>
+<div class="stmt observacion" id="cap6:obs-max-conv"><div class="head">Observación</div><div class="body"><p>Conviene mirar despacio lo que este enunciado no dice, porque es el sitio donde
+la intuición de dimensión infinita se equivoca en la dirección contraria a la
+habitual. Uno espera que arriba haga falta escribir $\cl\conv$, y no hace falta:
+la envolvente convexa aparece cerrada, sin clausura, igual que en $\R^n$. Lo que
+la sostiene es que la unión es finita y que cada subdiferencial es débilmente
+compacto, y eso último es lo que el teorema de existencia de subgradientes
+garantiza en el punto donde $f_i$ es continua.</p>
+<p>Lo que sí cambia respecto de la clase es la hipótesis, y por el mismo motivo que
+en todo este capítulo: donde en $\R^n$ se pide que $x$ esté en la intersección de
+los $\ri(\dom f_i)$, aquí se pide que las $f_i$ sean continuas en $x$. Y no es
+una comodidad de la demostración. Sin esa hipótesis el teorema es falso.
+<span class="src">[Bauschke–Combettes, Ejercicio 18.3]</span></p></div></div></section>
 <section class="capitulo"><h2 id="cap:calculo-subdif">La regla de la suma y las condiciones de optimalidad</h2>
 <h3 id="cap7:sec-suma">La regla de la suma</h3>
 <p>El capítulo anterior dejó probada la inclusión fácil,
@@ -2065,7 +2084,7 @@ cómoda: la <em>(i)</em> pide que el origen esté en el interior relativo fuerte
 la diferencia de los dominios, la <em>(ii)</em> basta en cuanto uno de los dominios
 tenga interior de verdad, y la <em>(iii)</em> cubre el caso frecuente en que uno de
 los dos sumandos es finito en todo el espacio.</p>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p43">Ver demostración</button><div class="proof" id="convexa-p43"><p>La idea es reducirlo a separar dos convexos: el epígrafo de una de las funciones
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p44">Ver demostración</button><div class="proof" id="convexa-p44"><p>La idea es reducirlo a separar dos convexos: el epígrafo de una de las funciones
 y el hipógrafo de la otra, que solo se tocan porque la desigualdad de subgradiente
 de la suma les impide cruzarse.</p>
 <p>Basta con la inclusión $\subdif(f+h)(x)\subset\subdif f(x)+\subdif h(x)$, que es
@@ -2135,7 +2154,7 @@ punto de partida es un enunciado que no pide nada.</p>
   \argmin f=\{x\in\Hs:\ 0\in\subdif f(x)\}.
 \]</div>
 <p><span class="src">[Bauschke–Combettes, Teorema 16.3]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p44">Ver demostración</button><div class="proof" id="convexa-p44"><p>Que $0\in\subdif f(x)$ significa $f(y)\ge f(x)+\ip{0}{y-x}=f(x)$ para todo $y$, y
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p45">Ver demostración</button><div class="proof" id="convexa-p45"><p>Que $0\in\subdif f(x)$ significa $f(y)\ge f(x)+\ip{0}{y-x}=f(x)$ para todo $y$, y
 eso es exactamente que $x$ minimice $f$.</p></div>
 <p>Conviene detenerse un segundo en lo que este enunciado no pide. No pide
 convexidad, no pide semicontinuidad y no pide nada sobre la dimensión del
@@ -2153,7 +2172,7 @@ $C$ si y solo si</p>
   \ip{g}{y-x^{*}}\ \ge\ 0\qquad\text{para todo } y\in C .
 \]</div>
 <p><span class="src">[Bauschke–Combettes, Teorema 16.3 y Corolario 16.48, con el Ejemplo 16.13]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p45">Ver demostración</button><div class="proof" id="convexa-p45"><p>La idea es que la indicadora convierte la restricción en un sumando, y que su
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p46">Ver demostración</button><div class="proof" id="convexa-p46"><p>La idea es que la indicadora convierte la restricción en un sumando, y que su
 subdiferencial es el cono normal.</p>
 <p>Minimizar $f$ sobre $C$ es minimizar $f+\delta_C$ sobre $\Hs$, según el
 capítulo <a class="xref" href="#cap:taylor">&#167;</a>. Por la regla de Fermat, $x^{*}$ es solución si y solo
@@ -2184,7 +2203,7 @@ sea $C=\{x\in\Hs:\ Lx=b\}$ no vacío. Entonces, para todo $x\in C$,</p>
 <div class="display">\[
   \Ncono_C(x)=\cl\bigl(\operatorname{ran}L^{*}\bigr).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p46">Ver demostración</button><div class="proof" id="convexa-p46"><p>Para $x\in C$ se tiene $C-x=\ker L$, y el cono normal de un subespacio cerrado es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p47">Ver demostración</button><div class="proof" id="convexa-p47"><p>Para $x\in C$ se tiene $C-x=\ker L$, y el cono normal de un subespacio cerrado es
 su complemento ortogonal, así que $\Ncono_C(x)=\orth{(\ker L)}$. La relación
 entre núcleo y rango del adjunto da
 $\orth{(\ker L)}=\cl(\operatorname{ran}L^{*})$.</p></div>
@@ -2197,7 +2216,7 @@ $\lambda\in\Ks$ con</p>
   \qquad
   Lx^{*}=b .
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p47">Ver demostración</button><div class="proof" id="convexa-p47"><p>La función $f$ es finita y continua en todo $\Hs$, así que la condición
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p48">Ver demostración</button><div class="proof" id="convexa-p48"><p>La función $f$ es finita y continua en todo $\Hs$, así que la condición
 <em>(iii)</em> de la regla de la suma se cumple con $h=\delta_C$, y el teorema
 anterior da que $x^{*}$ es solución si y solo si
 $0\in\nabla f(x^{*})+\Ncono_C(x^{*})$. Por la proposición precedente y la
