@@ -1048,19 +1048,17 @@ funcional continuo $\ip{x}{\cdot}$, luego es cerrado. Una intersección
 arbitraria de cerrados es cerrada.</p></div>
 <p>La prueba no usa la dimensión, y la intersección puede ser no numerable sin que
 eso cause ningún problema. El resultado siguiente es de otra naturaleza.</p>
-<div class="stmt teorema" id="cap3:teo-bipolar"><div class="head">Teorema</div><div class="body"><p>Sea $K\subset\Hs$ un cono. Entonces $\polar{(\polar{K})}=\cl(\cono(K))$. En
-particular, $K$ es un cono convexo y cerrado si y solo si
+<div class="stmt teorema" id="cap3:teo-bipolar"><div class="head">Teorema</div><div class="body"><p>Sea $K\subset\Hs$ un cono no vacío. Entonces $\polar{(\polar{K})}=\cl(\cono(K))$.
+En particular, $K$ es un cono convexo y cerrado si y solo si
 $\polar{(\polar{K})}=K$.
 <span class="src">[Bauschke–Combettes, Proposición 6.33]</span></p></div></div>
 <p>La inclusión $\cl(\cono(K))\subset\polar{(\polar{K})}$ es inmediata a partir de
-la proposición anterior. La otra requiere separar un punto
-que no esté en $\cl(\cono(K))$ de ese conjunto mediante un hiperplano, y ahí es
-donde la dimensión infinita cobra su peaje. En $\R^n$ dos convexos disjuntos
-siempre se separan; en $\Hs$ la versión ingenua de ese enunciado es falsa y hace
-falta una hipótesis adicional. La que sirve aquí es que el conjunto del que se
-separa sea convexo y cerrado, y en ese caso la separación se construye a partir
-del teorema de la proyección. El bipolar no es entonces un resultado gratuito en
-dimensión infinita, aunque su enunciado sea el mismo que en $\R^n$.</p>
+la proposición anterior. La otra necesita separar de $\cl(\cono(K))$ un punto que
+no esté en él, y ahí es donde la dimensión infinita cobra su peaje: en $\R^n$ dos
+convexos disjuntos siempre se separan, mientras que aquí la versión ingenua de
+ese enunciado es falsa. Lo que sirve en su lugar es el teorema de la proyección,
+que se demuestra al final de este capítulo y no pide más que un convexo cerrado.
+La demostración queda pospuesta hasta ahí.</p>
 <p>Los ejemplos habituales se reparten entre los dos ambientes.</p>
 <div class="stmt ejemplo" id="cap3:ej-duales"><div class="head">Ejemplo</div><div class="body"><p>El ortante positivo $K=\R^n_{+}$ satisface $\polar{K}=K$. Si $U\subset\Hs$ es un
 subespacio cerrado, entonces $\polar{U}=\orth{U}$, y sin la hipótesis de que $U$
@@ -1170,7 +1168,30 @@ punto original forma un ángulo obtuso con toda dirección que apunte hacia
 dentro de $C$, y el hiperplano que pasa por $\Proy_C z$ perpendicular a ese
 vector deja a $C$ entero de un lado. Es un hiperplano soporte de $C$ en
 $\Proy_C z$, y es la herramienta que faltaba para cerrar la igualdad bipolar de
-la sección anterior.</p></div></div></section>
+la sección anterior.</p></div></div>
+<p>Con ella, la demostración que quedó pendiente ocupa media página.</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p15" data-titulo="1">Ver: Demostración del teorema del bipolar</button><div class="proof" id="convexa-p15"><p>La idea es que la inclusión difícil sale proyectando sobre el cono, y que la
+caracterización de la proyección entrega justo la desigualdad que hace falta.</p>
+<p>Escriba $C=\cl(\cono(K))$, que es un cono convexo y cerrado, y note que $0\in C$.</p>
+<p>Para la inclusión $C\subset\polar{(\polar{K})}$, si $x\in K$ entonces
+$\ip{x}{y}\ge0$ para todo $y\in\polar{K}$, o sea $x\in\polar{(\polar{K})}$. Como
+$\polar{(\polar{K})}$ es un cono convexo y cerrado, contiene también a $\cono(K)$
+y a su clausura.</p>
+<p>Para la contraria, observe primero que $\polar{C}=\polar{K}$. Una inclusión sale
+de $K\subset C$; para la otra, si $y\in\polar{K}$ entonces $\ip{\cdot}{y}$ es no
+negativa sobre $K$, luego sobre las combinaciones de coeficientes no negativos y,
+por continuidad, sobre la clausura.</p>
+<p>Tome ahora $x\in\polar{(\polar{K})}=\polar{(\polar{C})}$ y ponga $p=\Proy_Cx$. La
+caracterización de la proyección da $\ip{x-p}{v-p}\le0$ para todo $v\in C$.
+Evaluándola en $v=0$ y en $v=2p$, que están los dos en $C$ por ser un cono, se
+obtiene $\ip{x-p}{p}\ge0$ y $\ip{x-p}{p}\le0$, luego $\ip{x-p}{p}=0$.
+Sustituyendo esto de vuelta queda $\ip{x-p}{v}\le0$ para todo $v\in C$, es decir
+$p-x\in\polar{C}$. Y como $x\in\polar{(\polar{C})}$, eso da $\ip{x}{p-x}\ge0$.
+Por lo tanto</p>
+<div class="display">\[
+  \norm{x-p}^2=\ip{x}{x-p}-\ip{p}{x-p}=-\ip{x}{p-x}-0\le0 ,
+\]</div>
+<p>de donde $x=p\in C$.</p></div></section>
 <section class="capitulo"><h2 id="cap:separacion">Separación y funciones convexas</h2>
 <h3 id="cap4:sec-corolarios">Dos corolarios de la proyección</h3>
 <p>Recordemos el enunciado con el que cerró el capítulo anterior: si $C\subset\Hs$
@@ -1185,7 +1206,7 @@ Entonces</p>
 \]</div>
 <p>En particular, $z-\Proy_Cz\in\Ncono_C(\Proy_Cz)$ para todo $z\in\Hs$.
 <span class="src">[Bauschke–Combettes, Proposición 6.47]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p15">Ver demostración</button><div class="proof" id="convexa-p15"><p>Es la caracterización del capítulo anterior, escrita con la definición del cono
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p16">Ver demostración</button><div class="proof" id="convexa-p16"><p>Es la caracterización del capítulo anterior, escrita con la definición del cono
 normal, y la segunda afirmación es la primera aplicada a $p=\Proy_Cz$.</p></div>
 <p>El segundo corolario es que la proyección no separa puntos: llevar dos puntos
 sobre $C$ nunca aumenta la distancia entre ellos. En clase esto se enunció como
@@ -1204,7 +1225,7 @@ no expansiva. En particular,</p>
 \]</div>
 <p>es decir, $\Proy_C$ es $1$-Lipschitz.
 <span class="src">[Bauschke–Combettes, Proposición 4.16]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p16">Ver demostración</button><div class="proof" id="convexa-p16"><p>Sean $x$ e $y$ en $\Hs$. Como $\Proy_Cy\in C$, la caracterización aplicada a $x$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p17">Ver demostración</button><div class="proof" id="convexa-p17"><p>Sean $x$ e $y$ en $\Hs$. Como $\Proy_Cy\in C$, la caracterización aplicada a $x$
 da $\ip{x-\Proy_Cx}{\Proy_Cy-\Proy_Cx}\le0$, y como $\Proy_Cx\in C$, la misma
 caracterización aplicada a $y$ da $\ip{y-\Proy_Cy}{\Proy_Cx-\Proy_Cy}\le0$.
 Sumando las dos desigualdades:</p>
@@ -1228,7 +1249,7 @@ $a\ne0$ tal que</p>
   \ip{a}{z}&gt;\sup_{x\in C}\ip{a}{x}.
 \]</div>
 <p><span class="src">[Bauschke–Combettes, §3.4]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p17">Ver demostración</button><div class="proof" id="convexa-p17"><p>Tome $a=z-\Proy_Cz$, que no es cero porque $z\notin C$. Por la desigualdad
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p18">Ver demostración</button><div class="proof" id="convexa-p18"><p>Tome $a=z-\Proy_Cz$, que no es cero porque $z\notin C$. Por la desigualdad
 variacional, para todo $x\in C$ se tiene $\ip{a}{x-\Proy_Cz}\le0$, y como
 $\Proy_Cz=z-a$ esto es</p>
 <div class="display">\[
@@ -1255,7 +1276,7 @@ de $\aff(C)$.</p>
         $\ip{a}{x-p}\le0$ para todo $x\in C$.</p></li><li><p>Si $p\in\partial C$, existe $a\ne0$ tal que $\ip{a}{x-p}\le0$ para todo
         $x\in C$.</p></li></ol>
 <p><span class="src">[Junca, §6.2, para la variante con el interior]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p18">Ver demostración</button><div class="proof" id="convexa-p18"><p><em>(a)</em> Sea $E=\aff(C)=p+V$. Como $p$ no está en el interior relativo de $C$,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p19">Ver demostración</button><div class="proof" id="convexa-p19"><p><em>(a)</em> Sea $E=\aff(C)=p+V$. Como $p$ no está en el interior relativo de $C$,
 ninguna bola de $E$ centrada en $p$ queda dentro de $C$, de manera que para cada
 $k$ existe $z_k\in E\setminus C$ con $\norm{z_k-p}&lt;1/k$. Ponga
 $p_k=\Proy_Cz_k$, que es distinto de $z_k$ porque $z_k\notin C$, y</p>
@@ -1300,7 +1321,7 @@ hiperplano cerrado que los separa.
 hipótesis que hay que pagar está a la vista: alguien tiene que tener interior.</p>
 <div class="stmt corolario" id="cap4:cor-soporte-hilbert"><div class="head">Corolario</div><div class="body"><p>Sea $C\subset\Hs$ convexo con $\intr(C)\ne\varnothing$ y sea $p\in\partial C$.
 Entonces existe $a\ne0$ tal que $\ip{a}{x-p}\le0$ para todo $x\in C$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p19">Ver demostración</button><div class="proof" id="convexa-p19"><p>Queremos aplicar el teorema anterior a $A=\intr(C)$, que es abierto, convexo y
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p20">Ver demostración</button><div class="proof" id="convexa-p20"><p>Queremos aplicar el teorema anterior a $A=\intr(C)$, que es abierto, convexo y
 no vacío, y a $B=\{p\}$, que es convexo y no vacío. Son disjuntos porque
 $p\in\partial C$ no pertenece al interior. Existe entonces un hiperplano cerrado
 que los separa, es decir, un funcional lineal continuo no nulo y un $\gamma\in\R$
@@ -1359,7 +1380,7 @@ que $x\ne y$ y $\lambda\in\,]0,1[$.
 <span class="src">[Bauschke–Combettes, Proposición 8.4]</span></p></div></div>
 <div class="stmt proposicion" id="cap4:prop-dominio"><div class="head">Proposición</div><div class="body"><p>Si $f$ es convexa, entonces $\dom f$ es convexo.
 <span class="src">[Bauschke–Combettes, Proposición 8.2]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p20">Ver demostración</button><div class="proof" id="convexa-p20"><p>Sean $x,y\in\dom f$ y $\lambda\in[0,1]$. El miembro derecho de la desigualdad de
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p21">Ver demostración</button><div class="proof" id="convexa-p21"><p>Sean $x,y\in\dom f$ y $\lambda\in[0,1]$. El miembro derecho de la desigualdad de
 convexidad es finito, luego $f(\lambda x+(1-\lambda)y)&lt;+\infty$.</p></div>
 <p>Los dos conjuntos que acompañan a una función son su epígrafo y sus conjuntos de
 nivel:</p>
@@ -1373,7 +1394,7 @@ producto interno $\ip{(x,s)}{(y,t)}=\ip{x}{y}+st$, y traduce cada pregunta sobre
 $f$ en una pregunta sobre un convexo. La primera es la convexidad misma.</p>
 <div class="stmt proposicion" id="cap4:prop-epi"><div class="head">Proposición</div><div class="body"><p>$f$ es convexa si y solo si $\epi f$ es un subconjunto convexo de $\Hs\times\R$.
 <span class="src">[Bauschke–Combettes, Definición 8.1 y Proposición 8.4]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p21">Ver demostración</button><div class="proof" id="convexa-p21"><p>Suponga $f$ convexa y tome $(x,s)$ y $(y,t)$ en $\epi f$ y $\lambda\in[0,1]$.
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p22">Ver demostración</button><div class="proof" id="convexa-p22"><p>Suponga $f$ convexa y tome $(x,s)$ y $(y,t)$ en $\epi f$ y $\lambda\in[0,1]$.
 Entonces</p>
 <div class="display">\[
   f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)\le\lambda s+(1-\lambda)t,
@@ -1387,7 +1408,7 @@ puntos no está en el dominio la desigualdad es trivial.</p></div>
 <div class="stmt proposicion" id="cap4:prop-nivel"><div class="head">Proposición</div><div class="body"><p>Si $f$ es convexa, entonces $\lev_\alpha f$ es convexo para todo $\alpha\in\R$.
 El recíproco es falso.
 <span class="src">[Bauschke–Combettes, Corolario 8.5]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p22">Ver demostración</button><div class="proof" id="convexa-p22"><p>Sean $x,y\in\lev_\alpha f$ y $\lambda\in[0,1]$. Entonces
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p23">Ver demostración</button><div class="proof" id="convexa-p23"><p>Sean $x,y\in\lev_\alpha f$ y $\lambda\in[0,1]$. Entonces
 $f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)\le\lambda\alpha+
 (1-\lambda)\alpha=\alpha$.</p>
 <p>Para ver que el recíproco falla, tome $f(x)=\sqrt{\norm{x}}$ sobre $\Hs\ne\{0\}$.
@@ -1402,7 +1423,7 @@ $\lambda=1/2$. Entonces $f(u/2)=1/\sqrt2&gt;1/2=\tfrac12f(u)+\tfrac12f(0)$.</p><
   f\Big(\sum_{i=1}^k\lambda_ix_i\Big)\le\sum_{i=1}^k\lambda_if(x_i).
 \]</div>
 <p><span class="src">[Bauschke–Combettes, Proposición 8.11]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p23">Ver demostración</button><div class="proof" id="convexa-p23"><p>Cada $(x_i,f(x_i))$ pertenece a $\epi f$, que es convexo, luego</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p24">Ver demostración</button><div class="proof" id="convexa-p24"><p>Cada $(x_i,f(x_i))$ pertenece a $\epi f$, que es convexo, luego</p>
 <div class="display">\[
   \sum_{i=1}^k\lambda_i\big(x_i,f(x_i)\big)
    =\Big(\sum_{i=1}^k\lambda_ix_i,\ \sum_{i=1}^k\lambda_if(x_i)\Big)\in\epi f,
@@ -1432,7 +1453,7 @@ capítulo <a class="xref" href="#cap:taylor">&#167;</a>. Entonces $\epi\delta_C=
 consecuencia $\delta_C$ es convexa si y solo si $C$ es convexo, es propia si y
 solo si $C$ es no vacío, y es l.s.c. si y solo si $C$ es cerrado.
 <span class="src">[Bauschke–Combettes, Ejemplo 8.3]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p24">Ver demostración</button><div class="proof" id="convexa-p24"><p>El par $(x,t)$ está en el epígrafo cuando $\delta_C(x)\le t$, y eso ocurre
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p25">Ver demostración</button><div class="proof" id="convexa-p25"><p>El par $(x,t)$ está en el epígrafo cuando $\delta_C(x)\le t$, y eso ocurre
 exactamente cuando $x\in C$ y $t\ge0$. De esa igualdad salen las tres
 equivalencias: la convexidad de una función es la de su epígrafo y $C\times\R_+$
 es convexo si y solo si lo es $C$; el dominio de $\delta_C$ es $C$; y
@@ -1457,7 +1478,7 @@ la demostración de $\R^n$.</p>
         \R\cup\{+\infty\}$ es convexa, entonces la inf-proyección
         $f(x)=\inf_{y\in\Ks}G(x,y)$ es convexa siempre que sea propia.
         <span class="src">[Bauschke–Combettes, Proposición 8.35]</span></p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p25">Ver demostración</button><div class="proof" id="convexa-p25"><p>Los apartados <em>(i)</em>, <em>(ii)</em> y <em>(iv)</em> se obtienen escribiendo la
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p26">Ver demostración</button><div class="proof" id="convexa-p26"><p>Los apartados <em>(i)</em>, <em>(ii)</em> y <em>(iv)</em> se obtienen escribiendo la
 desigualdad de convexidad de la función construida y sustituyendo la de las
 funciones de partida; en <em>(iv)</em> el paso
 $h(\lambda f(x)+(1-\lambda)f(y))\le\lambda h(f(x))+(1-\lambda)h(f(y))$ pide que
@@ -1494,7 +1515,7 @@ solución.</p>
 equivalentes.</p>
 <ol class="lista"><li><p>$f$ es l.s.c.</p></li><li><p>$\epi f$ es cerrado en $\Hs\times\R$.</p></li><li><p>$\lev_\alpha f$ es cerrado para todo $\alpha\in\R$.</p></li></ol>
 <p><span class="src">[Bauschke–Combettes, Lema 1.24]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p26">Ver demostración</button><div class="proof" id="convexa-p26"><p><em>(i)</em> implica <em>(ii)</em>: sea $(x_k,t_k)$ una sucesión de $\epi f$ que
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p27">Ver demostración</button><div class="proof" id="convexa-p27"><p><em>(i)</em> implica <em>(ii)</em>: sea $(x_k,t_k)$ una sucesión de $\epi f$ que
 converge a $(x,t)$. Entonces $f(x)\le\liminf_kf(x_k)\le\liminf_kt_k=t$, luego
 $(x,t)\in\epi f$.</p>
 <p><em>(ii)</em> implica <em>(iii)</em>: fije $\alpha$ y sea $(x_k)$ una sucesión de
@@ -1520,10 +1541,19 @@ siguientes son equivalentes: $f$ es l.s.c. para la topología de la norma, $f$ e
 l.s.c. por sucesiones para la topología de la norma, $f$ es l.s.c. para la
 topología débil y $f$ es l.s.c. por sucesiones débiles.
 <span class="src">[Bauschke–Combettes, Teorema 9.1]</span></p></div></div>
-<p>La razón se ve en el epígrafo: el de una función convexa es convexo, y un
-convexo cerrado en norma es débilmente cerrado. La l.s.c. respecto de la norma,
-que es barata de comprobar, se transporta así a la topología débil, que es la
-que tiene compacidad.</p></section>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p28">Ver demostración</button><div class="proof" id="convexa-p28"><p>La idea es que las cuatro nociones se leen todas en el epígrafo, y que para un
+conjunto convexo las cuatro clausuras correspondientes coinciden.</p>
+<p>La proposición anterior dice que $f$ es l.s.c. si y solo si $\epi f$ es cerrado,
+y su demostración, palabra por palabra con la topología débil en lugar de la de
+la norma, dice que $f$ es débilmente l.s.c. si y solo si $\epi f$ es débilmente
+cerrado; lo mismo con las dos versiones por sucesiones. Como $f$ es convexa,
+$\epi f$ es un subconjunto convexo de $\Hs\times\R$, y para un convexo las cuatro
+propiedades son equivalentes entre sí.
+<span class="src">[Bauschke–Combettes, Teorema 3.34]</span>
+Encadenando las dos equivalencias se obtienen las cuatro del enunciado.</p></div>
+<p>Lo que se compra con eso es lo que hace falta en el capítulo siguiente: la
+semicontinuidad inferior respecto de la norma, que es barata de comprobar, queda
+transportada a la topología débil, que es la que tiene compacidad.</p></section>
 <section class="capitulo"><h2 id="cap:existencia">Existencia de minimizadores y regularidad</h2>
 <h3 id="cap5:sec-existencia">Existencia de minimizadores</h3>
 <p>De las tres formulaciones equivalentes de la semicontinuidad inferior, la que se
@@ -1533,7 +1563,7 @@ conjuntos se puede pedir compacidad.</p>
 <div class="stmt teorema" id="cap5:teo-weierstrass-Rn"><div class="head">Teorema Weierstrass</div><div class="body"><p>Sea $f\colon\R^n\to\R\cup\{+\infty\}$ propia y l.s.c. y suponga que existe
 $\alpha\in\R$ tal que $\lev_\alpha f$ es acotado y no vacío. Entonces $f$ alcanza
 su mínimo.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p27">Ver demostración</button><div class="proof" id="convexa-p27"><p>Ponga $f^{*}=\inf f$ y tome una sucesión minimizante $(x_k)$, es decir, con
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p29">Ver demostración</button><div class="proof" id="convexa-p29"><p>Ponga $f^{*}=\inf f$ y tome una sucesión minimizante $(x_k)$, es decir, con
 $f(x_k)\to f^{*}$. Descartando finitos términos se puede suponer
 $f(x_k)\le\alpha$ para todo $k$, o sea $(x_k)\subset\lev_\alpha f$, que es
 cerrado por ser $f$ l.s.c. y acotado por hipótesis, luego compacto. Existe
@@ -1570,7 +1600,7 @@ acotado, o bien que</p>
 <p>Entonces $f$ alcanza su mínimo sobre $A$.
 <span class="src">[Brezis, Corolario 3.23; y Bauschke–Combettes, Teorema 11.10, que lo da
 con $f$ solo cuasiconvexa]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p28">Ver demostración</button><div class="proof" id="convexa-p28"><p>Fije $a\in A$ con $f(a)&lt;+\infty$ y ponga $\tilde A=\{x\in A: f(x)\le f(a)\}$, que
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p30">Ver demostración</button><div class="proof" id="convexa-p30"><p>Fije $a\in A$ con $f(a)&lt;+\infty$ y ponga $\tilde A=\{x\in A: f(x)\le f(a)\}$, que
 es no vacío, cerrado y convexo, y acotado por hipótesis. Como $\Hs$ es
 reflexivo, $\tilde A$ es compacto para la topología débil, y $f$ es débilmente
 l.s.c. por ser convexa y l.s.c. Una función l.s.c. sobre un compacto alcanza su
@@ -1584,6 +1614,8 @@ coinciden.</p>
 <div class="stmt definicion" id="cap5:def-coerciva"><div class="head">Definición</div><div class="body"><p>Una función $f$ es <span class="df">coerciva</span> si $f(x)\to+\infty$ cuando
 $\norm{x}\to\infty$.</p></div></div>
 <div class="stmt corolario" id="cap5:cor-coerciva"><div class="head">Corolario</div><div class="body"><p>Toda función propia, l.s.c., convexa y coerciva sobre $\Hs$ alcanza su mínimo.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p31">Ver demostración</button><div class="proof" id="convexa-p31"><p>Es el teorema anterior con $A=\Hs$, que es no vacío, cerrado y convexo. La
+coercividad es exactamente la hipótesis de su segunda rama.</p></div>
 <p>Para minimizar sobre un conjunto no hace falta un enunciado aparte. La función
 indicadora reduce el problema con restricción al problema libre, y lo hace sin
 tocar ninguna de las hipótesis: $\tilde f=f+\delta_C$ es propia si $f$ lo es
@@ -1593,7 +1625,7 @@ son convexas.</p>
 $f\colon C\to\R\cup\{+\infty\}$ propia, l.s.c. y convexa. Si para algún
 $\alpha\in\R$ el conjunto $C\cap\lev_\alpha f$ es acotado y no vacío, entonces
 $f$ alcanza su mínimo sobre $C$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p29">Ver demostración</button><div class="proof" id="convexa-p29"><p>Aplique el teorema anterior a $\tilde f=f+\delta_C$, cuyos conjuntos de nivel son
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p32">Ver demostración</button><div class="proof" id="convexa-p32"><p>Aplique el teorema anterior a $\tilde f=f+\delta_C$, cuyos conjuntos de nivel son
 los $C\cap\lev_\alpha f$.</p></div>
 <p>Sin convexidad el mínimo puede alcanzarse y aun así el conjunto donde se alcanza
 ser un puñado de puntos aislados, con otros tantos mínimos locales que no lo
@@ -1609,7 +1641,7 @@ $\alpha\in\R$. Entonces</p>
 entonces $S$ se reduce a un punto.
 <span class="src">[Bauschke–Combettes, Teorema 11.10 para la existencia, Proposición 11.6
 para la convexidad y Corolario 11.9 para la unicidad]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p30">Ver demostración</button><div class="proof" id="convexa-p30"><p>Que $S$ es no vacío es el corolario anterior. Llamando $\mu$ al valor mínimo,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p33">Ver demostración</button><div class="proof" id="convexa-p33"><p>Que $S$ es no vacío es el corolario anterior. Llamando $\mu$ al valor mínimo,
 $S=\lev_\mu(f+\delta_C)$ es un conjunto de nivel de una función convexa y por
 tanto es convexo. Suponga ahora $f$ estrictamente convexa y sean $x,y\in S$
 distintos. Entonces $(x+y)/2\in C$ y
@@ -1647,7 +1679,7 @@ contenido en $\dom f$, y llamando</p>
   M_f=\max\{f(x):\ x\ \text{es vértice de}\ Q\}
 \]</div>
 <p>se tiene $f(x)\le M_f$ para todo $x\in Q$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p31">Ver demostración</button><div class="proof" id="convexa-p31"><p>La existencia de $a$ es la definición de interior relativo, y $M_f&lt;+\infty$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p34">Ver demostración</button><div class="proof" id="convexa-p34"><p>La existencia de $a$ es la definición de interior relativo, y $M_f&lt;+\infty$
 porque el cubo tiene $2^d$ vértices y todos están en $\dom f$. Todo punto de $Q$
 es una combinación convexa de sus vértices, así que la desigualdad de Jensen da
 $f(x)\le M_f$.
@@ -1658,7 +1690,7 @@ vértices es la dimensión en persona.</p>
 <div class="stmt lema" id="cap5:lema-acotada"><div class="head">Lema</div><div class="body"><p>Con la notación anterior, existen $r&gt;0$ y $M&gt;0$ tales que
 $\abs{f(x)}\le M$ para todo $x\in\Ball_E(\bar x;r)$.
 <span class="src">[Bauschke–Combettes, Proposición 8.37(i)]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p32">Ver demostración</button><div class="proof" id="convexa-p32"><p>Sea $x\in Q_{1/2}=\bar x+\frac a2[-1,1]^d$. El punto reflejado $2\bar x-x$ está
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p35">Ver demostración</button><div class="proof" id="convexa-p35"><p>Sea $x\in Q_{1/2}=\bar x+\frac a2[-1,1]^d$. El punto reflejado $2\bar x-x$ está
 también en $Q_{1/2}$, y $\bar x$ es el punto medio de los dos, así que</p>
 <div class="display">\[
   f(\bar x)\le\tfrac12f(x)+\tfrac12f(2\bar x-x)\le\tfrac12f(x)+\tfrac12M_f ,
@@ -1676,7 +1708,7 @@ $M=\max\{\abs{M_f},\abs{2f(\bar x)-M_f}\}$.</p></div>
   \qquad\text{para todos}\ x,y\in\Ball_E(\bar x;r-\varepsilon).
 \]</div>
 <p><span class="src">[Bauschke–Combettes, Proposición 8.37(ii)]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p33">Ver demostración</button><div class="proof" id="convexa-p33"><p>Sean $x\neq y$ en $\Ball_E(\bar x;r-\varepsilon)$ y ponga</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p36">Ver demostración</button><div class="proof" id="convexa-p36"><p>Sean $x\neq y$ en $\Ball_E(\bar x;r-\varepsilon)$ y ponga</p>
 <div class="display">\[
   z=y+\frac{\varepsilon}{\norm{x-y}}(y-x) .
 \]</div>
@@ -1718,7 +1750,7 @@ el relativo.</p>
 <div class="stmt proposicion" id="cap5:prop-lipschitz-compacto"><div class="head">Proposición</div><div class="body"><p>Sea $f\colon\R^n\to\R\cup\{+\infty\}$ convexa y propia y sea $K\subset\ri(\dom f)$
 compacto. Entonces $f$ es Lipschitz sobre $K$.
 <span class="src">[Bauschke–Combettes, Corolario 8.41]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p34">Ver demostración</button><div class="proof" id="convexa-p34"><p>Como $K$ es compacto y está contenido en $\ri(\dom f)$, existe $\delta&gt;0$ con</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p37">Ver demostración</button><div class="proof" id="convexa-p37"><p>Como $K$ es compacto y está contenido en $\ri(\dom f)$, existe $\delta&gt;0$ con</p>
 <div class="display">\[
   K\subset K_\delta:=\{z\in E:\ \dist(z,K)\le\delta\}\subset\dom f,
 \]</div>
@@ -1740,7 +1772,7 @@ afirmaciones son equivalentes.</p>
 <ol class="lista"><li><p>$f$ es convexa.</p></li><li><p>$f(y)\ge f(x)+\ip{\nabla f(x)}{y-x}$ para todos $x,y\in U$.</p></li><li><p>$\nabla f$ es monótono, es decir,
         $\ip{\nabla f(x)-\nabla f(y)}{x-y}\ge0$ para todos $x,y\in U$.</p></li></ol>
 <p><span class="src">[Bauschke–Combettes, Proposición 17.7]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p35">Ver demostración</button><div class="proof" id="convexa-p35"><p><em>(i)</em> implica <em>(ii)</em>: fije $x,y\in U$ y defina
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p38">Ver demostración</button><div class="proof" id="convexa-p38"><p><em>(i)</em> implica <em>(ii)</em>: fije $x,y\in U$ y defina
 $q\colon\,]0,1]\to\R$ por</p>
 <div class="display">\[
   q(t)=\frac{f\bigl(x+t(y-x)\bigr)-f(x)}{t} .
@@ -1802,7 +1834,7 @@ Entonces $g\in\subdif f(x)$ si y solo si $\ip{g}{d}\le f&#x27;(x;d)$ para todo
 $d\in\Hs$.
 <span class="src">[Bauschke–Combettes, Proposición 17.17, que lo escribe con la conjugada
 de $f&#x27;(x;\cdot)$]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p36">Ver demostración</button><div class="proof" id="convexa-p36"><p>La idea es que la desigualdad de subgradiente es homogénea en la dirección, y
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p39">Ver demostración</button><div class="proof" id="convexa-p39"><p>La idea es que la desigualdad de subgradiente es homogénea en la dirección, y
 por tanto solo mira lo que pasa cerca de $x$.</p>
 <p>Suponga $g\in\subdif f(x)$ y tome $d\in\Hs$ y $t&gt;0$. Aplicando la definición a
 $y=x+td$ queda $f(x+td)-f(x)\ge t\ip{g}{d}$, es decir</p>
@@ -1829,7 +1861,7 @@ $g\in\Hs$ tal que</p>
   \ip{g}{d_0}=p(d_0).
 \]</div>
 <p><span class="src">[Brezis, Teorema 1.6]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p37">Ver demostración</button><div class="proof" id="convexa-p37"><p>La idea es geométrica: el epígrafo de $p$ es un cono convexo, el punto
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p40">Ver demostración</button><div class="proof" id="convexa-p40"><p>La idea es geométrica: el epígrafo de $p$ es un cono convexo, el punto
 $(d_0,p(d_0))$ está en su frontera, y un hiperplano de soporte ahí es justamente
 la minorante buscada.</p>
 <p>Sea $E=\epi p=\{(d,t)\in\Hs\times\R: p(d)\le t\}$, que es un cono convexo y
@@ -1874,6 +1906,29 @@ estableció en el interior del dominio.</p>
 $f$ es continua. Entonces $\subdif f(x)$ es no vacío y débilmente compacto, y
 existe $\rho&gt;0$ tal que $\subdif f$ está acotado sobre $\Ball(x;\rho)$.
 <span class="src">[Bauschke–Combettes, Proposición 16.17(ii) y (iii)]</span></p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p41">Ver demostración</button><div class="proof" id="convexa-p41"><p>La idea es aplicar el lema de sublinealidad a $p=f&#x27;(x;\cdot)$, y lo único que hay
+que comprobar para poder hacerlo es que esa función sea finita y continua. Eso lo
+da el estimado de Lipschitz del capítulo <a class="xref" href="#cap:existencia">&#167;</a>.</p>
+<p>Como $f$ es continua en $x$, es Lipschitz con alguna constante $L$ sobre una bola
+$\Ball(x;2\rho)$. Para $\norm{d}\le\rho$ y $0&lt;t\le1$ el punto $x+td$ sigue en esa
+bola, así que</p>
+<div class="display">\[
+  \Bigl|\frac{f(x+td)-f(x)}{t}\Bigr|\ \le\ \frac{L\,t\norm{d}}{t}\ =\ L\norm{d},
+\]</div>
+<p>y pasando al límite $\abs{f&#x27;(x;d)}\le L\norm{d}$, primero para esas direcciones y
+después para todas por homogeneidad positiva. Así que $f&#x27;(x;\cdot)$ es finita,
+sublineal y Lipschitz, en particular continua.</p>
+<p>El lema de sublinealidad, aplicado con una dirección cualquiera, entrega entonces
+un $g$ con $\ip{g}{d}\le f&#x27;(x;d)$ para todo $d$, y eso es $g\in\subdif f(x)$: el
+subdiferencial no es vacío.</p>
+<p>Para la acotación, todo $g\in\subdif f(x)$ cumple $\ip{g}{d}\le f&#x27;(x;d)\le
+L\norm{d}$, y tomando $d=g$ queda $\norm{g}^2\le L\norm{g}$, es decir
+$\norm{g}\le L$. El mismo argumento centrado en cualquier $y\in\Ball(x;\rho)$,
+donde $f$ sigue siendo $L$-Lipschitz sobre $\Ball(y;\rho)$, da
+$\subdif f(y)\subset\Ball(0;L)$, que es la acotación uniforme del enunciado.</p>
+<p>Finalmente, $\subdif f(x)$ es convexo y cerrado por su propia definición, y
+acabamos de verlo acotado; en un espacio de Hilbert un convexo cerrado y acotado
+es débilmente compacto.</p></div>
 <p>Aquí hay dos diferencias con lo que se ve en dimensión finita, y ninguna es
 cosmética.</p>
 <p>La primera es la hipótesis. En $\R^n$ el enunciado se pide sobre
@@ -1921,7 +1976,7 @@ Entonces</p>
 <ol class="lista"><li><p>$\sop_{C+D}=\sop_C+\sop_D$.</p></li><li><p>$\sop_{L(C)}(e)=\sop_C(L^{*}e)$ para todo $e\in\Ks$.</p></li><li><p>$\sop_C=\sop_{\cl C}=\sop_{\conv C}=\sop_{\cl(\conv C)}$.</p></li><li><p>Si $C$ y $D$ son cerrados y convexos, entonces $C=D$ si y solo si
         $\sop_C=\sop_D$.</p></li></ol>
 <p><span class="src">[Bauschke–Combettes, Proposición 7.13 y Proposición 7.16]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p38">Ver demostración</button><div class="proof" id="convexa-p38"><p>La idea de las tres primeras es que un supremo no distingue un conjunto de su
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p42">Ver demostración</button><div class="proof" id="convexa-p42"><p>La idea de las tres primeras es que un supremo no distingue un conjunto de su
 clausura ni de su envolvente convexa, y la de la última es separación.</p>
 <p>Para <em>(i)</em>, el supremo de $\ip{x+y}{d}$ sobre $x\in C$ e $y\in D$ se parte
 porque las dos variables son independientes. Para <em>(ii)</em>, la definición del
@@ -1945,7 +2000,7 @@ $f$ es continua. Entonces</p>
   \qquad\text{para todo } d\in\Hs .
 \]</div>
 <p><span class="src">[Bauschke–Combettes, Teorema 17.18]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p39">Ver demostración</button><div class="proof" id="convexa-p39"><p>La idea es que las dos desigualdades ya están probadas por separado y lo único
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p43">Ver demostración</button><div class="proof" id="convexa-p43"><p>La idea es que las dos desigualdades ya están probadas por separado y lo único
 que falta es que el supremo se alcance.</p>
 <p>Una desigualdad es la caracterización del subdiferencial por la derivada
 direccional: todo $g\in\subdif f(x)$ cumple $\ip{g}{d}\le f&#x27;(x;d)$, luego
@@ -1966,7 +2021,7 @@ compacidad que se necesita es la débil, no la de la norma.</p></div></div>
 <div class="stmt proposicion" id="cap6:prop-dif-punto"><div class="head">Proposición</div><div class="body"><p>Sea $f\colon\Hs\to\R\cup\{+\infty\}$ convexa y sea $x\in\dom f$ un punto donde
 $f$ es Gâteaux diferenciable. Entonces $\subdif f(x)=\{\nabla f(x)\}$.
 <span class="src">[Bauschke–Combettes, Proposición 17.31(i)]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p40">Ver demostración</button><div class="proof" id="convexa-p40"><p>Si $f$ es Gâteaux diferenciable en $x$ entonces $f&#x27;(x;d)=\ip{\nabla f(x)}{d}$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p44">Ver demostración</button><div class="proof" id="convexa-p44"><p>Si $f$ es Gâteaux diferenciable en $x$ entonces $f&#x27;(x;d)=\ip{\nabla f(x)}{d}$
 para todo $d$, y por la caracterización con la derivada direccional un vector $g$
 está en $\subdif f(x)$ exactamente cuando $\ip{g}{d}\le\ip{\nabla f(x)}{d}$ para
 todo $d$. Cambiando $d$ por $-d$ se obtiene la igualdad, luego
@@ -1977,7 +2032,7 @@ tamaño del espacio se nota.</p>
 es continua y suponga que $\subdif f(x)$ consta de un solo vector $u$. Entonces
 $f$ es Gâteaux diferenciable en $x$ y $u=\nabla f(x)$.
 <span class="src">[Bauschke–Combettes, Proposición 17.31(ii)]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p41">Ver demostración</button><div class="proof" id="convexa-p41"><p>Por la fórmula del máximo, $f&#x27;(x;d)=\max_{g\in\subdif f(x)}\ip{g}{d}=\ip{u}{d}$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p45">Ver demostración</button><div class="proof" id="convexa-p45"><p>Por la fórmula del máximo, $f&#x27;(x;d)=\max_{g\in\subdif f(x)}\ip{g}{d}=\ip{u}{d}$
 para todo $d$, y que la derivada direccional sea lineal y continua en la
 dirección es la definición de la diferenciabilidad de Gâteaux.</p></div>
 <div class="stmt observacion" id="cap6:obs-reciproco-finito"><div class="head">Observación</div><div class="body"><p>En clase el par de resultados anteriores se enunció junto y como una sola
@@ -2008,7 +2063,7 @@ $x\in\bigcap_i\dom f_i$. Entonces</p>
   \sum_{i=1}^{m}\subdif f_i(x)\ \subset\ \subdif\Bigl(\sum_{i=1}^{m}f_i\Bigr)(x).
 \]</div>
 <p><span class="src">[Bauschke–Combettes, Proposición 16.6(ii)]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p42">Ver demostración</button><div class="proof" id="convexa-p42"><p>Tome $g_i\in\subdif f_i(x)$ para cada $i$ y ponga $g=\sum_i g_i$. Cada uno cumple
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p46">Ver demostración</button><div class="proof" id="convexa-p46"><p>Tome $g_i\in\subdif f_i(x)$ para cada $i$ y ponga $g=\sum_i g_i$. Cada uno cumple
 $f_i(y)\ge f_i(x)+\ip{g_i}{y-x}$ para todo $y$, y sumando las $m$ desigualdades
 queda $\sum_i f_i(y)\ge\sum_i f_i(x)+\ip{g}{y-x}$, que es lo pedido.</p></div>
 <p>La inclusión contraria es el asunto del capítulo siguiente, y no es gratuita:
@@ -2020,11 +2075,19 @@ sea $h\in\Gamma_0(\Ks)$. Ponga $\varphi(x)=h(Lx+b)$ y suponga que</p>
 \]</div>
 <p>Entonces $\subdif\varphi(x)=L^{*}\,\subdif h(Lx+b)$ para todo $x\in\dom\varphi$.
 <span class="src">[Bauschke–Combettes, Teorema 16.47]</span></p></div></div>
-<p>La inclusión $\supset$ no necesita ninguna hipótesis y se prueba como la de la
-suma: si $v\in\subdif h(Lx+b)$, la desigualdad de subgradiente para $h$ evaluada
-en $Ly+b$ da, usando $\ip{Ly-Lx}{v}=\ip{y-x}{L^{*}v}$, la desigualdad de
-subgradiente para $\varphi$ con el vector $L^{*}v$. Lo que la hipótesis compra es
-la otra.</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p47" data-titulo="1">Ver: Demostración de la inclusión $\supset$, que no usa la hipótesis</button><div class="proof" id="convexa-p47"><p>Sea $v\in\subdif h(Lx+b)$ y sea $y\in\Hs$. La desigualdad de subgradiente para
+$h$ en el punto $Lx+b$, evaluada en $Ly+b$, da</p>
+<div class="display">\[
+  h(Ly+b)\ \ge\ h(Lx+b)+\ip{(Ly+b)-(Lx+b)}{v}
+        \ =\ h(Lx+b)+\ip{L(y-x)}{v},
+\]</div>
+<p>y la definición del adjunto convierte el último producto en
+$\ip{y-x}{L^{*}v}$. Como $\varphi(y)=h(Ly+b)$, eso es exactamente
+$\varphi(y)\ge\varphi(x)+\ip{y-x}{L^{*}v}$, o sea $L^{*}v\in\subdif\varphi(x)$.</p></div>
+<p>Lo que la hipótesis compra es la inclusión contraria, y esa descansa en el
+teorema de dualidad de Fenchel y Rockafellar, que este libro todavía no ha
+introducido.
+<span class="src">[Bauschke–Combettes, Teorema 15.27]</span></p>
 <p>En clase la hipótesis fue $Lx+b\in\ri(\dom h)$, que es la forma que toma en
 $\R^n$. Arriba el interior relativo no sirve y su lugar lo ocupa el interior
 relativo <em>fuerte</em> $\sri$, que coincide con $\ri$ en dimensión finita y que en
@@ -2037,7 +2100,7 @@ $I(x)=\{i: f_i(x)=f(x)\}$ para el conjunto de índices activos,</p>
   \subdif f(x)=\conv\Bigl(\bigcup_{i\in I(x)}\subdif f_i(x)\Bigr).
 \]</div>
 <p><span class="src">[Bauschke–Combettes, Teorema 18.5]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p43">Ver demostración</button><div class="proof" id="convexa-p43"><p>La idea es que una inclusión es inmediata y la otra se obtiene separando, para lo
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p48">Ver demostración</button><div class="proof" id="convexa-p48"><p>La idea es que una inclusión es inmediata y la otra se obtiene separando, para lo
 cual hace falta saber de antemano que el conjunto de la derecha es cerrado.</p>
 <p>Para la inclusión fácil, sea $i\in I(x)$ y sea $u\in\subdif f_i(x)$. Entonces
 $\ip{u}{y-x}\le f_i(y)-f_i(x)\le f(y)-f(x)$ para todo $y$, porque $f_i(x)=f(x)$ y
@@ -2084,7 +2147,7 @@ cómoda: la <em>(i)</em> pide que el origen esté en el interior relativo fuerte
 la diferencia de los dominios, la <em>(ii)</em> basta en cuanto uno de los dominios
 tenga interior de verdad, y la <em>(iii)</em> cubre el caso frecuente en que uno de
 los dos sumandos es finito en todo el espacio.</p>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p44">Ver demostración</button><div class="proof" id="convexa-p44"><p>La idea es reducirlo a separar dos convexos: el epígrafo de una de las funciones
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p49">Ver demostración</button><div class="proof" id="convexa-p49"><p>La idea es reducirlo a separar dos convexos: el epígrafo de una de las funciones
 y el hipógrafo de la otra, que solo se tocan porque la desigualdad de subgradiente
 de la suma les impide cruzarse.</p>
 <p>Basta con la inclusión $\subdif(f+h)(x)\subset\subdif f(x)+\subdif h(x)$, que es
@@ -2154,7 +2217,7 @@ punto de partida es un enunciado que no pide nada.</p>
   \argmin f=\{x\in\Hs:\ 0\in\subdif f(x)\}.
 \]</div>
 <p><span class="src">[Bauschke–Combettes, Teorema 16.3]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p45">Ver demostración</button><div class="proof" id="convexa-p45"><p>Que $0\in\subdif f(x)$ significa $f(y)\ge f(x)+\ip{0}{y-x}=f(x)$ para todo $y$, y
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p50">Ver demostración</button><div class="proof" id="convexa-p50"><p>Que $0\in\subdif f(x)$ significa $f(y)\ge f(x)+\ip{0}{y-x}=f(x)$ para todo $y$, y
 eso es exactamente que $x$ minimice $f$.</p></div>
 <p>Conviene detenerse un segundo en lo que este enunciado no pide. No pide
 convexidad, no pide semicontinuidad y no pide nada sobre la dimensión del
@@ -2172,7 +2235,7 @@ $C$ si y solo si</p>
   \ip{g}{y-x^{*}}\ \ge\ 0\qquad\text{para todo } y\in C .
 \]</div>
 <p><span class="src">[Bauschke–Combettes, Teorema 16.3 y Corolario 16.48, con el Ejemplo 16.13]</span></p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p46">Ver demostración</button><div class="proof" id="convexa-p46"><p>La idea es que la indicadora convierte la restricción en un sumando, y que su
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p51">Ver demostración</button><div class="proof" id="convexa-p51"><p>La idea es que la indicadora convierte la restricción en un sumando, y que su
 subdiferencial es el cono normal.</p>
 <p>Minimizar $f$ sobre $C$ es minimizar $f+\delta_C$ sobre $\Hs$, según el
 capítulo <a class="xref" href="#cap:taylor">&#167;</a>. Por la regla de Fermat, $x^{*}$ es solución si y solo
@@ -2203,7 +2266,7 @@ sea $C=\{x\in\Hs:\ Lx=b\}$ no vacío. Entonces, para todo $x\in C$,</p>
 <div class="display">\[
   \Ncono_C(x)=\cl\bigl(\operatorname{ran}L^{*}\bigr).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p47">Ver demostración</button><div class="proof" id="convexa-p47"><p>Para $x\in C$ se tiene $C-x=\ker L$, y el cono normal de un subespacio cerrado es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p52">Ver demostración</button><div class="proof" id="convexa-p52"><p>Para $x\in C$ se tiene $C-x=\ker L$, y el cono normal de un subespacio cerrado es
 su complemento ortogonal, así que $\Ncono_C(x)=\orth{(\ker L)}$. La relación
 entre núcleo y rango del adjunto da
 $\orth{(\ker L)}=\cl(\operatorname{ran}L^{*})$.</p></div>
@@ -2216,7 +2279,7 @@ $\lambda\in\Ks$ con</p>
   \qquad
   Lx^{*}=b .
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p48">Ver demostración</button><div class="proof" id="convexa-p48"><p>La función $f$ es finita y continua en todo $\Hs$, así que la condición
+<button class="proof-btn" type="button" aria-expanded="false" data-t="convexa-p53">Ver demostración</button><div class="proof" id="convexa-p53"><p>La función $f$ es finita y continua en todo $\Hs$, así que la condición
 <em>(iii)</em> de la regla de la suma se cumple con $h=\delta_C$, y el teorema
 anterior da que $x^{*}$ es solución si y solo si
 $0\in\nabla f(x^{*})+\Ncono_C(x^{*})$. Por la proposición precedente y la
