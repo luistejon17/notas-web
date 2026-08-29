@@ -896,6 +896,90 @@ forma</p>
 \]</div>
 <p>para un único $\tau$ que satisface $\sum_{i}(y_{i} - \tau)_{+} = 1$. Diseñe un
 algoritmo de complejidad $O(n\log n)$ basado en ordenar las coordenadas de $y$.</p></div></div>
+<p><em>Solución pendiente.</em></p>
+<h4 id="ejercicios-convexa-x4">Tarea 3</h4>
+<div class="stmt ejercicio" id="ej:t3-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sean $C_{1},\ldots,C_{m} \subset \mathbb{R}^{n}$ conjuntos convexos no vacíos.
+Muestre lo siguiente.</p>
+<ol class="lista"><li><p>$\rint(\cl C_{1}) = \rint(C_{1})$.</p></li><li><p>$\rint(C_{1}-C_{2}) = \rint C_{1} - \rint C_{2}$.</p></li><li><p>$\bigcap_{i=1}^{m} \rint C_{i} \subset \rint\left(\bigcap_{i=1}^{m} C_{i}\right)$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p10">Ver solución</button><div class="proof" id="ejercicios-convexa-p10"><p><em>a)</em> y <em>b)</em> son los apartados <em>a)</em> y <em>d)</em> del
+Ejercicio 5 de la Tarea 2.</p>
+<p><em>c)</em> Basta $m=2$, y el caso general sale encadenando. Si
+$x \in \rint C \cap \rint D$, por la caracterización $(*)$ del Ejercicio 5 de la
+Tarea 2,</p>
+<div class="display">\[
+  \forall y \in C \ \exists \mu &gt; 1 : \mu x + (1-\mu)y \in C ,
+  \qquad
+  \forall y \in D \ \exists \mu &gt; 1 : \mu x + (1-\mu)y \in D .
+\]</div>
+<p>Así, si $y \in C \cap D$ y tomo el mínimo de los dos $\mu$ de arriba, que sirve
+para ambos porque por convexidad $\mu x + (1-\mu)y$ permanece en el conjunto
+para todo valor intermedio, $\Rightarrow \exists \mu&gt;1 : \mu x + (1-\mu)y \in C \cap D$.
+$\therefore x \in \rint(C \cap D)$.  □</p></div>
+<div class="stmt ejercicio" id="ej:t3-2"><div class="head">Ejercicio 2</div><div class="body"><p>Todo conjunto convexo cerrado es la intersección de los semiespacios cerrados
+que lo contienen.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p11">Ver solución</button><div class="proof" id="ejercicios-convexa-p11"><p>Dado $C$ convexo y cerrado, sea
+$H_{m,b} := \{x \in \mathbb{R}^{n} : \langle m, x\rangle \geq b\}$, con
+$m \neq 0$, un semiespacio cerrado, y sea $A := \{(m,b) : C \subseteq H_{m,b}\}$.
+Claramente $C \subseteq \bigcap_{(m,b) \in A} H_{m,b}$.</p>
+<p>Si $y \in \bigcap_{(m,b) \in A} H_{m,b}$ pero $y \notin C$, existe un hiperplano
+que separa estrictamente $y$ de $C$, esto es, existe $(m,b)$ con
+$\langle m, x\rangle \geq b$ para todo $x \in C$ pero $\langle m, y\rangle &lt; b$
+$\Rightarrow C \subseteq H_{m,b} \Rightarrow y \in H_{m,b}
+\Rightarrow \langle m,y\rangle \geq b$. Contradicción, pues
+$\langle m,y\rangle &lt; b$.
+$\therefore C = \bigcap_{(m,b) \in A} H_{m,b}$.  □</p></div>
+<div class="stmt ejercicio" id="ej:t3-3"><div class="head">Ejercicio 3</div><div class="body"><p>Para todo cono $K \subset \mathbb{R}^{n}$ se tiene que
+$K^{**} = \cl(\conv K)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p12">Ver solución</button><div class="proof" id="ejercicios-convexa-p12"><p>Con la notación del curso, $K^{\circ} = \{y : \langle y,x\rangle \geq 0 \ \forall x \in K\}$
+y $K^{\circ\circ} = \{x : \langle x,y\rangle \geq 0 \ \forall y \in K^{\circ}\}$.
+Claramente $K \subseteq K^{\circ\circ}$, y como $K^{\circ\circ}$ es convexo y
+cerrado $\Rightarrow \cl(\conv K) \subseteq K^{\circ\circ}$.</p>
+<p>Si $x_{0} \in K^{\circ\circ}$ pero $x_{0} \notin \cl(\conv K)$, tome $(y,b)$ tal
+que $\langle y,x\rangle \geq b$ para todo $x \in \cl(\conv K)$ y
+$\langle y, x_{0}\rangle &lt; b$. De hecho, como $\cl(\conv K)$ es un cono,
+$\tfrac{x}{\lambda} \in \cl(\conv K)$ para todo $\lambda&gt;0$
+$\Rightarrow \langle y,x\rangle \geq \lambda b$ para todo $\lambda&gt;0$, y con
+$\lambda \to 0 \Rightarrow \langle y,x\rangle \geq 0$.
+$\therefore y \in K^{\circ} \Rightarrow \langle y, x_{0}\rangle \geq 0$, pues
+$x_{0} \in K^{\circ\circ}$. Pero como $0 \in \cl(\conv K)
+\Rightarrow \langle y,0\rangle = 0 \geq b
+\Rightarrow \langle y,x_{0}\rangle &lt; b \leq 0$. Contradicción.
+$\therefore \cl(\conv K) = K^{\circ\circ}$.  □</p></div>
+<div class="stmt ejercicio" id="ej:t3-4"><div class="head">Ejercicio 4</div><div class="body"><p>Calcule el mínimo de</p>
+<div class="display">\[
+  f(x,y) = \frac{1}{xy} + x + y, \qquad (x,y) \in \mathbb{R}^{2}_{++}.
+\]</div>
+<p>Pruebe primero que el mínimo existe y luego determine si es único.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p13">Ver solución</button><div class="proof" id="ejercicios-convexa-p13"><p>Sea $f : \mathbb{R}^{2}_{++} \to \mathbb{R}$ dada por
+$(x,y) \mapsto \frac{1}{xy} + x + y$. Pero entonces:</p>
+<div class="display">\[
+  \nabla f(x,y) = \Bigl(-\frac{1}{x^{2}y} + 1,\ -\frac{1}{xy^{2}} + 1\Bigr) = 0
+  \Longleftrightarrow 1 = x^{2}y = xy^{2}
+  \Longleftrightarrow x = y \ \text{ y } \ 1 = x^{3}
+  \Rightarrow x = y = 1 ,
+\]</div>
+<p>y la matriz Hessiana es</p>
+<div class="display">\[
+  Hf(x,y) =
+  \begin{bmatrix}
+    \dfrac{2}{x^{3}y} &amp; \dfrac{1}{x^{2}y^{2}} \\[0.9em]
+    \dfrac{1}{x^{2}y^{2}} &amp; \dfrac{2}{xy^{3}}
+  \end{bmatrix},
+  \qquad
+  Hf(1,1) = \begin{bmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{bmatrix} .
+\]</div>
+<p>$\Rightarrow Hf(1,1) \succ 0 \Rightarrow (1,1)$ es mínimo.  □</p></div>
+<div class="stmt ejercicio" id="ej:t3-5"><div class="head">Ejercicio 5</div><div class="body"><p>Sea $f : \mathbb{R}^{n} \to \mathbb{R}$ y defina</p>
+<div class="display">\[
+  g(x) := \inf\bigl\{t \in \mathbb{R} : (x,t) \in \conv(\operatorname{epi} f)\bigr\}.
+\]</div>
+<ol class="lista"><li><p>Pruebe que $g$ es convexa.</p></li><li><p>Muestre que $g(x) \leq f(x)$ para todo $x \in \mathbb{R}^{n}$.</p></li><li><p>Sea $h : \mathbb{R}^{n} \to \mathbb{R}$ convexa y suponga que $h \leq f$
+    puntualmente. Pruebe que $h \leq g$.</p></li></ol>
+<p>Concluya que $g$ es el mayor minorante convexo de $f$.</p></div></div>
+<p><em>Solución pendiente.</em></p>
+<div class="stmt ejercicio" id="ej:t3-6"><div class="head">Ejercicio 6$^{*}$</div><div class="body"><p>Muestre que una función Gâteaux diferenciable localmente Lipschitz es Fréchet
+diferenciable. Concluya que toda función convexa con derivadas direccionales
+lineales es Fréchet diferenciable.</p></div></div>
 <p><em>Solución pendiente.</em></p></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
