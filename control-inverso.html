@@ -245,6 +245,15 @@ div.v[data-on="true"]{display:block}
 :root[data-nota="ambas"] .v[data-var="fin"]::before{content:"\00a0\00a0"}
 :root[data-nota="ambas"] .display .v[data-var="fin"]{margin-top:-.4em}
 :root[data-nota="ambas"] .display .v[data-var="fin"]::before{content:none}
+/* Excepcion: los bloques de VARIANTE (el interruptor de alcance de
+   Optimizacion_Convexa) no son un duplicado de la misma formula sino
+   enunciados distintos con su demostracion. En gris no se leen, asi que se
+   quedan en negro y se separan con una linea al margen. */
+:root[data-nota="ambas"] .v.variante[data-var="fin"]{color:inherit}
+:root[data-nota="ambas"] .v.variante[data-var="fin"]::before{content:none}
+:root[data-nota="ambas"] .v.variante[data-var="fin"],
+:root[data-nota="ambas"] .v.variante[data-var="amb"]{
+  border-left:2px solid var(--faint); padding-left:.9em; margin-left:-.1em}
 
 /* --- enunciados ------------------------------------------------------ */
 .stmt{
