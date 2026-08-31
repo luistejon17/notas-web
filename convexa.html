@@ -307,8 +307,12 @@ ol.rom{margin:.4em 0 .4em 1.3em; padding:0}
 ol.rom li{margin-bottom:.4em}
 
 /* --- demostraciones (o soluciones) ----------------------------------- */
+/* El compendio de ejercicios pone VARIOS botones seguidos, uno por solucion.
+   Con la caja cerrada (display:none) quedan pegados en una fila, asi que el
+   margen derecho no es decorativo: sin el se leen como un solo boton largo. */
 .proof-btn{
-  margin-top:.5em; border:1px solid var(--rule); border-radius:4px;
+  margin-top:.5em; margin-right:.4em;
+  border:1px solid var(--rule); border-radius:4px;
   background:transparent; color:var(--muted); cursor:pointer;
   font-family:"Segoe UI",system-ui,sans-serif; font-size:.75em;
   padding:2.5px 9px; letter-spacing:.02em;
@@ -322,6 +326,14 @@ ol.rom li{margin-bottom:.4em}
 }
 .proof[data-open="true"]{display:block}
 .proof p:last-child{margin-bottom:0}
+
+/* \nota: el paso de una solucion que no cierra. Va dentro de su propia caja
+   plegable y tiene que verse como una advertencia, no como una frase mas. */
+.aviso{
+  margin:.9em 0 0; padding:.45em .7em;
+  border-left:2px solid var(--mark);
+  color:var(--mark); font-size:.92em;
+}
 
 .note{
   margin-top:3.5em; padding-top:1.2em; border-top:1px solid var(--rule);
