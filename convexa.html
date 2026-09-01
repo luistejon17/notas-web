@@ -539,7 +539,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
   startup: {
@@ -1181,8 +1181,8 @@ $x\in\bigcap_{i}\ri(\dom f_{i})$. Entonces</p>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p36">Ver demostración</button><div class="proof" id="clase-convexa-p36"><p>Las derivadas direccionales cumplen
 $\dird{d}{f}(x)=\max_{i\in I(x)}\dird{d}{f_{i}}(x)$, y por la fórmula de la derivada direccional eso es
 $\max_{i\in I(x)}\sop_{\subdif f_{i}(x)}(d)
- =\sop_{\conv(\bigcup_{i\in I(x)}\subdif f_{i}(x))}(d)$, usando la
-las propiedades de la función de soporte. Dos convexos cerrados con la misma función de
+ =\sop_{\conv(\bigcup_{i\in I(x)}\subdif f_{i}(x))}(d)$, por las propiedades de
+la función de soporte. Dos convexos cerrados con la misma función de
 soporte coinciden.</p></div>
 <div class="stmt teorema" id="clase-c10:teo-cadena"><div class="head">Teorema regla de la cadena afín</div><div class="body"><p>Sea $h:\R^{m}\to\R\cup\{\infty\}$ convexa y propia, $A$ una matriz $m\times n$,
 $b\in\R^{m}$ y $\phi(x)=h(Ax+b)$. Si $Ax+b\in\ri(\dom h)$, entonces</p>
@@ -1242,7 +1242,190 @@ $f$ diferenciable la regla de Fermat es</p>
   \nabla f(x^{*})+A\trans\lambda=0\ \text{ para algún }\lambda,
   \qquad Ax^{*}=b,
 \]</div>
-<p>que son las condiciones de los multiplicadores de Lagrange.</p></div></div></section></div>
+<p>que son las condiciones de los multiplicadores de Lagrange.</p></div></div></section>
+<section class="capitulo"><h2 id="clase-cap:conjugada">La conjugada de Fenchel</h2>
+<div class="stmt definicion" id="clase-c11:def-conjugada"><div class="head">Definición función conjugada</div><div class="body"><p>Sea $f:\R^{n}\to\R\cup\{\infty\}$ propia. Su <em>conjugada</em> es</p>
+<div class="display">\[
+  f^{*}(y)=\sup_{x\in\dom f}\ \ip{x}{y}-f(x),
+  \qquad y\in\R^{n}.
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c11:prop-conjugada-cerrada"><div class="head">Proposición</div><div class="body"><p>$f^{*}$ es convexa y semicontinua inferiormente, sea $f$ lo que sea.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p40">Ver demostración</button><div class="proof" id="clase-convexa-p40"><p>Para cada $x\in\dom f$ la función $y\mapsto\ip{x}{y}-f(x)$ es afín, y el
+supremo de una familia de funciones afines es convexo y s.c.i. porque su
+epígrafo es la intersección de los epígrafos, que son cerrados y convexos.</p></div>
+<div class="stmt ejemplo" id="clase-c11:ej-afin"><div class="head">Ejemplo una afín</div><div class="body"><p>Si $f(x)=\ip{a}{x}+b$, entonces $f^{*}(y)=\delta_{\{a\}}(y)-b$.</p></div></div>
+<div class="stmt ejemplo" id="clase-c11:ej-cuadratica"><div class="head">Ejemplo una cuadrática</div><div class="body"><p>Si $Q\succ0$ y $f(x)=\tfrac12 x\trans Qx$, entonces
+$f^{*}(y)=\tfrac12 y\trans Q^{-1}y$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p41">Ver demostración</button><div class="proof" id="clase-convexa-p41"><p>El supremo de $\ip{x}{y}-\tfrac12x\trans Qx$ se alcanza donde el gradiente se
+anula, esto es en $x=Q^{-1}y$, y ahí el valor es $\tfrac12y\trans Q^{-1}y$.</p></div>
+<div class="stmt ejemplo" id="clase-c11:ej-indicadora"><div class="head">Ejemplo la indicadora y la función soporte</div><div class="body"><p>Si $C\subset\R^{n}$ y $f=\delta_{C}$, entonces $f^{*}=\sop_{C}$.</p></div></div>
+<div class="stmt ejemplo" id="clase-c11:ej-norma"><div class="head">Ejemplo una norma</div><div class="body"><p>Si $f(x)=\lambda\norm{x}$ con $\lambda&gt;0$, entonces
+$f^{*}=\delta_{\{y\,:\,\norm{y}\le\lambda\}}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p42">Ver demostración</button><div class="proof" id="clase-convexa-p42"><p>Por Cauchy–Schwarz,
+$\ip{x}{y}-\lambda\norm{x}\le\norm{x}\bigl(\norm{y}-\lambda\bigr)$. Si
+$\norm{y}\le\lambda$ el supremo es $0$, y se alcanza en $x=0$. Si
+$\norm{y}&gt;\lambda$, tomando $x=t\,y/\norm{y}$ con $t\to\infty$ la expresión
+tiende a $\infty$.</p></div>
+<div class="stmt ejemplo" id="clase-c11:ej-entropia"><div class="head">Ejemplo la entropía en una variable</div><div class="body"><p>Si</p>
+<div class="display">\[
+  h(t)=\begin{cases} t\log t-t, &amp; t\ge0,\\ +\infty, &amp; t&lt;0,\end{cases}
+\]</div>
+<p>con $0\log0=0$, entonces $h^{*}(s)=e^{s}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p43">Ver demostración</button><div class="proof" id="clase-convexa-p43"><p>Para $t&gt;0$ la derivada de $st-t\log t+t$ es $s-\log t$, que se anula en
+$t=e^{s}$, y ahí el valor es $se^{s}-se^{s}+e^{s}=e^{s}$.</p></div>
+<div class="stmt ejemplo" id="clase-c11:ej-lse"><div class="head">Ejemplo log-sum-exp y la entropía negativa</div><div class="body"><p>Si $\lse(x)=\log\bigl(\sum_{i=1}^{n}e^{x_{i}}\bigr)$, entonces</p>
+<div class="display">\[
+  \lse^{*}(p)=\begin{cases}\sum_{i=1}^{n}p_{i}\log p_{i}, &amp; p\in\simplex,\\
+  +\infty,&amp;\text{de lo contrario,}\end{cases}
+\]</div>
+<p>donde $\simplex=\{p\ge0:\sum_{i}p_{i}=1\}$.</p></div></div>
+<div class="stmt proposicion" id="clase-c11:prop-biconjugacion"><div class="head">Proposición biconjugación</div><div class="body"><p>$f^{**}\le f$ para toda $f$ propia.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p44">Ver demostración</button><div class="proof" id="clase-convexa-p44"><p>Por definición de supremo, $f^{*}(y)\ge\ip{x}{y}-f(x)$ para todos $x,y$, que es
+lo mismo que $\ip{x}{y}-f^{*}(y)\le f(x)$. Tomando el supremo en $y$ queda
+$f^{**}(x)\le f(x)$.</p></div>
+<div class="stmt teorema" id="clase-c11:teo-fenchel-moreau"><div class="head">Teorema Fenchel–Moreau</div><div class="body"><p>Sea $f:\R^{n}\to\R\cup\{\infty\}$ propia. Entonces $f=f^{**}$ si y solo si $f$
+es convexa y cerrada.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p45">Ver demostración</button><div class="proof" id="clase-convexa-p45"><p>Si $f=f^{**}$, entonces $f$ es convexa y cerrada porque toda conjugada lo es.</p>
+<p>Recíprocamente, ya se sabe que $f^{**}\le f$. Sea $r&lt;f(x)$, de modo que
+$(x,r)\notin\epi f$, que es cerrado y convexo. Por separación estricta existe
+$(a,\beta)\neq0$ con</p>
+<div class="display">\[
+  \ip{a}{x}+\beta r&gt;\sup_{(z,t)\in\epi f}\ \ip{a}{z}+\beta t .
+\]</div>
+<p>Haciendo $t\to\infty$ se obtiene $\beta\le0$.</p>
+<p>Si $\beta&lt;0$, se puede normalizar $\beta=-1$, y entonces</p>
+<div class="display">\[
+  \ip{a}{x}-r&gt;\sup_{z\in\dom f}\ \ip{a}{z}-f(z)=f^{*}(a),
+\]</div>
+<p>luego $r&lt;\ip{a}{x}-f^{*}(a)\le f^{**}(x)$. Como $r&lt;f(x)$ era arbitrario,
+$f(x)\le f^{**}(x)$.</p>
+<p>Si $\beta=0$, entonces $\ip{a}{x}&gt;M:=\sup_{z\in\dom f}\ip{a}{z}$, y en
+particular $x\notin\dom f$, esto es $f(x)=+\infty$. Sea
+$x_{0}\in\ri(\dom f)$ y sea $g_{0}\in\subdif f(x_{0})$, que existe, de manera
+que $f(z)\ge f(x_{0})+\ip{g_{0}}{z-x_{0}}$ para todo $z$. Para $\lambda&gt;0$ y
+$z\in\dom f$,</p>
+<div class="display">\[
+  \ip{g_{0}+\lambda a}{z}-f(z)\le -f(x_{0})+\ip{g_{0}}{x_{0}}+\lambda M,
+\]</div>
+<p>es decir $f^{*}(g_{0}+\lambda a)\le\ip{g_{0}}{x_{0}}-f(x_{0})+\lambda M$. Por
+tanto</p>
+<div class="display">\[
+  f^{**}(x)\ \ge\ \ip{g_{0}+\lambda a}{x}-f^{*}(g_{0}+\lambda a)
+  \ \ge\ f(x_{0})+\ip{g_{0}}{x-x_{0}}+\lambda\bigl(\ip{a}{x}-M\bigr),
+\]</div>
+<p>y como $\ip{a}{x}-M&gt;0$, haciendo $\lambda\to\infty$ queda $f^{**}(x)=+\infty$.</p></div>
+<div class="stmt corolario" id="clase-c11:cor-envolvente"><div class="head">Corolario la envolvente convexa cerrada</div><div class="body"><p>Sea $f$ propia con $f^{*}$ propia. Entonces $f^{**}$ es la mayor función
+convexa, cerrada y propia que está por debajo de $f$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p46">Ver demostración</button><div class="proof" id="clase-convexa-p46"><p>Ya se sabe que $f^{**}\le f$, y $f^{**}$ es convexa y cerrada. Como $f^{*}$ es
+propia, $f^{**}$ no toma el valor $-\infty$ y no es idénticamente $+\infty$,
+luego es propia. Si $h$ es propia, convexa y cerrada con $h\le f$, entonces
+$h^{*}\ge f^{*}$ y por tanto $h=h^{**}\le f^{**}$.</p></div>
+<div class="stmt corolario" id="clase-c11:cor-indicadora"><div class="head">Corolario</div><div class="body"><p>Si $C\subset\R^{n}$ es no vacío, entonces
+$\delta_{C}^{**}=\delta_{\cl\conv C}$.</p></div></div>
+<div class="stmt teorema" id="clase-c11:teo-fenchel-young"><div class="head">Teorema desigualdad de Fenchel–Young</div><div class="body"><p>Sea $f$ propia. Entonces</p>
+<div class="display">\[
+  f(x)+f^{*}(y)\ \ge\ \ip{x}{y}
+  \qquad\text{para todos }x,y\in\R^{n},
+\]</div>
+<p>y se da la igualdad si y solo si $y\in\subdif f(x)$. Si además $f$ es convexa y
+cerrada, eso equivale a $x\in\subdif f^{*}(y)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p47">Ver demostración</button><div class="proof" id="clase-convexa-p47"><p>La desigualdad es la definición de $f^{*}$ como supremo. Y la igualdad
+$f^{*}(y)=\ip{x}{y}-f(x)$ dice que el supremo se alcanza en $x$, es decir que
+$\ip{x}{y}-f(x)\ge\ip{z}{y}-f(z)$ para todo $z$, que reordenado es
+$f(z)\ge f(x)+\ip{y}{z-x}$ para todo $z$, y eso es $y\in\subdif f(x)$. La
+última equivalencia sale de aplicar lo anterior a $f^{*}$, usando
+$f^{**}=f$.</p></div></section>
+<section class="capitulo"><h2 id="clase-cap:dualidad">Dualidad de Fenchel–Rockafellar</h2>
+<div class="stmt definicion" id="clase-c12:def-par"><div class="head">Definición el par primal-dual</div><div class="body"><p>Sean $f:\R^{n}\to\R\cup\{\infty\}$ y $g:\R^{m}\to\R\cup\{\infty\}$ propias y sea
+$A$ una matriz $m\times n$. El <em>problema primal</em> y el <em>problema
+dual</em> son</p>
+<div class="display">\[
+  p^{*}=\inf_{x\in\R^{n}}\ f(x)+g(Ax),
+  \qquad
+  d^{*}=\sup_{y\in\R^{m}}\ -f^{*}(-A\trans y)-g^{*}(y).
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c12:prop-debil"><div class="head">Proposición dualidad débil</div><div class="body"><p>$d^{*}\le p^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p48">Ver demostración</button><div class="proof" id="clase-convexa-p48"><p>Por Fenchel–Young aplicado a $f$ en $(x,-A\trans y)$ y a $g$ en $(Ax,y)$,</p>
+<div class="display">\[
+  f(x)+f^{*}(-A\trans y)\ge\ip{x}{-A\trans y}=-\ip{y}{Ax},
+  \qquad
+  g(Ax)+g^{*}(y)\ge\ip{Ax}{y}.
+\]</div>
+<p>Sumando, $f(x)+g(Ax)\ge-f^{*}(-A\trans y)-g^{*}(y)$ para todos $x$ e $y$, y
+basta tomar el ínfimo a la izquierda y el supremo a la derecha.</p></div>
+<div class="stmt definicion" id="clase-c12:def-slater"><div class="head">Definición condición de Slater</div><div class="body"><p>Se dice que el par cumple la <em>condición de Slater</em> si
+$0\in\ri(A\dom f-\dom g)$, o lo que es lo mismo, si existe
+$\bar{x}\in\ri(\dom f)$ con $A\bar{x}\in\ri(\dom g)$.</p></div></div>
+<div class="stmt observacion" id="clase-c12:obs-slater"><div class="head">Observación</div><div class="body"><p>Las dos formas coinciden porque
+$\ri(A\dom f-\dom g)=A(\ri(\dom f))-\ri(\dom g)$.</p></div></div>
+<div class="stmt teorema" id="clase-c12:teo-fuerte"><div class="head">Teorema dualidad fuerte</div><div class="body"><p>Sean $f$ y $g$ convexas y propias con $p^{*}&gt;-\infty$, y supóngase la condición
+de Slater. Entonces $p^{*}=d^{*}$ y el dual alcanza su valor, esto es, $d^{*}$
+es un máximo.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p49">Ver demostración</button><div class="proof" id="clase-convexa-p49"><p>Sea $\varphi$ la función valor,</p>
+<div class="display">\[
+  \varphi(u)=\inf_{x\in\R^{n}}\ f(x)+g(Ax-u),
+\]</div>
+<p>que es convexa, cumple $\varphi(0)=p^{*}$ y tiene
+$\dom\varphi=A(\dom f)-\dom g$. Por Slater, $0\in\ri(\dom\varphi)$, y como
+$\varphi$ es propia y convexa existe $s\in\subdif\varphi(0)$, de modo que</p>
+<div class="display">\[
+  \varphi(u)\ \ge\ p^{*}+\ip{s}{u}
+  \qquad\text{para todo }u .
+\]</div>
+<p>Tomando $u=Ax-z$ con $x\in\dom f$ y $z\in\dom g$, y usando
+$\varphi(Ax-z)\le f(x)+g(z)$, queda</p>
+<div class="display">\[
+  f(x)+g(z)\ \ge\ p^{*}+\ip{s}{Ax-z},
+\]</div>
+<p>es decir $f(x)-\ip{A\trans s}{x}+g(z)+\ip{s}{z}\ge p^{*}$. Tomando el ínfimo en
+$x$ y en $z$ por separado,</p>
+<div class="display">\[
+  -f^{*}(A\trans s)-g^{*}(-s)\ \ge\ p^{*},
+\]</div>
+<p>o sea que $y=-s$ cumple $-f^{*}(-A\trans y)-g^{*}(y)\ge p^{*}$. Con la dualidad
+débil, $d^{*}=p^{*}$ y el supremo se alcanza en $y=-s$.</p></div>
+<div class="stmt definicion" id="clase-c12:def-brecha"><div class="head">Definición brecha de dualidad</div><div class="body"><p>Para $x\in\R^{n}$ e $y\in\R^{m}$, la <em>brecha de dualidad</em> es</p>
+<div class="display">\[
+  G(x,y)=f(x)+g(Ax)+f^{*}(-A\trans y)+g^{*}(y).
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c12:prop-certificado"><div class="head">Proposición certificado primal-dual</div><div class="body"><p>$G\ge0$ siempre, y $G(x,y)=0$ si y solo si</p>
+<div class="display">\[
+  -A\trans y\in\subdif f(x)
+  \qquad\text{y}\qquad
+  y\in\subdif g(Ax),
+\]</div>
+<p>en cuyo caso $x$ resuelve el primal, $y$ resuelve el dual y $p^{*}=d^{*}$. Estas
+dos condiciones son el <em>certificado primal-dual</em>.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p50">Ver demostración</button><div class="proof" id="clase-convexa-p50"><p>$G(x,y)$ es la suma de las dos desigualdades de Fenchel–Young de la dualidad
+débil, cada una con su holgura, así que $G\ge0$ y $G=0$ obliga a que las dos
+sean igualdades. Por el caso de igualdad de Fenchel–Young, eso es
+$-A\trans y\in\subdif f(x)$ y $y\in\subdif g(Ax)$. Y entonces
+$f(x)+g(Ax)=-f^{*}(-A\trans y)-g^{*}(y)$, con lo que el valor primal en $x$ y el
+valor dual en $y$ coinciden.</p></div>
+<div class="stmt ejemplo" id="clase-c12:ej-lasso"><div class="head">Ejemplo regresión Lasso</div><div class="body"><p>El problema</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\ \tfrac12\norm{Ax-b}_{2}^{2}+\lambda\norm{x}_{1}
+\]</div>
+<p>es el primal de $f(x)=\lambda\norm{x}_{1}$ y $g(z)=\tfrac12\norm{z-b}_{2}^{2}$.
+Como $f^{*}=\delta_{\{y\,:\,\norm{y}_{\infty}\le\lambda\}}$ y
+$g^{*}(y)=\tfrac12\norm{y}_{2}^{2}+\ip{b}{y}$, el dual es</p>
+<div class="display">\[
+  \max_{y\in\R^{m}}\ -\tfrac12\norm{y}_{2}^{2}-\ip{b}{y}
+  \qquad\text{sujeto a}\qquad \norm{A\trans y}_{\infty}\le\lambda,
+\]</div>
+<p>y el certificado primal-dual es</p>
+<div class="display">\[
+  y=Ax-b,
+  \qquad
+  -A\trans y\in\lambda\,\subdif\norm{x}_{1}.
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c12:obs-lasso-holder"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La segunda condición del certificado se lee también como
+$-\ip{A\trans y}{x}=\lambda\norm{x}_{1}$. En efecto, $-A\trans y$ es factible
+para el dual, así que $f^{*}(-A\trans y)=0$ y la igualdad de Fenchel–Young
+para $f$ se reduce a $f(x)=\ip{x}{-A\trans y}$. Es el caso de igualdad de
+Hölder entre $\norm{\cdot}_{1}$ y $\norm{\cdot}_{\infty}$: obliga a que
+$(-A\trans y)_{i}=\lambda\operatorname{sgn}(x_{i})$ en cada $i$ con
+$x_{i}\neq0$, y deja libre el resto dentro de $[-\lambda,\lambda]$.</p></div></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -1877,7 +2060,199 @@ dificultad está en partirla en dos sumandos.</p>
 $\Ncono_{C}(x)$ es la clausura del rango de $A^{*}$, y para $f$ diferenciable la
 regla de Fermat da $\Dif f(x^{*})+A^{*}\lambda=0$ con $Ax^{*}=b$, que son los
 multiplicadores de Lagrange. En $\R^{n}$ el rango es cerrado y la clausura
-sobra; en dimensión infinita no, y esa es toda la diferencia.</p></div></div></section></div>
+sobra; en dimensión infinita no, y esa es toda la diferencia.</p></div></div></section>
+<section class="capitulo"><h2 id="general-cap:conjugada">La conjugada de Fenchel</h2>
+<div class="stmt definicion" id="general-c11:def-conjugada"><div class="head">Definición función conjugada</div><div class="body"><p>Sea $E$ un espacio de Banach y $f:E\to\R\cup\{\infty\}$ propia. Su
+<em>conjugada</em> es la función $f^{*}:E^{*}\to\R\cup\{\pm\infty\}$ dada por</p>
+<div class="display">\[
+  f^{*}(y)=\sup_{x\in\dom f}\ \ip{y}{x}-f(x),
+\]</div>
+<p>donde $\ip{\cdot}{\cdot}$ es el par de dualidad entre $E^{*}$ y $E$. La
+<em>biconjugada</em> es $f^{**}:E\to\R\cup\{\pm\infty\}$,</p>
+<div class="display">\[
+  f^{**}(x)=\sup_{y\in E^{*}}\ \ip{y}{x}-f^{*}(y),
+\]</div>
+<p>que es $f^{*}{}^{*}$ restringida a $E$ dentro de $E^{**}$.</p></div></div>
+<div class="stmt proposicion" id="general-c11:prop-conjugada-cerrada"><div class="head">Proposición</div><div class="body"><p>$f^{*}$ es convexa y semicontinua inferiormente, sea $f$ lo que sea. De hecho es
+s.c.i. para la topología débil-$*$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p37">Ver demostración</button><div class="proof" id="general-convexa-p37"><p>Para cada $x\in\dom f$ la función $y\mapsto\ip{y}{x}-f(x)$ es afín y continua
+para la topología débil-$*$, y un supremo de funciones afines s.c.i. es convexo
+y s.c.i., porque su epígrafo es una intersección de semiespacios cerrados.</p></div>
+<div class="stmt ejemplo" id="general-c11:ej-afin"><div class="head">Ejemplo una afín</div><div class="body"><p>Si $a\in E^{*}$, $b\in\R$ y $f(x)=\ip{a}{x}+b$, entonces
+$f^{*}=\delta_{\{a\}}-b$.</p></div></div>
+<div class="stmt ejemplo" id="general-c11:ej-cuadratica"><div class="head">Ejemplo una cuadrática</div><div class="body"><p>Sea $\Hs$ un Hilbert y $Q\in\Bop{\Hs}$ autoadjunto y coercivo, esto es
+$\ip{Qx}{x}\ge c\norm{x}^{2}$ con $c&gt;0$. Si $f(x)=\tfrac12\ip{Qx}{x}$, entonces
+$f^{*}(y)=\tfrac12\ip{Q^{-1}y}{y}$.</p></div></div>
+<div class="stmt observacion" id="general-c11:obs-coercivo"><div class="head">Observación</div><div class="body"><p>La coercividad no se puede rebajar a $\ip{Qx}{x}&gt;0$: eso no garantiza que $Q$
+sea invertible con inverso acotado, y el enunciado deja de tener sentido.</p></div></div>
+<div class="stmt ejemplo" id="general-c11:ej-indicadora"><div class="head">Ejemplo la indicadora y la función soporte</div><div class="body"><p>Si $C\subset E$ es no vacío y $f=\delta_{C}$, entonces $f^{*}=\sop_{C}$, la
+función soporte de $C$ sobre $E^{*}$.</p></div></div>
+<div class="stmt ejemplo" id="general-c11:ej-norma"><div class="head">Ejemplo una norma</div><div class="body"><p>Si $f(x)=\lambda\norm{x}$ con $\lambda&gt;0$, entonces
+$f^{*}=\delta_{\{y\in E^{*}\,:\,\norm{y}_{E^{*}}\le\lambda\}}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p38">Ver demostración</button><div class="proof" id="general-convexa-p38"><p>Por definición de la norma dual,
+$\ip{y}{x}-\lambda\norm{x}\le\norm{x}(\norm{y}_{E^{*}}-\lambda)$, que es
+$\le0$ si $\norm{y}_{E^{*}}\le\lambda$, con igualdad en $x=0$. Si
+$\norm{y}_{E^{*}}&gt;\lambda$, hay $x$ con $\norm{x}=1$ y
+$\ip{y}{x}&gt;\lambda$, y sobre $tx$ la expresión tiende a $\infty$.</p></div>
+<div class="stmt ejemplo" id="general-c11:ej-entropia"><div class="head">Ejemplo la entropía en una variable</div><div class="body"><p>Si</p>
+<div class="display">\[
+  h(t)=\begin{cases} t\log t-t, &amp; t\ge0,\\ +\infty, &amp; t&lt;0,\end{cases}
+\]</div>
+<p>con $0\log0=0$, entonces $h^{*}(s)=e^{s}$.</p></div></div>
+<div class="stmt ejemplo" id="general-c11:ej-lse"><div class="head">Ejemplo log-sum-exp y la entropía negativa</div><div class="body"><p>Sea $\dim E&lt;\infty$, con $E=\R^{n}$. Si
+$\lse(x)=\log\bigl(\sum_{i=1}^{n}e^{x_{i}}\bigr)$, entonces $\lse^{*}$ vale
+$\sum_{i}p_{i}\log p_{i}$ sobre el símplex $\simplex$ y $+\infty$ fuera.</p></div></div>
+<div class="stmt proposicion" id="general-c11:prop-biconjugacion"><div class="head">Proposición biconjugación</div><div class="body"><p>$f^{**}\le f$ para toda $f$ propia.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p39">Ver demostración</button><div class="proof" id="general-convexa-p39"><p>Por definición de supremo, $f^{*}(y)\ge\ip{y}{x}-f(x)$ para todos $x\in E$ e
+$y\in E^{*}$, que es lo mismo que $\ip{y}{x}-f^{*}(y)\le f(x)$. Tomando el
+supremo en $y$ queda $f^{**}(x)\le f(x)$.</p></div>
+<div class="stmt proposicion" id="general-c11:prop-minorante"><div class="head">Proposición la minorante afín</div><div class="body"><p>Si $f$ es convexa, s.c.i. y propia, entonces $f^{*}$ es propia. En particular
+$f$ admite una minorante afín continua.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p40">Ver demostración</button><div class="proof" id="general-convexa-p40"><p>Sea $x_{0}\in\dom f$ y $\lambda_{0}&lt;f(x_{0})$. Como $\epi f$ es cerrado y
+convexo y $(x_{0},\lambda_{0})\notin\epi f$, la segunda forma geométrica de
+Hahn–Banach en $E\times\R$ separa estrictamente los dos, y da $y\in E^{*}$,
+$k\in\R$ y $\alpha\in\R$ con</p>
+<div class="display">\[
+  \ip{y}{x}+k\lambda&gt;\alpha&gt;\ip{y}{x_{0}}+k\lambda_{0}
+  \qquad\text{para todo }(x,\lambda)\in\epi f .
+\]</div>
+<p>Evaluando en $(x_{0},f(x_{0}))$ resulta $k&gt;0$, y entonces
+$\ip{-y/k}{x}-f(x)&lt;-\alpha/k$ para todo $x\in\dom f$, luego
+$f^{*}(-y/k)&lt;\infty$.</p></div>
+<div class="stmt teorema" id="general-c11:teo-fenchel-moreau"><div class="head">Teorema Fenchel–Moreau</div><div class="body"><p>Sea $E$ un Banach y $f:E\to\R\cup\{\infty\}$ propia. Entonces $f=f^{**}$ si y
+solo si $f$ es convexa y semicontinua inferiormente.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p41">Ver demostración</button><div class="proof" id="general-convexa-p41"><p>Si $f=f^{**}$, entonces $f$ es convexa y s.c.i. porque toda biconjugada lo es.</p>
+<p>Recíprocamente, supóngase primero que $f\ge0$, y sea $x_{0}\in E$ con
+$f^{**}(x_{0})&lt;f(x_{0})$. Como $\epi f$ es cerrado, convexo y no vacío y el
+punto $(x_{0},f^{**}(x_{0}))$ no le pertenece, la segunda forma geométrica de
+Hahn–Banach da $y\in E^{*}$, $k\in\R$ y $\alpha\in\R$ con</p>
+<div class="display">\[
+  \ip{y}{x}+k\lambda&gt;\alpha\quad\text{en }\epi f,
+  \qquad
+  \ip{y}{x_{0}}+kf^{**}(x_{0})&lt;\alpha .
+\]</div>
+<p>Haciendo $\lambda\to\infty$ se obtiene $k\ge0$, y aquí no se puede afirmar que
+$k&gt;0$. Sea $\varepsilon&gt;0$. Como $f\ge0$, la primera desigualdad da
+$\ip{y}{x}+(k+\varepsilon)f(x)\ge\alpha$ para todo $x\in\dom f$, es decir</p>
+<div class="display">\[
+  f^{*}\Bigl(\frac{-y}{k+\varepsilon}\Bigr)\le\frac{-\alpha}{k+\varepsilon},
+\]</div>
+<p>y por tanto</p>
+<div class="display">\[
+  f^{**}(x_{0})\ \ge\
+  \Bigl\langle\frac{-y}{k+\varepsilon},x_{0}\Bigr\rangle
+  -f^{*}\Bigl(\frac{-y}{k+\varepsilon}\Bigr)
+  \ \ge\ \frac{-\ip{y}{x_{0}}+\alpha}{k+\varepsilon}
+  \ &gt;\ f^{**}(x_{0}),
+\]</div>
+<p>donde la última desigualdad sale de la segunda propiedad de la separación al
+despejar. Es una contradicción.</p>
+<p>En el caso general, la minorante afín da $y_{0}\in\dom f^{*}$, y la función
+$\bar{f}=f-\ip{y_{0}}{\cdot}+f^{*}(y_{0})$ es convexa, s.c.i., propia y no
+negativa por Fenchel–Young. El caso anterior le aplica, y deshacer el cambio
+devuelve $f=f^{**}$.</p></div>
+<div class="stmt corolario" id="general-c11:cor-envolvente"><div class="head">Corolario la envolvente convexa cerrada</div><div class="body"><p>Sea $f$ propia con $f^{*}$ propia. Entonces $f^{**}$ es la mayor función
+convexa, s.c.i. y propia que está por debajo de $f$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p42">Ver demostración</button><div class="proof" id="general-convexa-p42"><p>Ya se sabe que $f^{**}\le f$, y $f^{**}$ es convexa y s.c.i. Como $f^{*}$ es
+propia, $f^{**}$ no toma el valor $-\infty$ y no es idénticamente $+\infty$.
+Si $h$ es propia, convexa y s.c.i. con $h\le f$, entonces $h^{*}\ge f^{*}$ y
+por tanto $h=h^{**}\le f^{**}$.</p></div>
+<div class="stmt corolario" id="general-c11:cor-indicadora"><div class="head">Corolario</div><div class="body"><p>Si $C\subset E$ es no vacío, entonces
+$\delta_{C}^{**}=\delta_{\cl\conv C}$, con la clausura en norma.</p></div></div>
+<div class="stmt teorema" id="general-c11:teo-fenchel-young"><div class="head">Teorema desigualdad de Fenchel–Young</div><div class="body"><p>Sea $f$ propia. Entonces</p>
+<div class="display">\[
+  f(x)+f^{*}(y)\ \ge\ \ip{y}{x}
+  \qquad\text{para todos }x\in E,\ y\in E^{*},
+\]</div>
+<p>y se da la igualdad si y solo si $y\in\subdif f(x)$. Si además $f$ es convexa y
+s.c.i., eso equivale a $x\in\subdif f^{*}(y)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p43">Ver demostración</button><div class="proof" id="general-convexa-p43"><p>La desigualdad es la definición de $f^{*}$ como supremo. La igualdad
+$f^{*}(y)=\ip{y}{x}-f(x)$ dice que el supremo se alcanza en $x$, esto es que
+$\ip{y}{x}-f(x)\ge\ip{y}{z}-f(z)$ para todo $z$, que reordenado es
+$f(z)\ge f(x)+\ip{y}{z-x}$ para todo $z$, y eso es $y\in\subdif f(x)$. La
+última equivalencia es lo mismo aplicado a $f^{*}$, usando $f^{**}=f$.</p></div></section>
+<section class="capitulo"><h2 id="general-cap:dualidad">Dualidad de Fenchel–Rockafellar</h2>
+<div class="stmt definicion" id="general-c12:def-par"><div class="head">Definición el par primal-dual</div><div class="body"><p>Sean $E$ y $F$ espacios de Banach, $f:E\to\R\cup\{\infty\}$ y
+$g:F\to\R\cup\{\infty\}$ propias y $A\in\Bop{E,F}$. El <em>problema primal</em> y
+el <em>problema dual</em> son</p>
+<div class="display">\[
+  p^{*}=\inf_{x\in E}\ f(x)+g(Ax),
+  \qquad
+  d^{*}=\sup_{y\in F^{*}}\ -f^{*}(-A^{*}y)-g^{*}(y),
+\]</div>
+<p>donde $A^{*}\in\Bop{F^{*},E^{*}}$ es el adjunto de $A$.</p></div></div>
+<div class="stmt proposicion" id="general-c12:prop-debil"><div class="head">Proposición dualidad débil</div><div class="body"><p>$d^{*}\le p^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p44">Ver demostración</button><div class="proof" id="general-convexa-p44"><p>Por Fenchel–Young aplicado a $f$ en $(x,-A^{*}y)$ y a $g$ en $(Ax,y)$,</p>
+<div class="display">\[
+  f(x)+f^{*}(-A^{*}y)\ge\ip{-A^{*}y}{x}=-\ip{y}{Ax},
+  \qquad
+  g(Ax)+g^{*}(y)\ge\ip{y}{Ax}.
+\]</div>
+<p>Sumando, $f(x)+g(Ax)\ge-f^{*}(-A^{*}y)-g^{*}(y)$ para todos $x$ e $y$, y basta
+tomar el ínfimo a la izquierda y el supremo a la derecha.</p></div>
+<div class="stmt definicion" id="general-c12:def-sri"><div class="head">Definición interior relativo fuerte</div><div class="body"><p>Para $C$ convexo en un Hilbert $\Hs$, su <em>interior relativo fuerte</em> es</p>
+<div class="display">\[
+  \sri C=\{x\in C:\cono(C-x)\ \text{es un subespacio cerrado}\}.
+\]</div></div></div>
+<div class="stmt observacion" id="general-c12:obs-sri"><div class="head">Observación</div><div class="body"><p>Si $\dim\Hs&lt;\infty$, entonces $\sri C=\ri C$. Es el sustituto de $\ri$ que hay
+que usar aquí, porque $\ri C$ puede ser vacío en dimensión infinita.</p></div></div>
+<div class="stmt teorema" id="general-c12:teo-fuerte"><div class="head">Teorema dualidad fuerte</div><div class="body"><p>Sean $\Hs$ y $\Ks$ espacios de Hilbert, sean $f$ y $g$ convexas, s.c.i. y
+propias sobre $\Hs$ y $\Ks$, y sea $L\in\Bop{\Hs,\Ks}$ con</p>
+<div class="display">\[
+  0\in\sri\bigl(\dom g-L(\dom f)\bigr).
+\]</div>
+<p>Entonces $p^{*}=d^{*}$ y el dual alcanza su valor, esto es, $d^{*}$ es un
+máximo.</p></div></div>
+<div class="stmt observacion" id="general-c12:obs-slater"><div class="head">Observación</div><div class="body"><p>En $\R^{n}$ la condición es $0\in\ri(\dom g-A\dom f)$, es decir que exista
+$\bar{x}\in\ri(\dom f)$ con $A\bar{x}\in\ri(\dom g)$, que es la condición de
+Slater.</p></div></div>
+<div class="stmt teorema" id="general-c12:teo-brezis"><div class="head">Teorema la forma de Brezis</div><div class="body"><p>Sean $\varphi,\psi:E\to\R\cup\{\infty\}$ convexas y propias sobre un Banach $E$,
+y supóngase que existe $x_{0}\in\dom\varphi\cap\dom\psi$ en el que $\varphi$ es
+continua. Entonces</p>
+<div class="display">\[
+  \inf_{x\in E}\ \varphi(x)+\psi(x)
+  \ =\ \max_{y\in E^{*}}\ -\varphi^{*}(-y)-\psi^{*}(y).
+\]</div></div></div>
+<div class="stmt observacion" id="general-c12:obs-cualificacion"><div class="head">Observación</div><div class="body"><p>La cualificación cambia de forma al subir: en $\R^{n}$ basta que los interiores
+relativos se corten, y en un Banach se pide que una de las dos funciones sea
+continua en un punto común del dominio.</p></div></div>
+<div class="stmt definicion" id="general-c12:def-brecha"><div class="head">Definición brecha de dualidad</div><div class="body"><p>Para $x\in E$ e $y\in F^{*}$, la <em>brecha de dualidad</em> es</p>
+<div class="display">\[
+  G(x,y)=f(x)+g(Ax)+f^{*}(-A^{*}y)+g^{*}(y).
+\]</div></div></div>
+<div class="stmt proposicion" id="general-c12:prop-certificado"><div class="head">Proposición certificado primal-dual</div><div class="body"><p>$G\ge0$ siempre, y $G(x,y)=0$ si y solo si</p>
+<div class="display">\[
+  -A^{*}y\in\subdif f(x)
+  \qquad\text{y}\qquad
+  y\in\subdif g(Ax),
+\]</div>
+<p>en cuyo caso $x$ resuelve el primal, $y$ resuelve el dual y $p^{*}=d^{*}$. Estas
+dos condiciones son el <em>certificado primal-dual</em>.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p45">Ver demostración</button><div class="proof" id="general-convexa-p45"><p>$G(x,y)$ es la suma de las dos desigualdades de Fenchel–Young de la dualidad
+débil, cada una con su holgura, así que $G\ge0$ y $G=0$ obliga a que las dos
+sean igualdades. Por el caso de igualdad de Fenchel–Young, eso es
+$-A^{*}y\in\subdif f(x)$ y $y\in\subdif g(Ax)$, y entonces el valor primal en
+$x$ y el valor dual en $y$ coinciden.</p></div>
+<div class="stmt ejemplo" id="general-c12:ej-lasso"><div class="head">Ejemplo regresión Lasso</div><div class="body"><p>Sea $\dim E&lt;\infty$. El problema</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\ \tfrac12\norm{Ax-b}_{2}^{2}+\lambda\norm{x}_{1}
+\]</div>
+<p>es el primal de $f(x)=\lambda\norm{x}_{1}$ y $g(z)=\tfrac12\norm{z-b}_{2}^{2}$.
+Como $f^{*}=\delta_{\{y\,:\,\norm{y}_{\infty}\le\lambda\}}$ y
+$g^{*}(y)=\tfrac12\norm{y}_{2}^{2}+\ip{b}{y}$, el dual es</p>
+<div class="display">\[
+  \max_{y\in\R^{m}}\ -\tfrac12\norm{y}_{2}^{2}-\ip{b}{y}
+  \qquad\text{sujeto a}\qquad \norm{A\trans y}_{\infty}\le\lambda,
+\]</div>
+<p>y el certificado primal-dual es $y=Ax-b$ y
+$-A\trans y\in\lambda\,\subdif\norm{x}_{1}$.</p></div></div>
+<div class="stmt observacion" id="general-c12:obs-lasso-holder"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La segunda condición del certificado se lee también como
+$-\ip{A\trans y}{x}=\lambda\norm{x}_{1}$. En efecto, $-A\trans y$ es factible
+para el dual, así que $f^{*}(-A\trans y)=0$ y la igualdad de Fenchel–Young
+para $f$ se reduce a $f(x)=\ip{x}{-A\trans y}$. Es el caso de igualdad de
+Hölder entre $\norm{\cdot}_{1}$ y $\norm{\cdot}_{\infty}$: obliga a que
+$(-A\trans y)_{i}=\lambda\operatorname{sgn}(x_{i})$ en cada $i$ con
+$x_{i}\neq0$, y deja libre el resto dentro de $[-\lambda,\lambda]$.</p></div></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -2281,7 +2656,132 @@ $A^{*}$, y para $f$ diferenciable la regla de Fermat da
 $\Dif f(x^{*})+A^{*}\lambda=0$ con $Ax^{*}=b$: los multiplicadores de Lagrange.
 En $\R^{n}$ el rango de $A\trans$ es cerrado y la clausura sobra; en dimensión
 infinita el rango de un operador acotado no tiene por qué serlo, y ahí la
-clausura es necesaria.</p></div></div></section></div>
+clausura es necesaria.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:conjugada">La conjugada de Fenchel</h2>
+<div class="stmt definicion" id="ambas-c11:def-conjugada"><div class="head">Definición función conjugada</div><div class="body"><p>Sea $E$ un espacio de Banach y $f:E\to\R\cup\{\infty\}$ propia. Su
+<em>conjugada</em> es $f^{*}:E^{*}\to\R\cup\{\pm\infty\}$,</p>
+<div class="display">\[
+  f^{*}(y)=\sup_{x\in\dom f}\ \ip{y}{x}-f(x),
+\]</div>
+<p>y su <em>biconjugada</em> es $f^{**}(x)=\sup_{y\in E^{*}}\ip{y}{x}-f^{*}(y)$.</p></div></div>
+<div class="stmt observacion" id="ambas-c11:obs-donde-vive"><div class="head">Observación dónde vive la conjugada</div><div class="body"><p>La conjugada nunca vive en el mismo sitio que $f$: si $f$ está definida sobre
+$E$, entonces $f^{*}$ lo está sobre $E^{*}$. En $\R^{n}$ los dos espacios se
+identifican y la distinción se pierde, y en un Hilbert el teorema de Riesz la
+vuelve a perder. En un Banach general no hay tal identificación, y la
+biconjugada obliga además a elegir: $f^{*}{}^{*}$ vive sobre $E^{**}$, y lo que
+se llama $f^{**}$ es su restricción a $E$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c11:prop-conjugada-cerrada"><div class="head">Proposición</div><div class="body"><p>$f^{*}$ es convexa y semicontinua inferiormente, sea $f$ lo que sea. De hecho es
+s.c.i. para la topología débil-$*$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c11:ej-catalogo"><div class="head">Ejemplo el catálogo</div><div class="body"><p>Con $a\in E^{*}$, $b\in\R$, $C\subset E$ no vacío y $\lambda&gt;0$:</p>
+<div class="display">\[
+  \begin{aligned}
+  f(x)&amp;=\ip{a}{x}+b &amp; &amp;\Longrightarrow &amp; f^{*}&amp;=\delta_{\{a\}}-b,\\
+  f&amp;=\delta_{C} &amp; &amp;\Longrightarrow &amp; f^{*}&amp;=\sop_{C},\\
+  f(x)&amp;=\lambda\norm{x} &amp; &amp;\Longrightarrow &amp;
+  f^{*}&amp;=\delta_{\{y\,:\,\norm{y}_{E^{*}}\le\lambda\}}.
+  \end{aligned}
+\]</div></div></div>
+<div class="stmt ejemplo" id="ambas-c11:ej-cuadratica"><div class="head">Ejemplo la cuadrática, y lo que pide</div><div class="body"><p>En $\R^{n}$, si $Q\succ0$ y $f(x)=\tfrac12x\trans Qx$, entonces
+$f^{*}(y)=\tfrac12y\trans Q^{-1}y$. En un Hilbert el enunciado vale para
+$Q\in\Bop{\Hs}$ autoadjunto y <em>coercivo</em>, y ahí
+$f^{*}(y)=\tfrac12\ip{Q^{-1}y}{y}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c11:obs-coercivo"><div class="head">Observación por qué no basta $Q&gt;0$</div><div class="body"><p>En $\R^{n}$ las condiciones $\ip{Qx}{x}&gt;0$ para $x\neq0$ y
+$\ip{Qx}{x}\ge c\norm{x}^{2}$ son la misma, porque la esfera unidad es compacta
+y el mínimo del cociente se alcanza. En dimensión infinita no: el operador
+diagonal $(Qx)_{n}=x_{n}/n$ sobre $\ell^{2}$ es autoadjunto y cumple
+$\ip{Qx}{x}&gt;0$ para todo $x\neq0$, pero su ínfimo sobre la esfera es $0$, no es
+invertible con inverso acotado, y $Q^{-1}$ no está definido en todo el espacio.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c11:ej-entropia"><div class="head">Ejemplo la entropía y log-sum-exp</div><div class="body"><p>Si $h(t)=t\log t-t$ para $t\ge0$ y $+\infty$ para $t&lt;0$, entonces
+$h^{*}(s)=e^{s}$. En $\R^{n}$, la conjugada de
+$\lse(x)=\log\bigl(\sum_{i}e^{x_{i}}\bigr)$ es la entropía negativa
+$\sum_{i}p_{i}\log p_{i}$ sobre el símplex, y $+\infty$ fuera.</p></div></div>
+<div class="stmt proposicion" id="ambas-c11:prop-biconjugacion"><div class="head">Proposición biconjugación</div><div class="body"><p>$f^{**}\le f$ para toda $f$ propia.</p></div></div>
+<div class="stmt teorema" id="ambas-c11:teo-fenchel-moreau"><div class="head">Teorema Fenchel–Moreau</div><div class="body"><p>Sea $f:E\to\R\cup\{\infty\}$ propia. Entonces $f=f^{**}$ si y solo si $f$ es
+convexa y semicontinua inferiormente.</p></div></div>
+<div class="stmt observacion" id="ambas-c11:obs-dos-pruebas"><div class="head">Observación la misma frase, dos demostraciones distintas</div><div class="body"><p>El enunciado es literalmente el mismo en $\R^{n}$ y en un Banach, pero las
+pruebas no se parecen. En $\R^{n}$ el caso difícil, el del hiperplano vertical,
+se cierra tomando $x_{0}\in\ri(\dom f)$ y un subgradiente suyo, que existe
+porque el interior relativo de un convexo no vacío no es vacío. En un Banach ese
+argumento no arranca, y en su lugar se reduce primero al caso $f\ge0$
+trasladando por una minorante afín, y ahí la separación se aplica con
+$k\ge0$ en vez de $k&gt;0$, absorbiendo el caso vertical con un $\varepsilon$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c11:prop-minorante"><div class="head">Proposición la minorante afín</div><div class="body"><p>Si $f$ es convexa, s.c.i. y propia, entonces $f^{*}$ es propia; equivalentemente
+$f$ admite una minorante afín continua.</p></div></div>
+<div class="stmt corolario" id="ambas-c11:cor-envolvente"><div class="head">Corolario la envolvente convexa cerrada</div><div class="body"><p>Sea $f$ propia con $f^{*}$ propia. Entonces $f^{**}$ es la mayor función
+convexa, s.c.i. y propia que está por debajo de $f$. En particular
+$\delta_{C}^{**}=\delta_{\cl\conv C}$ para todo $C$ no vacío.</p></div></div>
+<div class="stmt teorema" id="ambas-c11:teo-fenchel-young"><div class="head">Teorema desigualdad de Fenchel–Young</div><div class="body"><p>Sea $f$ propia. Entonces $f(x)+f^{*}(y)\ge\ip{y}{x}$ para todos $x\in E$ e
+$y\in E^{*}$, con igualdad si y solo si $y\in\subdif f(x)$. Si además $f$ es
+convexa y s.c.i., eso equivale a $x\in\subdif f^{*}(y)$.</p></div></div>
+<div class="stmt observacion" id="ambas-c11:obs-balance"><div class="head">Observación qué se conserva al subir</div><div class="body"><p>De todo el capítulo, lo único que pide dimensión finita son los ejemplos que
+usan coordenadas y la equivalencia entre $Q\succ0$ y la coercividad. La teoría
+entera, conjugada, biconjugada, Fenchel–Moreau, envolvente y Fenchel–Young,
+sube sin una sola hipótesis nueva. Es el capítulo del curso que mejor viaja, y
+la razón es que la conjugada se define por un supremo de funciones afines, que
+es una operación que no sabe en qué dimensión está.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:dualidad">Dualidad de Fenchel–Rockafellar</h2>
+<div class="stmt definicion" id="ambas-c12:def-par"><div class="head">Definición el par primal-dual</div><div class="body"><p>Sean $E$ y $F$ Banach, $f:E\to\R\cup\{\infty\}$ y $g:F\to\R\cup\{\infty\}$
+propias y $A\in\Bop{E,F}$. El <em>primal</em> y el <em>dual</em> son</p>
+<div class="display">\[
+  p^{*}=\inf_{x\in E}\ f(x)+g(Ax),
+  \qquad
+  d^{*}=\sup_{y\in F^{*}}\ -f^{*}(-A^{*}y)-g^{*}(y).
+\]</div></div></div>
+<div class="stmt observacion" id="ambas-c12:obs-adjunto"><div class="head">Observación la traspuesta y el adjunto</div><div class="body"><p>En $\R^{n}$ el dual se escribe con $A\trans$ y las variables duales $y$ viven en
+$\R^{m}$, el mismo sitio que las $Ax$. En un Banach hay que distinguir: $y$ vive
+en $F^{*}$ y $A^{*}y$ en $E^{*}$, y $A^{*}$ es el adjunto. Es el único cambio de
+notación del capítulo, y no cambia ni un enunciado.</p></div></div>
+<div class="stmt proposicion" id="ambas-c12:prop-debil"><div class="head">Proposición dualidad débil</div><div class="body"><p>$d^{*}\le p^{*}$, sin ninguna hipótesis sobre $f$, $g$ ni $A$ más allá de que
+sean propias.</p></div></div>
+<div class="stmt teorema" id="ambas-c12:teo-fuerte-fin"><div class="head">Teorema dualidad fuerte, en dimensión finita</div><div class="body"><p>Sean $f$ y $g$ convexas y propias sobre $\R^{n}$ y $\R^{m}$, con
+$p^{*}&gt;-\infty$, y supóngase la condición de Slater,</p>
+<div class="display">\[
+  0\in\ri\bigl(A\dom f-\dom g\bigr),
+  \quad\text{es decir}\quad
+  \exists\,\bar{x}\in\ri(\dom f)\ \text{con}\ A\bar{x}\in\ri(\dom g).
+\]</div>
+<p>Entonces $p^{*}=d^{*}$ y $d^{*}$ es un máximo.</p></div></div>
+<div class="stmt teorema" id="ambas-c12:teo-fuerte-hilbert"><div class="head">Teorema dualidad fuerte, en un Hilbert</div><div class="body"><p>Sean $f$ y $g$ convexas, s.c.i. y propias sobre $\Hs$ y $\Ks$, y sea
+$L\in\Bop{\Hs,\Ks}$ con $0\in\sri(\dom g-L(\dom f))$. Entonces $p^{*}=d^{*}$ y
+$d^{*}$ es un máximo.</p></div></div>
+<div class="stmt teorema" id="ambas-c12:teo-fuerte-banach"><div class="head">Teorema dualidad fuerte, en un Banach</div><div class="body"><p>Sean $\varphi,\psi:E\to\R\cup\{\infty\}$ convexas y propias, y supóngase que hay
+$x_{0}\in\dom\varphi\cap\dom\psi$ en el que $\varphi$ es continua. Entonces</p>
+<div class="display">\[
+  \inf_{x\in E}\ \varphi(x)+\psi(x)
+  \ =\ \max_{y\in E^{*}}\ -\varphi^{*}(-y)-\psi^{*}(y).
+\]</div></div></div>
+<div class="stmt observacion" id="ambas-c12:obs-tres-cualificaciones"><div class="head">Observación las tres cualificaciones son la misma idea</div><div class="body"><p>Las tres piden lo mismo, que los dominios se corten con holgura y no solo de
+canto, y se distinguen en qué noción de holgura sobrevive. En $\R^{n}$ basta
+$\ri$, porque todo convexo no vacío tiene interior relativo no vacío. En
+dimensión infinita eso es falso, y $\ri$ deja de servir: hay convexos cerrados y
+no vacíos con $\ri$ vacío. En un Hilbert el sustituto es $\sri$, que en $\R^{n}$
+coincide con $\ri$. En un Banach, sin producto interno, se pide directamente lo
+más fuerte y más fácil de comprobar, que una de las dos funciones sea continua
+en un punto común.</p></div></div>
+<div class="stmt observacion" id="ambas-c12:obs-funcion-valor"><div class="head">Observación qué se pierde en la demostración</div><div class="body"><p>En $\R^{n}$ la prueba pasa por la función valor
+$\varphi(u)=\inf_{x}f(x)+g(Ax-u)$ y por la existencia de un subgradiente suyo en
+$0$, que es exactamente donde entra Slater. En dimensión infinita ese
+subgradiente ya no sale de $\ri(\dom\varphi)$, y hay que conseguirlo de otro
+modo: por eso el enunciado hilbertiano es un teorema de Attouch–Brézis y no un
+calco del argumento de la clase.</p></div></div>
+<div class="stmt definicion" id="ambas-c12:def-brecha"><div class="head">Definición brecha de dualidad</div><div class="body"><p>$G(x,y)=f(x)+g(Ax)+f^{*}(-A^{*}y)+g^{*}(y)$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c12:prop-certificado"><div class="head">Proposición certificado primal-dual</div><div class="body"><p>$G\ge0$ siempre, y $G(x,y)=0$ si y solo si $-A^{*}y\in\subdif f(x)$ y
+$y\in\subdif g(Ax)$, en cuyo caso $x$ resuelve el primal, $y$ resuelve el dual y
+$p^{*}=d^{*}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c12:obs-certificado-viaja"><div class="head">Observación</div><div class="body"><p>El certificado no pide ninguna cualificación y vale en los tres settings tal
+cual: es solo el caso de igualdad de Fenchel–Young, dos veces. Lo que la
+cualificación compra es que exista un $y$ que lo cumpla, no que el certificado
+sirva.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c12:ej-lasso"><div class="head">Ejemplo regresión Lasso</div><div class="body"><p>En $\R^{n}$, el problema $\min_{x}\tfrac12\norm{Ax-b}_{2}^{2}+\lambda\norm{x}_{1}$
+es el primal de $f(x)=\lambda\norm{x}_{1}$ y $g(z)=\tfrac12\norm{z-b}_{2}^{2}$.
+Su dual es</p>
+<div class="display">\[
+  \max_{y\in\R^{m}}\ -\tfrac12\norm{y}_{2}^{2}-\ip{b}{y}
+  \qquad\text{sujeto a}\qquad \norm{A\trans y}_{\infty}\le\lambda,
+\]</div>
+<p>y el certificado es $y=Ax-b$ junto con
+$-A\trans y\in\lambda\,\subdif\norm{x}_{1}$, que equivale a
+$-\ip{A\trans y}{x}=\lambda\norm{x}_{1}$.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
