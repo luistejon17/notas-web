@@ -1343,12 +1343,161 @@ forma</p>
 \]</div>
 <p>para un único $\tau$ que satisface $\sum_{i}(y_{i} - \tau)_{+} = 1$. Diseñe un
 algoritmo de complejidad $O(n\log n)$ basado en ordenar las coordenadas de $y$.</p></div></div>
-<p><em>Solución pendiente.</em></p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p21" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p21"><p>Tome $x_{i} = (y_{i}-\tau)_{+}$ para $\tau \in \mathbb{R}$ fijo. Queremos
+$\langle y-x, v-x\rangle \leq 0$ para todo $v \in \Delta_{n}$. Sean
+$I = \{i : y_{i} \geq \tau\}$ y $J = \{i : y_{i} &lt; \tau\}$, de modo que
+$(y-x)_{i} = \tau$ y $(v-x)_{i} = v_{i}-y_{i}+\tau$ sobre $I$, y
+$(y-x)_{i} = y_{i}$ y $(v-x)_{i} = v_{i}$ sobre $J$. Pero entonces:</p>
+<div class="display">\begin{align*}
+  \langle y-x, v-x\rangle
+   &amp;= \sum_{i}\bigl(y_{i}-(y_{i}-\tau)_{+}\bigr)\bigl(v_{i}-(y_{i}-\tau)_{+}\bigr)
+    = \sum_{I}\tau\,(v_{i}-y_{i}+\tau) + \sum_{J} y_{i}v_{i} \\
+   &amp;\leq \sum_{I}\tau v_{i} - \sum_{I}\tau y_{i} + \sum_{I}\tau^{2} + \sum_{J}\tau v_{i}
+    = \tau\sum_{i} v_{i} - \tau\sum_{I} y_{i} + |I|\tau^{2}
+    = \tau - \tau\sum_{I} y_{i} + |I|\tau^{2} = 0
+\end{align*}</div>
+<p>cuando $x \in \Delta_{n}$, pues</p>
+<div class="display">\[
+  \sum_{i}(y_{i}-\tau)_{+} = \sum_{I} y_{i} - |I|\tau = 1
+  \Longleftrightarrow \sum_{I} y_{i} = 1 + |I|\tau
+  \Longleftrightarrow \tau\sum_{I} y_{i} = \tau + |I|\tau^{2}
+  \Longleftrightarrow \tau - \tau\sum_{I} y_{i} + |I|\tau^{2} = 0 .
+\]</div>
+<p>Así pues, si existe $\tau$ tal que $\sum_{i}(y_{i}-\tau)_{+} = 1$
+$\Rightarrow x = \operatorname{Proj}_{\Delta_{n}}(y)$. Solo falta ver que $\tau$
+existe.</p>
+<p>Defina $\varphi(\tau) = \sum_{i}(y_{i}-\tau)_{+}$. Claramente
+$\lim_{\tau \to \infty}\varphi(\tau) = 0$,
+$\lim_{\tau \to -\infty}\varphi(\tau) = \infty$ y $\varphi(\tau) \geq 0$. Más
+aún, $\varphi$ es continua, pues la función $(y_{i}-\tau)_{+}$ es máximo de
+funciones continuas. Así pues, existe $\tau \in \mathbb{R}$ tal que
+$\varphi(\tau) = 1$.</p>
+<p>De hecho, si $\tau_{1}&lt;\tau_{2} \Rightarrow -\tau_{1} &gt; -\tau_{2}
+\Rightarrow y_{i}-\tau_{1} &gt; y_{i}-\tau_{2}
+\Rightarrow (y_{i}-\tau_{1})_{+} \geq (y_{i}-\tau_{2})_{+}
+\Rightarrow \varphi(\tau_{1}) &gt; \varphi(\tau_{2})$. $\varphi$ es decreciente, y
+de hecho estrictamente decreciente en $(-\infty, \max_{i} y_{i})$. Más aún, es
+lineal a trozos donde cada salto está en un $y_{i}$. Así que, suponiendo sin
+pérdida de generalidad que $y_{1}&lt;y_{2}&lt;\cdots&lt;y_{n}$, basta calcular
+$\varphi(y_{1}), \varphi(y_{2}), \ldots, \varphi(y_{n}) = 0$.</p>
+<p>Si $\varphi(y_{1}) \leq 1$:</p>
+<div class="display">\[
+  \sum_{i} y_{i} - y_{1} = \sum_{i} y_{i} - ny_{1} \leq 1
+  \Longleftrightarrow \frac{\sum_{i} y_{i} - 1}{n} \leq y_{1} .
+\]</div>
+<p>Escoja $\tau = \frac{\sum_{i} y_{i}-1}{n} \leq y_{1}
+\Rightarrow \tau \leq y_{i}$ para todo $i$. Pero entonces:</p>
+<div class="display">\[
+  \sum_{i}(y_{i}-\tau)_{+} = \sum_{i}(y_{i}-\tau)
+   = \sum_{i} y_{i} - n\Bigl(\frac{\sum_{i} y_{i}-1}{n}\Bigr) = 1 .
+\]</div>
+<p>Si $\varphi(y_{1}) &gt; 1$, halle $k$ tal que $\varphi(y_{k}) &gt; 1 \geq \varphi(y_{k+1})$
+$\Rightarrow$</p>
+<div class="display">\[
+  \sum_{i}(y_{i}-y_{k+1})_{+} = \sum_{i=k+1}^{n} y_{i} - (n-k)y_{k+1} \leq 1,
+  \qquad
+  \sum_{i}(y_{i}-y_{k})_{+} = \sum_{i=k+1}^{n} y_{i} - (n-k)y_{k} \geq 1 ,
+\]</div>
+<p>$\Rightarrow y_{k} \leq \frac{\bigl(\sum_{i=k+1}^{n} y_{i}\bigr)-1}{n-k} \leq y_{k+1}$.
+Tome $\tau = \frac{(\sum_{i=k+1}^{n} y_{i})-1}{n-k}$. Pero entonces:</p>
+<div class="display">\[
+  \sum_{i=1}^{n}(y_{i}-\tau)_{+} = \sum_{i=k+1}^{n}(y_{i}-\tau)
+   = \sum_{i=k+1}^{n} y_{i} - (n-k)\tau = 1 .
+\]</div>
+<p><strong>Algoritmo propuesto.</strong> Tome $y$ y haga <em>merge sort</em> para obtener
+$\tilde{y} = (y_{(1)},\ldots,y_{(n)})$ con
+$y_{(1)}&lt;y_{(2)}&lt;\cdots&lt;y_{(n)}$. Defina $y_{(0)} = y_{(1)}-1$.</p>
+<div class="display">\[
+  \begin{aligned}
+    &amp;\textbf{for } k=0,1,\ldots,n-1: \\
+    &amp;\qquad \textbf{if } \varphi(y_{(k)}) &gt; 1 \ \textbf{ and } \ \varphi(y_{(k+1)}) \leq 1: \\
+    &amp;\qquad\qquad \tau = \frac{\bigl(\sum_{i=k+1}^{n} y_{(i)}\bigr)-1}{n-k} .
+  \end{aligned}
+\]</div>
+<p>□</p>
+<p class="aviso">La unicidad de $\tau$ no se concluye, aunque la monotonía estricta que la
+da está probada; y el bucle evalúa $\varphi$ de cero en cada $k$, que es
+$O(n^{2})$ y no el $O(n\log n)$ que pide el enunciado.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p22" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p22"><p>La forma $x_{i} = (y_{i}-\tau)_{+}$ no hace falta adivinarla: sale de relajar la
+restricción de igualdad y completar el cuadrado, y de paso queda claro de dónde
+viene el $\tau$.</p>
+<p><strong>La forma de la proyección.</strong> Sea $\tau \in \mathbb{R}$ con
+$\varphi(\tau) := \sum_{i}(y_{i}-\tau)_{+} = 1$, y sea
+$x = (y-\tau\mathbf{1})_{+}$, es decir $x_{i} = (y_{i}-\tau)_{+}$. Note que
+$x \geq 0$ y $\mathbf{1}\trans x = \varphi(\tau) = 1
+\Rightarrow x \in \Delta_{n}$. Para $v \in \Delta_{n}$ se tiene
+$\mathbf{1}\trans v = 1$, de modo que añadir $\tau(\mathbf{1}\trans v - 1)$ no
+cambia nada:</p>
+<div class="display">\[
+  \tfrac{1}{2}\lVert v-y\rVert^{2}
+   = \tfrac{1}{2}\lVert v-y\rVert^{2} + \tau(\mathbf{1}\trans v - 1)
+   = \tfrac{1}{2}\bigl\lVert v-(y-\tau\mathbf{1})\bigr\rVert^{2}
+     + \underbrace{\tfrac{1}{2}\lVert y\rVert^{2}
+       - \tfrac{1}{2}\lVert y-\tau\mathbf{1}\rVert^{2} - \tau}_{\text{no depende de } v} ,
+\]</div>
+<p>donde la segunda igualdad es completar el cuadrado. Ahora bien, minimizar el
+lado derecho sobre el ortante $\{v \geq 0\}$, que es más grande que
+$\Delta_{n}$, es minimizar $\lVert v-(y-\tau\mathbf{1})\rVert^{2}$ ahí, y eso se
+hace coordenada a coordenada: el mínimo está en
+$v_{i} = (y_{i}-\tau)_{+}$, esto es, en $x$. Pero entonces, para todo
+$v \in \Delta_{n}$,</p>
+<div class="display">\[
+  \tfrac{1}{2}\lVert v-y\rVert^{2} \geq \tfrac{1}{2}\lVert x-y\rVert^{2} ,
+\]</div>
+<p>pues el mínimo sobre el conjunto grande lo alcanza $x$, que está en el pequeño.
+$\therefore x = \operatorname{Proj}_{\Delta_{n}}(y)$. (Es el Teorema 6.27 de
+Beck, <em>First-Order Methods in Optimization</em>, escrito para este caso; el
+enunciado general proyecta sobre un hiperplano cortado con una caja, y el
+Corolario 6.29 es justo este.)</p>
+<p><strong>Existencia y unicidad de $\tau$.</strong> $\varphi$ es continua, por ser suma de
+máximos de funciones continuas, con
+$\lim_{\tau \to -\infty}\varphi(\tau) = \infty$ y
+$\lim_{\tau \to \infty}\varphi(\tau) = 0$
+$\Rightarrow$ por el teorema del valor intermedio existe $\tau$ con
+$\varphi(\tau) = 1$. Para la unicidad, sean $\tau_{1}&lt;\tau_{2}$ con
+$\tau_{2} \leq \max_{i} y_{i}$ y sea $j$ con $y_{j} = \max_{i} y_{i}$. Pero
+entonces $(y_{j}-\tau_{1})_{+} &gt; (y_{j}-\tau_{2})_{+} \geq 0$ y el resto de
+términos cumple $\geq$
+$\Rightarrow \varphi(\tau_{1}) &gt; \varphi(\tau_{2})$, es decir $\varphi$ es
+estrictamente decreciente en $(-\infty, \max_{i} y_{i}]$. Como
+$\varphi(\tau) = 1 &gt; 0$ obliga a $\tau &lt; \max_{i} y_{i}$, el $\tau$ es único.  □</p>
+<p><strong>El algoritmo, y su costo.</strong> Ordene $y$ con <em>merge sort</em>, en
+$O(n\log n)$, para obtener $y_{(1)} \leq \cdots \leq y_{(n)}$, y calcule las
+sumas de cola</p>
+<div class="display">\[
+  S_{k} := \sum_{i=k+1}^{n} y_{(i)}, \qquad k=n,n-1,\ldots,0 ,
+\]</div>
+<p>de atrás hacia adelante con $S_{n}=0$ y $S_{k-1} = S_{k} + y_{(k)}$, lo que
+cuesta $O(n)$ en total. La observación que hace barato el barrido es que sobre
+los nodos $\varphi$ se lee de las sumas de cola:</p>
+<div class="display">\[
+  \varphi(y_{(k)}) = \sum_{i}(y_{(i)}-y_{(k)})_{+} = S_{k} - (n-k)\,y_{(k)} ,
+\]</div>
+<p>que es $O(1)$ una vez se tiene $S_{k}$. Recorra $k=0,1,\ldots,n-1$, con el
+centinela $y_{(0)} := y_{(1)}-1$, y quédese con el primer $k$ tal que</p>
+<div class="display">\[
+  \varphi(y_{(k)}) &gt; 1 \geq \varphi(y_{(k+1)}) ,
+  \qquad\text{y devuelva}\qquad
+  \tau = \frac{S_{k}-1}{n-k}, \qquad x_{i} = (y_{i}-\tau)_{+} .
+\]</div>
+<p>Ese $k$ existe: $\varphi(y_{(0)}) = \varphi(y_{(1)}) + n \geq n \geq 1$ y
+$\varphi(y_{(n)}) = 0 \leq 1$, y $\varphi$ es decreciente sobre los nodos, así
+que en algún paso se cruza el nivel $1$. El centinela absorbe el caso
+$\varphi(y_{(1)}) \leq 1$, que sale con $k=0$ y
+$\tau = \frac{\sum_{i} y_{i}-1}{n}$.</p>
+<p>Y el $\tau$ devuelto es el bueno: de $\varphi(y_{(k)}) &gt; 1$ sale
+$S_{k}-(n-k)y_{(k)} &gt; 1$, o sea $y_{(k)} &lt; \frac{S_{k}-1}{n-k} = \tau$, y de
+$\varphi(y_{(k+1)}) \leq 1$ sale $\tau \leq y_{(k+1)}$
+$\Rightarrow (y_{(i)}-\tau)_{+} = 0$ para $i \leq k$ y
+$(y_{(i)}-\tau)_{+} = y_{(i)}-\tau$ para $i \geq k+1$, de donde
+$\varphi(\tau) = S_{k}-(n-k)\tau = 1$.</p>
+<p>El costo total es $O(n\log n)$ del ordenamiento más $O(n)$ de las sumas de cola
+y del barrido, es decir $O(n\log n)$, dominado por el ordenamiento.  □</p></div>
 <h4 id="ejercicios-convexa-x4">Tarea 3</h4>
 <div class="stmt ejercicio" id="ej:t3-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sean $C_{1},\ldots,C_{m} \subset \mathbb{R}^{n}$ conjuntos convexos no vacíos.
 Muestre lo siguiente.</p>
 <ol class="lista"><li><p>$\rint(\cl C_{1}) = \rint(C_{1})$.</p></li><li><p>$\rint(C_{1}-C_{2}) = \rint C_{1} - \rint C_{2}$.</p></li><li><p>$\bigcap_{i=1}^{m} \rint C_{i} \subset \rint\left(\bigcap_{i=1}^{m} C_{i}\right)$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p21" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p21"><p><em>a)</em> y <em>b)</em> son los apartados <em>a)</em> y <em>d)</em> del
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p23" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p23"><p><em>a)</em> y <em>b)</em> son los apartados <em>a)</em> y <em>d)</em> del
 Ejercicio 5 de la Tarea 2.</p>
 <p><em>c)</em> Basta $m=2$, y el caso general sale encadenando. Si
 $x \in \rint C \cap \rint D$, por la caracterización $(*)$ del
@@ -1369,7 +1518,7 @@ $\therefore x \in \rint(C \cap D)$. Encadenando,</p>
    \subseteq \rint(C_{1} \cap C_{2} \cap C_{3}),
 \]</div>
 <p>y así hasta $m$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p22" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p22"><p><em>a)</em> y <em>b)</em> son los apartados <em>a)</em> y <em>d)</em> del
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p24" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p24"><p><em>a)</em> y <em>b)</em> son los apartados <em>a)</em> y <em>d)</em> del
 Ejercicio 5 de la Tarea 2, y para <em>c)</em> se puede evitar por completo el
 argumento del mínimo de los $\mu$: la intersección se fabrica cortando el
 producto con la diagonal, y los dos apartados del Ejercicio 5 de la Tarea 2 hacen
@@ -1402,7 +1551,7 @@ $\bigcap_{i=1}^{m}\rint C_{i} \subseteq \rint\bigl(\bigcap_{i=1}^{m-1}C_{i}\bigr
  \subseteq \rint\bigl(\bigcap_{i=1}^{m}C_{i}\bigr)$.  □</p></div>
 <div class="stmt ejercicio" id="ej:t3-2"><div class="head">Ejercicio 2</div><div class="body"><p>Todo conjunto convexo cerrado es la intersección de los semiespacios cerrados
 que lo contienen.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p23" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p23"><p>Dado $C$ convexo y cerrado, sea
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p25" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p25"><p>Dado $C$ convexo y cerrado, sea
 $H_{m,b} := \{x \in \mathbb{R}^{n} : \langle m, x\rangle \geq b\}$, con
 $m \neq 0$, un semiespacio cerrado, y sea $A := \{(m,b) : C \subseteq H_{m,b}\}$.
 Claramente $C \subseteq \bigcap_{(m,b) \in A} H_{m,b}$.</p>
@@ -1412,7 +1561,7 @@ $\langle m, x\rangle \geq b$ para todo $x \in C$ pero $\langle m, y\rangle &lt; 
 $\Rightarrow C \subseteq H_{m,b} \Rightarrow y \in H_{m,b}
 \Rightarrow \langle m,y\rangle \geq b$. Contradicción, pues
 $\langle m,y\rangle &lt; b$. $\therefore C = \bigcap_{(m,b) \in A} H_{m,b}$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p24" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p24"><p>La misma estructura, pero sin usar el teorema de separación como caja negra: el
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p26" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p26"><p>La misma estructura, pero sin usar el teorema de separación como caja negra: el
 semiespacio se construye con la proyección, que es lo que da el vector normal.</p>
 <p>Si $C = \varnothing$, la intersección de todos los semiespacios cerrados es
 vacía, pues por ejemplo $\{x : x_{1} \geq 0\}$ y $\{x : -x_{1} \geq 1\}$ son
@@ -1439,7 +1588,7 @@ $\Rightarrow y \notin \bigcap_{(m,b) \in A}H_{m,b}$.
 $\therefore C = \bigcap_{(m,b) \in A} H_{m,b}$.  □</p></div>
 <div class="stmt ejercicio" id="ej:t3-3"><div class="head">Ejercicio 3</div><div class="body"><p>Para todo cono $K \subset \mathbb{R}^{n}$ se tiene que
 $K^{**} = \cl(\conv K)$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p25" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p25"><p>Con la notación del curso,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p27" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p27"><p>Con la notación del curso,
 $K^{\circ} = \{y : \langle y,x\rangle \geq 0 \ \forall x \in K\}$ y
 $K^{\circ\circ} = \{x : \langle x,y\rangle \geq 0 \ \forall y \in K^{\circ}\}$.
 Claramente $K \subseteq K^{\circ\circ}$, y como $K^{\circ\circ}$ es convexo y
@@ -1455,7 +1604,7 @@ $x_{0} \in K^{\circ\circ}$. Pero como $0 \in \cl(\conv K)
 \Rightarrow \langle y,0\rangle = 0 \geq b
 \Rightarrow \langle y,x_{0}\rangle &lt; b \leq 0$. Contradicción.
 $\therefore \cl(\conv K) = K^{\circ\circ}$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p26" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p26"><p>Sin montar la separación a mano: el curso ya probó que un cono convexo cerrado
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p28" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p28"><p>Sin montar la separación a mano: el curso ya probó que un cono convexo cerrado
 coincide con su bipolar, así que basta ver que $K$ y $\cl(\conv K)$ tienen el
 mismo dual.</p>
 <p>Sea $L := \cl(\conv K)$. Primero, $L$ es un cono convexo cerrado. En efecto,
@@ -1480,7 +1629,7 @@ cerrado,</p>
   f(x,y) = \frac{1}{xy} + x + y, \qquad (x,y) \in \mathbb{R}^{2}_{++}.
 \]</div>
 <p>Pruebe primero que el mínimo existe y luego determine si es único.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p27" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p27"><p>Sea $f : \mathbb{R}^{2}_{++} \to \mathbb{R}$ dada por
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p29" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p29"><p>Sea $f : \mathbb{R}^{2}_{++} \to \mathbb{R}$ dada por
 $(x,y) \mapsto \frac{1}{xy} + x + y$. Pero entonces:</p>
 <div class="display">\[
   \nabla f(x,y) = \Bigl(-\frac{1}{x^{2}y} + 1,\ -\frac{1}{xy^{2}} + 1\Bigr) = 0
@@ -1501,7 +1650,7 @@ $(x,y) \mapsto \frac{1}{xy} + x + y$. Pero entonces:</p>
 <p>$\Rightarrow Hf(1,1) \succ 0 \Rightarrow (1,1)$ es mínimo.  □</p>
 <p class="aviso">$Hf \succ 0$ <em>en el punto</em> da mínimo local estricto. El enunciado
 pide existencia y unicidad, que no se siguen de ahí.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p28" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p28"><p><strong>Existencia.</strong> $f$ es continua sobre el abierto
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p30" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p30"><p><strong>Existencia.</strong> $f$ es continua sobre el abierto
 $\Omega = \mathbb{R}^{2}_{++}$ y $f(1,1)=3$, así que
 $L := \{(x,y) \in \Omega : f(x,y) \leq 3\}$ es no vacío. Es acotado, pues
 $f \geq x+y \Rightarrow L \subseteq \{x+y \leq 3\}$. Y es cerrado en
@@ -1536,7 +1685,7 @@ punto crítico:</p>
 todo $(x,y) \in \Omega$. Como $\Omega$ es convexo, $f$ es estrictamente convexa
 $\Rightarrow$ su minimizador es único. $\therefore$ el mínimo es $3$, se alcanza
 solo en $(1,1)$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p29" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p29"><p>Sin derivadas y sin Weierstrass: los tres sumandos son positivos y su producto
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p31" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p31"><p>Sin derivadas y sin Weierstrass: los tres sumandos son positivos y su producto
 es constante, que es exactamente la situación de la desigualdad entre las medias
 aritmética y geométrica. Para $x,y&gt;0$,</p>
 <div class="display">\[
