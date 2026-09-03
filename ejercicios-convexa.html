@@ -1705,11 +1705,241 @@ tres cosas que pide el enunciado, de la misma desigualdad.  □</p></div>
 <ol class="lista"><li><p>Pruebe que $g$ es convexa.</p></li><li><p>Muestre que $g(x) \leq f(x)$ para todo $x \in \mathbb{R}^{n}$.</p></li><li><p>Sea $h : \mathbb{R}^{n} \to \mathbb{R}$ convexa y suponga que $h \leq f$
     puntualmente. Pruebe que $h \leq g$.</p></li></ol>
 <p>Concluya que $g$ es el mayor minorante convexo de $f$.</p></div></div>
-<p><em>Solución pendiente.</em></p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p32" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p32"><p><em>a)</em> $\operatorname{epi} g = \{(x,t) : g(x) \leq t\}$. Sean
+$(x_{0},t_{0}), (x_{1},t_{1}) \in \operatorname{epi} g$ y $\lambda \in [0,1]$
+$\Rightarrow$</p>
+<div class="display">\[
+  g\bigl(\lambda x_{0}+(1-\lambda)x_{1}\bigr)
+   = \inf\bigl\{t \in \mathbb{R} : (\lambda x_{0}+(1-\lambda)x_{1},\, t) \in \conv(\operatorname{epi} f)\bigr\} ,
+\]</div>
+<p>y como</p>
+<div class="display">\begin{equation}
+  \bigl(\lambda x_{0}+(1-\lambda)x_{1},\ \lambda t_{0}+(1-\lambda)t_{1}\bigr)
+   \in \conv(\operatorname{epi} f) ,
+  \tag{$\star$}
+\end{equation}</div>
+<p>$\Rightarrow g(\lambda x_{0}+(1-\lambda)x_{1}) \leq \lambda t_{0}+(1-\lambda)t_{1}
+\Rightarrow \lambda\binom{x_{0}}{t_{0}} + (1-\lambda)\binom{x_{1}}{t_{1}}
+ \in \operatorname{epi} g$
+$\Rightarrow \operatorname{epi} g$ es convexo $\Rightarrow g$ es convexa.</p>
+<p>Ahora, en efecto $(\star)$ es verdad. Pues como $(x_{i},t_{i}) \in \operatorname{epi} g$</p>
+<div class="display">\[
+  \Rightarrow g(x_{i}) = \inf\bigl\{t : (x_{i},t) \in \conv(\operatorname{epi} f)\bigr\} \leq t_{i}
+  \Rightarrow (x_{i},t_{i}) \in \conv(\operatorname{epi} f)
+\]</div>
+<p>$\Rightarrow \bigl(\lambda x_{0}+(1-\lambda)x_{1},\ \lambda t_{0}+(1-\lambda)t_{1}\bigr)
+ \in \conv(\operatorname{epi} f)$.</p>
+<p><em>b)</em> Como $(x, f(x)) \in \conv(\operatorname{epi} f)$
+$\Rightarrow g(x) = \inf\{t : (x,t) \in \conv(\operatorname{epi} f)\} \leq f(x)$.</p>
+<p><em>c)</em> Similarmente, si $h \leq f \Rightarrow \operatorname{epi} f \subseteq \operatorname{epi} h$,
+y como $\operatorname{epi} h$ es convexo
+$\Rightarrow \conv(\operatorname{epi} f) \subseteq \operatorname{epi} h$. Y note
+que</p>
+<div class="display">\[
+  h(x) = \inf\{t : (x,t) \in \operatorname{epi} h\}
+   \leq \inf\{t : (x,t) \in \conv(\operatorname{epi} f)\}
+   = g(x) .
+\]</div>
+<p>$\therefore h \leq g$.  □</p>
+<p class="aviso">El paso $g(x_{i}) \leq t_{i} \Rightarrow (x_{i},t_{i}) \in \conv(\operatorname{epi} f)$
+es falso cuando el ínfimo no se alcanza: con $f(x)=1/(1+x^{2})$ queda
+$g \equiv 0$ y $(0,0) \notin \conv(\operatorname{epi} f)$. Y falta la conclusión
+que pide el enunciado.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p33" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p33"><p>Por epigrafos, con el $\varepsilon$ que hace falta porque el ínfimo puede no
+alcanzarse. Escriba $C = \conv(\operatorname{epi} f)$.</p>
+<p><strong>Observación.</strong> $C$ es cerrado hacia arriba: si $(x,s) \in C$ y
+$s&#x27; \geq s$, entonces $(x,s&#x27;) \in C$. En efecto,
+$(x,s) = \sum_{i}\lambda_{i}(u_{i},r_{i})$ con $r_{i} \geq f(u_{i})$
+$\Rightarrow (x,s&#x27;) = \sum_{i}\lambda_{i}(u_{i},\, r_{i}+s&#x27;-s)$ y
+$r_{i}+s&#x27;-s \geq r_{i} \geq f(u_{i})$.</p>
+<p><em>a)</em> Sean $(x_{0},t_{0}), (x_{1},t_{1}) \in \operatorname{epi} g$,
+$\lambda \in [0,1]$ y $\varepsilon&gt;0$. Como $g(x_{i}) \leq t_{i} &lt; t_{i}+\varepsilon$,
+por definición de ínfimo existe $s_{i} &lt; t_{i}+\varepsilon$ con
+$(x_{i},s_{i}) \in C$, y por la observación $(x_{i}, t_{i}+\varepsilon) \in C$.
+Pero entonces, por convexidad de $C$,</p>
+<div class="display">\[
+  \bigl(\lambda x_{0}+(1-\lambda)x_{1},\ \lambda t_{0}+(1-\lambda)t_{1}+\varepsilon\bigr) \in C
+  \quad\Rightarrow\quad
+  g\bigl(\lambda x_{0}+(1-\lambda)x_{1}\bigr) \leq \lambda t_{0}+(1-\lambda)t_{1}+\varepsilon ,
+\]</div>
+<p>y con $\varepsilon \downarrow 0$ queda
+$g(\lambda x_{0}+(1-\lambda)x_{1}) \leq \lambda t_{0}+(1-\lambda)t_{1}$
+$\Rightarrow \operatorname{epi} g$ es convexo $\Rightarrow g$ es convexa.  □</p>
+<p><em>b)</em> $(x,f(x)) \in \operatorname{epi} f \subseteq C$, así que $f(x)$ está
+en el conjunto del que se toma el ínfimo $\Rightarrow g(x) \leq f(x)$.  □</p>
+<p><em>c)</em> De $h \leq f$ sale $\operatorname{epi} f \subseteq \operatorname{epi} h$,
+y $\operatorname{epi} h$ es convexo por serlo $h$
+$\Rightarrow C \subseteq \operatorname{epi} h$, por ser $C$ el convexo más
+pequeño que contiene a $\operatorname{epi} f$. Tomando ínfimos sobre el conjunto
+más pequeño, que da el ínfimo más grande,</p>
+<div class="display">\[
+  h(x) = \inf\{t : (x,t) \in \operatorname{epi} h\}
+   \leq \inf\{t : (x,t) \in C\} = g(x) . \qquad
+\]</div>
+<p>$\therefore$ $g$ es convexa por <em>a)</em>, minora a $f$ por <em>b)</em>, y por
+<em>c)</em> cualquier convexa que minore a $f$ minora a $g$: $g$ es el mayor
+minorante convexo de $f$.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p34" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p34"><p>Sin tocar epigrafos: $g$ tiene una fórmula cerrada en términos de $f$, y con
+ella los tres apartados son de dos renglones cada uno.</p>
+<p><strong>Lema.</strong> <em>Para todo $x \in \mathbb{R}^{n}$,</em></p>
+<div class="display">\[
+  g(x) = \inf\Bigl\{\sum_{i=1}^{k}\lambda_{i}f(u_{i}) \ :\
+    k \geq 1,\ \lambda_{i} \geq 0,\ \sum_{i}\lambda_{i}=1,\
+    \sum_{i}\lambda_{i}u_{i} = x\Bigr\} =: \gamma(x) .
+\]</div>
+<p><strong>Demostración: </strong> $(\leq)$ Sea $\sum_{i}\lambda_{i}u_{i} = x$ con
+$\lambda$ en el simplex. Cada $(u_{i}, f(u_{i})) \in \operatorname{epi} f$, de
+modo que $(x, \sum_{i}\lambda_{i}f(u_{i}))$ es combinación convexa de puntos de
+$\operatorname{epi} f$ $\Rightarrow$ está en $\conv(\operatorname{epi} f)$
+$\Rightarrow g(x) \leq \sum_{i}\lambda_{i}f(u_{i})$. Tomando ínfimo sobre las
+representaciones, $g(x) \leq \gamma(x)$.</p>
+<p>$(\geq)$ Sea $(x,t) \in \conv(\operatorname{epi} f)$, digamos
+$(x,t) = \sum_{i}\lambda_{i}(u_{i},r_{i})$ con $r_{i} \geq f(u_{i})$. Pero
+entonces $\sum_{i}\lambda_{i}u_{i} = x$ y</p>
+<div class="display">\[
+  t = \sum_{i}\lambda_{i}r_{i} \geq \sum_{i}\lambda_{i}f(u_{i}) \geq \gamma(x) ,
+\]</div>
+<p>y tomando ínfimo sobre $t$ queda $g(x) \geq \gamma(x)$.  □</p>
+<p><em>a)</em> Sean $x_{0},x_{1}$, $\lambda \in [0,1]$ y $\varepsilon&gt;0$. Tome
+representaciones $\sum_{i}\alpha_{i}u_{i} = x_{0}$ y
+$\sum_{j}\beta_{j}v_{j} = x_{1}$ con
+$\sum_{i}\alpha_{i}f(u_{i}) \leq g(x_{0})+\varepsilon$ y
+$\sum_{j}\beta_{j}f(v_{j}) \leq g(x_{1})+\varepsilon$. Los pesos
+$\{\lambda\alpha_{i}\} \cup \{(1-\lambda)\beta_{j}\}$ son no negativos, suman
+$1$, y combinan los $u_{i}, v_{j}$ hasta $\lambda x_{0}+(1-\lambda)x_{1}$
+$\Rightarrow$</p>
+<div class="display">\[
+  g\bigl(\lambda x_{0}+(1-\lambda)x_{1}\bigr)
+   \leq \lambda\sum_{i}\alpha_{i}f(u_{i}) + (1-\lambda)\sum_{j}\beta_{j}f(v_{j})
+   \leq \lambda g(x_{0}) + (1-\lambda)g(x_{1}) + \varepsilon ,
+\]</div>
+<p>y $\varepsilon \downarrow 0$ cierra. $\therefore g$ es convexa.  □</p>
+<p><em>b)</em> La representación trivial $k=1$, $\lambda_{1}=1$, $u_{1}=x$ da
+$g(x) \leq f(x)$.  □</p>
+<p><em>c)</em> Sea $h$ convexa con $h \leq f$, y sea $\sum_{i}\lambda_{i}u_{i}=x$
+cualquier representación. Por la desigualdad de Jensen para combinaciones
+convexas finitas,</p>
+<div class="display">\[
+  h(x) = h\Bigl(\sum_{i}\lambda_{i}u_{i}\Bigr) \leq \sum_{i}\lambda_{i}h(u_{i})
+   \leq \sum_{i}\lambda_{i}f(u_{i}) ,
+\]</div>
+<p>y tomando ínfimo sobre las representaciones, $h(x) \leq g(x)$.  □</p>
+<p>$\therefore$ $g$ es convexa, minora a $f$, y domina a todo minorante convexo de
+$f$: es el mayor minorante convexo.  □</p></div>
 <div class="stmt ejercicio" id="ej:t3-6"><div class="head">Ejercicio 6$^{*}$</div><div class="body"><p>Muestre que una función Gâteaux diferenciable localmente Lipschitz es Fréchet
 diferenciable. Concluya que toda función convexa con derivadas direccionales
 lineales es Fréchet diferenciable.</p></div></div>
-<p><em>Solución pendiente.</em></p></section>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p35" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p35"><p><em>a)</em> Sea $f : \mathbb{R}^{n} \to \mathbb{R}$ Gâteaux y localmente
+Lipschitz. Sea</p>
+<div class="display">\[
+  g_{t}(h) = \frac{f(x+th)-f(x)}{t} - \langle\nabla f(x), h\rangle .
+\]</div>
+<p>Por ser Gâteaux, $g_{t}(h) \xrightarrow{\ t \to 0\ } 0$. Fréchet pide más: $f$ es
+Fréchet si $\sup_{\lVert h\rVert = 1}|g_{t}(h)| \xrightarrow{\ t \to 0\ } 0$.</p>
+<p>En efecto, como</p>
+<div class="display">\[
+  |g_{t}(h)-g_{t}(h&#x27;)| = \tfrac{1}{t}\,|f(x+th)-f(x+th&#x27;)|
+   \leq \tfrac{1}{t}K\lVert x+th-x-th&#x27;\rVert = K\lVert h-h&#x27;\rVert
+\]</div>
+<p>$\Rightarrow \{g_{t}\}_{t}$ son equi-Lipschitz. Y como
+$\lim_{t \to 0} g_{t}(h) = 0$ para todo $h$ fijo y $\{g_{t}\}$ son
+equicontinuas $\Rightarrow g_{t} \to 0$ uniformemente en $\overline{B_{1}(0)}$.</p>
+<p><em>b)</em> Sea $f : \mathbb{R}^{n} \to \mathbb{R}$ con derivadas direccionales
+lineales. Por la dimensión finita $\Rightarrow f$ es Gâteaux. Si además $f$ es
+convexa, por teorema $f$ es localmente Lipschitz en
+$\rint(\operatorname{dom} f) = \mathbb{R}^{n}$ $\Rightarrow f$ es Fréchet.  □</p>
+<p class="aviso">En $|g_{t}(h)-g_{t}(h&#x27;)|$ la igualdad omite el término
+$|\langle\nabla f(x), h-h&#x27;\rangle|$; con él la cota es
+$(K+\lVert\nabla f(x)\rVert)\lVert h-h&#x27;\rVert$ y nada más cambia.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p36" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p36"><p>Por equicontinuidad y un cubrimiento finito de la esfera, que es donde entra la
+dimensión finita.</p>
+<p><em>a)</em> Sea $x$ fijo y sean $K&gt;0$ y $\rho&gt;0$ con $f$ $K$-Lipschitz en
+$B_{\rho}(x)$, que existen por ser $f$ localmente Lipschitz. Para
+$\lVert h\rVert \leq 1$ y $0&lt;t&lt;\rho$ se tiene $x+th \in B_{\rho}(x)$. Defina</p>
+<div class="display">\[
+  g_{t}(h) = \frac{f(x+th)-f(x)}{t} - \langle\nabla f(x), h\rangle .
+\]</div>
+<p>Escribiendo $u = th$ con $t = \lVert u\rVert$ y $\lVert h\rVert = 1$,</p>
+<div class="display">\[
+  \frac{\bigl|f(x+u)-f(x)-\langle\nabla f(x),u\rangle\bigr|}{\lVert u\rVert} = |g_{t}(h)|
+  \quad\Rightarrow\quad
+  f \text{ es Fréchet en } x
+  \iff \sup_{\lVert h\rVert=1}|g_{t}(h)| \xrightarrow{\ t \downarrow 0\ } 0 .
+\]</div>
+<p>Por ser $f$ Gâteaux, $g_{t}(h) \to 0$ para cada $h$ fijo. Y las $g_{t}$ son
+equi-Lipschitz: para $\lVert h\rVert, \lVert h&#x27;\rVert \leq 1$ y $0&lt;t&lt;\rho$,</p>
+<div class="display">\[
+  |g_{t}(h)-g_{t}(h&#x27;)|
+   \leq \tfrac{1}{t}\,|f(x+th)-f(x+th&#x27;)| + |\langle\nabla f(x), h-h&#x27;\rangle|
+   \leq \bigl(K+\lVert\nabla f(x)\rVert\bigr)\lVert h-h&#x27;\rVert =: L\lVert h-h&#x27;\rVert .
+\]</div>
+<p><strong>Lema.</strong> <em>Sea $S$ compacto, sean $g_{t} : S \to \mathbb{R}$
+$L$-Lipschitz con $L&gt;0$ la misma constante para todo $t$, y suponga
+$g_{t}(h) \to 0$ para cada $h \in S$. Entonces
+$\sup_{h \in S}|g_{t}(h)| \to 0$.</em></p>
+<p><strong>Demostración: </strong> Sea $\varepsilon&gt;0$. Por compacidad, $S$ se cubre con
+finitas bolas de radio $\varepsilon/(3L)$ centradas en $h_{1},\ldots,h_{N} \in S$.
+Tome $t_{0}$ tal que $|g_{t}(h_{j})| &lt; \varepsilon/3$ para todo $j$ y todo
+$t&lt;t_{0}$, lo que es posible por ser finitos. Dado $h \in S$, tome $j$ con
+$\lVert h-h_{j}\rVert &lt; \varepsilon/(3L)$. Pero entonces:</p>
+<div class="display">\[
+  |g_{t}(h)| \leq |g_{t}(h)-g_{t}(h_{j})| + |g_{t}(h_{j})|
+   \leq L\,\frac{\varepsilon}{3L} + \frac{\varepsilon}{3} &lt; \varepsilon . \qquad
+\]</div>
+<p>Aplicando el lema con $S = \{h : \lVert h\rVert = 1\}$, que es compacto por ser
+cerrado y acotado en $\mathbb{R}^{n}$, queda
+$\sup_{\lVert h\rVert=1}|g_{t}(h)| \to 0$ $\Rightarrow f$ es Fréchet en $x$ con
+$\Dif f(x) = \langle\nabla f(x),\cdot\rangle$.  □</p>
+<p><em>b)</em> Sea $f : \mathbb{R}^{n} \to \mathbb{R}$ convexa con derivadas
+direccionales lineales. La definición de Gâteaux pide que
+$d \mapsto \dird{d}{f}(x)$ sea lineal <em>y acotada</em>, y en dimensión finita
+toda forma lineal es acotada $\Rightarrow f$ es Gâteaux en todo punto. Como $f$
+es convexa y finita en todo $\mathbb{R}^{n}$, es localmente Lipschitz allí, por
+el teorema de regularidad local de las funciones convexas (Corolario 3.5.4 de
+Junca). Pero entonces <em>a)</em> aplica en cada $x \in \mathbb{R}^{n}$
+$\Rightarrow f$ es Fréchet diferenciable.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p37" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p37"><p>Por contradicción y con una subsucesión, en vez de con un cubrimiento finito. Es
+el Teorema A.1.5 de Junca.</p>
+<p><em>a)</em> Sea $a = \nabla f(x)$ y defina el resto</p>
+<div class="display">\[
+  r(h) := f(x+h) - f(x) - \langle a, h\rangle ,
+\]</div>
+<p>para $\lVert h\rVert$ pequeño. Como $f$ es localmente Lipschitz, existen $K&gt;0$ y
+$\rho&gt;0$ con $|f(x+u)-f(x+v)| \leq K\lVert u-v\rVert$ si
+$\lVert u\rVert, \lVert v\rVert &lt; \rho$, de donde</p>
+<div class="display">\begin{equation}
+  |r(u)-r(v)| \leq |f(x+u)-f(x+v)| + |\langle a, u-v\rangle|
+   \leq (K+\lVert a\rVert)\,\lVert u-v\rVert .
+  \tag{$\dagger$}
+\end{equation}</div>
+<p>Y por ser $f$ Gâteaux, para cada dirección fija $d$,</p>
+<div class="display">\begin{equation}
+  \frac{r(td)}{t} = \frac{f(x+td)-f(x)}{t} - \langle a,d\rangle
+   \xrightarrow{\ t \to 0\ } 0 .
+  \tag{$\ddagger$}
+\end{equation}</div>
+<p>Suponga en busca de contradicción que $r(h)/\lVert h\rVert \not\to 0$. Entonces
+existen $\varepsilon&gt;0$ y $h_{k} \to 0$ con $h_{k} \neq 0$ y
+$|r(h_{k})|/\lVert h_{k}\rVert \geq \varepsilon$ para todo $k$. Tome
+$t_{k} = \lVert h_{k}\rVert$ y $d_{k} = h_{k}/\lVert h_{k}\rVert$, de modo que
+$t_{k} \to 0$ y $\lVert d_{k}\rVert = 1$. Como la esfera unitaria de
+$\mathbb{R}^{n}$ es compacta, pasando a una subsucesión $d_{k} \to d$ con
+$\lVert d\rVert = 1$. Pero entonces, por $(\dagger)$,</p>
+<div class="display">\[
+  \left|\frac{r(t_{k}d_{k})}{t_{k}} - \frac{r(t_{k}d)}{t_{k}}\right|
+   = \frac{|r(t_{k}d_{k}) - r(t_{k}d)|}{t_{k}}
+   \leq (K+\lVert a\rVert)\,\lVert d_{k}-d\rVert \xrightarrow{\ k \to \infty\ } 0 ,
+\]</div>
+<p>y por $(\ddagger)$, con $d$ fija, $r(t_{k}d)/t_{k} \to 0$. Sumando,</p>
+<div class="display">\[
+  \frac{r(h_{k})}{\lVert h_{k}\rVert} = \frac{r(t_{k}d_{k})}{t_{k}} \longrightarrow 0 .
+\]</div>
+<p>Contradicción, pues $|r(h_{k})|/\lVert h_{k}\rVert \geq \varepsilon$ para todo
+$k$. $\therefore f$ es Fréchet en $x$ con $\nabla f(x) = a$.  □</p>
+<p><em>b)</em> Las derivadas direccionales lineales son acotadas por ser la
+dimensión finita $\Rightarrow f$ es Gâteaux. Y $f$ convexa y finita en todo
+$\mathbb{R}^{n}$ es localmente Lipschitz allí (Corolario 3.5.4 de Junca)
+$\Rightarrow$ por <em>a)</em>, $f$ es Fréchet diferenciable.  □</p></div></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
