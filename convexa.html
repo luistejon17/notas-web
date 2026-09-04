@@ -1025,19 +1025,26 @@ $w$ con $v=p$ y sumando,</p>
 que $\Proy_{C}$ no solo no separa puntos, sino que el desplazamiento
 $p-q$ apunta en el sentido de $z-w$. Es la propiedad que hace converger los
 algoritmos de proyecciones alternadas.</p></div></div>
-<div class="stmt teorema" id="clase-c5:teo-separacion"><div class="head">Teorema separación estricta</div><div class="body"><p>Si $z\notin C$, entonces existe $a\neq0$ con</p>
+<div class="stmt teorema" id="clase-c5:teo-separacion"><div class="head">Teorema separación estricta</div><div class="body"><p>Sea $z\notin C$, sea $p=\Proy_{C}(z)$ y sea $a=p-z\neq0$. Entonces el
+hiperplano</p>
 <div class="display">\[
-  \ip{a}{z}&lt;\inf_{x\in C}\ip{a}{x}.
+  H=\{x\in\R^{n}:\ip{a}{x-p}=0\}
+\]</div>
+<p>separa estrictamente a $z$ de $C$:</p>
+<div class="display">\[
+  \ip{a}{z-p}=-\norm{a}^{2}&lt;0\le\ip{a}{x-p}
+  \qquad\text{para todo }x\in C.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p23">Ver demostración</button><div class="proof" id="clase-convexa-p23"><p>Sea $p=\Proy_{C}(z)$ y $a=p-z\neq0$. Por la caracterización variacional de la proyección, $\ip{p-z}{x-p}\ge0$ para todo $x\in C$,
-luego</p>
-<div class="display">\[
-  \ip{a}{x}\ge\ip{a}{p}=\ip{a}{z}+\norm{a}^{2}&gt;\ip{a}{z}. 
-\]</div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p23">Ver demostración</button><div class="proof" id="clase-convexa-p23"><p>La desigualdad de la derecha es la caracterización variacional de la
+proyección, que da $\ip{p-z}{x-p}\ge0$ para todo $x\in C$. La de la izquierda
+es el cálculo $\ip{a}{z-p}=\ip{p-z}{z-p}=-\norm{p-z}^{2}$.</p></div>
+<div class="stmt corolario" id="clase-c5:cor-separacion-funcional"><div class="head">Corolario</div><div class="body"><p>Con la misma $a$, se tiene $\ip{a}{z}&lt;\inf_{x\in C}\ip{a}{x}$, y la diferencia
+entre los dos lados es al menos $\norm{a}^{2}=\dist(z,C)^{2}$.</p></div></div>
 <div class="stmt corolario" id="clase-c5:cor-semiespacios"><div class="head">Corolario representación por semiespacios<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Todo convexo cerrado es la intersección de los semiespacios cerrados que lo
 contienen.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p24">Ver demostración</button><div class="proof" id="clase-convexa-p24"><p>Una inclusión es inmediata. Para la otra, si $z\notin C$ la separación estricta
-da un semiespacio cerrado que contiene a $C$ y no a $z$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p24">Ver demostración</button><div class="proof" id="clase-convexa-p24"><p>Una inclusión es inmediata. Para la otra, si $z\notin C$ el teorema anterior da
+el semiespacio $\{x:\ip{a}{x-p}\ge0\}$, que es cerrado, contiene a $C$ y deja
+fuera a $z$.</p></div>
 <div class="stmt teorema" id="clase-c5:teo-separacion-fuerte"><div class="head">Teorema separación fuerte<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $C,D\subset\R^{n}$ convexos, cerrados, no vacíos y disjuntos, con uno de
 los dos compacto. Entonces existen $a\neq0$ y $\alpha&lt;\beta$ con</p>
 <div class="display">\[
@@ -2146,14 +2153,23 @@ interno, así que es de $\Hs$ y no sube a un Banach.</p></div></div>
     $rz/\norm{z}$ en caso contrario.</p></li><li><p>Sobre el hiperplano $\{x:\ip{a}{x}=b\}$ con $a\neq0$:
     $\Proy(z)=z-\frac{\ip{a}{z}-b}{\norm{a}^{2}}a$.</p></li><li><p>Sobre el ortante de $\ell^{2}$: $[\Proy(z)]_{n}=\max\{z_{n},0\}$, que
     sigue valiendo coordenada a coordenada.</p></li></ol></div></div>
-<div class="stmt teorema" id="general-c5:teo-separacion"><div class="head">Teorema separación estricta</div><div class="body"><p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, y $z\notin C$. Entonces existe
-$a\neq0$ con $\ip{a}{z}&lt;\inf_{x\in C}\ip{a}{x}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p21">Ver demostración</button><div class="proof" id="general-convexa-p21"><p>Sea $p=\Proy_{C}(z)$ y $a=p-z\neq0$. Por la caracterización variacional de la proyección, $\ip{a}{x}\ge\ip{a}{p}=\ip{a}{z}+\norm{a}^{2}$
-para todo $x\in C$.</p></div>
-<p>En un Banach no hay proyección, y la separación es la segunda forma geométrica
-de Hahn–Banach: si $C\subset E$ es convexo cerrado no vacío y $z\notin C$,
-existe $\ell\in E^{*}$ con $\ell(z)&lt;\inf_{x\in C}\ell(x)$ (Brezis,
-Teorema 1.7).</p>
+<div class="stmt teorema" id="general-c5:teo-separacion"><div class="head">Teorema separación estricta</div><div class="body"><p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, sea $z\notin C$, sea
+$p=\Proy_{C}(z)$ y sea $a=p-z\neq0$. Entonces el hiperplano
+$H=\{x\in\Hs:\ip{a}{x-p}=0\}$ separa estrictamente a $z$ de $C$:</p>
+<div class="display">\[
+  \ip{a}{z-p}=-\norm{a}^{2}&lt;0\le\ip{a}{x-p}
+  \qquad\text{para todo }x\in C.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p21">Ver demostración</button><div class="proof" id="general-convexa-p21"><p>La desigualdad de la derecha es la caracterización variacional de la
+proyección; la de la izquierda es
+$\ip{a}{z-p}=\ip{p-z}{z-p}=-\norm{p-z}^{2}$.</p></div>
+<div class="stmt corolario" id="general-c5:cor-separacion-funcional"><div class="head">Corolario</div><div class="body"><p>Con la misma $a$ se tiene $\ip{a}{z}&lt;\inf_{x\in C}\ip{a}{x}$, con una holgura de
+al menos $\dist(z,C)^{2}$.</p></div></div>
+<p>En un Banach no hay proyección, así que lo que sobrevive es el corolario y no el
+teorema: no hay $p$ con el que construir $H$, y la separación pasa a ser la
+segunda forma geométrica de Hahn–Banach, que entrega directamente el funcional.
+Si $C\subset E$ es convexo cerrado no vacío y $z\notin C$, existe
+$\ell\in E^{*}$ con $\ell(z)&lt;\inf_{x\in C}\ell(x)$ (Brezis, Teorema 1.7).</p>
 <div class="stmt corolario" id="general-c5:cor-semiespacios"><div class="head">Corolario representación por semiespacios<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Todo convexo cerrado de un Banach es la intersección de los semiespacios
 cerrados que lo contienen.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p22">Ver demostración</button><div class="proof" id="general-convexa-p22"><p>Una inclusión es inmediata, y para la otra la separación de Hahn–Banach da,
@@ -3041,11 +3057,19 @@ precisamente lo que caracteriza a las normas que vienen de un producto interno.<
 $\ip{z-p}{v-p}\le0$ para todo $v\in C$.</p></div></div>
 <div class="stmt corolario" id="ambas-c5:cor-normal"><div class="head">Corolario</div><div class="body"><p>$p=\Proy_{C}(z)$ si y solo si $z-p\in\Ncono_{C}(p)$.</p></div></div>
 <div class="stmt corolario" id="ambas-c5:cor-lipschitz"><div class="head">Corolario</div><div class="body"><p>$\Proy_{C}$ es $1$-Lipschitz.</p></div></div>
-<div class="stmt teorema" id="ambas-c5:teo-separacion"><div class="head">Teorema separación estricta</div><div class="body"><p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, y $z\notin C$. Entonces existe
-$a\neq0$ con $\ip{a}{z}&lt;\inf_{x\in C}\ip{a}{x}$, y sirve $a=\Proy_{C}(z)-z$.</p></div></div>
-<div class="stmt proposicion" id="ambas-c5:prop-hb"><div class="head">Proposición</div><div class="body"><p>El enunciado sube a un Banach cambiando el vector por un funcional: si
-$C\subset E$ es convexo cerrado no vacío y $z\notin C$, existe $\ell\in E^{*}$
-con $\ell(z)&lt;\inf_{x\in C}\ell(x)$. Es la segunda forma geométrica de
+<div class="stmt teorema" id="ambas-c5:teo-separacion"><div class="head">Teorema separación estricta</div><div class="body"><p>Sea $C\subset\Hs$ convexo, cerrado y no vacío, sea $z\notin C$, sea
+$p=\Proy_{C}(z)$ y sea $a=p-z\neq0$. Entonces $H=\{x:\ip{a}{x-p}=0\}$ separa
+estrictamente a $z$ de $C$, con
+$\ip{a}{z-p}=-\norm{a}^{2}&lt;0\le\ip{a}{x-p}$ para todo $x\in C$. En particular
+$\ip{a}{z}&lt;\inf_{x\in C}\ip{a}{x}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c5:obs-dos-formas"><div class="head">Observación el enunciado tiene dos formas, y solo una sube</div><div class="body"><p>La forma <em>geométrica</em> nombra el hiperplano y lo construye: $H$ pasa por la
+proyección y es perpendicular al segmento que une $z$ con ella. La forma
+<em>funcional</em> solo afirma que existe una $a$ que separa. En $\R^{n}$ y en
+$\Hs$ las dos son el mismo teorema, y la primera es mejor porque dice de dónde
+sale el hiperplano.</p></div></div>
+<div class="stmt proposicion" id="ambas-c5:prop-hb"><div class="head">Proposición</div><div class="body"><p>En un Banach solo sobrevive la forma funcional: si $C\subset E$ es convexo
+cerrado no vacío y $z\notin C$, existe $\ell\in E^{*}$ con
+$\ell(z)&lt;\inf_{x\in C}\ell(x)$. Es la segunda forma geométrica de
 Hahn–Banach (Brezis, Teorema 1.7), y sin producto interno hay que pagarla con
 el lema de Zorn: en $\Hs$ la da gratis la proyección.</p></div></div>
 <div class="stmt teorema" id="ambas-c5:teo-soporte"><div class="head">Teorema hiperplano de soporte</div><div class="body"><p>Sea $\dim\Hs&lt;\infty$, $C$ convexo, cerrado y no vacío, y $V=\paral(\aff C)$.</p>
