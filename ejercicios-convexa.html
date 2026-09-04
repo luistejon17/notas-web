@@ -1939,7 +1939,548 @@ $k$. $\therefore f$ es Fréchet en $x$ con $\nabla f(x) = a$.  □</p>
 <p><em>b)</em> Las derivadas direccionales lineales son acotadas por ser la
 dimensión finita $\Rightarrow f$ es Gâteaux. Y $f$ convexa y finita en todo
 $\mathbb{R}^{n}$ es localmente Lipschitz allí (Corolario 3.5.4 de Junca)
-$\Rightarrow$ por <em>a)</em>, $f$ es Fréchet diferenciable.  □</p></div></section>
+$\Rightarrow$ por <em>a)</em>, $f$ es Fréchet diferenciable.  □</p></div>
+<h4 id="ejercicios-convexa-x5">Tarea 4</h4>
+<div class="stmt ejercicio" id="ej:t4-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sea $f$ convexa y diferenciable y $C$ convexo. Pruebe (directamente, sin usar
+subdiferenciales) que $x^{\star} \in C$ minimiza $f$ sobre $C$ si y solo si</p>
+<div class="display">\[
+  \langle\nabla f(x^{\star}), x-x^{\star}\rangle \geq 0
+  \qquad \text{para todo } x \in C.
+\]</div>
+<p>Aplíquelo a la proyección de un punto sobre un conjunto convexo cerrado.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p38" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p38"><p>$(\Rightarrow)$ Si $x_{0} \in \rint C$ y $x_{0} = \min_{C} f(x)
+\Rightarrow \nabla f(x_{0}) = 0$, así que asumimos $x_{0} \in \partial C$.
+Suponga que existe $x \in C$ con $\langle\nabla f(x_{0}), x-x_{0}\rangle &lt; 0$.
+Tome $y = \lambda x + (1-\lambda)x_{0} \in C$ para todo $\lambda \in (0,1)$
+$\Rightarrow y - x_{0} = \lambda(x-x_{0})$ y
+$\lVert y-x_{0}\rVert = \lambda\lVert x-x_{0}\rVert$. Pero entonces:</p>
+<div class="display">\begin{align*}
+  f(y)-f(x_{0})
+   &amp;= \langle\nabla f(x_{0}), y-x_{0}\rangle + o(\lVert y-x_{0}\rVert)
+    = \lambda\langle\nabla f(x_{0}), x-x_{0}\rangle + o(\lambda) \\
+  \Rightarrow \quad \frac{f(y)-f(x_{0})}{\lambda}
+   &amp;= \langle\nabla f(x_{0}), x-x_{0}\rangle + \frac{o(\lambda)}{\lambda} &lt; 0
+\end{align*}</div>
+<p>para $\lambda$ suficientemente cercano a $0$, y como $\lambda&gt;0$
+$\Rightarrow f(y)-f(x_{0})&lt;0 \Rightarrow f(y)&lt;f(x_{0}) \Rightarrow x_{0}$ no es
+mínimo. $\therefore$ si $x_{0}$ es mínimo
+$\Rightarrow \langle\nabla f(x_{0}), x-x_{0}\rangle \geq 0$ para todo $x \in C$.</p>
+<p>$(\Leftarrow)$ Similarmente, si $\langle\nabla f(x_{0}), x-x_{0}\rangle \geq 0$
+para todo $x \in C$, y $d \in \mathbb{R}^{n}$ fijo y $\lambda&gt;0$
+$\Rightarrow \langle\nabla f(x_{0}), d\rangle \geq 0$, y</p>
+<div class="display">\[
+  f(x_{0}+\lambda d)-f(x_{0})
+   = \lambda\langle\nabla f(x_{0}), d\rangle + o(\lambda\lVert d\rVert)
+   = \lambda\langle\nabla f(x_{0}), d\rangle + \lambda\,o(\lVert d\rVert) .
+\]</div>
+<p>Análogamente se concluye $f(x_{0}+\lambda d)-f(x_{0}) \geq 0$ para
+$\lambda&lt;\varepsilon$ $\Rightarrow x_{0}$ es mínimo local, y como $f$ es convexa
+$\Rightarrow x_{0}$ es mínimo de $f$.  □</p>
+<p class="aviso">«$x_{0} \in \rint C$ y mínimo $\Rightarrow \nabla f(x_{0})=0$» es falso si
+$\aff C \neq \mathbb{R}^{n}$, y no hace falta: el argumento de abajo vale para
+todo $x_{0} \in C$. En $(\Leftarrow)$ el $o(\lambda)$ puede dominar cuando
+$\langle\nabla f(x_{0}),d\rangle = 0$. Y falta la aplicación a la proyección.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p39" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p39"><p>$(\Rightarrow)$ Sea $x^{\star}$ mínimo de $f$ sobre $C$ y sea $x \in C$. Para
+$\lambda \in (0,1]$, $x^{\star}+\lambda(x-x^{\star}) \in C$ por convexidad
+$\Rightarrow f(x^{\star}+\lambda(x-x^{\star})) - f(x^{\star}) \geq 0$. Dividiendo
+por $\lambda$ y haciendo $\lambda \downarrow 0$, el cociente tiende a la
+derivada direccional:</p>
+<div class="display">\[
+  0 \leq \lim_{\lambda \downarrow 0}\frac{f(x^{\star}+\lambda(x-x^{\star}))-f(x^{\star})}{\lambda}
+   = \langle\nabla f(x^{\star}), x-x^{\star}\rangle . \qquad
+\]</div>
+<p>$(\Leftarrow)$ Aquí la convexidad hace todo el trabajo y no hace falta ningún
+$o(\lambda)$. Por ser $f$ convexa y diferenciable, vale la desigualdad del
+gradiente $f(x) \geq f(x^{\star}) + \langle\nabla f(x^{\star}), x-x^{\star}\rangle$
+para todos $x, x^{\star}$ (§8 de las notas). Pero entonces, si
+$\langle\nabla f(x^{\star}), x-x^{\star}\rangle \geq 0$ para todo $x \in C$,</p>
+<div class="display">\[
+  f(x) \geq f(x^{\star}) + \langle\nabla f(x^{\star}), x-x^{\star}\rangle \geq f(x^{\star})
+  \qquad \forall x \in C ,
+\]</div>
+<p>$\Rightarrow x^{\star}$ minimiza $f$ sobre $C$.  □</p>
+<p><strong>La proyección.</strong> Sea $C$ convexo cerrado no vacío, sea $z \in \mathbb{R}^{n}$
+y tome $f(x) = \tfrac{1}{2}\lVert x-z\rVert^{2}$, que es convexa y diferenciable
+con $\nabla f(x) = x-z$. Por definición, $p = \operatorname{Proj}_{C}(z)$ es el
+minimizador de $f$ sobre $C$, así que el criterio dice</p>
+<div class="display">\[
+  p = \operatorname{Proj}_{C}(z)
+  \iff \langle p-z,\ x-p\rangle \geq 0 \ \ \forall x \in C
+  \iff \langle z-p,\ x-p\rangle \leq 0 \ \ \forall x \in C ,
+\]</div>
+<p>que es exactamente la caracterización variacional de la proyección.  □</p></div>
+<div class="stmt ejercicio" id="ej:t4-2"><div class="head">Ejercicio 2</div><div class="body"><p>Sea $f : \mathbb{R} \to \mathbb{R}$.</p>
+<ol class="lista"><li><p>Suponga que existe una función diferenciable y convexa $\varphi$ tal que
+    $f = \varphi&#x27;$. Pruebe que $f$ es no decreciente.</p></li><li><p>Recíprocamente, suponga que $f$ es no decreciente y continua. Fijado
+    $x_{0} \in \mathbb{R}$, defina</p>
+<div class="display">\[
+      \varphi(x) = \int_{x_{0}}^{x} f(t)\,dt .
+    \]</div>
+<p>Pruebe que $\varphi$ es diferenciable, $\varphi&#x27; = f$ y $\varphi$ es convexa.</p></li><li><p>Discuta qué parte del argumento cambia si se elimina la continuidad de
+    $f$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p40" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p40"><p><em>a)</em> Basta ver que $(f(y)-f(x))(y-x) \geq 0$. Como $\varphi$ es convexa y
+diferenciable $\Rightarrow \partial\varphi(x) = \{\varphi&#x27;(x)\} = \{f(x)\}$
+$\Rightarrow \varphi(y) \geq \varphi(x) + f(x)(y-x)$ para todo $y \in \mathbb{R}$,
+y similarmente $\varphi(x) \geq \varphi(y) + f(y)(x-y)$
+$\Rightarrow -\varphi(y) + f(y)(y-x) \geq -\varphi(x)$. Pero entonces:</p>
+<div class="display">\[
+  f(y)(y-x) \geq f(x)(y-x) \Rightarrow (f(y)-f(x))(y-x) \geq 0 .
+\]</div>
+<p><em>b)</em> $\varphi$ es diferenciable y $\varphi&#x27;(x) = f(x)$ por el teorema
+fundamental del cálculo. Sabemos que $\varphi$ es convexa
+$\Longleftrightarrow$ para todos $x,y$ se tiene
+$\varphi(y) \geq \varphi(x) + \varphi&#x27;(x)(y-x) = \varphi(x)+f(x)(y-x)$. En
+efecto, como</p>
+<div class="display">\[
+  \varphi(y) = \varphi(x) + f(x)(y-x)
+   + \int_{0}^{1}\bigl(f(x+t(y-x))-f(x)\bigr)(y-x)\,dt
+\]</div>
+<p>y $f$ es creciente $\Rightarrow$ el integrando es positivo
+$\Rightarrow \varphi(y) \geq \varphi(x)+f(x)(y-x)$.</p>
+<p><em>c)</em> Si $f$ no es continua, es sabido que una $f : \mathbb{R} \to \mathbb{R}$
+creciente tiene contables discontinuidades. Tome $x_{1}, x_{2}, \ldots$ estas
+discontinuidades. En cada trozo $(x_{i}, x_{i+1})$ el mismo argumento vale, más
+aún los límites en cada $x_{i}$ coinciden. Puede pegar estos trozos y da una
+$\varphi$ continua tal que $\varphi&#x27; = f$ casi en todo punto.  □</p>
+<p class="aviso">En <em>c)</em> no se dice lo principal, que es que la convexidad
+sobrevive entera: el argumento de <em>b)</em> solo usa la continuidad en el
+teorema fundamental del cálculo.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p41" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p41"><p><em>a)</em> La caracterización de primer orden de la convexidad para una función
+diferenciable dice que $\varphi$ es convexa si y solo si $\varphi&#x27;$ es monótona
+(§8 de las notas), esto es
+$(\varphi&#x27;(y)-\varphi&#x27;(x))(y-x) \geq 0$ para todos $x,y$. Con $f = \varphi&#x27;$ eso
+es $(f(y)-f(x))(y-x) \geq 0$, que para $y&gt;x$ da $f(y) \geq f(x)$.
+$\therefore f$ es no decreciente.  □</p>
+<p><em>b)</em> $f$ es continua $\Rightarrow$ por el teorema fundamental del cálculo
+$\varphi$ es diferenciable con $\varphi&#x27; = f$. Y $\varphi&#x27; = f$ es no
+decreciente, es decir monótona, $\Rightarrow \varphi$ es convexa por la misma
+caracterización de <em>a)</em>.  □</p>
+<p><em>c)</em> Quitada la continuidad, $f$ no decreciente sigue siendo acotada y
+Riemann integrable en cada compacto, así que $\varphi$ está bien definida.
+Separe lo que usa cada cosa:</p>
+<ul class="lista"><li><p><strong>La convexidad no cambia.</strong> La identidad
+    $\varphi(y) = \varphi(x)+f(x)(y-x)+\int_{0}^{1}(f(x+t(y-x))-f(x))(y-x)\,dt$
+    es un cambio de variable en una integral de Riemann y no usa continuidad, y
+    el integrando sigue siendo $\geq 0$ por ser $f$ no decreciente: para $y&gt;x$
+    los dos factores son $\geq 0$, y para $y&lt;x$ los dos son $\leq 0$.
+    $\Rightarrow \varphi(y) \geq \varphi(x)+f(x)(y-x)$ y $\varphi$ es convexa.</p></li><li><p><strong>Lo que se pierde es $\varphi&#x27; = f$.</strong> El teorema fundamental del
+    cálculo da $\varphi&#x27;(x) = f(x)$ solo en los puntos de continuidad de $f$. En
+    un salto se tiene $\varphi&#x27;_{-}(x) = f(x^{-})$ y $\varphi&#x27;_{+}(x) = f(x^{+})$,
+    que difieren, de modo que $\varphi$ no es diferenciable ahí.</p></li><li><p><strong>Y son pocos.</strong> Una función monótona tiene a lo sumo una cantidad
+    numerable de discontinuidades $\Rightarrow \varphi$ es diferenciable con
+    $\varphi&#x27;=f$ salvo en un conjunto numerable.</p></li></ul>
+<p>$\varphi$ sigue siendo continua, y de hecho Lipschitz en cada compacto, porque
+$f$ es acotada allí.  □</p></div>
+<div class="stmt ejercicio" id="ej:t4-3"><div class="head">Ejercicio 3</div><div class="body"><p>Considere</p>
+<div class="display">\[
+  f(x) = \langle c,x\rangle - \sum_{j=1}^{m}\log(1-\langle a_{j},x\rangle)
+   - \sum_{i=1}^{n}\log(1-x_{i}^{2})
+\]</div>
+<p>sobre su dominio natural.</p>
+<ol class="lista"><li><p>Determine explícitamente $\operatorname{dom} f$.</p></li><li><p>Muestre que $f$ es convexa.</p></li><li><p>Calcule $\nabla f(x)$ y $\nabla^{2} f(x)$.</p></li><li><p>Dé condiciones suficientes para que $f$ sea estrictamente convexa.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p42" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p42"><p><em>a)</em></p>
+<div class="display">\[
+  \operatorname{dom} f = \{x \in \mathbb{R}^{n} : \langle a_{j},x\rangle&lt;1 \text{ y } x_{i}^{2}&lt;1 \ \forall j\, \forall i\}
+   = \{x : \langle a_{j},x\rangle&lt;1 \ \forall j\} \cap (-1,1)^{n} .
+\]</div>
+<p><em>b)</em> Primero, $\operatorname{dom} f$ es intersección de convexos
+$\Rightarrow$ es convexo. Más aún, sea
+$g_{a}(x) = -\log(1-\langle a,x\rangle)$, que es convexa al ser composición de
+$-\log$ (convexa) con $1-\langle a,\cdot\rangle$ (afín). Similarmente,
+$h_{i}(x) = -\log(1-x_{i}^{2})$ satisface
+$\nabla h_{i}(x) = (0,\ldots,\tfrac{2x_{i}}{1-x_{i}^{2}},\ldots,0)$. Es claro que
+$\langle\nabla h_{i}(y)-\nabla h_{i}(x), y-x\rangle \geq 0$, pues
+$\tfrac{2x_{i}}{1-x_{i}^{2}}$ es creciente $\Rightarrow \nabla h$ es monótono
+$\Rightarrow h$ es convexa. Así $f$ es suma de convexas $\Rightarrow f$ es
+convexa.</p>
+<p><em>c)</em> Note que
+$\nabla g_{a}(x) = -\tfrac{1}{1-\langle a,x\rangle}\cdot(-a) = \tfrac{a}{1-\langle a,x\rangle}$,
+y como $f(x) = \langle c,x\rangle + \sum_{j=1}^{m}g_{a_{j}}(x) + \sum_{i=1}^{n}h_{i}(x)$
+$\Rightarrow$</p>
+<div class="display">\[
+  \nabla f(x) = c + \sum_{j=1}^{m}\frac{a_{j}}{1-\langle a_{j},x\rangle}
+   + 2\Bigl(\frac{x_{1}}{1-x_{1}^{2}}, \frac{x_{2}}{1-x_{2}^{2}}, \ldots, \frac{x_{n}}{1-x_{n}^{2}}\Bigr) .
+\]</div>
+<p><em>d)</em> Basta que $\langle\nabla f(y)-\nabla f(x), y-x\rangle&gt;0$ (monótono
+estricto), y para esto basta que $\nabla g_{a_{j}}$ y $\nabla h$ sean monótonos
+estrictos. Trivialmente $\nabla h$ lo es, pues
+$\nabla^{2}h = \operatorname{diag}\bigl((1-x_{i})^{2}+2x_{i}^{2}\bigr) \succ 0$,
+ya que $(1-x_{i})^{2}+2x_{i}^{2}&gt;0$ si $|x_{i}|&lt;1$. Por otro lado,</p>
+<div class="display">\[
+  \langle\nabla g_{a_{j}}(y)-\nabla g_{a_{j}}(x), y-x\rangle
+   = \frac{\langle a_{j}, y-x\rangle^{2}}{(1-\langle a_{j},y\rangle)(1-\langle a_{j},x\rangle)} &gt; 0
+  \iff \langle a_{j}, y-x\rangle \neq 0 ,
+\]</div>
+<p>pues $\langle a_{j},y\rangle&lt;1$ para todo $j$ y todo $y \in \operatorname{dom} f$.  □</p>
+<p class="aviso">$\nabla^{2}f$ queda sin calcular, y el enunciado la pide. En <em>d)</em> la
+entrada de $\nabla^{2}h$ es $\tfrac{2(1+x_{i}^{2})}{(1-x_{i}^{2})^{2}}$, no
+$(1-x_{i})^{2}+2x_{i}^{2}$, aunque las dos son positivas; y no se enuncia
+ninguna condición, que es lo que se pide.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p43" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p43"><p>Una sola cuenta de Hessiana responde <em>b)</em>, <em>c)</em> y <em>d)</em> a la
+vez.</p>
+<p><em>a)</em> El dominio natural es donde los dos logaritmos tienen argumento
+positivo:</p>
+<div class="display">\[
+  \operatorname{dom} f = \{x : \langle a_{j},x\rangle&lt;1 \ \forall j\} \cap (-1,1)^{n} ,
+\]</div>
+<p>intersección de $m$ semiespacios abiertos y una caja abierta, luego abierto y
+convexo.</p>
+<p><em>c)</em> Con $g_{a}(x) = -\log(1-\langle a,x\rangle)$ y
+$h_{i}(x) = -\log(1-x_{i}^{2})$,</p>
+<div class="display">\[
+  \nabla g_{a}(x) = \frac{a}{1-\langle a,x\rangle} ,
+  \qquad
+  \nabla^{2} g_{a}(x) = \frac{a\,a\trans}{(1-\langle a,x\rangle)^{2}} ,
+\]</div>
+<p>y $h_{i}$ depende solo de $x_{i}$, con
+$h_{i}&#x27;(x_{i}) = \tfrac{2x_{i}}{1-x_{i}^{2}}$ y</p>
+<div class="display">\[
+  h_{i}&#x27;&#x27;(x_{i}) = \frac{2(1-x_{i}^{2}) + 4x_{i}^{2}}{(1-x_{i}^{2})^{2}}
+   = \frac{2(1+x_{i}^{2})}{(1-x_{i}^{2})^{2}} .
+\]</div>
+<p>Pero entonces:</p>
+<div class="display">\[
+  \nabla f(x) = c + \sum_{j=1}^{m}\frac{a_{j}}{1-\langle a_{j},x\rangle}
+   + 2\Bigl(\frac{x_{i}}{1-x_{i}^{2}}\Bigr)_{i=1}^{n} ,
+  \qquad
+  \nabla^{2} f(x) = \sum_{j=1}^{m}\frac{a_{j}a_{j}\trans}{(1-\langle a_{j},x\rangle)^{2}}
+   + \operatorname{diag}\Bigl(\frac{2(1+x_{i}^{2})}{(1-x_{i}^{2})^{2}}\Bigr) .
+\]</div>
+<p>El término lineal $\langle c,x\rangle$ no aporta nada a la Hessiana.  □</p>
+<p><em>b)</em> Cada $a_{j}a_{j}\trans \succeq 0$ y cada entrada diagonal es
+positiva sobre $(-1,1)$ $\Rightarrow \nabla^{2}f(x) \succeq 0$ en todo
+$\operatorname{dom} f$, que es abierto y convexo $\Rightarrow f$ es convexa, por
+la caracterización de segundo orden (§8 de las notas).  □</p>
+<p><em>d)</em> De hecho la parte diagonal ya es definida positiva:</p>
+<div class="display">\[
+  \nabla^{2} f(x) \succeq \operatorname{diag}\Bigl(\frac{2(1+x_{i}^{2})}{(1-x_{i}^{2})^{2}}\Bigr) \succ 0
+  \qquad \text{en todo } \operatorname{dom} f ,
+\]</div>
+<p>$\Rightarrow f$ es estrictamente convexa <em>sin ninguna hipótesis adicional</em>
+sobre $c$ ni sobre los $a_{j}$. La barrera $-\sum_{i}\log(1-x_{i}^{2})$ sola la
+fuerza, y los términos $-\log(1-\langle a_{j},x\rangle)$ solo pueden añadir
+curvatura.  □</p>
+<p>Si la caja $(-1,1)^{n}$ no estuviera, es decir para
+$\tilde{f}(x) = \langle c,x\rangle - \sum_{j}\log(1-\langle a_{j},x\rangle)$, la
+Hessiana es $\sum_{j}\frac{a_{j}a_{j}\trans}{(1-\langle a_{j},x\rangle)^{2}}$, y
+la condición suficiente sí hace falta: es definida positiva si y solo si
+$\{a_{1},\ldots,a_{m}\}$ genera $\mathbb{R}^{n}$. En efecto,
+$v\trans\nabla^{2}\tilde{f}(x)v = \sum_{j}\frac{\langle a_{j},v\rangle^{2}}{(1-\langle a_{j},x\rangle)^{2}}$,
+que se anula si y solo si $v \perp a_{j}$ para todo $j$.  □</p></div>
+<div class="stmt ejercicio" id="ej:t4-4"><div class="head">Ejercicio 4</div><div class="body"><p>Sean $C, D \subset \mathbb{R}^{n}$ conjuntos convexos, cerrados, no vacíos y
+disjuntos. Si uno de ellos es compacto, muestre que existen $a \neq 0$ y números
+$\alpha&lt;\beta$ tales que</p>
+<div class="display">\[
+  \langle a,x\rangle \leq \alpha &lt; \beta \leq \langle a,y\rangle
+  \qquad \text{para todo } x \in C,\ y \in D .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p44" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p44"><p>Note que $A = C-D$ es convexo y cerrado. En efecto, si $a_{1}, a_{2} \in A
+\Rightarrow a_{1} = c_{1}-d_{1}$ y $a_{2} = c_{2}-d_{2}$, y</p>
+<div class="display">\[
+  ta_{1}+(1-t)a_{2} = tc_{1}+(1-t)c_{2} - \bigl(td_{1}+(1-t)d_{2}\bigr) \in C-D .
+\]</div>
+<p>Y si $a_{n} \in A$ con $a_{n} \to a$ y $a_{n} = c_{n}-d_{n}$, como $C$ es
+compacto $\Rightarrow$ existe $c_{n_{k}}$ convergente con $c_{n_{k}} \to c \in C$
+$\Rightarrow d_{n_{k}} = c_{n_{k}}-a_{n_{k}} \to c-a$, y como $D$ es cerrado
+$\Rightarrow c-a \in D \Rightarrow a \in C-D$.</p>
+<p>Ahora, como $C, D$ son disjuntos $\Rightarrow 0 \notin C-D$. Tome $a \neq 0$ tal
+que $0 = \langle a,0\rangle &lt; \inf_{z \in A}\langle a,z\rangle$. Pero entonces:</p>
+<div class="display">\[
+  0 &lt; \inf_{\substack{c \in C \\ d \in D}}\langle a,c-d\rangle
+   = \inf_{c \in C}\langle a,c\rangle - \sup_{d \in D}\langle a,d\rangle
+  \quad\Rightarrow\quad
+  \sup_{d \in D}\langle a,d\rangle &lt; \inf_{c \in C}\langle a,c\rangle
+\]</div>
+<p>$\Rightarrow$ existen $\alpha$ y $\beta$ tales que
+$\langle a,d\rangle \leq \alpha &lt; \beta \leq \langle a,c\rangle$ para todo
+$d \in D$ y todo $c \in C$.  □</p>
+<p class="aviso">Queda con $D$ del lado bajo y $C$ del alto, al revés del enunciado; se
+arregla cambiando $a$ por $-a$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p45" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p45"><p>Sin invocar la separación estricta como caja negra: la proyección da el vector
+normal, y de paso una brecha explícita. Es el Teorema 2.6.11 de Junca.</p>
+<p>Suponga que $D$ es compacto y sea $S = C-D$, que es convexo por serlo $C$ y $D$,
+y cerrado: si $s_{k} = c_{k}-d_{k} \to s$, por compacidad de $D$ una subsucesión
+cumple $d_{k_{j}} \to d \in D$, de donde $c_{k_{j}} = s_{k_{j}}+d_{k_{j}} \to s+d$,
+que está en $C$ por ser cerrado $\Rightarrow s = (s+d)-d \in S$. Y como $C$ y $D$
+son disjuntos, $0 \notin S$.</p>
+<p>Sea $p = \operatorname{Proj}_{S}(0)$, que existe y es único por ser $S$ convexo,
+cerrado y no vacío, y sea $a = -p \neq 0$, pues $0 \notin S$. Por la
+caracterización variacional de la proyección, $\langle 0-p, s-p\rangle \leq 0$
+para todo $s \in S$, esto es</p>
+<div class="display">\[
+  \langle a, s\rangle \leq \langle a,p\rangle = -\lVert p\rVert^{2}
+  \qquad \forall s \in S .
+\]</div>
+<p>Escribiendo $s = x-y$ con $x \in C$ e $y \in D$ queda
+$\langle a,x\rangle - \langle a,y\rangle \leq -\lVert p\rVert^{2}$, y tomando
+supremo en $x$ e ínfimo en $y$,</p>
+<div class="display">\[
+  \sup_{x \in C}\langle a,x\rangle
+   \leq \inf_{y \in D}\langle a,y\rangle - \lVert p\rVert^{2} .
+\]</div>
+<p>Como $\lVert p\rVert^{2}&gt;0$, el intervalo entre los dos extremos es no vacío:
+basta tomar $\alpha = \sup_{x \in C}\langle a,x\rangle$ y
+$\beta = \alpha + \lVert p\rVert^{2}$, que cumplen
+$\langle a,x\rangle \leq \alpha &lt; \beta \leq \langle a,y\rangle$ para todo
+$x \in C$, $y \in D$.  □</p>
+<p>La compacidad se usa exactamente una vez, en que $S$ sea cerrado, y ahí es
+indispensable: con $C = \{(t,0) : t \in \mathbb{R}\}$ y
+$D = \{(t,s) : s \geq e^{t}\}$, los dos convexos cerrados y disjuntos, se tiene
+$\inf\{\lVert x-y\rVert\} = 0$ y no hay separación estricta.  □</p></div>
+<div class="stmt ejercicio" id="ej:t4-5"><div class="head">Ejercicio 5</div><div class="body"><p>Calcule el subdiferencial de:</p>
+<ol class="lista"><li><p>$f(x) = \lVert x\rVert_{2}$ en todo $x \in \mathbb{R}^{n}$;</p></li><li><p>$f(x) = \max_{i}(a_{i}\trans x + b_{i})$;</p></li><li><p>$f(x) = \lVert x\rVert_{\infty}$;</p></li><li><p>la indicadora de un subespacio afín.</p></li></ol>
+<p>Identifique también cuándo el subdiferencial es un singleton y cuándo puede ser
+no acotado.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p46" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p46"><p><em>a)</em> $\partial\lVert x\rVert_{2} = \nabla\lVert x\rVert_{2}
+ = \bigl\{\tfrac{x}{\lVert x\rVert_{2}}\bigr\}$.</p>
+<p><em>b)</em> Como las $a_{i}\trans x + b_{i}$ son convexas propias con dominio
+$\mathbb{R}^{n}$, para $x$ fijo sea $I_{x} = \operatorname{argmax}_{i} a_{i}\trans x + b_{i}$
+$\Rightarrow$</p>
+<div class="display">\[
+  \partial f(x) = \conv\Bigl(\bigcup_{i \in I_{x}}\partial(\langle a_{i},\cdot\rangle+b_{i})(x)\Bigr)
+   = \conv\Bigl(\bigcup_{i \in I_{x}}\{a_{i}\}\Bigr)
+   = \Bigl\{\sum_{i \in I_{x}}\lambda_{i}a_{i} : \sum_{i \in I_{x}}\lambda_{i}=1\Bigr\} .
+\]</div>
+<p><em>c)</em> Como
+$\lVert x\rVert_{\infty}^{*} = \sup_{\lVert y\rVert_{\infty} \leq 1}\langle x,y\rangle
+ = \sup_{|y_{i}| \leq 1}\sum_{i} x_{i}y_{i} \leq \sum_{i}|x_{i}| = \lVert x\rVert_{1}$,
+y ese supremo se alcanza con $y_{i} = \operatorname{sign} x_{i}$
+$\Rightarrow \lVert\cdot\rVert_{\infty}^{*} = \lVert\cdot\rVert_{1}$. Pero
+entonces:</p>
+<div class="display">\[
+  \partial\lVert 0\rVert_{\infty} = \{g \in \mathbb{R}^{n} : \lVert g\rVert_{1} \leq 1\} ,
+  \qquad
+  \partial\lVert x\rVert_{\infty} = \{g : \lVert g\rVert_{1} \leq 1 \text{ y } \langle g,x\rangle = \lVert x\rVert_{\infty}\}
+  \ \text{ si } x \neq 0 .
+\]</div>
+<p><em>d)</em> Si $H_{a,b} = \{x \in \mathbb{R}^{n} : \langle a,x\rangle = b\}$ y
+$f = \delta_{H_{a,b}}$ $\Rightarrow f$ es convexa, pues $H_{a,b}$ es convexo. Si
+$x \notin H_{a,b} \Rightarrow x \notin \operatorname{dom} f
+\Rightarrow \partial f(x) = \varnothing$. Si $x \in H_{a,b}$
+$\Rightarrow \partial f(x) = N_{H_{a,b}}(x)
+ = \{g : \langle g,h-x\rangle \leq 0 \ \forall h \in H_{a,b}\}$. Pero
+$V = \operatorname{par}(H_{a,b}) = H_{a,b}-\{x\}$, de modo que</p>
+<div class="display">\[
+  g \in N_{H_{a,b}}(x)
+  \iff \langle g,v\rangle \leq 0 \ \forall v \in V
+  \iff \langle g,-v\rangle \leq 0 \ \forall v \in V
+  \iff \langle g,v\rangle = 0 \ \forall v \in V
+  \iff g \in V^{\perp} ,
+\]</div>
+<p>$\Rightarrow \partial f(x) = (H_{a,b}-\{x\})^{\perp}
+ = \{y : \langle a,y\rangle = 0\}^{\perp} = \{\lambda a : \lambda \in \mathbb{R}\}$.
+$\therefore$</p>
+<div class="display">\[
+  \partial f(x) = \begin{cases}
+    \varnothing &amp; \text{si } x \notin H_{a,b}, \\
+    \gene\{a\} &amp; \text{si } x \in H_{a,b}.
+  \end{cases}
+  \qquad
+\]</div>
+<p class="aviso">En <em>a)</em> falta $x=0$, que es el único caso interesante, y el
+enunciado dice «en todo $x$». En <em>b)</em> los $\lambda_{i}$ deben ser
+$\geq 0$. Y falta la última parte, cuándo es singleton y cuándo no acotado.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p47" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p47"><p>Los cuatro salen del mismo molde si se usa que una norma es la función de
+soporte de la bola dual.</p>
+<p><strong>Lema.</strong> <em>Sea $\lVert\cdot\rVert$ una norma con dual
+$\lVert\cdot\rVert_{*}$ y sea $B_{*} = \{g : \lVert g\rVert_{*} \leq 1\}$.
+Entonces</em></p>
+<div class="display">\[
+  \partial\lVert\cdot\rVert(x) = \begin{cases}
+    B_{*} &amp; \text{si } x = 0, \\
+    \{g \in B_{*} : \langle g,x\rangle = \lVert x\rVert\} &amp; \text{si } x \neq 0.
+  \end{cases}
+\]</div>
+<p><strong>Demostración: </strong> $g \in \partial\lVert\cdot\rVert(x)$ si y solo si
+$\lVert y\rVert \geq \lVert x\rVert + \langle g,y-x\rangle$ para todo $y$.
+Tomando $y = 0$ y $y = 2x$ queda $\langle g,x\rangle = \lVert x\rVert$; y
+tomando $y$ arbitrario con $x$ fijo, $\lVert y\rVert \geq \langle g,y\rangle$
+para todo $y$, que es $\lVert g\rVert_{*} \leq 1$. Recíprocamente, si
+$\lVert g\rVert_{*} \leq 1$ y $\langle g,x\rangle = \lVert x\rVert$, entonces
+$\lVert x\rVert + \langle g,y-x\rangle = \langle g,y\rangle \leq \lVert y\rVert$.
+Para $x=0$ la condición $\langle g,x\rangle = \lVert x\rVert$ es vacía.  □</p>
+<p><em>a)</em> La norma euclidiana es autodual
+$\Rightarrow \partial\lVert\cdot\rVert_{2}(0) = \{g : \lVert g\rVert_{2} \leq 1\}$,
+la bola unidad cerrada. Y si $x \neq 0$, la condición
+$\langle g,x\rangle = \lVert x\rVert_{2}$ con $\lVert g\rVert_{2} \leq 1$ fuerza
+la igualdad en Cauchy–Schwarz $\Rightarrow g = x/\lVert x\rVert_{2}$, que es el
+gradiente. $\therefore$</p>
+<div class="display">\[
+  \partial\lVert x\rVert_{2} = \begin{cases}
+    \bar{B}(0;1) &amp; \text{si } x=0, \\
+    \{x/\lVert x\rVert_{2}\} &amp; \text{si } x \neq 0.
+  \end{cases}
+\]</div>
+<p><em>b)</em> Por la regla del máximo (§10 de las notas), con
+$I_{x} = \operatorname{argmax}_{i}(a_{i}\trans x + b_{i})$,</p>
+<div class="display">\[
+  \partial f(x) = \conv\{a_{i} : i \in I_{x}\}
+   = \Bigl\{\sum_{i \in I_{x}}\lambda_{i}a_{i} : \lambda_{i} \geq 0,\ \sum_{i \in I_{x}}\lambda_{i}=1\Bigr\} .
+\]</div>
+<p><em>c)</em> $\lVert\cdot\rVert_{\infty}$ tiene dual $\lVert\cdot\rVert_{1}$, y
+por el lema, con $M = \{i : |x_{i}| = \lVert x\rVert_{\infty}\}$,</p>
+<div class="display">\[
+  \partial\lVert x\rVert_{\infty} = \begin{cases}
+    \{g : \lVert g\rVert_{1} \leq 1\} &amp; \text{si } x = 0, \\
+    \conv\{\operatorname{sign}(x_{i})\,e_{i} : i \in M\} &amp; \text{si } x \neq 0.
+  \end{cases}
+\]</div>
+<p>En efecto, para $x \neq 0$ la condición
+$\langle g,x\rangle = \lVert x\rVert_{\infty}$ con $\lVert g\rVert_{1} \leq 1$
+obliga a $\sum_{i} g_{i}x_{i} = \lVert x\rVert_{\infty}$, y como
+$\sum_{i} g_{i}x_{i} \leq \sum_{i}|g_{i}|\,|x_{i}| \leq \lVert x\rVert_{\infty}\sum_{i}|g_{i}|
+\leq \lVert x\rVert_{\infty}$, la igualdad fuerza $\lVert g\rVert_{1}=1$ y
+$g_{i}=0$ salvo cuando $|x_{i}| = \lVert x\rVert_{\infty}$, con
+$g_{i}x_{i} = |g_{i}|\,|x_{i}|$, esto es $g_{i}$ del signo de $x_{i}$.</p>
+<p><em>d)</em> Sea $M = x_{0}+V$ un subespacio afín, con $V$ subespacio, y
+$f = \delta_{M}$. Si $x \notin M$ entonces $x \notin \operatorname{dom} f$ y
+$\partial f(x) = \varnothing$. Si $x \in M$, entonces
+$\partial\delta_{M}(x) = N_{M}(x)$, y para $g$,</p>
+<div class="display">\[
+  \langle g, h-x\rangle \leq 0 \ \forall h \in M
+  \iff \langle g,v\rangle \leq 0 \ \forall v \in V
+  \iff \langle g,v\rangle = 0 \ \forall v \in V ,
+\]</div>
+<p>donde la última equivalencia usa que $V$ es un subespacio, y por tanto
+$v \in V \Rightarrow -v \in V$. $\therefore \partial\delta_{M}(x) = V^{\perp}$
+para $x \in M$. Con $M = \{x : \langle a,x\rangle = b\}$ y $a \neq 0$ se tiene
+$V = a^{\perp}$ y $\partial\delta_{M}(x) = \gene\{a\}$.  □</p>
+<p><strong>Singleton y acotación.</strong> El subdiferencial es un singleton exactamente
+donde $f$ es diferenciable (§9 de las notas):
+en <em>a)</em> si $x \neq 0$; en <em>b)</em> si el máximo se alcanza en un solo
+índice; en <em>c)</em> si hay un único $i$ con $|x_{i}| = \lVert x\rVert_{\infty}$;
+y en <em>d)</em> solo si $V^{\perp} = \{0\}$, es decir $M = \mathbb{R}^{n}$.</p>
+<p>Y es acotado en <em>a)</em>, <em>b)</em> y <em>c)</em>, porque las tres son
+normas o máximos de afines, es decir Lipschitz en todo $\mathbb{R}^{n}$, y el
+subdiferencial de una función $L$-Lipschitz está contenido en la bola de radio
+$L$. En <em>d)</em> es <em>no acotado</em> en cuanto $V \neq \mathbb{R}^{n}$, pues
+$V^{\perp}$ es un subespacio no trivial: es lo que pasa siempre que
+$\operatorname{dom} f$ tiene interior vacío, porque ahí $f$ vale $+\infty$
+arbitrariamente cerca de $x$ y ninguna pendiente queda excluida.  □</p></div>
+<div class="stmt ejercicio" id="ej:t4-6"><div class="head">Ejercicio 6$^{*}$</div><div class="body"><p>Sea $C \subset \mathbb{R}^{n}$ un conjunto convexo no vacío y sea
+$V = \operatorname{par}(C)$. Considere una función convexa $f : C \to \mathbb{R}$
+y una norma $\lVert\cdot\rVert$ sobre $V$, con norma dual
+$\lVert\cdot\rVert_{*}$. Defina</p>
+<div class="display">\[
+  \operatorname{Lip}(f;C) := \sup_{\substack{x,y \in \rint C \\ x \neq y}}
+   \frac{|f(x)-f(y)|}{\lVert x-y\rVert} .
+\]</div>
+<ol class="lista"><li><p>Pruebe que</p>
+<div class="display">\[
+      \operatorname{Lip}(f;C) = \sup_{\substack{x \in \rint C \\ g \in \partial_{V}f(x)}}
+       \lVert g\rVert_{*} .
+    \]</div>
+<p>La igualdad se entiende en $\mathbb{R} \cup \{+\infty\}$.</p></li><li><p>Suponga que $\aff(C)$ es un subespacio afín propio de $\mathbb{R}^{n}$ y
+    extienda $f$ por $+\infty$ fuera de $C$. Explique por qué no puede
+    sustituirse en el apartado anterior $\partial_{V}f(x)$ por el subdiferencial
+    ambiente. En particular, tome $f \equiv 0$ sobre $C$ y pruebe que, para
+    $x \in \rint C$,</p>
+<div class="display">\[
+      \partial_{V}f(x) = \{0\}, \qquad \partial\delta_{C}(x) = N_{C}(x) = V^{\perp} .
+    \]</div>
+<p>Concluya que el subdiferencial ambiente es no acotado cuando
+    $V^{\perp} \neq \{0\}$, aunque $f$ tenga constante de Lipschitz cero en su
+    espacio afín.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p48" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p48"><p><em>a)</em> Si $g \in \partial_{V}f(x)$ con $x \in \rint C$ $\Rightarrow$</p>
+<div class="display">\begin{equation}
+  f(y) \geq f(x)+\langle g,y-x\rangle \ \forall y \in C
+  \iff \frac{f(y)-f(x)}{\lVert y-x\rVert} \geq \Bigl\langle g, \frac{y-x}{\lVert y-x\rVert}\Bigr\rangle
+   \ \forall y \in C \setminus\{x\} .
+  \tag{$\star$}
+\end{equation}</div>
+<p>En particular:
+$\lVert g\rVert_{*} \leq \bigl\langle g, \tfrac{y-x}{\lVert y-x\rVert}\bigr\rangle
+ \leq \tfrac{|f(y)-f(x)|}{\lVert y-x\rVert}$ para todo $y \in C$
+$\Rightarrow \sup_{x \in \rint C,\, g \in \partial_{V}f(x)}\lVert g\rVert_{*} \leq \operatorname{Lip}(f;C)$.</p>
+<p>Similarmente, al multiplicar por menos en $(\star)$,</p>
+<div class="display">\[
+  \frac{f(x)-f(y)}{\lVert x-y\rVert} \leq \Bigl\langle g, \frac{x-y}{\lVert x-y\rVert}\Bigr\rangle
+  \qquad \forall y \in C,\ \forall x \in \rint C,\ \forall g \in \partial_{V}f(x)
+\]</div>
+<div class="display">\[
+  \Rightarrow \operatorname{Lip}(f;C)
+   \leq \sup_{\substack{x,y \in \rint C \\ x \neq y}}\Bigl\langle g, \frac{x-y}{\lVert x-y\rVert}\Bigr\rangle
+   \leq \sup_{\lVert v\rVert=1}\langle g,v\rangle = \lVert g\rVert_{*}
+  \ \Rightarrow\ \operatorname{Lip}(f;C) \leq \sup_{\substack{x \in \rint C \\ g \in \partial_{V}f(x)}}\lVert g\rVert_{*} .
+\]</div>
+<p><em>b)</em> Simplemente porque $\lVert\cdot\rVert$ es sobre $V$, y para tomar
+$\lVert\cdot\rVert_{*}$ de $g$ se necesita que $g$ sea funcional lineal en $V$,
+en este caso $g \in V$.</p>
+<p>Si $f \equiv 0$ en $C$, i.e. $f = \delta_{C}$, ya sabemos que
+$\partial f(x) = N_{C}(x)$. Si $x \in \rint C$, para todo $d \in V$ existe
+$\lambda&gt;0$ con $x+\lambda d \in C$ $\Rightarrow$ si
+$g \in N_{C}(x) = \{g : \langle g,c-x\rangle \leq 0 \ \forall c \in C\}$, en
+particular $\langle g, x+\lambda d-x\rangle = \lambda\langle g,d\rangle \leq 0$
+para todo $d \in V$ $\Rightarrow \langle g,d\rangle \leq 0$ para todo $d \in V$
+$\Rightarrow \langle g,d\rangle = 0$ para todo $d \in V$.
+$\therefore \partial f(x) = V^{\perp}$.</p>
+<p>Por otro lado, si $g \in \partial_{V}f(x)$ con $x \in \rint C$, el mismo cálculo
+vale $\Rightarrow g \in V^{\perp}$ y $g \in V \Rightarrow g=0$.
+$\therefore \partial_{V}f(x) = \{0\}$.</p>
+<p>En particular, note que $\operatorname{Lip}(f;C) = 0$ pero
+$\partial f(x) = V^{\perp}$ para todo $x \in \rint C$, así que si
+$V^{\perp} \neq \{0\}$ el subdiferencial ambiente es no acotado.  □</p>
+<p class="aviso">«En particular: $\lVert g\rVert_{*} \leq \langle g, \frac{y-x}{\lVert y-x\rVert}\rangle$»
+va al revés, pues $\lVert g\rVert_{*}$ es el supremo de esos productos; para
+alcanzarlo hace falta $x \in \rint C$, que es justo donde entra la hipótesis.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p49" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p49"><p><em>a)</em> $(\geq)$ Sean $x \in \rint C$ y $g \in \partial_{V}f(x)$, y sea
+$v \in V$ con $\lVert v\rVert = 1$. Como $x \in \rint C$ y $\rint C$ es abierto
+en $\aff C = x+V$, existe $t&gt;0$ con $y := x+tv \in \rint C$. Por la desigualdad
+del subgradiente,</p>
+<div class="display">\[
+  f(y)-f(x) \geq \langle g, y-x\rangle = t\,\langle g,v\rangle
+  \quad\Rightarrow\quad
+  \langle g,v\rangle \leq \frac{f(y)-f(x)}{t}
+   \leq \frac{|f(y)-f(x)|}{\lVert y-x\rVert} \leq \operatorname{Lip}(f;C) ,
+\]</div>
+<p>pues $\lVert y-x\rVert = t$. Tomando supremo sobre los $v$ unitarios de $V$, que
+es donde vive la norma dual, $\lVert g\rVert_{*} \leq \operatorname{Lip}(f;C)$, y
+tomando supremo sobre $x$ y $g$,</p>
+<div class="display">\[
+  \sup_{\substack{x \in \rint C \\ g \in \partial_{V}f(x)}}\lVert g\rVert_{*}
+   \leq \operatorname{Lip}(f;C) . \qquad
+\]</div>
+<p>$(\leq)$ Sean $x,y \in \rint C$ con $x \neq y$. Como $f$ es convexa y
+$x \in \rint C$, existe $g \in \partial_{V}f(x)$, que no es vacío en el interior
+relativo del dominio (§9 de las notas). Pero entonces:</p>
+<div class="display">\[
+  f(x)-f(y) \leq \langle g, x-y\rangle \leq \lVert g\rVert_{*}\,\lVert x-y\rVert ,
+\]</div>
+<p>por la desigualdad de Hölder que define la norma dual. Intercambiando los
+papeles de $x$ e $y$, y tomando $g&#x27; \in \partial_{V}f(y)$, se obtiene
+$f(y)-f(x) \leq \lVert g&#x27;\rVert_{*}\lVert x-y\rVert$
+$\Rightarrow$</p>
+<div class="display">\[
+  \frac{|f(x)-f(y)|}{\lVert x-y\rVert}
+   \leq \max\{\lVert g\rVert_{*}, \lVert g&#x27;\rVert_{*}\}
+   \leq \sup_{\substack{z \in \rint C \\ h \in \partial_{V}f(z)}}\lVert h\rVert_{*} ,
+\]</div>
+<p>y tomando supremo sobre $x,y$ queda
+$\operatorname{Lip}(f;C) \leq \sup\lVert h\rVert_{*}$. Las dos desigualdades dan
+la igualdad, en $\mathbb{R} \cup \{+\infty\}$.  □</p>
+<p><em>b)</em> La norma $\lVert\cdot\rVert$ está definida sobre $V$, así que
+$\lVert g\rVert_{*} = \sup\{\langle g,v\rangle : v \in V,\ \lVert v\rVert=1\}$
+solo ve la componente de $g$ en $V$. Un subgradiente ambiente
+$g \in \partial\delta_{C}(x)$ puede tener componente arbitrariamente grande en
+$V^{\perp}$ sin que $\lVert g\rVert_{*}$ lo note, de modo que el lado derecho de
+<em>a)</em> dejaría de medir nada.</p>
+<p>Tome $f \equiv 0$ sobre $C$, extendida por $+\infty$, esto es $f = \delta_{C}$, y
+sea $x \in \rint C$. Es claro que $\operatorname{Lip}(f;C)=0$.</p>
+<p>$\partial\delta_{C}(x) = N_{C}(x)$ por definición del subdiferencial de una
+indicadora. Y $N_{C}(x) = V^{\perp}$: si $g \in V^{\perp}$, entonces
+$\langle g,c-x\rangle = 0$ para todo $c \in C$, pues $c-x \in V$, luego
+$g \in N_{C}(x)$; recíprocamente, si $g \in N_{C}(x)$ y $d \in V$, como
+$x \in \rint C$ existe $\lambda&gt;0$ con $x+\lambda d \in C$, de donde
+$\lambda\langle g,d\rangle \leq 0$, y aplicando lo mismo a $-d \in V$ queda
+$\langle g,d\rangle = 0$ $\Rightarrow g \in V^{\perp}$.</p>
+<p>Para $\partial_{V}f(x)$ el mismo cálculo vale, con la restricción extra
+$g \in V$ $\Rightarrow g \in V^{\perp} \cap V = \{0\}$
+$\Rightarrow \partial_{V}f(x) = \{0\}$, cuya norma dual es $0
+= \operatorname{Lip}(f;C)$, como debe ser por <em>a)</em>.</p>
+<p>$\therefore$ si $V^{\perp} \neq \{0\}$, el subdiferencial ambiente
+$\partial\delta_{C}(x) = V^{\perp}$ es un subespacio no trivial, y por tanto no
+acotado en $\mathbb{R}^{n}$, mientras que $f$ tiene constante de Lipschitz cero
+sobre su espacio afín.  □</p></div></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
