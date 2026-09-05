@@ -825,11 +825,12 @@ $A\trans A\succ0$ y la única solución es $x=(A\trans A)^{-1}A\trans b$.</p></d
 <div class="stmt problema" id="clase-c2:pr-lasso"><div class="head">Problema regresión con regularización $\ell^{1}$</div><div class="body"><p>$\min_{x\in\R^{n}}\tfrac{1}{2}\norm{Ax-b}_{2}^{2}+\lambda\norm{x}_{1}$, con
 $\lambda&gt;0$.</p></div></div>
 <div class="stmt problema" id="clase-c2:pr-logistica"><div class="head">Problema regresión logística</div><div class="body"><p>$\displaystyle\min_{x\in\R^{n}}\frac{1}{N}\sum_{i=1}^{N}\log\bigl(1+e^{-y_{i}\ip{a_{i}}{x}}\bigr)$.</p></div></div>
-<div class="stmt problema" id="clase-c2:pr-portafolio"><div class="head">Problema selección de portafolio</div><div class="body"><p>$\min_{x\in\simplex^{n}}\tfrac{1}{2}x\trans\Sigma x-\gamma\ip{\mu}{x}$, con
+<div class="stmt problema" id="clase-c2:pr-portafolio"><div class="head">Problema selección de portafolio</div><div class="body"><p>$\min_{x\in\simplex_{n}}\tfrac{1}{2}x\trans\Sigma x-\gamma\ip{\mu}{x}$, con
 $\Sigma$ la matriz de covarianzas y $\gamma&gt;0$.</p></div></div>
 <div class="stmt problema" id="clase-c2:pr-lineal"><div class="head">Problema programa lineal</div><div class="body"><p>$\min_{x\in\R^{n}}\ip{c}{x}$ sujeto a $\ip{a_{i}}{x}\le b_{i}$ para
 $i=1,\ldots,N$.</p></div></div>
-<div class="stmt problema" id="clase-c2:pr-simplex"><div class="head">Problema sobre el símplex<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\min_{x\in\simplex}f(x)$, con $\simplex=\{x\ge0:\sum_{i}x_{i}=1\}$. Aparece
+<div class="stmt problema" id="clase-c2:pr-simplex"><div class="head">Problema sobre el símplex<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\min_{x\in\simplex_{n}}f(x)$, con
+$\simplex_{n}=\{x\in\R^{n}:x\ge0,\ \sum_{i}x_{i}=1\}$. Aparece
 siempre que la variable es una distribución de probabilidad, y su proyección es
 barata aunque la restricción no sea suave.</p></div></div>
 <div class="stmt problema" id="clase-c2:pr-conico"><div class="head">Problema forma cónica<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\min_{x}\ip{c}{x}$ sujeto a $Ax=b$ y $x\in K$, con $K$ un cono convexo y
@@ -879,8 +880,10 @@ convexa, por la desigualdad triangular y la homogeneidad.</p></div></div>
 <div class="stmt ejemplo" id="clase-c3:ej-poliedros"><div class="head">Ejemplo poliedros<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Un <span class="df">poliedro</span> es una intersección finita de semiespacios, esto es
 $P=\{x:Ax\le b\}$, y es convexo y cerrado. Un <span class="df">politopo</span> es un poliedro
 acotado.</p></div></div>
-<div class="stmt ejemplo" id="clase-c3:ej-simplex"><div class="head">Ejemplo el símplex<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El símplex $\simplex=\{x\ge0:\sum_{i}x_{i}=1\}$ es la intersección del ortante
-no negativo con un hiperplano, y $\simplex=\conv\{e_{1},\ldots,e_{n}\}$.</p></div></div>
+<div class="stmt ejemplo" id="clase-c3:ej-simplex"><div class="head">Ejemplo el símplex<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El símplex $\simplex_{n}=\{x\in\R^{n}:x\ge0,\ \sum_{i}x_{i}=1\}$ es la
+intersección del ortante no negativo con un hiperplano, y
+$\simplex_{n}=\conv\{e_{1},\ldots,e_{n}\}$. El subíndice cuenta las
+<em>coordenadas</em>, de modo que $\simplex_{n}$ vive en $\R^{n}$.</p></div></div>
 <div class="stmt definicion" id="clase-c3:def-af-indep"><div class="head">Definición</div><div class="body"><p>Los puntos $x_{0},x_{1},\ldots,x_{k}$ son <span class="df">afínmente independientes</span> si
 $\{x_{i}-x_{0}\}_{i=1}^{k}$ es linealmente independiente.</p></div></div>
 <div class="stmt proposicion" id="clase-c3:prop-af-dep"><div class="head">Proposición</div><div class="body"><p>$\{x_{0},\ldots,x_{k}\}$ es afínmente dependiente si y solo si existen
@@ -897,8 +900,10 @@ anula, lo que contradice la minimalidad de $k$. Luego los $x_{i}$ son afínmente
 independientes y $k\le n+1$.</p></div>
 <div class="stmt corolario" id="clase-c3:cor-compacto"><div class="head">Corolario</div><div class="body"><p>Si $B\subset\R^{n}$ es compacto, entonces $\conv(B)$ es compacto.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p15">Ver demostración</button><div class="proof" id="clase-convexa-p15"><p>Por Carathéodory, $\conv(B)$ es la imagen del compacto
-$B^{n+1}\times\simplex^{n}$ bajo la aplicación continua
-$(x_{1},\ldots,x_{n+1},\alpha)\mapsto\sum_{i}\alpha_{i}x_{i}$.</p></div>
+$B^{n+1}\times\simplex_{n+1}$ bajo la aplicación continua
+$(x_{1},\ldots,x_{n+1},\alpha)\mapsto\sum_{i=1}^{n+1}\alpha_{i}x_{i}$. El
+símplex lleva $n+1$ coordenadas porque hay que repartir peso entre $n+1$
+puntos.</p></div>
 <div class="stmt definicion" id="clase-c3:def-afin"><div class="head">Definición</div><div class="body"><p>$A\subset\R^{n}$ es <span class="df">afín</span> si existen $x_{0}\in\R^{n}$ y un subespacio
 vectorial $V$ con $A=x_{0}+V$. Se escribe $V=\paral(A)$.</p></div></div>
 <div class="stmt definicion" id="clase-c3:def-aff"><div class="head">Definición</div><div class="body"><p>La <span class="df">envolvente afín</span> de $B\subset\R^{n}$ es</p>
@@ -1592,10 +1597,10 @@ tiende a $\infty$.</p></div>
 $t=e^{s}$, y ahí el valor es $se^{s}-se^{s}+e^{s}=e^{s}$.</p></div>
 <div class="stmt ejemplo" id="clase-c11:ej-lse"><div class="head">Ejemplo log-sum-exp y la entropía negativa</div><div class="body"><p>Si $\lse(x)=\log\bigl(\sum_{i=1}^{n}e^{x_{i}}\bigr)$, entonces</p>
 <div class="display">\[
-  \lse^{*}(p)=\begin{cases}\sum_{i=1}^{n}p_{i}\log p_{i}, &amp; p\in\simplex,\\
+  \lse^{*}(p)=\begin{cases}\sum_{i=1}^{n}p_{i}\log p_{i}, &amp; p\in\simplex_{n},\\
   +\infty,&amp;\text{de lo contrario,}\end{cases}
 \]</div>
-<p>donde $\simplex=\{p\ge0:\sum_{i}p_{i}=1\}$.</p></div></div>
+<p>donde $\simplex_{n}=\{p\in\R^{n}:p\ge0,\ \sum_{i}p_{i}=1\}$.</p></div></div>
 <div class="stmt proposicion" id="clase-c11:prop-biconjugacion"><div class="head">Proposición biconjugación</div><div class="body"><p>$f^{**}\le f$ para toda $f$ propia.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p60">Ver demostración</button><div class="proof" id="clase-convexa-p60"><p>Por definición de supremo, $f^{*}(y)\ge\ip{x}{y}-f(x)$ para todos $x,y$, que es
 lo mismo que $\ip{x}{y}-f^{*}(y)\le f(x)$. Tomando el supremo en $y$ queda
@@ -1942,7 +1947,7 @@ invertible, la única solución es $x=(A^{*}A)^{-1}A^{*}b$.</p></div></div>
 <div class="stmt problema" id="general-c2:pr-lasso"><div class="head">Problema regresión con regularización $\ell^{1}$</div><div class="body"><p>$\min_{x\in\R^{n}}\tfrac{1}{2}\norm{Ax-b}_{2}^{2}+\lambda\norm{x}_{1}$, con
 $\lambda&gt;0$.</p></div></div>
 <div class="stmt problema" id="general-c2:pr-logistica"><div class="head">Problema regresión logística</div><div class="body"><p>$\displaystyle\min_{x\in\R^{n}}\frac{1}{N}\sum_{i=1}^{N}\log\bigl(1+e^{-y_{i}\ip{a_{i}}{x}}\bigr)$.</p></div></div>
-<div class="stmt problema" id="general-c2:pr-portafolio"><div class="head">Problema selección de portafolio</div><div class="body"><p>$\min_{x\in\simplex^{n}}\tfrac{1}{2}x\trans\Sigma x-\gamma\ip{\mu}{x}$, con
+<div class="stmt problema" id="general-c2:pr-portafolio"><div class="head">Problema selección de portafolio</div><div class="body"><p>$\min_{x\in\simplex_{n}}\tfrac{1}{2}x\trans\Sigma x-\gamma\ip{\mu}{x}$, con
 $\Sigma$ la matriz de covarianzas y $\gamma&gt;0$.</p></div></div>
 <div class="stmt problema" id="general-c2:pr-lineal"><div class="head">Problema programa lineal</div><div class="body"><p>$\min_{x\in\R^{n}}\ip{c}{x}$ sujeto a $\ip{a_{i}}{x}\le b_{i}$ para
 $i=1,\ldots,N$.</p></div></div>
@@ -1988,8 +1993,9 @@ define un hiperplano denso, que no es cerrado.</p></div></div>
 y la homogeneidad.</p></div></div>
 <div class="stmt ejemplo" id="general-c3:ej-poliedros"><div class="head">Ejemplo poliedros y símplex<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $\dim E&lt;\infty$. Un <span class="df">poliedro</span> es una intersección finita de
 semiespacios, $P=\{x:Ax\le b\}$, y es convexo y cerrado. El símplex
-$\simplex=\{x\ge0:\sum_{i}x_{i}=1\}$ es un politopo, y
-$\simplex=\conv\{e_{1},\ldots,e_{n}\}$.</p></div></div>
+$\simplex_{n}=\{x\in\R^{n}:x\ge0,\ \sum_{i}x_{i}=1\}$ es un politopo, y
+$\simplex_{n}=\conv\{e_{1},\ldots,e_{n}\}$. El subíndice cuenta las
+<em>coordenadas</em>.</p></div></div>
 <div class="stmt definicion" id="general-c3:def-af-indep"><div class="head">Definición</div><div class="body"><p>Los puntos $x_{0},x_{1},\ldots,x_{k}$ son <span class="df">afínmente independientes</span> si
 $\{x_{i}-x_{0}\}_{i=1}^{k}$ es linealmente independiente.</p></div></div>
 <div class="stmt proposicion" id="general-c3:prop-af-dep"><div class="head">Proposición</div><div class="body"><p>$\{x_{0},\ldots,x_{k}\}$ es afínmente dependiente si y solo si existen
@@ -2009,9 +2015,11 @@ como combinación convexa finita sigue existiendo, pero el número de puntos que
 hace falta no está acotado.</p>
 <div class="stmt corolario" id="general-c3:cor-compacto"><div class="head">Corolario</div><div class="body"><p>Sea $\dim E&lt;\infty$. Si $B\subset E$ es compacto, entonces $\conv(B)$ es
 compacto.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p13">Ver demostración</button><div class="proof" id="general-convexa-p13"><p>Por Carathéodory, $\conv(B)$ es la imagen del compacto
-$B^{n+1}\times\simplex^{n}$ bajo la aplicación continua
-$(x_{1},\ldots,x_{n+1},\alpha)\mapsto\sum_{i}\alpha_{i}x_{i}$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p13">Ver demostración</button><div class="proof" id="general-convexa-p13"><p>Por Carathéodory, con $n=\dim E$, el conjunto $\conv(B)$ es la imagen del
+compacto $B^{n+1}\times\simplex_{n+1}$ bajo la aplicación continua
+$(x_{1},\ldots,x_{n+1},\alpha)\mapsto\sum_{i=1}^{n+1}\alpha_{i}x_{i}$. El
+símplex lleva $n+1$ coordenadas porque hay que repartir peso entre $n+1$
+puntos.</p></div>
 <div class="stmt definicion" id="general-c3:def-afin"><div class="head">Definición</div><div class="body"><p>$A\subset E$ es <span class="df">afín</span> si existen $x_{0}\in E$ y un subespacio vectorial $V$
 con $A=x_{0}+V$. Se escribe $V=\paral(A)$.</p></div></div>
 <div class="stmt definicion" id="general-c3:def-aff"><div class="head">Definición</div><div class="body"><p>La <span class="df">envolvente afín</span> $\aff(B)$ es el conjunto de las combinaciones
@@ -2629,7 +2637,7 @@ $\ip{y}{x}&gt;\lambda$, y sobre $tx$ la expresión tiende a $\infty$.</p></div>
 <p>con $0\log0=0$, entonces $h^{*}(s)=e^{s}$.</p></div></div>
 <div class="stmt ejemplo" id="general-c11:ej-lse"><div class="head">Ejemplo log-sum-exp y la entropía negativa</div><div class="body"><p>Sea $\dim E&lt;\infty$, con $E=\R^{n}$. Si
 $\lse(x)=\log\bigl(\sum_{i=1}^{n}e^{x_{i}}\bigr)$, entonces $\lse^{*}$ vale
-$\sum_{i}p_{i}\log p_{i}$ sobre el símplex $\simplex$ y $+\infty$ fuera.</p></div></div>
+$\sum_{i}p_{i}\log p_{i}$ sobre el símplex $\simplex_{n}$ y $+\infty$ fuera.</p></div></div>
 <div class="stmt proposicion" id="general-c11:prop-biconjugacion"><div class="head">Proposición biconjugación</div><div class="body"><p>$f^{**}\le f$ para toda $f$ propia.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p49">Ver demostración</button><div class="proof" id="general-convexa-p49"><p>Por definición de supremo, $f^{*}(y)\ge\ip{y}{x}-f(x)$ para todos $x\in E$ e
 $y\in E^{*}$, que es lo mismo que $\ip{y}{x}-f^{*}(y)\le f(x)$. Tomando el
@@ -2922,7 +2930,7 @@ que $A^{*}A$ sea invertible, y el rango completo ya no lo garantiza.</p></div></
 <div class="stmt problema" id="ambas-c2:pr-lasso"><div class="head">Problema regresión con regularización $\ell^{1}$</div><div class="body"><p>$\min_{x\in\R^{n}}\tfrac{1}{2}\norm{Ax-b}_{2}^{2}+\lambda\norm{x}_{1}$, con
 $\lambda&gt;0$.</p></div></div>
 <div class="stmt problema" id="ambas-c2:pr-logistica"><div class="head">Problema regresión logística</div><div class="body"><p>$\displaystyle\min_{x\in\R^{n}}\frac{1}{N}\sum_{i=1}^{N}\log\bigl(1+e^{-y_{i}\ip{a_{i}}{x}}\bigr)$.</p></div></div>
-<div class="stmt problema" id="ambas-c2:pr-portafolio"><div class="head">Problema selección de portafolio</div><div class="body"><p>$\min_{x\in\simplex^{n}}\tfrac{1}{2}x\trans\Sigma x-\gamma\ip{\mu}{x}$.</p></div></div>
+<div class="stmt problema" id="ambas-c2:pr-portafolio"><div class="head">Problema selección de portafolio</div><div class="body"><p>$\min_{x\in\simplex_{n}}\tfrac{1}{2}x\trans\Sigma x-\gamma\ip{\mu}{x}$.</p></div></div>
 <div class="stmt problema" id="ambas-c2:pr-lineal"><div class="head">Problema programa lineal</div><div class="body"><p>$\min_{x\in\R^{n}}\ip{c}{x}$ sujeto a $\ip{a_{i}}{x}\le b_{i}$ para
 $i=1,\ldots,N$.</p></div></div>
 <p>Los dos primeros son suaves y se resuelven con lo anterior. Los demás no lo son,
@@ -2963,7 +2971,7 @@ $\conv(B)$ sigue siendo una combinación convexa <em>finita</em> de puntos de $B
 por definición, pero el número de sumandos que hace falta no está acotado por
 ninguna constante.</p></div></div>
 <div class="stmt corolario" id="ambas-c3:cor-compacto"><div class="head">Corolario</div><div class="body"><p>Sea $\dim E&lt;\infty$. Si $B$ es compacto, entonces $\conv(B)$ es compacto, por
-ser imagen continua de $B^{n+1}\times\simplex^{n}$.</p></div></div>
+ser imagen continua de $B^{n+1}\times\simplex_{n+1}$.</p></div></div>
 <div class="stmt observacion" id="ambas-c3:obs-compacto-infinito"><div class="head">Observación</div><div class="body"><p>La prueba se apoya en Carathéodory y por tanto en la dimensión finita. En
 dimensión infinita $\conv(B)$ de un compacto ni siquiera tiene por qué ser
 cerrado.</p></div></div>
@@ -2992,7 +3000,8 @@ convexo y su interior cuando no es vacío.</p></div></div>
 son de espacios vectoriales. Es el bloque del curso que viaja más lejos.</p></div></div>
 <div class="stmt ejemplo" id="ambas-c3:ej-fundamentales"><div class="head">Ejemplo los ejemplos fundamentales</div><div class="body"><p>Subespacios y afines; hiperplanos y semiespacios asociados a un funcional
 $a\neq0$; bolas de cualquier norma; poliedros $\{x:Ax\le b\}$; y el símplex
-$\simplex=\conv\{e_{1},\ldots,e_{n}\}$.</p></div></div>
+$\simplex_{n}=\conv\{e_{1},\ldots,e_{n}\}$, con el subíndice contando
+<em>coordenadas</em>.</p></div></div>
 <div class="stmt observacion" id="ambas-c3:obs-hiperplano-denso"><div class="head">Observación un hiperplano puede no ser cerrado</div><div class="body"><p>En $\R^{n}$ todo hiperplano es cerrado, porque todo funcional lineal es
 continuo. En un Banach de dimensión infinita hay funcionales lineales no
 acotados, y el hiperplano que definen es <em>denso</em>: su clausura es el espacio
