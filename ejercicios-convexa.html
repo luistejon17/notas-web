@@ -2480,7 +2480,730 @@ $\Rightarrow \partial_{V}f(x) = \{0\}$, cuya norma dual es $0
 <p>$\therefore$ si $V^{\perp} \neq \{0\}$, el subdiferencial ambiente
 $\partial\delta_{C}(x) = V^{\perp}$ es un subespacio no trivial, y por tanto no
 acotado en $\mathbb{R}^{n}$, mientras que $f$ tiene constante de Lipschitz cero
-sobre su espacio afín.  □</p></div></section>
+sobre su espacio afín.  □</p></div>
+<h4 id="ejercicios-convexa-x6">Tarea 5</h4>
+<div class="stmt ejercicio" id="ej:t5-1"><div class="head">Ejercicio 1</div><div class="body"><p>Calcule las conjugadas de:</p>
+<ol class="lista"><li><p>$f(x) = \frac{1}{2}\lVert x\rVert_{2}^{2}$;</p></li><li><p>$f(x) = \frac{\mu}{2}\lVert x-a\rVert_{2}^{2}$, con $\mu&gt;0$;</p></li><li><p>$f(x) = \lambda\lVert x\rVert_{1}$, con $\lambda&gt;0$;</p></li><li><p>$f(x) = \delta_{C}(x)$, donde $C \subseteq \mathbb{R}^{n}$ es no vacío;</p></li><li><p>$f(x) = e^{x}$ en $\mathbb{R}$.</p></li></ol>
+<p>Indique en cada caso el dominio efectivo de $f^{*}$ y verifique, cuando sea
+posible, la igualdad de Fenchel–Young en un par $(x,y)$ apropiado.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p50" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p50"><p><em>a)</em></p>
+<div class="display">\[
+  2f^{*}(y) = \sup_{x} 2\langle x,y\rangle - \lVert x\rVert^{2}
+   = \sup_{x} -\lVert x-y\rVert^{2} + \lVert y\rVert^{2} = \lVert y\rVert^{2}
+  \quad\Rightarrow\quad f^{*}(y) = \frac{\lVert y\rVert^{2}}{2},
+  \quad \operatorname{dom} f^{*} = \mathbb{R}^{n} .
+\]</div>
+<p>Y $f(x)+f^{*}(y) = \langle x,y\rangle
+\Longleftrightarrow \lVert x\rVert^{2}+\lVert y\rVert^{2} = 2\langle x,y\rangle
+\Longleftrightarrow \lVert x-y\rVert^{2} = 0 \Longleftrightarrow x=y$. En efecto,
+$y \in \partial f(x) \Longleftrightarrow y = \nabla f(x) = x$.</p>
+<p><em>b)</em> Si $f_{0}(x) = \frac{1}{2}\lVert x\rVert^{2}$ y
+$f_{1}(x) = \frac{1}{2}\lVert x-a\rVert^{2}$
+$\Rightarrow f_{1}^{*}(y) = \langle y,a\rangle + f_{0}^{*}(y)
+ = \langle y,a\rangle + \frac{1}{2}\lVert y\rVert^{2}$. Y si
+$f(x) = \mu f_{1}(x) = \frac{\mu}{2}\lVert x-a\rVert^{2}$ $\Rightarrow$</p>
+<div class="display">\[
+  f^{*}(y) = f_{1}^{*}\Bigl(\frac{y}{\mu}\Bigr)
+   = \frac{1}{2}\Bigl\lVert\frac{y}{\mu}\Bigr\rVert^{2} + \Bigl\langle\frac{y}{\mu},a\Bigr\rangle
+   = \frac{1}{2}\Bigl\lVert\frac{y}{\mu}+a\Bigr\rVert^{2} - \frac{1}{2}\lVert a\rVert^{2} ,
+\]</div>
+<p>con $y = \mu(x-a)$, esto es $\frac{y}{\mu}+a = x$.</p>
+<p><em>c)</em> Si $f(x) = \lambda\lVert x\rVert_{1}$ y $f_{0}(x) = \lVert x\rVert_{1}$
+$\Rightarrow$</p>
+<div class="display">\[
+  f_{0}^{*}(y) = \sup_{x}\langle y,x\rangle - \lVert x\rVert_{1}
+   \leq \sup_{x}\lVert y\rVert_{\infty}\lVert x\rVert_{1} - \lVert x\rVert_{1}
+   = \sup_{x}\lVert x\rVert_{1}\bigl(\lVert y\rVert_{\infty}-1\bigr) = 0
+  \quad \text{si } \lVert y\rVert_{\infty} \leq 1 ,
+\]</div>
+<p>y como $\langle y,0\rangle - \lVert 0\rVert_{1} = 0$
+$\Rightarrow f_{0}^{*}(y) = 0$ para todo $y$ con $\lVert y\rVert_{\infty} \leq 1$.
+Y si $\lVert y\rVert_{\infty}&gt;1$, suponga $|y_{k}| = \lVert y\rVert_{\infty}$ y
+sea $x$ definido por $x_{k} = m\operatorname{sign}(y_{k})$ y $x_{j}=0$ para
+$j \neq k$ $\Rightarrow \lVert x\rVert_{1} = m$ y</p>
+<div class="display">\[
+  \langle y,x\rangle - \lVert x\rVert_{1} = m\lVert y\rVert_{\infty} - m
+   = m\bigl(\lVert y\rVert_{\infty}-1\bigr) ,
+\]</div>
+<p>y tomando $m \to \infty$ vemos que
+$\sup_{x}\langle y,x\rangle - \lVert x\rVert_{1} = \infty$
+$\Rightarrow f_{0}^{*} = \delta_{C}$ donde
+$C = \{y : \lVert y\rVert_{\infty} \leq 1\}$. Más aún,
+$f^{*}(y) = f_{0}^{*}\bigl(\frac{y}{\lambda}\bigr) = \delta_{C}\bigl(\frac{y}{\lambda}\bigr)
+ = \delta_{\lambda C}(y)$, y</p>
+<div class="display">\[
+  f(x)+f^{*}(y) = \langle x,y\rangle
+  \Longleftrightarrow \lVert y\rVert_{\infty} \leq \lambda
+  \ \text{ y } \ \lambda\lVert x\rVert_{1} = \langle x,y\rangle .
+\]</div>
+<p><em>d)</em> Si $f = \delta_{C}$ con $C \neq \varnothing$ $\Rightarrow$</p>
+<div class="display">\[
+  f^{*}(y) = \sup_{x}\langle y,x\rangle - \delta_{C}(x)
+   = \sup_{x \in C}\langle y,x\rangle = \sigma_{C}(y) ,
+\]</div>
+<p>y $f(x)+f^{*}(y) = \langle x,y\rangle
+\Longleftrightarrow x \in C$ y $x \in \operatorname{argmax}_{z \in C}\langle y,z\rangle$.</p>
+<p><em>e)</em> Si $f(x) = e^{x}$ $\Rightarrow f^{*}(y) = \sup_{x} xy - e^{x}$. Sea
+$g(x) = xy-e^{x}$ $\Rightarrow g&#x27;(x) = y-e^{x}$ y $g&#x27;&#x27;(x) = -e^{x}&lt;0$
+$\Rightarrow g$ es estrictamente cóncava, y $y-e^{x}=0 \Longleftrightarrow y = e^{x}$.
+Si $y&gt;0 \Rightarrow g$ tiene máximo en $x = \ln y$ y
+$f^{*}(y) = y\ln y - y$. Si $y=0 \Rightarrow \sup_{x}-e^{x} = 0$. Si $y&lt;0$ y
+$x \to -\infty \Rightarrow xy-e^{x} \to \infty$. $\therefore$</p>
+<div class="display">\[
+  f^{*}(y) = \begin{cases}
+    y\ln y - y &amp; \text{si } y&gt;0, \\
+    0 &amp; \text{si } y=0, \\
+    +\infty &amp; \text{si } y&lt;0,
+  \end{cases}
+\]</div>
+<p>y $f(x)+f^{*}(y) = xy \Longleftrightarrow y&gt;0$ y
+$e^{x}-y = y(x-\ln y) \Longleftrightarrow y = e^{x}$.  □</p>
+<p class="aviso">En <em>b)</em> falta el factor $\mu$: la regla es
+$(\mu g)^{*}(y) = \mu g^{*}(y/\mu)$, de modo que
+$f^{*}(y) = \frac{1}{2\mu}\lVert y\rVert^{2}+\langle y,a\rangle$. En
+<em>c)</em> el mismo salto es inocuo, porque la conjugada es una indicadora. Y
+falta $\operatorname{dom} f^{*}$ en <em>b)</em> y <em>d)</em>.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p51" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p51"><p>Dos reglas de una línea cubren <em>a)</em>, <em>b)</em> y <em>c)</em>, y evitan
+tener que rehacer el supremo cada vez.</p>
+<p><strong>Lema (traslación y escalado).</strong> <em>Sean $\lambda&gt;0$ y
+$a \in \mathbb{R}^{n}$. Si $g(x) = f(x-a)$, entonces
+$g^{*}(y) = f^{*}(y)+\langle y,a\rangle$. Si $h(x) = \lambda f(x)$, entonces
+$h^{*}(y) = \lambda f^{*}(y/\lambda)$.</em></p>
+<p><strong>Demostración: </strong> Para la primera, con $u = x-a$,</p>
+<div class="display">\[
+  g^{*}(y) = \sup_{x}\langle y,x\rangle - f(x-a)
+   = \sup_{u}\langle y,u+a\rangle - f(u) = f^{*}(y)+\langle y,a\rangle .
+\]</div>
+<p>Para la segunda, sacando $\lambda$ del supremo,
+$h^{*}(y) = \sup_{x}\lambda\bigl[\langle y/\lambda,x\rangle - f(x)\bigr]
+ = \lambda f^{*}(y/\lambda)$.  □</p>
+<p><em>a)</em> Completando el cuadrado,
+$\sup_{x}\langle y,x\rangle - \frac{1}{2}\lVert x\rVert^{2}
+ = \sup_{x}\frac{1}{2}\lVert y\rVert^{2}-\frac{1}{2}\lVert x-y\rVert^{2}
+ = \frac{1}{2}\lVert y\rVert^{2}$, alcanzado en $x=y$
+$\Rightarrow f^{*}(y) = \frac{1}{2}\lVert y\rVert^{2}$, con
+$\operatorname{dom} f^{*} = \mathbb{R}^{n}$. Fenchel–Young con igualdad si y
+solo si $y = \nabla f(x) = x$.</p>
+<p><em>b)</em> $f(x) = \mu f_{0}(x-a)$ con $f_{0} = \frac{1}{2}\lVert\cdot\rVert^{2}$.
+Primero el escalado: $(\mu f_{0})^{*}(y) = \mu f_{0}^{*}(y/\mu)
+ = \mu\cdot\frac{1}{2}\frac{\lVert y\rVert^{2}}{\mu^{2}} = \frac{\lVert y\rVert^{2}}{2\mu}$;
+después la traslación:</p>
+<div class="display">\[
+  f^{*}(y) = \frac{1}{2\mu}\lVert y\rVert^{2} + \langle y,a\rangle ,
+  \qquad \operatorname{dom} f^{*} = \mathbb{R}^{n} .
+\]</div>
+<p>Igualdad de Fenchel–Young si y solo si $y = \nabla f(x) = \mu(x-a)$, y en ese
+par se comprueba directamente:
+$\frac{\mu}{2}\lVert x-a\rVert^{2} + \frac{\mu}{2}\lVert x-a\rVert^{2} + \langle \mu(x-a),a\rangle
+ = \langle \mu(x-a),x\rangle$.  □</p>
+<p><em>c)</em> Para $f_{0} = \lVert\cdot\rVert_{1}$, por Hölder
+$\langle y,x\rangle \leq \lVert y\rVert_{\infty}\lVert x\rVert_{1}$, así que el
+supremo de $\langle y,x\rangle - \lVert x\rVert_{1}$ vale $0$ si
+$\lVert y\rVert_{\infty} \leq 1$, alcanzado en $x=0$; y si
+$\lVert y\rVert_{\infty}&gt;1$, con $x = m\operatorname{sign}(y_{k})e_{k}$ y
+$|y_{k}| = \lVert y\rVert_{\infty}$ el valor es
+$m(\lVert y\rVert_{\infty}-1) \to \infty$
+$\Rightarrow f_{0}^{*} = \delta_{B_{\infty}}$ con
+$B_{\infty} = \{y : \lVert y\rVert_{\infty} \leq 1\}$. Por el lema,</p>
+<div class="display">\[
+  f^{*}(y) = \lambda\,\delta_{B_{\infty}}(y/\lambda) = \delta_{\lambda B_{\infty}}(y)
+   = \delta_{\{\lVert y\rVert_{\infty} \leq \lambda\}}(y) ,
+  \qquad \operatorname{dom} f^{*} = \{y : \lVert y\rVert_{\infty} \leq \lambda\} ,
+\]</div>
+<p>donde el factor $\lambda$ de delante no se nota por ser el valor $0$ o
+$+\infty$. Fenchel–Young con igualdad si y solo si
+$\lVert y\rVert_{\infty} \leq \lambda$ y $\langle x,y\rangle = \lambda\lVert x\rVert_{1}$.  □</p>
+<p><em>d)</em> $f^{*} = \sigma_{C}$, y $\operatorname{dom}\sigma_{C}$ es el cono
+barrera $\{y : \sup_{x \in C}\langle y,x\rangle&lt;\infty\}$, que es todo
+$\mathbb{R}^{n}$ si y solo si $C$ es acotado. Igualdad de Fenchel–Young si y
+solo si $x \in C$ y $x$ maximiza $\langle y,\cdot\rangle$ sobre $C$.  □</p>
+<p><em>e)</em> Como arriba, con
+$\operatorname{dom} f^{*} = [0,\infty)$ e igualdad en $y = e^{x}$.  □</p></div>
+<div class="stmt ejercicio" id="ej:t5-2"><div class="head">Ejercicio 2</div><div class="body"><ol class="lista"><li><p>Si $B := \{x : \lVert x\rVert \leq 1\}$, pruebe que
+    $\sigma_{B}(y) = \lVert y\rVert_{*}$.</p></li><li><p>Para el simplex $\Delta_{n} = \{x \geq 0 : \mathbf{1}\trans x = 1\}$,
+    pruebe que $\sigma_{\Delta_{n}}(y) = \max_{1 \leq i \leq n} y_{i}$.</p></li><li><p>Para la caja $C = [\ell_{1},u_{1}] \times \cdots \times [\ell_{n},u_{n}]$,
+    muestre que</p>
+<div class="display">\[
+      \sigma_{C}(y) = \sum_{i=1}^{n}\begin{cases}
+        u_{i}y_{i}, &amp; y_{i} \geq 0, \\
+        \ell_{i}y_{i}, &amp; y_{i}&lt;0.
+      \end{cases}
+    \]</div></li><li><p>Sea $C = x_{0}+V$, donde $V$ es un subespacio vectorial. Pruebe que</p>
+<div class="display">\[
+      \sigma_{C}(y) = \begin{cases}
+        \langle y,x_{0}\rangle, &amp; y \in V^{\perp}, \\
+        +\infty, &amp; y \notin V^{\perp}.
+      \end{cases}
+    \]</div>
+<p>Explique qué muestra este ejemplo sobre funciones de soporte de conjuntos
+    no acotados.</p></li><li><p>Sea $A : \mathbb{R}^{m} \to \mathbb{R}^{n}$ lineal y
+    $K = B_{2}+A\Delta_{m}$, con $B_{2} := \{x \in \mathbb{R}^{n} : \lVert x\rVert_{2} \leq 1\}$.
+    Deduzca que
+    $\sigma_{K}(y) = \lVert y\rVert_{2} + \max_{1 \leq i \leq m}(A\trans y)_{i}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p52" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p52"><p><em>a)</em> Es la definición de $\lVert\cdot\rVert_{*}$.</p>
+<p><em>b)</em> Si $x \in \Delta_{n} \Rightarrow \langle y,x\rangle = \sum_{i} y_{i}x_{i}
+ \leq \sum_{i}(\max_{j} y_{j})\,x_{i} = \max_{j} y_{j}$
+$\Rightarrow \sigma_{\Delta_{n}}(y) \leq \max_{i} y_{i}$. Más aún, si
+$y_{k} = \max_{i} y_{i}$, con $x = e_{k} \in \Delta_{n}$
+$\Rightarrow \max_{i} y_{i} = \langle y,x\rangle \leq \sigma_{\Delta_{n}}(y)$.</p>
+<p><em>c)</em> Sea $x \in C \Rightarrow \ell_{i} \leq x_{i} \leq u_{i}$ para todo
+$i$, y sean $I = \{i : y_{i} \geq 0\}$, $J = \{i : y_{i}&lt;0\}$:</p>
+<div class="display">\[
+  \left.\begin{array}{ll}
+    \text{si } y_{i} \geq 0 &amp; \Rightarrow x_{i}y_{i} \leq u_{i}y_{i} \\
+    \text{si } y_{i}&lt;0 &amp; \Rightarrow x_{i}y_{i} \leq \ell_{i}y_{i}
+  \end{array}\right\}
+  \Rightarrow \sum_{i} x_{i}y_{i} \leq \sum_{i \in I} u_{i}y_{i} + \sum_{j \in J}\ell_{j}y_{j} ,
+\]</div>
+<p>$\Rightarrow$ el supremo se alcanza en $z_{i} = u_{i}$ si $y_{i} \geq 0$ y
+$z_{i} = \ell_{i}$ si $y_{i}&lt;0$.</p>
+<p><em>d)</em> Si $y \in V^{\perp} \Rightarrow$ para todo $v \in V$,
+$\langle y,x_{0}+v\rangle = \langle y,x_{0}\rangle$
+$\Rightarrow$ para todo $x \in C$, $\langle y,x\rangle = \langle y,x_{0}\rangle$.
+Si $y \notin V^{\perp}$, tome $v \in V$ con $\langle y,v\rangle \neq 0$; tomando
+$-v$ podemos asumir $\langle y,v\rangle&gt;0$. Como $x_{0}+nv \in C$ para todo
+$n \in \mathbb{N}$,</p>
+<div class="display">\[
+  \sigma_{C}(y) \geq \langle y,x_{0}+nv\rangle
+   = \langle y,x_{0}\rangle + n\langle y,v\rangle \xrightarrow{\ n \to \infty\ } \infty .
+\]</div>
+<p><em>e)</em> Ya sabemos que $\sigma_{C}+\sigma_{D} = \sigma_{C+D}$ para
+$C,D \neq \varnothing$, y que $\sigma_{AC}(y) = \sigma_{C}(A\trans y)$.
+Pero entonces:</p>
+<div class="display">\[
+  \sigma_{K}(y) = \sigma_{B_{2}}(y) + \sigma_{A\Delta_{m}}(y)
+   = \lVert y\rVert_{2} + \sigma_{\Delta_{m}}(A\trans y)
+   = \lVert y\rVert_{2} + \max_{i}(A\trans y)_{i} . \qquad
+\]</div>
+<p class="aviso">Falta el «explique» de <em>d)</em>, y en <em>e)</em> las dos reglas de
+cálculo se usan sin enunciarlas ni probarlas.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p53" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p53"><p>Las dos reglas que hacen falta en <em>e)</em> son de un renglón cada una, y con
+ellas el apartado sale sin más cuentas.</p>
+<p><strong>Lema.</strong> <em>Sean $C, D \subseteq \mathbb{R}^{n}$ no vacíos y
+$A : \mathbb{R}^{m} \to \mathbb{R}^{n}$ lineal. Entonces
+$\sigma_{C+D} = \sigma_{C}+\sigma_{D}$ y $\sigma_{AC}(y) = \sigma_{C}(A\trans y)$.</em></p>
+<p><strong>Demostración: </strong> Para la primera, el supremo sobre $c+d$ se separa
+porque $c$ y $d$ varían de forma independiente:
+$\sup_{c,d}\langle y,c+d\rangle = \sup_{c}\langle y,c\rangle + \sup_{d}\langle y,d\rangle$.
+Para la segunda,
+$\sigma_{AC}(y) = \sup_{c \in C}\langle y,Ac\rangle
+ = \sup_{c \in C}\langle A\trans y,c\rangle = \sigma_{C}(A\trans y)$.  □</p>
+<p><em>a)</em> $\sigma_{B}(y) = \sup_{\lVert x\rVert \leq 1}\langle y,x\rangle$, que
+es la definición de $\lVert y\rVert_{*}$.</p>
+<p><em>b)</em> $\Delta_{n} = \conv\{e_{1},\ldots,e_{n}\}$, y la función de soporte
+de una envolvente convexa es la del conjunto generador, pues
+$\langle y,\cdot\rangle$ es lineal y su supremo sobre un conjunto finito de
+puntos no cambia al pasar a las combinaciones convexas
+$\Rightarrow \sigma_{\Delta_{n}}(y) = \max_{i}\langle y,e_{i}\rangle = \max_{i} y_{i}$.</p>
+<p><em>c)</em> La caja es un producto y $\langle y,x\rangle = \sum_{i} y_{i}x_{i}$ se
+separa coordenada a coordenada
+$\Rightarrow \sigma_{C}(y) = \sum_{i}\sup_{\ell_{i} \leq t \leq u_{i}} y_{i}t$, y
+cada supremo escalar se alcanza en $u_{i}$ si $y_{i} \geq 0$ y en $\ell_{i}$ si
+$y_{i}&lt;0$.</p>
+<p><em>d)</em> $C = x_{0}+V$ da $\sigma_{C}(y) = \langle y,x_{0}\rangle + \sigma_{V}(y)$
+por el lema, y $\sigma_{V}(y) = \sup_{v \in V}\langle y,v\rangle$ vale $0$ si
+$y \in V^{\perp}$ y $+\infty$ si no, pues $V$ es un subespacio y $\lambda v \in V$
+para todo $\lambda$.</p>
+<p><strong>Lo que muestra el ejemplo.</strong> Que la función de soporte de un conjunto no
+acotado <em>toma el valor $+\infty$</em>, y que su dominio efectivo puede ser tan
+pequeño como se quiera: aquí es exactamente $V^{\perp}$, un subespacio propio en
+cuanto $V \neq \{0\}$. Y el recíproco es cierto:</p>
+<div class="display">\[
+  \sigma_{C} \text{ es finita en todo } \mathbb{R}^{n}
+  \quad\Longleftrightarrow\quad C \text{ es acotado} .
+\]</div>
+<p>En efecto, si $C \subseteq \bar{B}(0;R)$ entonces
+$\sigma_{C}(y) \leq R\lVert y\rVert&lt;\infty$. Recíprocamente, si $\sigma_{C}$ es
+finita en todo $\mathbb{R}^{n}$, es una función convexa finita sobre
+$\mathbb{R}^{n}$ y por tanto continua (§8 de las notas), de modo que está
+acotada por algún $M$ sobre la esfera unidad, que es compacta. Pero entonces,
+para $x \in C$ no nulo, tomando $y = x/\lVert x\rVert$,</p>
+<div class="display">\[
+  \lVert x\rVert = \langle y,x\rangle \leq \sigma_{C}(y) \leq M ,
+\]</div>
+<p>$\Rightarrow C$ está acotado.  □</p>
+<p><em>e)</em> Por el lema y por <em>a)</em>, <em>b)</em>,</p>
+<div class="display">\[
+  \sigma_{K}(y) = \sigma_{B_{2}}(y) + \sigma_{A\Delta_{m}}(y)
+   = \lVert y\rVert_{2} + \sigma_{\Delta_{m}}(A\trans y)
+   = \lVert y\rVert_{2} + \max_{1 \leq i \leq m}(A\trans y)_{i} ,
+\]</div>
+<p>donde $\sigma_{B_{2}} = \lVert\cdot\rVert_{2}$ porque la norma euclidiana es
+autodual.  □</p></div>
+<div class="stmt ejercicio" id="ej:t5-3"><div class="head">Ejercicio 3</div><div class="body"><p>Sea $F : \mathbb{R}^{n} \times \mathbb{R}^{m} \to \mathbb{R} \cup \{+\infty\}$
+propia y conjuntamente convexa, y defina
+$p(x) := \inf_{y \in \mathbb{R}^{m}} F(x,y)$. Suponga que $p(x)$ es finito.</p>
+<ol class="lista"><li><p>Pruebe, sin asumir que el ínfimo se alcanza, que
+    $\{u : \exists y \text{ tal que } (u,0) \in \partial F(x,y)\} \subseteq \partial p(x)$.</p></li><li><p>Suponga ahora que el ínfimo se alcanza en $y_{x}$. Pruebe la identidad
+    exacta $\partial p(x) = \{u : (u,0) \in \partial F(x,y_{x})\}$. Muestre que la
+    igualdad vale para cualquier minimizador $y_{x}$.</p></li><li><p>Considere $F(x,y) = x+e^{y}$, $(x,y) \in \mathbb{R}^{2}$. Calcule $p$ y
+    $\partial p(x)$, y compruebe que el ínfimo respecto de $y$ no se alcanza.
+    Muestre que no existe ningún $y$ tal que $(1,0) \in \partial F(x,y)$.
+    Explique así qué puede fallar en el apartado anterior cuando no hay alcance.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p54" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p54"><p><em>a)</em> Como $(u,0) \in \partial F(x,y)$</p>
+<div class="display">\[
+  \Rightarrow \forall x&#x27; \quad F(x&#x27;,y) \geq F(x,y) + \langle u, x-x&#x27;\rangle
+  \Rightarrow \inf_{y} F(x&#x27;,y) \geq \inf_{y} F(x,y) + \langle u, x-x&#x27;\rangle
+  \Rightarrow p(x&#x27;) \geq p(x) + \langle u, x-x&#x27;\rangle ,
+\]</div>
+<p>$\Rightarrow u \in \partial p(x)$.</p>
+<p><em>b)</em> Primero note que
+$\{u : \exists y,\ (u,0) \in \partial F(x,y)\} = \{u : (u,0) \in \partial F(x,y_{x})\}$,
+pues si $(u,0) \in \partial F(x,y)$, para todos $x&#x27;, y&#x27;$,</p>
+<div class="display">\[
+  F(x&#x27;,y&#x27;) \geq F(x,y) + \langle u, x&#x27;-x\rangle ,
+\]</div>
+<p>y tomando $x&#x27;=x$ $\Rightarrow F(x,y&#x27;) \geq F(x,y)$ para todo $y&#x27;$
+$\Rightarrow F(x,y_{x}) = \inf_{y&#x27;} F(x,y&#x27;) = F(x,y)$
+$\Rightarrow F(x&#x27;,y&#x27;) \geq F(x,y_{x}) + \langle u,x&#x27;-x\rangle
+\Rightarrow (u,0) \in \partial F(x,y_{x})$. La otra contenencia es trivial.
+Llame $D$ a ese conjunto.</p>
+<p>Finalmente, en el apartado anterior ya se vio que $D \subseteq \partial p(x)$.
+Note que si $u \in \partial p(x)$</p>
+<div class="display">\[
+  \Rightarrow \forall x&#x27; \quad p(x&#x27;) \geq p(x) + \langle u,x&#x27;-x\rangle
+   = F(x,y_{x}) + \langle u,x&#x27;-x\rangle
+  \Rightarrow \forall x&#x27;\, \forall y&#x27; \quad F(x&#x27;,y&#x27;) \geq F(x,y_{x}) + \langle u,x&#x27;-x\rangle ,
+\]</div>
+<p>esto es $(u,0) \in \partial F(x,y_{x})$. $\therefore D = \partial p(x)$.</p>
+<p><em>c)</em> $p(x) = \inf_{y} x+e^{y} = x$, pues $e^{y} \to 0$ cuando
+$y \to -\infty$ $\Rightarrow \partial p(x) = \{1\}$. Ahora</p>
+<div class="display">\[
+  (1,0) \in \partial F(x,y)
+  \Longleftrightarrow \forall x&#x27;\,\forall y&#x27; \quad x&#x27;+e^{y&#x27;} \geq x+e^{y}+1\cdot(x&#x27;-x) = e^{y}+x&#x27;
+  \Longleftrightarrow \forall y&#x27; \ e^{y&#x27;} \geq e^{y} ,
+\]</div>
+<p>y esto es falso para $y&#x27;&lt;y$. $\therefore (1,0) \notin \partial F(x,y)$ para todo
+$y$. Así $D = \{u : \exists y \text{ con } (u,0) \in \partial F(x,y)\} = \varnothing$
+pero $\partial p(x) = \{1\}$. Justamente lo que falla es que $D$ puede ser
+vacío, pero como $p$ es finita y convexa $\Rightarrow \partial p(x) \neq \varnothing$
+para todo $x$.  □</p>
+<p class="aviso">En <em>a)</em> el signo va al revés, y sobre todo: fijando $y&#x27;=y$ la
+desigualdad solo vale para ese $y$, así que el $\inf_{y}$ del lado izquierdo no
+está justificado. Dejando $y&#x27;$ libre sale directo.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p55" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p55"><p><em>a)</em> Sea $(u,0) \in \partial F(x,y)$. La desigualdad del subgradiente en
+$\mathbb{R}^{n} \times \mathbb{R}^{m}$ dice que, <em>para todo</em> $(x&#x27;,y&#x27;)$,</p>
+<div class="display">\[
+  F(x&#x27;,y&#x27;) \geq F(x,y) + \bigl\langle (u,0),\ (x&#x27;,y&#x27;)-(x,y)\bigr\rangle
+   = F(x,y) + \langle u, x&#x27;-x\rangle \geq p(x) + \langle u,x&#x27;-x\rangle ,
+\]</div>
+<p>donde la última desigualdad es $F(x,y) \geq \inf_{y&#x27;}F(x,y&#x27;) = p(x)$. El lado
+derecho no depende de $y&#x27;$, así que tomando ínfimo en $y&#x27;$ del lado izquierdo,</p>
+<div class="display">\[
+  p(x&#x27;) \geq p(x) + \langle u, x&#x27;-x\rangle \qquad \forall x&#x27;
+  \quad\Rightarrow\quad u \in \partial p(x) . \qquad
+\]</div>
+<p>Dejar $y&#x27;$ libre es lo que permite el paso al ínfimo: con $y&#x27;=y$ fijo la
+desigualdad solo habla de un punto.</p>
+<p><em>b)</em> Sea $y_{x}$ cualquier minimizador, de modo que $F(x,y_{x}) = p(x)$, y
+sea $D := \{u : (u,0) \in \partial F(x,y_{x})\}$.</p>
+<p>$(\supseteq)$ Es <em>a)</em> con $y = y_{x}$.</p>
+<p>$(\subseteq)$ Sea $u \in \partial p(x)$. Para todos $x&#x27;, y&#x27;$,</p>
+<div class="display">\[
+  F(x&#x27;,y&#x27;) \geq p(x&#x27;) \geq p(x) + \langle u,x&#x27;-x\rangle
+   = F(x,y_{x}) + \langle u, x&#x27;-x\rangle
+   = F(x,y_{x}) + \bigl\langle (u,0),(x&#x27;,y&#x27;)-(x,y_{x})\bigr\rangle ,
+\]</div>
+<p>donde la última igualdad es porque la segunda componente de $(u,0)$ es cero.
+$\therefore (u,0) \in \partial F(x,y_{x})$ y $u \in D$.</p>
+<p>Como $y_{x}$ era un minimizador cualquiera, la igualdad vale para todos a la
+vez. Más aún, todo $y$ con $\partial F(x,y) \ni (u,0)$ es minimizador: tomando
+$x&#x27;=x$ en la desigualdad del subgradiente queda $F(x,y&#x27;) \geq F(x,y)$ para todo
+$y&#x27;$.  □</p>
+<p><em>c)</em> $F(x,y) = x+e^{y}$ $\Rightarrow p(x) = x + \inf_{y} e^{y} = x$, y el
+ínfimo no se alcanza, pues $e^{y}&gt;0$ para todo $y$. Como $p$ es lineal,
+$\partial p(x) = \{1\}$.</p>
+<p>Si $(1,0) \in \partial F(x,y)$, entonces para todos $x&#x27;,y&#x27;$,</p>
+<div class="display">\[
+  x&#x27;+e^{y&#x27;} \geq x+e^{y}+(x&#x27;-x) \Longleftrightarrow e^{y&#x27;} \geq e^{y} ,
+\]</div>
+<p>que falla para $y&#x27;&lt;y$ $\Rightarrow$ no hay ningún $y$ con
+$(1,0) \in \partial F(x,y)$, es decir $D = \varnothing$ mientras
+$\partial p(x) = \{1\}$.</p>
+<p>Lo que falla es solo una contenencia: la de <em>a)</em> sigue siendo cierta, y
+de hecho es la que da $\varnothing \subseteq \{1\}$. Lo que se pierde sin
+alcance es $\partial p(x) \subseteq D$, porque su prueba necesita un $y_{x}$ con
+$F(x,y_{x}) = p(x)$ y aquí no existe. $\partial p(x)$ nunca es vacío, por ser $p$
+convexa y finita en todo $\mathbb{R}$ (§9 de las notas), así que $D$ vacío
+obliga a que la igualdad falle.  □</p></div>
+<div class="stmt ejercicio" id="ej:t5-4"><div class="head">Ejercicio 4$^{*}$</div><div class="body"><p>Para $\tau&gt;0$ defina
+$L_{\tau}(x) := \tau\log\bigl(\sum_{i=1}^{m} e^{x_{i}/\tau}\bigr)$.</p>
+<ol class="lista"><li><p>Pruebe que</p>
+<div class="display">\[
+      L_{\tau}^{*}(p) = \begin{cases}
+        \tau\sum_{i=1}^{m} p_{i}\log p_{i}, &amp; p \in \Delta_{m}, \\
+        +\infty, &amp; p \notin \Delta_{m}.
+      \end{cases}
+    \]</div></li><li><p>Deduzca la representación variacional
+    $L_{\tau}(x) = \max_{p \in \Delta_{m}}\bigl\{\langle p,x\rangle - \tau\sum_{i} p_{i}\log p_{i}\bigr\}$.</p></li><li><p>Identifique el maximizador y pruebe que
+    $p_{i}^{\star} = e^{x_{i}/\tau}/\sum_{j} e^{x_{j}/\tau}$.</p></li><li><p>Pruebe las cotas
+    $\max_{i} x_{i} \leq L_{\tau}(x) \leq \max_{i} x_{i}+\tau\log m$, y concluya
+    que $L_{\tau}(x) \to \max_{i} x_{i}$ cuando $\tau \downarrow 0$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p56" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p56"><p><em>a)</em> Ya sabemos que</p>
+<div class="display">\[
+  \operatorname{lse}^{*}(p) = \begin{cases}
+    \sum_{i=1}^{m} p_{i}\log p_{i}, &amp; p \in \Delta_{m}, \\
+    +\infty, &amp; \text{de lo contrario,}
+  \end{cases}
+\]</div>
+<p>y con la sustitución $z = \frac{x}{\tau}$
+$\Rightarrow L_{\tau}^{*}(p) = \tau\sup_{z}\langle p,z\rangle - \operatorname{lse}(z)
+ = \tau\operatorname{lse}^{*}(p)$.</p>
+<p><em>b)</em> Se sabe que $\operatorname{lse}(x)$ es convexa y s.c.i.
+$\Rightarrow \operatorname{lse}(x/\tau)$ es convexa y s.c.i.
+$\Rightarrow \tau\operatorname{lse}(x/\tau)$ es convexa y s.c.i. $\therefore$</p>
+<div class="display">\[
+  L_{\tau}(x) = \sup_{p \in \operatorname{dom}(L_{\tau}^{*})}\langle p,x\rangle - L_{\tau}^{*}(p)
+   = \max_{p \in \Delta_{m}}\langle p,x\rangle - \tau\sum_{i} p_{i}\log p_{i} ,
+\]</div>
+<p>donde el supremo se alcanza por compacidad de $\Delta_{m}$.</p>
+<p><em>c)</em> Si $p$ es maximizador
+$\Rightarrow L_{\tau}(x) = \langle p,x\rangle - L_{\tau}^{*}(p)
+\Longleftrightarrow L_{\tau}(x)+L_{\tau}^{*}(p) = \langle p,x\rangle
+\Longleftrightarrow p \in \partial L_{\tau}(x) = \{\nabla L_{\tau}(x)\}$, y</p>
+<div class="display">\[
+  \nabla L_{\tau}(x) = \tau\cdot\nabla\bigl(\operatorname{lse}(x/\tau)\bigr)
+   = \tau\cdot\Bigl(\frac{e^{x_{i}/\tau}}{\sum_{j} e^{x_{j}/\tau}}\Bigr)_{i}\cdot\frac{1}{\tau}
+   = \Bigl(\frac{e^{x_{i}/\tau}}{\sum_{j} e^{x_{j}/\tau}}\Bigr)_{i} .
+\]</div>
+<p><em>d)</em> Si $k \in \operatorname{argmax}_{i} x_{i}$, tome $p = e_{k}$
+$\Rightarrow L_{\tau}(x) \geq \langle p,x\rangle - \tau\sum_{i} p_{i}\log p_{i} = \max_{i} x_{i}$,
+y</p>
+<div class="display">\[
+  L_{\tau}(x) = \tau\log\Bigl(\sum_{i} e^{x_{i}/\tau}\Bigr)
+   \leq \tau\log\Bigl(\sum_{i} e^{\max_{j} x_{j}/\tau}\Bigr)
+   = \tau\log\bigl(m\,e^{\max_{j} x_{j}/\tau}\bigr)
+   = \max_{i} x_{i} + \tau\log m .
+\]</div>
+<p>$\therefore$ si $\tau \searrow 0 \Rightarrow L_{\tau}(x) \searrow \max_{i} x_{i}$.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p57" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p57"><p>La conjugada de $L_{\tau}$ se calcula directamente, sin apoyarse en la de
+$\operatorname{lse}$.</p>
+<p><em>a)</em> Sea $p \in \mathbb{R}^{m}$ y
+$\Phi(x) := \langle p,x\rangle - L_{\tau}(x)$.</p>
+<p><strong>Si $\sum_{i} p_{i} \neq 1$.</strong> De $L_{\tau}(x+c\mathbf{1}) = L_{\tau}(x)+c$
+para todo $c \in \mathbb{R}$, que sale de sacar $e^{c/\tau}$ del logaritmo,</p>
+<div class="display">\[
+  \Phi(x+c\mathbf{1}) = \Phi(x) + c\Bigl(\sum_{i} p_{i}-1\Bigr) ,
+\]</div>
+<p>y haciendo $c \to +\infty$ o $c \to -\infty$ según el signo
+$\Rightarrow L_{\tau}^{*}(p) = +\infty$.</p>
+<p><strong>Si $p_{k}&lt;0$ para algún $k$.</strong> Tome $x = -N e_{k}$ con $N&gt;0$
+$\Rightarrow \langle p,x\rangle = -Np_{k} \to +\infty$, mientras que
+$L_{\tau}(x) = \tau\log\bigl(m-1+e^{-N/\tau}\bigr) \leq \tau\log m$ está acotado
+$\Rightarrow L_{\tau}^{*}(p) = +\infty$.</p>
+<p><strong>Si $p \in \Delta_{m}$ con todas las $p_{i}&gt;0$.</strong> Tome
+$x^{\star}_{i} = \tau\log p_{i}$ $\Rightarrow \sum_{j} e^{x^{\star}_{j}/\tau} = \sum_{j} p_{j} = 1$
+$\Rightarrow L_{\tau}(x^{\star}) = 0$, de donde
+$\Phi(x^{\star}) = \tau\sum_{i} p_{i}\log p_{i}$. Y ese es el máximo: $L_{\tau}$
+es diferenciable con
+$\nabla L_{\tau}(x) = \bigl(e^{x_{i}/\tau}/\sum_{j}e^{x_{j}/\tau}\bigr)_{i}$, que
+en $x^{\star}$ vale $p$, así que $\Phi$ es cóncava con gradiente nulo ahí
+$\Rightarrow L_{\tau}^{*}(p) = \tau\sum_{i} p_{i}\log p_{i}$.</p>
+<p><strong>Si $p \in \Delta_{m}$ con alguna $p_{i}=0$.</strong> Sea
+$S = \{i : p_{i}&gt;0\}$ y tome $x_{i} = \tau\log p_{i}$ para $i \in S$ y
+$x_{i} = -N$ para $i \notin S$. Pero entonces
+$\langle p,x\rangle = \tau\sum_{i \in S} p_{i}\log p_{i}$, que no depende de $N$,
+y $L_{\tau}(x) = \tau\log\bigl(1+(m-|S|)e^{-N/\tau}\bigr) \downarrow 0$
+$\Rightarrow L_{\tau}^{*}(p) \geq \tau\sum_{i} p_{i}\log p_{i}$ con el convenio
+$0\log 0 = 0$; la desigualdad contraria sale de la de Fenchel–Young aplicada al
+$x^{\star}$ de cada $p$ con coordenadas positivas y pasando al límite.  □</p>
+<p><em>b)</em> $L_{\tau}$ es convexa, finita en todo $\mathbb{R}^{m}$ y por tanto
+continua, en particular cerrada $\Rightarrow L_{\tau}^{**} = L_{\tau}$ por
+Fenchel–Moreau (§11 de las notas). Pero entonces:</p>
+<div class="display">\[
+  L_{\tau}(x) = \sup_{p}\langle p,x\rangle - L_{\tau}^{*}(p)
+   = \sup_{p \in \Delta_{m}}\Bigl\{\langle p,x\rangle - \tau\sum_{i} p_{i}\log p_{i}\Bigr\} ,
+\]</div>
+<p>y el supremo es un máximo porque $\Delta_{m}$ es compacto y el integrando es
+continuo en $p$, con el convenio $0\log0=0$.  □</p>
+<p><em>c)</em> El maximizador es el $p$ que hace igualdad en Fenchel–Young, esto
+es $p \in \partial L_{\tau}(x)$. Como $L_{\tau}$ es diferenciable, ese
+subdiferencial es el único gradiente:</p>
+<div class="display">\[
+  \frac{\partial L_{\tau}}{\partial x_{i}}(x)
+   = \tau\cdot\frac{e^{x_{i}/\tau}\cdot\frac{1}{\tau}}{\sum_{j} e^{x_{j}/\tau}}
+   = \frac{e^{x_{i}/\tau}}{\sum_{j} e^{x_{j}/\tau}} = p^{\star}_{i} . \qquad
+\]</div>
+<p><em>d)</em> La cota superior sale de acotar cada sumando por el mayor:
+$\sum_{i} e^{x_{i}/\tau} \leq m\,e^{\max_{j}x_{j}/\tau}$, y tomando $\tau\log$,
+$L_{\tau}(x) \leq \max_{i} x_{i}+\tau\log m$. La inferior, de quedarse con un
+solo sumando: $\sum_{i} e^{x_{i}/\tau} \geq e^{\max_{j}x_{j}/\tau}$
+$\Rightarrow L_{\tau}(x) \geq \max_{i} x_{i}$. Pero entonces
+$0 \leq L_{\tau}(x) - \max_{i} x_{i} \leq \tau\log m \to 0$ cuando
+$\tau \downarrow 0$.  □</p></div>
+<h4 id="ejercicios-convexa-x7">Tarea 6</h4>
+<div class="stmt ejercicio" id="ej:t6-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sean $C_{1},\ldots,C_{m} \subset \mathbb{R}^{n}$ conjuntos convexos no vacíos y
+suponga que $\bigcap_{i=1}^{m}\rint C_{i} \neq \varnothing$.</p>
+<ol class="lista"><li><p>Use $\delta_{\cap_{i}C_{i}} = \sum_{i=1}^{m}\delta_{C_{i}}$ y la regla de
+    la suma para demostrar que, para todo $x \in \cap_{i}C_{i}$,</p>
+<div class="display">\[
+      N_{\cap_{i}C_{i}}(x) = \sum_{i=1}^{m} N_{C_{i}}(x) .
+    \]</div></li><li><p>Aplique el resultado a
+    $C = \{x : a_{i}\trans x \leq b_{i},\ i=1,\ldots,m\}$, suponiendo que existe
+    $\bar{x}$ con $a_{i}\trans\bar{x}&lt;b_{i}$ para todo $i$. Si
+    $I(x) := \{i : a_{i}\trans x = b_{i}\}$, pruebe que</p>
+<div class="display">\[
+      N_{C}(x) = \Bigl\{\sum_{i \in I(x)}\lambda_{i}a_{i} : \lambda_{i} \geq 0\Bigr\} .
+    \]</div></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p58" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p58"><p><em>a)</em> Como $\bigcap_{i}\rint C_{i} \neq \varnothing$ $\Rightarrow$</p>
+<div class="display">\[
+  N_{\cap_{i}C_{i}}(x) = \partial\bigl(\delta_{\cap_{i}C_{i}}\bigr)(x)
+   = \partial\Bigl(\sum_{i}\delta_{C_{i}}\Bigr)(x)
+   = \sum_{i}\partial\delta_{C_{i}}(x) = \sum_{i} N_{C_{i}}(x) .
+\]</div>
+<p><em>b)</em> Sea $C_{i}$ el semiplano $\{x : a_{i}\trans x \leq b_{i}\}$. Si
+$x \in C \Rightarrow N_{C}(x) = \sum_{i} N_{C_{i}}(x)$, y
+$N_{C_{i}}(x) = \{g : \langle g,c-x\rangle \leq 0 \ \forall c \in C_{i}\}$.</p>
+<p>Si $a_{i}\trans x&lt;b_{i} \Rightarrow N_{C_{i}}(x) = \varnothing$.</p>
+<p>Si $a_{i}\trans x = b_{i} \Rightarrow N_{C_{i}}(x) \subseteq N_{H_{i}}(x)
+ = \operatorname{span}\{a_{i}\} = (H_{i}-\{x\})^{\perp}$, donde
+$H_{i} := \{x : a_{i}\trans x = b_{i}\}$. Pero
+$g = \lambda a_{i} \in N_{C_{i}}(x) \Longleftrightarrow \lambda\langle a_{i},c-x\rangle \leq 0$
+para todo $c \in C_{i}$: si $a_{i}\trans c = b_{i} \Rightarrow \lambda\langle a_{i},c-x\rangle = 0$;
+y si $a_{i}\trans c&lt;b_{i} \Rightarrow \lambda(a_{i}\trans c - a_{i}\trans x) \leq 0
+\Longleftrightarrow \lambda\underbrace{(a_{i}\trans c - b_{i})}_{&lt;0} \leq 0
+\Longleftrightarrow \lambda \geq 0$
+$\Rightarrow N_{C_{i}}(x) = \{\lambda a_{i} : \lambda \geq 0\}$. $\therefore$</p>
+<div class="display">\[
+  N_{C}(x) = \Bigl\{\sum_{i \in I(x)}\lambda_{i}a_{i} : \lambda_{i} \geq 0\Bigr\}
+   = \cono\{a_{i}\}_{i \in I(x)} . \qquad
+\]</div>
+<p class="aviso">Si $a_{i}\trans x&lt;b_{i}$ el cono normal es $\{0\}$, no $\varnothing$: con
+$\varnothing$ la suma de Minkowski de <em>a)</em> se vaciaría entera y la
+fórmula de <em>b)</em> no saldría.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p59" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p59"><p><em>a)</em> $\operatorname{dom}\delta_{C_{i}} = C_{i}$, así que la calificación
+de la regla de la suma, $\bigcap_{i}\rint(\operatorname{dom}\delta_{C_{i}}) \neq \varnothing$,
+es exactamente la hipótesis. Pero entonces, para $x \in \cap_{i}C_{i}$,</p>
+<div class="display">\[
+  N_{\cap_{i}C_{i}}(x) = \partial\delta_{\cap_{i}C_{i}}(x)
+   = \partial\Bigl(\sum_{i}\delta_{C_{i}}\Bigr)(x)
+   = \sum_{i}\partial\delta_{C_{i}}(x) = \sum_{i} N_{C_{i}}(x) . \qquad
+\]</div>
+<p><em>b)</em> El cono normal de un semiespacio, en los dos casos:</p>
+<p><strong>Si $a_{i}\trans x&lt;b_{i}$</strong>, entonces $x \in \operatorname{int} C_{i}$ y
+$N_{C_{i}}(x) = \{0\}$. En efecto, si $g \in N_{C_{i}}(x)$ y $t&gt;0$ es pequeño,
+$x+tg \in C_{i}$ $\Rightarrow t\lVert g\rVert^{2} = \langle g,(x+tg)-x\rangle \leq 0
+\Rightarrow g=0$.</p>
+<p><strong>Si $a_{i}\trans x = b_{i}$</strong>, entonces
+$\{c-x : c \in C_{i}\} = \{v : a_{i}\trans v \leq 0\}$, de modo que
+$g \in N_{C_{i}}(x) \Longleftrightarrow \langle g,v\rangle \leq 0$ siempre que
+$a_{i}\trans v \leq 0$. Descomponga $g = \alpha a_{i}+w$ con $w \perp a_{i}$.
+Como $a_{i}\trans w = 0 \leq 0$, la condición aplicada a $v=w$ da
+$\lVert w\rVert^{2} \leq 0 \Rightarrow w=0$; y aplicada a $v = -a_{i}$, que
+cumple $a_{i}\trans v = -\lVert a_{i}\rVert^{2} \leq 0$, da
+$-\alpha\lVert a_{i}\rVert^{2} \leq 0 \Rightarrow \alpha \geq 0$. La contenencia
+recíproca es clara. $\therefore N_{C_{i}}(x) = \{\lambda a_{i} : \lambda \geq 0\}$.</p>
+<p>La hipótesis del $\bar{x}$ con $a_{i}\trans\bar{x}&lt;b_{i}$ para todo $i$ da
+$\bar{x} \in \bigcap_{i}\rint C_{i}$, así que <em>a)</em> aplica. Los índices
+inactivos aportan $\{0\}$ a la suma de Minkowski y no cambian nada
+$\Rightarrow$</p>
+<div class="display">\[
+  N_{C}(x) = \sum_{i=1}^{m} N_{C_{i}}(x)
+   = \sum_{i \in I(x)}\{\lambda a_{i} : \lambda \geq 0\}
+   = \Bigl\{\sum_{i \in I(x)}\lambda_{i}a_{i} : \lambda_{i} \geq 0\Bigr\} . \qquad
+\]</div></div>
+<div class="stmt ejercicio" id="ej:t6-2"><div class="head">Ejercicio 2</div><div class="body"><p>Sea $C \subset \mathbb{R}^{n}$ no vacío, cerrado y convexo.</p>
+<ol class="lista"><li><p>Use $\delta_{C}^{*} = \sigma_{C}$ y Fenchel–Young para probar que, para
+    $x \in C$, $y \in N_{C}(x) \Longleftrightarrow \sigma_{C}(y) = \langle y,x\rangle$.</p></li><li><p>Use la inversión subdiferencial para deducir
+    $\partial\sigma_{C}(y) = \operatorname{argmax}_{x \in C}\langle y,x\rangle$. La
+    igualdad se interpreta con ambos lados vacíos cuando el supremo no se
+    alcanza.</p></li><li><p>Pruebe que, si $C$ es compacto, entonces
+    $\partial\sigma_{C}(y) \neq \varnothing$ para todo $y$.</p></li><li><p>Aplique la fórmula al simplex $\Delta_{n}$. Como
+    $\sigma_{\Delta_{n}}(y) = \max_{i} y_{i}$, recupere la fórmula
+    $\partial\bigl(\max_{i} y_{i}\bigr) = \conv\{e_{i} : y_{i} = \max_{j} y_{j}\}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p60" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p60"><p><em>a)</em> Como $C$ es convexo y cerrado, $\delta_{C}$ es convexa y s.c.i.
+$\Rightarrow \delta_{C}^{**} = \delta_{C}$. Más aún,</p>
+<div class="display">\[
+  \langle x,y\rangle = \delta_{C}(x)+\sigma_{C}(y)
+  \Longleftrightarrow y \in \partial\delta_{C}(x) = N_{C}(x) ,
+\]</div>
+<p>y si $x \in C \Rightarrow \delta_{C}(x)=0$, de donde
+$\langle x,y\rangle = \sigma_{C}(y) \Longleftrightarrow y \in N_{C}(x)$.</p>
+<p><em>b)</em> Más aún,
+$x \in \partial\sigma_{C}(y) \Longleftrightarrow \langle x,y\rangle = \sigma_{C}(y)
+\Longleftrightarrow x \in \operatorname{argmax}_{z \in C}\langle y,z\rangle$.</p>
+<p><em>c)</em> Si $C$ es compacto, $\operatorname{argmax}_{x \in C}\langle y,\cdot\rangle \neq \varnothing$
+por continuidad.</p>
+<p><em>d)</em> Sea $f(y) = \max_{i} y_{i} = \sigma_{\Delta_{n}}(y)$
+$\Rightarrow \partial f(y) = \operatorname{argmax}_{x \in \Delta_{n}}\langle y,x\rangle
+ \supseteq \conv\{e_{i} : y_{i} = \max_{j} y_{j}\}$. Solo falta mostrar
+$\subseteq$. Sea $I = \{k : y_{k} = \max_{j} y_{j}\}$, sea
+$x \in \operatorname{argmax}_{\Delta_{n}}\langle y,\cdot\rangle$ y sea
+$\mu = \max_{x \in \Delta_{n}}\langle y,x\rangle$. Pero entonces:</p>
+<div class="display">\[
+  0 = \mu - \langle y,x\rangle = \mu\sum_{i} x_{i} - \sum_{i} x_{i}y_{i}
+   = \sum_{i} x_{i}(\mu-y_{i}) = \sum_{i \notin I} x_{i}(\mu-y_{i}) ,
+\]</div>
+<p>y como cada sumando es $\geq 0$
+$\Longleftrightarrow x_{i} = 0$ para todo $i \notin I$, i.e.
+$x \in \conv\{e_{k}\}_{k \in I}$.  □</p></div>
+<div class="stmt ejercicio" id="ej:t6-3"><div class="head">Ejercicio 3</div><div class="body"><p>Para funciones $f,g : \mathbb{R}^{n} \to \mathbb{R} \cup \{+\infty\}$ defina
+$(f\,\square\,g)(x) := \inf_{z \in \mathbb{R}^{n}}\{f(z)+g(x-z)\}$.</p>
+<ol class="lista"><li><p>Suponga que $f$ y $g$ son convexas. Pruebe directamente que
+    $f\,\square\,g$ es convexa siempre que no tome el valor $-\infty$.</p></li><li><p>Sea $C \subseteq \mathbb{R}^{n}$ no vacío y convexo, y sea
+    $d_{C}(x) := \inf_{z \in C}\lVert x-z\rVert$. Pruebe que
+    $d_{C} = \lVert\cdot\rVert\,\square\,\delta_{C}$.</p></li><li><p>Suponga que $f$ y $g$ son propias y que $f\,\square\,g$ es propia.
+    Pruebe directamente a partir de la definición de conjugada que
+    $(f\,\square\,g)^{*} = f^{*}+g^{*}$.</p></li><li><p>Aplique el apartado anterior a la identidad del apartado <em>b)</em> y
+    exprese $d_{C}^{*}$ en términos de la conjugada de la norma y de
+    $\sigma_{C}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p61" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p61"><p><em>a)</em> Sea $F(x,z) = f(z)+g(x-z)$. La función $(x,z) \mapsto f(z)$ es
+convexa trivialmente, y $(x,z) \mapsto g(x-z)$ es convexa al ser composición de
+convexa con afín $\Rightarrow F(x,z)$ es convexa $\Rightarrow$ el ínfimo parcial
+es convexo siempre que sea propio.</p>
+<p><em>b)</em></p>
+<div class="display">\[
+  \bigl(\lVert\cdot\rVert\,\square\,\delta_{C}\bigr)(x)
+   = \inf_{z}\lVert z\rVert + \delta_{C}(x-z)
+   = \inf_{x-z \in C}\lVert z\rVert
+   = \inf_{c \in C}\lVert x-c\rVert = d_{C}(x) .
+\]</div>
+<p><em>c)</em> Con la sustitución $u = x-z$,</p>
+<div class="display">\begin{align*}
+  (f\,\square\,g)^{*}(y)
+   &amp;= \sup_{x}\langle y,x\rangle - \inf_{z}\bigl\{f(z)+g(x-z)\bigr\}
+    = \sup_{x}\sup_{z}\ \langle y,x\rangle - f(z) - g(x-z) \\
+   &amp;= \sup_{u}\sup_{z}\ \langle y,u+z\rangle - f(z) - g(u)
+    = \sup_{u}\bigl[\langle y,u\rangle - g(u)\bigr] + \sup_{z}\bigl[\langle y,z\rangle - f(z)\bigr]
+    = g^{*}(y)+f^{*}(y) .
+\end{align*}</div>
+<p><em>d)</em> $\Rightarrow d_{C}^{*} = \bigl(\lVert\cdot\rVert\,\square\,\delta_{C}\bigr)^{*}
+ = \lVert\cdot\rVert^{*}+\delta_{C}^{*} = \delta_{B}+\sigma_{C}$, donde
+$B = \{y : \lVert y\rVert_{*} \leq 1\}$, esto es</p>
+<div class="display">\[
+  d_{C}^{*}(y) = \begin{cases}
+    \sigma_{C}(y), &amp; \lVert y\rVert_{*} \leq 1, \\
+    +\infty, &amp; \lVert y\rVert_{*}&gt;1.
+  \end{cases}
+  \qquad
+\]</div></div>
+<div class="stmt ejercicio" id="ej:t6-4"><div class="head">Ejercicio 4</div><div class="body"><p>Sea $f : \mathbb{R}^{n} \to \mathbb{R} \cup \{+\infty\}$ propia.</p>
+<ol class="lista"><li><p>Para $g(x) = f(x)+\langle c,x\rangle+d$, exprese $g^{*}$ en términos de
+    $f^{*}$.</p></li><li><p>Sea $F : \mathbb{R}^{n} \times \mathbb{R}^{m} \to \mathbb{R} \cup \{+\infty\}$
+    y defina $h(x) := \inf_{z \in \mathbb{R}^{m}} F(x,z)$. Suponiendo que $h$ es
+    propia, pruebe que $h^{*}(y) = F^{*}(y,0)$.</p></li><li><p>Como aplicación del apartado anterior, sea
+    $h(x) := \inf\{g(z) : Az+b = x\}$, donde
+    $g : \mathbb{R}^{m} \to \mathbb{R} \cup \{+\infty\}$ es propia. Exprese
+    $h^{*}$ en términos de $g^{*}$, $A$ y $b$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p62" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p62"><p><em>a)</em></p>
+<div class="display">\[
+  g^{*}(y) = \sup_{x}\langle y,x\rangle - f(x) - \langle c,x\rangle - d
+   = \sup_{x}\langle y-c,x\rangle - f(x) - d = f^{*}(y-c)-d .
+\]</div>
+<p><em>b)</em></p>
+<div class="display">\[
+  h^{*}(y) = \sup_{x}\langle x,y\rangle - h(x)
+   = \sup_{x}\sup_{z}\ \langle x,y\rangle - F(x,z)
+   = \sup_{(x,z)}\Bigl\langle\binom{y}{0},\binom{x}{z}\Bigr\rangle - F(x,z)
+   = F^{*}(y,0) .
+\]</div>
+<p><em>c)</em> Sea $C = \{(x,z) : Az+b = x\}$ y $F(x,z) = g(z)+\delta_{C}(x,z)$, de
+modo que $h(x) = \inf_{z} F(x,z)$. Pero entonces:</p>
+<div class="display">\[
+  F^{*}(y,w) = \sup_{z}\ \langle y,Az+b\rangle + \langle w,z\rangle - g(z)
+   = \langle y,b\rangle + \sup_{z}\ \langle A\trans y+w,\ z\rangle - g(z)
+   = \langle y,b\rangle + g^{*}(A\trans y+w) ,
+\]</div>
+<p>y evaluando en $w=0$ y usando $h^{*} = F^{*}(\cdot,0)$,</p>
+<div class="display">\[
+  h^{*}(y) = \langle y,b\rangle + g^{*}(A\trans y) . \qquad
+\]</div></div>
+<div class="stmt ejercicio" id="ej:t6-5"><div class="head">Ejercicio 5$^{*}$</div><div class="body"><p>Sea $f : \mathbb{R}^{n} \to \mathbb{R} \cup \{+\infty\}$ propia, cerrada y
+$\mu$-fuertemente convexa, con $\mu&gt;0$.</p>
+<ol class="lista"><li><p>Sean $x_{1},x_{2} \in \operatorname{dom}\partial f$ y
+    $y_{i} \in \partial f(x_{i})$, $i=1,2$. Usando dos veces la desigualdad de
+    subgradiente para una función $\mu$-fuertemente convexa, pruebe que
+    $\langle y_{1}-y_{2}, x_{1}-x_{2}\rangle \geq \mu\lVert x_{1}-x_{2}\rVert_{2}^{2}$.</p></li><li><p>Fije $y \in \mathbb{R}^{n}$ y considere $x \longmapsto f(x)-\langle y,x\rangle$.
+    Pruebe que esta función tiene un único minimizador, denotado $x(y)$, y que
+    $y \in \partial f(x(y))$.</p></li><li><p>Use la inversión subdiferencial
+    $y \in \partial f(x) \Longleftrightarrow x \in \partial f^{*}(y)$ para probar
+    que $\partial f^{*}(y) = \{x(y)\}$. Concluya que $f^{*}$ es diferenciable y
+    $\nabla f^{*}(y) = x(y)$.</p></li><li><p>Aplique el apartado <em>a)</em> a $y_{i} \in \partial f(x_{i})$ y use
+    Cauchy–Schwarz para demostrar
+    $\lVert\nabla f^{*}(y_{1})-\nabla f^{*}(y_{2})\rVert_{2} \leq \frac{1}{\mu}\lVert y_{1}-y_{2}\rVert_{2}$.</p></li></ol>
+<p>Concluya que la conjugada de una función propia, cerrada y $\mu$-fuertemente
+convexa es diferenciable con gradiente $1/\mu$-Lipschitz.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p63" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p63"><p><em>a)</em> Se tiene, para todo $z$,</p>
+<div class="display">\[
+  f(z) \geq f(x_{1}) + \langle y_{1}, z-x_{1}\rangle + \tfrac{\mu}{2}\lVert z-x_{1}\rVert^{2},
+  \qquad
+  f(z) \geq f(x_{2}) + \langle y_{2}, z-x_{2}\rangle + \tfrac{\mu}{2}\lVert z-x_{2}\rVert^{2} .
+\]</div>
+<p>En particular, con $z = x_{2}$ en la primera y $z = x_{1}$ en la segunda,</p>
+<div class="display">\[
+  f(x_{2})-f(x_{1}) \geq \langle -y_{1}, x_{1}-x_{2}\rangle + \tfrac{\mu}{2}\lVert x_{1}-x_{2}\rVert^{2},
+  \qquad
+  f(x_{1})-f(x_{2}) \geq \langle y_{2}, x_{1}-x_{2}\rangle + \tfrac{\mu}{2}\lVert x_{1}-x_{2}\rVert^{2} ,
+\]</div>
+<p>$\Rightarrow 0 \geq \langle y_{2}-y_{1}, x_{1}-x_{2}\rangle + \mu\lVert x_{1}-x_{2}\rVert^{2}$
+$\Rightarrow \langle y_{1}-y_{2}, x_{1}-x_{2}\rangle \geq \mu\lVert x_{1}-x_{2}\rVert^{2}$.</p>
+<p><em>b)</em> Sea $g(x) = f(x)-\langle y,x\rangle$, con $f$ estrictamente convexa,
+propia y cerrada. Si $x_{0} \in \operatorname{dom}\partial f
+\Rightarrow \partial f(x_{0}) \neq \varnothing$; tome $g_{0} \in \partial f(x_{0})$
+$\Rightarrow$</p>
+<div class="display">\[
+  f(x) \geq f(x_{0}) + \langle g_{0}, x-x_{0}\rangle + \tfrac{\mu}{2}\lVert x-x_{0}\rVert^{2}
+  \ \Rightarrow\
+  g(x) \geq f(x_{0}) + \langle g_{0}-y, x-x_{0}\rangle + \tfrac{\mu}{2}\lVert x-x_{0}\rVert^{2} - \langle y,x_{0}\rangle ,
+\]</div>
+<p>$\Rightarrow g(x) \to \infty$ cuando $\lVert x\rVert \to \infty$, es decir $g$ es
+coerciva $\Rightarrow g$ tiene mínimo, y al ser estrictamente convexa es único.
+Más aún, $f^{*}(y) = \sup_{x} -g(x) = -\inf_{x} g(x) = -g(x(y))$
+$\Rightarrow f(x(y))+f^{*}(y) = \langle x(y),y\rangle
+\Rightarrow y \in \partial f(x(y))$.  □</p>
+<p class="aviso">Faltan <em>c)</em> y <em>d)</em>, y con ellos la conclusión sobre el
+gradiente $1/\mu$-Lipschitz, que es lo que el ejercicio persigue.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p64" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p64"><p><em>a)</em> Como arriba: sumando las dos desigualdades de subgradiente
+fuertemente convexas, evaluadas cruzadas,</p>
+<div class="display">\[
+  0 \geq \langle y_{2}-y_{1},\, x_{1}-x_{2}\rangle + \mu\lVert x_{1}-x_{2}\rVert^{2}
+  \quad\Rightarrow\quad
+  \langle y_{1}-y_{2},\, x_{1}-x_{2}\rangle \geq \mu\lVert x_{1}-x_{2}\rVert^{2} . \qquad
+\]</div>
+<p><em>b)</em> Sea $g = f-\langle y,\cdot\rangle$, que es propia, cerrada y
+$\mu$-fuertemente convexa por serlo $f$, pues restar una lineal no cambia la
+curvatura. Tomando $x_{0} \in \rint(\operatorname{dom} f)$, donde
+$\partial f(x_{0}) \neq \varnothing$ (§9 de las notas), y
+$g_{0} \in \partial f(x_{0})$,</p>
+<div class="display">\[
+  g(x) \geq g(x_{0}) + \langle g_{0}-y,\, x-x_{0}\rangle + \tfrac{\mu}{2}\lVert x-x_{0}\rVert^{2}
+   \geq g(x_{0}) - \lVert g_{0}-y\rVert\,\lVert x-x_{0}\rVert + \tfrac{\mu}{2}\lVert x-x_{0}\rVert^{2} ,
+\]</div>
+<p>y el lado derecho tiende a $+\infty$ con $\lVert x\rVert$, porque el término
+cuadrático domina al lineal $\Rightarrow g$ es coerciva. Siendo además cerrada y
+propia, alcanza su mínimo, y la convexidad estricta lo hace único: es $x(y)$.
+Por la regla de Fermat, $0 \in \partial g(x(y)) = \partial f(x(y)) - y$
+$\Rightarrow y \in \partial f(x(y))$.  □</p>
+<p><em>c)</em> $f$ es propia, cerrada y convexa, así que vale la inversión
+$y \in \partial f(x) \Longleftrightarrow x \in \partial f^{*}(y)$ (§11 de las
+notas). Por <em>b)</em>, $y \in \partial f(x(y))$
+$\Rightarrow x(y) \in \partial f^{*}(y)$. Recíprocamente, si
+$x \in \partial f^{*}(y) \Rightarrow y \in \partial f(x)
+\Rightarrow 0 \in \partial f(x)-y = \partial g(x)$
+$\Rightarrow x$ minimiza $g$, y por la unicidad de <em>b)</em>, $x = x(y)$.
+$\therefore \partial f^{*}(y) = \{x(y)\}$ para todo $y \in \mathbb{R}^{n}$.</p>
+<p>Y una función convexa cuyo subdiferencial en un punto es un único vector es
+diferenciable ahí, con ese vector por gradiente (§9 de las notas)
+$\Rightarrow f^{*}$ es diferenciable en todo $\mathbb{R}^{n}$ con
+$\nabla f^{*}(y) = x(y)$. Note que $\operatorname{dom} f^{*} = \mathbb{R}^{n}$,
+justamente porque el mínimo de <em>b)</em> existe para todo $y$.  □</p>
+<p><em>d)</em> Sean $y_{1},y_{2}$ y sean $x_{i} = x(y_{i}) = \nabla f^{*}(y_{i})$,
+que cumplen $y_{i} \in \partial f(x_{i})$ por <em>b)</em>. Por <em>a)</em> y
+Cauchy–Schwarz,</p>
+<div class="display">\[
+  \mu\lVert x_{1}-x_{2}\rVert^{2}
+   \leq \langle y_{1}-y_{2},\, x_{1}-x_{2}\rangle
+   \leq \lVert y_{1}-y_{2}\rVert\,\lVert x_{1}-x_{2}\rVert .
+\]</div>
+<p>Si $x_{1} = x_{2}$ no hay nada que probar; si no, dividiendo por
+$\lVert x_{1}-x_{2}\rVert&gt;0$,</p>
+<div class="display">\[
+  \lVert\nabla f^{*}(y_{1})-\nabla f^{*}(y_{2})\rVert
+   = \lVert x_{1}-x_{2}\rVert \leq \frac{1}{\mu}\lVert y_{1}-y_{2}\rVert . \qquad
+\]</div>
+<p>$\therefore$ la conjugada de una función propia, cerrada y $\mu$-fuertemente
+convexa es diferenciable en todo $\mathbb{R}^{n}$ y su gradiente es
+$\frac{1}{\mu}$-Lipschitz.  □</p></div></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
