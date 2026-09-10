@@ -720,13 +720,41 @@ $d \mapsto 0$ es lineal $\Rightarrow f$ es Gâteaux diferenciable en el origen.<
 \]</div>
 <p>y $(x, e^{-x^{-2}}) \to (0,0)$ cuando $x \to 0$, mientras que $f(0,0) = 0$
 $\Rightarrow f$ no es continua.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p6" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p6"><p>$f$ depende de una sola variable escondida, y verla resuelve los dos apartados
+de golpe y dice de dónde sale el testigo.</p>
+<p>Para $x \neq 0$, divida numerador y denominador por $e^{-2x^{-2}}$:</p>
+<div class="display">\[
+  f(x,y) = \frac{2y\,e^{-x^{-2}}}{y^{2}+e^{-2x^{-2}}}
+   = \frac{2\,y\,e^{x^{-2}}}{y^{2}e^{2x^{-2}}+1}
+   = \frac{2s}{1+s^{2}} ,
+  \qquad s := y\,e^{x^{-2}} .
+\]</div>
+<p>$\Rightarrow |f| \leq 1$ en todo punto, pues $2|s| \leq 1+s^{2}$, y $f=1$ si y
+solo si $s=1$.</p>
+<p><strong>Gâteaux.</strong> Sea $d = (d_{1},d_{2}) \neq 0$. Si $d_{1}=0$, la recta es
+$x=0$ y ahí $f \equiv 0$ por definición. Si $d_{1} \neq 0$ y $d_{2}=0$, el
+numerador se anula y $f \equiv 0$. Y si $d_{1} \neq 0$ y $d_{2} \neq 0$, con
+$s(t) = t d_{2}\,e^{1/(t^{2}d_{1}^{2})}$,</p>
+<div class="display">\[
+  \left|\frac{f(td)}{t}\right| = \frac{1}{|t|}\cdot\frac{2|s|}{1+s^{2}}
+   \leq \frac{1}{|t|}\cdot\frac{2}{|s|}
+   = \frac{2}{t^{2}|d_{2}|\,e^{1/(t^{2}d_{1}^{2})}} \xrightarrow{\ t \to 0\ } 0 ,
+\]</div>
+<p>porque la exponencial vence a cualquier potencia. En los tres casos
+$\dird{d}{f}(0) = 0$, y $d \mapsto 0$ es lineal $\Rightarrow f$ es Gâteaux
+diferenciable en el origen.  □</p>
+<p><strong>No continua.</strong> Basta mantener $s$ constante: la curva $s \equiv 1$, esto
+es $y = e^{-x^{-2}}$, cumple $f \equiv 1$ y tiende al origen cuando
+$x \to 0$, mientras que $f(0,0)=0$.  □</p>
+<p>Las curvas de nivel de $f$ son exactamente las $y = c\,e^{-x^{-2}}$, y por eso
+ninguna recta detecta la discontinuidad: sobre una recta $s \to \infty$.</p></div>
 <div class="stmt ejercicio" id="ej:t1-4"><div class="head">Ejercicio 4</div><div class="body"><p>Sea $f : \mathbb{R}^{2} \mapsto \mathbb{R}$ dada por</p>
 <div class="display">\[
   f(x) = \frac{x^{3}y}{x^{4}+y^{2}}
 \]</div>
 <p>si $(x,y) \neq (0,0)$ y $0$ de lo contrario. Muestre que $f$ es Gâteaux
 diferenciable en el origen pero no es Fréchet diferenciable.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p6" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p6"><p>Sobre la recta $y = mx$ con $m \neq 0$,</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p7" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p7"><p>Sobre la recta $y = mx$ con $m \neq 0$,</p>
 <div class="display">\[
   |f(x, mx)| = \frac{|m|x^{4}}{x^{4} + m^{2}x^{2}}
    \leq \frac{|m|x^{4}}{m^{2}x^{2}}
@@ -748,7 +776,7 @@ con $\nabla f(0,0) = 0$.</p>
 \]</div>
 <p>$\Rightarrow f(h) - f(0) - \langle\nabla f(0,0), h\rangle$ no es $o(\lVert h\rVert)$
 $\Rightarrow f$ no es Fréchet diferenciable en el origen.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p7" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p7"><p>Sin separar en casos: se calcula $f(td)/t$ exactamente y se acota $f$ de una vez.</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p8" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p8"><p>Sin separar en casos: se calcula $f(td)/t$ exactamente y se acota $f$ de una vez.</p>
 <p>Sea $d = (d_{1},d_{2}) \neq 0$ y $t \neq 0$. Pero entonces:</p>
 <div class="display">\[
   f(td_{1}, td_{2}) = \frac{t^{4}d_{1}^{3}d_{2}}{t^{4}d_{1}^{4} + t^{2}d_{2}^{2}}
@@ -776,7 +804,7 @@ dónde mirar: con $h = (x,x^{2})$ y $x&gt;0$,</p>
 diferenciable en el origen.  □</p></div>
 <div class="stmt ejercicio" id="ej:t1-5"><div class="head">Ejercicio 5$^{*}$</div><div class="body"><p>Calcule las primeras dos derivadas de la función $f(X) = -\log\det(X)$ para $X$
 matriz definida positiva de $n \times n$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p8" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p8"><p>Sea $U = \{X \in \Sym{n} : X \succ 0\}$ y $f : U \to \mathbb{R}$ dada por
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p9" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p9"><p>Sea $U = \{X \in \Sym{n} : X \succ 0\}$ y $f : U \to \mathbb{R}$ dada por
 $f(X) = -\log\det X = -\tr(\log X)$. Todas las series de abajo convergen para
 $\lVert X^{-1}H\rVert &lt; 1$, que es el régimen en que se toma $H \to 0$.</p>
 <p><strong>Primera derivada.</strong> De $X+H = X(I + X^{-1}H)$:</p>
@@ -802,7 +830,7 @@ $\Rightarrow \Dif g(X)(H) = -X^{-1}HX^{-1}$. Pero entonces:</p>
 <div class="display">\[
   \nabla^{2} f(X) = -\Dif g(X) = \bigl(H \mapsto X^{-1}HX^{-1}\bigr). 
 \]</div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p9" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p9"><p>Sin series matriciales: se restringe a un segmento y se diagonaliza.</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p10" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p10"><p>Sin series matriciales: se restringe a un segmento y se diagonaliza.</p>
 <p>Sean $X \succ 0$ y $H \in \Sym{n}$. Como $X \succ 0$ existe $X^{1/2} \succ 0$, y
 $M := X^{-1/2}HX^{-1/2}$ es simétrica; sean $\lambda_{1},\ldots,\lambda_{n}$ sus
 valores propios. De $X + tH = X^{1/2}(I + tM)X^{1/2}$:</p>
@@ -848,7 +876,7 @@ $\lVert H\rVert = 1$.  □</p></div>
     añadirse a la desigualdad el término $\lambda(g\trans x + h)^{2}$ sin
     modificar el conjunto.</p></li><li><p>Analice los conversos de los dos apartados anteriores: determine si son
     verdaderos y, cuando fallen, construya contraejemplos.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p10" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p10"><p><em>a)</em> Como $A \succeq 0 \Rightarrow$ existe $B \in \Sym{n}$ con $A = B^{2}$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p11" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p11"><p><em>a)</em> Como $A \succeq 0 \Rightarrow$ existe $B \in \Sym{n}$ con $A = B^{2}$
 $\Rightarrow x\trans A x = x\trans B\trans B x = \lVert Bx\rVert^{2}$. Tome</p>
 <div class="display">\[
   f(x) := \lVert Bx\rVert^{2} + b\trans x + c .
@@ -873,23 +901,15 @@ $\Rightarrow C \cap H$ es convexo.  □</p>
 <p class="aviso">En <em>b)</em> la contenencia $D \subseteq C$ es falsa si $\lambda&lt;0$, que
 el enunciado permite: con $n=1$, $A=1$, $b=0$, $c=-1$, $g=1$, $h=0$,
 $\lambda=-1$ queda $C=[-1,1]$ y $D=\mathbb{R}$. El apartado <em>c)</em> no está.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p11" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p11"><p><em>a)</em> Sin raíz cuadrada de $A$ y sin invocar la convexidad de $f$: la
-identidad que lo dice todo es, para $q(x) = x\trans Ax$ y
-$\lambda \in [0,1]$,</p>
-<div class="display">\[
-  \lambda q(x) + (1-\lambda)q(y) - q(\lambda x + (1-\lambda)y)
-   = \lambda(1-\lambda)\,(x-y)\trans A\,(x-y) \geq 0 ,
-\]</div>
-<p>que sale de desarrollar los dos lados. Como la parte $b\trans x + c$ es afín y
-por tanto respeta las combinaciones convexas con igualdad, para
-$f(x) = x\trans Ax + b\trans x + c$ queda</p>
-<div class="display">\[
-  f(\lambda x + (1-\lambda)y)
-   = \lambda f(x) + (1-\lambda)f(y) - \lambda(1-\lambda)(x-y)\trans A(x-y)
-   \leq \lambda f(x) + (1-\lambda)f(y) .
-\]</div>
-<p>Si $x,y \in C \Rightarrow f(x), f(y) \leq 0 \Rightarrow f(\lambda x+(1-\lambda)y) \leq 0$.
-$\therefore C$ es convexo.  □</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p12" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p12"><p><em>a)</em> Sea $f(x) = x\trans Ax + b\trans x + c$, que es $C^{2}$ con
+$Hf(x) \equiv 2A \succeq 0$ $\Rightarrow f$ es convexa por la caracterización de
+segundo orden (§8 de las notas), y $C = \{f \leq 0\}$ es un conjunto de nivel de
+una convexa $\Rightarrow$ es convexo.  □</p>
+<p>Si se prefiere no citar nada, la identidad
+$\lambda q(x)+(1-\lambda)q(y)-q(\lambda x+(1-\lambda)y)
+ = \lambda(1-\lambda)(x-y)\trans A(x-y) \geq 0$, con $q(x)=x\trans Ax$, da lo
+mismo desarrollando los dos lados, pues la parte afín $b\trans x+c$ respeta las
+combinaciones convexas con igualdad.</p>
 <p><em>b)</em> Siguiendo la indicación, sea</p>
 <div class="display">\[
   q_{\lambda}(x) := x\trans Ax + b\trans x + c + \lambda(g\trans x + h)^{2}
@@ -924,7 +944,7 @@ $\lambda \in \mathbb{R}$, pues la entrada $-1$ no la toca $\lambda$.  □</p><
 <div class="stmt ejercicio" id="ej:t2-2"><div class="head">Ejercicio 2</div><div class="body"><p>Calcule $\aff(C)$, $\rint(C)$ y la clausura relativa para:</p>
 <ol class="lista"><li><p>un segmento no degenerado en $\mathbb{R}^{3}$;</p></li><li><p>el simplex $\Delta_{n}$;</p></li><li><p>$C = \{x \in \mathbb{R}^{n} : Ax = b,\ x \geq 0\}$, suponiendo que
     existe un punto estrictamente positivo;</p></li><li><p>el cono $\PSD{n}$ visto en el espacio de matrices simétricas.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p12" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p12"><p><em>a)</em> Sea $C = [x,y] \subseteq \mathbb{R}^{3}$ con $x \neq y$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p13" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p13"><p><em>a)</em> Sea $C = [x,y] \subseteq \mathbb{R}^{3}$ con $x \neq y$
 $\Rightarrow \aff(C) = \gene(x-y) + y$ trivialmente, y $\rint(C) = (x,y)$. En
 efecto, si $z \in C$, entonces $z = \lambda x + (1-\lambda)y$ con
 $\lambda \in (0,1)$ $\Longleftrightarrow$ existe $r &gt; 0$ tal que
@@ -957,7 +977,19 @@ note que</p>
 <p>pero este último es abierto
 $\Rightarrow \operatorname{int}(\PSD{n}) = \{A \in \PSD{n} : A \succ 0\}$.  □</p>
 <p class="aviso">Falta la clausura relativa, que el enunciado pide en los cuatro apartados.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p13" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p13"><p>Los tres primeros apartados son el mismo teorema, y conviene enunciarlo una vez.
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p14" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p14"><p>Las doce respuestas, y debajo de dónde salen:</p>
+<p>\small
+\begin{tabular}{llll}
+\toprule
+ &amp; $\aff C$ &amp; $\rint C$ &amp; $\cl C$ \\
+\midrule
+<em>a)</em> $[x,y]$ &amp; $y+\gene(x-y)$ &amp; $(x,y)$ &amp; $[x,y]$ \\
+<em>b)</em> $\Delta_{n}$ &amp; $\{\mathbf{1}\trans x = 1\}$ &amp; $\{x&gt;0 : \mathbf{1}\trans x=1\}$ &amp; $\Delta_{n}$ \\
+<em>c)</em> $\{Ax=b,\ x \geq 0\}$ &amp; $\{Ax=b\}$ &amp; $\{x&gt;0 : Ax=b\}$ &amp; $C$ \\
+<em>d)</em> $\PSD{n}$ &amp; $\Sym{n}$ &amp; $\{X \succ 0\}$ &amp; $\PSD{n}$ \\
+\bottomrule
+\end{tabular}</p>
+<p>Los tres primeros apartados son el mismo teorema, y conviene enunciarlo una vez.
 Antes, una observación que resuelve la clausura relativa de golpe: la clausura
 relativa de $C$ es su clausura dentro de $\aff C$, y como $\aff C$ es cerrado en
 $\mathbb{R}^{n}$ y $C \subseteq \aff C$, esa clausura coincide con $\cl C$. Los
@@ -1043,7 +1075,7 @@ $\PSD{n} = \bigcap_{v}\{X : \langle X,vv\trans\rangle \geq 0\}$ es intersección
 de cerrados $\Rightarrow \cl\PSD{n} = \PSD{n}$.  □</p></div>
 <div class="stmt ejercicio" id="ej:t2-3"><div class="head">Ejercicio 3</div><div class="body"><p>Sean $K_{1}, K_{2} \subseteq \mathbb{R}^{n}$ conos convexos. Pruebe que
 $K_{1} + K_{2} = \conv(K_{1} \cup K_{2})$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p14" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p14"><p>$(\supseteq)$ Si $z \in \conv(K_{1} \cup K_{2})
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p15" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p15"><p>$(\supseteq)$ Si $z \in \conv(K_{1} \cup K_{2})
  \Rightarrow z = \sum_{i}^{k}\lambda_{i}x_{i} + \sum_{j}^{m}\alpha_{j}y_{j}$
 con $\lambda_{i}, \alpha_{j} \geq 0$, $x_{i} \in K_{1}$, $y_{j} \in K_{2}$. Pero
 $\sum_{i}\lambda_{i}x_{i} \in K_{1}$ y $\sum_{j}\alpha_{j}y_{j} \in K_{2}$
@@ -1053,7 +1085,7 @@ $y \in K_{2}$, pero $x+y \in \cono(K_{1} \cup K_{2})$ pues es combinación con
 $\lambda_{i}=1$ de $x$ e $y$.  □</p>
 <p class="aviso">En $(\subseteq)$ se concluye sobre $\cono$ y lo pedido es $\conv$: con
 coeficientes $\lambda_{i}=1$ la combinación no es convexa.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p15" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p15"><p>Los dos conos son no vacíos $\Rightarrow 0 \in K_{1}$ y $0 \in K_{2}$, pues
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p16" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p16"><p>Los dos conos son no vacíos $\Rightarrow 0 \in K_{1}$ y $0 \in K_{2}$, pues
 $\lambda \geq 0$ en la definición de cono.</p>
 <p>$(\supseteq)$ $K_{1}+K_{2}$ es convexo, por ser suma de convexos, y contiene a
 $K_{1} \cup K_{2}$, pues $K_{1} = K_{1}+0$ y $K_{2} = 0+K_{2}$. Como
@@ -1068,7 +1100,7 @@ conos, $2x \in K_{1}$ y $2y \in K_{2}$. Pero entonces:</p>
 <div class="stmt ejercicio" id="ej:t2-4"><div class="head">Ejercicio 4</div><div class="body"><p>Calcule el cono dual de:</p>
 <ol class="lista"><li><p>$\mathbb{R}^{n}_{+}$;</p></li><li><p>un subespacio vectorial $V$;</p></li><li><p>el cono de segundo orden $\Qcono{n+1}$;</p></li><li><p>el cono semidefinido positivo $\PSD{n}$.</p></li></ol>
 <p>En los dos últimos casos demuestre la autodualidad.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p16" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p16"><p><em>a)</em> $(\mathbb{R}^{n}_{+})^{\circ}
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p17" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p17"><p><em>a)</em> $(\mathbb{R}^{n}_{+})^{\circ}
  = \{y \in \mathbb{R}^{n} : \langle y, x\rangle \geq 0 \ \ \forall x \in \mathbb{R}^{n}_{+}\}$.
 Si $y \in \mathbb{R}^{n}_{+} \Rightarrow y_{i} \geq 0$ para todo $i$
 $\Rightarrow y_{i}x_{i} \geq 0$ para todo $x \in \mathbb{R}^{n}_{+}
@@ -1112,39 +1144,7 @@ es un cono convexo $\Rightarrow \PSD{n} \subseteq (\PSD{n})^{\circ}$.
 $\therefore (\PSD{n})^{\circ} = \PSD{n}$.  □</p>
 <p class="aviso">En <em>c)</em> los casos $y=0$, $x=0$ y $\alpha&lt;0$ quedan sin cubrir, y son
 justo donde se divide por cero.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p17" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p17"><p><em>a)</em> Si $y \geq 0$, entonces $\langle y,x\rangle = \sum_{i} y_{i}x_{i} \geq 0$
-para todo $x \geq 0$; si $y_{i} &lt; 0$ para algún $i$, el testigo es $e_{i}$.
-$\therefore (\mathbb{R}^{n}_{+})^{\circ} = \mathbb{R}^{n}_{+}$.</p>
-<p><em>b)</em> Si $\langle y,v\rangle \geq 0$ para todo $v \in V$, aplicando esto a
-$v$ y a $-v$ queda $\langle y,v\rangle = 0$; y $V^{\perp} \subseteq V^{\circ}$ es
-claro. $\therefore V^{\circ} = V^{\perp}$.</p>
-<p><em>c)</em> Con $\Qcono{n+1} = \{(t,x) : \lVert x\rVert \leq t\}$, la
-autodualidad es Cauchy–Schwarz en las dos direcciones, y sin dividir por nada.</p>
-<p>$(\supseteq)$ Sea $\lVert y\rVert \leq \alpha$ y sea $(t,x) \in \Qcono{n+1}$, de
-modo que $t \geq \lVert x\rVert \geq 0$. Pero entonces:</p>
-<div class="display">\[
-  \alpha t + \langle y,x\rangle \geq \lVert y\rVert\,t - \lVert y\rVert\,\lVert x\rVert
-   = \lVert y\rVert\,(t - \lVert x\rVert) \geq 0 ,
-\]</div>
-<p>donde la primera desigualdad usa $\alpha \geq \lVert y\rVert$ con $t \geq 0$ y
-Cauchy–Schwarz. $\therefore (\alpha,y) \in (\Qcono{n+1})^{\circ}$.</p>
-<p>$(\subseteq)$ Sea $\lVert y\rVert &gt; \alpha$. Si $y \neq 0$, el testigo es
-$(\lVert y\rVert, -y) \in \Qcono{n+1}$, que da
-$\alpha\lVert y\rVert - \lVert y\rVert^{2} = \lVert y\rVert(\alpha - \lVert y\rVert) &lt; 0$.
-Si $y = 0$, entonces $\alpha &lt; 0$ y el testigo es $(1,0) \in \Qcono{n+1}$, que da
-$\alpha &lt; 0$. $\therefore (\Qcono{n+1})^{\circ} = \Qcono{n+1}$.</p>
-<p><em>d)</em> $(\supseteq)$ Si $A \notin \PSD{n}$, tome $v$ con $v\trans Av &lt; 0$;
-el testigo es $X = vv\trans \succeq 0$, pues
-$\tr(Avv\trans) = v\trans Av &lt; 0$.</p>
-<p>$(\subseteq)$ Sean $A, X \succeq 0$, y sin descomponer $X$ en rangos uno: tome
-$B = A^{1/2} \succeq 0$. Como la traza es cíclica,</p>
-<div class="display">\[
-  \tr(AX) = \tr(BBX) = \tr(BXB),
-\]</div>
-<p>y $BXB \succeq 0$ porque $\langle BXBv,v\rangle = \langle X(Bv),(Bv)\rangle \geq 0$
-$\Rightarrow \tr(BXB) \geq 0$, por ser la traza de una matriz semidefinida
-positiva. $\therefore \tr(AX) \geq 0$ y $(\PSD{n})^{\circ} = \PSD{n}$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p18" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p18"><p>Los cuatro apartados salen de un solo lema, que reduce el dual de un cono al
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p18" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p18"><p>Los cuatro apartados salen de un solo lema, que reduce el dual de un cono al
 dual de cualquier conjunto que lo genere.</p>
 <p><strong>Lema.</strong> <em>Si $K = \cono(G)$, entonces
 $K^{\circ} = \{y : \langle y,g\rangle \geq 0 \ \forall g \in G\}$.</em></p>
@@ -1181,11 +1181,43 @@ entonces, por el lema,</p>
   (\PSD{n})^{\circ} = \{A \in \Sym{n} : \langle A, vv\trans\rangle = v\trans Av \geq 0
    \ \ \forall v\} = \PSD{n} . \qquad
 \]</div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p19" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p19"><p><em>a)</em> Si $y \geq 0$, entonces $\langle y,x\rangle = \sum_{i} y_{i}x_{i} \geq 0$
+para todo $x \geq 0$; si $y_{i} &lt; 0$ para algún $i$, el testigo es $e_{i}$.
+$\therefore (\mathbb{R}^{n}_{+})^{\circ} = \mathbb{R}^{n}_{+}$.</p>
+<p><em>b)</em> Si $\langle y,v\rangle \geq 0$ para todo $v \in V$, aplicando esto a
+$v$ y a $-v$ queda $\langle y,v\rangle = 0$; y $V^{\perp} \subseteq V^{\circ}$ es
+claro. $\therefore V^{\circ} = V^{\perp}$.</p>
+<p><em>c)</em> Con $\Qcono{n+1} = \{(t,x) : \lVert x\rVert \leq t\}$, la
+autodualidad es Cauchy–Schwarz en las dos direcciones, y sin dividir por nada.</p>
+<p>$(\supseteq)$ Sea $\lVert y\rVert \leq \alpha$ y sea $(t,x) \in \Qcono{n+1}$, de
+modo que $t \geq \lVert x\rVert \geq 0$. Pero entonces:</p>
+<div class="display">\[
+  \alpha t + \langle y,x\rangle \geq \lVert y\rVert\,t - \lVert y\rVert\,\lVert x\rVert
+   = \lVert y\rVert\,(t - \lVert x\rVert) \geq 0 ,
+\]</div>
+<p>donde la primera desigualdad usa $\alpha \geq \lVert y\rVert$ con $t \geq 0$ y
+Cauchy–Schwarz. $\therefore (\alpha,y) \in (\Qcono{n+1})^{\circ}$.</p>
+<p>$(\subseteq)$ Sea $\lVert y\rVert &gt; \alpha$. Si $y \neq 0$, el testigo es
+$(\lVert y\rVert, -y) \in \Qcono{n+1}$, que da
+$\alpha\lVert y\rVert - \lVert y\rVert^{2} = \lVert y\rVert(\alpha - \lVert y\rVert) &lt; 0$.
+Si $y = 0$, entonces $\alpha &lt; 0$ y el testigo es $(1,0) \in \Qcono{n+1}$, que da
+$\alpha &lt; 0$. $\therefore (\Qcono{n+1})^{\circ} = \Qcono{n+1}$.</p>
+<p><em>d)</em> $(\supseteq)$ Si $A \notin \PSD{n}$, tome $v$ con $v\trans Av &lt; 0$;
+el testigo es $X = vv\trans \succeq 0$, pues
+$\tr(Avv\trans) = v\trans Av &lt; 0$.</p>
+<p>$(\subseteq)$ Sean $A, X \succeq 0$, y sin descomponer $X$ en rangos uno: tome
+$B = A^{1/2} \succeq 0$. Como la traza es cíclica,</p>
+<div class="display">\[
+  \tr(AX) = \tr(BBX) = \tr(BXB),
+\]</div>
+<p>y $BXB \succeq 0$ porque $\langle BXBv,v\rangle = \langle X(Bv),(Bv)\rangle \geq 0$
+$\Rightarrow \tr(BXB) \geq 0$, por ser la traza de una matriz semidefinida
+positiva. $\therefore \tr(AX) \geq 0$ y $(\PSD{n})^{\circ} = \PSD{n}$.  □</p></div>
 <div class="stmt ejercicio" id="ej:t2-5"><div class="head">Ejercicio 5$^{*}$</div><div class="body"><p>Sean $C \subset \mathbb{R}^{n}$ y $D \subset \mathbb{R}^{m}$ conjuntos convexos
 no vacíos. Pruebe que se cumplen las propiedades siguientes:</p>
 <ol class="lista"><li><p>$\rint(\cl C) = \rint C$.</p></li><li><p>Si $T(x) = Ax + b$ es una aplicación afín, entonces
     $T(\rint C) = \rint(T(C))$.</p></li><li><p>$\rint(C \times D) = \rint C \times \rint D$.</p></li><li><p>Concluya que $\rint(C - D) = \rint C - \rint D$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p19" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p19"><p><em>a)</em> Sea $H = \aff C = \aff \cl C
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p20" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p20"><p><em>a)</em> Sea $H = \aff C = \aff \cl C
 \Rightarrow \rint A = \operatorname{int}_{H}(A)$ para todo $A \subseteq H$, así
 que basta mostrar que $\operatorname{int}_{H}(\cl C) = \operatorname{int}_{H}(C)$.
 La contenencia $\supseteq$ es trivial. Si $x \in \operatorname{int}_{H}\cl C$,
@@ -1237,7 +1269,7 @@ $C=\{(a,b): 0 \leq a \leq b \leq 1\}$, $T(a,b)=a$ y $v=\tfrac12$, el punto
 $x=(\tfrac12,\tfrac12)$ cumple el lado izquierdo y no está en $\rint C$. Queda
 probado $T(\rint C) \subseteq \rint(T(C))$ y no la otra contenencia. En
 <em>c)</em> el $\mu$ tiene que ser común a las dos coordenadas.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p20" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p20"><p>El apoyo de todo es un lema que el curso no demostró, así que va con su prueba.</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p21" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p21"><p>El apoyo de todo es un lema que el curso no demostró, así que va con su prueba.</p>
 <p><strong>Lema (principio del segmento).</strong> <em>Sea $C$ convexo, $x \in \rint C$
 y $y \in \cl C$. Entonces $(1-\lambda)y + \lambda x \in \rint C$ para todo
 $\lambda \in (0,1]$.</em> (Beck, <em>First-Order Methods in Optimization</em>,
@@ -1343,7 +1375,7 @@ forma</p>
 \]</div>
 <p>para un único $\tau$ que satisface $\sum_{i}(y_{i} - \tau)_{+} = 1$. Diseñe un
 algoritmo de complejidad $O(n\log n)$ basado en ordenar las coordenadas de $y$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p21" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p21"><p>Tome $x_{i} = (y_{i}-\tau)_{+}$ para $\tau \in \mathbb{R}$ fijo. Queremos
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p22" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p22"><p>Tome $x_{i} = (y_{i}-\tau)_{+}$ para $\tau \in \mathbb{R}$ fijo. Queremos
 $\langle y-x, v-x\rangle \leq 0$ para todo $v \in \Delta_{n}$. Sean
 $I = \{i : y_{i} \geq \tau\}$ y $J = \{i : y_{i} &lt; \tau\}$, de modo que
 $(y-x)_{i} = \tau$ y $(v-x)_{i} = v_{i}-y_{i}+\tau$ sobre $I$, y
@@ -1418,7 +1450,7 @@ $y_{(1)}&lt;y_{(2)}&lt;\cdots&lt;y_{(n)}$. Defina $y_{(0)} = y_{(1)}-1$.</p>
 <p class="aviso">La unicidad de $\tau$ no se concluye, aunque la monotonía estricta que la
 da está probada; y el bucle evalúa $\varphi$ de cero en cada $k$, que es
 $O(n^{2})$ y no el $O(n\log n)$ que pide el enunciado.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p22" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p22"><p>La forma $x_{i} = (y_{i}-\tau)_{+}$ no hace falta adivinarla: sale de relajar la
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p23" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p23"><p>La forma $x_{i} = (y_{i}-\tau)_{+}$ no hace falta adivinarla: sale de relajar la
 restricción de igualdad y completar el cuadrado, y de paso queda claro de dónde
 viene el $\tau$.</p>
 <p><strong>La forma de la proyección.</strong> Sea $\tau \in \mathbb{R}$ con
@@ -1497,7 +1529,7 @@ y del barrido, es decir $O(n\log n)$, dominado por el ordenamiento.  □</p></
 <div class="stmt ejercicio" id="ej:t3-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sean $C_{1},\ldots,C_{m} \subset \mathbb{R}^{n}$ conjuntos convexos no vacíos.
 Muestre lo siguiente.</p>
 <ol class="lista"><li><p>$\rint(\cl C_{1}) = \rint(C_{1})$.</p></li><li><p>$\rint(C_{1}-C_{2}) = \rint C_{1} - \rint C_{2}$.</p></li><li><p>$\bigcap_{i=1}^{m} \rint C_{i} \subset \rint\left(\bigcap_{i=1}^{m} C_{i}\right)$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p23" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p23"><p><em>a)</em> y <em>b)</em> son los apartados <em>a)</em> y <em>d)</em> del
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p24" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p24"><p><em>a)</em> y <em>b)</em> son los apartados <em>a)</em> y <em>d)</em> del
 Ejercicio 5 de la Tarea 2.</p>
 <p><em>c)</em> Basta $m=2$, y el caso general sale encadenando. Si
 $x \in \rint C \cap \rint D$, por la caracterización $(*)$ del
@@ -1518,7 +1550,7 @@ $\therefore x \in \rint(C \cap D)$. Encadenando,</p>
    \subseteq \rint(C_{1} \cap C_{2} \cap C_{3}),
 \]</div>
 <p>y así hasta $m$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p24" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p24"><p><em>a)</em> y <em>b)</em> son los apartados <em>a)</em> y <em>d)</em> del
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p25" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p25"><p><em>a)</em> y <em>b)</em> son los apartados <em>a)</em> y <em>d)</em> del
 Ejercicio 5 de la Tarea 2, y para <em>c)</em> se puede evitar por completo el
 argumento del mínimo de los $\mu$: la intersección se fabrica cortando el
 producto con la diagonal, y los dos apartados del Ejercicio 5 de la Tarea 2 hacen
@@ -1551,7 +1583,7 @@ $\bigcap_{i=1}^{m}\rint C_{i} \subseteq \rint\bigl(\bigcap_{i=1}^{m-1}C_{i}\bigr
  \subseteq \rint\bigl(\bigcap_{i=1}^{m}C_{i}\bigr)$.  □</p></div>
 <div class="stmt ejercicio" id="ej:t3-2"><div class="head">Ejercicio 2</div><div class="body"><p>Todo conjunto convexo cerrado es la intersección de los semiespacios cerrados
 que lo contienen.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p25" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p25"><p>Dado $C$ convexo y cerrado, sea
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p26" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p26"><p>Dado $C$ convexo y cerrado, sea
 $H_{m,b} := \{x \in \mathbb{R}^{n} : \langle m, x\rangle \geq b\}$, con
 $m \neq 0$, un semiespacio cerrado, y sea $A := \{(m,b) : C \subseteq H_{m,b}\}$.
 Claramente $C \subseteq \bigcap_{(m,b) \in A} H_{m,b}$.</p>
@@ -1561,7 +1593,7 @@ $\langle m, x\rangle \geq b$ para todo $x \in C$ pero $\langle m, y\rangle &lt; 
 $\Rightarrow C \subseteq H_{m,b} \Rightarrow y \in H_{m,b}
 \Rightarrow \langle m,y\rangle \geq b$. Contradicción, pues
 $\langle m,y\rangle &lt; b$. $\therefore C = \bigcap_{(m,b) \in A} H_{m,b}$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p26" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p26"><p>La misma estructura, pero sin usar el teorema de separación como caja negra: el
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p27" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p27"><p>La misma estructura, pero sin usar el teorema de separación como caja negra: el
 semiespacio se construye con la proyección, que es lo que da el vector normal.</p>
 <p>Si $C = \varnothing$, la intersección de todos los semiespacios cerrados es
 vacía, pues por ejemplo $\{x : x_{1} \geq 0\}$ y $\{x : -x_{1} \geq 1\}$ son
@@ -1588,7 +1620,7 @@ $\Rightarrow y \notin \bigcap_{(m,b) \in A}H_{m,b}$.
 $\therefore C = \bigcap_{(m,b) \in A} H_{m,b}$.  □</p></div>
 <div class="stmt ejercicio" id="ej:t3-3"><div class="head">Ejercicio 3</div><div class="body"><p>Para todo cono $K \subset \mathbb{R}^{n}$ se tiene que
 $K^{**} = \cl(\conv K)$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p27" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p27"><p>Con la notación del curso,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p28" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p28"><p>Con la notación del curso,
 $K^{\circ} = \{y : \langle y,x\rangle \geq 0 \ \forall x \in K\}$ y
 $K^{\circ\circ} = \{x : \langle x,y\rangle \geq 0 \ \forall y \in K^{\circ}\}$.
 Claramente $K \subseteq K^{\circ\circ}$, y como $K^{\circ\circ}$ es convexo y
@@ -1604,7 +1636,7 @@ $x_{0} \in K^{\circ\circ}$. Pero como $0 \in \cl(\conv K)
 \Rightarrow \langle y,0\rangle = 0 \geq b
 \Rightarrow \langle y,x_{0}\rangle &lt; b \leq 0$. Contradicción.
 $\therefore \cl(\conv K) = K^{\circ\circ}$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p28" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p28"><p>Sin montar la separación a mano: el curso ya probó que un cono convexo cerrado
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p29" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p29"><p>Sin montar la separación a mano: el curso ya probó que un cono convexo cerrado
 coincide con su bipolar, así que basta ver que $K$ y $\cl(\conv K)$ tienen el
 mismo dual.</p>
 <p>Sea $L := \cl(\conv K)$. Primero, $L$ es un cono convexo cerrado. En efecto,
@@ -1629,7 +1661,7 @@ cerrado,</p>
   f(x,y) = \frac{1}{xy} + x + y, \qquad (x,y) \in \mathbb{R}^{2}_{++}.
 \]</div>
 <p>Pruebe primero que el mínimo existe y luego determine si es único.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p29" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p29"><p>Sea $f : \mathbb{R}^{2}_{++} \to \mathbb{R}$ dada por
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p30" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p30"><p>Sea $f : \mathbb{R}^{2}_{++} \to \mathbb{R}$ dada por
 $(x,y) \mapsto \frac{1}{xy} + x + y$. Pero entonces:</p>
 <div class="display">\[
   \nabla f(x,y) = \Bigl(-\frac{1}{x^{2}y} + 1,\ -\frac{1}{xy^{2}} + 1\Bigr) = 0
@@ -1650,7 +1682,20 @@ $(x,y) \mapsto \frac{1}{xy} + x + y$. Pero entonces:</p>
 <p>$\Rightarrow Hf(1,1) \succ 0 \Rightarrow (1,1)$ es mínimo.  □</p>
 <p class="aviso">$Hf \succ 0$ <em>en el punto</em> da mínimo local estricto. El enunciado
 pide existencia y unicidad, que no se siguen de ahí.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p30" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p30"><p><strong>Existencia.</strong> $f$ es continua sobre el abierto
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p31" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p31"><p>Sin derivadas y sin Weierstrass: los tres sumandos son positivos y su producto
+es constante, que es exactamente la situación de la desigualdad entre las medias
+aritmética y geométrica. Para $x,y&gt;0$,</p>
+<div class="display">\[
+  \frac{f(x,y)}{3} = \frac{\frac{1}{xy} + x + y}{3}
+   \geq \Bigl(\frac{1}{xy}\cdot x \cdot y\Bigr)^{1/3} = 1
+  \qquad\Rightarrow\qquad f(x,y) \geq 3 ,
+\]</div>
+<p>con igualdad si y solo si los tres sumandos coinciden, es decir
+$\frac{1}{xy} = x = y$. De $x=y$ y $\frac{1}{x^{2}} = x$ sale $x^{3}=1$, o sea
+$x=y=1$, que además cumple $f(1,1)=3$.</p>
+<p>$\therefore$ el mínimo existe, vale $3$ y se alcanza únicamente en $(1,1)$: las
+tres cosas que pide el enunciado, de la misma desigualdad.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p32" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p32"><p><strong>Existencia.</strong> $f$ es continua sobre el abierto
 $\Omega = \mathbb{R}^{2}_{++}$ y $f(1,1)=3$, así que
 $L := \{(x,y) \in \Omega : f(x,y) \leq 3\}$ es no vacío. Es acotado, pues
 $f \geq x+y \Rightarrow L \subseteq \{x+y \leq 3\}$. Y es cerrado en
@@ -1685,19 +1730,6 @@ punto crítico:</p>
 todo $(x,y) \in \Omega$. Como $\Omega$ es convexo, $f$ es estrictamente convexa
 $\Rightarrow$ su minimizador es único. $\therefore$ el mínimo es $3$, se alcanza
 solo en $(1,1)$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p31" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p31"><p>Sin derivadas y sin Weierstrass: los tres sumandos son positivos y su producto
-es constante, que es exactamente la situación de la desigualdad entre las medias
-aritmética y geométrica. Para $x,y&gt;0$,</p>
-<div class="display">\[
-  \frac{f(x,y)}{3} = \frac{\frac{1}{xy} + x + y}{3}
-   \geq \Bigl(\frac{1}{xy}\cdot x \cdot y\Bigr)^{1/3} = 1
-  \qquad\Rightarrow\qquad f(x,y) \geq 3 ,
-\]</div>
-<p>con igualdad si y solo si los tres sumandos coinciden, es decir
-$\frac{1}{xy} = x = y$. De $x=y$ y $\frac{1}{x^{2}} = x$ sale $x^{3}=1$, o sea
-$x=y=1$, que además cumple $f(1,1)=3$.</p>
-<p>$\therefore$ el mínimo existe, vale $3$ y se alcanza únicamente en $(1,1)$: las
-tres cosas que pide el enunciado, de la misma desigualdad.  □</p></div>
 <div class="stmt ejercicio" id="ej:t3-5"><div class="head">Ejercicio 5</div><div class="body"><p>Sea $f : \mathbb{R}^{n} \to \mathbb{R}$ y defina</p>
 <div class="display">\[
   g(x) := \inf\bigl\{t \in \mathbb{R} : (x,t) \in \conv(\operatorname{epi} f)\bigr\}.
@@ -1705,7 +1737,7 @@ tres cosas que pide el enunciado, de la misma desigualdad.  □</p></div>
 <ol class="lista"><li><p>Pruebe que $g$ es convexa.</p></li><li><p>Muestre que $g(x) \leq f(x)$ para todo $x \in \mathbb{R}^{n}$.</p></li><li><p>Sea $h : \mathbb{R}^{n} \to \mathbb{R}$ convexa y suponga que $h \leq f$
     puntualmente. Pruebe que $h \leq g$.</p></li></ol>
 <p>Concluya que $g$ es el mayor minorante convexo de $f$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p32" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p32"><p><em>a)</em> $\operatorname{epi} g = \{(x,t) : g(x) \leq t\}$. Sean
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p33" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p33"><p><em>a)</em> $\operatorname{epi} g = \{(x,t) : g(x) \leq t\}$. Sean
 $(x_{0},t_{0}), (x_{1},t_{1}) \in \operatorname{epi} g$ y $\lambda \in [0,1]$
 $\Rightarrow$</p>
 <div class="display">\[
@@ -1745,7 +1777,7 @@ que</p>
 es falso cuando el ínfimo no se alcanza: con $f(x)=1/(1+x^{2})$ queda
 $g \equiv 0$ y $(0,0) \notin \conv(\operatorname{epi} f)$. Y falta la conclusión
 que pide el enunciado.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p33" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p33"><p>Por epigrafos, con el $\varepsilon$ que hace falta porque el ínfimo puede no
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p34" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p34"><p>Por epigrafos, con el $\varepsilon$ que hace falta porque el ínfimo puede no
 alcanzarse. Escriba $C = \conv(\operatorname{epi} f)$.</p>
 <p><strong>Observación.</strong> $C$ es cerrado hacia arriba: si $(x,s) \in C$ y
 $s&#x27; \geq s$, entonces $(x,s&#x27;) \in C$. En efecto,
@@ -1779,7 +1811,7 @@ más pequeño, que da el ínfimo más grande,</p>
 <p>$\therefore$ $g$ es convexa por <em>a)</em>, minora a $f$ por <em>b)</em>, y por
 <em>c)</em> cualquier convexa que minore a $f$ minora a $g$: $g$ es el mayor
 minorante convexo de $f$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p34" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p34"><p>Sin tocar epigrafos: $g$ tiene una fórmula cerrada en términos de $f$, y con
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p35" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p35"><p>Sin tocar epigrafos: $g$ tiene una fórmula cerrada en términos de $f$, y con
 ella los tres apartados son de dos renglones cada uno.</p>
 <p><strong>Lema.</strong> <em>Para todo $x \in \mathbb{R}^{n}$,</em></p>
 <div class="display">\[
@@ -1829,7 +1861,7 @@ $f$: es el mayor minorante convexo.  □</p></div>
 <div class="stmt ejercicio" id="ej:t3-6"><div class="head">Ejercicio 6$^{*}$</div><div class="body"><p>Muestre que una función Gâteaux diferenciable localmente Lipschitz es Fréchet
 diferenciable. Concluya que toda función convexa con derivadas direccionales
 lineales es Fréchet diferenciable.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p35" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p35"><p><em>a)</em> Sea $f : \mathbb{R}^{n} \to \mathbb{R}$ Gâteaux y localmente
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p36" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p36"><p><em>a)</em> Sea $f : \mathbb{R}^{n} \to \mathbb{R}$ Gâteaux y localmente
 Lipschitz. Sea</p>
 <div class="display">\[
   g_{t}(h) = \frac{f(x+th)-f(x)}{t} - \langle\nabla f(x), h\rangle .
@@ -1851,7 +1883,49 @@ $\rint(\operatorname{dom} f) = \mathbb{R}^{n}$ $\Rightarrow f$ es Fréchet.  �
 <p class="aviso">En $|g_{t}(h)-g_{t}(h&#x27;)|$ la igualdad omite el término
 $|\langle\nabla f(x), h-h&#x27;\rangle|$; con él la cota es
 $(K+\lVert\nabla f(x)\rVert)\lVert h-h&#x27;\rVert$ y nada más cambia.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p36" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p36"><p>Por equicontinuidad y un cubrimiento finito de la esfera, que es donde entra la
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p37" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p37"><p>Por contradicción y con una subsucesión de la esfera, que es donde entra la
+dimensión finita. Es el Teorema A.1.5 de Junca.</p>
+<p><em>a)</em> Sea $a = \nabla f(x)$ y defina el resto</p>
+<div class="display">\[
+  r(h) := f(x+h) - f(x) - \langle a, h\rangle ,
+\]</div>
+<p>para $\lVert h\rVert$ pequeño. Como $f$ es localmente Lipschitz, existen $K&gt;0$ y
+$\rho&gt;0$ con $|f(x+u)-f(x+v)| \leq K\lVert u-v\rVert$ si
+$\lVert u\rVert, \lVert v\rVert &lt; \rho$, de donde</p>
+<div class="display">\begin{equation}
+  |r(u)-r(v)| \leq |f(x+u)-f(x+v)| + |\langle a, u-v\rangle|
+   \leq (K+\lVert a\rVert)\,\lVert u-v\rVert .
+  \tag{$\dagger$}
+\end{equation}</div>
+<p>Y por ser $f$ Gâteaux, para cada dirección fija $d$,</p>
+<div class="display">\begin{equation}
+  \frac{r(td)}{t} = \frac{f(x+td)-f(x)}{t} - \langle a,d\rangle
+   \xrightarrow{\ t \to 0\ } 0 .
+  \tag{$\ddagger$}
+\end{equation}</div>
+<p>Suponga en busca de contradicción que $r(h)/\lVert h\rVert \not\to 0$. Entonces
+existen $\varepsilon&gt;0$ y $h_{k} \to 0$ con $h_{k} \neq 0$ y
+$|r(h_{k})|/\lVert h_{k}\rVert \geq \varepsilon$ para todo $k$. Tome
+$t_{k} = \lVert h_{k}\rVert$ y $d_{k} = h_{k}/\lVert h_{k}\rVert$, de modo que
+$t_{k} \to 0$ y $\lVert d_{k}\rVert = 1$. Como la esfera unitaria de
+$\mathbb{R}^{n}$ es compacta, pasando a una subsucesión $d_{k} \to d$ con
+$\lVert d\rVert = 1$. Pero entonces, por $(\dagger)$,</p>
+<div class="display">\[
+  \left|\frac{r(t_{k}d_{k})}{t_{k}} - \frac{r(t_{k}d)}{t_{k}}\right|
+   = \frac{|r(t_{k}d_{k}) - r(t_{k}d)|}{t_{k}}
+   \leq (K+\lVert a\rVert)\,\lVert d_{k}-d\rVert \xrightarrow{\ k \to \infty\ } 0 ,
+\]</div>
+<p>y por $(\ddagger)$, con $d$ fija, $r(t_{k}d)/t_{k} \to 0$. Sumando,</p>
+<div class="display">\[
+  \frac{r(h_{k})}{\lVert h_{k}\rVert} = \frac{r(t_{k}d_{k})}{t_{k}} \longrightarrow 0 .
+\]</div>
+<p>Contradicción, pues $|r(h_{k})|/\lVert h_{k}\rVert \geq \varepsilon$ para todo
+$k$. $\therefore f$ es Fréchet en $x$ con $\nabla f(x) = a$.  □</p>
+<p><em>b)</em> Las derivadas direccionales lineales son acotadas por ser la
+dimensión finita $\Rightarrow f$ es Gâteaux. Y $f$ convexa y finita en todo
+$\mathbb{R}^{n}$ es localmente Lipschitz allí (Corolario 3.5.4 de Junca)
+$\Rightarrow$ por <em>a)</em>, $f$ es Fréchet diferenciable.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p38" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p38"><p>Por equicontinuidad y un cubrimiento finito de la esfera, que es donde entra la
 dimensión finita.</p>
 <p><em>a)</em> Sea $x$ fijo y sean $K&gt;0$ y $\rho&gt;0$ con $f$ $K$-Lipschitz en
 $B_{\rho}(x)$, que existen por ser $f$ localmente Lipschitz. Para
@@ -1898,48 +1972,6 @@ es convexa y finita en todo $\mathbb{R}^{n}$, es localmente Lipschitz allí, por
 el teorema de regularidad local de las funciones convexas (Corolario 3.5.4 de
 Junca). Pero entonces <em>a)</em> aplica en cada $x \in \mathbb{R}^{n}$
 $\Rightarrow f$ es Fréchet diferenciable.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p37" data-titulo="1">Ver: Alternativa 2</button><div class="proof" id="ejercicios-convexa-p37"><p>Por contradicción y con una subsucesión, en vez de con un cubrimiento finito. Es
-el Teorema A.1.5 de Junca.</p>
-<p><em>a)</em> Sea $a = \nabla f(x)$ y defina el resto</p>
-<div class="display">\[
-  r(h) := f(x+h) - f(x) - \langle a, h\rangle ,
-\]</div>
-<p>para $\lVert h\rVert$ pequeño. Como $f$ es localmente Lipschitz, existen $K&gt;0$ y
-$\rho&gt;0$ con $|f(x+u)-f(x+v)| \leq K\lVert u-v\rVert$ si
-$\lVert u\rVert, \lVert v\rVert &lt; \rho$, de donde</p>
-<div class="display">\begin{equation}
-  |r(u)-r(v)| \leq |f(x+u)-f(x+v)| + |\langle a, u-v\rangle|
-   \leq (K+\lVert a\rVert)\,\lVert u-v\rVert .
-  \tag{$\dagger$}
-\end{equation}</div>
-<p>Y por ser $f$ Gâteaux, para cada dirección fija $d$,</p>
-<div class="display">\begin{equation}
-  \frac{r(td)}{t} = \frac{f(x+td)-f(x)}{t} - \langle a,d\rangle
-   \xrightarrow{\ t \to 0\ } 0 .
-  \tag{$\ddagger$}
-\end{equation}</div>
-<p>Suponga en busca de contradicción que $r(h)/\lVert h\rVert \not\to 0$. Entonces
-existen $\varepsilon&gt;0$ y $h_{k} \to 0$ con $h_{k} \neq 0$ y
-$|r(h_{k})|/\lVert h_{k}\rVert \geq \varepsilon$ para todo $k$. Tome
-$t_{k} = \lVert h_{k}\rVert$ y $d_{k} = h_{k}/\lVert h_{k}\rVert$, de modo que
-$t_{k} \to 0$ y $\lVert d_{k}\rVert = 1$. Como la esfera unitaria de
-$\mathbb{R}^{n}$ es compacta, pasando a una subsucesión $d_{k} \to d$ con
-$\lVert d\rVert = 1$. Pero entonces, por $(\dagger)$,</p>
-<div class="display">\[
-  \left|\frac{r(t_{k}d_{k})}{t_{k}} - \frac{r(t_{k}d)}{t_{k}}\right|
-   = \frac{|r(t_{k}d_{k}) - r(t_{k}d)|}{t_{k}}
-   \leq (K+\lVert a\rVert)\,\lVert d_{k}-d\rVert \xrightarrow{\ k \to \infty\ } 0 ,
-\]</div>
-<p>y por $(\ddagger)$, con $d$ fija, $r(t_{k}d)/t_{k} \to 0$. Sumando,</p>
-<div class="display">\[
-  \frac{r(h_{k})}{\lVert h_{k}\rVert} = \frac{r(t_{k}d_{k})}{t_{k}} \longrightarrow 0 .
-\]</div>
-<p>Contradicción, pues $|r(h_{k})|/\lVert h_{k}\rVert \geq \varepsilon$ para todo
-$k$. $\therefore f$ es Fréchet en $x$ con $\nabla f(x) = a$.  □</p>
-<p><em>b)</em> Las derivadas direccionales lineales son acotadas por ser la
-dimensión finita $\Rightarrow f$ es Gâteaux. Y $f$ convexa y finita en todo
-$\mathbb{R}^{n}$ es localmente Lipschitz allí (Corolario 3.5.4 de Junca)
-$\Rightarrow$ por <em>a)</em>, $f$ es Fréchet diferenciable.  □</p></div>
 <h4 id="ejercicios-convexa-x5">Tarea 4</h4>
 <div class="stmt ejercicio" id="ej:t4-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sea $f$ convexa y diferenciable y $C$ convexo. Pruebe (directamente, sin usar
 subdiferenciales) que $x^{\star} \in C$ minimiza $f$ sobre $C$ si y solo si</p>
@@ -1948,7 +1980,7 @@ subdiferenciales) que $x^{\star} \in C$ minimiza $f$ sobre $C$ si y solo si</p>
   \qquad \text{para todo } x \in C.
 \]</div>
 <p>Aplíquelo a la proyección de un punto sobre un conjunto convexo cerrado.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p38" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p38"><p>$(\Rightarrow)$ Si $x_{0} \in \rint C$ y $x_{0} = \min_{C} f(x)
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p39" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p39"><p>$(\Rightarrow)$ Si $x_{0} \in \rint C$ y $x_{0} = \min_{C} f(x)
 \Rightarrow \nabla f(x_{0}) = 0$, así que asumimos $x_{0} \in \partial C$.
 Suponga que existe $x \in C$ con $\langle\nabla f(x_{0}), x-x_{0}\rangle &lt; 0$.
 Tome $y = \lambda x + (1-\lambda)x_{0} \in C$ para todo $\lambda \in (0,1)$
@@ -1980,7 +2012,7 @@ $\Rightarrow x_{0}$ es mínimo de $f$.  □</p>
 $\aff C \neq \mathbb{R}^{n}$, y no hace falta: el argumento de abajo vale para
 todo $x_{0} \in C$. En $(\Leftarrow)$ el $o(\lambda)$ puede dominar cuando
 $\langle\nabla f(x_{0}),d\rangle = 0$. Y falta la aplicación a la proyección.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p39" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p39"><p>$(\Rightarrow)$ Sea $x^{\star}$ mínimo de $f$ sobre $C$ y sea $x \in C$. Para
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p40" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p40"><p>$(\Rightarrow)$ Sea $x^{\star}$ mínimo de $f$ sobre $C$ y sea $x \in C$. Para
 $\lambda \in (0,1]$, $x^{\star}+\lambda(x-x^{\star}) \in C$ por convexidad
 $\Rightarrow f(x^{\star}+\lambda(x-x^{\star})) - f(x^{\star}) \geq 0$. Dividiendo
 por $\lambda$ y haciendo $\lambda \downarrow 0$, el cociente tiende a la
@@ -2018,7 +2050,7 @@ minimizador de $f$ sobre $C$, así que el criterio dice</p>
     \]</div>
 <p>Pruebe que $\varphi$ es diferenciable, $\varphi&#x27; = f$ y $\varphi$ es convexa.</p></li><li><p>Discuta qué parte del argumento cambia si se elimina la continuidad de
     $f$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p40" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p40"><p><em>a)</em> Basta ver que $(f(y)-f(x))(y-x) \geq 0$. Como $\varphi$ es convexa y
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p41" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p41"><p><em>a)</em> Basta ver que $(f(y)-f(x))(y-x) \geq 0$. Como $\varphi$ es convexa y
 diferenciable $\Rightarrow \partial\varphi(x) = \{\varphi&#x27;(x)\} = \{f(x)\}$
 $\Rightarrow \varphi(y) \geq \varphi(x) + f(x)(y-x)$ para todo $y \in \mathbb{R}$,
 y similarmente $\varphi(x) \geq \varphi(y) + f(y)(x-y)$
@@ -2045,7 +2077,7 @@ $\varphi$ continua tal que $\varphi&#x27; = f$ casi en todo punto.  □</p>
 <p class="aviso">En <em>c)</em> no se dice lo principal, que es que la convexidad
 sobrevive entera: el argumento de <em>b)</em> solo usa la continuidad en el
 teorema fundamental del cálculo.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p41" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p41"><p><em>a)</em> La caracterización de primer orden de la convexidad para una función
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p42" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p42"><p><em>a)</em> La caracterización de primer orden de la convexidad para una función
 diferenciable dice que $\varphi$ es convexa si y solo si $\varphi&#x27;$ es monótona
 (§8 de las notas), esto es
 $(\varphi&#x27;(y)-\varphi&#x27;(x))(y-x) \geq 0$ para todos $x,y$. Con $f = \varphi&#x27;$ eso
@@ -2078,7 +2110,7 @@ $f$ es acotada allí.  □</p></div>
 \]</div>
 <p>sobre su dominio natural.</p>
 <ol class="lista"><li><p>Determine explícitamente $\operatorname{dom} f$.</p></li><li><p>Muestre que $f$ es convexa.</p></li><li><p>Calcule $\nabla f(x)$ y $\nabla^{2} f(x)$.</p></li><li><p>Dé condiciones suficientes para que $f$ sea estrictamente convexa.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p42" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p42"><p><em>a)</em></p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p43" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p43"><p><em>a)</em></p>
 <div class="display">\[
   \operatorname{dom} f = \{x \in \mathbb{R}^{n} : \langle a_{j},x\rangle&lt;1 \text{ y } x_{i}^{2}&lt;1 \ \forall j\, \forall i\}
    = \{x : \langle a_{j},x\rangle&lt;1 \ \forall j\} \cap (-1,1)^{n} .
@@ -2116,7 +2148,7 @@ ya que $(1-x_{i})^{2}+2x_{i}^{2}&gt;0$ si $|x_{i}|&lt;1$. Por otro lado,</p>
 entrada de $\nabla^{2}h$ es $\tfrac{2(1+x_{i}^{2})}{(1-x_{i}^{2})^{2}}$, no
 $(1-x_{i})^{2}+2x_{i}^{2}$, aunque las dos son positivas; y no se enuncia
 ninguna condición, que es lo que se pide.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p43" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p43"><p>Una sola cuenta de Hessiana responde <em>b)</em>, <em>c)</em> y <em>d)</em> a la
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p44" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p44"><p>Una sola cuenta de Hessiana responde <em>b)</em>, <em>c)</em> y <em>d)</em> a la
 vez.</p>
 <p><em>a)</em> El dominio natural es donde los dos logaritmos tienen argumento
 positivo:</p>
@@ -2174,7 +2206,7 @@ $\alpha&lt;\beta$ tales que</p>
   \langle a,x\rangle \leq \alpha &lt; \beta \leq \langle a,y\rangle
   \qquad \text{para todo } x \in C,\ y \in D .
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p44" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p44"><p>Note que $A = C-D$ es convexo y cerrado. En efecto, si $a_{1}, a_{2} \in A
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p45" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p45"><p>Note que $A = C-D$ es convexo y cerrado. En efecto, si $a_{1}, a_{2} \in A
 \Rightarrow a_{1} = c_{1}-d_{1}$ y $a_{2} = c_{2}-d_{2}$, y</p>
 <div class="display">\[
   ta_{1}+(1-t)a_{2} = tc_{1}+(1-t)c_{2} - \bigl(td_{1}+(1-t)d_{2}\bigr) \in C-D .
@@ -2196,7 +2228,7 @@ $\langle a,d\rangle \leq \alpha &lt; \beta \leq \langle a,c\rangle$ para todo
 $d \in D$ y todo $c \in C$.  □</p>
 <p class="aviso">Queda con $D$ del lado bajo y $C$ del alto, al revés del enunciado; se
 arregla cambiando $a$ por $-a$.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p45" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p45"><p>Sin invocar la separación estricta como caja negra: la proyección da el vector
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p46" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p46"><p>Sin invocar la separación estricta como caja negra: la proyección da el vector
 normal, y de paso una brecha explícita. Es el Teorema 2.6.11 de Junca.</p>
 <p>Suponga que $D$ es compacto y sea $S = C-D$, que es convexo por serlo $C$ y $D$,
 y cerrado: si $s_{k} = c_{k}-d_{k} \to s$, por compacidad de $D$ una subsucesión
@@ -2231,7 +2263,7 @@ $\inf\{\lVert x-y\rVert\} = 0$ y no hay separación estricta.  □</p></div>
 <ol class="lista"><li><p>$f(x) = \lVert x\rVert_{2}$ en todo $x \in \mathbb{R}^{n}$;</p></li><li><p>$f(x) = \max_{i}(a_{i}\trans x + b_{i})$;</p></li><li><p>$f(x) = \lVert x\rVert_{\infty}$;</p></li><li><p>la indicadora de un subespacio afín.</p></li></ol>
 <p>Identifique también cuándo el subdiferencial es un singleton y cuándo puede ser
 no acotado.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p46" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p46"><p><em>a)</em> $\partial\lVert x\rVert_{2} = \nabla\lVert x\rVert_{2}
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p47" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p47"><p><em>a)</em> $\partial\lVert x\rVert_{2} = \nabla\lVert x\rVert_{2}
  = \bigl\{\tfrac{x}{\lVert x\rVert_{2}}\bigr\}$.</p>
 <p><em>b)</em> Como las $a_{i}\trans x + b_{i}$ son convexas propias con dominio
 $\mathbb{R}^{n}$, para $x$ fijo sea $I_{x} = \operatorname{argmax}_{i} a_{i}\trans x + b_{i}$
@@ -2280,7 +2312,7 @@ $\therefore$</p>
 <p class="aviso">En <em>a)</em> falta $x=0$, que es el único caso interesante, y el
 enunciado dice «en todo $x$». En <em>b)</em> los $\lambda_{i}$ deben ser
 $\geq 0$. Y falta la última parte, cuándo es singleton y cuándo no acotado.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p47" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p47"><p>Los cuatro salen del mismo molde si se usa que una norma es la función de
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p48" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p48"><p>Los cuatro salen del mismo molde si se usa que una norma es la función de
 soporte de la bola dual.</p>
 <p><strong>Lema.</strong> <em>Sea $\lVert\cdot\rVert$ una norma con dual
 $\lVert\cdot\rVert_{*}$ y sea $B_{*} = \{g : \lVert g\rVert_{*} \leq 1\}$.
@@ -2381,7 +2413,7 @@ $\lVert\cdot\rVert_{*}$. Defina</p>
 <p>Concluya que el subdiferencial ambiente es no acotado cuando
     $V^{\perp} \neq \{0\}$, aunque $f$ tenga constante de Lipschitz cero en su
     espacio afín.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p48" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p48"><p><em>a)</em> Si $g \in \partial_{V}f(x)$ con $x \in \rint C$ $\Rightarrow$</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p49" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p49"><p><em>a)</em> Si $g \in \partial_{V}f(x)$ con $x \in \rint C$ $\Rightarrow$</p>
 <div class="display">\begin{equation}
   f(y) \geq f(x)+\langle g,y-x\rangle \ \forall y \in C
   \iff \frac{f(y)-f(x)}{\lVert y-x\rVert} \geq \Bigl\langle g, \frac{y-x}{\lVert y-x\rVert}\Bigr\rangle
@@ -2423,7 +2455,7 @@ $V^{\perp} \neq \{0\}$ el subdiferencial ambiente es no acotado.  □</p>
 <p class="aviso">«En particular: $\lVert g\rVert_{*} \leq \langle g, \frac{y-x}{\lVert y-x\rVert}\rangle$»
 va al revés, pues $\lVert g\rVert_{*}$ es el supremo de esos productos; para
 alcanzarlo hace falta $x \in \rint C$, que es justo donde entra la hipótesis.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p49" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p49"><p><em>a)</em> $(\geq)$ Sean $x \in \rint C$ y $g \in \partial_{V}f(x)$, y sea
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p50" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p50"><p><em>a)</em> $(\geq)$ Sean $x \in \rint C$ y $g \in \partial_{V}f(x)$, y sea
 $v \in V$ con $\lVert v\rVert = 1$. Como $x \in \rint C$ y $\rint C$ es abierto
 en $\aff C = x+V$, existe $t&gt;0$ con $y := x+tv \in \rint C$. Por la desigualdad
 del subgradiente,</p>
@@ -2486,7 +2518,7 @@ sobre su espacio afín.  □</p></div>
 <ol class="lista"><li><p>$f(x) = \frac{1}{2}\lVert x\rVert_{2}^{2}$;</p></li><li><p>$f(x) = \frac{\mu}{2}\lVert x-a\rVert_{2}^{2}$, con $\mu&gt;0$;</p></li><li><p>$f(x) = \lambda\lVert x\rVert_{1}$, con $\lambda&gt;0$;</p></li><li><p>$f(x) = \delta_{C}(x)$, donde $C \subseteq \mathbb{R}^{n}$ es no vacío;</p></li><li><p>$f(x) = e^{x}$ en $\mathbb{R}$.</p></li></ol>
 <p>Indique en cada caso el dominio efectivo de $f^{*}$ y verifique, cuando sea
 posible, la igualdad de Fenchel–Young en un par $(x,y)$ apropiado.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p50" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p50"><p><em>a)</em></p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p51" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p51"><p><em>a)</em></p>
 <div class="display">\[
   2f^{*}(y) = \sup_{x} 2\langle x,y\rangle - \lVert x\rVert^{2}
    = \sup_{x} -\lVert x-y\rVert^{2} + \lVert y\rVert^{2} = \lVert y\rVert^{2}
@@ -2563,7 +2595,7 @@ $(\mu g)^{*}(y) = \mu g^{*}(y/\mu)$, de modo que
 $f^{*}(y) = \frac{1}{2\mu}\lVert y\rVert^{2}+\langle y,a\rangle$. En
 <em>c)</em> el mismo salto es inocuo, porque la conjugada es una indicadora. Y
 falta $\operatorname{dom} f^{*}$ en <em>b)</em> y <em>d)</em>.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p51" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p51"><p>Dos reglas de una línea cubren <em>a)</em>, <em>b)</em> y <em>c)</em>, y evitan
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p52" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p52"><p>Dos reglas de una línea cubren <em>a)</em>, <em>b)</em> y <em>c)</em>, y evitan
 tener que rehacer el supremo cada vez.</p>
 <p><strong>Lema (traslación y escalado).</strong> <em>Sean $\lambda&gt;0$ y
 $a \in \mathbb{R}^{n}$. Si $g(x) = f(x-a)$, entonces
@@ -2640,7 +2672,7 @@ $\operatorname{dom} f^{*} = [0,\infty)$ e igualdad en $y = e^{x}$.  □</p></d
     $K = B_{2}+A\Delta_{m}$, con $B_{2} := \{x \in \mathbb{R}^{n} : \lVert x\rVert_{2} \leq 1\}$.
     Deduzca que
     $\sigma_{K}(y) = \lVert y\rVert_{2} + \max_{1 \leq i \leq m}(A\trans y)_{i}$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p52" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p52"><p><em>a)</em> Es la definición de $\lVert\cdot\rVert_{*}$.</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p53" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p53"><p><em>a)</em> Es la definición de $\lVert\cdot\rVert_{*}$.</p>
 <p><em>b)</em> Si $x \in \Delta_{n} \Rightarrow \langle y,x\rangle = \sum_{i} y_{i}x_{i}
  \leq \sum_{i}(\max_{j} y_{j})\,x_{i} = \max_{j} y_{j}$
 $\Rightarrow \sigma_{\Delta_{n}}(y) \leq \max_{i} y_{i}$. Más aún, si
@@ -2677,7 +2709,7 @@ Pero entonces:</p>
 \]</div>
 <p class="aviso">Falta el «explique» de <em>d)</em>, y en <em>e)</em> las dos reglas de
 cálculo se usan sin enunciarlas ni probarlas.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p53" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p53"><p>Las dos reglas que hacen falta en <em>e)</em> son de un renglón cada una, y con
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p54" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p54"><p>Las dos reglas que hacen falta en <em>e)</em> son de un renglón cada una, y con
 ellas el apartado sale sin más cuentas.</p>
 <p><strong>Lema.</strong> <em>Sean $C, D \subseteq \mathbb{R}^{n}$ no vacíos y
 $A : \mathbb{R}^{m} \to \mathbb{R}^{n}$ lineal. Entonces
@@ -2740,7 +2772,7 @@ $p(x) := \inf_{y \in \mathbb{R}^{m}} F(x,y)$. Suponga que $p(x)$ es finito.</p>
     $\partial p(x)$, y compruebe que el ínfimo respecto de $y$ no se alcanza.
     Muestre que no existe ningún $y$ tal que $(1,0) \in \partial F(x,y)$.
     Explique así qué puede fallar en el apartado anterior cuando no hay alcance.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p54" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p54"><p><em>a)</em> Como $(u,0) \in \partial F(x,y)$</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p55" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p55"><p><em>a)</em> Como $(u,0) \in \partial F(x,y)$</p>
 <div class="display">\[
   \Rightarrow \forall x&#x27; \quad F(x&#x27;,y) \geq F(x,y) + \langle u, x-x&#x27;\rangle
   \Rightarrow \inf_{y} F(x&#x27;,y) \geq \inf_{y} F(x,y) + \langle u, x-x&#x27;\rangle
@@ -2781,7 +2813,7 @@ para todo $x$.  □</p>
 <p class="aviso">En <em>a)</em> el signo va al revés, y sobre todo: fijando $y&#x27;=y$ la
 desigualdad solo vale para ese $y$, así que el $\inf_{y}$ del lado izquierdo no
 está justificado. Dejando $y&#x27;$ libre sale directo.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p55" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p55"><p><em>a)</em> Sea $(u,0) \in \partial F(x,y)$. La desigualdad del subgradiente en
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p56" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p56"><p><em>a)</em> Sea $(u,0) \in \partial F(x,y)$. La desigualdad del subgradiente en
 $\mathbb{R}^{n} \times \mathbb{R}^{m}$ dice que, <em>para todo</em> $(x&#x27;,y&#x27;)$,</p>
 <div class="display">\[
   F(x&#x27;,y&#x27;) \geq F(x,y) + \bigl\langle (u,0),\ (x&#x27;,y&#x27;)-(x,y)\bigr\rangle
@@ -2839,7 +2871,7 @@ $L_{\tau}(x) := \tau\log\bigl(\sum_{i=1}^{m} e^{x_{i}/\tau}\bigr)$.</p>
     $p_{i}^{\star} = e^{x_{i}/\tau}/\sum_{j} e^{x_{j}/\tau}$.</p></li><li><p>Pruebe las cotas
     $\max_{i} x_{i} \leq L_{\tau}(x) \leq \max_{i} x_{i}+\tau\log m$, y concluya
     que $L_{\tau}(x) \to \max_{i} x_{i}$ cuando $\tau \downarrow 0$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p56" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p56"><p><em>a)</em> Ya sabemos que</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p57" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p57"><p><em>a)</em> Ya sabemos que</p>
 <div class="display">\[
   \operatorname{lse}^{*}(p) = \begin{cases}
     \sum_{i=1}^{m} p_{i}\log p_{i}, &amp; p \in \Delta_{m}, \\
@@ -2876,7 +2908,7 @@ y</p>
    = \max_{i} x_{i} + \tau\log m .
 \]</div>
 <p>$\therefore$ si $\tau \searrow 0 \Rightarrow L_{\tau}(x) \searrow \max_{i} x_{i}$.  □</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p57" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p57"><p>La conjugada de $L_{\tau}$ se calcula directamente, sin apoyarse en la de
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p58" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p58"><p>La conjugada de $L_{\tau}$ se calcula directamente, sin apoyarse en la de
 $\operatorname{lse}$.</p>
 <p><em>a)</em> Sea $p \in \mathbb{R}^{m}$ y
 $\Phi(x) := \langle p,x\rangle - L_{\tau}(x)$.</p>
@@ -2945,7 +2977,7 @@ suponga que $\bigcap_{i=1}^{m}\rint C_{i} \neq \varnothing$.</p>
 <div class="display">\[
       N_{C}(x) = \Bigl\{\sum_{i \in I(x)}\lambda_{i}a_{i} : \lambda_{i} \geq 0\Bigr\} .
     \]</div></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p58" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p58"><p><em>a)</em> Como $\bigcap_{i}\rint C_{i} \neq \varnothing$ $\Rightarrow$</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p59" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p59"><p><em>a)</em> Como $\bigcap_{i}\rint C_{i} \neq \varnothing$ $\Rightarrow$</p>
 <div class="display">\[
   N_{\cap_{i}C_{i}}(x) = \partial\bigl(\delta_{\cap_{i}C_{i}}\bigr)(x)
    = \partial\Bigl(\sum_{i}\delta_{C_{i}}\Bigr)(x)
@@ -2971,7 +3003,7 @@ $\Rightarrow N_{C_{i}}(x) = \{\lambda a_{i} : \lambda \geq 0\}$. $\therefore$</p
 <p class="aviso">Si $a_{i}\trans x&lt;b_{i}$ el cono normal es $\{0\}$, no $\varnothing$: con
 $\varnothing$ la suma de Minkowski de <em>a)</em> se vaciaría entera y la
 fórmula de <em>b)</em> no saldría.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p59" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p59"><p><em>a)</em> $\operatorname{dom}\delta_{C_{i}} = C_{i}$, así que la calificación
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p60" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p60"><p><em>a)</em> $\operatorname{dom}\delta_{C_{i}} = C_{i}$, así que la calificación
 de la regla de la suma, $\bigcap_{i}\rint(\operatorname{dom}\delta_{C_{i}}) \neq \varnothing$,
 es exactamente la hipótesis. Pero entonces, para $x \in \cap_{i}C_{i}$,</p>
 <div class="display">\[
@@ -3011,7 +3043,7 @@ $\Rightarrow$</p>
     $\partial\sigma_{C}(y) \neq \varnothing$ para todo $y$.</p></li><li><p>Aplique la fórmula al simplex $\Delta_{n}$. Como
     $\sigma_{\Delta_{n}}(y) = \max_{i} y_{i}$, recupere la fórmula
     $\partial\bigl(\max_{i} y_{i}\bigr) = \conv\{e_{i} : y_{i} = \max_{j} y_{j}\}$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p60" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p60"><p><em>a)</em> Como $C$ es convexo y cerrado, $\delta_{C}$ es convexa y s.c.i.
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p61" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p61"><p><em>a)</em> Como $C$ es convexo y cerrado, $\delta_{C}$ es convexa y s.c.i.
 $\Rightarrow \delta_{C}^{**} = \delta_{C}$. Más aún,</p>
 <div class="display">\[
   \langle x,y\rangle = \delta_{C}(x)+\sigma_{C}(y)
@@ -3047,7 +3079,7 @@ $(f\,\square\,g)(x) := \inf_{z \in \mathbb{R}^{n}}\{f(z)+g(x-z)\}$.</p>
     $(f\,\square\,g)^{*} = f^{*}+g^{*}$.</p></li><li><p>Aplique el apartado anterior a la identidad del apartado <em>b)</em> y
     exprese $d_{C}^{*}$ en términos de la conjugada de la norma y de
     $\sigma_{C}$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p61" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p61"><p><em>a)</em> Sea $F(x,z) = f(z)+g(x-z)$. La función $(x,z) \mapsto f(z)$ es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p62" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p62"><p><em>a)</em> Sea $F(x,z) = f(z)+g(x-z)$. La función $(x,z) \mapsto f(z)$ es
 convexa trivialmente, y $(x,z) \mapsto g(x-z)$ es convexa al ser composición de
 convexa con afín $\Rightarrow F(x,z)$ es convexa $\Rightarrow$ el ínfimo parcial
 es convexo siempre que sea propio.</p>
@@ -3085,7 +3117,7 @@ $B = \{y : \lVert y\rVert_{*} \leq 1\}$, esto es</p>
     $h(x) := \inf\{g(z) : Az+b = x\}$, donde
     $g : \mathbb{R}^{m} \to \mathbb{R} \cup \{+\infty\}$ es propia. Exprese
     $h^{*}$ en términos de $g^{*}$, $A$ y $b$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p62" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p62"><p><em>a)</em></p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p63" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p63"><p><em>a)</em></p>
 <div class="display">\[
   g^{*}(y) = \sup_{x}\langle y,x\rangle - f(x) - \langle c,x\rangle - d
    = \sup_{x}\langle y-c,x\rangle - f(x) - d = f^{*}(y-c)-d .
@@ -3123,7 +3155,7 @@ $\mu$-fuertemente convexa, con $\mu&gt;0$.</p>
     $\lVert\nabla f^{*}(y_{1})-\nabla f^{*}(y_{2})\rVert_{2} \leq \frac{1}{\mu}\lVert y_{1}-y_{2}\rVert_{2}$.</p></li></ol>
 <p>Concluya que la conjugada de una función propia, cerrada y $\mu$-fuertemente
 convexa es diferenciable con gradiente $1/\mu$-Lipschitz.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p63" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p63"><p><em>a)</em> Se tiene, para todo $z$,</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p64" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p64"><p><em>a)</em> Se tiene, para todo $z$,</p>
 <div class="display">\[
   f(z) \geq f(x_{1}) + \langle y_{1}, z-x_{1}\rangle + \tfrac{\mu}{2}\lVert z-x_{1}\rVert^{2},
   \qquad
@@ -3153,7 +3185,7 @@ $\Rightarrow f(x(y))+f^{*}(y) = \langle x(y),y\rangle
 \Rightarrow y \in \partial f(x(y))$.  □</p>
 <p class="aviso">Faltan <em>c)</em> y <em>d)</em>, y con ellos la conclusión sobre el
 gradiente $1/\mu$-Lipschitz, que es lo que el ejercicio persigue.</p></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p64" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p64"><p><em>a)</em> Como arriba: sumando las dos desigualdades de subgradiente
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p65" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p65"><p><em>a)</em> Como arriba: sumando las dos desigualdades de subgradiente
 fuertemente convexas, evaluadas cruzadas,</p>
 <div class="display">\[
   0 \geq \langle y_{2}-y_{1},\, x_{1}-x_{2}\rangle + \mu\lVert x_{1}-x_{2}\rVert^{2}
@@ -3203,7 +3235,166 @@ $\lVert x_{1}-x_{2}\rVert&gt;0$,</p>
 \]</div>
 <p>$\therefore$ la conjugada de una función propia, cerrada y $\mu$-fuertemente
 convexa es diferenciable en todo $\mathbb{R}^{n}$ y su gradiente es
-$\frac{1}{\mu}$-Lipschitz.  □</p></div></section>
+$\frac{1}{\mu}$-Lipschitz.  □</p></div>
+<h3 id="ejercicios-convexa-x8">Los ejemplos de las notas que hacen falta aquí</h3>
+<p>Cada entrada es un ejemplo de las lecture notes, con el capítulo donde vive y
+el ejercicio que se apoya en él.</p>
+<h4 id="ejercicios-convexa-x9">Cálculo diferencial (§1)</h4>
+<div class="stmt ejercicio" id="ej:not-cuadratica"><div class="head">La cuadrática</div><div class="body"><p>$f(x) = \tfrac{1}{2}\lVert Ax-b\rVert^{2}$ tiene
+$\nabla f(x) = A\trans(Ax-b)$ y $Hf(x) = A\trans A$.</p></div></div>
+<p>Con $A=I$ es la función que se minimiza para proyectar, y es el gradiente
+$\nabla f(x) = x-z$ que convierte el criterio del Ejercicio 1 de la Tarea 4 en
+la caracterización variacional de la proyección. La versión de Frobenius,
+$f(X) = \tfrac12\lVert AX-B\rVert_{F}^{2}$ con $\nabla f(X) = A\trans(AX-B)$, es
+la misma cuenta en matrices.</p>
+<div class="stmt ejercicio" id="ej:not-logdet"><div class="head">La inversa y el log-determinante</div><div class="body"><p>Para $F(X) = X^{-1}$ sobre las invertibles, $\Dif F(X)H = -X^{-1}HX^{-1}$. Y
+para $F(X) = \log\det X$ sobre $\{X \in \Sym{n} : X \succ 0\}$, con el producto
+de Frobenius,</p>
+<div class="display">\[
+  \nabla F(X) = X^{-1}, \qquad \nabla^{2}F(X)[H] = -X^{-1}HX^{-1} .
+\]</div></div></div>
+<p>Es el Ejercicio 5 de la Tarea 1 con los signos cambiados, porque allí la
+función es $-\log\det X$. La derivada de la inversa es la que da la segunda
+derivada sin volver a expandir series.</p>
+<div class="stmt ejercicio" id="ej:not-norma-gateaux"><div class="head">La norma no es Gâteaux en el origen</div><div class="body"><p>$f(x) = \lVert x\rVert$ tiene $\dird{d}{f}(0) = \lVert d\rVert$, que existe para
+toda $d$ y no es lineal $\Rightarrow f$ no es Gâteaux diferenciable en $0$.</p></div></div>
+<p>Es el contraste con los Ejercicios 3 y 4 de la Tarea 1: allí las derivadas
+direccionales sí son lineales, y aun así falla la continuidad en uno y la
+diferenciabilidad Fréchet en el otro. La definición de Gâteaux pide
+<em>lineal y acotada</em>, y en $\mathbb{R}^{n}$ lo segundo es gratis, que es lo
+que se usa en el Ejercicio 6 de la Tarea 3.</p>
+<h4 id="ejercicios-convexa-x10">Convexos e interior relativo (§3)</h4>
+<div class="stmt ejercicio" id="ej:not-simplex"><div class="head">Poliedros y el símplex</div><div class="body"><p>Un poliedro $\{x : Ax \leq b\}$ es convexo por ser intersección de
+semiespacios. El símplex $\Delta_{n} = \{x \geq 0 : \mathbf{1}\trans x = 1\}$ es
+la intersección del ortante con un hiperplano, y
+$\Delta_{n} = \conv\{e_{1},\ldots,e_{n}\}$, con puntos extremos los $e_{i}$.</p></div></div>
+<p>Las dos descripciones se usan en sitios distintos: la de desigualdades en el
+Ejercicio 2 de la Tarea 2, para leer $\aff$ y $\rint$; la de envolvente convexa
+en el Ejercicio 2 de la Tarea 5, donde $\sigma_{\Delta_{n}}(y) = \max_{i} y_{i}$
+sale de que el supremo de una lineal sobre una envolvente convexa se alcanza en
+un generador.</p>
+<h4 id="ejercicios-convexa-x11">Conos (§4)</h4>
+<div class="stmt ejercicio" id="ej:not-conos"><div class="head">Los cuatro conos autoduales</div><div class="body"><p>$(\mathbb{R}^{n}_{+})^{\circ} = \mathbb{R}^{n}_{+}$; para un subespacio,
+$V^{\circ} = V^{\perp}$; el cono de segundo orden
+$\Qcono{n+1} = \{(t,x) : \lVert x\rVert \leq t\}$ es autodual, y la desigualdad
+que lo sostiene es Cauchy–Schwarz; y $\PSD{n}$ es autodual en $\Sym{n}$ con
+$\langle A,B\rangle = \tr(A\trans B)$, vía la descomposición espectral.</p></div></div>
+<p>Es el Ejercicio 4 de la Tarea 2 entero. El cono normal en un punto interior es
+$\{0\}$, no vacío, y eso es lo que hace funcionar la suma de Minkowski del
+Ejercicio 1 de la Tarea 6.</p>
+<h4 id="ejercicios-convexa-x12">Proyección y separación (§5)</h4>
+<div class="stmt ejercicio" id="ej:not-proyecciones"><div class="head">Proyecciones explícitas</div><div class="body"><ol class="lista"><li><p>Sobre el ortante $\mathbb{R}^{n}_{+}$:
+    $[\operatorname{Proj}(x)]_{i} = \max\{x_{i},0\} = (x_{i})_{+}$.</p></li><li><p>Sobre el hiperplano $H = \{x : \langle a,x\rangle = b\}$ con $a \neq 0$:
+    $\operatorname{Proj}_{H}(x) = x - \frac{\langle a,x\rangle-b}{\lVert a\rVert^{2}}\,a$.</p></li><li><p>Sobre la bola $\bar{B}(0;r)$: es $x$ si $\lVert x\rVert \leq r$, y
+    $rx/\lVert x\rVert$ en caso contrario.</p></li></ol></div></div>
+<p>La primera es la que aparece en el Ejercicio 6 de la Tarea 2: al relajar la
+restricción de igualdad del símplex queda una proyección sobre el ortante, y de
+ahí el $(y_{i}-\tau)_{+}$. La caracterización variacional
+$\langle z-p, x-p\rangle \leq 0$ para todo $x \in C$ es la que cierra ese
+ejercicio y el 1 de la Tarea 4, y la separación estricta de un punto y un
+convexo cerrado es la del 2 de la Tarea 3, la del 3 de la Tarea 3 y la del 4 de
+la Tarea 4.</p>
+<h4 id="ejercicios-convexa-x13">Funciones convexas (§6)</h4>
+<div class="stmt ejercicio" id="ej:not-max-soporte"><div class="head">Máximo de afines y función de soporte</div><div class="body"><p>$f(x) = \max_{i}\{\langle c_{i},x\rangle+b_{i}\}$ es convexa por ser un supremo
+de afines, y por lo mismo $\sigma_{C}(y) = \sup_{x \in C}\langle y,x\rangle$ es
+convexa para todo $C \neq \varnothing$.</p></div></div>
+<p>El supremo de afines es el patrón del Ejercicio 5 de la Tarea 4 y del 2 de la
+Tarea 6. La formulación epigráfica, que cambia $\min\max_{i}f_{i}$ por $\min t$
+sujeto a $f_{i}(x) \leq t$, es el mismo truco visto desde el epigrafo, y el
+epigrafo es el objeto del Ejercicio 5 de la Tarea 3.</p>
+<h4 id="ejercicios-convexa-x14">Existencia (§7)</h4>
+<div class="stmt ejercicio" id="ej:not-coerciva"><div class="head">Coercividad</div><div class="body"><p>Si $Q \succ 0$, entonces $f(x) = \tfrac12 x\trans Qx + \langle q,x\rangle + c$ es
+coerciva, pues
+$f(x) \geq \frac{\lambda_{\min}(Q)}{2}\lVert x\rVert^{2} - \lVert q\rVert\lVert x\rVert + c$,
+y por tanto tiene un único minimizador. Y $f(x) = \lVert x-z\rVert^{2}$ con $C$
+cerrado, convexo y no vacío devuelve la existencia y unicidad de la proyección.</p></div></div>
+<p>La cota cuadrática menos lineal es exactamente la que hace coerciva a
+$f - \langle y,\cdot\rangle$ en el Ejercicio 5 de la Tarea 6, con
+$\frac{\mu}{2}$ en lugar de $\frac{\lambda_{\min}}{2}$. Weierstrass sobre un
+conjunto de nivel compacto es lo que se usa en el Ejercicio 4 de la Tarea 3.</p>
+<h4 id="ejercicios-convexa-x15">Regularidad (§8)</h4>
+<div class="stmt ejercicio" id="ej:not-lipschitz"><div class="head">Convexa y finita implica localmente Lipschitz</div><div class="body"><p>Una función convexa es continua y de hecho localmente Lipschitz en
+$\rint(\operatorname{dom} f)$. En particular, si $f : \mathbb{R}^{n} \to \mathbb{R}$
+es convexa y finita en todo punto, es localmente Lipschitz en todo
+$\mathbb{R}^{n}$.</p></div></div>
+<p>Es la hipótesis que falta en el Ejercicio 6 de la Tarea 3 para poder aplicar
+el apartado <em>a)</em>. Y las caracterizaciones de primer y segundo orden,
+$f$ convexa $\Longleftrightarrow$ $\nabla f$ monótono $\Longleftrightarrow$
+$Hf \succeq 0$, son las que resuelven el Ejercicio 2 de la Tarea 4 en un
+renglón y el 3 de la misma tarea con una sola Hessiana.</p>
+<h4 id="ejercicios-convexa-x16">Subdiferencial (§9)</h4>
+<div class="stmt ejercicio" id="ej:not-subdif"><div class="head">Los cuatro subdiferenciales de cabecera</div><div class="body"><ol class="lista"><li><p>Si $f$ es diferenciable en $x$, entonces $\partial f(x) = \{\nabla f(x)\}$,
+    y recíprocamente un subdiferencial que es un solo vector obliga a que $f$ sea
+    diferenciable ahí.</p></li><li><p>$f(t) = |t|$ tiene $\partial f(0) = [-1,1]$.</p></li><li><p>$f(x) = \max_{i}\{\langle a_{i},x\rangle+b_{i}\}$ tiene
+    $\partial f(x) = \conv\{a_{i} : i \in I(x)\}$, con
+    $I(x) = \{i : f(x) = \langle a_{i},x\rangle+b_{i}\}$.</p></li><li><p>Para una norma,</p>
+<div class="display">\[
+      \partial\lVert x\rVert = \begin{cases}
+        \{g : \lVert g\rVert_{*} \leq 1,\ \langle g,x\rangle = \lVert x\rVert\}, &amp; x \neq 0, \\
+        \{g : \lVert g\rVert_{*} \leq 1\}, &amp; x = 0.
+      \end{cases}
+    \]</div></li></ol></div></div>
+<p>Los cuatro son el Ejercicio 5 de la Tarea 4: <em>(a)</em> decide cuándo el
+subdiferencial es un singleton, <em>(c)</em> es el apartado <em>b)</em> y
+<em>(d)</em> resuelve <em>a)</em> y <em>c)</em> de una vez, incluido el
+$x=0$ que es el caso con contenido. La equivalencia de <em>(a)</em> es también
+la que cierra el Ejercicio 5 de la Tarea 6.</p>
+<div class="stmt ejercicio" id="ej:not-subdif-vacio"><div class="head">Un subdiferencial vacío</div><div class="body"><p>$f(t) = -\sqrt{t}$ para $t \geq 0$ y $+\infty$ para $t&lt;0$ es convexa, y
+$\partial f(0) = \varnothing$: ninguna recta de pendiente finita soporta la
+gráfica desde abajo en el origen.</p></div></div>
+<p>Es la razón de que la existencia de subgradientes pida
+$x \in \rint(\operatorname{dom} f)$, y por tanto de que en el Ejercicio 5 de la
+Tarea 6 haya que tomar $x_{0} \in \rint(\operatorname{dom} f)$ y no un $x_{0}$
+cualquiera del dominio. En el
+Ejercicio 3 de la Tarea 5 el que $\partial p(x)$ nunca sea vacío, por ser $p$
+convexa y finita, es justo lo que hace que la igualdad falle cuando no hay
+alcance.</p>
+<h4 id="ejercicios-convexa-x17">Cálculo subdiferencial (§10)</h4>
+<div class="stmt ejercicio" id="ej:not-reglas"><div class="head">Las tres reglas</div><div class="body"><p>La regla del máximo, $\partial(\max_{i}f_{i})(x) = \conv\bigl(\bigcup_{i \in I(x)}\partial f_{i}(x)\bigr)$;
+la regla de la suma, $\partial(f+g) = \partial f + \partial g$ bajo
+$\rint(\operatorname{dom} f) \cap \rint(\operatorname{dom} g) \neq \varnothing$;
+y la regla de la cadena
+para $f \circ A$.</p></div></div>
+<p>La del máximo es el apartado <em>b)</em> del Ejercicio 5 de la Tarea 4. La de la
+suma, con su calificación, es todo el Ejercicio 1 de la Tarea 6: la hipótesis
+$\bigcap_{i}\rint C_{i} \neq \varnothing$ del enunciado es exactamente la
+calificación aplicada a las indicadoras.</p>
+<h4 id="ejercicios-convexa-x18">Conjugada (§11)</h4>
+<div class="stmt ejercicio" id="ej:not-conjugadas"><div class="head">Las seis conjugadas de cabecera</div><div class="body"><ol class="lista"><li><p>Afín: si $f(x) = \langle a,x\rangle+b$, entonces
+    $f^{*} = \delta_{\{a\}} - b$.</p></li><li><p>Cuadrática: si $Q \succ 0$ y $f(x) = \tfrac12 x\trans Qx$, entonces
+    $f^{*}(y) = \tfrac12 y\trans Q^{-1}y$. Con $Q=I$,
+    $f = \tfrac12\lVert\cdot\rVert^{2}$ es su propia conjugada.</p></li><li><p>Indicadora y soporte: $\delta_{C}^{*} = \sigma_{C}$.</p></li><li><p>Norma: si $f = \lambda\lVert\cdot\rVert$ con $\lambda&gt;0$, entonces
+    $f^{*} = \delta_{\{y\, :\, \lVert y\rVert_{*} \leq \lambda\}}$. (§11 lo
+    escribe para la euclidiana, donde $\lVert\cdot\rVert_{*} = \lVert\cdot\rVert$.)</p></li><li><p>Entropía en una variable: si $h(t) = t\log t - t$ para $t \geq 0$ y
+    $+\infty$ si $t&lt;0$, con $0\log0=0$, entonces $h^{*}(s) = e^{s}$.</p></li><li><p>Log-sum-exp: si $\operatorname{lse}(x) = \log(\sum_{i} e^{x_{i}})$,
+    entonces $\operatorname{lse}^{*}(p) = \sum_{i} p_{i}\log p_{i}$ si
+    $p \in \Delta_{m}$ y $+\infty$ si no.</p></li></ol></div></div>
+<p>Los cinco primeros son el Ejercicio 1 de la Tarea 5, apartados <em>a)</em> a
+<em>e)</em>: el <em>e)</em> es la entropía leída al revés, pues
+$(e^{\cdot})^{*} = h$. El último es el Ejercicio 4 de la misma tarea, y es la
+única de las seis que conviene llevar memorizada tal cual, porque reconstruirla
+cuesta.</p>
+<div class="stmt ejercicio" id="ej:not-fy"><div class="head">Fenchel–Young, Fenchel–Moreau y la inversión</div><div class="body"><p>$f(x)+f^{*}(y) \geq \langle x,y\rangle$ siempre, con igualdad si y solo si
+$y \in \partial f(x)$. Si $f$ es propia, cerrada y convexa, entonces
+$f^{**} = f$, y</p>
+<div class="display">\[
+  y \in \partial f(x) \Longleftrightarrow x \in \partial f^{*}(y) .
+\]</div></div></div>
+<p>La condición de igualdad es la herramienta más rentable de las dos últimas
+tareas: identifica el maximizador en el Ejercicio 4 de la Tarea 5 sin derivar
+nada, da el apartado <em>a)</em> del Ejercicio 2 de la Tarea 6, y con la
+inversión cierra el Ejercicio 5 de la Tarea 6. Fenchel–Moreau es lo que
+convierte la conjugada en representación variacional.</p>
+<h4 id="ejercicios-convexa-x19">Dos reglas de cálculo que no son ejemplos pero se usan igual</h4>
+<div class="stmt ejercicio" id="ej:not-extra"><div class="head">Funciones de soporte e ínfimos parciales</div><div class="body"><p>Para $C,D \neq \varnothing$ y $A$ lineal:
+$\sigma_{C+D} = \sigma_{C}+\sigma_{D}$ y $\sigma_{AC}(y) = \sigma_{C}(A\trans y)$.
+Y si $F(x,z)$ es conjuntamente convexa, entonces $x \mapsto \inf_{z}F(x,z)$ es
+convexa mientras no valga $-\infty$, y su conjugada es
+$h^{*}(y) = F^{*}(y,0)$.</p></div></div>
+<p>Las dos primeras rematan el Ejercicio 2 de la Tarea 5 y las dos segundas son los
+Ejercicios 3 de la Tarea 5 y 3 y 4 de la Tarea 6. Ninguna está en las notas como
+ejemplo con nombre, y las cuatro se prueban en un renglón, así que conviene
+saberlas de memoria y no buscarlas.</p></section>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
