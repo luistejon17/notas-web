@@ -1762,7 +1762,364 @@ para el dual, así que $f^{*}(-A\trans y)=0$ y la igualdad de Fenchel–Young
 para $f$ se reduce a $f(x)=\ip{x}{-A\trans y}$. Es el caso de igualdad de
 Hölder entre $\norm{\cdot}_{1}$ y $\norm{\cdot}_{\infty}$: obliga a que
 $(-A\trans y)_{i}=\lambda\operatorname{sgn}(x_{i})$ en cada $i$ con
-$x_{i}\neq0$, y deja libre el resto dentro de $[-\lambda,\lambda]$.</p></div></div></section></div>
+$x_{i}\neq0$, y deja libre el resto dentro de $[-\lambda,\lambda]$.</p></div></div></section>
+<section class="capitulo"><h2 id="clase-cap:gradiente">Descenso del gradiente</h2>
+<p>En este capítulo $f:\R^{n}\to\R$ es diferenciable y, cuando tiene
+minimizadores, se escribe $X^{*}=\argmin f$ y $f^{*}=\min f$.</p>
+<div class="stmt definicion" id="clase-c13:def-suave"><div class="head">Definición</div><div class="body"><p>Sea $L&gt;0$. Una función diferenciable $f$ es <span class="df">$L$-suave</span> si su gradiente es
+$L$-Lipschitz:</p>
+<div class="display">\[
+  \norm{\nabla f(x)-\nabla f(y)}\le L\norm{x-y}
+  \qquad\text{para todos }x,y\in\R^{n}.
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c13:obs-hessiana"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $f$ es convexa y de clase $C^{2}$, es $L$-suave si y solo si
+$Hf(x)\preceq LI$ para todo $x$. En efecto, $Hf(x)d$ es el límite de
+$\bigl(\nabla f(x+td)-\nabla f(x)\bigr)/t$, así que ser $L$-suave da
+$\norm{Hf(x)}\le L$, y recíprocamente
+$\nabla f(y)-\nabla f(x)=\int_{0}^{1}Hf(x+t(y-x))(y-x)\dd t$. Como $Hf\succeq0$ por
+la caracterización de segundo orden, $\norm{Hf(x)}\le L$ equivale a
+$Hf(x)\preceq LI$.</p></div></div>
+<div class="stmt corolario" id="clase-c13:cor-paso"><div class="head">Corolario decrecimiento de un paso</div><div class="body"><p>Sea $f$ $L$-suave y $x\in\R^{n}$. El <span class="df">modelo cuadrático</span></p>
+<div class="display">\[
+  q_{x}(y)=f(x)+\ip{\nabla f(x)}{y-x}+\frac{L}{2}\norm{y-x}^{2}
+\]</div>
+<p>cumple $f\le q_{x}$ y se minimiza en $x^{+}=x-\frac{1}{L}\nabla f(x)$. Si
+$0&lt;\alpha&lt;2/L$,</p>
+<div class="display">\[
+  f\bigl(x-\alpha\nabla f(x)\bigr)\le f(x)-\alpha\Bigl(1-\frac{\alpha L}{2}\Bigr)\norm{\nabla f(x)}^{2},
+\]</div>
+<p>y el decrecimiento garantizado es máximo en $\alpha=1/L$, donde</p>
+<div class="display">\[
+  f(x^{+})\le f(x)-\frac{1}{2L}\norm{\nabla f(x)}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p68">Ver demostración</button><div class="proof" id="clase-convexa-p68"><p>$f\le q_{x}$ es el lema del descenso, y $q_{x}$ es una cuadrática con gradiente
+$\nabla f(x)+L(y-x)$, que se anula en $x^{+}$. Con $y=x-\alpha\nabla f(x)$,</p>
+<div class="display">\[
+  q_{x}(y)=f(x)-\alpha\norm{\nabla f(x)}^{2}+\frac{L\alpha^{2}}{2}\norm{\nabla f(x)}^{2},
+\]</div>
+<p>que es la cota. El factor $\alpha(1-\alpha L/2)$ es positivo en $(0,2/L)$ y
+alcanza su máximo $1/(2L)$ en $\alpha=1/L$.</p></div>
+<div class="stmt definicion" id="clase-c13:def-metodo"><div class="head">Definición el método del gradiente</div><div class="body"><p>Dados $x_{0}\in\R^{n}$ y $\alpha&gt;0$, el <span class="df">método del gradiente con paso fijo</span>
+$\alpha$ genera</p>
+<div class="display">\[
+  x_{k+1}=x_{k}-\alpha\nabla f(x_{k}),\qquad k=0,1,2,\dots
+\]</div>
+<p>El paso $\alpha=1/L$ es el que minimiza el modelo cuadrático.</p></div></div>
+<div class="stmt definicion" id="clase-c13:def-backtracking"><div class="head">Definición <em>backtracking</em></div><div class="body"><p>Cuando no se conoce $L$, se estima en cada iteración. Dados $x_{0}$,
+$M_{-1}&gt;0$ y $\eta&gt;1$, para $k=0,1,2,\dots$:</p>
+<ol class="lista"><li><p>se parte de $M=M_{k-1}$;</p></li><li><p>mientras
+    $f\bigl(x_{k}-\frac{1}{M}\nabla f(x_{k})\bigr)&gt;f(x_{k})-\frac{1}{2M}\norm{\nabla f(x_{k})}^{2}$,
+    se reemplaza $M$ por $\eta M$;</p></li><li><p>se toman $M_{k}=M$ y $x_{k+1}=x_{k}-\frac{1}{M_{k}}\nabla f(x_{k})$.</p></li></ol>
+<p>Es un caso particular de la regla de Armijo.</p></div></div>
+<div class="stmt observacion" id="clase-c13:obs-backtracking"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La prueba de <em>(ii)</em> pide que el modelo cuadrático con constante $M$ quede
+por encima de $f$ en el punto de prueba, y por el lema del descenso eso se
+cumple para todo $M\ge L$. Luego el bucle acaba tras un número finito de
+aumentos, y $M_{k}\le\max\{M_{-1},\eta L\}$ para todo $k$: si $M$ tuvo que
+crecer, su valor anterior falló la prueba y por tanto era menor que $L$.</p></div></div>
+<div class="stmt lema" id="clase-c13:lem-tres-puntos"><div class="head">Lema desigualdad de los tres puntos</div><div class="body"><p>Sea $f$ convexa y $L$-suave, sea $0&lt;\alpha\le1/L$ y $x^{+}=x-\alpha\nabla f(x)$.
+Entonces, para todo $z\in\R^{n}$,</p>
+<div class="display">\[
+  f(x^{+})\le f(z)+\frac{1}{2\alpha}\Bigl(\norm{z-x}^{2}-\norm{z-x^{+}}^{2}\Bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p69">Ver demostración</button><div class="proof" id="clase-convexa-p69"><p>Sea $g=\nabla f(x)$. El decrecimiento de un paso y la caracterización de primer
+orden de la convexidad dan</p>
+<div class="display">\[
+  f(x^{+})\le f(x)-\alpha\Bigl(1-\frac{\alpha L}{2}\Bigr)\norm{g}^{2},
+  \qquad
+  f(x)\le f(z)+\ip{g}{x-z}.
+\]</div>
+<p>Por otro lado, como $z-x^{+}=z-x+\alpha g$,</p>
+<div class="display">\[
+  \ip{g}{x-z}=\frac{1}{2\alpha}\Bigl(\norm{z-x}^{2}-\norm{z-x^{+}}^{2}\Bigr)+\frac{\alpha}{2}\norm{g}^{2}.
+\]</div>
+<p>Encadenando las tres,</p>
+<div class="display">\[
+  f(x^{+})\le f(z)+\frac{1}{2\alpha}\Bigl(\norm{z-x}^{2}-\norm{z-x^{+}}^{2}\Bigr)
+  -\frac{\alpha}{2}(1-\alpha L)\norm{g}^{2},
+\]</div>
+<p>y el último término es no positivo porque $\alpha L\le1$.</p></div>
+<div class="stmt observacion" id="clase-c13:obs-tres-puntos"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $\alpha=1/L$ el término residual desaparece y la desigualdad se lee en el
+modelo cuadrático. Completando cuadrados,
+$q_{x}(z)=q_{x}(x^{+})+\frac{L}{2}\norm{z-x^{+}}^{2}$, y basta combinar
+$f(x^{+})\le q_{x}(x^{+})$ con $q_{x}(z)\le f(z)+\frac{L}{2}\norm{z-x}^{2}$, que
+es la convexidad. La cota relaciona a la vez el punto $z$, el iterado $x$ y el
+iterado nuevo $x^{+}$, y de ahí su nombre.</p></div></div>
+<div class="stmt teorema" id="clase-c13:teo-tasa"><div class="head">Teorema tasa $O(1/k)$</div><div class="body"><p>Sea $f$ convexa y $L$-suave con $X^{*}\neq\varnothing$, y sea $(x_{k})$ el
+método del gradiente con paso $0&lt;\alpha\le1/L$. Para todo $x^{*}\in X^{*}$ y
+todo $k\ge1$,</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2\alpha k}.
+\]</div>
+<p>En particular, con $\alpha=1/L$ se tiene
+$f(x_{k})-f^{*}\le L\norm{x_{0}-x^{*}}^{2}/(2k)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p70">Ver demostración</button><div class="proof" id="clase-convexa-p70"><p>La desigualdad de los tres puntos con $x=x_{i}$ y $z=x^{*}$ da</p>
+<div class="display">\[
+  0\le f(x_{i+1})-f^{*}\le\frac{1}{2\alpha}\Bigl(\norm{x_{i}-x^{*}}^{2}-\norm{x_{i+1}-x^{*}}^{2}\Bigr).
+\]</div>
+<p>Los valores $f(x_{i})$ no crecen por el decrecimiento de un paso, así que
+$f(x_{k})-f^{*}\le f(x_{i+1})-f^{*}$ para $i=0,\dots,k-1$. Sumando, la suma de
+la derecha es telescópica:</p>
+<div class="display">\[
+  k\bigl(f(x_{k})-f^{*}\bigr)\le\sum_{i=0}^{k-1}\bigl(f(x_{i+1})-f^{*}\bigr)
+  \le\frac{1}{2\alpha}\Bigl(\norm{x_{0}-x^{*}}^{2}-\norm{x_{k}-x^{*}}^{2}\Bigr)
+  \le\frac{\norm{x_{0}-x^{*}}^{2}}{2\alpha}. 
+\]</div></div>
+<div class="stmt proposicion" id="clase-c13:prop-fejer"><div class="head">Proposición</div><div class="body"><p>En las condiciones del teorema,
+$\norm{x_{k+1}-x^{*}}\le\norm{x_{k}-x^{*}}$ para todo $x^{*}\in X^{*}$, es
+decir, la sucesión es <span class="df">Fejér monótona</span> respecto de $X^{*}$, y converge a un
+punto de $X^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p71">Ver demostración</button><div class="proof" id="clase-convexa-p71"><p>La monotonía es la primera desigualdad de la prueba anterior, cuyo lado
+izquierdo es no negativo. En particular $(x_{k})$ es acotada y tiene una
+subsucesión $x_{k_{j}}\to\bar{x}$. Por la tasa y la continuidad de $f$,
+$f(\bar{x})=f^{*}$, luego $\bar{x}\in X^{*}$. Entonces $\norm{x_{k}-\bar{x}}$ es
+no creciente y tiene una subsucesión que tiende a $0$, así que tiende a $0$.</p></div>
+<div class="stmt corolario" id="clase-c13:cor-complejidad"><div class="head">Corolario complejidad</div><div class="body"><p>Sea $R=\dist(x_{0},X^{*})$. Con $\alpha=1/L$, para garantizar
+$f(x_{k})-f^{*}\le\varepsilon$ basta $k\ge LR^{2}/(2\varepsilon)$, es decir,
+$O(LR^{2}/\varepsilon)$ iteraciones.</p></div></div>
+<div class="stmt proposicion" id="clase-c13:prop-backtracking"><div class="head">Proposición tasa con <em>backtracking</em><sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $f$ convexa y $L$-suave con $X^{*}\neq\varnothing$, y sea $(x_{k})$ generada
+por <em>backtracking</em> con $M_{k}\le\bar{L}$ para todo $k$. Entonces</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\frac{\bar{L}\norm{x_{0}-x^{*}}^{2}}{2k}.
+\]</div>
+<p>Por la observación sobre el <em>backtracking</em>, sirve
+$\bar{L}=\max\{M_{-1},\eta L\}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p72">Ver demostración</button><div class="proof" id="clase-convexa-p72"><p>Sea $\alpha_{i}=1/M_{i}$. El criterio aceptado es el decrecimiento de un paso con
+$M_{i}$ en lugar de $L$, y la prueba de la desigualdad de los tres puntos no usó
+nada más que eso y la convexidad. Luego</p>
+<div class="display">\[
+  2\alpha_{i}\bigl(f(x_{i+1})-f^{*}\bigr)\le\norm{x_{i}-x^{*}}^{2}-\norm{x_{i+1}-x^{*}}^{2}.
+\]</div>
+<p>Los valores no crecen, así que al sumar
+$2\bigl(f(x_{k})-f^{*}\bigr)\sum_{i&lt;k}\alpha_{i}\le\norm{x_{0}-x^{*}}^{2}$, y cada
+$\alpha_{i}\ge1/\bar{L}$.</p></div>
+<div class="stmt teorema" id="clase-c13:teo-cocoercividad"><div class="head">Teorema cocoercividad del gradiente</div><div class="body"><p>Si $f$ es convexa y $L$-suave, para todos $x,y$</p>
+<div class="display">\[
+  \ip{\nabla f(x)-\nabla f(y)}{x-y}\ge\frac{1}{L}\norm{\nabla f(x)-\nabla f(y)}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p73">Ver demostración</button><div class="proof" id="clase-convexa-p73"><p>Fije $y$ y sea $h(z)=f(z)-\ip{\nabla f(y)}{z}$, que es convexa, $L$-suave y
+tiene $\nabla h(y)=0$, así que $y$ la minimiza. El decrecimiento de un paso para
+$h$ en $x$ da</p>
+<div class="display">\[
+  h(y)\le h\Bigl(x-\frac{1}{L}\nabla h(x)\Bigr)\le h(x)-\frac{1}{2L}\norm{\nabla h(x)}^{2},
+\]</div>
+<p>y como $\nabla h(x)=\nabla f(x)-\nabla f(y)$, esto es</p>
+<div class="display">\[
+  f(x)-f(y)-\ip{\nabla f(y)}{x-y}\ge\frac{1}{2L}\norm{\nabla f(x)-\nabla f(y)}^{2}.
+\]</div>
+<p>Basta sumarla con la misma desigualdad con $x$ e $y$ intercambiados.</p></div>
+<h3 id="clase-convexa-x6">El caso fuertemente convexo</h3>
+<div class="stmt proposicion" id="clase-c13:prop-sandwich"><div class="head">Proposición</div><div class="body"><p>Sea $f$ $L$-suave y $\mu$-fuertemente convexa con $\mu&gt;0$. Entonces $\mu\le L$,
+$f$ tiene un único minimizador $x^{*}$, y para todo $x$</p>
+<div class="display">\[
+  \frac{\mu}{2}\norm{x-x^{*}}^{2}\le f(x)-f^{*}\le\frac{L}{2}\norm{x-x^{*}}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p74">Ver demostración</button><div class="proof" id="clase-convexa-p74"><p>Por las caracterizaciones de la convexidad fuerte y por Cauchy–Schwarz,</p>
+<div class="display">\[
+  \mu\norm{x-y}^{2}\le\ip{\nabla f(x)-\nabla f(y)}{x-y}\le L\norm{x-y}^{2},
+\]</div>
+<p>de donde $\mu\le L$. La caracterización <em>(ii)</em> de la convexidad fuerte hace
+a $f$ coerciva, así que tiene minimizador, que es único por ser $f$ fuertemente
+convexa. La cota de abajo es el crecimiento cuadrático, y la de arriba es el
+lema del descenso en $x^{*}$, donde $\nabla f(x^{*})=0$.</p></div>
+<div class="stmt lema" id="clase-c13:lem-pl"><div class="head">Lema desigualdad de Polyak–Łojasiewicz</div><div class="body"><p>Si $f$ es diferenciable y $\mu$-fuertemente convexa con minimizador $x^{*}$,</p>
+<div class="display">\[
+  \mu\bigl(f(x)-f^{*}\bigr)\le\frac12\norm{\nabla f(x)}^{2}
+  \qquad\text{para todo }x .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p75">Ver demostración</button><div class="proof" id="clase-convexa-p75"><p>La caracterización <em>(ii)</em> de la convexidad fuerte con $y=x^{*}$ da</p>
+<div class="display">\[
+  f^{*}-f(x)\ge\ip{\nabla f(x)}{x^{*}-x}+\frac{\mu}{2}\norm{x^{*}-x}^{2}.
+\]</div>
+<p>Para cualquier $d$, completando cuadrados,</p>
+<div class="display">\[
+  \ip{\nabla f(x)}{d}+\frac{\mu}{2}\norm{d}^{2}
+  =\frac{\mu}{2}\norm{d+\frac{1}{\mu}\nabla f(x)}^{2}-\frac{1}{2\mu}\norm{\nabla f(x)}^{2}
+  \ge-\frac{1}{2\mu}\norm{\nabla f(x)}^{2},
+\]</div>
+<p>y basta tomar $d=x^{*}-x$.</p></div>
+<div class="stmt teorema" id="clase-c13:teo-lineal"><div class="head">Teorema tasa lineal</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, el método del gradiente con
+paso $1/L$ cumple</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\Bigl(1-\frac{\mu}{L}\Bigr)^{k}\bigl(f(x_{0})-f^{*}\bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p76">Ver demostración</button><div class="proof" id="clase-convexa-p76"><p>Por el decrecimiento de un paso y la desigualdad de Polyak–Łojasiewicz,</p>
+<div class="display">\[
+  f(x_{k+1})-f^{*}\le f(x_{k})-f^{*}-\frac{1}{2L}\norm{\nabla f(x_{k})}^{2}
+  \le\Bigl(1-\frac{\mu}{L}\Bigr)\bigl(f(x_{k})-f^{*}\bigr),
+\]</div>
+<p>y basta iterar.</p></div>
+<div class="stmt definicion" id="clase-c13:def-condicion"><div class="head">Definición</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, su <span class="df">número de condición</span> es
+$\kappa=L/\mu\ge1$.</p></div></div>
+<div class="stmt corolario" id="clase-c13:cor-complejidad-lineal"><div class="head">Corolario <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con paso $1/L$, reducir el error inicial $f(x_{0})-f^{*}$ por un factor
+$\varepsilon$ pide $O\bigl(\kappa\log\frac{1}{\varepsilon}\bigr)$ iteraciones.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p77">Ver demostración</button><div class="proof" id="clase-convexa-p77"><p>El factor de la tasa lineal es $1-1/\kappa\le e^{-1/\kappa}$, así que basta
+$k\ge\kappa\log(1/\varepsilon)$.</p></div>
+<div class="stmt lema" id="clase-c13:lem-interpolacion"><div class="head">Lema interpolación</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, para todos $x,y$</p>
+<div class="display">\[
+  \ip{\nabla f(x)-\nabla f(y)}{x-y}\ge\frac{\mu L}{\mu+L}\norm{x-y}^{2}
+  +\frac{1}{\mu+L}\norm{\nabla f(x)-\nabla f(y)}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p78">Ver demostración</button><div class="proof" id="clase-convexa-p78"><p>Sea $h(u)=f(u)-\frac{\mu}{2}\norm{u}^{2}$, que es convexa por la definición de
+convexidad fuerte. Restando $\frac{\mu}{2}\norm{y}^{2}$ en el lema del descenso
+para $f$,</p>
+<div class="display">\[
+  h(y)\le h(x)+\ip{\nabla h(x)}{y-x}+\frac{L-\mu}{2}\norm{y-x}^{2}.
+\]</div>
+<p>Si $L&gt;\mu$, la prueba de la cocoercividad no usó más que la convexidad y una
+cota superior de esta forma, así que da
+$(L-\mu)\ip{\nabla h(x)-\nabla h(y)}{x-y}\ge\norm{\nabla h(x)-\nabla h(y)}^{2}$.
+Con $a=\nabla f(x)-\nabla f(y)$ y $d=x-y$ se tiene
+$\nabla h(x)-\nabla h(y)=a-\mu d$, y la desigualdad queda</p>
+<div class="display">\[
+  (L-\mu)\ip{a-\mu d}{d}\ge\norm{a-\mu d}^{2}=\norm{a}^{2}-2\mu\ip{a}{d}+\mu^{2}\norm{d}^{2},
+\]</div>
+<p>que reagrupada es $(L+\mu)\ip{a}{d}\ge\norm{a}^{2}+\mu L\norm{d}^{2}$. Si
+$L=\mu$, la cota superior y la convexidad dicen que $h$ es afín, luego
+$a=\mu d$ y se tiene la igualdad.</p></div>
+<div class="stmt teorema" id="clase-c13:teo-paso-optimo"><div class="head">Teorema el paso óptimo</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, el método del gradiente con
+paso $\alpha=2/(L+\mu)$ cumple</p>
+<div class="display">\[
+  \norm{x_{k}-x^{*}}\le\Bigl(\frac{L-\mu}{L+\mu}\Bigr)^{k}\norm{x_{0}-x^{*}},
+  \qquad
+  f(x_{k})-f^{*}\le\frac{L}{2}\Bigl(\frac{L-\mu}{L+\mu}\Bigr)^{2k}\norm{x_{0}-x^{*}}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p79">Ver demostración</button><div class="proof" id="clase-convexa-p79"><p>Sea $g=\nabla f(x)$ y $d=x-x^{*}$. El lema de interpolación con $y=x^{*}$, donde
+el gradiente se anula, da
+$\ip{g}{d}\ge\frac{\mu L}{\mu+L}\norm{d}^{2}+\frac{1}{\mu+L}\norm{g}^{2}$. Luego,
+para $x^{+}=x-\alpha g$,</p>
+<div class="display">\[
+  \norm{x^{+}-x^{*}}^{2}=\norm{d}^{2}-2\alpha\ip{g}{d}+\alpha^{2}\norm{g}^{2}
+  \le\Bigl(1-\frac{2\alpha\mu L}{\mu+L}\Bigr)\norm{d}^{2}
+  +\Bigl(\alpha^{2}-\frac{2\alpha}{\mu+L}\Bigr)\norm{g}^{2}.
+\]</div>
+<p>Con $\alpha=2/(L+\mu)$ el segundo coeficiente se anula y el primero vale
+$1-4\mu L/(L+\mu)^{2}=\bigl(\frac{L-\mu}{L+\mu}\bigr)^{2}$. La cota en valor sale
+de la de distancia y de $f(x)-f^{*}\le\frac{L}{2}\norm{x-x^{*}}^{2}$.</p></div>
+<div class="stmt ejemplo" id="clase-c13:ej-cuadratica"><div class="head">Ejemplo la cuadrática</div><div class="body"><p>Sea $f(x)=\frac12x\trans Qx-b\trans x$ con $Q\succ0$. Entonces
+$L=\lambda_{\max}(Q)$, $\mu=\lambda_{\min}(Q)$, y el método con paso $\alpha$
+cumple</p>
+<div class="display">\[
+  x_{k+1}-x^{*}=(I-\alpha Q)(x_{k}-x^{*}),
+\]</div>
+<p>así que la tasa en distancia es exactamente $\max_{i}\abs{1-\alpha\lambda_{i}(Q)}$.
+Ese máximo se minimiza en $\alpha=2/(L+\mu)$, donde vale
+$(\kappa-1)/(\kappa+1)$, y cuando $\kappa$ es grande las componentes asociadas a
+valores propios grandes y pequeños se contraen a velocidades muy distintas.</p></div></div>
+<div class="stmt observacion" id="clase-c13:obs-precondicionar"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Un cambio de variables $x=Pz$ cambia $Q$ por $P\trans QP$. Escoger $P$ para que
+ese espectro esté más concentrado, es decir con $\kappa$ menor, es
+<span class="df">precondicionar</span>.</p></div></div>
+<h3 id="clase-convexa-x7">Criterios de parada</h3>
+<div class="stmt proposicion" id="clase-c13:prop-parada"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $f$ $L$-suave con $f^{*}=\inf f$ finito. Entonces</p>
+<div class="display">\[
+  \frac{1}{2L}\norm{\nabla f(x)}^{2}\le f(x)-f^{*}.
+\]</div>
+<p>Si además $f$ es convexa, $f(x)-f^{*}\le\dist(x,X^{*})\,\norm{\nabla f(x)}$; y si
+es $\mu$-fuertemente convexa, $f(x)-f^{*}\le\frac{1}{2\mu}\norm{\nabla f(x)}^{2}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p80">Ver demostración</button><div class="proof" id="clase-convexa-p80"><p>La primera es el decrecimiento de un paso junto con $f^{*}\le f(x^{+})$. Para la
+segunda, si $x^{*}\in X^{*}$ la caracterización de primer orden da
+$f(x)-f^{*}\le\ip{\nabla f(x)}{x-x^{*}}\le\norm{\nabla f(x)}\norm{x-x^{*}}$, y
+basta tomar el ínfimo en $x^{*}$. La tercera es Polyak–Łojasiewicz.</p></div>
+<div class="stmt observacion" id="clase-c13:obs-parada-paso"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La primera cota va en una sola dirección: un gradiente grande certifica que el
+punto no es óptimo, y uno pequeño no acota el error sin una de las otras dos
+hipótesis. En la práctica se para cuando el paso o el cambio del objetivo son
+pequeños,
+por ejemplo con
+$\norm{x_{k+1}-x_{k}}\le\varepsilon_{\mathrm{abs}}+\varepsilon_{\mathrm{rel}}\max\{1,\norm{x_{k}}\}$.
+Esos criterios detectan estancamiento pero no certifican optimalidad, porque un
+paso puede ser pequeño por una mala escala. Cuando el problema tiene dual, la
+brecha de dualidad de Fenchel–Rockafellar sí es un certificado.</p></div></div>
+<div class="stmt observacion" id="clase-c13:obs-no-convexo"><div class="head">Observación el caso no convexo<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sin convexidad, sumando el decrecimiento de un paso con $\alpha=1/L$ queda</p>
+<div class="display">\[
+  \min_{0\le i&lt;k}\norm{\nabla f(x_{i})}\le\sqrt{\frac{2L\bigl(f(x_{0})-\inf f\bigr)}{k}},
+\]</div>
+<p>que solo garantiza acercarse a puntos críticos.</p></div></div></section>
+<section class="capitulo"><h2 id="clase-cap:aceleracion">Aceleración</h2>
+<div class="stmt definicion" id="clase-c14:def-momento"><div class="head">Definición métodos con momento</div><div class="body"><p>El <span class="df">método de la bola pesada</span> corrige el paso del gradiente con el
+desplazamiento anterior,</p>
+<div class="display">\[
+  x_{k+1}=x_{k}-\alpha\nabla f(x_{k})+\beta_{k}(x_{k}-x_{k-1}),
+\]</div>
+<p>y un <span class="df">método con momento</span> evalúa el gradiente en un punto extrapolado:</p>
+<div class="display">\[
+  x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k}),
+  \qquad
+  y_{k+1}=x_{k+1}+\beta_{k}(x_{k+1}-x_{k}).
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c14:obs-beta"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Todo depende de los $\beta_{k}$, y un momento arbitrario puede oscilar o
+divergir. La bola pesada puede ser muy eficaz en cuadráticas, pero su garantía
+no es global; el método de Nesterov escoge los coeficientes junto con un
+potencial que decrece en cada iteración, y eso le da una tasa para toda función
+convexa y $L$-suave.</p></div></div>
+<div class="stmt definicion" id="clase-c14:def-nesterov"><div class="head">Definición método acelerado de Nesterov</div><div class="body"><p>Sea $f$ convexa y $L$-suave y sea $x_{0}\in\R^{n}$. Se toman $A_{0}=0$ y
+$z_{0}=x_{0}$, y para $k=0,1,2,\dots$:</p>
+<ol class="lista"><li><p>$a_{k+1}&gt;0$ es la raíz positiva de $La_{k+1}^{2}=A_{k}+a_{k+1}$, es decir
+    $a_{k+1}=\frac{1+\sqrt{1+4LA_{k}}}{2L}$, y $A_{k+1}=A_{k}+a_{k+1}$;</p></li><li><p>$y_{k}=\dfrac{A_{k}x_{k}+a_{k+1}z_{k}}{A_{k+1}}$;</p></li><li><p>$x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k})$ y
+    $z_{k+1}=z_{k}-a_{k+1}\nabla f(y_{k})$.</p></li></ol></div></div>
+<div class="stmt teorema" id="clase-c14:teo-tasa"><div class="head">Teorema tasa $O(1/k^{2})$</div><div class="body"><p>Sea $f$ convexa y $L$-suave con $X^{*}\neq\varnothing$. El método acelerado
+cumple, para todo $x^{*}\in X^{*}$ y todo $k\ge1$,</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2A_{k}}
+  \le\frac{2L\norm{x_{0}-x^{*}}^{2}}{(k+1)^{2}}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p81">Ver demostración</button><div class="proof" id="clase-convexa-p81"><p>Queremos mostrar, por inducción, que el potencial
+$A_{k}\bigl(f(x_{k})-f^{*}\bigr)+\frac12\norm{z_{k}-x^{*}}^{2}$ no crece. Como
+en $k=0$ vale $\frac12\norm{x_{0}-x^{*}}^{2}$, eso da la primera desigualdad.
+Escriba $A=A_{k}$, $a=a_{k+1}$, $A^{+}=A+a$ y $g=\nabla f(y_{k})$. Por la
+caracterización de primer orden en $y_{k}$, aplicada hacia $x_{k}$ y hacia
+$x^{*}$, y como $A(x_{k}-y_{k})+a(x^{*}-y_{k})=a(x^{*}-z_{k})$,</p>
+<div class="display">\[
+  Af(x_{k})+af^{*}\ge A^{+}f(y_{k})+a\ip{g}{x^{*}-z_{k}}.
+\]</div>
+<p>Por otro lado, el decrecimiento de un paso y la definición de $z_{k+1}$ dan</p>
+<div class="display">\begin{gather*}
+  f(x_{k+1})\le f(y_{k})-\frac{1}{2L}\norm{g}^{2},\\
+  \frac12\norm{z_{k+1}-x^{*}}^{2}
+  =\frac12\norm{z_{k}-x^{*}}^{2}+a\ip{g}{x^{*}-z_{k}}+\frac{a^{2}}{2}\norm{g}^{2}.
+\end{gather*}</div>
+<p>Como $La^{2}=A^{+}$, al multiplicar la primera por $A^{+}$ y sumarle la segunda
+los términos en $\norm{g}^{2}$ se cancelan, y con la desigualdad anterior</p>
+<div class="display">\[
+  A^{+}f(x_{k+1})+\frac12\norm{z_{k+1}-x^{*}}^{2}
+  \le Af(x_{k})+af^{*}+\frac12\norm{z_{k}-x^{*}}^{2},
+\]</div>
+<p>que es la disminución del potencial después de restar $A^{+}f^{*}=Af^{*}+af^{*}$.</p>
+<p>Para la segunda desigualdad, sea $t_{k}=\sqrt{LA_{k+1}}$ para $k\ge0$. Por la
+ecuación de $a_{k+1}$, $t_{k}=La_{k+1}$, y $t_{0}=1$ porque $A_{1}=a_{1}=1/L$.
+Además $t_{k+1}^{2}=LA_{k+2}=LA_{k+1}+La_{k+2}=t_{k}^{2}+t_{k+1}$, luego</p>
+<div class="display">\[
+  t_{k+1}=\frac{1+\sqrt{1+4t_{k}^{2}}}{2}\ge t_{k}+\frac12 .
+\]</div>
+<p>Así $t_{k}\ge(k+2)/2$, y $A_{k}=t_{k-1}^{2}/L\ge(k+1)^{2}/(4L)$.</p></div>
+<div class="stmt proposicion" id="clase-c14:prop-momento"><div class="head">Proposición la forma de momento</div><div class="body"><p>Sea $t_{0}=1$ y $t_{k+1}=\bigl(1+\sqrt{1+4t_{k}^{2}}\bigr)/2$, que por la prueba
+anterior es $t_{k}=\sqrt{LA_{k+1}}$. Los iterados $x_{k}$ del método acelerado
+son los del método con momento</p>
+<div class="display">\[
+  x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k}),
+  \qquad
+  y_{k+1}=x_{k+1}+\frac{t_{k}-1}{t_{k+1}}\,(x_{k+1}-x_{k}),
+\]</div>
+<p>empezando en $y_{0}=x_{0}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p82">Ver demostración</button><div class="proof" id="clase-convexa-p82"><p>En $k=0$ se tiene $A_{0}=0$, luego $y_{0}=z_{0}=x_{0}$. Despejando $z_{k}$ de la
+definición de $y_{k}$, y usando $\nabla f(y_{k})=L(y_{k}-x_{k+1})$ y
+$La_{k+1}=A_{k+1}/a_{k+1}=t_{k}$,</p>
+<div class="display">\begin{align*}
+  z_{k+1}&amp;=\frac{A_{k+1}y_{k}-A_{k}x_{k}}{a_{k+1}}-a_{k+1}L\,(y_{k}-x_{k+1})\\
+  &amp;=\frac{A_{k+1}x_{k+1}-A_{k}x_{k}}{a_{k+1}}
+  =x_{k}+t_{k}(x_{k+1}-x_{k}).
+\end{align*}</div>
+<p>Sustituyendo en la definición de $y_{k+1}$, con $A_{k+1}=A_{k+2}-a_{k+2}$ y
+$a_{k+2}/A_{k+2}=1/(La_{k+2})=1/t_{k+1}$,</p>
+<div class="display">\begin{align*}
+  y_{k+1}&amp;=\frac{A_{k+1}x_{k+1}+a_{k+2}z_{k+1}}{A_{k+2}}
+  =x_{k+1}+\frac{a_{k+2}}{A_{k+2}}(t_{k}-1)(x_{k+1}-x_{k})\\
+  &amp;=x_{k+1}+\frac{t_{k}-1}{t_{k+1}}(x_{k+1}-x_{k}). 
+\end{align*}</div></div>
+<div class="stmt corolario" id="clase-c14:cor-complejidad"><div class="head">Corolario complejidad acelerada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $R=\dist(x_{0},X^{*})$. Para garantizar $f(x_{k})-f^{*}\le\varepsilon$ basta
+$k+1\ge R\sqrt{2L/\varepsilon}$, es decir, $O\bigl(\sqrt{LR^{2}/\varepsilon}\bigr)$
+iteraciones, contra las $O(LR^{2}/\varepsilon)$ del método del gradiente.</p></div></div>
+<div class="stmt observacion" id="clase-c14:obs-no-monotono"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El potencial de la prueba decrece y el objetivo no tiene por qué: los valores
+$f(x_{k})$ del método acelerado pueden oscilar. Hay variantes monótonas que en
+cada paso se quedan con el mejor punto visto.</p></div></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -2794,7 +3151,394 @@ para el dual, así que $f^{*}(-A\trans y)=0$ y la igualdad de Fenchel–Young
 para $f$ se reduce a $f(x)=\ip{x}{-A\trans y}$. Es el caso de igualdad de
 Hölder entre $\norm{\cdot}_{1}$ y $\norm{\cdot}_{\infty}$: obliga a que
 $(-A\trans y)_{i}=\lambda\operatorname{sgn}(x_{i})$ en cada $i$ con
-$x_{i}\neq0$, y deja libre el resto dentro de $[-\lambda,\lambda]$.</p></div></div></section></div>
+$x_{i}\neq0$, y deja libre el resto dentro de $[-\lambda,\lambda]$.</p></div></div></section>
+<section class="capitulo"><h2 id="general-cap:gradiente">Descenso del gradiente</h2>
+<p>En este capítulo $\Hs$ es un espacio de Hilbert y $f:\Hs\to\R$ es Fréchet
+diferenciable, con gradiente $\nabla f(x)\in\Hs$. Cuando $f$ tiene
+minimizadores, se escribe $X^{*}=\argmin f$ y $f^{*}=\min f$.</p>
+<div class="stmt definicion" id="general-c13:def-suave"><div class="head">Definición</div><div class="body"><p>Sea $L&gt;0$. La función $f$ es <span class="df">$L$-suave</span> si su gradiente es $L$-Lipschitz:</p>
+<div class="display">\[
+  \norm{\nabla f(x)-\nabla f(y)}\le L\norm{x-y}
+  \qquad\text{para todos }x,y\in\Hs.
+\]</div></div></div>
+<div class="stmt observacion" id="general-c13:obs-hessiana"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $f$ es convexa y $L$-suave, la función $\frac{L}{2}\norm{\cdot}^{2}-f$ es
+convexa. En efecto, por Cauchy–Schwarz
+$\ip{\nabla f(x)-\nabla f(y)}{x-y}\le L\norm{x-y}^{2}$, que es la monotonía de su
+gradiente $Lx-\nabla f(x)$, y basta la caracterización de primer orden. En
+$\R^{n}$ y para $f$ de clase $C^{2}$, es la cota $Hf\preceq LI$. El recíproco es
+una de las equivalencias del teorema de Baillon y Haddad.</p></div></div>
+<div class="stmt corolario" id="general-c13:cor-paso"><div class="head">Corolario decrecimiento de un paso</div><div class="body"><p>Sea $f$ $L$-suave y $x\in\Hs$. El <span class="df">modelo cuadrático</span></p>
+<div class="display">\[
+  q_{x}(y)=f(x)+\ip{\nabla f(x)}{y-x}+\frac{L}{2}\norm{y-x}^{2}
+\]</div>
+<p>cumple $f\le q_{x}$ y se minimiza en $x^{+}=x-\frac{1}{L}\nabla f(x)$. Si
+$0&lt;\alpha&lt;2/L$,</p>
+<div class="display">\[
+  f\bigl(x-\alpha\nabla f(x)\bigr)\le f(x)-\alpha\Bigl(1-\frac{\alpha L}{2}\Bigr)\norm{\nabla f(x)}^{2},
+\]</div>
+<p>y el decrecimiento garantizado es máximo en $\alpha=1/L$, donde</p>
+<div class="display">\[
+  f(x^{+})\le f(x)-\frac{1}{2L}\norm{\nabla f(x)}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p56">Ver demostración</button><div class="proof" id="general-convexa-p56"><p>$f\le q_{x}$ es el lema del descenso, y $q_{x}$ es una cuadrática con gradiente
+$\nabla f(x)+L(y-x)$, que se anula en $x^{+}$. Con $y=x-\alpha\nabla f(x)$,</p>
+<div class="display">\[
+  q_{x}(y)=f(x)-\alpha\norm{\nabla f(x)}^{2}+\frac{L\alpha^{2}}{2}\norm{\nabla f(x)}^{2},
+\]</div>
+<p>que es la cota. El factor $\alpha(1-\alpha L/2)$ es positivo en $(0,2/L)$ y
+alcanza su máximo $1/(2L)$ en $\alpha=1/L$.</p></div>
+<div class="stmt definicion" id="general-c13:def-metodo"><div class="head">Definición el método del gradiente</div><div class="body"><p>Dados $x_{0}\in\Hs$ y $\alpha&gt;0$, el <span class="df">método del gradiente con paso fijo</span>
+$\alpha$ genera</p>
+<div class="display">\[
+  x_{k+1}=x_{k}-\alpha\nabla f(x_{k}),\qquad k=0,1,2,\dots
+\]</div>
+<p>El paso $\alpha=1/L$ es el que minimiza el modelo cuadrático.</p></div></div>
+<div class="stmt definicion" id="general-c13:def-backtracking"><div class="head">Definición <em>backtracking</em></div><div class="body"><p>Cuando no se conoce $L$, se estima en cada iteración. Dados $x_{0}$,
+$M_{-1}&gt;0$ y $\eta&gt;1$, para $k=0,1,2,\dots$:</p>
+<ol class="lista"><li><p>se parte de $M=M_{k-1}$;</p></li><li><p>mientras
+    $f\bigl(x_{k}-\frac{1}{M}\nabla f(x_{k})\bigr)&gt;f(x_{k})-\frac{1}{2M}\norm{\nabla f(x_{k})}^{2}$,
+    se reemplaza $M$ por $\eta M$;</p></li><li><p>se toman $M_{k}=M$ y $x_{k+1}=x_{k}-\frac{1}{M_{k}}\nabla f(x_{k})$.</p></li></ol>
+<p>Es un caso particular de la regla de Armijo.</p></div></div>
+<div class="stmt observacion" id="general-c13:obs-backtracking"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La prueba de <em>(ii)</em> pide que el modelo cuadrático con constante $M$ quede
+por encima de $f$ en el punto de prueba, y por el lema del descenso eso se
+cumple para todo $M\ge L$. Luego el bucle acaba tras un número finito de
+aumentos, y $M_{k}\le\max\{M_{-1},\eta L\}$ para todo $k$: si $M$ tuvo que
+crecer, su valor anterior falló la prueba y por tanto era menor que $L$.</p></div></div>
+<div class="stmt lema" id="general-c13:lem-tres-puntos"><div class="head">Lema desigualdad de los tres puntos</div><div class="body"><p>Sea $f$ convexa y $L$-suave, sea $0&lt;\alpha\le1/L$ y $x^{+}=x-\alpha\nabla f(x)$.
+Entonces, para todo $z\in\Hs$,</p>
+<div class="display">\[
+  f(x^{+})\le f(z)+\frac{1}{2\alpha}\Bigl(\norm{z-x}^{2}-\norm{z-x^{+}}^{2}\Bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p57">Ver demostración</button><div class="proof" id="general-convexa-p57"><p>Sea $g=\nabla f(x)$. El decrecimiento de un paso y la caracterización de primer
+orden de la convexidad dan</p>
+<div class="display">\[
+  f(x^{+})\le f(x)-\alpha\Bigl(1-\frac{\alpha L}{2}\Bigr)\norm{g}^{2},
+  \qquad
+  f(x)\le f(z)+\ip{g}{x-z}.
+\]</div>
+<p>Por otro lado, como $z-x^{+}=z-x+\alpha g$, desarrollando el producto interno,</p>
+<div class="display">\[
+  \ip{g}{x-z}=\frac{1}{2\alpha}\Bigl(\norm{z-x}^{2}-\norm{z-x^{+}}^{2}\Bigr)+\frac{\alpha}{2}\norm{g}^{2}.
+\]</div>
+<p>Encadenando las tres,</p>
+<div class="display">\[
+  f(x^{+})\le f(z)+\frac{1}{2\alpha}\Bigl(\norm{z-x}^{2}-\norm{z-x^{+}}^{2}\Bigr)
+  -\frac{\alpha}{2}(1-\alpha L)\norm{g}^{2},
+\]</div>
+<p>y el último término es no positivo porque $\alpha L\le1$.</p></div>
+<div class="stmt observacion" id="general-c13:obs-tres-puntos"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $\alpha=1/L$ el término residual desaparece y la desigualdad se lee en el
+modelo cuadrático. Completando cuadrados,
+$q_{x}(z)=q_{x}(x^{+})+\frac{L}{2}\norm{z-x^{+}}^{2}$, y basta combinar
+$f(x^{+})\le q_{x}(x^{+})$ con $q_{x}(z)\le f(z)+\frac{L}{2}\norm{z-x}^{2}$, que
+es la convexidad. La cota relaciona a la vez el punto $z$, el iterado $x$ y el
+iterado nuevo $x^{+}$, y de ahí su nombre.</p></div></div>
+<div class="stmt teorema" id="general-c13:teo-tasa"><div class="head">Teorema tasa $O(1/k)$</div><div class="body"><p>Sea $f$ convexa y $L$-suave con $X^{*}\neq\varnothing$, y sea $(x_{k})$ el
+método del gradiente con paso $0&lt;\alpha\le1/L$. Para todo $x^{*}\in X^{*}$ y
+todo $k\ge1$,</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2\alpha k}.
+\]</div>
+<p>En particular, con $\alpha=1/L$ se tiene
+$f(x_{k})-f^{*}\le L\norm{x_{0}-x^{*}}^{2}/(2k)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p58">Ver demostración</button><div class="proof" id="general-convexa-p58"><p>La desigualdad de los tres puntos con $x=x_{i}$ y $z=x^{*}$ da</p>
+<div class="display">\[
+  0\le f(x_{i+1})-f^{*}\le\frac{1}{2\alpha}\Bigl(\norm{x_{i}-x^{*}}^{2}-\norm{x_{i+1}-x^{*}}^{2}\Bigr).
+\]</div>
+<p>Los valores $f(x_{i})$ no crecen por el decrecimiento de un paso, así que
+$f(x_{k})-f^{*}\le f(x_{i+1})-f^{*}$ para $i=0,\dots,k-1$. Sumando, la suma de
+la derecha es telescópica:</p>
+<div class="display">\[
+  k\bigl(f(x_{k})-f^{*}\bigr)\le\sum_{i=0}^{k-1}\bigl(f(x_{i+1})-f^{*}\bigr)
+  \le\frac{1}{2\alpha}\Bigl(\norm{x_{0}-x^{*}}^{2}-\norm{x_{k}-x^{*}}^{2}\Bigr)
+  \le\frac{\norm{x_{0}-x^{*}}^{2}}{2\alpha}. 
+\]</div></div>
+<div class="stmt lema" id="general-c13:lem-opial"><div class="head">Lema de Opial</div><div class="body"><p>Sea $C\subset\Hs$ no vacío y $(x_{k})$ una sucesión tal que
+$\norm{x_{k}-x}$ converge para cada $x\in C$ y cuyos puntos de acumulación
+débiles están todos en $C$. Entonces $(x_{k})$ converge débilmente a un punto de
+$C$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p59">Ver demostración</button><div class="proof" id="general-convexa-p59"><p>La sucesión es acotada, luego tiene algún punto de acumulación débil, y una
+sucesión acotada de $\Hs$ con un único punto de acumulación débil converge
+débilmente a él. Basta ver que no hay dos distintos. Si $y,z\in C$ lo son, la
+identidad</p>
+<div class="display">\[
+  2\ip{x_{k}}{y-z}=\norm{x_{k}-z}^{2}-\norm{x_{k}-y}^{2}+\norm{y}^{2}-\norm{z}^{2}
+\]</div>
+<p>muestra que $\ip{x_{k}}{y-z}$ converge. Pasando al límite por subsucesiones que
+tienden débilmente a $y$ y a $z$ queda $\ip{y}{y-z}=\ip{z}{y-z}$, es decir
+$\norm{y-z}^{2}=0$.</p></div>
+<div class="stmt proposicion" id="general-c13:prop-fejer"><div class="head">Proposición</div><div class="body"><p>En las condiciones del teorema de la tasa $O(1/k)$,
+$\norm{x_{k+1}-x^{*}}\le\norm{x_{k}-x^{*}}$ para todo $x^{*}\in X^{*}$, es
+decir, la sucesión es <span class="df">Fejér monótona</span> respecto de $X^{*}$, y converge
+débilmente a un punto de $X^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p60">Ver demostración</button><div class="proof" id="general-convexa-p60"><p>La monotonía es la primera desigualdad de la prueba de la tasa, cuyo lado
+izquierdo es no negativo, y da que $\norm{x_{k}-x^{*}}$ converge para cada
+$x^{*}\in X^{*}$. Si $x_{k_{j}}\rightharpoonup\bar{x}$, como $f$ es convexa y
+continua es débilmente semicontinua inferiormente, y por la tasa
+$f(\bar{x})\le\liminf_{j}f(x_{k_{j}})=f^{*}$, luego $\bar{x}\in X^{*}$. Basta
+aplicar el lema de Opial con $C=X^{*}$.</p></div>
+<div class="stmt corolario" id="general-c13:cor-complejidad"><div class="head">Corolario complejidad</div><div class="body"><p>Sea $R=\dist(x_{0},X^{*})$. Con $\alpha=1/L$, para garantizar
+$f(x_{k})-f^{*}\le\varepsilon$ basta $k\ge LR^{2}/(2\varepsilon)$, es decir,
+$O(LR^{2}/\varepsilon)$ iteraciones.</p></div></div>
+<div class="stmt proposicion" id="general-c13:prop-backtracking"><div class="head">Proposición tasa con <em>backtracking</em><sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $f$ convexa y $L$-suave con $X^{*}\neq\varnothing$, y sea $(x_{k})$ generada
+por <em>backtracking</em> con $M_{k}\le\bar{L}$ para todo $k$. Entonces</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\frac{\bar{L}\norm{x_{0}-x^{*}}^{2}}{2k}.
+\]</div>
+<p>Por la observación sobre el <em>backtracking</em>, sirve
+$\bar{L}=\max\{M_{-1},\eta L\}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p61">Ver demostración</button><div class="proof" id="general-convexa-p61"><p>Sea $\alpha_{i}=1/M_{i}$. El criterio aceptado es el decrecimiento de un paso con
+$M_{i}$ en lugar de $L$, y la prueba de la desigualdad de los tres puntos no usó
+nada más que eso y la convexidad. Luego</p>
+<div class="display">\[
+  2\alpha_{i}\bigl(f(x_{i+1})-f^{*}\bigr)\le\norm{x_{i}-x^{*}}^{2}-\norm{x_{i+1}-x^{*}}^{2}.
+\]</div>
+<p>Los valores no crecen, así que al sumar
+$2\bigl(f(x_{k})-f^{*}\bigr)\sum_{i&lt;k}\alpha_{i}\le\norm{x_{0}-x^{*}}^{2}$, y cada
+$\alpha_{i}\ge1/\bar{L}$.</p></div>
+<div class="stmt teorema" id="general-c13:teo-cocoercividad"><div class="head">Teorema de Baillon y Haddad</div><div class="body"><p>Sea $f$ convexa y $L&gt;0$. Son equivalentes:</p>
+<ol class="lista"><li><p>$f$ es $L$-suave;</p></li><li><p>$f(y)\le f(x)+\ip{\nabla f(x)}{y-x}+\frac{L}{2}\norm{y-x}^{2}$ para
+    todos $x,y$;</p></li><li><p>$\nabla f$ es <span class="df">$\frac1L$-cocoercivo</span>:
+    $\ip{\nabla f(x)-\nabla f(y)}{x-y}\ge\frac{1}{L}\norm{\nabla f(x)-\nabla f(y)}^{2}$
+    para todos $x,y$;</p></li><li><p>$\frac{L}{2}\norm{\cdot}^{2}-f$ es convexa.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p62">Ver demostración</button><div class="proof" id="general-convexa-p62"><p><em>(i)</em> implica <em>(ii)</em>: es el lema del descenso.</p>
+<p><em>(ii)</em> implica <em>(iii)</em>: fije $y$ y sea $h(z)=f(z)-\ip{\nabla f(y)}{z}$,
+que es convexa, cumple <em>(ii)</em> y tiene $\nabla h(y)=0$, así que $y$ la
+minimiza. El decrecimiento de un paso solo usa <em>(ii)</em>, y aplicado a $h$ en
+$x$ da</p>
+<div class="display">\[
+  h(y)\le h\Bigl(x-\frac{1}{L}\nabla h(x)\Bigr)\le h(x)-\frac{1}{2L}\norm{\nabla h(x)}^{2},
+\]</div>
+<p>y como $\nabla h(x)=\nabla f(x)-\nabla f(y)$, esto es</p>
+<div class="display">\[
+  f(x)-f(y)-\ip{\nabla f(y)}{x-y}\ge\frac{1}{2L}\norm{\nabla f(x)-\nabla f(y)}^{2}.
+\]</div>
+<p>Basta sumarla con la misma desigualdad con $x$ e $y$ intercambiados.</p>
+<p><em>(iii)</em> implica <em>(i)</em>: por Cauchy–Schwarz,</p>
+<div class="display">\[
+  \frac{1}{L}\norm{\nabla f(x)-\nabla f(y)}^{2}\le\norm{\nabla f(x)-\nabla f(y)}\norm{x-y}.
+\]</div>
+<p><em>(i)</em> implica <em>(iv)</em>: es la observación del principio del capítulo.</p>
+<p><em>(iv)</em> implica <em>(ii)</em>: la caracterización de primer orden para
+$\frac{L}{2}\norm{\cdot}^{2}-f$, cuyo gradiente es $Lx-\nabla f(x)$, da</p>
+<div class="display">\[
+  \frac{L}{2}\norm{y}^{2}-f(y)\ge\frac{L}{2}\norm{x}^{2}-f(x)+\ip{Lx-\nabla f(x)}{y-x},
+\]</div>
+<p>que reordenada con
+$\norm{y}^{2}-\norm{x}^{2}-2\ip{x}{y-x}=\norm{y-x}^{2}$ es <em>(ii)</em>.</p></div>
+<h3 id="general-convexa-x3">El caso fuertemente convexo</h3>
+<div class="stmt proposicion" id="general-c13:prop-sandwich"><div class="head">Proposición</div><div class="body"><p>Sea $f$ $L$-suave y $\mu$-fuertemente convexa con $\mu&gt;0$. Entonces $\mu\le L$,
+$f$ tiene un único minimizador $x^{*}$, y para todo $x$</p>
+<div class="display">\[
+  \frac{\mu}{2}\norm{x-x^{*}}^{2}\le f(x)-f^{*}\le\frac{L}{2}\norm{x-x^{*}}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p63">Ver demostración</button><div class="proof" id="general-convexa-p63"><p>Por las caracterizaciones de la convexidad fuerte y por Cauchy–Schwarz,</p>
+<div class="display">\[
+  \mu\norm{x-y}^{2}\le\ip{\nabla f(x)-\nabla f(y)}{x-y}\le L\norm{x-y}^{2},
+\]</div>
+<p>de donde $\mu\le L$. La caracterización <em>(ii)</em> de la convexidad fuerte hace
+a $f$ coerciva, y como $f$ es convexa y continua y $\Hs$ es reflexivo, el
+teorema de existencia en un reflexivo da un minimizador, que es único por ser
+$f$ fuertemente convexa. La cota de abajo es el crecimiento cuadrático, y la de
+arriba es el lema del descenso en $x^{*}$, donde $\nabla f(x^{*})=0$.</p></div>
+<div class="stmt lema" id="general-c13:lem-pl"><div class="head">Lema desigualdad de Polyak–Łojasiewicz</div><div class="body"><p>Si $f$ es $\mu$-fuertemente convexa con minimizador $x^{*}$,</p>
+<div class="display">\[
+  \mu\bigl(f(x)-f^{*}\bigr)\le\frac12\norm{\nabla f(x)}^{2}
+  \qquad\text{para todo }x .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p64">Ver demostración</button><div class="proof" id="general-convexa-p64"><p>La caracterización <em>(ii)</em> de la convexidad fuerte con $y=x^{*}$ da</p>
+<div class="display">\[
+  f^{*}-f(x)\ge\ip{\nabla f(x)}{x^{*}-x}+\frac{\mu}{2}\norm{x^{*}-x}^{2}.
+\]</div>
+<p>Para cualquier $d\in\Hs$, completando cuadrados,</p>
+<div class="display">\[
+  \ip{\nabla f(x)}{d}+\frac{\mu}{2}\norm{d}^{2}
+  =\frac{\mu}{2}\norm{d+\frac{1}{\mu}\nabla f(x)}^{2}-\frac{1}{2\mu}\norm{\nabla f(x)}^{2}
+  \ge-\frac{1}{2\mu}\norm{\nabla f(x)}^{2},
+\]</div>
+<p>y basta tomar $d=x^{*}-x$.</p></div>
+<div class="stmt teorema" id="general-c13:teo-lineal"><div class="head">Teorema tasa lineal</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, el método del gradiente con
+paso $1/L$ cumple</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\Bigl(1-\frac{\mu}{L}\Bigr)^{k}\bigl(f(x_{0})-f^{*}\bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p65">Ver demostración</button><div class="proof" id="general-convexa-p65"><p>Por el decrecimiento de un paso y la desigualdad de Polyak–Łojasiewicz,</p>
+<div class="display">\[
+  f(x_{k+1})-f^{*}\le f(x_{k})-f^{*}-\frac{1}{2L}\norm{\nabla f(x_{k})}^{2}
+  \le\Bigl(1-\frac{\mu}{L}\Bigr)\bigl(f(x_{k})-f^{*}\bigr),
+\]</div>
+<p>y basta iterar.</p></div>
+<div class="stmt definicion" id="general-c13:def-condicion"><div class="head">Definición</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, su <span class="df">número de condición</span> es
+$\kappa=L/\mu\ge1$.</p></div></div>
+<div class="stmt corolario" id="general-c13:cor-complejidad-lineal"><div class="head">Corolario <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con paso $1/L$, reducir el error inicial $f(x_{0})-f^{*}$ por un factor
+$\varepsilon$ pide $O\bigl(\kappa\log\frac{1}{\varepsilon}\bigr)$ iteraciones.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p66">Ver demostración</button><div class="proof" id="general-convexa-p66"><p>El factor de la tasa lineal es $1-1/\kappa\le e^{-1/\kappa}$, así que basta
+$k\ge\kappa\log(1/\varepsilon)$.</p></div>
+<div class="stmt lema" id="general-c13:lem-interpolacion"><div class="head">Lema interpolación</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, para todos $x,y$</p>
+<div class="display">\[
+  \ip{\nabla f(x)-\nabla f(y)}{x-y}\ge\frac{\mu L}{\mu+L}\norm{x-y}^{2}
+  +\frac{1}{\mu+L}\norm{\nabla f(x)-\nabla f(y)}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p67">Ver demostración</button><div class="proof" id="general-convexa-p67"><p>Sea $h(u)=f(u)-\frac{\mu}{2}\norm{u}^{2}$, que es convexa por la definición de
+convexidad fuerte. Restando $\frac{\mu}{2}\norm{y}^{2}$ en el lema del descenso
+para $f$,</p>
+<div class="display">\[
+  h(y)\le h(x)+\ip{\nabla h(x)}{y-x}+\frac{L-\mu}{2}\norm{y-x}^{2}.
+\]</div>
+<p>Si $L&gt;\mu$, esto es la condición <em>(ii)</em> del teorema de Baillon y Haddad
+para $h$ con constante $L-\mu$, y la <em>(iii)</em> da
+$(L-\mu)\ip{\nabla h(x)-\nabla h(y)}{x-y}\ge\norm{\nabla h(x)-\nabla h(y)}^{2}$.
+Con $a=\nabla f(x)-\nabla f(y)$ y $d=x-y$ se tiene
+$\nabla h(x)-\nabla h(y)=a-\mu d$, y la desigualdad queda</p>
+<div class="display">\[
+  (L-\mu)\ip{a-\mu d}{d}\ge\norm{a-\mu d}^{2}=\norm{a}^{2}-2\mu\ip{a}{d}+\mu^{2}\norm{d}^{2},
+\]</div>
+<p>que reagrupada es $(L+\mu)\ip{a}{d}\ge\norm{a}^{2}+\mu L\norm{d}^{2}$. Si
+$L=\mu$, la cota superior y la convexidad dicen que $h$ es afín, luego
+$a=\mu d$ y se tiene la igualdad.</p></div>
+<div class="stmt teorema" id="general-c13:teo-paso-optimo"><div class="head">Teorema el paso óptimo</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, el método del gradiente con
+paso $\alpha=2/(L+\mu)$ cumple</p>
+<div class="display">\[
+  \norm{x_{k}-x^{*}}\le\Bigl(\frac{L-\mu}{L+\mu}\Bigr)^{k}\norm{x_{0}-x^{*}},
+  \qquad
+  f(x_{k})-f^{*}\le\frac{L}{2}\Bigl(\frac{L-\mu}{L+\mu}\Bigr)^{2k}\norm{x_{0}-x^{*}}^{2}.
+\]</div>
+<p>En particular, en este caso los iterados convergen en norma.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p68">Ver demostración</button><div class="proof" id="general-convexa-p68"><p>Sea $g=\nabla f(x)$ y $d=x-x^{*}$. El lema de interpolación con $y=x^{*}$, donde
+el gradiente se anula, da
+$\ip{g}{d}\ge\frac{\mu L}{\mu+L}\norm{d}^{2}+\frac{1}{\mu+L}\norm{g}^{2}$. Luego,
+para $x^{+}=x-\alpha g$,</p>
+<div class="display">\[
+  \norm{x^{+}-x^{*}}^{2}=\norm{d}^{2}-2\alpha\ip{g}{d}+\alpha^{2}\norm{g}^{2}
+  \le\Bigl(1-\frac{2\alpha\mu L}{\mu+L}\Bigr)\norm{d}^{2}
+  +\Bigl(\alpha^{2}-\frac{2\alpha}{\mu+L}\Bigr)\norm{g}^{2}.
+\]</div>
+<p>Con $\alpha=2/(L+\mu)$ el segundo coeficiente se anula y el primero vale
+$1-4\mu L/(L+\mu)^{2}=\bigl(\frac{L-\mu}{L+\mu}\bigr)^{2}$. La cota en valor sale
+de la de distancia y de $f(x)-f^{*}\le\frac{L}{2}\norm{x-x^{*}}^{2}$.</p></div>
+<div class="stmt ejemplo" id="general-c13:ej-cuadratica"><div class="head">Ejemplo la cuadrática</div><div class="body"><p>En $\R^{n}$, sea $f(x)=\frac12x\trans Qx-b\trans x$ con $Q\succ0$. Entonces
+$L=\lambda_{\max}(Q)$, $\mu=\lambda_{\min}(Q)$, y el método con paso $\alpha$
+cumple</p>
+<div class="display">\[
+  x_{k+1}-x^{*}=(I-\alpha Q)(x_{k}-x^{*}),
+\]</div>
+<p>así que la tasa en distancia es exactamente $\max_{i}\abs{1-\alpha\lambda_{i}(Q)}$.
+Ese máximo se minimiza en $\alpha=2/(L+\mu)$, donde vale
+$(\kappa-1)/(\kappa+1)$, y cuando $\kappa$ es grande las componentes asociadas a
+valores propios grandes y pequeños se contraen a velocidades muy distintas.</p></div></div>
+<div class="stmt observacion" id="general-c13:obs-precondicionar"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Un cambio de variables $x=Pz$ cambia $Q$ por $P\trans QP$. Escoger $P$ para que
+ese espectro esté más concentrado, es decir con $\kappa$ menor, es
+<span class="df">precondicionar</span>.</p></div></div>
+<h3 id="general-convexa-x4">Criterios de parada</h3>
+<div class="stmt proposicion" id="general-c13:prop-parada"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $f$ $L$-suave con $f^{*}=\inf f$ finito. Entonces</p>
+<div class="display">\[
+  \frac{1}{2L}\norm{\nabla f(x)}^{2}\le f(x)-f^{*}.
+\]</div>
+<p>Si además $f$ es convexa, $f(x)-f^{*}\le\dist(x,X^{*})\,\norm{\nabla f(x)}$; y si
+es $\mu$-fuertemente convexa, $f(x)-f^{*}\le\frac{1}{2\mu}\norm{\nabla f(x)}^{2}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p69">Ver demostración</button><div class="proof" id="general-convexa-p69"><p>La primera es el decrecimiento de un paso junto con $f^{*}\le f(x^{+})$. Para la
+segunda, si $x^{*}\in X^{*}$ la caracterización de primer orden da
+$f(x)-f^{*}\le\ip{\nabla f(x)}{x-x^{*}}\le\norm{\nabla f(x)}\norm{x-x^{*}}$, y
+basta tomar el ínfimo en $x^{*}$. La tercera es Polyak–Łojasiewicz.</p></div>
+<div class="stmt observacion" id="general-c13:obs-parada-paso"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La primera cota va en una sola dirección: un gradiente grande certifica que el
+punto no es óptimo, y uno pequeño no acota el error sin una de las otras dos
+hipótesis. En la práctica se para cuando el paso o el cambio del objetivo son
+pequeños, por ejemplo con
+$\norm{x_{k+1}-x_{k}}\le\varepsilon_{\mathrm{abs}}+\varepsilon_{\mathrm{rel}}\max\{1,\norm{x_{k}}\}$.
+Esos criterios detectan estancamiento pero no certifican optimalidad, porque un
+paso puede ser pequeño por una mala escala. Cuando el problema tiene dual, la
+brecha de dualidad de Fenchel–Rockafellar sí es un certificado.</p></div></div>
+<div class="stmt observacion" id="general-c13:obs-no-convexo"><div class="head">Observación el caso no convexo<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sin convexidad, sumando el decrecimiento de un paso con $\alpha=1/L$ queda</p>
+<div class="display">\[
+  \min_{0\le i&lt;k}\norm{\nabla f(x_{i})}\le\sqrt{\frac{2L\bigl(f(x_{0})-\inf f\bigr)}{k}},
+\]</div>
+<p>que solo garantiza acercarse a puntos críticos.</p></div></div></section>
+<section class="capitulo"><h2 id="general-cap:aceleracion">Aceleración</h2>
+<div class="stmt definicion" id="general-c14:def-momento"><div class="head">Definición métodos con momento</div><div class="body"><p>Sea $f:\Hs\to\R$ Fréchet diferenciable. El <span class="df">método de la bola pesada</span> corrige
+el paso del gradiente con el desplazamiento anterior,</p>
+<div class="display">\[
+  x_{k+1}=x_{k}-\alpha\nabla f(x_{k})+\beta_{k}(x_{k}-x_{k-1}),
+\]</div>
+<p>y un <span class="df">método con momento</span> evalúa el gradiente en un punto extrapolado:</p>
+<div class="display">\[
+  x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k}),
+  \qquad
+  y_{k+1}=x_{k+1}+\beta_{k}(x_{k+1}-x_{k}).
+\]</div></div></div>
+<div class="stmt observacion" id="general-c14:obs-beta"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Todo depende de los $\beta_{k}$, y un momento arbitrario puede oscilar o
+divergir. La bola pesada puede ser muy eficaz en cuadráticas, pero su garantía
+no es global; el método de Nesterov escoge los coeficientes junto con un
+potencial que decrece en cada iteración, y eso le da una tasa para toda función
+convexa y $L$-suave.</p></div></div>
+<div class="stmt definicion" id="general-c14:def-nesterov"><div class="head">Definición método acelerado de Nesterov</div><div class="body"><p>Sea $f:\Hs\to\R$ convexa y $L$-suave y sea $x_{0}\in\Hs$. Se toman $A_{0}=0$ y
+$z_{0}=x_{0}$, y para $k=0,1,2,\dots$:</p>
+<ol class="lista"><li><p>$a_{k+1}&gt;0$ es la raíz positiva de $La_{k+1}^{2}=A_{k}+a_{k+1}$, es decir
+    $a_{k+1}=\frac{1+\sqrt{1+4LA_{k}}}{2L}$, y $A_{k+1}=A_{k}+a_{k+1}$;</p></li><li><p>$y_{k}=\dfrac{A_{k}x_{k}+a_{k+1}z_{k}}{A_{k+1}}$;</p></li><li><p>$x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k})$ y
+    $z_{k+1}=z_{k}-a_{k+1}\nabla f(y_{k})$.</p></li></ol></div></div>
+<div class="stmt teorema" id="general-c14:teo-tasa"><div class="head">Teorema tasa $O(1/k^{2})$</div><div class="body"><p>Sea $f:\Hs\to\R$ convexa y $L$-suave con $X^{*}\neq\varnothing$. El método
+acelerado cumple, para todo $x^{*}\in X^{*}$ y todo $k\ge1$,</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2A_{k}}
+  \le\frac{2L\norm{x_{0}-x^{*}}^{2}}{(k+1)^{2}}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p70">Ver demostración</button><div class="proof" id="general-convexa-p70"><p>Queremos mostrar, por inducción, que el potencial
+$A_{k}\bigl(f(x_{k})-f^{*}\bigr)+\frac12\norm{z_{k}-x^{*}}^{2}$ no crece. Como
+en $k=0$ vale $\frac12\norm{x_{0}-x^{*}}^{2}$, eso da la primera desigualdad.
+Escriba $A=A_{k}$, $a=a_{k+1}$, $A^{+}=A+a$ y $g=\nabla f(y_{k})$. Por la
+caracterización de primer orden en $y_{k}$, aplicada hacia $x_{k}$ y hacia
+$x^{*}$, y como $A(x_{k}-y_{k})+a(x^{*}-y_{k})=a(x^{*}-z_{k})$,</p>
+<div class="display">\[
+  Af(x_{k})+af^{*}\ge A^{+}f(y_{k})+a\ip{g}{x^{*}-z_{k}}.
+\]</div>
+<p>Por otro lado, el decrecimiento de un paso y la definición de $z_{k+1}$ dan</p>
+<div class="display">\begin{gather*}
+  f(x_{k+1})\le f(y_{k})-\frac{1}{2L}\norm{g}^{2},\\
+  \frac12\norm{z_{k+1}-x^{*}}^{2}
+  =\frac12\norm{z_{k}-x^{*}}^{2}+a\ip{g}{x^{*}-z_{k}}+\frac{a^{2}}{2}\norm{g}^{2}.
+\end{gather*}</div>
+<p>Como $La^{2}=A^{+}$, al multiplicar la primera por $A^{+}$ y sumarle la segunda
+los términos en $\norm{g}^{2}$ se cancelan, y con la desigualdad anterior</p>
+<div class="display">\[
+  A^{+}f(x_{k+1})+\frac12\norm{z_{k+1}-x^{*}}^{2}
+  \le Af(x_{k})+af^{*}+\frac12\norm{z_{k}-x^{*}}^{2},
+\]</div>
+<p>que es la disminución del potencial después de restar $A^{+}f^{*}=Af^{*}+af^{*}$.</p>
+<p>Para la segunda desigualdad, sea $t_{k}=\sqrt{LA_{k+1}}$ para $k\ge0$. Por la
+ecuación de $a_{k+1}$, $t_{k}=La_{k+1}$, y $t_{0}=1$ porque $A_{1}=a_{1}=1/L$.
+Además $t_{k+1}^{2}=LA_{k+2}=LA_{k+1}+La_{k+2}=t_{k}^{2}+t_{k+1}$, luego</p>
+<div class="display">\[
+  t_{k+1}=\frac{1+\sqrt{1+4t_{k}^{2}}}{2}\ge t_{k}+\frac12 .
+\]</div>
+<p>Así $t_{k}\ge(k+2)/2$, y $A_{k}=t_{k-1}^{2}/L\ge(k+1)^{2}/(4L)$.</p></div>
+<div class="stmt proposicion" id="general-c14:prop-momento"><div class="head">Proposición la forma de momento</div><div class="body"><p>Sea $t_{0}=1$ y $t_{k+1}=\bigl(1+\sqrt{1+4t_{k}^{2}}\bigr)/2$, que por la prueba
+anterior es $t_{k}=\sqrt{LA_{k+1}}$. Los iterados $x_{k}$ del método acelerado
+son los del método con momento</p>
+<div class="display">\[
+  x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k}),
+  \qquad
+  y_{k+1}=x_{k+1}+\frac{t_{k}-1}{t_{k+1}}\,(x_{k+1}-x_{k}),
+\]</div>
+<p>empezando en $y_{0}=x_{0}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p71">Ver demostración</button><div class="proof" id="general-convexa-p71"><p>En $k=0$ se tiene $A_{0}=0$, luego $y_{0}=z_{0}=x_{0}$. Despejando $z_{k}$ de la
+definición de $y_{k}$, y usando $\nabla f(y_{k})=L(y_{k}-x_{k+1})$ y
+$La_{k+1}=A_{k+1}/a_{k+1}=t_{k}$,</p>
+<div class="display">\begin{align*}
+  z_{k+1}&amp;=\frac{A_{k+1}y_{k}-A_{k}x_{k}}{a_{k+1}}-a_{k+1}L\,(y_{k}-x_{k+1})\\
+  &amp;=\frac{A_{k+1}x_{k+1}-A_{k}x_{k}}{a_{k+1}}
+  =x_{k}+t_{k}(x_{k+1}-x_{k}).
+\end{align*}</div>
+<p>Sustituyendo en la definición de $y_{k+1}$, con $A_{k+1}=A_{k+2}-a_{k+2}$ y
+$a_{k+2}/A_{k+2}=1/(La_{k+2})=1/t_{k+1}$,</p>
+<div class="display">\begin{align*}
+  y_{k+1}&amp;=\frac{A_{k+1}x_{k+1}+a_{k+2}z_{k+1}}{A_{k+2}}
+  =x_{k+1}+\frac{a_{k+2}}{A_{k+2}}(t_{k}-1)(x_{k+1}-x_{k})\\
+  &amp;=x_{k+1}+\frac{t_{k}-1}{t_{k+1}}(x_{k+1}-x_{k}). 
+\end{align*}</div></div>
+<div class="stmt corolario" id="general-c14:cor-complejidad"><div class="head">Corolario complejidad acelerada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $R=\dist(x_{0},X^{*})$. Para garantizar $f(x_{k})-f^{*}\le\varepsilon$ basta
+$k+1\ge R\sqrt{2L/\varepsilon}$, es decir, $O\bigl(\sqrt{LR^{2}/\varepsilon}\bigr)$
+iteraciones, contra las $O(LR^{2}/\varepsilon)$ del método del gradiente.</p></div></div>
+<div class="stmt observacion" id="general-c14:obs-no-monotono"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El potencial de la prueba decrece y el objetivo no tiene por qué: los valores
+$f(x_{k})$ del método acelerado pueden oscilar. Hay variantes monótonas que en
+cada paso se quedan con el mejor punto visto.</p></div></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -3561,7 +4305,163 @@ Vale igual en los dos alcances.</p></div></div>
 <div class="stmt observacion" id="ambas-c12:obs-brecha-algoritmo"><div class="head">Observación la brecha como criterio de parada</div><div class="body"><p>La brecha $G(x,y)$ se puede evaluar en cualquier par admisible sin conocer el
 valor óptimo, y acota por encima el error $f(x)+g(Ax)-p^{*}$. Es lo que
 convierte la dualidad en algo que un programa puede usar: da un certificado de
-optimalidad verificable, no una promesa asintótica.</p></div></div></section></div>
+optimalidad verificable, no una promesa asintótica.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:gradiente">Descenso del gradiente</h2>
+<p>En este capítulo $\Hs$ es un espacio de Hilbert, que en dimensión finita es
+$\R^{n}$, y $f:\Hs\to\R$ es Fréchet diferenciable. Cuando $f$ tiene
+minimizadores, se escribe $X^{*}=\argmin f$ y $f^{*}=\min f$.</p>
+<div class="stmt definicion" id="ambas-c13:def-suave"><div class="head">Definición</div><div class="body"><p>Sea $L&gt;0$. La función $f$ es <span class="df">$L$-suave</span> si
+$\norm{\nabla f(x)-\nabla f(y)}\le L\norm{x-y}$ para todos $x,y\in\Hs$.</p></div></div>
+<div class="stmt observacion" id="ambas-c13:obs-hilbert"><div class="head">Observación el método es de Hilbert</div><div class="body"><p>El lema del descenso vale en un Banach $E$ para una $f$ con derivada Lipschitz,
+pero el paso $x-\alpha\nabla f(x)$ no tiene sentido allí: la derivada vive en
+$E^{*}$, y sin el teorema de Riesz no hay un vector que restarle a $x$. Por eso
+este capítulo y el siguiente se escriben en $\Hs$, y $\R^{n}$ es su caso
+particular.</p></div></div>
+<div class="stmt observacion" id="ambas-c13:obs-hessiana"><div class="head">Observación la suavidad sin segundas derivadas</div><div class="body"><p>En $\R^{n}$, una $f$ convexa de clase $C^{2}$ es $L$-suave si y solo si
+$Hf(x)\preceq LI$ para todo $x$. En $\Hs$ la misma condición se escribe sin
+derivadas segundas: una $f$ convexa es $L$-suave si y solo si
+$\frac{L}{2}\norm{\cdot}^{2}-f$ es convexa.</p></div></div>
+<div class="stmt corolario" id="ambas-c13:cor-paso"><div class="head">Corolario decrecimiento de un paso</div><div class="body"><p>Si $f$ es $L$-suave, el <span class="df">modelo cuadrático</span>
+$q_{x}(y)=f(x)+\ip{\nabla f(x)}{y-x}+\frac{L}{2}\norm{y-x}^{2}$ cumple
+$f\le q_{x}$ y se minimiza en $x^{+}=x-\frac{1}{L}\nabla f(x)$. Para
+$0&lt;\alpha&lt;2/L$,</p>
+<div class="display">\[
+  f\bigl(x-\alpha\nabla f(x)\bigr)\le f(x)-\alpha\Bigl(1-\frac{\alpha L}{2}\Bigr)\norm{\nabla f(x)}^{2},
+\]</div>
+<p>y en $\alpha=1/L$ queda $f(x^{+})\le f(x)-\frac{1}{2L}\norm{\nabla f(x)}^{2}$.</p></div></div>
+<div class="stmt definicion" id="ambas-c13:def-metodo"><div class="head">Definición el método del gradiente</div><div class="body"><p>Dados $x_{0}\in\Hs$ y $\alpha&gt;0$, el <span class="df">método del gradiente con paso fijo</span>
+$\alpha$ genera $x_{k+1}=x_{k}-\alpha\nabla f(x_{k})$.</p></div></div>
+<div class="stmt definicion" id="ambas-c13:def-backtracking"><div class="head">Definición <em>backtracking</em></div><div class="body"><p>Dados $x_{0}$, $M_{-1}&gt;0$ y $\eta&gt;1$, en cada iteración se parte de
+$M=M_{k-1}$, se multiplica $M$ por $\eta$ mientras
+$f\bigl(x_{k}-\frac{1}{M}\nabla f(x_{k})\bigr)&gt;f(x_{k})-\frac{1}{2M}\norm{\nabla f(x_{k})}^{2}$,
+y se toman $M_{k}=M$ y $x_{k+1}=x_{k}-\frac{1}{M_{k}}\nabla f(x_{k})$. Todo
+$M\ge L$ pasa la prueba, así que el bucle acaba y $M_{k}\le\max\{M_{-1},\eta L\}$.</p></div></div>
+<div class="stmt lema" id="ambas-c13:lem-tres-puntos"><div class="head">Lema desigualdad de los tres puntos</div><div class="body"><p>Si $f$ es convexa y $L$-suave, $0&lt;\alpha\le1/L$ y $x^{+}=x-\alpha\nabla f(x)$,
+para todo $z\in\Hs$</p>
+<div class="display">\[
+  f(x^{+})\le f(z)+\frac{1}{2\alpha}\Bigl(\norm{z-x}^{2}-\norm{z-x^{+}}^{2}\Bigr).
+\]</div></div></div>
+<div class="stmt teorema" id="ambas-c13:teo-tasa"><div class="head">Teorema tasa $O(1/k)$</div><div class="body"><p>Si $f$ es convexa y $L$-suave con $X^{*}\neq\varnothing$ y $0&lt;\alpha\le1/L$, el
+método del gradiente cumple
+$f(x_{k})-f^{*}\le\norm{x_{0}-x^{*}}^{2}/(2\alpha k)$ para todo $x^{*}\in X^{*}$
+y todo $k\ge1$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c13:prop-fejer"><div class="head">Proposición convergencia de los iterados</div><div class="body"><p>En las condiciones del teorema, la sucesión es <span class="df">Fejér monótona</span> respecto de
+$X^{*}$: $\norm{x_{k+1}-x^{*}}\le\norm{x_{k}-x^{*}}$ para todo $x^{*}\in X^{*}$.</p>
+<ol class="lista"><li><p>En $\R^{n}$, $(x_{k})$ converge a un punto de $X^{*}$.</p></li><li><p>En $\Hs$, $(x_{k})$ converge débilmente a un punto de $X^{*}$.</p></li></ol></div></div>
+<div class="stmt observacion" id="ambas-c13:obs-opial"><div class="head">Observación qué se pierde en la convergencia</div><div class="body"><p>En $\R^{n}$ la prueba extrae una subsucesión convergente de una sucesión
+acotada, que es la compacidad de la bola. En $\Hs$ una sucesión acotada solo
+tiene subsucesiones débilmente convergentes, y el argumento lo cierra el
+<span class="df">lema de Opial</span>: si $\norm{x_{k}-x}$ converge para todo $x$ de un conjunto
+$C$ y todos los puntos de acumulación débiles de $(x_{k})$ están en $C$,
+entonces $(x_{k})$ converge débilmente a un punto de $C$. La prueba no da
+convergencia en norma.</p></div></div>
+<div class="stmt observacion" id="ambas-c13:obs-dimension"><div class="head">Observación las tasas no ven la dimensión</div><div class="body"><p>Ninguna cota en valor de este capítulo depende de $n$. Sus pruebas usan el
+producto interno, el lema del descenso y la desigualdad del gradiente, y nada
+más, así que valen en $\Hs$ tal cual. La dimensión finita solo compra la
+convergencia en norma de los iterados.</p></div></div>
+<div class="stmt corolario" id="ambas-c13:cor-complejidad"><div class="head">Corolario complejidad</div><div class="body"><p>Con $\alpha=1/L$ y $R=\dist(x_{0},X^{*})$, bastan $O(LR^{2}/\varepsilon)$
+iteraciones para garantizar $f(x_{k})-f^{*}\le\varepsilon$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c13:prop-backtracking"><div class="head">Proposición tasa con <em>backtracking</em></div><div class="body"><p>Si $f$ es convexa y $L$-suave con $X^{*}\neq\varnothing$ y los $M_{k}$ del
+<em>backtracking</em> cumplen $M_{k}\le\bar{L}$, entonces
+$f(x_{k})-f^{*}\le\bar{L}\norm{x_{0}-x^{*}}^{2}/(2k)$.</p></div></div>
+<div class="stmt teorema" id="ambas-c13:teo-cocoercividad"><div class="head">Teorema de Baillon y Haddad</div><div class="body"><p>Sea $f$ convexa y $L&gt;0$. Son equivalentes:</p>
+<ol class="lista"><li><p>$f$ es $L$-suave;</p></li><li><p>$f(y)\le f(x)+\ip{\nabla f(x)}{y-x}+\frac{L}{2}\norm{y-x}^{2}$ para
+    todos $x,y$;</p></li><li><p>$\nabla f$ es <span class="df">$\frac1L$-cocoercivo</span>:
+    $\ip{\nabla f(x)-\nabla f(y)}{x-y}\ge\frac{1}{L}\norm{\nabla f(x)-\nabla f(y)}^{2}$;</p></li><li><p>$\frac{L}{2}\norm{\cdot}^{2}-f$ es convexa.</p></li></ol></div></div>
+<div class="stmt observacion" id="ambas-c13:obs-baillon"><div class="head">Observación gradientes contra operadores</div><div class="body"><p>El teorema vale igual en $\R^{n}$ y en $\Hs$, y es propio de los gradientes de
+convexas: para un operador Lipschitz cualquiera falla ya en $\R^{2}$. La rotación
+de noventa grados $T(x_{1},x_{2})=(-x_{2},x_{1})$ es $1$-Lipschitz y cumple
+$\ip{Tx-Ty}{x-y}=0$, así que no es cocoerciva con ninguna constante.</p></div></div>
+<h3 id="ambas-convexa-x7">El caso fuertemente convexo</h3>
+<div class="stmt proposicion" id="ambas-c13:prop-sandwich"><div class="head">Proposición</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa con $\mu&gt;0$, entonces
+$\mu\le L$, $f$ tiene un único minimizador $x^{*}$ y</p>
+<div class="display">\[
+  \frac{\mu}{2}\norm{x-x^{*}}^{2}\le f(x)-f^{*}\le\frac{L}{2}\norm{x-x^{*}}^{2}.
+\]</div></div></div>
+<div class="stmt observacion" id="ambas-c13:obs-existencia"><div class="head">Observación de dónde sale el minimizador</div><div class="body"><p>En $\R^{n}$ la convexidad fuerte da coercividad y Weierstrass hace el resto,
+porque las bolas son compactas. En $\Hs$ las bolas no lo son, y el minimizador
+lo da la reflexividad: una función convexa, continua y coerciva alcanza su
+mínimo en un espacio reflexivo.</p></div></div>
+<div class="stmt lema" id="ambas-c13:lem-pl"><div class="head">Lema desigualdad de Polyak–Łojasiewicz</div><div class="body"><p>Si $f$ es $\mu$-fuertemente convexa con minimizador $x^{*}$, entonces
+$\mu\bigl(f(x)-f^{*}\bigr)\le\frac12\norm{\nabla f(x)}^{2}$ para todo $x$.</p></div></div>
+<div class="stmt teorema" id="ambas-c13:teo-lineal"><div class="head">Teorema tasa lineal</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, el método del gradiente con
+paso $1/L$ cumple
+$f(x_{k})-f^{*}\le(1-\mu/L)^{k}\bigl(f(x_{0})-f^{*}\bigr)$.</p></div></div>
+<div class="stmt definicion" id="ambas-c13:def-condicion"><div class="head">Definición</div><div class="body"><p>El <span class="df">número de condición</span> de una $f$ $L$-suave y $\mu$-fuertemente convexa es
+$\kappa=L/\mu\ge1$. Con paso $1/L$, reducir el error por un factor
+$\varepsilon$ pide $O\bigl(\kappa\log\frac{1}{\varepsilon}\bigr)$ iteraciones.</p></div></div>
+<div class="stmt lema" id="ambas-c13:lem-interpolacion"><div class="head">Lema interpolación</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, para todos $x,y$</p>
+<div class="display">\[
+  \ip{\nabla f(x)-\nabla f(y)}{x-y}\ge\frac{\mu L}{\mu+L}\norm{x-y}^{2}
+  +\frac{1}{\mu+L}\norm{\nabla f(x)-\nabla f(y)}^{2}.
+\]</div></div></div>
+<div class="stmt teorema" id="ambas-c13:teo-paso-optimo"><div class="head">Teorema el paso óptimo</div><div class="body"><p>Si $f$ es $L$-suave y $\mu$-fuertemente convexa, con paso $\alpha=2/(L+\mu)$</p>
+<div class="display">\[
+  \norm{x_{k}-x^{*}}\le\Bigl(\frac{L-\mu}{L+\mu}\Bigr)^{k}\norm{x_{0}-x^{*}},
+  \qquad
+  f(x_{k})-f^{*}\le\frac{L}{2}\Bigl(\frac{L-\mu}{L+\mu}\Bigr)^{2k}\norm{x_{0}-x^{*}}^{2}.
+\]</div></div></div>
+<div class="stmt observacion" id="ambas-c13:obs-fuerte"><div class="head">Observación la convergencia fuerte vuelve</div><div class="body"><p>La contracción de este teorema es en norma, así que con convexidad fuerte los
+iterados convergen en norma también en $\Hs$. La convexidad fuerte recupera
+justo lo que el caso convexo perdía al soltar la dimensión finita.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c13:ej-cuadratica"><div class="head">Ejemplo la cuadrática</div><div class="body"><p>En $\R^{n}$, para $f(x)=\frac12x\trans Qx-b\trans x$ con $Q\succ0$ se tiene
+$L=\lambda_{\max}(Q)$, $\mu=\lambda_{\min}(Q)$ y
+$x_{k+1}-x^{*}=(I-\alpha Q)(x_{k}-x^{*})$. La tasa es exactamente
+$\max_{i}\abs{1-\alpha\lambda_{i}(Q)}$, que se minimiza en $\alpha=2/(L+\mu)$ con
+valor $(\kappa-1)/(\kappa+1)$. Un cambio de variables $x=Pz$ que concentre el
+espectro de $P\trans QP$ es un <span class="df">precondicionamiento</span>.</p></div></div>
+<h3 id="ambas-convexa-x8">Criterios de parada</h3>
+<div class="stmt proposicion" id="ambas-c13:prop-parada"><div class="head">Proposición</div><div class="body"><p>Si $f$ es $L$-suave con $f^{*}=\inf f$ finito, entonces
+$\frac{1}{2L}\norm{\nabla f(x)}^{2}\le f(x)-f^{*}$. Si además es convexa,
+$f(x)-f^{*}\le\dist(x,X^{*})\norm{\nabla f(x)}$; y si es $\mu$-fuertemente
+convexa, $f(x)-f^{*}\le\frac{1}{2\mu}\norm{\nabla f(x)}^{2}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c13:obs-parada-paso"><div class="head">Observación</div><div class="body"><p>Un gradiente pequeño no acota el error sin una de las dos últimas hipótesis. Los
+criterios sobre el tamaño del paso detectan estancamiento pero no certifican
+optimalidad; cuando el problema tiene dual, la brecha de dualidad sí lo hace, y
+vale igual en los dos alcances.</p></div></div>
+<div class="stmt observacion" id="ambas-c13:obs-no-convexo"><div class="head">Observación el caso no convexo</div><div class="body"><p>Sin convexidad, el método con paso $1/L$ solo garantiza
+$\min_{0\le i&lt;k}\norm{\nabla f(x_{i})}\le\sqrt{2L\bigl(f(x_{0})-\inf f\bigr)/k}$,
+es decir, acercarse a puntos críticos.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:aceleracion">Aceleración</h2>
+<div class="stmt definicion" id="ambas-c14:def-momento"><div class="head">Definición métodos con momento</div><div class="body"><p>El <span class="df">método de la bola pesada</span> es
+$x_{k+1}=x_{k}-\alpha\nabla f(x_{k})+\beta_{k}(x_{k}-x_{k-1})$, y un
+<span class="df">método con momento</span> evalúa el gradiente en un punto extrapolado:</p>
+<div class="display">\[
+  x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k}),
+  \qquad
+  y_{k+1}=x_{k+1}+\beta_{k}(x_{k+1}-x_{k}).
+\]</div>
+<p>Un momento arbitrario puede oscilar o divergir; todo depende de los $\beta_{k}$.</p></div></div>
+<div class="stmt definicion" id="ambas-c14:def-nesterov"><div class="head">Definición método acelerado de Nesterov</div><div class="body"><p>Sea $f:\Hs\to\R$ convexa y $L$-suave y $x_{0}\in\Hs$. Con $A_{0}=0$ y
+$z_{0}=x_{0}$, para $k=0,1,2,\dots$ se toma $a_{k+1}&gt;0$ con
+$La_{k+1}^{2}=A_{k}+a_{k+1}$, $A_{k+1}=A_{k}+a_{k+1}$, y</p>
+<div class="display">\[
+  y_{k}=\frac{A_{k}x_{k}+a_{k+1}z_{k}}{A_{k+1}},
+  \qquad
+  x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k}),
+  \qquad
+  z_{k+1}=z_{k}-a_{k+1}\nabla f(y_{k}).
+\]</div></div></div>
+<div class="stmt teorema" id="ambas-c14:teo-tasa"><div class="head">Teorema tasa $O(1/k^{2})$</div><div class="body"><p>Si $f$ es convexa y $L$-suave con $X^{*}\neq\varnothing$, el potencial
+$A_{k}\bigl(f(x_{k})-f^{*}\bigr)+\frac12\norm{z_{k}-x^{*}}^{2}$ no crece, y
+para todo $x^{*}\in X^{*}$ y $k\ge1$</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2A_{k}}
+  \le\frac{2L\norm{x_{0}-x^{*}}^{2}}{(k+1)^{2}}.
+\]</div></div></div>
+<div class="stmt proposicion" id="ambas-c14:prop-momento"><div class="head">Proposición la forma de momento</div><div class="body"><p>Con $t_{k}=\sqrt{LA_{k+1}}$, que cumple $t_{0}=1$ y
+$t_{k+1}=\bigl(1+\sqrt{1+4t_{k}^{2}}\bigr)/2$, los iterados del método acelerado
+son los del método con momento de coeficiente $\beta_{k}=(t_{k}-1)/t_{k+1}$,
+empezando en $y_{0}=x_{0}$.</p></div></div>
+<div class="stmt corolario" id="ambas-c14:cor-complejidad"><div class="head">Corolario complejidad acelerada</div><div class="body"><p>Con $R=\dist(x_{0},X^{*})$, bastan $O\bigl(\sqrt{LR^{2}/\varepsilon}\bigr)$
+iteraciones, contra las $O(LR^{2}/\varepsilon)$ del método del gradiente.</p></div></div>
+<div class="stmt observacion" id="ambas-c14:obs-no-monotono"><div class="head">Observación</div><div class="body"><p>El potencial decrece y el objetivo no tiene por qué: los valores $f(x_{k})$ del
+método acelerado pueden oscilar.</p></div></div>
+<div class="stmt observacion" id="ambas-c14:obs-hilbert"><div class="head">Observación el capítulo entero vale en $\Hs$</div><div class="body"><p>Nada de este capítulo usa la dimensión. El método necesita el gradiente como
+vector, que en $\Hs$ lo da Riesz, y la prueba de la tasa solo usa la
+desigualdad del gradiente, el lema del descenso y el desarrollo del cuadrado de
+una norma. Por eso las cotas son idénticas en $\R^{n}$ y en $\Hs$, sin ninguna
+constante que dependa de la dimensión.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
