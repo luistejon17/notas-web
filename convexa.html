@@ -2119,7 +2119,371 @@ $k+1\ge R\sqrt{2L/\varepsilon}$, es decir, $O\bigl(\sqrt{LR^{2}/\varepsilon}\big
 iteraciones, contra las $O(LR^{2}/\varepsilon)$ del método del gradiente.</p></div></div>
 <div class="stmt observacion" id="clase-c14:obs-no-monotono"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El potencial de la prueba decrece y el objetivo no tiene por qué: los valores
 $f(x_{k})$ del método acelerado pueden oscilar. Hay variantes monótonas que en
-cada paso se quedan con el mejor punto visto.</p></div></div></section></div>
+cada paso se quedan con el mejor punto visto.</p></div></div>
+<h3 id="clase-convexa-x8">El caso fuertemente convexo</h3>
+<div class="stmt definicion" id="clase-c14:def-momento-constante"><div class="head">Definición momento constante<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $f$ $L$-suave y $\mu$-fuertemente convexa, y sean</p>
+<div class="display">\[
+  q=\sqrt{\frac{\mu}{L}},
+  \qquad
+  \beta=\frac{1-q}{1+q}=\frac{\sqrt{L}-\sqrt{\mu}}{\sqrt{L}+\sqrt{\mu}} .
+\]</div>
+<p>Con $x_{-1}=x_{0}$ y $y_{0}=x_{0}$ se itera</p>
+<div class="display">\[
+  x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k}),
+  \qquad
+  y_{k+1}=x_{k+1}+\beta(x_{k+1}-x_{k}).
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c14:obs-momento-constante"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El momento ya no depende de $k$. Un análisis por sucesiones de estimación
+produce un potencial que domina $f(x_{k})-f^{*}$ y se contrae por el factor
+$1-\sqrt{\mu/L}$ en cada paso. Abajo se obtiene la misma complejidad por un
+camino que solo usa la tasa $O(1/k^{2})$ y la convexidad fuerte.</p></div></div>
+<div class="stmt proposicion" id="clase-c14:prop-reinicios"><div class="head">Proposición aceleración mediante reinicios<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $u$ el punto inicial de una fase y sea $x_{m}$ el resultado de $m$
+iteraciones del método acelerado convexo empezado en $u$. Entonces</p>
+<div class="display">\[
+  f(x_{m})-f^{*}\le\frac{4\kappa}{(m+1)^{2}}\bigl(f(u)-f^{*}\bigr).
+\]</div>
+<p>En particular, si $m+1\ge\sqrt{8\kappa}$, cada fase reduce la suboptimalidad al
+menos a la mitad.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p83">Ver demostración</button><div class="proof" id="clase-convexa-p83"><p>La tasa $O(1/k^{2})$ con $x_{0}=u$ da
+$f(x_{m})-f^{*}\le 2L\norm{u-x^{*}}^{2}/(m+1)^{2}$, y el sandwich de la
+convexidad fuerte da $\norm{u-x^{*}}^{2}\le2\bigl(f(u)-f^{*}\bigr)/\mu$.
+Sustituyendo sale la cota, y con $(m+1)^{2}\ge8\kappa$ el factor es
+$4\kappa/(m+1)^{2}\le1/2$.</p></div>
+<div class="stmt corolario" id="clase-c14:cor-complejidad-fuerte"><div class="head">Corolario complejidad acelerada con convexidad fuerte</div><div class="body"><p>Reiniciando el momento cada $m+1=\lceil\sqrt{8\kappa}\,\rceil$ iteraciones se
+alcanza $f(x_{k})-f^{*}\le\varepsilon$ en
+$O\bigl(\sqrt{\kappa}\log\frac{1}{\varepsilon}\bigr)$ iteraciones, contra las
+$O\bigl(\kappa\log\frac{1}{\varepsilon}\bigr)$ del método del gradiente.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p84">Ver demostración</button><div class="proof" id="clase-convexa-p84"><p>Cada fase divide la suboptimalidad por dos, así que
+$\lceil\log_{2}(1/\varepsilon)\rceil$ fases bastan, y cada una cuesta
+$\lceil\sqrt{8\kappa}\,\rceil$ iteraciones.</p></div>
+<div class="stmt observacion" id="clase-c14:obs-reinicio-adaptativo"><div class="head">Observación reinicios adaptativos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El reinicio periódico necesita una estimación de $\kappa$. Cuando $\mu$ es
+desconocida se reinicia al detectar un aumento del objetivo, o la pérdida de
+alineación $\ip{\nabla f(y_{k})}{x_{k+1}-x_{k}}&gt;0$. Sin hipótesis adicionales
+son heurísticas de implementación y no garantías.</p></div></div>
+<div class="stmt proposicion" id="clase-c14:prop-backtracking"><div class="head">Proposición <em>backtracking</em> acelerado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si no se conoce $L$, se usa en cada paso una estimación $M_{k}$ que cumpla</p>
+<div class="display">\[
+  f\bigl(y_{k}-M_{k}^{-1}\nabla f(y_{k})\bigr)
+  \le f(y_{k})-\frac{1}{2M_{k}}\norm{\nabla f(y_{k})}^{2},
+\]</div>
+<p>y se escoge $a_{k+1}$ por $M_{k}a_{k+1}^{2}=A_{k}+a_{k+1}$. La prueba de la tasa
+vale con $L$ reemplazado iteración por iteración por $M_{k}$, y si
+$M_{k}\le\bar{L}$ se conserva el orden
+$O\bigl(\sqrt{\bar{L}R^{2}/\varepsilon}\bigr)$.</p></div></div>
+<h3 id="clase-convexa-x9">Cotas inferiores</h3>
+<div class="stmt teorema" id="clase-c14:teo-cotas-inferiores"><div class="head">Teorema cotas inferiores de primer orden, de Nemirovski y Yudin<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En el modelo de oráculo de primer orden, donde al consultar $x$ el algoritmo
+recibe $f(x)$ y $\nabla f(x)$ y construye el iterado nuevo con la información
+acumulada, en dimensión suficientemente grande: para todo método determinista
+existen funciones convexas y $L$-suaves con</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\ge c\,\frac{LR^{2}}{(k+1)^{2}},
+\]</div>
+<p>con $c&gt;0$ universal; y bajo $\mu$-convexidad fuerte existen problemas que exigen
+$\Omega\bigl(\sqrt{\kappa}\log\frac{1}{\varepsilon}\bigr)$ consultas.</p></div></div>
+<div class="stmt observacion" id="clase-c14:obs-optimalidad"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Las dos tasas del capítulo coinciden en orden con esas cotas, así que el método
+acelerado es óptimo dentro del modelo general de primer orden. Las cotas se
+construyen con cuadráticas cuyo gradiente revela una sola dirección nueva por
+consulta, y la dimensión tiene que crecer con el número de iteraciones; por eso
+no contradicen que un método que use más información resuelva una cuadrática de
+dimensión fija en un número finito de pasos.</p></div></div>
+<div class="stmt observacion" id="clase-c14:obs-robustez"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La optimalidad de peor caso no dice que el método acelerado gane siempre en
+tiempo de cómputo. El momento amplifica los errores en el gradiente, la
+inexactitud numérica y la variación de la curvatura local, y por eso
+<em>backtracking</em>, reinicios y escalamiento son parte de una implementación
+seria.</p></div></div></section>
+<section class="capitulo"><h2 id="clase-cap:segundo-orden">Métodos de segundo orden</h2>
+<p>En este capítulo $f:\R^{n}\to\R$ es dos veces diferenciable, y se escribe
+$g(x)=\nabla f(x)$ y $H(x)=\nabla^{2}f(x)$.</p>
+<div class="stmt proposicion" id="clase-c15:prop-curvatura"><div class="head">Proposición curvatura y convexidad</div><div class="body"><p>Sea $U\subseteq\R^{n}$ abierto convexo y $f\in C^{2}(U)$.</p>
+<ol class="lista"><li><p>$f$ es convexa en $U$ si y solo si $H(x)\succeq0$ para todo $x\in U$;</p></li><li><p>$f$ es $m$-fuertemente convexa en $U$ si y solo si $H(x)\succeq mI$ para
+    todo $x\in U$;</p></li><li><p>si $f$ es convexa, $f$ es $M$-suave en $U$ si y solo si $H(x)\preceq MI$
+    para todo $x\in U$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p85">Ver demostración</button><div class="proof" id="clase-convexa-p85"><p>Para <em>(i)</em>, sea $\varphi(t)=f(x+t(y-x))$ con $[x,y]\subset U$, que es
+$C^{2}$ con $\varphi&#x27;&#x27;(t)=H(x+t(y-x))[y-x,y-x]$. Una función de una variable es
+convexa si y solo si su segunda derivada es no negativa, y $f$ es convexa si y
+solo si lo son todas esas restricciones. Para <em>(ii)</em> basta aplicar
+<em>(i)</em> a $f-\frac{m}{2}\norm{\cdot}^{2}$, cuya Hessiana es $H-mI$, y para
+<em>(iii)</em> aplicar <em>(i)</em> a $\frac{M}{2}\norm{\cdot}^{2}-f$ junto con la
+equivalencia del teorema de Baillon y Haddad entre esa convexidad y la
+$M$-suavidad.</p></div>
+<div class="stmt definicion" id="clase-c15:def-paso"><div class="head">Definición el paso de Newton</div><div class="body"><p>El <span class="df">modelo cuadrático</span> de $f$ en $x$ es</p>
+<div class="display">\[
+  m_{x}(p)=f(x)+\ip{g(x)}{p}+\frac12\,p\trans H(x)p .
+\]</div>
+<p>Si $H(x)\succ0$, tiene un único minimizador, el <span class="df">paso de Newton</span> $p_{N}$,
+caracterizado por</p>
+<div class="display">\[
+  H(x)\,p_{N}=-g(x),
+\]</div>
+<p>y el punto nuevo es $x^{+}=x+p_{N}$.</p></div></div>
+<div class="stmt definicion" id="clase-c15:def-metodo"><div class="head">Definición método de Newton con paso completo</div><div class="body"><p>Dado $x_{0}\in\R^{n}$, para $k=0,1,2,\dots$:</p>
+<ol class="lista"><li><p>calcular $g_{k}=\nabla f(x_{k})$ y $H_{k}=\nabla^{2}f(x_{k})$;</p></li><li><p>resolver $H_{k}p_{k}=-g_{k}$;</p></li><li><p>$x_{k+1}=x_{k}+p_{k}$.</p></li></ol></div></div>
+<div class="stmt observacion" id="clase-c15:obs-resolver"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En <em>(ii)</em> no se calcula $H_{k}^{-1}$, se resuelve el sistema. Si $H_{k}$ es
+simétrica definida positiva, la factorización de Cholesky es la opción directa
+estándar; la alternativa son los métodos iterativos, que se tratan más abajo.</p></div></div>
+<div class="stmt ejemplo" id="clase-c15:ej-cuadratica"><div class="head">Ejemplo las cuadráticas</div><div class="body"><p>Sea $f(x)=\frac12x\trans Qx-b\trans x+c$ con $Q\succ0$. Entonces $g(x)=Qx-b$ y
+$H(x)=Q$, de modo que desde cualquier punto</p>
+<div class="display">\[
+  x+p_{N}=x-Q^{-1}(Qx-b)=Q^{-1}b=x^{*}.
+\]</div>
+<p>Newton resuelve una cuadrática estrictamente convexa en una sola iteración,
+donde el método del gradiente necesita $O(\kappa\log\frac1\varepsilon)$.</p></div></div>
+<div class="stmt observacion" id="clase-c15:obs-afin"><div class="head">Observación invariancia afín</div><div class="body"><p>Sea $A$ no singular y $\widetilde{f}(z)=f(Az+b)$. Como
+$\nabla\widetilde{f}(z)=A\trans g(Az+b)$ y
+$\nabla^{2}\widetilde{f}(z)=A\trans H(Az+b)A$, el paso de Newton de
+$\widetilde{f}$ es $\widetilde{p}_{N}=A^{-1}p_{N}$, así que
+$A(z+\widetilde{p}_{N})+b=x+p_{N}$: el método conmuta con los cambios de
+variable afines. El descenso del gradiente no, y por eso allí había que
+precondicionar.</p></div></div>
+<div class="stmt definicion" id="clase-c15:def-descenso"><div class="head">Definición dirección de descenso</div><div class="body"><p>$p$ es una <span class="df">dirección de descenso</span> para $f$ en $x$ si $\ip{g(x)}{p}&lt;0$.</p></div></div>
+<div class="stmt proposicion" id="clase-c15:prop-descenso"><div class="head">Proposición</div><div class="body"><p>Si $H(x)\succ0$ y $g(x)\neq0$, el paso de Newton es dirección de descenso:</p>
+<div class="display">\[
+  \ip{g(x)}{p_{N}}=-g(x)\trans H(x)^{-1}g(x)&lt;0 .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p86">Ver demostración</button><div class="proof" id="clase-convexa-p86"><p>Sustituir $p_{N}=-H(x)^{-1}g(x)$, y usar que $H(x)^{-1}\succ0$.</p></div>
+<div class="stmt definicion" id="clase-c15:def-decremento"><div class="head">Definición decremento de Newton</div><div class="body"><p>El <span class="df">decremento de Newton</span> es</p>
+<div class="display">\[
+  \lambda(x):=\sqrt{g(x)\trans H(x)^{-1}g(x)}=\sqrt{-\ip{g(x)}{p_{N}}} .
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c15:obs-decremento"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El modelo predice la reducción $m_{x}(0)-m_{x}(p_{N})=\lambda(x)^{2}/2$, porque
+$p_{N}\trans H(x)p_{N}=-\ip{g(x)}{p_{N}}=\lambda(x)^{2}$. Para funciones
+autoconcordantes el decremento es además un certificado global del error; para
+una $f$ de clase $C^{2}$ cualquiera su lectura es local.</p></div></div>
+<h3 id="clase-convexa-x10">Convergencia local</h3>
+<div class="stmt teorema" id="clase-c15:teo-local"><div class="head">Teorema convergencia local cuadrática</div><div class="body"><p>Sea $x^{*}$ con $g(x^{*})=0$, sea $U$ abierto convexo con $x^{*}\in U$ y sean
+$m,\rho&gt;0$ tales que</p>
+<div class="display">\begin{gather*}
+  H(x)\succeq mI\quad\text{para todo }x\in U,\\
+  \norm{H(x)-H(y)}\le\rho\norm{x-y}\quad\text{para todos }x,y\in U .
+\end{gather*}</div>
+<p>Si $\Ball(x^{*};r)\subseteq U$ con $r&lt;2m/\rho$ y $x_{0}\in \Ball(x^{*};r)$, los
+iterados del método con paso completo se quedan en $\Ball(x^{*};r)$ y</p>
+<div class="display">\[
+  \norm{x_{k+1}-x^{*}}\le\frac{\rho}{2m}\norm{x_{k}-x^{*}}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p87">Ver demostración</button><div class="proof" id="clase-convexa-p87"><p>Sea $e_{k}=x_{k}-x^{*}$. Como $g(x^{*})=0$, el teorema de Taylor de primer orden
+aplicado a $g$ da</p>
+<div class="display">\[
+  g_{k}=\int_{0}^{1}H(x^{*}+te_{k})\,e_{k}\dd t ,
+\]</div>
+<p>y de $x_{k+1}=x_{k}-H_{k}^{-1}g_{k}$ sale</p>
+<div class="display">\[
+  e_{k+1}=H_{k}^{-1}\bigl(H_{k}e_{k}-g_{k}\bigr)
+  =H_{k}^{-1}\int_{0}^{1}\bigl(H(x_{k})-H(x^{*}+te_{k})\bigr)e_{k}\dd t .
+\]</div>
+<p>La segunda hipótesis da
+$\norm{\bigl(H(x_{k})-H(x^{*}+te_{k})\bigr)e_{k}}\le\rho(1-t)\norm{e_{k}}^{2}$,
+porque $x_{k}-(x^{*}+te_{k})=(1-t)e_{k}$, y la primera da
+$\norm{H_{k}^{-1}}\le1/m$. Luego</p>
+<div class="display">\[
+  \norm{e_{k+1}}\le\frac{1}{m}\int_{0}^{1}\rho(1-t)\norm{e_{k}}^{2}\dd t
+  =\frac{\rho}{2m}\norm{e_{k}}^{2}.
+\]</div>
+<p>Si $\norm{e_{k}}&lt;r&lt;2m/\rho$, entonces
+$\norm{e_{k+1}}\le\frac{\rho}{2m}\norm{e_{k}}\norm{e_{k}}&lt;\norm{e_{k}}$, así que
+la bola es invariante y la cota se puede iterar.</p></div>
+<div class="stmt corolario" id="clase-c15:cor-complejidad"><div class="head">Corolario complejidad local</div><div class="body"><p>Sean $C=\rho/(2m)$ y $\theta_{0}=C\norm{x_{0}-x^{*}}$. Si $\theta_{0}&lt;1$,
+entonces</p>
+<div class="display">\[
+  C\norm{e_{k}}\le\theta_{0}^{2^{k}},
+\]</div>
+<p>y con $\bar{M}=\norm{H(x^{*})}+\rho r$, que acota $\norm{H}$ en
+$\Ball(x^{*};r)$,</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\frac{\bar{M}}{2C^{2}}\,\theta_{0}^{2^{k+1}} .
+\]</div>
+<p>Para garantizar $f(x_{k})-f^{*}\le\varepsilon$ bastan
+$O\bigl(\log\log\frac{1}{\varepsilon}\bigr)$ iteraciones.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p88">Ver demostración</button><div class="proof" id="clase-convexa-p88"><p>La cota cuadrática es $C\norm{e_{k+1}}\le\bigl(C\norm{e_{k}}\bigr)^{2}$, y de
+ahí la primera desigualdad por inducción. Para la segunda,
+$\norm{H(x)}\le\norm{H(x^{*})}+\rho\norm{x-x^{*}}\le\bar{M}$ en la bola, así que
+el lema del descenso con constante $\bar{M}$ en $x^{*}$, donde $g(x^{*})=0$, da
+$f(x)-f^{*}\le\frac{\bar M}{2}\norm{x-x^{*}}^{2}$. Sustituyendo
+$\norm{e_{k}}\le\theta_{0}^{2^{k}}/C$ sale la cota. Finalmente,
+$\frac{\bar M}{2C^{2}}\theta_{0}^{2^{k+1}}\le\varepsilon$ equivale a</p>
+<div class="display">\[
+  2^{k+1}\ge\frac{\log\bigl(\bar{M}/(2C^{2}\varepsilon)\bigr)}{\log(1/\theta_{0})},
+\]</div>
+<p>y tomando logaritmo en base dos queda $k+1=O\bigl(\log\log\frac1\varepsilon\bigr)$.</p></div>
+<div class="stmt observacion" id="clase-c15:obs-local"><div class="head">Observación</div><div class="body"><p>La hipótesis $\theta_{0}&lt;1$ es la que dice que hay que empezar cerca, y la tasa
+es local: la convexidad fuerte global no basta para que el método con paso
+completo converja desde cualquier punto, porque lejos de la solución la
+aproximación cuadrática puede ser mala.</p></div></div>
+<h3 id="clase-convexa-x11">Newton amortiguado</h3>
+<div class="stmt definicion" id="clase-c15:def-amortiguado"><div class="head">Definición Newton con <em>backtracking</em></div><div class="body"><p>Dados $x_{0}\in\R^{n}$, $c_{1}\in(0,\frac12)$ y $\tau\in(0,1)$, para
+$k=0,1,2,\dots$:</p>
+<ol class="lista"><li><p>calcular $g_{k}$ y $H_{k}$, y resolver $H_{k}p_{k}=-g_{k}$;</p></li><li><p>$\alpha\leftarrow1$;</p></li><li><p>mientras $f(x_{k}+\alpha p_{k})&gt;f(x_{k})+c_{1}\alpha\ip{g_{k}}{p_{k}}$,
+    reemplazar $\alpha$ por $\tau\alpha$;</p></li><li><p>$\alpha_{k}=\alpha$ y $x_{k+1}=x_{k}+\alpha_{k}p_{k}$.</p></li></ol>
+<p>La desigualdad de <em>(iii)</em> es la condición de <span class="df">Armijo</span>.</p></div></div>
+<div class="stmt teorema" id="clase-c15:teo-global"><div class="head">Teorema globalización y fase local</div><div class="body"><p>Sea $\mathcal{L}_{0}=\{x:f(x)\le f(x_{0})\}$ compacto y contenido en un abierto
+convexo $U$ sobre el que $mI\preceq H(x)\preceq MI$, con $0&lt;m\le M$. Entonces el
+método está bien definido, los iterados se quedan en $\mathcal{L}_{0}$ y
+convergen al único minimizador $x^{*}$ de $f$ en $U$. Si además $H$ es
+$\rho$-Lipschitz cerca de $x^{*}$, a partir de cierto $k$ se acepta el paso
+completo $\alpha_{k}=1$ y la convergencia pasa a ser cuadrática.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p89">Ver demostración</button><div class="proof" id="clase-convexa-p89"><p>Armijo da $f(x_{k+1})&lt;f(x_{k})$, luego $\{x_{k}\}\subseteq\mathcal{L}_{0}$. Las
+cotas espectrales dan</p>
+<div class="display">\[
+  -\ip{g_{k}}{p_{k}}=g_{k}\trans H_{k}^{-1}g_{k}\ge\frac{1}{M}\norm{g_{k}}^{2},
+  \qquad
+  -\ip{g_{k}}{p_{k}}=p_{k}\trans H_{k}p_{k}\ge m\norm{p_{k}}^{2},
+\]</div>
+<p>y de $\norm{H_{k}^{-1}}\le1/m$ sale $\norm{p_{k}}\le\frac{1}{m}\norm{g_{k}}$. Sea
+$d=\dist(\mathcal{L}_{0},\R^{n}\setminus U)$, que es positivo porque
+$\mathcal{L}_{0}$ es compacto y está en el abierto $U$, y sea $P$ una cota de
+$\norm{p_{k}}$ en $\mathcal{L}_{0}$. Con $\alpha_{0}=\min\{1,d/P\}$ se tiene
+$\norm{tp_{k}}\le tP&lt;d$ para $t\in[0,\alpha_{0}]$, luego $x_{k}+tp_{k}\in U$ y
+vale el lema del descenso con constante $M$:</p>
+<div class="display">\[
+  f(x_{k}+\alpha p_{k})\le f(x_{k})+\alpha\ip{g_{k}}{p_{k}}
+  +\frac{M\alpha^{2}}{2}\norm{p_{k}}^{2}.
+\]</div>
+<p>Usando $\norm{p_{k}}^{2}\le-\ip{g_{k}}{p_{k}}/m$, el lado derecho queda por
+debajo de $f(x_{k})+c_{1}\alpha\ip{g_{k}}{p_{k}}$ en cuanto
+$\alpha\le2(1-c_{1})m/M$. Luego con
+$\bar{\alpha}=\min\{\alpha_{0},2(1-c_{1})m/M\}$ el bucle termina y
+$\alpha_{k}\ge\tau\bar{\alpha}$, de donde</p>
+<div class="display">\[
+  f(x_{k+1})\le f(x_{k})+c_{1}\alpha_{k}\ip{g_{k}}{p_{k}}
+  \le f(x_{k})-\frac{c_{1}\tau\bar{\alpha}}{M}\norm{g_{k}}^{2}.
+\]</div>
+<p>Sumando en $k$, la suma telescópica está acotada por abajo por
+$f^{*}-f(x_{0})$, así que $\sum_{k}\norm{g_{k}}^{2}&lt;\infty$ y
+$\norm{g_{k}}\to0$. Como $H\succeq mI$ en el convexo $U$, allí $f$ es
+$m$-fuertemente convexa, con lo que su minimizador $x^{*}$ es único y</p>
+<div class="display">\[
+  m\norm{x_{k}-x^{*}}^{2}\le\ip{g_{k}-g(x^{*})}{x_{k}-x^{*}}
+  \le\norm{g_{k}}\norm{x_{k}-x^{*}},
+\]</div>
+<p>de donde $m\norm{x_{k}-x^{*}}\le\norm{g_{k}}\to0$. La última afirmación es el
+teorema de convergencia local, una vez que los iterados entran en la bola donde
+el paso completo satisface Armijo.</p></div>
+<div class="stmt observacion" id="clase-c15:obs-regularizado"><div class="head">Observación Newton regularizado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $H_{k}$ es singular, indefinida o demasiado mal condicionada, se resuelve</p>
+<div class="display">\[
+  (H_{k}+\sigma_{k}I)\,p_{k}=-g_{k},\qquad\sigma_{k}\ge0,
+\]</div>
+<p>aumentando $\sigma_{k}$ hasta que la matriz sea suficientemente definida
+positiva y la dirección sea de descenso. Es el puente con Levenberg y Marquardt
+y con las regiones de confianza.</p></div></div>
+<h3 id="clase-convexa-x12">Métodos quasi-Newton</h3>
+<div class="stmt definicion" id="clase-c15:def-secante"><div class="head">Definición la ecuación secante<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $s_{k}=x_{k+1}-x_{k}$ y $y_{k}=g_{k+1}-g_{k}$, la identidad
+$y_{k}=\int_{0}^{1}H(x_{k}+ts_{k})s_{k}\dd t$ sugiere pedirle a una
+aproximación $B_{k+1}$ de la Hessiana la <span class="df">ecuación secante</span>
+$B_{k+1}s_{k}=y_{k}$.</p></div></div>
+<div class="stmt definicion" id="clase-c15:def-bfgs"><div class="head">Definición la actualización BFGS<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><div class="display">\[
+  B_{k+1}=B_{k}-\frac{B_{k}s_{k}s_{k}\trans B_{k}}{s_{k}\trans B_{k}s_{k}}
+  +\frac{y_{k}y_{k}\trans}{y_{k}\trans s_{k}},
+\]</div>
+<p>y si se guarda directamente $G_{k}=B_{k}^{-1}$,</p>
+<div class="display">\[
+  G_{k+1}=\bigl(I-\rho_{k}s_{k}y_{k}\trans\bigr)G_{k}
+  \bigl(I-\rho_{k}y_{k}s_{k}\trans\bigr)+\rho_{k}s_{k}s_{k}\trans,
+  \qquad\rho_{k}=\frac{1}{y_{k}\trans s_{k}} .
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c15:prop-bfgs-positiva"><div class="head">Proposición preservación de la positividad<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $G_{k}\succ0$ y $y_{k}\trans s_{k}&gt;0$, entonces $G_{k+1}\succ0$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p90">Ver demostración</button><div class="proof" id="clase-convexa-p90"><p>Sea $V_{k}=I-\rho_{k}y_{k}s_{k}\trans$. Para todo $v\neq0$,</p>
+<div class="display">\[
+  v\trans G_{k+1}v=(V_{k}v)\trans G_{k}(V_{k}v)+\rho_{k}(s_{k}\trans v)^{2},
+\]</div>
+<p>y los dos sumandos son no negativos. Si el segundo se anula y $V_{k}v=0$,
+entonces $s_{k}\trans v=0$ y por tanto $v=\rho_{k}y_{k}(s_{k}\trans v)=0$, que
+es una contradicción.</p></div>
+<div class="stmt observacion" id="clase-c15:obs-wolfe"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La hipótesis $y_{k}\trans s_{k}&gt;0$ se consigue con una búsqueda lineal que
+cumpla las condiciones de Wolfe: si $p_{k}=-G_{k}g_{k}$ es de descenso y
+$s_{k}=\alpha_{k}p_{k}$, la condición de curvatura
+$\ip{g_{k+1}}{p_{k}}\ge c_{2}\ip{g_{k}}{p_{k}}$ con $c_{2}\in(c_{1},1)$ da
+$y_{k}\trans s_{k}\ge\alpha_{k}(c_{2}-1)\ip{g_{k}}{p_{k}}&gt;0$.</p></div></div>
+<div class="stmt teorema" id="clase-c15:teo-bfgs"><div class="head">Teorema convergencia superlineal local de BFGS<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $x_{k}\to x^{*}$, $H(x^{*})\succ0$, $H$ es Lipschitz cerca de $x^{*}$ y los
+pasos cumplen condiciones de Wolfe apropiadas, entonces</p>
+<div class="display">\[
+  \frac{\norm{x_{k+1}-x^{*}}}{\norm{x_{k}-x^{*}}}\longrightarrow0 .
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c15:obs-lbfgs"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La hipótesis $x_{k}\to x^{*}$ no sobra: el enunciado no dice que BFGS converja
+superlinealmente desde cualquier punto y para toda función convexa. Guardar
+$G_{k}$ cuesta $O(n^{2})$; <span class="df">L-BFGS</span> conserva solo los últimos $m$ pares
+$(s_{i},y_{i})$ y recupera la dirección con una recursión de dos ciclos, con
+coste $O(mn)$ y sin formar ninguna matriz densa.</p></div></div>
+<h3 id="clase-convexa-x13">Pasos inexactos</h3>
+<div class="stmt observacion" id="clase-c15:obs-hv"><div class="head">Observación</div><div class="body"><p>El paso de Newton es el minimizador de
+$\ip{g_{k}}{p}+\frac12 p\trans H_{k}p$, y ese problema se puede resolver
+aproximadamente con métodos que solo necesitan los productos $H_{k}v$, sin
+formar $H_{k}$. Por ejemplo, si $f(x)=\frac12\norm{Ax+b}^{2}$ no hace falta
+calcular $A\trans A$, sino $A\trans(Av)$.</p></div></div>
+<div class="stmt definicion" id="clase-c15:def-inexacto"><div class="head">Definición paso de Newton inexacto<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$p_{k}$ es un <span class="df">paso de Newton inexacto</span> si su residual
+$r_{k}=H_{k}p_{k}+g_{k}$ cumple</p>
+<div class="display">\[
+  \norm{r_{k}}\le\eta_{k}\norm{g_{k}},\qquad 0\le\eta_{k}&lt;1,
+\]</div>
+<p>y la sucesión $(\eta_{k})$ se llama <span class="df">sucesión forzante</span>.</p></div></div>
+<div class="stmt proposicion" id="clase-c15:prop-inexacto"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Bajo las hipótesis del teorema de convergencia local, una cota uniforme
+$\eta_{k}\le\bar\eta&lt;1$ da convergencia al menos lineal; si $\eta_{k}\to0$ la
+convergencia es superlineal; y si $\eta_{k}=O(\norm{g_{k}})$ se recupera la
+cuadrática.</p></div></div>
+<div class="stmt observacion" id="clase-c15:obs-cg"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>De ahí que no convenga resolver los sistemas con mucha precisión mientras el
+iterado esté lejos. Con gradiente conjugado, reducir el error relativo a $\eta$
+cuesta del orden de $\sqrt{\kappa(H_{k})}\log\frac{1}{\eta}$ productos
+Hessiana-vector, así que precondicionar es decisivo. Si $H_{k}$ no es definida
+positiva, el método puede detectar una dirección de curvatura negativa; en
+optimización convexa eso solo ocurre por errores numéricos o por aproximaciones,
+y se responde truncando y regularizando.</p></div></div>
+<h3 id="clase-convexa-x14">Regiones de confianza</h3>
+<div class="stmt definicion" id="clase-c15:def-region"><div class="head">Definición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Una <span class="df">región de confianza</span> fija primero un radio $\Delta_{k}$ dentro del cual
+se considera fiable el modelo y resuelve</p>
+<div class="display">\[
+  \min_{\norm{p}\le\Delta_{k}}\;
+  m_{k}(p)=f(x_{k})+\ip{g_{k}}{p}+\frac12 p\trans B_{k}p ,
+\]</div>
+<p>midiendo después la calidad del paso con</p>
+<div class="display">\[
+  \varrho_{k}=\frac{f(x_{k})-f(x_{k}+p_{k})}{m_{k}(0)-m_{k}(p_{k})} .
+\]</div>
+<p>Si $\varrho_{k}$ es pequeño o negativo se rechaza el paso y se reduce
+$\Delta_{k}$; si está cerca de uno, el radio puede aumentarse.</p></div></div>
+<div class="stmt observacion" id="clase-c15:obs-cauchy"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Es el orden inverso al de la búsqueda lineal, que fija primero la dirección y
+luego cuánto avanzar. No hace falta resolver el subproblema exactamente: para
+la convergencia global basta exigir una fracción uniforme del decrecimiento de
+Cauchy,</p>
+<div class="display">\[
+  m_{k}(0)-m_{k}(p_{k})\ge c\norm{g_{k}}
+  \min\Bigl\{\Delta_{k},\frac{\norm{g_{k}}}{\norm{B_{k}}}\Bigr\},
+  \qquad c&gt;0,
+\]</div>
+<p>que el punto de Cauchy cumple y que el método <em>dogleg</em> alcanza combinándolo
+con el paso quasi-Newton. Con $B_{k}$ uniformemente acotadas, todo punto de
+acumulación es estacionario, y en el caso convexo eso es óptimo.</p></div></div>
+<h3 id="clase-convexa-x15">Comparación</h3>
+<div class="stmt observacion" id="clase-c15:obs-tabla"><div class="head">Observación</div><div class="body"><p>Con $\kappa=L/\mu$, y midiendo cuántas iteraciones hacen falta para
+$f(x_{k})-f^{*}\le\varepsilon$:</p>
+<p>\begin{tabular}{@{}lll@{}}
+\toprule
+Método &amp; Iteraciones &amp; Condiciones \\
+\midrule
+Gradiente          &amp; $O\bigl(\frac1\varepsilon\bigr)$                        &amp; $L$-suave \\
+Nesterov           &amp; $O\bigl(\frac{1}{\sqrt\varepsilon}\bigr)$               &amp; $L$-suave \\
+Gradiente          &amp; $O\bigl(\kappa\log\frac1\varepsilon\bigr)$              &amp; $L$-suave y $\mu$-fuerte \\
+Nesterov           &amp; $O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$         &amp; $L$-suave y $\mu$-fuerte \\
+Newton             &amp; $O\bigl(\log\log\frac1\varepsilon\bigr)$                &amp; $H$ $\rho$-Lipschitz, $H\succeq mI$, \\
+                   &amp;                                                         &amp; y $\theta_{0}&lt;1$ \\
+\bottomrule
+\end{tabular}</p>
+<p>La última fila no es comparable con las otras cuatro: es local, y su hipótesis
+$\theta_{0}=\frac{\rho}{2m}\norm{x_{0}-x^{*}}&lt;1$ habla del punto de partida y no
+solo de la función. Newton amortiguado cierra esa brecha, a cambio de una fase
+previa cuya longitud depende de $f(x_{0})-f^{*}$.</p></div></div>
+<div class="stmt observacion" id="clase-c15:obs-tabla-recursos"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Contar iteraciones tampoco basta, porque cuestan cosas distintas:</p>
+<p>\begin{tabular}{@{}llp{2.5cm}@{}}
+\toprule
+Método &amp; Por iteración &amp; Memoria \\
+\midrule
+Newton directo        &amp; gradiente y Hessiana        &amp; $O(n^{2})$, menos si es dispersa \\
+Newton-CG             &amp; gradiente y productos $Hv$  &amp; la del precondicionador \\
+BFGS                  &amp; gradientes                  &amp; $O(n^{2})$ \\
+L-BFGS                &amp; gradientes                  &amp; $O(mn)$ \\
+Región de confianza   &amp; modelo cuadrático           &amp; variable \\
+\bottomrule
+\end{tabular}</p>
+<p>Los métodos de primer orden salen a cuenta cuando basta precisión moderada o
+cuando una factorización es prohibitiva; Newton y sus variantes, cuando se
+quiere precisión alta y la estructura lineal se puede explotar.</p></div></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -3538,7 +3902,337 @@ $k+1\ge R\sqrt{2L/\varepsilon}$, es decir, $O\bigl(\sqrt{LR^{2}/\varepsilon}\big
 iteraciones, contra las $O(LR^{2}/\varepsilon)$ del método del gradiente.</p></div></div>
 <div class="stmt observacion" id="general-c14:obs-no-monotono"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El potencial de la prueba decrece y el objetivo no tiene por qué: los valores
 $f(x_{k})$ del método acelerado pueden oscilar. Hay variantes monótonas que en
-cada paso se quedan con el mejor punto visto.</p></div></div></section></div>
+cada paso se quedan con el mejor punto visto.</p></div></div>
+<h3 id="general-convexa-x5">El caso fuertemente convexo</h3>
+<div class="stmt definicion" id="general-c14:def-momento-constante"><div class="head">Definición momento constante<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $f:\Hs\to\R$ $L$-suave y $\mu$-fuertemente convexa, y sean</p>
+<div class="display">\[
+  q=\sqrt{\frac{\mu}{L}},
+  \qquad
+  \beta=\frac{1-q}{1+q}=\frac{\sqrt{L}-\sqrt{\mu}}{\sqrt{L}+\sqrt{\mu}} .
+\]</div>
+<p>Con $x_{-1}=x_{0}$ y $y_{0}=x_{0}$ se itera</p>
+<div class="display">\[
+  x_{k+1}=y_{k}-\frac{1}{L}\nabla f(y_{k}),
+  \qquad
+  y_{k+1}=x_{k+1}+\beta(x_{k+1}-x_{k}).
+\]</div></div></div>
+<div class="stmt observacion" id="general-c14:obs-momento-constante"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El momento ya no depende de $k$. Un análisis por sucesiones de estimación
+produce un potencial que domina $f(x_{k})-f^{*}$ y se contrae por el factor
+$1-\sqrt{\mu/L}$ en cada paso. Abajo se obtiene la misma complejidad por un
+camino que solo usa la tasa $O(1/k^{2})$ y la convexidad fuerte.</p></div></div>
+<div class="stmt proposicion" id="general-c14:prop-reinicios"><div class="head">Proposición aceleración mediante reinicios<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $u\in\Hs$ el punto inicial de una fase y sea $x_{m}$ el resultado de $m$
+iteraciones del método acelerado convexo empezado en $u$. Entonces</p>
+<div class="display">\[
+  f(x_{m})-f^{*}\le\frac{4\kappa}{(m+1)^{2}}\bigl(f(u)-f^{*}\bigr).
+\]</div>
+<p>En particular, si $m+1\ge\sqrt{8\kappa}$, cada fase reduce la suboptimalidad al
+menos a la mitad.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p72">Ver demostración</button><div class="proof" id="general-convexa-p72"><p>La tasa $O(1/k^{2})$ con $x_{0}=u$ da
+$f(x_{m})-f^{*}\le 2L\norm{u-x^{*}}^{2}/(m+1)^{2}$, y el sandwich de la
+convexidad fuerte da $\norm{u-x^{*}}^{2}\le2\bigl(f(u)-f^{*}\bigr)/\mu$.
+Sustituyendo sale la cota, y con $(m+1)^{2}\ge8\kappa$ el factor es
+$4\kappa/(m+1)^{2}\le1/2$.</p></div>
+<div class="stmt corolario" id="general-c14:cor-complejidad-fuerte"><div class="head">Corolario complejidad acelerada con convexidad fuerte</div><div class="body"><p>Reiniciando el momento cada $m+1=\lceil\sqrt{8\kappa}\,\rceil$ iteraciones se
+alcanza $f(x_{k})-f^{*}\le\varepsilon$ en
+$O\bigl(\sqrt{\kappa}\log\frac{1}{\varepsilon}\bigr)$ iteraciones, contra las
+$O\bigl(\kappa\log\frac{1}{\varepsilon}\bigr)$ del método del gradiente.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p73">Ver demostración</button><div class="proof" id="general-convexa-p73"><p>Cada fase divide la suboptimalidad por dos, así que
+$\lceil\log_{2}(1/\varepsilon)\rceil$ fases bastan, y cada una cuesta
+$\lceil\sqrt{8\kappa}\,\rceil$ iteraciones.</p></div>
+<div class="stmt observacion" id="general-c14:obs-reinicio-adaptativo"><div class="head">Observación reinicios adaptativos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El reinicio periódico necesita una estimación de $\kappa$. Cuando $\mu$ es
+desconocida se reinicia al detectar un aumento del objetivo, o la pérdida de
+alineación $\ip{\nabla f(y_{k})}{x_{k+1}-x_{k}}&gt;0$. Sin hipótesis adicionales
+son heurísticas de implementación y no garantías.</p></div></div>
+<div class="stmt proposicion" id="general-c14:prop-backtracking"><div class="head">Proposición <em>backtracking</em> acelerado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si no se conoce $L$, se usa en cada paso una estimación $M_{k}$ que cumpla</p>
+<div class="display">\[
+  f\bigl(y_{k}-M_{k}^{-1}\nabla f(y_{k})\bigr)
+  \le f(y_{k})-\frac{1}{2M_{k}}\norm{\nabla f(y_{k})}^{2},
+\]</div>
+<p>y se escoge $a_{k+1}$ por $M_{k}a_{k+1}^{2}=A_{k}+a_{k+1}$. La prueba de la tasa
+vale con $L$ reemplazado iteración por iteración por $M_{k}$, y si
+$M_{k}\le\bar{L}$ se conserva el orden
+$O\bigl(\sqrt{\bar{L}R^{2}/\varepsilon}\bigr)$.</p></div></div>
+<h3 id="general-convexa-x6">Cotas inferiores</h3>
+<div class="stmt teorema" id="general-c14:teo-cotas-inferiores"><div class="head">Teorema cotas inferiores de primer orden, de Nemirovski y Yudin<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En el modelo de oráculo de primer orden, donde al consultar $x$ el algoritmo
+recibe $f(x)$ y $\nabla f(x)$ y construye el iterado nuevo con la información
+acumulada: si $\dim\Hs$ es suficientemente grande, para todo método determinista
+existen funciones convexas y $L$-suaves con</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\ge c\,\frac{LR^{2}}{(k+1)^{2}},
+\]</div>
+<p>con $c&gt;0$ universal; y bajo $\mu$-convexidad fuerte existen problemas que exigen
+$\Omega\bigl(\sqrt{\kappa}\log\frac{1}{\varepsilon}\bigr)$ consultas.</p></div></div>
+<div class="stmt observacion" id="general-c14:obs-optimalidad"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Las dos tasas del capítulo coinciden en orden con esas cotas, así que el método
+acelerado es óptimo dentro del modelo general de primer orden. Aquí la hipótesis
+sobre la dimensión no es un tecnicismo: las cotas se construyen con cuadráticas
+cuyo gradiente revela una sola dirección nueva por consulta, de modo que en
+$\R^{n}$ la construcción se agota en $n$ pasos y en un $\Hs$ de dimensión
+infinita no se agota nunca. Por eso no contradicen que un método que use más
+información resuelva una cuadrática de dimensión fija en un número finito de
+pasos.</p></div></div>
+<div class="stmt observacion" id="general-c14:obs-robustez"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La optimalidad de peor caso no dice que el método acelerado gane siempre en
+tiempo de cómputo. El momento amplifica los errores en el gradiente, la
+inexactitud numérica y la variación de la curvatura local, y por eso
+<em>backtracking</em>, reinicios y escalamiento son parte de una implementación
+seria.</p></div></div></section>
+<section class="capitulo"><h2 id="general-cap:segundo-orden">Métodos de segundo orden</h2>
+<p>En este capítulo $f:\Hs\to\R$ es dos veces Fréchet diferenciable, y se escribe
+$g(x)=\nabla f(x)$ y $H(x)\in\Bop{\Hs}$ para el operador autoadjunto que
+representa la segunda derivada, es decir
+$\ip{H(x)u}{v}=\Dif^{2}f(x)[u,v]$. Para $0&lt;m\le M$, las desigualdades
+$mI\preceq H(x)\preceq MI$ abrevian
+$m\norm{v}^{2}\le\ip{H(x)v}{v}\le M\norm{v}^{2}$ para todo $v\in\Hs$.</p>
+<div class="stmt proposicion" id="general-c15:prop-curvatura"><div class="head">Proposición curvatura y convexidad</div><div class="body"><p>Sea $U\subseteq\Hs$ abierto convexo y $f\in C^{2}(U)$.</p>
+<ol class="lista"><li><p>$f$ es convexa en $U$ si y solo si $H(x)\succeq0$ para todo $x\in U$;</p></li><li><p>$f$ es $m$-fuertemente convexa en $U$ si y solo si $H(x)\succeq mI$ para
+    todo $x\in U$;</p></li><li><p>si $f$ es convexa, $f$ es $M$-suave en $U$ si y solo si $H(x)\preceq MI$
+    para todo $x\in U$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p74">Ver demostración</button><div class="proof" id="general-convexa-p74"><p>Para <em>(i)</em>, sea $\varphi(t)=f(x+t(y-x))$ con $[x,y]\subset U$, que es
+$C^{2}$ con $\varphi&#x27;&#x27;(t)=\ip{H(x+t(y-x))(y-x)}{y-x}$. Una función de una
+variable es convexa si y solo si su segunda derivada es no negativa, y $f$ es
+convexa si y solo si lo son todas esas restricciones. Para <em>(ii)</em> basta
+aplicar <em>(i)</em> a $f-\frac{m}{2}\norm{\cdot}^{2}$, cuya segunda derivada está
+representada por $H-mI$, y para <em>(iii)</em> aplicar <em>(i)</em> a
+$\frac{M}{2}\norm{\cdot}^{2}-f$ junto con la equivalencia del teorema de Baillon
+y Haddad entre esa convexidad y la $M$-suavidad.</p></div>
+<div class="stmt definicion" id="general-c15:def-modelo"><div class="head">Definición el modelo cuadrático</div><div class="body"><p>El <span class="df">modelo cuadrático</span> de $f$ en $x$ es</p>
+<div class="display">\[
+  m_{x}(p)=f(x)+\ip{g(x)}{p}+\frac12\ip{H(x)p}{p} .
+\]</div></div></div>
+<div class="stmt proposicion" id="general-c15:prop-paso"><div class="head">Proposición el paso de Newton</div><div class="body"><p>Si $mI\preceq H(x)\preceq MI$ con $m&gt;0$, el modelo tiene un único minimizador,
+el <span class="df">paso de Newton</span> $p_{N}$, y está caracterizado por</p>
+<div class="display">\[
+  H(x)\,p_{N}=-g(x).
+\]</div>
+<p>El punto nuevo es $x^{+}=x+p_{N}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p75">Ver demostración</button><div class="proof" id="general-convexa-p75"><p>La forma bilineal $(u,v)\mapsto\ip{H(x)u}{v}$ es simétrica, continua por la cota
+superior y coerciva por la inferior, así que el teorema de Lax y Milgram da un
+único $p_{N}$ con $\ip{H(x)p_{N}}{v}=-\ip{g(x)}{v}$ para todo $v$, y afirma
+además que ese $p_{N}$ es el minimizador de $\frac12\ip{H(x)p}{p}+\ip{g(x)}{p}$,
+que es $m_{x}$ salvo la constante $f(x)$.</p></div>
+<div class="stmt observacion" id="general-c15:obs-coercividad"><div class="head">Observación</div><div class="body"><p>La hipótesis que se usa no es $H(x)\succ0$ sino la cota uniforme
+$H(x)\succeq mI$ con $m&gt;0$. Además</p>
+<div class="display">\[
+  m\norm{u}^{2}\le\ip{H(x)u}{u}\le\norm{H(x)u}\norm{u}
+\]</div>
+<p>da $\norm{H(x)^{-1}}\le1/m$, que es la cota que sostiene todo el capítulo.</p></div></div>
+<div class="stmt definicion" id="general-c15:def-metodo"><div class="head">Definición método de Newton con paso completo</div><div class="body"><p>Dado $x_{0}\in\Hs$, para $k=0,1,2,\dots$:</p>
+<ol class="lista"><li><p>calcular $g_{k}=\nabla f(x_{k})$ y $H_{k}=H(x_{k})$;</p></li><li><p>resolver $H_{k}p_{k}=-g_{k}$;</p></li><li><p>$x_{k+1}=x_{k}+p_{k}$.</p></li></ol></div></div>
+<div class="stmt ejemplo" id="general-c15:ej-cuadratica"><div class="head">Ejemplo las cuadráticas</div><div class="body"><p>Sea $Q\in\Bop{\Hs}$ autoadjunto con $Q\succeq mI$, y
+$f(x)=\frac12\ip{Qx}{x}-\ip{b}{x}+c$. Entonces $g(x)=Qx-b$ y $H(x)=Q$, de modo
+que desde cualquier punto</p>
+<div class="display">\[
+  x+p_{N}=x-Q^{-1}(Qx-b)=Q^{-1}b=x^{*},
+\]</div>
+<p>donde $Q^{-1}b$ existe por Lax y Milgram. Newton resuelve el problema en una
+sola iteración, donde el método del gradiente necesita
+$O(\kappa\log\frac1\varepsilon)$.</p></div></div>
+<div class="stmt observacion" id="general-c15:obs-afin"><div class="head">Observación invariancia afín</div><div class="body"><p>Sea $A\in\Bop{\Hs}$ biyectivo y $\widetilde{f}(z)=f(Az+b)$. Como
+$\nabla\widetilde{f}(z)=A^{*}g(Az+b)$ y
+$\widetilde{H}(z)=A^{*}H(Az+b)A$, el paso de Newton de $\widetilde{f}$ es
+$\widetilde{p}_{N}=A^{-1}p_{N}$, así que
+$A(z+\widetilde{p}_{N})+b=x+p_{N}$: el método conmuta con los cambios de
+variable afines. El descenso del gradiente no, y por eso allí había que
+precondicionar.</p></div></div>
+<div class="stmt definicion" id="general-c15:def-descenso"><div class="head">Definición dirección de descenso</div><div class="body"><p>$p$ es una <span class="df">dirección de descenso</span> para $f$ en $x$ si $\ip{g(x)}{p}&lt;0$.</p></div></div>
+<div class="stmt proposicion" id="general-c15:prop-descenso"><div class="head">Proposición</div><div class="body"><p>Si $H(x)\succeq mI$ con $m&gt;0$ y $g(x)\neq0$, el paso de Newton es dirección de
+descenso:</p>
+<div class="display">\[
+  \ip{g(x)}{p_{N}}=-\ip{H(x)^{-1}g(x)}{g(x)}&lt;0 .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p76">Ver demostración</button><div class="proof" id="general-convexa-p76"><p>Sustituir $p_{N}=-H(x)^{-1}g(x)$. El operador $H(x)^{-1}$ es autoadjunto y
+cumple $\ip{H(x)^{-1}w}{w}\ge\norm{w}^{2}/M&gt;0$ para $w\neq0$, porque con
+$u=H(x)^{-1}w$ se tiene $\ip{H(x)^{-1}w}{w}=\ip{u}{H(x)u}\ge m\norm{u}^{2}$ y
+$\norm{w}\le M\norm{u}$.</p></div>
+<div class="stmt definicion" id="general-c15:def-decremento"><div class="head">Definición decremento de Newton</div><div class="body"><p>El <span class="df">decremento de Newton</span> es</p>
+<div class="display">\[
+  \lambda(x):=\sqrt{\ip{H(x)^{-1}g(x)}{g(x)}}=\sqrt{-\ip{g(x)}{p_{N}}} .
+\]</div></div></div>
+<div class="stmt observacion" id="general-c15:obs-decremento"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El modelo predice la reducción $m_{x}(0)-m_{x}(p_{N})=\lambda(x)^{2}/2$, porque
+$\ip{H(x)p_{N}}{p_{N}}=-\ip{g(x)}{p_{N}}=\lambda(x)^{2}$. Para funciones
+autoconcordantes el decremento es además un certificado global del error; para
+una $f$ de clase $C^{2}$ cualquiera su lectura es local.</p></div></div>
+<h3 id="general-convexa-x7">Convergencia local</h3>
+<div class="stmt teorema" id="general-c15:teo-local"><div class="head">Teorema convergencia local cuadrática</div><div class="body"><p>Sea $x^{*}$ con $g(x^{*})=0$, sea $U\subseteq\Hs$ abierto convexo con
+$x^{*}\in U$ y sean $m,\rho&gt;0$ y $M&lt;\infty$ tales que</p>
+<div class="display">\begin{gather*}
+  mI\preceq H(x)\preceq MI\quad\text{para todo }x\in U,\\
+  \norm{H(x)-H(y)}\le\rho\norm{x-y}\quad\text{para todos }x,y\in U .
+\end{gather*}</div>
+<p>Si $\Ball(x^{*};r)\subseteq U$ con $r&lt;2m/\rho$ y $x_{0}\in \Ball(x^{*};r)$, los
+iterados del método con paso completo se quedan en $\Ball(x^{*};r)$ y</p>
+<div class="display">\[
+  \norm{x_{k+1}-x^{*}}\le\frac{\rho}{2m}\norm{x_{k}-x^{*}}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p77">Ver demostración</button><div class="proof" id="general-convexa-p77"><p>Sea $e_{k}=x_{k}-x^{*}$. Como $g(x^{*})=0$, el teorema de Taylor de primer orden
+aplicado a $g$ da</p>
+<div class="display">\[
+  g_{k}=\int_{0}^{1}H(x^{*}+te_{k})\,e_{k}\dd t ,
+\]</div>
+<p>integral de una función continua de $[0,1]$ en $\Hs$, y de
+$x_{k+1}=x_{k}-H_{k}^{-1}g_{k}$ sale</p>
+<div class="display">\[
+  e_{k+1}=H_{k}^{-1}\bigl(H_{k}e_{k}-g_{k}\bigr)
+  =H_{k}^{-1}\int_{0}^{1}\bigl(H(x_{k})-H(x^{*}+te_{k})\bigr)e_{k}\dd t .
+\]</div>
+<p>La hipótesis de Lipschitz da
+$\norm{\bigl(H(x_{k})-H(x^{*}+te_{k})\bigr)e_{k}}\le\rho(1-t)\norm{e_{k}}^{2}$,
+porque $x_{k}-(x^{*}+te_{k})=(1-t)e_{k}$, y la cota inferior da
+$\norm{H_{k}^{-1}}\le1/m$. Luego</p>
+<div class="display">\[
+  \norm{e_{k+1}}\le\frac{1}{m}\int_{0}^{1}\rho(1-t)\norm{e_{k}}^{2}\dd t
+  =\frac{\rho}{2m}\norm{e_{k}}^{2}.
+\]</div>
+<p>Si $\norm{e_{k}}&lt;r&lt;2m/\rho$, entonces
+$\norm{e_{k+1}}\le\frac{\rho}{2m}\norm{e_{k}}\norm{e_{k}}&lt;\norm{e_{k}}$, así que
+la bola es invariante y la cota se puede iterar.</p></div>
+<div class="stmt corolario" id="general-c15:cor-complejidad"><div class="head">Corolario complejidad local</div><div class="body"><p>Sean $C=\rho/(2m)$ y $\theta_{0}=C\norm{x_{0}-x^{*}}$. Si $\theta_{0}&lt;1$,
+entonces</p>
+<div class="display">\[
+  C\norm{e_{k}}\le\theta_{0}^{2^{k}},
+\]</div>
+<p>y con $\bar{M}=\norm{H(x^{*})}+\rho r$, que acota $\norm{H}$ en
+$\Ball(x^{*};r)$,</p>
+<div class="display">\[
+  f(x_{k})-f^{*}\le\frac{\bar{M}}{2C^{2}}\,\theta_{0}^{2^{k+1}} .
+\]</div>
+<p>Para garantizar $f(x_{k})-f^{*}\le\varepsilon$ bastan
+$O\bigl(\log\log\frac{1}{\varepsilon}\bigr)$ iteraciones.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p78">Ver demostración</button><div class="proof" id="general-convexa-p78"><p>La cota cuadrática es $C\norm{e_{k+1}}\le\bigl(C\norm{e_{k}}\bigr)^{2}$, y de
+ahí la primera desigualdad por inducción. Para la segunda,
+$\norm{H(x)}\le\norm{H(x^{*})}+\rho\norm{x-x^{*}}\le\bar{M}$ en la bola, así que
+el lema del descenso con constante $\bar{M}$ en $x^{*}$, donde $g(x^{*})=0$, da
+$f(x)-f^{*}\le\frac{\bar M}{2}\norm{x-x^{*}}^{2}$. Sustituyendo
+$\norm{e_{k}}\le\theta_{0}^{2^{k}}/C$ sale la cota. Finalmente,
+$\frac{\bar M}{2C^{2}}\theta_{0}^{2^{k+1}}\le\varepsilon$ equivale a</p>
+<div class="display">\[
+  2^{k+1}\ge\frac{\log\bigl(\bar{M}/(2C^{2}\varepsilon)\bigr)}{\log(1/\theta_{0})},
+\]</div>
+<p>y tomando logaritmo en base dos queda $k+1=O\bigl(\log\log\frac1\varepsilon\bigr)$.</p></div>
+<div class="stmt observacion" id="general-c15:obs-local"><div class="head">Observación</div><div class="body"><p>La hipótesis $\theta_{0}&lt;1$ es la que dice que hay que empezar cerca, y la tasa
+es local: la convexidad fuerte global no basta para que el método con paso
+completo converja desde cualquier punto, porque lejos de la solución la
+aproximación cuadrática puede ser mala.</p></div></div>
+<h3 id="general-convexa-x8">Newton amortiguado</h3>
+<div class="stmt definicion" id="general-c15:def-amortiguado"><div class="head">Definición Newton con <em>backtracking</em></div><div class="body"><p>Dados $x_{0}\in\Hs$, $c_{1}\in(0,\frac12)$ y $\tau\in(0,1)$, para
+$k=0,1,2,\dots$:</p>
+<ol class="lista"><li><p>calcular $g_{k}$ y $H_{k}$, y resolver $H_{k}p_{k}=-g_{k}$;</p></li><li><p>$\alpha\leftarrow1$;</p></li><li><p>mientras $f(x_{k}+\alpha p_{k})&gt;f(x_{k})+c_{1}\alpha\ip{g_{k}}{p_{k}}$,
+    reemplazar $\alpha$ por $\tau\alpha$;</p></li><li><p>$\alpha_{k}=\alpha$ y $x_{k+1}=x_{k}+\alpha_{k}p_{k}$.</p></li></ol>
+<p>La desigualdad de <em>(iii)</em> es la condición de <span class="df">Armijo</span>.</p></div></div>
+<div class="stmt teorema" id="general-c15:teo-global"><div class="head">Teorema globalización y fase local</div><div class="body"><p>Supóngase $mI\preceq H(x)\preceq MI$ para todo $x\in\Hs$, con $0&lt;m\le M$.
+Entonces el método está bien definido, los valores decrecen y los iterados
+convergen <em>en norma</em> al único minimizador $x^{*}$ de $f$. Si además $H$ es
+$\rho$-Lipschitz cerca de $x^{*}$, a partir de cierto $k$ se acepta el paso
+completo $\alpha_{k}=1$ y la convergencia pasa a ser cuadrática.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p79">Ver demostración</button><div class="proof" id="general-convexa-p79"><p>Las cotas espectrales dan</p>
+<div class="display">\[
+  -\ip{g_{k}}{p_{k}}=\ip{H_{k}^{-1}g_{k}}{g_{k}}\ge\frac{1}{M}\norm{g_{k}}^{2},
+  \qquad
+  -\ip{g_{k}}{p_{k}}=\ip{H_{k}p_{k}}{p_{k}}\ge m\norm{p_{k}}^{2}.
+\]</div>
+<p>Como las hipótesis valen en todo $\Hs$, el lema del descenso con constante $M$
+vale para todo $\alpha&gt;0$:</p>
+<div class="display">\[
+  f(x_{k}+\alpha p_{k})\le f(x_{k})+\alpha\ip{g_{k}}{p_{k}}
+  +\frac{M\alpha^{2}}{2}\norm{p_{k}}^{2}.
+\]</div>
+<p>Usando $\norm{p_{k}}^{2}\le-\ip{g_{k}}{p_{k}}/m$, el lado derecho queda por
+debajo de $f(x_{k})+c_{1}\alpha\ip{g_{k}}{p_{k}}$ en cuanto
+$\alpha\le2(1-c_{1})m/M$. Luego con
+$\bar{\alpha}=\min\{1,2(1-c_{1})m/M\}$ el bucle termina y
+$\alpha_{k}\ge\tau\bar{\alpha}$, de donde</p>
+<div class="display">\[
+  f(x_{k+1})\le f(x_{k})+c_{1}\alpha_{k}\ip{g_{k}}{p_{k}}
+  \le f(x_{k})-\frac{c_{1}\tau\bar{\alpha}}{M}\norm{g_{k}}^{2}.
+\]</div>
+<p>Sumando en $k$, la suma telescópica está acotada por abajo por
+$f^{*}-f(x_{0})$, que es finito porque $f$ es $m$-fuertemente convexa y por
+tanto tiene minimizador, así que $\sum_{k}\norm{g_{k}}^{2}&lt;\infty$ y
+$\norm{g_{k}}\to0$. La convexidad fuerte da</p>
+<div class="display">\[
+  m\norm{x_{k}-x^{*}}^{2}\le\ip{g_{k}-g(x^{*})}{x_{k}-x^{*}}
+  \le\norm{g_{k}}\norm{x_{k}-x^{*}},
+\]</div>
+<p>de donde $m\norm{x_{k}-x^{*}}\le\norm{g_{k}}\to0$. La última afirmación es el
+teorema de convergencia local, una vez que los iterados entran en la bola donde
+el paso completo satisface Armijo.</p></div>
+<div class="stmt observacion" id="general-c15:obs-global-global"><div class="head">Observación</div><div class="body"><p>Las hipótesis se pusieron en todo $\Hs$ y no sobre un abierto $U$ que contenga
+al conjunto de nivel $\{f\le f(x_{0})\}$. La razón es que el argumento de $U$
+necesita que la distancia de ese conjunto de nivel al complemento de $U$ sea
+positiva, y eso en dimensión infinita no se sigue de que el conjunto sea cerrado
+y acotado.</p></div></div>
+<div class="stmt observacion" id="general-c15:obs-regularizado"><div class="head">Observación Newton regularizado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $H_{k}$ no está uniformemente acotado por abajo, se resuelve</p>
+<div class="display">\[
+  (H_{k}+\sigma_{k}I)\,p_{k}=-g_{k},\qquad\sigma_{k}\ge0,
+\]</div>
+<p>aumentando $\sigma_{k}$ hasta que el operador sea coercivo y la dirección de
+descenso. Es el puente con Levenberg y Marquardt y con las regiones de
+confianza.</p></div></div>
+<h3 id="general-convexa-x9">Pasos inexactos</h3>
+<div class="stmt observacion" id="general-c15:obs-hv"><div class="head">Observación</div><div class="body"><p>El paso de Newton es el minimizador de
+$\ip{g_{k}}{p}+\frac12\ip{H_{k}p}{p}$, y ese problema se puede resolver
+aproximadamente con métodos que solo necesitan aplicar $H_{k}$ a un vector, sin
+representar $H_{k}$. Por ejemplo, si $f(x)=\frac12\norm{Ax+b}^{2}$ con
+$A\in\Bop{\Hs,\Ks}$, no hace falta $A^{*}A$, sino $A^{*}(Av)$.</p></div></div>
+<div class="stmt definicion" id="general-c15:def-inexacto"><div class="head">Definición paso de Newton inexacto<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$p_{k}$ es un <span class="df">paso de Newton inexacto</span> si su residual
+$r_{k}=H_{k}p_{k}+g_{k}$ cumple</p>
+<div class="display">\[
+  \norm{r_{k}}\le\eta_{k}\norm{g_{k}},\qquad 0\le\eta_{k}&lt;1,
+\]</div>
+<p>y la sucesión $(\eta_{k})$ se llama <span class="df">sucesión forzante</span>.</p></div></div>
+<div class="stmt proposicion" id="general-c15:prop-inexacto"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Bajo las hipótesis del teorema de convergencia local, una cota uniforme
+$\eta_{k}\le\bar\eta&lt;1$ da convergencia al menos lineal; si $\eta_{k}\to0$ la
+convergencia es superlineal; y si $\eta_{k}=O(\norm{g_{k}})$ se recupera la
+cuadrática.</p></div></div>
+<div class="stmt observacion" id="general-c15:obs-precision"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>De ahí que no convenga resolver los sistemas con mucha precisión mientras el
+iterado esté lejos de la solución.</p></div></div>
+<h3 id="general-convexa-x10">Regiones de confianza</h3>
+<div class="stmt definicion" id="general-c15:def-region"><div class="head">Definición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Una <span class="df">región de confianza</span> fija primero un radio $\Delta_{k}$ dentro del cual
+se considera fiable el modelo y resuelve</p>
+<div class="display">\[
+  \min_{\norm{p}\le\Delta_{k}}\;
+  m_{k}(p)=f(x_{k})+\ip{g_{k}}{p}+\frac12\ip{B_{k}p}{p} ,
+\]</div>
+<p>midiendo después la calidad del paso con</p>
+<div class="display">\[
+  \varrho_{k}=\frac{f(x_{k})-f(x_{k}+p_{k})}{m_{k}(0)-m_{k}(p_{k})} .
+\]</div>
+<p>Si $\varrho_{k}$ es pequeño o negativo se rechaza el paso y se reduce
+$\Delta_{k}$; si está cerca de uno, el radio puede aumentarse.</p></div></div>
+<div class="stmt observacion" id="general-c15:obs-region-existe"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Cuando $B_{k}\succeq0$ el subproblema tiene solución: $m_{k}$ es convexa y
+continua, luego débilmente semicontinua inferiormente, y la bola cerrada es
+débilmente compacta. Es el mismo argumento que dio la existencia de
+minimizadores en un reflexivo, y aquí sustituye a la compacidad de la bola que
+se usaría en $\R^{n}$.</p></div></div>
+<div class="stmt observacion" id="general-c15:obs-cauchy"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Es el orden inverso al de la búsqueda lineal, que fija primero la dirección y
+luego cuánto avanzar. No hace falta resolver el subproblema exactamente: para
+la convergencia global basta exigir una fracción uniforme del decrecimiento de
+Cauchy,</p>
+<div class="display">\[
+  m_{k}(0)-m_{k}(p_{k})\ge c\norm{g_{k}}
+  \min\Bigl\{\Delta_{k},\frac{\norm{g_{k}}}{\norm{B_{k}}}\Bigr\},
+  \qquad c&gt;0,
+\]</div>
+<p>que el punto de Cauchy cumple.</p></div></div>
+<h3 id="general-convexa-x11">Comparación</h3>
+<div class="stmt observacion" id="general-c15:obs-tabla"><div class="head">Observación</div><div class="body"><p>Con $\kappa=L/\mu$, y midiendo cuántas iteraciones hacen falta para
+$f(x_{k})-f^{*}\le\varepsilon$:</p>
+<p>\begin{tabular}{@{}lll@{}}
+\toprule
+Método &amp; Iteraciones &amp; Condiciones \\
+\midrule
+Gradiente          &amp; $O\bigl(\frac1\varepsilon\bigr)$                        &amp; $L$-suave \\
+Nesterov           &amp; $O\bigl(\frac{1}{\sqrt\varepsilon}\bigr)$               &amp; $L$-suave \\
+Gradiente          &amp; $O\bigl(\kappa\log\frac1\varepsilon\bigr)$              &amp; $L$-suave y $\mu$-fuerte \\
+Nesterov           &amp; $O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$         &amp; $L$-suave y $\mu$-fuerte \\
+Newton             &amp; $O\bigl(\log\log\frac1\varepsilon\bigr)$                &amp; $H$ $\rho$-Lipschitz, $H\succeq mI$, \\
+                   &amp;                                                         &amp; y $\theta_{0}&lt;1$ \\
+\bottomrule
+\end{tabular}</p>
+<p>Ninguna de las cinco depende de la dimensión. La última fila no es comparable
+con las otras cuatro: es local, y su hipótesis
+$\theta_{0}=\frac{\rho}{2m}\norm{x_{0}-x^{*}}&lt;1$ habla del punto de partida y no
+solo de la función. Newton amortiguado cierra esa brecha, a cambio de una fase
+previa cuya longitud depende de $f(x_{0})-f^{*}$.</p></div></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -4457,11 +5151,181 @@ empezando en $y_{0}=x_{0}$.</p></div></div>
 iteraciones, contra las $O(LR^{2}/\varepsilon)$ del método del gradiente.</p></div></div>
 <div class="stmt observacion" id="ambas-c14:obs-no-monotono"><div class="head">Observación</div><div class="body"><p>El potencial decrece y el objetivo no tiene por qué: los valores $f(x_{k})$ del
 método acelerado pueden oscilar.</p></div></div>
+<h3 id="ambas-convexa-x9">El caso fuertemente convexo</h3>
+<div class="stmt definicion" id="ambas-c14:def-momento-constante"><div class="head">Definición momento constante</div><div class="body"><p>Si $f$ es además $\mu$-fuertemente convexa, se toma $q=\sqrt{\mu/L}$ y el
+momento constante $\beta=(1-q)/(1+q)$, sin depender de $k$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c14:prop-reinicios"><div class="head">Proposición aceleración mediante reinicios</div><div class="body"><p>Si $x_{m}$ es el resultado de $m$ iteraciones del método acelerado convexo
+empezado en $u$, entonces
+$f(x_{m})-f^{*}\le\frac{4\kappa}{(m+1)^{2}}\bigl(f(u)-f^{*}\bigr)$, de modo que
+con $m+1\ge\sqrt{8\kappa}$ cada fase reduce la suboptimalidad a la mitad.</p></div></div>
+<div class="stmt corolario" id="ambas-c14:cor-complejidad-fuerte"><div class="head">Corolario complejidad acelerada con convexidad fuerte</div><div class="body"><p>Reiniciando cada $\lceil\sqrt{8\kappa}\,\rceil$ iteraciones bastan
+$O\bigl(\sqrt{\kappa}\log\frac{1}{\varepsilon}\bigr)$, contra las
+$O\bigl(\kappa\log\frac{1}{\varepsilon}\bigr)$ del método del gradiente.</p></div></div>
+<div class="stmt teorema" id="ambas-c14:teo-cotas-inferiores"><div class="head">Teorema cotas inferiores de primer orden, de Nemirovski y Yudin</div><div class="body"><p>En el modelo de oráculo de primer orden y en dimensión suficientemente grande,
+todo método determinista tiene funciones convexas $L$-suaves con
+$f(x_{k})-f^{*}\ge c\,LR^{2}/(k+1)^{2}$, y problemas fuertemente convexos que
+exigen $\Omega\bigl(\sqrt{\kappa}\log\frac{1}{\varepsilon}\bigr)$ consultas. Las
+dos tasas del capítulo coinciden en orden con ellas.</p></div></div>
+<div class="stmt observacion" id="ambas-c14:obs-dimension-cotas"><div class="head">Observación la dimensión está en la cota inferior, no en las tasas</div><div class="body"><p>Es el único sitio del capítulo donde la dimensión aparece, y aparece del lado
+contrario al habitual: las tasas valen igual en $\R^{n}$ y en $\Hs$, pero la
+cota inferior <em>necesita</em> dimensión grande. Se construye con cuadráticas cuyo
+gradiente revela una sola dirección nueva por consulta, así que en $\R^{n}$ la
+construcción se agota en $n$ pasos y en un $\Hs$ de dimensión infinita no se
+agota nunca. En $\R^{n}$, por tanto, la cota solo muerde mientras $k&lt;n$, y eso
+es justo lo que deja sitio a los métodos de segundo orden, que resuelven una
+cuadrática de dimensión fija en un paso.</p></div></div>
 <div class="stmt observacion" id="ambas-c14:obs-hilbert"><div class="head">Observación el capítulo entero vale en $\Hs$</div><div class="body"><p>Nada de este capítulo usa la dimensión. El método necesita el gradiente como
 vector, que en $\Hs$ lo da Riesz, y la prueba de la tasa solo usa la
 desigualdad del gradiente, el lema del descenso y el desarrollo del cuadrado de
 una norma. Por eso las cotas son idénticas en $\R^{n}$ y en $\Hs$, sin ninguna
-constante que dependa de la dimensión.</p></div></div></section></div>
+constante que dependa de la dimensión.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:segundo-orden">Métodos de segundo orden</h2>
+<p>En este capítulo $\Hs$ es un espacio de Hilbert, que en dimensión finita es
+$\R^{n}$, y $f:\Hs\to\R$ es dos veces Fréchet diferenciable. Se escribe
+$g(x)=\nabla f(x)$ y $H(x)\in\Bop{\Hs}$ para el operador autoadjunto que
+representa la segunda derivada.</p>
+<div class="stmt proposicion" id="ambas-c15:prop-curvatura"><div class="head">Proposición curvatura y convexidad</div><div class="body"><p>En un abierto convexo $U$: $f$ es convexa si y solo si $H\succeq0$ en $U$; es
+$m$-fuertemente convexa si y solo si $H\succeq mI$; y, siendo convexa, es
+$M$-suave si y solo si $H\preceq MI$.</p></div></div>
+<div class="stmt definicion" id="ambas-c15:def-modelo"><div class="head">Definición el modelo cuadrático</div><div class="body"><p>$m_{x}(p)=f(x)+\ip{g(x)}{p}+\frac12\ip{H(x)p}{p}$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c15:prop-paso"><div class="head">Proposición el paso de Newton</div><div class="body"><p>Si $mI\preceq H(x)\preceq MI$ con $m&gt;0$, el modelo tiene un único minimizador,
+el <span class="df">paso de Newton</span> $p_{N}$, caracterizado por $H(x)p_{N}=-g(x)$, y el punto
+nuevo es $x^{+}=x+p_{N}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-de-donde"><div class="head">Observación de dónde sale el paso, y no es el mismo teorema</div><div class="body"><p>En $\R^{n}$ el paso existe porque $H(x)\succ0$ implica que la matriz es
+invertible, y no hay nada más que decir. En $\Hs$ lo que da el paso es el
+teorema de Lax y Milgram aplicado a la forma bilineal
+$(u,v)\mapsto\ip{H(x)u}{v}$, que pide dos cosas distintas: continuidad, que es
+la cota $H\preceq MI$, y coercividad, que es la cota $H\succeq mI$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c15:ej-no-basta"><div class="head">Ejemplo por qué no basta $H(x)\succ0$</div><div class="body"><p>En $\ell^{2}$, sea $H$ el operador autoadjunto con $He_{n}=e_{n}/n$. Cumple
+$\ip{Hv}{v}=\sum_{n}v_{n}^{2}/n&gt;0$ para todo $v\neq0$, es decir $H\succ0$, pero
+no es sobreyectivo: el vector $y$ de coordenadas $y_{n}=1/n$ está en $\ell^{2}$
+y la única solución formal de $Hp=y$ es $p=(1,1,1,\dots)$, que no lo está. Con
+$g(x)=-y$, el paso de Newton no existe.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-que-arruina"><div class="head">Observación lo que el ejemplo arruina, y lo que no</div><div class="body"><p>La cota uniforme $H\succeq mI$ no es un tecnicismo para poder escribir
+$\norm{H^{-1}}\le1/m$: sin ella el método puede no estar ni definido. En
+$\R^{n}$ las dos condiciones coinciden, porque una matriz simétrica definida
+positiva cumple $H\succeq\lambda_{\min}I$ con $\lambda_{\min}&gt;0$, y ese mínimo
+existe porque el espectro es finito.</p></div></div>
+<div class="stmt definicion" id="ambas-c15:def-metodo"><div class="head">Definición método de Newton con paso completo</div><div class="body"><p>Dado $x_{0}$, se calculan $g_{k}$ y $H_{k}$, se resuelve $H_{k}p_{k}=-g_{k}$ y
+se toma $x_{k+1}=x_{k}+p_{k}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-resolver"><div class="head">Observación resolver el sistema es el capítulo entero</div><div class="body"><p>En $\R^{n}$ la opción directa es factorizar, y para $H_{k}$ simétrica definida
+positiva eso es Cholesky. La alternativa son los métodos iterativos, que solo
+usan productos $H_{k}v$ y son los únicos que sobreviven cuando no hay matriz que
+factorizar, que es siempre el caso en $\Hs$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c15:ej-cuadratica"><div class="head">Ejemplo las cuadráticas</div><div class="body"><p>Si $f(x)=\frac12\ip{Qx}{x}-\ip{b}{x}+c$ con $Q$ autoadjunto y $Q\succeq mI$,
+entonces $x+p_{N}=Q^{-1}b=x^{*}$ desde cualquier punto: Newton converge en una
+iteración, donde el gradiente necesita $O(\kappa\log\frac1\varepsilon)$. En
+$\R^{n}$ basta $Q\succ0$; en $\Hs$ hace falta la cota uniforme, por el ejemplo
+de arriba.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-afin"><div class="head">Observación invariancia afín</div><div class="body"><p>Con $\widetilde{f}(z)=f(Az+b)$ y $A$ biyectivo, el paso de Newton de
+$\widetilde{f}$ es $A^{-1}p_{N}$, de modo que el método conmuta con los cambios
+de variable afines. El descenso del gradiente no, y por eso allí había que
+precondicionar: la invariancia afín es exactamente lo que el precondicionamiento
+intentaba comprar a mano.</p></div></div>
+<div class="stmt definicion" id="ambas-c15:def-descenso"><div class="head">Definición dirección de descenso y decremento de Newton</div><div class="body"><p>$p$ es <span class="df">dirección de descenso</span> en $x$ si $\ip{g(x)}{p}&lt;0$. El paso de Newton
+lo es, y el <span class="df">decremento de Newton</span> es
+$\lambda(x)=\sqrt{-\ip{g(x)}{p_{N}}}$, que mide la reducción
+$m_{x}(0)-m_{x}(p_{N})=\lambda(x)^{2}/2$ que el modelo predice.</p></div></div>
+<h3 id="ambas-convexa-x10">Convergencia local</h3>
+<div class="stmt teorema" id="ambas-c15:teo-local"><div class="head">Teorema convergencia local cuadrática</div><div class="body"><p>Sea $g(x^{*})=0$, sea $U$ abierto convexo con $x^{*}\in U$ y sean $m,\rho&gt;0$ con
+$H\succeq mI$ en $U$ y $H$ $\rho$-Lipschitz en $U$. Si
+$\Ball(x^{*};r)\subseteq U$ con $r&lt;2m/\rho$ y $x_{0}\in\Ball(x^{*};r)$, los
+iterados se quedan en la bola y</p>
+<div class="display">\[
+  \norm{x_{k+1}-x^{*}}\le\frac{\rho}{2m}\norm{x_{k}-x^{*}}^{2}.
+\]</div></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-local-hilbert"><div class="head">Observación este teorema no nota la dimensión</div><div class="body"><p>Su demostración es el resto integral de Taylor, la cota $\norm{H^{-1}}\le1/m$ y
+la desigualdad triangular. Nada de eso usa compacidad, ni bases, ni valores
+propios, así que el enunciado y la prueba son literalmente los mismos en
+$\R^{n}$ y en $\Hs$. Lo único que hay que haber pagado antes es la existencia
+del paso, que es donde sí cambió el argumento.</p></div></div>
+<div class="stmt corolario" id="ambas-c15:cor-complejidad"><div class="head">Corolario complejidad local</div><div class="body"><p>Con $C=\rho/(2m)$ y $\theta_{0}=C\norm{x_{0}-x^{*}}&lt;1$ se tiene
+$C\norm{x_{k}-x^{*}}\le\theta_{0}^{2^{k}}$, y por tanto
+$f(x_{k})-f^{*}\le\frac{\bar M}{2C^{2}}\theta_{0}^{2^{k+1}}$, de modo que
+bastan $O\bigl(\log\log\frac1\varepsilon\bigr)$ iteraciones.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-local"><div class="head">Observación</div><div class="body"><p>La hipótesis $\theta_{0}&lt;1$ dice que hay que empezar cerca. La convexidad fuerte
+global no basta para que el paso completo converja desde cualquier punto, ni en
+$\R^{n}$ ni en $\Hs$: lejos de la solución la aproximación cuadrática puede ser
+mala.</p></div></div>
+<h3 id="ambas-convexa-x11">Newton amortiguado</h3>
+<div class="stmt definicion" id="ambas-c15:def-amortiguado"><div class="head">Definición Newton con <em>backtracking</em></div><div class="body"><p>Con $c_{1}\in(0,\frac12)$ y $\tau\in(0,1)$, se parte de $\alpha=1$ y se
+multiplica por $\tau$ mientras falle la condición de <span class="df">Armijo</span>
+$f(x_{k}+\alpha p_{k})\le f(x_{k})+c_{1}\alpha\ip{g_{k}}{p_{k}}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c15:teo-global"><div class="head">Teorema globalización y fase local</div><div class="body"><p>Si $mI\preceq H\preceq MI$ con $0&lt;m\le M$, el método está bien definido, los
+valores decrecen y los iterados convergen en norma al único minimizador. Si
+además $H$ es $\rho$-Lipschitz cerca de $x^{*}$, a partir de cierto $k$ se
+acepta $\alpha_{k}=1$ y la convergencia pasa a ser cuadrática.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-donde-cotas"><div class="head">Observación dónde tienen que valer las cotas, y ahí sí cambia</div><div class="body"><p>La versión de $\R^{n}$ pide las cotas sobre un abierto $U$ que contenga al
+conjunto de nivel $\mathcal{L}_{0}=\{f\le f(x_{0})\}$, y lo usa para fijar un
+$d=\dist(\mathcal{L}_{0},\complement U)&gt;0$ que impide que la búsqueda lineal se
+salga de $U$. Ese $d$ es positivo porque $\mathcal{L}_{0}$ es <em>compacto</em>.
+En $\Hs$, $\mathcal{L}_{0}$ es cerrado y acotado pero no compacto, el ínfimo de
+una función positiva sobre él no tiene por qué alcanzarse, y $d$ puede ser cero.
+Por eso la versión general pide las cotas en todo $\Hs$, con lo que $d$ deja de
+hacer falta.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-norma"><div class="head">Observación aquí la convergencia sí es en norma</div><div class="body"><p>Es el contraste con el descenso del gradiente, donde en el caso meramente
+convexo los iterados solo convergían débilmente. Aquí no hay caso meramente
+convexo: la cota $H\succeq mI$ es convexidad fuerte, y de ella sale
+$m\norm{x_{k}-x^{*}}\le\norm{g_{k}}\to0$, que es convergencia en norma. El
+capítulo entero vive bajo la hipótesis que en el capítulo del gradiente
+recuperaba la convergencia fuerte.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-regularizado"><div class="head">Observación Newton regularizado</div><div class="body"><p>Si $H_{k}$ no es suficientemente definida positiva se resuelve
+$(H_{k}+\sigma_{k}I)p_{k}=-g_{k}$, aumentando $\sigma_{k}$. En $\Hs$ eso es
+justamente forzar la coercividad que el ejemplo de $\ell^{2}$ mostraba que
+puede faltar.</p></div></div>
+<h3 id="ambas-convexa-x12">Cuando no se quiere la Hessiana</h3>
+<div class="stmt definicion" id="ambas-c15:def-inexacto"><div class="head">Definición paso de Newton inexacto</div><div class="body"><p>$p_{k}$ es un <span class="df">paso de Newton inexacto</span> si $r_{k}=H_{k}p_{k}+g_{k}$ cumple
+$\norm{r_{k}}\le\eta_{k}\norm{g_{k}}$ con $0\le\eta_{k}&lt;1$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c15:prop-inexacto"><div class="head">Proposición</div><div class="body"><p>Bajo las hipótesis locales, $\eta_{k}\le\bar\eta&lt;1$ da convergencia al menos
+lineal; $\eta_{k}\to0$, superlineal; y $\eta_{k}=O(\norm{g_{k}})$ recupera la
+cuadrática.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-hv"><div class="head">Observación lo único que hace falta es aplicar $H$</div><div class="body"><p>El subproblema solo necesita los productos $H_{k}v$, y esa es la forma en que el
+capítulo entero tiene sentido en $\Hs$: un operador se aplica, y no hay que
+representarlo. Si $f(x)=\frac12\norm{Ax+b}^{2}$ se calcula $A^{*}(Av)$ y nunca
+$A^{*}A$, que en $\R^{n}$ es un ahorro y en $\Hs$ es la única opción.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-quasi"><div class="head">Observación los métodos quasi-Newton se quedan en $\R^{n}$</div><div class="body"><p>BFGS construye una aproximación de la Hessiana con la ecuación secante
+$B_{k+1}s_{k}=y_{k}$ y correcciones de rango dos, y L-BFGS guarda solo los
+últimos $m$ pares con coste $O(mn)$. Las fórmulas son álgebra de matrices y sus
+enunciados de convergencia están dados en dimensión finita en las fuentes de
+este libro, así que no se enuncian aquí en $\Hs$. La cuenta de memoria,
+$O(n^{2})$ contra $O(mn)$, es además una afirmación que solo significa algo con
+$n$ finito.</p></div></div>
+<h3 id="ambas-convexa-x13">Regiones de confianza</h3>
+<div class="stmt definicion" id="ambas-c15:def-region"><div class="head">Definición</div><div class="body"><p>Se fija un radio $\Delta_{k}$ y se resuelve
+$\min_{\norm{p}\le\Delta_{k}}m_{k}(p)$ con
+$m_{k}(p)=f(x_{k})+\ip{g_{k}}{p}+\frac12\ip{B_{k}p}{p}$, aceptando o rechazando
+el paso según $\varrho_{k}=\bigl(f(x_{k})-f(x_{k}+p_{k})\bigr)/
+\bigl(m_{k}(0)-m_{k}(p_{k})\bigr)$.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-region-existe"><div class="head">Observación por qué el subproblema tiene solución</div><div class="body"><p>En $\R^{n}$ la bola es compacta y $m_{k}$ continua, y se acabó. En $\Hs$ la bola
+no es compacta, pero si $B_{k}\succeq0$ entonces $m_{k}$ es convexa y continua,
+luego débilmente semicontinua inferiormente, y la bola cerrada es débilmente
+compacta. Es el mismo cambio de topología que hizo falta para la existencia de
+minimizadores, y aquí reaparece por tercera vez.</p></div></div>
+<h3 id="ambas-convexa-x14">Comparación</h3>
+<div class="stmt observacion" id="ambas-c15:obs-tabla"><div class="head">Observación</div><div class="body"><p>Con $\kappa=L/\mu$, iteraciones para $f(x_{k})-f^{*}\le\varepsilon$:</p>
+<p>\begin{tabular}{@{}lll@{}}
+\toprule
+Método &amp; Iteraciones &amp; Condiciones \\
+\midrule
+Gradiente          &amp; $O\bigl(\frac1\varepsilon\bigr)$                        &amp; $L$-suave \\
+Nesterov           &amp; $O\bigl(\frac{1}{\sqrt\varepsilon}\bigr)$               &amp; $L$-suave \\
+Gradiente          &amp; $O\bigl(\kappa\log\frac1\varepsilon\bigr)$              &amp; $L$-suave y $\mu$-fuerte \\
+Nesterov           &amp; $O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$         &amp; $L$-suave y $\mu$-fuerte \\
+Newton             &amp; $O\bigl(\log\log\frac1\varepsilon\bigr)$                &amp; $H$ $\rho$-Lipschitz, $H\succeq mI$, \\
+                   &amp;                                                         &amp; y $\theta_{0}&lt;1$ \\
+\bottomrule
+\end{tabular}</p>
+<p>Ninguna de las cinco filas depende de la dimensión, y la última no es comparable
+con las otras cuatro: es local, y su condición $\theta_{0}&lt;1$ habla del punto de
+partida y no solo de la función.</p></div></div>
+<div class="stmt observacion" id="ambas-c15:obs-cota-inferior"><div class="head">Observación cómo escapa Newton de la cota inferior</div><div class="body"><p>La cota inferior del capítulo anterior dice que ningún método de primer orden
+baja de $O(1/\sqrt\varepsilon)$, y aquí aparece un $O(\log\log\frac1\varepsilon)$
+sin contradicción, por dos razones distintas y las dos vale la pena separarlas.
+La primera es que Newton no es un método de primer orden: consulta $H(x)$, que
+está fuera del oráculo. La segunda es que aquella cota se construye con
+funciones cuyo gradiente revela una dirección nueva por consulta, de modo que en
+$\R^{n}$ solo muerde mientras $k&lt;n$, mientras que en un $\Hs$ de dimensión
+infinita muerde siempre.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
