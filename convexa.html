@@ -539,7 +539,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "prox": "\\operatorname{prox}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "env": ["{}^{#1}\\!#2", 2], "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
   startup: {
@@ -2365,11 +2365,16 @@ el paso completo satisface Armijo.</p></div>
 positiva y la dirección sea de descenso. Es el puente con Levenberg y Marquardt
 y con las regiones de confianza.</p></div></div>
 <h3 id="clase-convexa-x12">Métodos quasi-Newton</h3>
-<div class="stmt definicion" id="clase-c15:def-secante"><div class="head">Definición la ecuación secante<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $s_{k}=x_{k+1}-x_{k}$ y $y_{k}=g_{k+1}-g_{k}$, la identidad
+<div class="stmt definicion" id="clase-c15:def-secante"><div class="head">Definición la ecuación secante</div><div class="body"><p>Con $s_{k}=x_{k+1}-x_{k}$ y $y_{k}=g_{k+1}-g_{k}$, la identidad
 $y_{k}=\int_{0}^{1}H(x_{k}+ts_{k})s_{k}\dd t$ sugiere pedirle a una
-aproximación $B_{k+1}$ de la Hessiana la <span class="df">ecuación secante</span>
+aproximación simétrica $B_{k+1}$ de la Hessiana la <span class="df">ecuación secante</span>
 $B_{k+1}s_{k}=y_{k}$.</p></div></div>
-<div class="stmt definicion" id="clase-c15:def-bfgs"><div class="head">Definición la actualización BFGS<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><div class="display">\[
+<div class="stmt observacion" id="clase-c15:obs-secante"><div class="head">Observación</div><div class="body"><p>Si $H\succeq mI$ en el segmento de $x_{k}$ a $x_{k+1}$, entonces
+$y_{k}\trans s_{k}=\int_{0}^{1}s_{k}\trans H(x_{k}+ts_{k})s_{k}\dd t\ge m\norm{s_{k}}^{2}&gt;0$.
+La ecuación secante y la simetría no determinan $B_{k+1}$: tienen infinitas
+soluciones, y los métodos <span class="df">SR1</span>, <span class="df">DFP</span> y <span class="df">BFGS</span> son tres maneras de
+escoger una.</p></div></div>
+<div class="stmt definicion" id="clase-c15:def-bfgs"><div class="head">Definición la actualización BFGS</div><div class="body"><div class="display">\[
   B_{k+1}=B_{k}-\frac{B_{k}s_{k}s_{k}\trans B_{k}}{s_{k}\trans B_{k}s_{k}}
   +\frac{y_{k}y_{k}\trans}{y_{k}\trans s_{k}},
 \]</div>
@@ -2379,7 +2384,7 @@ $B_{k+1}s_{k}=y_{k}$.</p></div></div>
   \bigl(I-\rho_{k}y_{k}s_{k}\trans\bigr)+\rho_{k}s_{k}s_{k}\trans,
   \qquad\rho_{k}=\frac{1}{y_{k}\trans s_{k}} .
 \]</div></div></div>
-<div class="stmt proposicion" id="clase-c15:prop-bfgs-positiva"><div class="head">Proposición preservación de la positividad<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $G_{k}\succ0$ y $y_{k}\trans s_{k}&gt;0$, entonces $G_{k+1}\succ0$.</p></div></div>
+<div class="stmt proposicion" id="clase-c15:prop-bfgs-positiva"><div class="head">Proposición preservación de la positividad</div><div class="body"><p>Si $G_{k}\succ0$ y $y_{k}\trans s_{k}&gt;0$, entonces $G_{k+1}\succ0$.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p90">Ver demostración</button><div class="proof" id="clase-convexa-p90"><p>Sea $V_{k}=I-\rho_{k}y_{k}s_{k}\trans$. Para todo $v\neq0$,</p>
 <div class="display">\[
   v\trans G_{k+1}v=(V_{k}v)\trans G_{k}(V_{k}v)+\rho_{k}(s_{k}\trans v)^{2},
@@ -2388,11 +2393,17 @@ $B_{k+1}s_{k}=y_{k}$.</p></div></div>
 entonces $s_{k}\trans v=0$ y por tanto $v=\rho_{k}y_{k}(s_{k}\trans v)=0$, que
 es una contradicción.</p></div>
 <div class="stmt observacion" id="clase-c15:obs-wolfe"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La hipótesis $y_{k}\trans s_{k}&gt;0$ se consigue con una búsqueda lineal que
-cumpla las condiciones de Wolfe: si $p_{k}=-G_{k}g_{k}$ es de descenso y
-$s_{k}=\alpha_{k}p_{k}$, la condición de curvatura
-$\ip{g_{k+1}}{p_{k}}\ge c_{2}\ip{g_{k}}{p_{k}}$ con $c_{2}\in(c_{1},1)$ da
+cumpla las <span class="df">condiciones de Wolfe</span>: la de Armijo,
+$f(x_{k}+\alpha_{k}p_{k})\le f(x_{k})+c_{1}\alpha_{k}\ip{g_{k}}{p_{k}}$, y la de
+curvatura, $\ip{g_{k+1}}{p_{k}}\ge c_{2}\ip{g_{k}}{p_{k}}$, con
+$0&lt;c_{1}&lt;c_{2}&lt;1$. Si $p_{k}=-G_{k}g_{k}$ es de descenso y
+$s_{k}=\alpha_{k}p_{k}$, la segunda da
 $y_{k}\trans s_{k}\ge\alpha_{k}(c_{2}-1)\ip{g_{k}}{p_{k}}&gt;0$.</p></div></div>
-<div class="stmt teorema" id="clase-c15:teo-bfgs"><div class="head">Teorema convergencia superlineal local de BFGS<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $x_{k}\to x^{*}$, $H(x^{*})\succ0$, $H$ es Lipschitz cerca de $x^{*}$ y los
+<div class="stmt definicion" id="clase-c15:def-metodo-bfgs"><div class="head">Definición el método BFGS</div><div class="body"><p>Dados $x_{0}\in\R^{n}$, $G_{0}\succ0$ y $0&lt;c_{1}&lt;c_{2}&lt;1$, para
+$k=0,1,2,\dots$:</p>
+<ol class="lista"><li><p>$p_{k}=-G_{k}\nabla f(x_{k})$;</p></li><li><p>se escoge $\alpha_{k}$ que cumpla las condiciones de Wolfe con
+    constantes $c_{1}$ y $c_{2}$;</p></li><li><p>$x_{k+1}=x_{k}+\alpha_{k}p_{k}$;</p></li><li><p>se calculan $s_{k}$ e $y_{k}$, y $G_{k+1}$ con la fórmula inversa.</p></li></ol></div></div>
+<div class="stmt teorema" id="clase-c15:teo-bfgs"><div class="head">Teorema convergencia superlineal local de BFGS</div><div class="body"><p>Si $x_{k}\to x^{*}$, $H(x^{*})\succ0$, $H$ es Lipschitz cerca de $x^{*}$ y los
 pasos cumplen condiciones de Wolfe apropiadas, entonces</p>
 <div class="display">\[
   \frac{\norm{x_{k+1}-x^{*}}}{\norm{x_{k}-x^{*}}}\longrightarrow0 .
@@ -2483,7 +2494,570 @@ Región de confianza   &amp; modelo cuadrático           &amp; variable \\
 \end{tabular}</p>
 <p>Los métodos de primer orden salen a cuenta cuando basta precisión moderada o
 cuando una factorización es prohibitiva; Newton y sus variantes, cuando se
-quiere precisión alta y la estructura lineal se puede explotar.</p></div></div></section></div>
+quiere precisión alta y la estructura lineal se puede explotar.</p></div></div></section>
+<section class="capitulo"><h2 id="clase-cap:subgradiente">Subgradiente y mirror descent</h2>
+<p>En este capítulo $C\subset\R^{n}$ es convexo, cerrado y no vacío, y
+$f\in\Gamma_{0}(\R^{n})$, es decir, $f:\R^{n}\to\R\cup\{\infty\}$ es convexa,
+propia y cerrada. Se escribe $X^{*}=\argmin_{x\in C}f$, que se supone no vacío, y
+$f^{*}=\min_{C}f$.</p>
+<div class="stmt definicion" id="clase-c16:def-metodo"><div class="head">Definición el método del subgradiente proyectado</div><div class="body"><p>Dados $x_{0}\in C$ y pasos $\alpha_{k}&gt;0$, el <span class="df">método del subgradiente
+proyectado</span> genera</p>
+<div class="display">\[
+  x_{k+1}=\Proy_{C}(x_{k}-\alpha_{k}g_{k}),\qquad g_{k}\in\subdif f(x_{k}).
+\]</div>
+<p>Si $C=\R^{n}$, la proyección desaparece.</p></div></div>
+<div class="stmt observacion" id="clase-c16:obs-no-descenso"><div class="head">Observación un subgradiente no es una dirección de descenso<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En general no se tiene $f(x_{k+1})\le f(x_{k})$. Para
+$f(x)=\abs{x_{1}}+2\abs{x_{2}}$ en $x=(1,0)$ se tiene
+$g=(1,2)\in\subdif f(x)$, y $f(x-tg)=\abs{1-t}+4t=1+3t$ para $t\in(0,1)$: todo
+paso en la dirección $-g$ sube. Por eso el método se mide con el mejor iterado
+o con promedios.</p></div></div>
+<div class="stmt lema" id="clase-c16:lem-recurrencia"><div class="head">Lema recurrencia básica</div><div class="body"><p>Sea $x^{*}\in X^{*}$. Entonces</p>
+<div class="display">\[
+  \norm{x_{k+1}-x^{*}}^{2}\le\norm{x_{k}-x^{*}}^{2}-2\alpha_{k}\bigl(f(x_{k})-f^{*}\bigr)+\alpha_{k}^{2}\norm{g_{k}}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p91">Ver demostración</button><div class="proof" id="clase-convexa-p91"><p>Como $x^{*}\in C$, es $x^{*}=\Proy_{C}(x^{*})$, y la proyección es
+$1$-Lipschitz por la no expansividad firme. Luego</p>
+<div class="display">\[
+  \norm{x_{k+1}-x^{*}}^{2}\le\norm{x_{k}-\alpha_{k}g_{k}-x^{*}}^{2}
+  =\norm{x_{k}-x^{*}}^{2}-2\alpha_{k}\ip{g_{k}}{x_{k}-x^{*}}+\alpha_{k}^{2}\norm{g_{k}}^{2},
+\]</div>
+<p>y la desigualdad del subgradiente da $\ip{g_{k}}{x_{k}-x^{*}}\ge f(x_{k})-f^{*}$.</p></div>
+<div class="stmt observacion" id="clase-c16:obs-oraculo"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La hipótesis natural para obtener tasas es $\norm{g_{k}}\le M$ para todo $k$, y
+es una hipótesis sobre los subgradientes que el oráculo devuelve. Se cumple si
+$f$ es $M$-Lipschitz en un abierto que contiene a $C$, por la relación entre
+subgradientes y constante de Lipschitz. En la frontera de $\dom f$, en cambio,
+el subdiferencial puede ser no acotado aunque $f$ restringida a $C$ sea
+Lipschitz.</p></div></div>
+<div class="stmt teorema" id="clase-c16:teo-cota"><div class="head">Teorema cota general y promediado</div><div class="body"><p>Supongamos $\norm{g_{k}}\le M$ para todo $k$, y sean</p>
+<div class="display">\[
+  A_{N}=\sum_{k=0}^{N-1}\alpha_{k},\qquad
+  \bar{x}_{N}=\frac{1}{A_{N}}\sum_{k=0}^{N-1}\alpha_{k}x_{k}.
+\]</div>
+<p>Entonces, para todo $x^{*}\in X^{*}$,</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}+M^{2}\sum_{k=0}^{N-1}\alpha_{k}^{2}}{2A_{N}},
+\]</div>
+<p>y la misma cota vale para el mejor valor
+$f_{N}^{\min}=\min_{0\le k&lt;N}f(x_{k})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p92">Ver demostración</button><div class="proof" id="clase-convexa-p92"><p>Sumando la recurrencia básica de $k=0$ a $N-1$ y descartando
+$\norm{x_{N}-x^{*}}^{2}\ge0$,</p>
+<div class="display">\[
+  2\sum_{k=0}^{N-1}\alpha_{k}\bigl(f(x_{k})-f^{*}\bigr)\le\norm{x_{0}-x^{*}}^{2}+M^{2}\sum_{k=0}^{N-1}\alpha_{k}^{2}.
+\]</div>
+<p>Como $\bar{x}_{N}\in C$ es una combinación convexa de los $x_{k}$, la
+desigualdad de Jensen da
+$f(\bar{x}_{N})\le\frac{1}{A_{N}}\sum_{k}\alpha_{k}f(x_{k})$. Para el mejor
+valor basta $A_{N}(f_{N}^{\min}-f^{*})\le\sum_{k}\alpha_{k}(f(x_{k})-f^{*})$.</p></div>
+<div class="stmt observacion" id="clase-c16:obs-promedio"><div class="head">Observación promedio o mejor iterado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El mejor iterado exige evaluar $f(x_{k})$ y llevar la cuenta; el promedio no
+compara valores, pero puede destruir estructura, como la dispersión o el rango
+bajo de los iterados. En esos casos se reporta el mejor iterado, un promedio
+sobre la cola de la trayectoria, o los dos.</p></div></div>
+<h3 id="clase-convexa-x16">Elección de los pasos</h3>
+<div class="stmt corolario" id="clase-c16:cor-tasa"><div class="head">Corolario tasa $O(1/\sqrt{N})$</div><div class="body"><p>Si $\norm{x_{0}-x^{*}}\le R$ y se harán exactamente $N$ iteraciones con el paso
+constante</p>
+<div class="display">\[
+  \alpha_{k}=\frac{R}{M\sqrt{N}},
+\]</div>
+<p>entonces $f(\bar{x}_{N})-f^{*}\le\frac{MR}{\sqrt{N}}$, y lo mismo
+$f_{N}^{\min}-f^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p93">Ver demostración</button><div class="proof" id="clase-convexa-p93"><p>Con $\alpha_{k}=\alpha$ la cota del teorema es
+$\frac{R^{2}}{2N\alpha}+\frac{M^{2}\alpha}{2}$, que se minimiza en
+$\alpha=R/(M\sqrt{N})$ con valor $MR/\sqrt{N}$.</p></div>
+<div class="stmt observacion" id="clase-c16:obs-optimo"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Garantizar $f(\bar{x}_{N})-f^{*}\le\varepsilon$ pide entonces
+$O(M^{2}R^{2}/\varepsilon^{2})$ llamadas al oráculo. La dependencia
+$1/\varepsilon^{2}$ es óptima, salvo constantes, para la clase de las funciones
+convexas Lipschitz con un oráculo local de primer orden: la lentitud la pone la
+falta de suavidad, no la prueba.</p></div></div>
+<div class="stmt corolario" id="clase-c16:cor-decrecientes"><div class="head">Corolario pasos decrecientes</div><div class="body"><p>Si</p>
+<div class="display">\[
+  \sum_{k=0}^{\infty}\alpha_{k}=\infty,\qquad\sum_{k=0}^{\infty}\alpha_{k}^{2}&lt;\infty,
+\]</div>
+<p>entonces $f_{N}^{\min}\to f^{*}$. Sirve, por ejemplo, $\alpha_{k}=1/(k+1)^{p}$
+con $p\in(\frac12,1]$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p94">Ver demostración</button><div class="proof" id="clase-convexa-p94"><p>En la cota del teorema el numerador está acotado y el denominador
+$2A_{N}$ tiende a infinito.</p></div>
+<div class="stmt observacion" id="clase-c16:obs-etapas"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Los pasos decrecientes dan convergencia pero su cota de peor caso es
+conservadora. Para conservar la tasa $O(1/\sqrt{N})$ sin conocer el horizonte
+se trabaja por etapas: bloques de longitudes $1,2,4,8,\dots$, cada uno con el
+paso constante de su longitud.</p></div></div>
+<div class="stmt definicion" id="clase-c16:def-polyak"><div class="head">Definición el paso de Polyak</div><div class="body"><p>Si se conoce $f^{*}$, o se puede estimar, el <span class="df">paso de Polyak</span> es</p>
+<div class="display">\[
+  \alpha_{k}=\frac{f(x_{k})-f^{*}}{\norm{g_{k}}^{2}}\qquad(g_{k}\neq0).
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c16:prop-polyak"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con el paso de Polyak,</p>
+<div class="display">\[
+  \norm{x_{k+1}-x^{*}}^{2}\le\norm{x_{k}-x^{*}}^{2}-\frac{\bigl(f(x_{k})-f^{*}\bigr)^{2}}{\norm{g_{k}}^{2}}
+  \qquad\text{para todo }x^{*}\in X^{*},
+\]</div>
+<p>así que la sucesión es Fejér monótona respecto de $X^{*}$. Si además
+$\norm{g_{k}}\le M$,</p>
+<div class="display">\[
+  \min_{0\le k&lt;N}\bigl(f(x_{k})-f^{*}\bigr)\le\frac{M\dist(x_{0},X^{*})}{\sqrt{N}}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p95">Ver demostración</button><div class="proof" id="clase-convexa-p95"><p>La primera desigualdad es la recurrencia básica con ese $\alpha_{k}$. Sumándola,
+$\sum_{k&lt;N}(f(x_{k})-f^{*})^{2}\le M^{2}\norm{x_{0}-x^{*}}^{2}$, luego
+$N\min_{k&lt;N}(f(x_{k})-f^{*})^{2}$ también lo está, y se toma $x^{*}$ la
+proyección de $x_{0}$ sobre $X^{*}$, que es convexo y cerrado.</p></div>
+<div class="stmt observacion" id="clase-c16:obs-polyak-cota"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En la práctica $f^{*}$ se reemplaza a veces por una cota inferior. Si esa cota es
+demasiado baja el paso resulta excesivo, y por eso se usan versiones con
+recortes.</p></div></div>
+<h3 id="clase-convexa-x17">El caso fuertemente convexo</h3>
+<div class="stmt lema" id="clase-c16:lem-fuerte"><div class="head">Lema <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $f$ es $\mu$-fuertemente convexa y $g\in\subdif f(x)$, entonces</p>
+<div class="display">\[
+  f(y)\ge f(x)+\ip{g}{y-x}+\frac{\mu}{2}\norm{y-x}^{2}\qquad\text{para todo }y.
+\]</div>
+<p>En particular $\ip{g-g&#x27;}{x-x&#x27;}\ge\mu\norm{x-x&#x27;}^{2}$ si $g\in\subdif f(x)$ y
+$g&#x27;\in\subdif f(x&#x27;)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p96">Ver demostración</button><div class="proof" id="clase-convexa-p96"><p>Sea $t\in(0,1)$. La desigualdad del subgradiente de $x$, evaluada en
+$x+t(y-x)$, y la caracterización de la convexidad fuerte con $\lambda=t$ dan</p>
+<div class="display">\[
+  f(x)+t\ip{g}{y-x}\le f\bigl(x+t(y-x)\bigr)\le tf(y)+(1-t)f(x)-\frac{\mu}{2}t(1-t)\norm{y-x}^{2}.
+\]</div>
+<p>Restando $f(x)$, dividiendo por $t$ y haciendo $t\downarrow0$ queda la primera
+afirmación. La segunda es la suma de la primera en $x$ hacia $x&#x27;$ y en $x&#x27;$
+hacia $x$.</p></div>
+<div class="stmt teorema" id="clase-c16:teo-fuerte"><div class="head">Teorema subgradiente bajo convexidad fuerte</div><div class="body"><p>Sea $f$ $\mu$-fuertemente convexa en $C$, con $\norm{g_{k}}\le M$, y sea la
+iteración que parte de $x_{1}\in C$ con</p>
+<div class="display">\[
+  \alpha_{k}=\frac{2}{\mu(k+1)},\quad k\ge1,
+  \qquad
+  \hat{x}_{N}=\frac{2}{N(N+1)}\sum_{k=1}^{N}k\,x_{k}.
+\]</div>
+<p>Entonces</p>
+<div class="display">\[
+  f(\hat{x}_{N})-f^{*}\le\frac{2M^{2}}{\mu(N+1)}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p97">Ver demostración</button><div class="proof" id="clase-convexa-p97"><p>Sea $r_{k}=\norm{x_{k}-x^{*}}$. Por el lema anterior,
+$\ip{g_{k}}{x_{k}-x^{*}}\ge f(x_{k})-f^{*}+\frac{\mu}{2}r_{k}^{2}$, y llevado a
+la prueba de la recurrencia básica da</p>
+<div class="display">\[
+  2\alpha_{k}\bigl(f(x_{k})-f^{*}\bigr)\le(1-\mu\alpha_{k})r_{k}^{2}-r_{k+1}^{2}+\alpha_{k}^{2}M^{2}.
+\]</div>
+<p>Con $\alpha_{k}=2/(\mu(k+1))$, multiplicando por $\mu k(k+1)/4$,</p>
+<div class="display">\[
+  k\bigl(f(x_{k})-f^{*}\bigr)\le\frac{\mu}{4}k(k-1)r_{k}^{2}-\frac{\mu}{4}(k+1)k\,r_{k+1}^{2}+\frac{M^{2}}{\mu}\frac{k}{k+1}.
+\]</div>
+<p>Los términos de distancia telescopan al sumar de $1$ a $N$, y el primero es
+nulo, así que $\sum_{k=1}^{N}k(f(x_{k})-f^{*})\le NM^{2}/\mu$. Como
+$\sum_{k=1}^{N}k=N(N+1)/2$, la desigualdad de Jensen concluye.</p></div>
+<h3 id="clase-convexa-x18">Geometría de Bregman</h3>
+<div class="stmt proposicion" id="clase-c16:prop-subproblema"><div class="head">Proposición la proyección es un subproblema</div><div class="body"><p>El paso del subgradiente proyectado es</p>
+<div class="display">\[
+  x_{k+1}=\argmin_{x\in C}\Bigl\{\alpha_{k}\ip{g_{k}}{x}+\frac12\norm{x-x_{k}}^{2}\Bigr\}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p98">Ver demostración</button><div class="proof" id="clase-convexa-p98"><p>Completando el cuadrado,</p>
+<div class="display">\[
+  \alpha_{k}\ip{g_{k}}{x}+\frac12\norm{x-x_{k}}^{2}
+  =\frac12\norm{x-(x_{k}-\alpha_{k}g_{k})}^{2}+\alpha_{k}\ip{g_{k}}{x_{k}}-\frac{\alpha_{k}^{2}}{2}\norm{g_{k}}^{2},
+\]</div>
+<p>y lo que no es el primer sumando no depende de $x$. Equivalentemente, por la
+caracterización variacional de la proyección,
+$\ip{x_{k}-\alpha_{k}g_{k}-x_{k+1}}{x-x_{k+1}}\le0$ para todo $x\in C$.</p></div>
+<div class="stmt definicion" id="clase-c16:def-dual"><div class="head">Definición norma dual y convexidad fuerte respecto de una norma<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $\norm{\cdot}$ una norma cualquiera en $\R^{n}$. Su <span class="df">norma dual</span> es
+$\norm{g}_{*}=\max_{\norm{x}\le1}\ip{g}{x}$, de modo que
+$\ip{g}{x}\le\norm{g}_{*}\norm{x}$; la de $\norm{\cdot}_{1}$ es
+$\norm{\cdot}_{\infty}$. Una función $h:C\to\R$ diferenciable en $\ri C$ es
+<span class="df">$\sigma$-fuertemente convexa respecto de $\norm{\cdot}$</span> si</p>
+<div class="display">\[
+  h(x)\ge h(y)+\ip{\nabla h(y)}{x-y}+\frac{\sigma}{2}\norm{x-y}^{2}
+  \qquad\text{para todos }x\in C,\ y\in\ri C.
+\]</div></div></div>
+<div class="stmt definicion" id="clase-c16:def-bregman"><div class="head">Definición divergencia de Bregman</div><div class="body"><p>La <span class="df">divergencia de Bregman</span> generada por $h$ es</p>
+<div class="display">\[
+  D_{h}(x,y)=h(x)-h(y)-\ip{\nabla h(y)}{x-y},\qquad x\in C,\ y\in\ri C.
+\]</div>
+<p>Se tiene $D_{h}(x,y)\ge\frac{\sigma}{2}\norm{x-y}^{2}$, pero en general
+$D_{h}(x,y)\neq D_{h}(y,x)$ y no se cumple la desigualdad triangular: no es una
+distancia.</p></div></div>
+<div class="stmt lema" id="clase-c16:lem-tres-puntos"><div class="head">Lema identidad de los tres puntos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $u,v\in\ri C$ y $w\in C$,</p>
+<div class="display">\[
+  \ip{\nabla h(u)-\nabla h(v)}{w-u}=D_{h}(w,v)-D_{h}(w,u)-D_{h}(u,v).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p99">Ver demostración</button><div class="proof" id="clase-convexa-p99"><p>Al desarrollar las tres divergencias de la derecha los valores de $h$ se
+cancelan y queda
+$-\ip{\nabla h(v)}{w-v}+\ip{\nabla h(u)}{w-u}+\ip{\nabla h(v)}{u-v}$, que es el
+lado izquierdo.</p></div>
+<div class="stmt ejemplo" id="clase-c16:ej-euclidea"><div class="head">Ejemplo la geometría euclidiana</div><div class="body"><p>Si $h(x)=\frac12\norm{x}_{2}^{2}$, entonces
+$D_{h}(x,y)=\frac12\norm{x}_{2}^{2}-\frac12\norm{y}_{2}^{2}-\ip{y}{x-y}=\frac12\norm{x-y}_{2}^{2}$.
+Más en general, $h(x)=\frac12\ip{Qx}{x}$ con $Q\succ0$ da
+$D_{h}(x,y)=\frac12\ip{Q(x-y)}{x-y}$.</p></div></div>
+<div class="stmt ejemplo" id="clase-c16:ej-entropia"><div class="head">Ejemplo la entropía negativa</div><div class="body"><p>En el símplex $\simplex_{n}=\{x\in\R^{n}:x\ge0,\ \ip{\1}{x}=1\}$ sea
+$h(x)=\sum_{i=1}^{n}x_{i}\log x_{i}$, con $0\log0=0$. Si $y_{i}&gt;0$ para todo
+$i$, como $\sum_{i}(x_{i}-y_{i})=0$,</p>
+<div class="display">\[
+  D_{h}(x,y)=\sum_{i}x_{i}\log x_{i}-\sum_{i}y_{i}\log y_{i}-\sum_{i}(\log y_{i}+1)(x_{i}-y_{i})
+  =\sum_{i=1}^{n}x_{i}\log\frac{x_{i}}{y_{i}},
+\]</div>
+<p>que es la <span class="df">divergencia de Kullback–Leibler</span> $D_{\mathrm{KL}}(x\,\|\,y)$.</p></div></div>
+<div class="stmt proposicion" id="clase-c16:prop-pinsker"><div class="head">Proposición desigualdad de Pinsker</div><div class="body"><p>Para $x\in\simplex_{n}$ e $y\in\ri\simplex_{n}$,</p>
+<div class="display">\[
+  D_{\mathrm{KL}}(x\,\|\,y)\ge\frac12\norm{x-y}_{1}^{2}.
+\]</div>
+<p>Es decir, la entropía negativa es $1$-fuertemente convexa respecto de
+$\norm{\cdot}_{1}$ en el símplex.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p100">Ver demostración</button><div class="proof" id="clase-convexa-p100"><p>Supongamos primero $x\in\ri\simplex_{n}$, y sean $d=x-y$ y $z_{t}=y+td$, que
+está en $\ri\simplex_{n}$ para $t\in[0,1]$. La Hessiana de $h$ es
+$\operatorname{diag}(1/z_{i})$, y el resto integral de Taylor da</p>
+<div class="display">\[
+  D_{h}(x,y)=\int_{0}^{1}(1-t)\sum_{i=1}^{n}\frac{d_{i}^{2}}{(z_{t})_{i}}\dd t .
+\]</div>
+<p>Por Cauchy–Schwarz y $\sum_{i}(z_{t})_{i}=1$,</p>
+<div class="display">\[
+  \norm{d}_{1}^{2}=\Bigl(\sum_{i}\frac{\abs{d_{i}}}{\sqrt{(z_{t})_{i}}}\sqrt{(z_{t})_{i}}\Bigr)^{2}
+  \le\sum_{i}\frac{d_{i}^{2}}{(z_{t})_{i}},
+\]</div>
+<p>y $\int_{0}^{1}(1-t)\dd t=\frac12$. Si $x$ está en la frontera del símplex, los
+dos lados son continuos en $x$ y basta aproximarlo desde $\ri\simplex_{n}$.</p></div>
+<div class="stmt observacion" id="clase-c16:obs-local"><div class="head">Observación la divergencia mide con la Hessiana</div><div class="body"><p>Si $h$ es de clase $C^{2}$, el desarrollo de Taylor da
+$D_{h}(x+d,x)=\frac12d\trans\nabla^{2}h(x)d+o(\norm{d}^{2})$. Para la
+entropía,</p>
+<div class="display">\[
+  D_{h}(x+d,x)=\frac12\sum_{i=1}^{n}\frac{d_{i}^{2}}{x_{i}}+o(\norm{d}^{2}):
+\]</div>
+<p>cerca del borde del símplex, donde algún $x_{i}$ es pequeño, mover esa
+coordenada cuesta mucho. Es lo que la prueba de Pinsker integra.</p></div></div>
+<h3 id="clase-convexa-x19">Mirror descent</h3>
+<div class="stmt definicion" id="clase-c16:def-mirror"><div class="head">Definición mirror descent</div><div class="body"><p>Sea $h$ $\sigma$-fuertemente convexa respecto de $\norm{\cdot}$. El método de
+<span class="df">mirror descent</span> genera</p>
+<div class="display">\[
+  x_{k+1}\in\argmin_{x\in C}\bigl\{\alpha_{k}\ip{g_{k}}{x}+D_{h}(x,x_{k})\bigr\},
+  \qquad g_{k}\in\subdif f(x_{k}),
+\]</div>
+<p>suponiendo que el subproblema tiene solución y que los iterados se quedan en
+$\ri C$. Con $h=\frac12\norm{\cdot}_{2}^{2}$ es el subgradiente proyectado, por
+la proposición de la proyección como subproblema.</p></div></div>
+<div class="stmt observacion" id="clase-c16:obs-espejo"><div class="head">Observación el espejo<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $C=\R^{n}$ y el minimizador es interior, la condición de primer orden del
+subproblema es</p>
+<div class="display">\[
+  \nabla h(x_{k+1})=\nabla h(x_{k})-\alpha_{k}g_{k}.
+\]</div>
+<p>El paso se da en las coordenadas $\nabla h(x)$ y se vuelve con
+$(\nabla h)^{-1}$; de ahí el nombre.</p></div></div>
+<div class="stmt lema" id="clase-c16:lem-un-paso"><div class="head">Lema desigualdad de un paso<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para todo $x\in C$,</p>
+<div class="display">\[
+  \alpha_{k}\ip{g_{k}}{x_{k}-x}\le D_{h}(x,x_{k})-D_{h}(x,x_{k+1})+\frac{\alpha_{k}^{2}}{2\sigma}\norm{g_{k}}_{*}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p101">Ver demostración</button><div class="proof" id="clase-convexa-p101"><p>La función $\varphi(x)=\alpha_{k}\ip{g_{k}}{x}+D_{h}(x,x_{k})$ es diferenciable
+en $x_{k+1}$ con gradiente $\alpha_{k}g_{k}+\nabla h(x_{k+1})-\nabla h(x_{k})$, y
+alcanza en $x_{k+1}$ su mínimo sobre $C$. Como en la caracterización variacional
+de la proyección, $\varphi(x_{k+1}+t(x-x_{k+1}))\ge\varphi(x_{k+1})$ para
+$t\in(0,1]$ da, al dividir por $t$ y hacer $t\downarrow0$,</p>
+<div class="display">\[
+  \ip{\alpha_{k}g_{k}+\nabla h(x_{k+1})-\nabla h(x_{k})}{x-x_{k+1}}\ge0 .
+\]</div>
+<p>Con la identidad de los tres puntos ($u=x_{k+1}$, $v=x_{k}$, $w=x$),</p>
+<div class="display">\[
+  \alpha_{k}\ip{g_{k}}{x_{k+1}-x}\le D_{h}(x,x_{k})-D_{h}(x,x_{k+1})-D_{h}(x_{k+1},x_{k}).
+\]</div>
+<p>Por otro lado, por la norma dual, la desigualdad $ab\le\frac{a^{2}}{2\sigma}+\frac{\sigma b^{2}}{2}$
+y la convexidad fuerte de $h$,</p>
+<div class="display">\[
+  \alpha_{k}\ip{g_{k}}{x_{k}-x_{k+1}}
+  \le\frac{\alpha_{k}^{2}}{2\sigma}\norm{g_{k}}_{*}^{2}+\frac{\sigma}{2}\norm{x_{k}-x_{k+1}}^{2}
+  \le\frac{\alpha_{k}^{2}}{2\sigma}\norm{g_{k}}_{*}^{2}+D_{h}(x_{k+1},x_{k}),
+\]</div>
+<p>y basta sumar las dos.</p></div>
+<div class="stmt teorema" id="clase-c16:teo-mirror"><div class="head">Teorema tasa de mirror descent</div><div class="body"><p>Supongamos $\norm{g_{k}}_{*}\le M$, sea $x^{*}\in X^{*}$ y sea
+$\bar{x}_{N}=\sum_{k&lt;N}\alpha_{k}x_{k}/\sum_{k&lt;N}\alpha_{k}$. Entonces</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le\frac{D_{h}(x^{*},x_{0})+\frac{M^{2}}{2\sigma}\sum_{k=0}^{N-1}\alpha_{k}^{2}}{\sum_{k=0}^{N-1}\alpha_{k}}.
+\]</div>
+<p>En particular, si $D_{h}(x^{*},x_{0})\le R_{h}^{2}$ y
+$\alpha_{k}=\frac{\sqrt{2\sigma}R_{h}}{M\sqrt{N}}$,</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le MR_{h}\sqrt{\frac{2}{\sigma N}} .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p102">Ver demostración</button><div class="proof" id="clase-convexa-p102"><p>Por la desigualdad del subgradiente,
+$\alpha_{k}(f(x_{k})-f^{*})\le\alpha_{k}\ip{g_{k}}{x_{k}-x^{*}}$. Se aplica la
+desigualdad de un paso con $x=x^{*}$, se suma de $0$ a $N-1$, se descarta
+$D_{h}(x^{*},x_{N})\ge0$ y se usa la desigualdad de Jensen. Con paso constante
+la cota es $\frac{R_{h}^{2}}{N\alpha}+\frac{M^{2}\alpha}{2\sigma}$, mínima en el
+$\alpha$ del enunciado.</p></div>
+<div class="stmt observacion" id="clase-c16:obs-ventaja"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La dependencia $1/\sqrt{N}$ ya era óptima, así que la geometría no la mejora. Lo
+que se gana es un radio $R_{h}$ y una constante $M$ medidos en la norma que
+conviene al conjunto, y un subproblema que a veces tiene solución explícita.</p></div></div>
+<h3 id="clase-convexa-x20">Entropía y símplex</h3>
+<div class="stmt proposicion" id="clase-c16:prop-exponenciado"><div class="head">Proposición el paso entrópico<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $C=\simplex_{n}$, $h$ la entropía negativa y $x_{k}\in\ri\simplex_{n}$.
+El paso de mirror descent es</p>
+<div class="display">\[
+  x_{k+1,i}=\frac{x_{k,i}\,e^{-\alpha_{k}g_{k,i}}}{\sum_{j=1}^{n}x_{k,j}\,e^{-\alpha_{k}g_{k,j}}},
+\]</div>
+<p>y se llama <span class="df">gradiente exponenciado</span>. Conserva la positividad y no necesita
+proyectar.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p103">Ver demostración</button><div class="proof" id="clase-convexa-p103"><p>Sea $Z=\sum_{j}x_{k,j}e^{-\alpha_{k}g_{k,j}}$ y sea $x_{k+1}$ el de la
+fórmula. Para $x\in\simplex_{n}$, como $\sum_{i}x_{i}=1$,</p>
+<div class="display">\[
+  \alpha_{k}\ip{g_{k}}{x}+D_{\mathrm{KL}}(x\,\|\,x_{k})
+  =\sum_{i}x_{i}\log\frac{x_{i}}{x_{k,i}e^{-\alpha_{k}g_{k,i}}}
+  =D_{\mathrm{KL}}(x\,\|\,x_{k+1})-\log Z,
+\]</div>
+<p>y por la desigualdad de Pinsker el último miembro es mínimo exactamente en
+$x=x_{k+1}$.</p></div>
+<div class="stmt corolario" id="clase-c16:cor-exponenciado"><div class="head">Corolario gradiente exponenciado</div><div class="body"><p>Si $\norm{g_{k}}_{\infty}\le M$, $x_{0}=\frac1n\1$ y el paso es constante,</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le\frac{\log n}{\alpha N}+\frac{\alpha M^{2}}{2},
+\]</div>
+<p>y con $\alpha=\sqrt{2\log n}/(M\sqrt{N})$,</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le M\sqrt{\frac{2\log n}{N}} .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p104">Ver demostración</button><div class="proof" id="clase-convexa-p104"><p>Para $x\in\simplex_{n}$,
+$D_{h}(x,x_{0})=\sum_{i}x_{i}\log(nx_{i})=\log n+\sum_{i}x_{i}\log x_{i}\le\log n$.
+La norma dual de $\norm{\cdot}_{1}$ es $\norm{\cdot}_{\infty}$, y la desigualdad de
+Pinsker da $\sigma=1$, así que basta el teorema con $R_{h}^{2}=\log n$.</p></div>
+<div class="stmt observacion" id="clase-c16:obs-dimension"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La proyección euclidiana sobre el símplex también es barata, pero su análisis
+mide el radio y los subgradientes en $\norm{\cdot}_{2}$. Cuando lo que está
+controlado es $\norm{g_{k}}_{\infty}$, la geometría entrópica cambia una posible
+dependencia $\sqrt{n}$ por $\sqrt{\log n}$.</p></div></div>
+<h3 id="clase-convexa-x21">Multiplicative weights</h3>
+<div class="stmt definicion" id="clase-c16:def-arrepentimiento"><div class="head">Definición arrepentimiento<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En el juego en línea, en la ronda $k$ se elige $x_{k}\in\simplex_{n}$, se observa
+un vector de pérdidas $\ell_{k}\in\R^{n}$ y se paga $\ip{\ell_{k}}{x_{k}}$. El
+<span class="df">arrepentimiento</span> frente a una distribución fija $u\in\simplex_{n}$ es</p>
+<div class="display">\[
+  \mathrm{Reg}_{N}(u)=\sum_{k=0}^{N-1}\ip{\ell_{k}}{x_{k}-u}.
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c16:prop-mw"><div class="head">Proposición multiplicative weights<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $x_{0}=\frac1n\1$ y</p>
+<div class="display">\[
+  x_{k+1,i}=\frac{x_{k,i}e^{-\eta\ell_{k,i}}}{\sum_{j}x_{k,j}e^{-\eta\ell_{k,j}}} .
+\]</div>
+<p>Si $\norm{\ell_{k}}_{\infty}\le M$, para todo $u\in\simplex_{n}$</p>
+<div class="display">\[
+  \mathrm{Reg}_{N}(u)\le\frac{\log n}{\eta}+\frac{\eta M^{2}N}{2},
+\]</div>
+<p>y con $\eta=\sqrt{2\log n}/(M\sqrt{N})$ el arrepentimiento promedio es a lo sumo
+$M\sqrt{2\log n/N}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p105">Ver demostración</button><div class="proof" id="clase-convexa-p105"><p>Es el paso entrópico con $g_{k}=\ell_{k}$. La desigualdad de un paso con
+$x=u$ y $\sigma=1$, sumada de $0$ a $N-1$, da
+$\eta\,\mathrm{Reg}_{N}(u)\le D_{h}(u,x_{0})+\frac{\eta^{2}}{2}M^{2}N$, y
+$D_{h}(u,x_{0})\le\log n$.</p></div>
+<div class="stmt observacion" id="clase-c16:obs-online"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\ell_{k}\in\subdif f(x_{k})$ para una misma $f$ convexa, la cota de
+arrepentimiento y la desigualdad de Jensen devuelven el corolario del gradiente
+exponenciado. La versión en línea permite que las pérdidas cambien
+arbitrariamente de una ronda a otra, y es la que conecta la optimización
+convexa con el aprendizaje secuencial, los juegos y la predicción con expertos.</p></div></div></section>
+<section class="capitulo"><h2 id="clase-cap:proximal">Métodos proximales</h2>
+<div class="stmt observacion" id="clase-c17:obs-compuesto"><div class="head">Observación el problema compuesto</div><div class="body"><p>Muchos problemas tienen la forma</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\ f(x)+g(x),
+\]</div>
+<p>con $f$ convexa y suave y $g$ convexa, quizá no diferenciable pero sencilla:
+una restricción, la norma $\ell_{1}$, una norma de grupos o la norma nuclear.
+Aplicarle el subgradiente a $f+g$ ignora esa separación y se queda en la tasa
+$O(1/\sqrt{k})$. Los métodos proximales tratan $g$ de forma implícita.</p></div></div>
+<p>En el resto del capítulo $g\in\Gamma_{0}(\R^{n})$ y $\lambda&gt;0$.</p>
+<div class="stmt definicion" id="clase-c17:def-prox"><div class="head">Definición el operador proximal</div><div class="body"><p>El <span class="df">operador proximal</span> de $\lambda g$ es</p>
+<div class="display">\[
+  \prox_{\lambda g}(v)=\argmin_{x\in\R^{n}}\Bigl\{g(x)+\frac{1}{2\lambda}\norm{x-v}^{2}\Bigr\}.
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c17:prop-existe"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para todo $v\in\R^{n}$ el mínimo de la definición existe y es único.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p106">Ver demostración</button><div class="proof" id="clase-convexa-p106"><p>Como $g$ es convexa, cerrada y propia, admite una minorante afín
+$\ip{a}{x}+b$, así que $g(x)+\frac{1}{2\lambda}\norm{x-v}^{2}$ es coerciva; es
+además s.c.i. y propia, y el teorema de Weierstrass da un minimizador. Es
+$\frac1\lambda$-fuertemente convexa, así que no hay dos.</p></div>
+<div class="stmt proposicion" id="clase-c17:prop-caracterizacion"><div class="head">Proposición caracterización</div><div class="body"><div class="display">\[
+  p=\prox_{\lambda g}(v)
+  \iff 0\in\subdif g(p)+\frac{1}{\lambda}(p-v)
+  \iff \frac{v-p}{\lambda}\in\subdif g(p).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p107">Ver demostración</button><div class="proof" id="clase-convexa-p107"><p>Es la regla de Fermat para $g+\frac{1}{2\lambda}\norm{\cdot-v}^{2}$, y la regla de
+la suma se aplica sin condición porque el segundo sumando es finito en todo
+$\R^{n}$ y diferenciable, con gradiente $\frac1\lambda(x-v)$.</p></div>
+<div class="stmt observacion" id="clase-c17:obs-resolvente"><div class="head">Observación el resolvente<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La caracterización dice que $v\in p+\lambda\subdif g(p)$, es decir,</p>
+<div class="display">\[
+  \prox_{\lambda g}=(I+\lambda\subdif g)^{-1},
+\]</div>
+<p>el <span class="df">resolvente</span> del operador monótono $\subdif g$.</p></div></div>
+<div class="stmt proposicion" id="clase-c17:prop-firme"><div class="head">Proposición no expansividad firme<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $p=\prox_{\lambda g}(u)$ y $q=\prox_{\lambda g}(v)$, entonces</p>
+<div class="display">\[
+  \norm{p-q}^{2}\le\ip{p-q}{u-v}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p108">Ver demostración</button><div class="proof" id="clase-convexa-p108"><p>Por la caracterización, $\frac{u-p}{\lambda}\in\subdif g(p)$ y
+$\frac{v-q}{\lambda}\in\subdif g(q)$. Sumando la desigualdad del subgradiente de
+$p$ hacia $q$ y la de $q$ hacia $p$ queda
+$\ip{(u-p)-(v-q)}{p-q}\ge0$, que es la afirmación.</p></div>
+<div class="stmt corolario" id="clase-c17:cor-lipschitz"><div class="head">Corolario</div><div class="body"><p>$\norm{\prox_{\lambda g}(u)-\prox_{\lambda g}(v)}\le\norm{u-v}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p109">Ver demostración</button><div class="proof" id="clase-convexa-p109"><p>Cauchy–Schwarz en la no expansividad firme.</p></div>
+<h3 id="clase-convexa-x22">Ejemplos</h3>
+<div class="stmt ejemplo" id="clase-c17:ej-indicadora"><div class="head">Ejemplo la indicadora</div><div class="body"><p>Si $C$ es convexo, cerrado y no vacío, $\prox_{\lambda\delta_{C}}(v)=\Proy_{C}(v)$,
+y $\lambda$ no interviene: el mínimo de $\frac{1}{2\lambda}\norm{x-v}^{2}$ sobre
+$C$ es la proyección.</p></div></div>
+<div class="stmt ejemplo" id="clase-c17:ej-umbral"><div class="head">Ejemplo el umbral suave</div><div class="body"><p>Para $g(x)=\tau\norm{x}_{1}$ con $\tau&gt;0$,</p>
+<div class="display">\[
+  \bigl(\prox_{\lambda\tau\norm{\cdot}_{1}}(v)\bigr)_{i}=\operatorname{sgn}(v_{i})\max\{\abs{v_{i}}-\lambda\tau,0\}.
+\]</div>
+<p>Este operador se escribe $S_{\lambda\tau}(v)$, y anula exactamente las
+coordenadas pequeñas.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p110">Ver demostración</button><div class="proof" id="clase-convexa-p110"><p>El objetivo $\sum_{i}\bigl(\tau\abs{x_{i}}+\frac{1}{2\lambda}(x_{i}-v_{i})^{2}\bigr)$
+se separa por coordenadas, y multiplicando por $\lambda$ basta minimizar
+$a\abs{x}+\frac12(x-v)^{2}$ en $\R$ con $a=\lambda\tau$. Por la caracterización,
+$p$ es el minimizador si y solo si $v-p\in a\,\subdif\abs{\cdot}(p)$:</p>
+<ul class="lista"><li><p>si $p&gt;0$, es $v-p=a$, es decir $p=v-a$, y eso pide $v&gt;a$;</p></li><li><p>si $p&lt;0$, es $v-p=-a$, es decir $p=v+a$, y eso pide $v&lt;-a$;</p></li><li><p>si $p=0$, es $v\in a[-1,1]$, es decir $\abs{v}\le a$.</p></li></ul>
+<p>Los tres casos son $p=\operatorname{sgn}(v)\max\{\abs{v}-a,0\}$.</p></div>
+<div class="stmt ejemplo" id="clase-c17:ej-norma2"><div class="head">Ejemplo la norma euclídea<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $g(x)=\tau\norm{x}_{2}$,</p>
+<div class="display">\[
+  \prox_{\lambda\tau\norm{\cdot}_{2}}(v)=\Bigl(1-\frac{\lambda\tau}{\norm{v}_{2}}\Bigr)_{+}v,
+\]</div>
+<p>con valor $0$ si $v=0$. Es la contracción radial del <em>group Lasso</em>.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p111">Ver demostración</button><div class="proof" id="clase-convexa-p111"><p>Si $\norm{v}\le\lambda\tau$, entonces $p=0$ cumple la caracterización, porque
+$\subdif(\tau\norm{\cdot})(0)$ es la bola de radio $\tau$. Si no,
+$p=(1-\lambda\tau/\norm{v})v\neq0$ y $\frac{v-p}{\lambda}=\tau\frac{v}{\norm{v}}=\tau\frac{p}{\norm{p}}$,
+que es el gradiente de $\tau\norm{\cdot}$ en $p$.</p></div>
+<div class="stmt ejemplo" id="clase-c17:ej-elastic"><div class="head">Ejemplo <em>elastic net</em><sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $g(x)=\tau_{1}\norm{x}_{1}+\frac{\tau_{2}}{2}\norm{x}_{2}^{2}$,</p>
+<div class="display">\[
+  \prox_{\lambda g}(v)=\frac{1}{1+\lambda\tau_{2}}S_{\lambda\tau_{1}}(v).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p112">Ver demostración</button><div class="proof" id="clase-convexa-p112"><p>Coordenada a coordenada, la caracterización es
+$v-(1+\lambda\tau_{2})p\in\lambda\tau_{1}\subdif\abs{\cdot}(p)$. Con
+$q=(1+\lambda\tau_{2})p$, y como $\subdif\abs{\cdot}(p)=\subdif\abs{\cdot}(q)$,
+queda $v-q\in\lambda\tau_{1}\subdif\abs{\cdot}(q)$, es decir
+$q=S_{\lambda\tau_{1}}(v)$.</p></div>
+<div class="stmt ejemplo" id="clase-c17:ej-nuclear"><div class="head">Ejemplo la norma nuclear</div><div class="body"><p>La <span class="df">norma nuclear</span> de una matriz es $\norm{X}_{*}=\sum_{i}\sigma_{i}(X)$, la suma
+de sus valores singulares. Si $X=U\Sigma V\trans$ es una descomposición en
+valores singulares,</p>
+<div class="display">\[
+  \prox_{\lambda\tau\norm{\cdot}_{*}}(X)=U\operatorname{diag}\bigl((\sigma_{i}-\lambda\tau)_{+}\bigr)V\trans,
+\]</div>
+<p>es decir, el umbral suave aplicado a los valores singulares.</p></div></div>
+<div class="stmt ejemplo" id="clase-c17:ej-lasso"><div class="head">Ejemplo Lasso</div><div class="body"><p>El problema</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\ \frac12\norm{Ax-b}_{2}^{2}+\tau\norm{x}_{1}
+\]</div>
+<p>es compuesto, con $f(x)=\frac12\norm{Ax-b}_{2}^{2}$ suave y
+$g=\tau\norm{\cdot}_{1}$, cuyo proximal es el umbral suave.</p></div></div>
+<div class="stmt ejemplo" id="clase-c17:ej-netflix"><div class="head">Ejemplo completar una matriz</div><div class="body"><p>Una matriz $A\in\R^{m\times n}$ de calificaciones, con una fila por persona y una
+columna por película, se conoce solo en un conjunto $\Omega$ de entradas. Sea
+$P_{\Omega}$ la proyección que conserva esas entradas y anula las demás. Si los
+gustos dependen de pocos factores, la matriz completa tiene rango bajo, y la
+norma nuclear es la relajación convexa del rango:</p>
+<div class="display">\[
+  \min_{X\in\R^{m\times n}}\ \frac12\norm{P_{\Omega}(X-A)}_{F}^{2}+\lambda\norm{X}_{*}.
+\]</div></div></div>
+<h3 id="clase-convexa-x23">El método del punto proximal</h3>
+<div class="stmt definicion" id="clase-c17:def-punto"><div class="head">Definición el punto proximal</div><div class="body"><p>Para $\min\varphi$ con $\varphi\in\Gamma_{0}(\R^{n})$, dados $x_{0}$ y
+$\lambda_{k}&gt;0$, el <span class="df">método del punto proximal</span> genera</p>
+<div class="display">\[
+  x_{k+1}=\prox_{\lambda_{k}\varphi}(x_{k}).
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c17:obs-euler"><div class="head">Observación implícito contra explícito</div><div class="body"><p>Para el flujo $\dot{x}=-\nabla\varphi(x)$, el paso de Euler explícito es
+$x(t+h)=x(t)-h\nabla\varphi(x(t))$, y el implícito
+$x(t+h)=x(t)-h\nabla\varphi(x(t+h))$. Por la caracterización, el punto proximal
+es</p>
+<div class="display">\[
+  x_{k+1}=x_{k}-\lambda_{k}s_{k+1},\qquad s_{k+1}=\frac{x_{k}-x_{k+1}}{\lambda_{k}}\in\subdif\varphi(x_{k+1}),
+\]</div>
+<p>con el subgradiente evaluado en el punto nuevo:</p>
+<p>\begin{tabular}{ll}
+\toprule
+Implícito (<em>backward</em>) &amp; Explícito (<em>forward</em>) \\
+\midrule
+Punto proximal &amp; Subgradiente \\
+$x_{k+1}=x_{k}-\lambda_{k}s_{k+1}$, $s_{k+1}\in\subdif\varphi(x_{k+1})$ &amp;
+$x_{k+1}=x_{k}-\lambda_{k}s_{k}$, $s_{k}\in\subdif\varphi(x_{k})$ \\
+\bottomrule
+\end{tabular}</p></div></div>
+<div class="stmt lema" id="clase-c17:lem-proximal"><div class="head">Lema desigualdad proximal</div><div class="body"><p>Sea $x^{*}\in\argmin\varphi$ y $\varphi^{*}=\varphi(x^{*})$. Entonces</p>
+<div class="display">\[
+  \lambda_{k}\bigl(\varphi(x_{k+1})-\varphi^{*}\bigr)
+  \le\frac12\Bigl(\norm{x_{k}-x^{*}}^{2}-\norm{x_{k+1}-x^{*}}^{2}-\norm{x_{k+1}-x_{k}}^{2}\Bigr),
+\]</div>
+<p>y</p>
+<div class="display">\[
+  \varphi(x_{k+1})+\frac{1}{2\lambda_{k}}\norm{x_{k+1}-x_{k}}^{2}\le\varphi(x_{k}).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p113">Ver demostración</button><div class="proof" id="clase-convexa-p113"><p>Como $s_{k+1}\in\subdif\varphi(x_{k+1})$,</p>
+<div class="display">\[
+  \varphi(x_{k+1})-\varphi^{*}\le\ip{s_{k+1}}{x_{k+1}-x^{*}}
+  =\frac{1}{2\lambda_{k}}\Bigl(\norm{x_{k}-x^{*}}^{2}-\norm{x_{k+1}-x^{*}}^{2}-\norm{x_{k}-x_{k+1}}^{2}\Bigr),
+\]</div>
+<p>por la identidad $2\ip{a-b}{b-c}=\norm{a-c}^{2}-\norm{b-c}^{2}-\norm{a-b}^{2}$.
+La segunda desigualdad compara el objetivo del subproblema en su minimizador
+$x_{k+1}$ y en $x_{k}$.</p></div>
+<div class="stmt teorema" id="clase-c17:teo-tasa"><div class="head">Teorema tasa del punto proximal</div><div class="body"><p>Sean $\Lambda_{N}=\sum_{k=0}^{N-1}\lambda_{k}$ y
+$\bar{x}_{N}=\frac{1}{\Lambda_{N}}\sum_{k=0}^{N-1}\lambda_{k}x_{k+1}$. Entonces</p>
+<div class="display">\[
+  \varphi(\bar{x}_{N})-\varphi^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2\Lambda_{N}}.
+\]</div>
+<p>Los valores $\varphi(x_{k})$ no crecen, y si $\lambda_{k}=\lambda$ es constante,</p>
+<div class="display">\[
+  \varphi(x_{N})-\varphi^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2\lambda N}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p114">Ver demostración</button><div class="proof" id="clase-convexa-p114"><p>Sumando la desigualdad proximal de $0$ a $N-1$ y descartando los términos no
+positivos,
+$\sum_{k&lt;N}\lambda_{k}(\varphi(x_{k+1})-\varphi^{*})\le\frac12\norm{x_{0}-x^{*}}^{2}$,
+y la desigualdad de Jensen da la primera cota. La segunda parte del lema dice
+que los valores no crecen, así que con paso constante
+$N\lambda(\varphi(x_{N})-\varphi^{*})$ queda por debajo de la misma suma.</p></div>
+<div class="stmt proposicion" id="clase-c17:prop-contraccion"><div class="head">Proposición contracción bajo convexidad fuerte</div><div class="body"><p>Si $\varphi$ es $\mu$-fuertemente convexa,</p>
+<div class="display">\[
+  \norm{\prox_{\lambda\varphi}(u)-\prox_{\lambda\varphi}(v)}\le\frac{1}{1+\lambda\mu}\norm{u-v}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p115">Ver demostración</button><div class="proof" id="clase-convexa-p115"><p>Sean $p=\prox_{\lambda\varphi}(u)$ y $q=\prox_{\lambda\varphi}(v)$, de modo que
+$\frac{u-p}{\lambda}\in\subdif\varphi(p)$ y
+$\frac{v-q}{\lambda}\in\subdif\varphi(q)$. La desigualdad del subgradiente con
+convexidad fuerte da
+$\ip{(u-p)-(v-q)}{p-q}\ge\lambda\mu\norm{p-q}^{2}$, es decir
+$\ip{u-v}{p-q}\ge(1+\lambda\mu)\norm{p-q}^{2}$, y basta Cauchy–Schwarz.</p></div>
+<div class="stmt corolario" id="clase-c17:cor-lineal"><div class="head">Corolario <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\varphi$ es $\mu$-fuertemente convexa y $\lambda_{k}=\lambda$, el punto
+proximal converge linealmente a su único minimizador:
+$\norm{x_{k}-x^{*}}\le(1+\lambda\mu)^{-k}\norm{x_{0}-x^{*}}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p116">Ver demostración</button><div class="proof" id="clase-convexa-p116"><p>$x^{*}=\prox_{\lambda\varphi}(x^{*})$, porque $0\in\subdif\varphi(x^{*})$, y se
+aplica la contracción $k$ veces.</p></div>
+<h3 id="clase-convexa-x24">La envolvente de Moreau</h3>
+<div class="stmt definicion" id="clase-c17:def-moreau"><div class="head">Definición envolvente de Moreau</div><div class="body"><p>La <span class="df">envolvente de Moreau</span> de $g$ con parámetro $\lambda$ es</p>
+<div class="display">\[
+  \env{\lambda}{g}(v)=\min_{x\in\R^{n}}\Bigl\{g(x)+\frac{1}{2\lambda}\norm{x-v}^{2}\Bigr\}
+  =g\bigl(\prox_{\lambda g}(v)\bigr)+\frac{1}{2\lambda}\norm{v-\prox_{\lambda g}(v)}^{2}.
+\]</div></div></div>
+<div class="stmt teorema" id="clase-c17:teo-moreau"><div class="head">Teorema suavidad de la envolvente</div><div class="body"><p>$\env{\lambda}{g}$ es convexa y de clase $C^{1}$, con</p>
+<div class="display">\[
+  \nabla\env{\lambda}{g}(v)=\frac{1}{\lambda}\bigl(v-\prox_{\lambda g}(v)\bigr),
+\]</div>
+<p>y ese gradiente es $\frac1\lambda$-Lipschitz.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p117">Ver demostración</button><div class="proof" id="clase-convexa-p117"><p>Sean $p=\prox_{\lambda g}(v)$ y $q=\prox_{\lambda g}(u)$. Usando $p$ como
+competidor para $u$ y desarrollando $\norm{p-u}^{2}=\norm{(p-v)+(v-u)}^{2}$,</p>
+<div class="display">\[
+  \env{\lambda}{g}(u)\le g(p)+\frac{1}{2\lambda}\norm{p-u}^{2}
+  =\env{\lambda}{g}(v)+\Bigl\langle\frac{v-p}{\lambda},u-v\Bigr\rangle+\frac{1}{2\lambda}\norm{u-v}^{2}.
+\]</div>
+<p>Lo mismo con los papeles cambiados da
+$\env{\lambda}{g}(u)-\env{\lambda}{g}(v)\ge\ip{\frac{u-q}{\lambda}}{u-v}-\frac{1}{2\lambda}\norm{u-v}^{2}$,
+y como $\ip{(u-q)-(v-p)}{u-v}=\norm{u-v}^{2}-\ip{q-p}{u-v}\ge0$ por el
+corolario de la no expansividad,</p>
+<div class="display">\[
+  \Bigl|\env{\lambda}{g}(u)-\env{\lambda}{g}(v)-\Bigl\langle\frac{v-p}{\lambda},u-v\Bigr\rangle\Bigr|\le\frac{1}{2\lambda}\norm{u-v}^{2},
+\]</div>
+<p>que es la diferenciabilidad con ese gradiente. Por la no expansividad firme,</p>
+<div class="display">\[
+  \begin{aligned}
+  \norm{(u-q)-(v-p)}^{2}&amp;=\norm{u-v}^{2}-2\ip{u-v}{q-p}+\norm{q-p}^{2}\\
+  &amp;\le\norm{u-v}^{2}-\ip{u-v}{q-p}\le\norm{u-v}^{2},
+  \end{aligned}
+\]</div>
+<p>que es la constante de Lipschitz. El gradiente es además monótono, por la
+desigualdad de antes, y una función de clase $C^{1}$ con gradiente monótono es
+convexa.</p></div>
+<div class="stmt observacion" id="clase-c17:obs-moreau"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Tomando $x=v$ en la definición, $\env{\lambda}{g}\le g$. Las dos tienen los
+mismos minimizadores, porque $\nabla\env{\lambda}{g}(v)=0$ si y solo si
+$v=\prox_{\lambda g}(v)$, que por la caracterización es $0\in\subdif g(v)$. El
+parámetro mide el compromiso entre fidelidad y suavidad: cuando
+$\lambda\downarrow0$ la envolvente se acerca a $g$, y su gradiente, con
+constante $1/\lambda$, empeora.</p></div></div>
+<div class="stmt teorema" id="clase-c17:teo-identidad"><div class="head">Teorema identidad de Moreau<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para todo $v\in\R^{n}$,</p>
+<div class="display">\[
+  \prox_{\lambda g}(v)+\lambda\prox_{\lambda^{-1}g^{*}}(v/\lambda)=v,
+\]</div>
+<p>es decir, $\nabla\env{\lambda}{g}(v)=\prox_{\lambda^{-1}g^{*}}(v/\lambda)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p118">Ver demostración</button><div class="proof" id="clase-convexa-p118"><p>Sean $p=\prox_{\lambda g}(v)$ e $y=(v-p)/\lambda$, que está en $\subdif g(p)$
+por la caracterización. Por la desigualdad de Fenchel–Young, $p\in\subdif g^{*}(y)$,
+y como $p=v-\lambda y=\lambda(v/\lambda-y)$, eso es
+$\frac{v/\lambda-y}{1/\lambda}\in\subdif g^{*}(y)$, que por la caracterización
+dice $y=\prox_{\lambda^{-1}g^{*}}(v/\lambda)$.</p></div>
+<div class="stmt observacion" id="clase-c17:obs-identidad"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La identidad calcula un proximal con el de la conjugada. La conjugada de
+$\tau\norm{\cdot}$ es la indicadora de la bola de radio $\tau$ de la norma dual,
+y su proximal es la proyección sobre ella, así que
+$\prox_{\lambda\tau\norm{\cdot}}(v)=v-\Proy_{\lambda\tau\Ball_{*}}(v)$, con
+$\Ball_{*}$ la bola unidad dual. Con $\norm{\cdot}_{1}$, la bola dual es el
+cubo $[-1,1]^{n}$ y sale otra vez el umbral suave.</p></div></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -4232,7 +4806,462 @@ Newton             &amp; $O\bigl(\log\log\frac1\varepsilon\bigr)$               
 con las otras cuatro: es local, y su hipótesis
 $\theta_{0}=\frac{\rho}{2m}\norm{x_{0}-x^{*}}&lt;1$ habla del punto de partida y no
 solo de la función. Newton amortiguado cierra esa brecha, a cambio de una fase
-previa cuya longitud depende de $f(x_{0})-f^{*}$.</p></div></div></section></div>
+previa cuya longitud depende de $f(x_{0})-f^{*}$.</p></div></div></section>
+<section class="capitulo"><h2 id="general-cap:subgradiente">Subgradiente y mirror descent</h2>
+<p>En las tres primeras secciones $\Hs$ es un espacio de Hilbert,
+$C\subset\Hs$ es convexo, cerrado y no vacío, y $f:\Hs\to\R$ es convexa y
+continua, de modo que $\subdif f(x)\neq\varnothing$ en todo punto. Se escribe
+$X^{*}=\argmin_{x\in C}f$, que se supone no vacío, y $f^{*}=\min_{C}f$.</p>
+<div class="stmt definicion" id="general-c16:def-metodo"><div class="head">Definición el método del subgradiente proyectado</div><div class="body"><p>Dados $x_{0}\in C$ y pasos $\alpha_{k}&gt;0$, el <span class="df">método del subgradiente
+proyectado</span> genera</p>
+<div class="display">\[
+  x_{k+1}=\Proy_{C}(x_{k}-\alpha_{k}g_{k}),\qquad g_{k}\in\subdif f(x_{k}).
+\]</div>
+<p>Si $C=\Hs$, la proyección desaparece.</p></div></div>
+<div class="stmt observacion" id="general-c16:obs-no-descenso"><div class="head">Observación un subgradiente no es una dirección de descenso<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En general no se tiene $f(x_{k+1})\le f(x_{k})$. Para
+$f(x)=\abs{x_{1}}+2\abs{x_{2}}$ en $\R^{2}$ y $x=(1,0)$ se tiene
+$g=(1,2)\in\subdif f(x)$, y $f(x-tg)=1+3t$ para $t\in(0,1)$. Por eso el método
+se mide con el mejor iterado o con promedios.</p></div></div>
+<div class="stmt lema" id="general-c16:lem-recurrencia"><div class="head">Lema recurrencia básica</div><div class="body"><p>Sea $x^{*}\in X^{*}$. Entonces</p>
+<div class="display">\[
+  \norm{x_{k+1}-x^{*}}^{2}\le\norm{x_{k}-x^{*}}^{2}-2\alpha_{k}\bigl(f(x_{k})-f^{*}\bigr)+\alpha_{k}^{2}\norm{g_{k}}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p80">Ver demostración</button><div class="proof" id="general-convexa-p80"><p>Como $x^{*}\in C$, es $x^{*}=\Proy_{C}(x^{*})$, y la proyección es
+$1$-Lipschitz por la no expansividad firme. Luego</p>
+<div class="display">\[
+  \norm{x_{k+1}-x^{*}}^{2}\le\norm{x_{k}-\alpha_{k}g_{k}-x^{*}}^{2}
+  =\norm{x_{k}-x^{*}}^{2}-2\alpha_{k}\ip{g_{k}}{x_{k}-x^{*}}+\alpha_{k}^{2}\norm{g_{k}}^{2},
+\]</div>
+<p>y la desigualdad del subgradiente da $\ip{g_{k}}{x_{k}-x^{*}}\ge f(x_{k})-f^{*}$.</p></div>
+<div class="stmt observacion" id="general-c16:obs-oraculo"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La hipótesis natural para obtener tasas es $\norm{g_{k}}\le M$ para todo $k$, y
+se cumple si $f$ es $M$-Lipschitz en un abierto que contiene a $C$. Es una
+hipótesis sobre el oráculo: para una $f$ que solo es convexa, propia y s.c.i.,
+el subdiferencial puede ser vacío o no acotado en la frontera de su dominio.</p></div></div>
+<div class="stmt teorema" id="general-c16:teo-cota"><div class="head">Teorema cota general y promediado</div><div class="body"><p>Supongamos $\norm{g_{k}}\le M$ para todo $k$, y sean</p>
+<div class="display">\[
+  A_{N}=\sum_{k=0}^{N-1}\alpha_{k},\qquad
+  \bar{x}_{N}=\frac{1}{A_{N}}\sum_{k=0}^{N-1}\alpha_{k}x_{k}.
+\]</div>
+<p>Entonces, para todo $x^{*}\in X^{*}$,</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}+M^{2}\sum_{k=0}^{N-1}\alpha_{k}^{2}}{2A_{N}},
+\]</div>
+<p>y la misma cota vale para el mejor valor
+$f_{N}^{\min}=\min_{0\le k&lt;N}f(x_{k})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p81">Ver demostración</button><div class="proof" id="general-convexa-p81"><p>Sumando la recurrencia básica de $k=0$ a $N-1$ y descartando
+$\norm{x_{N}-x^{*}}^{2}\ge0$,</p>
+<div class="display">\[
+  2\sum_{k=0}^{N-1}\alpha_{k}\bigl(f(x_{k})-f^{*}\bigr)\le\norm{x_{0}-x^{*}}^{2}+M^{2}\sum_{k=0}^{N-1}\alpha_{k}^{2}.
+\]</div>
+<p>Como $\bar{x}_{N}\in C$ es una combinación convexa de los $x_{k}$, la
+desigualdad de Jensen da
+$f(\bar{x}_{N})\le\frac{1}{A_{N}}\sum_{k}\alpha_{k}f(x_{k})$. Para el mejor
+valor basta $A_{N}(f_{N}^{\min}-f^{*})\le\sum_{k}\alpha_{k}(f(x_{k})-f^{*})$.</p></div>
+<div class="stmt observacion" id="general-c16:obs-promedio"><div class="head">Observación promedio o mejor iterado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El mejor iterado exige evaluar $f(x_{k})$ y llevar la cuenta; el promedio no
+compara valores, pero puede destruir estructura, como la dispersión de los
+iterados. En esos casos se reporta el mejor iterado, un promedio sobre la cola
+de la trayectoria, o los dos.</p></div></div>
+<h3 id="general-convexa-x12">Elección de los pasos</h3>
+<div class="stmt corolario" id="general-c16:cor-tasa"><div class="head">Corolario tasa $O(1/\sqrt{N})$</div><div class="body"><p>Si $\norm{x_{0}-x^{*}}\le R$ y se harán exactamente $N$ iteraciones con el paso
+constante $\alpha_{k}=\frac{R}{M\sqrt{N}}$, entonces
+$f(\bar{x}_{N})-f^{*}\le\frac{MR}{\sqrt{N}}$, y lo mismo $f_{N}^{\min}-f^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p82">Ver demostración</button><div class="proof" id="general-convexa-p82"><p>Con $\alpha_{k}=\alpha$ la cota del teorema es
+$\frac{R^{2}}{2N\alpha}+\frac{M^{2}\alpha}{2}$, que se minimiza en
+$\alpha=R/(M\sqrt{N})$ con valor $MR/\sqrt{N}$.</p></div>
+<div class="stmt observacion" id="general-c16:obs-optimo"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Garantizar $f(\bar{x}_{N})-f^{*}\le\varepsilon$ pide entonces
+$O(M^{2}R^{2}/\varepsilon^{2})$ llamadas al oráculo, sin ninguna dependencia de
+la dimensión. El orden $1/\varepsilon^{2}$ es óptimo, salvo constantes, para las
+funciones convexas Lipschitz con un oráculo local de primer orden.</p></div></div>
+<div class="stmt corolario" id="general-c16:cor-decrecientes"><div class="head">Corolario pasos decrecientes</div><div class="body"><p>Si $\sum_{k}\alpha_{k}=\infty$ y $\sum_{k}\alpha_{k}^{2}&lt;\infty$, entonces
+$f_{N}^{\min}\to f^{*}$. Sirve, por ejemplo, $\alpha_{k}=1/(k+1)^{p}$ con
+$p\in(\frac12,1]$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p83">Ver demostración</button><div class="proof" id="general-convexa-p83"><p>En la cota del teorema el numerador está acotado y el denominador tiende a
+infinito.</p></div>
+<div class="stmt observacion" id="general-c16:obs-etapas"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para conservar la tasa $O(1/\sqrt{N})$ sin conocer el horizonte se trabaja por
+etapas: bloques de longitudes $1,2,4,8,\dots$, cada uno con el paso constante de
+su longitud.</p></div></div>
+<div class="stmt definicion" id="general-c16:def-polyak"><div class="head">Definición el paso de Polyak</div><div class="body"><p>Si se conoce $f^{*}$, el <span class="df">paso de Polyak</span> es
+$\alpha_{k}=\bigl(f(x_{k})-f^{*}\bigr)/\norm{g_{k}}^{2}$, para $g_{k}\neq0$.</p></div></div>
+<div class="stmt proposicion" id="general-c16:prop-polyak"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con el paso de Polyak,</p>
+<div class="display">\[
+  \norm{x_{k+1}-x^{*}}^{2}\le\norm{x_{k}-x^{*}}^{2}-\frac{\bigl(f(x_{k})-f^{*}\bigr)^{2}}{\norm{g_{k}}^{2}}
+  \qquad\text{para todo }x^{*}\in X^{*},
+\]</div>
+<p>así que la sucesión es Fejér monótona respecto de $X^{*}$. Si además
+$\norm{g_{k}}\le M$, entonces
+$\min_{0\le k&lt;N}\bigl(f(x_{k})-f^{*}\bigr)\le M\dist(x_{0},X^{*})/\sqrt{N}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p84">Ver demostración</button><div class="proof" id="general-convexa-p84"><p>La primera desigualdad es la recurrencia básica con ese $\alpha_{k}$. Sumándola,
+$\sum_{k&lt;N}(f(x_{k})-f^{*})^{2}\le M^{2}\norm{x_{0}-x^{*}}^{2}$, y se toma
+$x^{*}=\Proy_{X^{*}}(x_{0})$, que existe porque $X^{*}$ es convexo y cerrado.</p></div>
+<div class="stmt observacion" id="general-c16:obs-polyak-cota"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $f^{*}$ se reemplaza por una cota inferior demasiado baja, el paso resulta
+excesivo, y por eso se usan versiones con recortes.</p></div></div>
+<h3 id="general-convexa-x13">El caso fuertemente convexo</h3>
+<div class="stmt lema" id="general-c16:lem-fuerte"><div class="head">Lema <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $f$ es $\mu$-fuertemente convexa y $g\in\subdif f(x)$, entonces</p>
+<div class="display">\[
+  f(y)\ge f(x)+\ip{g}{y-x}+\frac{\mu}{2}\norm{y-x}^{2}\qquad\text{para todo }y.
+\]</div>
+<p>En particular $\ip{g-g&#x27;}{x-x&#x27;}\ge\mu\norm{x-x&#x27;}^{2}$ si $g\in\subdif f(x)$ y
+$g&#x27;\in\subdif f(x&#x27;)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p85">Ver demostración</button><div class="proof" id="general-convexa-p85"><p>Sea $t\in(0,1)$. La desigualdad del subgradiente de $x$, evaluada en
+$x+t(y-x)$, y la caracterización de la convexidad fuerte con $\lambda=t$ dan</p>
+<div class="display">\[
+  f(x)+t\ip{g}{y-x}\le tf(y)+(1-t)f(x)-\frac{\mu}{2}t(1-t)\norm{y-x}^{2}.
+\]</div>
+<p>Restando $f(x)$, dividiendo por $t$ y haciendo $t\downarrow0$ queda la primera
+afirmación, y la segunda es su suma en los dos sentidos.</p></div>
+<div class="stmt teorema" id="general-c16:teo-fuerte"><div class="head">Teorema subgradiente bajo convexidad fuerte</div><div class="body"><p>Sea $f$ $\mu$-fuertemente convexa, con $\norm{g_{k}}\le M$, y sea la iteración
+que parte de $x_{1}\in C$ con $\alpha_{k}=\frac{2}{\mu(k+1)}$ para $k\ge1$. Si
+$\hat{x}_{N}=\frac{2}{N(N+1)}\sum_{k=1}^{N}k\,x_{k}$, entonces</p>
+<div class="display">\[
+  f(\hat{x}_{N})-f^{*}\le\frac{2M^{2}}{\mu(N+1)}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p86">Ver demostración</button><div class="proof" id="general-convexa-p86"><p>Sea $r_{k}=\norm{x_{k}-x^{*}}$. El lema anterior, llevado a la prueba de la
+recurrencia básica, da
+$2\alpha_{k}(f(x_{k})-f^{*})\le(1-\mu\alpha_{k})r_{k}^{2}-r_{k+1}^{2}+\alpha_{k}^{2}M^{2}$.
+Con $\alpha_{k}=2/(\mu(k+1))$ y multiplicando por $\mu k(k+1)/4$,</p>
+<div class="display">\[
+  k\bigl(f(x_{k})-f^{*}\bigr)\le\frac{\mu}{4}k(k-1)r_{k}^{2}-\frac{\mu}{4}(k+1)k\,r_{k+1}^{2}+\frac{M^{2}}{\mu}\frac{k}{k+1},
+\]</div>
+<p>que telescopa al sumar de $1$ a $N$ y da
+$\sum_{k=1}^{N}k(f(x_{k})-f^{*})\le NM^{2}/\mu$. Concluye la desigualdad de
+Jensen, porque $\sum_{k=1}^{N}k=N(N+1)/2$.</p></div>
+<h3 id="general-convexa-x14">Geometría de Bregman</h3>
+<div class="stmt proposicion" id="general-c16:prop-subproblema"><div class="head">Proposición la proyección es un subproblema</div><div class="body"><p>El paso del subgradiente proyectado es</p>
+<div class="display">\[
+  x_{k+1}=\argmin_{x\in C}\Bigl\{\alpha_{k}\ip{g_{k}}{x}+\frac12\norm{x-x_{k}}^{2}\Bigr\}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p87">Ver demostración</button><div class="proof" id="general-convexa-p87"><p>Completando el cuadrado, el objetivo es
+$\frac12\norm{x-(x_{k}-\alpha_{k}g_{k})}^{2}$ más una constante.</p></div>
+<p>A partir de aquí $E$ es un espacio de Banach con norma $\norm{\cdot}$, su dual
+$E^{*}$ lleva la norma $\norm{g}_{*}=\sup_{\norm{x}\le1}\ip{g}{x}$, de modo que
+$\ip{g}{x}\le\norm{g}_{*}\norm{x}$, y $C\subset E$ es convexo y no vacío.</p>
+<div class="stmt definicion" id="general-c16:def-dual"><div class="head">Definición convexidad fuerte respecto de una norma<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $h:C\to\R$ convexa y $C_{h}\subset C$ el conjunto de los puntos donde es
+Gâteaux diferenciable, con derivada $\nabla h(y)\in E^{*}$. La función $h$ es
+<span class="df">$\sigma$-fuertemente convexa respecto de $\norm{\cdot}$</span> si</p>
+<div class="display">\[
+  h(x)\ge h(y)+\ip{\nabla h(y)}{x-y}+\frac{\sigma}{2}\norm{x-y}^{2}
+  \qquad\text{para todos }x\in C,\ y\in C_{h}.
+\]</div>
+<p>En $\R^{n}$ con $\norm{\cdot}_{1}$, el dual es $\norm{\cdot}_{\infty}$.</p></div></div>
+<div class="stmt definicion" id="general-c16:def-bregman"><div class="head">Definición divergencia de Bregman</div><div class="body"><p>La <span class="df">divergencia de Bregman</span> generada por $h$ es</p>
+<div class="display">\[
+  D_{h}(x,y)=h(x)-h(y)-\ip{\nabla h(y)}{x-y},\qquad x\in C,\ y\in C_{h}.
+\]</div>
+<p>Se tiene $D_{h}(x,y)\ge\frac{\sigma}{2}\norm{x-y}^{2}$, pero en general
+$D_{h}(x,y)\neq D_{h}(y,x)$ y no se cumple la desigualdad triangular.</p></div></div>
+<div class="stmt lema" id="general-c16:lem-tres-puntos"><div class="head">Lema identidad de los tres puntos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $u,v\in C_{h}$ y $w\in C$,</p>
+<div class="display">\[
+  \ip{\nabla h(u)-\nabla h(v)}{w-u}=D_{h}(w,v)-D_{h}(w,u)-D_{h}(u,v).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p88">Ver demostración</button><div class="proof" id="general-convexa-p88"><p>Al desarrollar las tres divergencias los valores de $h$ se cancelan y queda
+$-\ip{\nabla h(v)}{w-v}+\ip{\nabla h(u)}{w-u}+\ip{\nabla h(v)}{u-v}$, que es el
+lado izquierdo.</p></div>
+<div class="stmt ejemplo" id="general-c16:ej-euclidea"><div class="head">Ejemplo la geometría hilbertiana</div><div class="body"><p>En $\Hs$, $h(x)=\frac12\norm{x}^{2}$ da
+$D_{h}(x,y)=\frac12\norm{x}^{2}-\frac12\norm{y}^{2}-\ip{y}{x-y}=\frac12\norm{x-y}^{2}$.
+Más en general, para $Q\in\Bop{\Hs}$ autoadjunto, $h(x)=\frac12\ip{Qx}{x}$ da
+$D_{h}(x,y)=\frac12\ip{Q(x-y)}{x-y}$.</p></div></div>
+<div class="stmt ejemplo" id="general-c16:ej-entropia"><div class="head">Ejemplo la entropía negativa</div><div class="body"><p>En $\simplex_{n}=\{x\in\R^{n}:x\ge0,\ \ip{\1}{x}=1\}$ sea
+$h(x)=\sum_{i}x_{i}\log x_{i}$, con $0\log0=0$. Si $y_{i}&gt;0$ para todo $i$,</p>
+<div class="display">\[
+  D_{h}(x,y)=\sum_{i}x_{i}\log x_{i}-\sum_{i}y_{i}\log y_{i}-\sum_{i}(\log y_{i}+1)(x_{i}-y_{i})
+  =\sum_{i=1}^{n}x_{i}\log\frac{x_{i}}{y_{i}},
+\]</div>
+<p>la <span class="df">divergencia de Kullback–Leibler</span> $D_{\mathrm{KL}}(x\,\|\,y)$.</p></div></div>
+<div class="stmt proposicion" id="general-c16:prop-pinsker"><div class="head">Proposición desigualdad de Pinsker</div><div class="body"><p>Para $x\in\simplex_{n}$ e $y\in\ri\simplex_{n}$,
+$D_{\mathrm{KL}}(x\,\|\,y)\ge\frac12\norm{x-y}_{1}^{2}$. Es decir, la entropía
+negativa es $1$-fuertemente convexa respecto de $\norm{\cdot}_{1}$ en el
+símplex.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p89">Ver demostración</button><div class="proof" id="general-convexa-p89"><p>Para $x\in\ri\simplex_{n}$, con $d=x-y$ y $z_{t}=y+td\in\ri\simplex_{n}$, el
+resto integral de Taylor da
+$D_{h}(x,y)=\int_{0}^{1}(1-t)\sum_{i}d_{i}^{2}/(z_{t})_{i}\dd t$, y por
+Cauchy–Schwarz y $\sum_{i}(z_{t})_{i}=1$,</p>
+<div class="display">\[
+  \norm{d}_{1}^{2}=\Bigl(\sum_{i}\frac{\abs{d_{i}}}{\sqrt{(z_{t})_{i}}}\sqrt{(z_{t})_{i}}\Bigr)^{2}
+  \le\sum_{i}\frac{d_{i}^{2}}{(z_{t})_{i}} .
+\]</div>
+<p>Si $x$ está en la frontera, los dos lados son continuos en $x$.</p></div>
+<div class="stmt observacion" id="general-c16:obs-local"><div class="head">Observación la divergencia mide con la segunda derivada</div><div class="body"><p>Si $h$ es dos veces Fréchet diferenciable, Taylor da
+$D_{h}(x+d,x)=\frac12\Dif^{2}h(x)[d,d]+o(\norm{d}^{2})$. Para la entropía es
+$\frac12\sum_{i}d_{i}^{2}/x_{i}+o(\norm{d}^{2})$, y cerca del borde del símplex
+mover una coordenada pequeña cuesta mucho.</p></div></div>
+<h3 id="general-convexa-x15">Mirror descent</h3>
+<div class="stmt definicion" id="general-c16:def-mirror"><div class="head">Definición mirror descent</div><div class="body"><p>Sean $f:E\to\R\cup\{\infty\}$ convexa, $C$ cerrado, $X^{*}=\argmin_{C}f\neq\varnothing$
+y $h$ $\sigma$-fuertemente convexa respecto de $\norm{\cdot}$. El método de
+<span class="df">mirror descent</span> genera</p>
+<div class="display">\[
+  x_{k+1}\in\argmin_{x\in C}\bigl\{\alpha_{k}\ip{g_{k}}{x}+D_{h}(x,x_{k})\bigr\},
+  \qquad g_{k}\in\subdif f(x_{k})\subset E^{*},
+\]</div>
+<p>suponiendo que el subproblema tiene solución y que los iterados se quedan en
+$C_{h}$. En $\Hs$ con $h=\frac12\norm{\cdot}^{2}$ es el subgradiente proyectado.</p></div></div>
+<div class="stmt observacion" id="general-c16:obs-espejo"><div class="head">Observación el espejo<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $C=E$ y $h$ es diferenciable en todo $E$, la condición de primer orden del
+subproblema es</p>
+<div class="display">\[
+  \nabla h(x_{k+1})=\nabla h(x_{k})-\alpha_{k}g_{k},
+\]</div>
+<p>una igualdad en $E^{*}$: el paso se da en el dual y se vuelve con
+$(\nabla h)^{-1}$.</p></div></div>
+<div class="stmt lema" id="general-c16:lem-un-paso"><div class="head">Lema desigualdad de un paso<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para todo $x\in C$,</p>
+<div class="display">\[
+  \alpha_{k}\ip{g_{k}}{x_{k}-x}\le D_{h}(x,x_{k})-D_{h}(x,x_{k+1})+\frac{\alpha_{k}^{2}}{2\sigma}\norm{g_{k}}_{*}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p90">Ver demostración</button><div class="proof" id="general-convexa-p90"><p>La función $\varphi(x)=\alpha_{k}\ip{g_{k}}{x}+D_{h}(x,x_{k})$ es Gâteaux
+diferenciable en $x_{k+1}$, con derivada
+$\alpha_{k}g_{k}+\nabla h(x_{k+1})-\nabla h(x_{k})$, y alcanza en $x_{k+1}$ su
+mínimo sobre $C$. Como $\varphi(x_{k+1}+t(x-x_{k+1}))\ge\varphi(x_{k+1})$ para
+$t\in(0,1]$, dividiendo por $t$ y haciendo $t\downarrow0$,</p>
+<div class="display">\[
+  \ip{\alpha_{k}g_{k}+\nabla h(x_{k+1})-\nabla h(x_{k})}{x-x_{k+1}}\ge0 .
+\]</div>
+<p>Con la identidad de los tres puntos,
+$\alpha_{k}\ip{g_{k}}{x_{k+1}-x}\le D_{h}(x,x_{k})-D_{h}(x,x_{k+1})-D_{h}(x_{k+1},x_{k})$.
+Por la norma dual, $ab\le\frac{a^{2}}{2\sigma}+\frac{\sigma b^{2}}{2}$ y la
+convexidad fuerte de $h$,</p>
+<div class="display">\[
+  \alpha_{k}\ip{g_{k}}{x_{k}-x_{k+1}}
+  \le\frac{\alpha_{k}^{2}}{2\sigma}\norm{g_{k}}_{*}^{2}+\frac{\sigma}{2}\norm{x_{k}-x_{k+1}}^{2}
+  \le\frac{\alpha_{k}^{2}}{2\sigma}\norm{g_{k}}_{*}^{2}+D_{h}(x_{k+1},x_{k}),
+\]</div>
+<p>y basta sumar.</p></div>
+<div class="stmt teorema" id="general-c16:teo-mirror"><div class="head">Teorema tasa de mirror descent</div><div class="body"><p>Supongamos $\norm{g_{k}}_{*}\le M$, sea $x^{*}\in X^{*}$ y sea
+$\bar{x}_{N}=\sum_{k&lt;N}\alpha_{k}x_{k}/\sum_{k&lt;N}\alpha_{k}$. Entonces</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le\frac{D_{h}(x^{*},x_{0})+\frac{M^{2}}{2\sigma}\sum_{k=0}^{N-1}\alpha_{k}^{2}}{\sum_{k=0}^{N-1}\alpha_{k}}.
+\]</div>
+<p>En particular, si $D_{h}(x^{*},x_{0})\le R_{h}^{2}$ y
+$\alpha_{k}=\frac{\sqrt{2\sigma}R_{h}}{M\sqrt{N}}$, entonces
+$f(\bar{x}_{N})-f^{*}\le MR_{h}\sqrt{\frac{2}{\sigma N}}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p91">Ver demostración</button><div class="proof" id="general-convexa-p91"><p>Por la desigualdad del subgradiente,
+$\alpha_{k}(f(x_{k})-f^{*})\le\alpha_{k}\ip{g_{k}}{x_{k}-x^{*}}$. Se aplica la
+desigualdad de un paso con $x=x^{*}$, se suma, se descarta
+$D_{h}(x^{*},x_{N})\ge0$ y se usa la desigualdad de Jensen. Con paso constante
+la cota es $\frac{R_{h}^{2}}{N\alpha}+\frac{M^{2}\alpha}{2\sigma}$, mínima en el
+$\alpha$ del enunciado.</p></div>
+<div class="stmt observacion" id="general-c16:obs-ventaja"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La dependencia $1/\sqrt{N}$ ya era óptima. Lo que se gana es un radio y una
+constante medidos en la norma que conviene al conjunto, y un subproblema que a
+veces tiene solución explícita.</p></div></div>
+<h3 id="general-convexa-x16">Entropía y símplex</h3>
+<p>En esta sección $E=(\R^{n},\norm{\cdot}_{1})$, $C=\simplex_{n}$ y $h$ es la
+entropía negativa, que por la desigualdad de Pinsker tiene $\sigma=1$.</p>
+<div class="stmt proposicion" id="general-c16:prop-exponenciado"><div class="head">Proposición el paso entrópico<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $x_{k}\in\ri\simplex_{n}$, el paso de mirror descent es</p>
+<div class="display">\[
+  x_{k+1,i}=\frac{x_{k,i}\,e^{-\alpha_{k}g_{k,i}}}{\sum_{j=1}^{n}x_{k,j}\,e^{-\alpha_{k}g_{k,j}}},
+\]</div>
+<p>el <span class="df">gradiente exponenciado</span>. Conserva la positividad y no proyecta.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p92">Ver demostración</button><div class="proof" id="general-convexa-p92"><p>Con $Z=\sum_{j}x_{k,j}e^{-\alpha_{k}g_{k,j}}$ y $x_{k+1}$ el de la fórmula,
+para $x\in\simplex_{n}$ se tiene
+$\alpha_{k}\ip{g_{k}}{x}+D_{\mathrm{KL}}(x\,\|\,x_{k})=D_{\mathrm{KL}}(x\,\|\,x_{k+1})-\log Z$,
+que por la desigualdad de Pinsker es mínimo exactamente en $x=x_{k+1}$.</p></div>
+<div class="stmt corolario" id="general-c16:cor-exponenciado"><div class="head">Corolario gradiente exponenciado</div><div class="body"><p>Si $\norm{g_{k}}_{\infty}\le M$, $x_{0}=\frac1n\1$ y el paso es constante,
+$f(\bar{x}_{N})-f^{*}\le\frac{\log n}{\alpha N}+\frac{\alpha M^{2}}{2}$, y con
+$\alpha=\sqrt{2\log n}/(M\sqrt{N})$,</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le M\sqrt{\frac{2\log n}{N}} .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p93">Ver demostración</button><div class="proof" id="general-convexa-p93"><p>$D_{h}(x,x_{0})=\log n+\sum_{i}x_{i}\log x_{i}\le\log n$ en $\simplex_{n}$, y se
+aplica el teorema con $R_{h}^{2}=\log n$.</p></div>
+<div class="stmt observacion" id="general-c16:obs-dimension"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Cuando lo que está controlado es $\norm{g_{k}}_{\infty}$, la geometría entrópica
+cambia una posible dependencia $\sqrt{n}$ de la euclidiana por $\sqrt{\log n}$.</p></div></div>
+<h3 id="general-convexa-x17">Multiplicative weights</h3>
+<div class="stmt definicion" id="general-c16:def-arrepentimiento"><div class="head">Definición arrepentimiento<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En el juego en línea, en la ronda $k$ se elige $x_{k}\in\simplex_{n}$, se observa
+un vector de pérdidas $\ell_{k}\in\R^{n}$ y se paga $\ip{\ell_{k}}{x_{k}}$. El
+<span class="df">arrepentimiento</span> frente a $u\in\simplex_{n}$ es
+$\mathrm{Reg}_{N}(u)=\sum_{k=0}^{N-1}\ip{\ell_{k}}{x_{k}-u}$.</p></div></div>
+<div class="stmt proposicion" id="general-c16:prop-mw"><div class="head">Proposición multiplicative weights<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $x_{0}=\frac1n\1$ y</p>
+<div class="display">\[
+  x_{k+1,i}=\frac{x_{k,i}e^{-\eta\ell_{k,i}}}{\sum_{j}x_{k,j}e^{-\eta\ell_{k,j}}} .
+\]</div>
+<p>Si $\norm{\ell_{k}}_{\infty}\le M$, para todo $u\in\simplex_{n}$</p>
+<div class="display">\[
+  \mathrm{Reg}_{N}(u)\le\frac{\log n}{\eta}+\frac{\eta M^{2}N}{2},
+\]</div>
+<p>y con $\eta=\sqrt{2\log n}/(M\sqrt{N})$ el arrepentimiento promedio es a lo sumo
+$M\sqrt{2\log n/N}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p94">Ver demostración</button><div class="proof" id="general-convexa-p94"><p>Es el paso entrópico con $g_{k}=\ell_{k}$; se suma la desigualdad de un paso
+con $x=u$ y se usa $D_{h}(u,x_{0})\le\log n$.</p></div>
+<div class="stmt observacion" id="general-c16:obs-online"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\ell_{k}\in\subdif f(x_{k})$ para una misma $f$ convexa, se recupera el
+corolario del gradiente exponenciado. La versión en línea permite que las
+pérdidas cambien arbitrariamente de una ronda a otra.</p></div></div></section>
+<section class="capitulo"><h2 id="general-cap:proximal">Métodos proximales</h2>
+<div class="stmt observacion" id="general-c17:obs-compuesto"><div class="head">Observación el problema compuesto</div><div class="body"><p>Muchos problemas tienen la forma</p>
+<div class="display">\[
+  \min_{x\in\Hs}\ f(x)+g(x),
+\]</div>
+<p>con $f$ convexa y suave y $g$ convexa, quizá no diferenciable pero sencilla:
+una restricción, una norma $\ell_{1}$, una norma de grupos o la norma nuclear.
+Aplicarle el subgradiente a $f+g$ ignora esa separación y se queda en la tasa
+$O(1/\sqrt{k})$. Los métodos proximales tratan $g$ de forma implícita.</p></div></div>
+<p>En el resto del capítulo $\Hs$ es un espacio de Hilbert, $g\in\Gamma_{0}(\Hs)$ y
+$\lambda&gt;0$.</p>
+<div class="stmt definicion" id="general-c17:def-prox"><div class="head">Definición el operador proximal</div><div class="body"><p>El <span class="df">operador proximal</span> de $\lambda g$ es</p>
+<div class="display">\[
+  \prox_{\lambda g}(v)=\argmin_{x\in\Hs}\Bigl\{g(x)+\frac{1}{2\lambda}\norm{x-v}^{2}\Bigr\}.
+\]</div></div></div>
+<div class="stmt proposicion" id="general-c17:prop-existe"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para todo $v\in\Hs$ el mínimo de la definición existe y es único.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p95">Ver demostración</button><div class="proof" id="general-convexa-p95"><p>Por la proposición de la minorante afín, $g\ge\ip{a}{\cdot}+b$ para algún
+$a\in\Hs$, así que $g+\frac{1}{2\lambda}\norm{\cdot-v}^{2}$ es coerciva. Es
+convexa, s.c.i. y propia, y el teorema de existencia en un reflexivo da un
+minimizador. Es $\frac1\lambda$-fuertemente convexa, así que no hay dos.</p></div>
+<div class="stmt proposicion" id="general-c17:prop-caracterizacion"><div class="head">Proposición caracterización</div><div class="body"><div class="display">\[
+  p=\prox_{\lambda g}(v)
+  \iff 0\in\subdif g(p)+\frac{1}{\lambda}(p-v)
+  \iff \frac{v-p}{\lambda}\in\subdif g(p).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p96">Ver demostración</button><div class="proof" id="general-convexa-p96"><p>Es la regla de Fermat para $g+\frac{1}{2\lambda}\norm{\cdot-v}^{2}$, y la regla de
+la suma se aplica porque el segundo sumando es continuo en todo $\Hs$, con
+gradiente $\frac1\lambda(x-v)$.</p></div>
+<div class="stmt observacion" id="general-c17:obs-resolvente"><div class="head">Observación el resolvente<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La caracterización dice que $\prox_{\lambda g}=(\Id+\lambda\subdif g)^{-1}$, el
+<span class="df">resolvente</span> del operador monótono $\subdif g$. En particular
+$\Id+\lambda\subdif g$ es sobreyectivo.</p></div></div>
+<div class="stmt proposicion" id="general-c17:prop-firme"><div class="head">Proposición no expansividad firme<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $p=\prox_{\lambda g}(u)$ y $q=\prox_{\lambda g}(v)$, entonces
+$\norm{p-q}^{2}\le\ip{p-q}{u-v}$. Lo mismo vale para $\Id-\prox_{\lambda g}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p97">Ver demostración</button><div class="proof" id="general-convexa-p97"><p>Por la caracterización, $\frac{u-p}{\lambda}\in\subdif g(p)$ y
+$\frac{v-q}{\lambda}\in\subdif g(q)$, y la monotonía del subdiferencial da
+$\ip{(u-p)-(v-q)}{p-q}\ge0$. Para $\Id-\prox_{\lambda g}$ se desarrolla
+$\norm{(u-p)-(v-q)}^{2}=\norm{u-v}^{2}-2\ip{u-v}{p-q}+\norm{p-q}^{2}$ y se usa lo
+anterior.</p></div>
+<div class="stmt corolario" id="general-c17:cor-lipschitz"><div class="head">Corolario</div><div class="body"><p>$\norm{\prox_{\lambda g}(u)-\prox_{\lambda g}(v)}\le\norm{u-v}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p98">Ver demostración</button><div class="proof" id="general-convexa-p98"><p>Cauchy–Schwarz en la no expansividad firme.</p></div>
+<h3 id="general-convexa-x18">Ejemplos</h3>
+<div class="stmt ejemplo" id="general-c17:ej-indicadora"><div class="head">Ejemplo la indicadora</div><div class="body"><p>Si $C\subset\Hs$ es convexo, cerrado y no vacío,
+$\prox_{\lambda\delta_{C}}=\Proy_{C}$, para todo $\lambda$.</p></div></div>
+<div class="stmt ejemplo" id="general-c17:ej-umbral"><div class="head">Ejemplo el umbral suave</div><div class="body"><p>Sea $\Hs=\ell^{2}(I)$, con $I$ finito o numerable, y
+$g(x)=\tau\norm{x}_{1}=\tau\sum_{i}\abs{x_{i}}$, que vale $\infty$ fuera de
+$\ell^{1}(I)$. Entonces $g\in\Gamma_{0}(\Hs)$ y</p>
+<div class="display">\[
+  \bigl(\prox_{\lambda\tau\norm{\cdot}_{1}}(v)\bigr)_{i}=\operatorname{sgn}(v_{i})\max\{\abs{v_{i}}-\lambda\tau,0\}.
+\]</div>
+<p>Se escribe $S_{\lambda\tau}(v)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p99">Ver demostración</button><div class="proof" id="general-convexa-p99"><p>Para una suma de funciones de $\Gamma_{0}(\R)$ que se anulan en su mínimo $0$, el
+proximal se calcula coordenada a coordenada, y la suma está en $\Gamma_{0}$. En
+cada coordenada, con $a=\lambda\tau$, la caracterización
+$v-p\in a\,\subdif\abs{\cdot}(p)$ da $p=v-a$ si $v&gt;a$, $p=v+a$ si $v&lt;-a$ y $p=0$
+si $\abs{v}\le a$.</p></div>
+<div class="stmt ejemplo" id="general-c17:ej-norma2"><div class="head">Ejemplo la norma del espacio<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $g=\tau\norm{\cdot}$,</p>
+<div class="display">\[
+  \prox_{\lambda\tau\norm{\cdot}}(v)=\Bigl(1-\frac{\lambda\tau}{\max\{\norm{v},\lambda\tau\}}\Bigr)v .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p100">Ver demostración</button><div class="proof" id="general-convexa-p100"><p>Si $\norm{v}\le\lambda\tau$, $p=0$ cumple la caracterización porque
+$\subdif(\tau\norm{\cdot})(0)$ es la bola de radio $\tau$. Si no,
+$p=(1-\lambda\tau/\norm{v})v\neq0$ y
+$\frac{v-p}{\lambda}=\tau\frac{p}{\norm{p}}$, el gradiente de $\tau\norm{\cdot}$
+en $p$.</p></div>
+<div class="stmt ejemplo" id="general-c17:ej-elastic"><div class="head">Ejemplo <em>elastic net</em><sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En $\ell^{2}(I)$, para $g=\tau_{1}\norm{\cdot}_{1}+\frac{\tau_{2}}{2}\norm{\cdot}^{2}$,</p>
+<div class="display">\[
+  \prox_{\lambda g}(v)=\frac{1}{1+\lambda\tau_{2}}S_{\lambda\tau_{1}}(v).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p101">Ver demostración</button><div class="proof" id="general-convexa-p101"><p>Añadir $\frac{\tau_{2}}{2}\norm{\cdot}^{2}$ reescala:
+$\prox_{\lambda g}(v)=\prox_{c\lambda\tau_{1}\norm{\cdot}_{1}}(cv)$ con
+$c=(1+\lambda\tau_{2})^{-1}$, y $S_{ca}(cv)=c\,S_{a}(v)$.</p></div>
+<div class="stmt ejemplo" id="general-c17:ej-nuclear"><div class="head">Ejemplo la norma nuclear</div><div class="body"><p>En $\R^{m\times n}$ con el producto de Frobenius, la <span class="df">norma nuclear</span> es
+$\norm{X}_{*}=\sum_{i}\sigma_{i}(X)$, y si $X=U\Sigma V\trans$,</p>
+<div class="display">\[
+  \prox_{\lambda\tau\norm{\cdot}_{*}}(X)=U\operatorname{diag}\bigl((\sigma_{i}-\lambda\tau)_{+}\bigr)V\trans .
+\]</div></div></div>
+<div class="stmt ejemplo" id="general-c17:ej-lasso"><div class="head">Ejemplo Lasso</div><div class="body"><p>El problema $\min_{x\in\R^{n}}\frac12\norm{Ax-b}_{2}^{2}+\tau\norm{x}_{1}$ es
+compuesto, con $f(x)=\frac12\norm{Ax-b}_{2}^{2}$ suave y
+$g=\tau\norm{\cdot}_{1}$, cuyo proximal es el umbral suave.</p></div></div>
+<div class="stmt ejemplo" id="general-c17:ej-netflix"><div class="head">Ejemplo completar una matriz</div><div class="body"><p>Una matriz $A\in\R^{m\times n}$ de calificaciones, persona por película, se
+conoce solo en un conjunto $\Omega$ de entradas, y $P_{\Omega}$ conserva esas
+entradas y anula las demás. Si los gustos dependen de pocos factores, la matriz
+completa tiene rango bajo, y la norma nuclear es la relajación convexa del rango:</p>
+<div class="display">\[
+  \min_{X\in\R^{m\times n}}\ \frac12\norm{P_{\Omega}(X-A)}_{F}^{2}+\lambda\norm{X}_{*}.
+\]</div></div></div>
+<h3 id="general-convexa-x19">El método del punto proximal</h3>
+<div class="stmt definicion" id="general-c17:def-punto"><div class="head">Definición el punto proximal</div><div class="body"><p>Para $\min\varphi$ con $\varphi\in\Gamma_{0}(\Hs)$, dados $x_{0}$ y
+$\lambda_{k}&gt;0$, el <span class="df">método del punto proximal</span> genera
+$x_{k+1}=\prox_{\lambda_{k}\varphi}(x_{k})$.</p></div></div>
+<div class="stmt observacion" id="general-c17:obs-euler"><div class="head">Observación implícito contra explícito</div><div class="body"><p>Para el flujo $\dot{x}=-\nabla\varphi(x)$, Euler explícito es
+$x(t+h)=x(t)-h\nabla\varphi(x(t))$ e implícito
+$x(t+h)=x(t)-h\nabla\varphi(x(t+h))$. El punto proximal es el implícito:</p>
+<div class="display">\[
+  x_{k+1}=x_{k}-\lambda_{k}s_{k+1},\qquad s_{k+1}=\frac{x_{k}-x_{k+1}}{\lambda_{k}}\in\subdif\varphi(x_{k+1}),
+\]</div>
+<p>mientras que el subgradiente,
+$x_{k+1}=x_{k}-\lambda_{k}s_{k}$ con $s_{k}\in\subdif\varphi(x_{k})$, es el
+explícito. Son los pasos <em>backward</em> y <em>forward</em>.</p></div></div>
+<div class="stmt lema" id="general-c17:lem-proximal"><div class="head">Lema desigualdad proximal</div><div class="body"><p>Sea $x^{*}\in\argmin\varphi$ y $\varphi^{*}=\varphi(x^{*})$. Entonces</p>
+<div class="display">\[
+  \lambda_{k}\bigl(\varphi(x_{k+1})-\varphi^{*}\bigr)
+  \le\frac12\Bigl(\norm{x_{k}-x^{*}}^{2}-\norm{x_{k+1}-x^{*}}^{2}-\norm{x_{k+1}-x_{k}}^{2}\Bigr),
+\]</div>
+<p>y
+$\varphi(x_{k+1})+\frac{1}{2\lambda_{k}}\norm{x_{k+1}-x_{k}}^{2}\le\varphi(x_{k})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p102">Ver demostración</button><div class="proof" id="general-convexa-p102"><p>Como $s_{k+1}\in\subdif\varphi(x_{k+1})$,
+$\varphi(x_{k+1})-\varphi^{*}\le\ip{s_{k+1}}{x_{k+1}-x^{*}}$, y
+$2\ip{a-b}{b-c}=\norm{a-c}^{2}-\norm{b-c}^{2}-\norm{a-b}^{2}$ con $a=x_{k}$,
+$b=x_{k+1}$, $c=x^{*}$. La segunda compara el objetivo del subproblema en
+$x_{k+1}$ y en $x_{k}$.</p></div>
+<div class="stmt teorema" id="general-c17:teo-tasa"><div class="head">Teorema tasa del punto proximal</div><div class="body"><p>Sean $\Lambda_{N}=\sum_{k=0}^{N-1}\lambda_{k}$ y
+$\bar{x}_{N}=\frac{1}{\Lambda_{N}}\sum_{k=0}^{N-1}\lambda_{k}x_{k+1}$. Entonces</p>
+<div class="display">\[
+  \varphi(\bar{x}_{N})-\varphi^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2\Lambda_{N}}.
+\]</div>
+<p>Los valores $\varphi(x_{k})$ no crecen, y con paso constante
+$\varphi(x_{N})-\varphi^{*}\le\norm{x_{0}-x^{*}}^{2}/(2\lambda N)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p103">Ver demostración</button><div class="proof" id="general-convexa-p103"><p>Se suma la desigualdad proximal, se descartan los términos no positivos y se
+usa la desigualdad de Jensen. Con paso constante, como los valores no crecen,
+$N\lambda(\varphi(x_{N})-\varphi^{*})$ queda por debajo de la misma suma.</p></div>
+<div class="stmt proposicion" id="general-c17:prop-debil"><div class="head">Proposición convergencia de los iterados</div><div class="body"><p>Si $\sum_{k}\lambda_{k}=\infty$, entonces $\varphi(x_{k})\downarrow\min\varphi$ y
+$(x_{k})$ converge débilmente a un punto de $\argmin\varphi$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p104">Ver demostración</button><div class="proof" id="general-convexa-p104"><p>La desigualdad proximal da $\norm{x_{k+1}-x^{*}}\le\norm{x_{k}-x^{*}}$ para todo
+$x^{*}\in\argmin\varphi$, así que $\norm{x_{k}-x^{*}}$ converge. Como
+$\sum_{k}\lambda_{k}(\varphi(x_{k+1})-\varphi^{*})$ es finita y
+$\sum_{k}\lambda_{k}=\infty$, los valores, que no crecen, tienden a
+$\varphi^{*}$. Si $x_{k_{j}}\rightharpoonup\bar{x}$, como $\varphi$ es convexa y
+s.c.i. es débilmente s.c.i., y $\varphi(\bar{x})\le\varphi^{*}$. Basta el lema
+de Opial con $C=\argmin\varphi$.</p></div>
+<div class="stmt proposicion" id="general-c17:prop-contraccion"><div class="head">Proposición contracción bajo convexidad fuerte</div><div class="body"><p>Si $\varphi$ es $\mu$-fuertemente convexa,</p>
+<div class="display">\[
+  \norm{\prox_{\lambda\varphi}(u)-\prox_{\lambda\varphi}(v)}\le\frac{1}{1+\lambda\mu}\norm{u-v}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p105">Ver demostración</button><div class="proof" id="general-convexa-p105"><p>Con $p=\prox_{\lambda\varphi}(u)$ y $q=\prox_{\lambda\varphi}(v)$, la monotonía
+fuerte del subdiferencial de una fuertemente convexa da
+$\ip{(u-p)-(v-q)}{p-q}\ge\lambda\mu\norm{p-q}^{2}$, es decir
+$\ip{u-v}{p-q}\ge(1+\lambda\mu)\norm{p-q}^{2}$, y basta Cauchy–Schwarz.</p></div>
+<div class="stmt corolario" id="general-c17:cor-lineal"><div class="head">Corolario <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\varphi$ es $\mu$-fuertemente convexa y $\lambda_{k}=\lambda$,
+$\norm{x_{k}-x^{*}}\le(1+\lambda\mu)^{-k}\norm{x_{0}-x^{*}}$: el punto proximal
+converge linealmente, y en norma, a su único minimizador.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p106">Ver demostración</button><div class="proof" id="general-convexa-p106"><p>$x^{*}=\prox_{\lambda\varphi}(x^{*})$, porque $0\in\subdif\varphi(x^{*})$.</p></div>
+<h3 id="general-convexa-x20">La envolvente de Moreau</h3>
+<div class="stmt definicion" id="general-c17:def-moreau"><div class="head">Definición envolvente de Moreau</div><div class="body"><p>La <span class="df">envolvente de Moreau</span> de $g$ con parámetro $\lambda$ es</p>
+<div class="display">\[
+  \env{\lambda}{g}(v)=\min_{x\in\Hs}\Bigl\{g(x)+\frac{1}{2\lambda}\norm{x-v}^{2}\Bigr\}
+  =g\bigl(\prox_{\lambda g}(v)\bigr)+\frac{1}{2\lambda}\norm{v-\prox_{\lambda g}(v)}^{2}.
+\]</div>
+<p>Es la convolución ínfima de $g$ con $\frac{1}{2\lambda}\norm{\cdot}^{2}$.</p></div></div>
+<div class="stmt teorema" id="general-c17:teo-moreau"><div class="head">Teorema suavidad de la envolvente</div><div class="body"><p>$\env{\lambda}{g}:\Hs\to\R$ es convexa y Fréchet diferenciable, con</p>
+<div class="display">\[
+  \nabla\env{\lambda}{g}(v)=\frac{1}{\lambda}\bigl(v-\prox_{\lambda g}(v)\bigr),
+\]</div>
+<p>y ese gradiente es $\frac1\lambda$-Lipschitz.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p107">Ver demostración</button><div class="proof" id="general-convexa-p107"><p>Sean $p=\prox_{\lambda g}(v)$ y $q=\prox_{\lambda g}(u)$. Usando $p$ como
+competidor para $u$,</p>
+<div class="display">\[
+  \env{\lambda}{g}(u)\le\env{\lambda}{g}(v)+\Bigl\langle\frac{v-p}{\lambda},u-v\Bigr\rangle+\frac{1}{2\lambda}\norm{u-v}^{2},
+\]</div>
+<p>y con los papeles cambiados y $\ip{(u-q)-(v-p)}{u-v}\ge0$, que es la no
+expansividad, sale la misma cota por debajo con signo menos. Eso es la
+diferenciabilidad de Fréchet con ese gradiente. La constante de Lipschitz es la
+no expansividad de $\Id-\prox_{\lambda g}$, que es firme, y la monotonía del
+gradiente da la convexidad.</p></div>
+<div class="stmt observacion" id="general-c17:obs-moreau"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\env{\lambda}{g}\le g$, y las dos tienen los mismos minimizadores, porque
+$\nabla\env{\lambda}{g}(v)=0$ si y solo si $v=\prox_{\lambda g}(v)$, es decir
+$0\in\subdif g(v)$. Cuando $\lambda\downarrow0$, $\env{\lambda}{g}(v)\uparrow g(v)$
+en todo punto, y la constante $1/\lambda$ del gradiente empeora.</p></div></div>
+<div class="stmt teorema" id="general-c17:teo-identidad"><div class="head">Teorema identidad de Moreau<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para todo $v\in\Hs$,</p>
+<div class="display">\[
+  \prox_{\lambda g}(v)+\lambda\prox_{\lambda^{-1}g^{*}}(v/\lambda)=v,
+\]</div>
+<p>es decir, $\nabla\env{\lambda}{g}(v)=\prox_{\lambda^{-1}g^{*}}(v/\lambda)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p108">Ver demostración</button><div class="proof" id="general-convexa-p108"><p>Sean $p=\prox_{\lambda g}(v)$ e $y=(v-p)/\lambda\in\subdif g(p)$. Por la
+desigualdad de Fenchel–Young, $p\in\subdif g^{*}(y)$, y como
+$p=\lambda(v/\lambda-y)$, la caracterización aplicada a $g^{*}\in\Gamma_{0}(\Hs)$
+dice $y=\prox_{\lambda^{-1}g^{*}}(v/\lambda)$.</p></div>
+<div class="stmt observacion" id="general-c17:obs-identidad"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La conjugada de $\tau\norm{\cdot}$ es la indicadora de la bola de radio $\tau$,
+así que $\prox_{\lambda\tau\norm{\cdot}}(v)=v-\Proy_{\Ball(0;\lambda\tau)}(v)$,
+que es otra vez el ejemplo de la norma.</p></div></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -5325,7 +6354,194 @@ La primera es que Newton no es un método de primer orden: consulta $H(x)$, que
 está fuera del oráculo. La segunda es que aquella cota se construye con
 funciones cuyo gradiente revela una dirección nueva por consulta, de modo que en
 $\R^{n}$ solo muerde mientras $k&lt;n$, mientras que en un $\Hs$ de dimensión
-infinita muerde siempre.</p></div></div></section></div>
+infinita muerde siempre.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:subgradiente">Subgradiente y mirror descent</h2>
+<p>En las tres primeras secciones $\Hs$ es un espacio de Hilbert, que en dimensión
+finita es $\R^{n}$, $C\subset\Hs$ es convexo, cerrado y no vacío, y
+$f:\Hs\to\R$ es convexa y continua. Se escribe $X^{*}=\argmin_{x\in C}f$, que
+se supone no vacío, y $f^{*}=\min_{C}f$.</p>
+<div class="stmt definicion" id="ambas-c16:def-metodo"><div class="head">Definición el método del subgradiente proyectado</div><div class="body"><p>Dados $x_{0}\in C$ y $\alpha_{k}&gt;0$, el <span class="df">método del subgradiente proyectado</span>
+genera $x_{k+1}=\Proy_{C}(x_{k}-\alpha_{k}g_{k})$ con $g_{k}\in\subdif f(x_{k})$.</p></div></div>
+<div class="stmt observacion" id="ambas-c16:obs-oraculo-vacio"><div class="head">Observación el oráculo puede no tener nada que devolver</div><div class="body"><p>En $\R^{n}$ toda $f:\R^{n}\to\R$ convexa es continua, y su subdiferencial es no
+vacío en todo punto. En $\Hs$ de dimensión infinita no: un funcional lineal
+$\ell$ discontinuo es convexo y finito, y no tiene subgradientes en ningún
+punto, porque $u\in\subdif\ell(x)$ haría que el funcional lineal
+$\ell-\ip{u}{\cdot}$ estuviera acotado inferiormente, luego fuera nulo, y $\ell$
+sería continuo. Por eso aquí se pide $f$ continua, que para una $f$ finita
+equivale a pedirla s.c.i., y entonces $\subdif f(x)\neq\varnothing$ en todo
+punto.</p></div></div>
+<div class="stmt observacion" id="ambas-c16:obs-no-descenso"><div class="head">Observación un subgradiente no es una dirección de descenso</div><div class="body"><p>Para $f(x)=\abs{x_{1}}+2\abs{x_{2}}$ en $x=(1,0)$, el subgradiente $g=(1,2)$
+cumple $f(x-tg)=1+3t$ para $t\in(0,1)$. El método se mide con el mejor iterado
+o con promedios.</p></div></div>
+<div class="stmt lema" id="ambas-c16:lem-recurrencia"><div class="head">Lema recurrencia básica</div><div class="body"><p>Para $x^{*}\in X^{*}$,
+$\norm{x_{k+1}-x^{*}}^{2}\le\norm{x_{k}-x^{*}}^{2}-2\alpha_{k}(f(x_{k})-f^{*})+\alpha_{k}^{2}\norm{g_{k}}^{2}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c16:teo-cota"><div class="head">Teorema cota general y promediado</div><div class="body"><p>Si $\norm{g_{k}}\le M$, $A_{N}=\sum_{k&lt;N}\alpha_{k}$ y
+$\bar{x}_{N}=\frac{1}{A_{N}}\sum_{k&lt;N}\alpha_{k}x_{k}$, entonces</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}+M^{2}\sum_{k&lt;N}\alpha_{k}^{2}}{2A_{N}},
+\]</div>
+<p>y lo mismo $f_{N}^{\min}-f^{*}$, con $f_{N}^{\min}=\min_{k&lt;N}f(x_{k})$.</p></div></div>
+<div class="stmt observacion" id="ambas-c16:obs-promedio"><div class="head">Observación promedio o mejor iterado</div><div class="body"><p>El mejor iterado exige evaluar $f$; el promedio no, pero puede destruir la
+dispersión o el rango bajo de los iterados.</p></div></div>
+<h3 id="ambas-convexa-x15">Elección de los pasos</h3>
+<div class="stmt corolario" id="ambas-c16:cor-tasa"><div class="head">Corolario tasa $O(1/\sqrt{N})$</div><div class="body"><p>Si $\norm{x_{0}-x^{*}}\le R$ y $\alpha_{k}=R/(M\sqrt{N})$ para un horizonte $N$
+fijo, entonces $f(\bar{x}_{N})-f^{*}\le MR/\sqrt{N}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c16:obs-dimension-tasas"><div class="head">Observación las tasas no ven la dimensión</div><div class="body"><p>Todas las cotas de estas tres secciones se prueban con el producto interno, la
+no expansividad de la proyección, la desigualdad del subgradiente y la de
+Jensen, y valen en $\Hs$ tal cual. Garantizar $f(\bar{x}_{N})-f^{*}\le\varepsilon$
+pide $O(M^{2}R^{2}/\varepsilon^{2})$ llamadas al oráculo en cualquier dimensión,
+y el orden es óptimo para las convexas Lipschitz.</p></div></div>
+<div class="stmt corolario" id="ambas-c16:cor-decrecientes"><div class="head">Corolario pasos decrecientes</div><div class="body"><p>Si $\sum_{k}\alpha_{k}=\infty$ y $\sum_{k}\alpha_{k}^{2}&lt;\infty$, por ejemplo
+$\alpha_{k}=1/(k+1)^{p}$ con $p\in(\frac12,1]$, entonces $f_{N}^{\min}\to f^{*}$.
+Sin conocer el horizonte, un esquema por etapas de longitudes $1,2,4,\dots$
+conserva la tasa $O(1/\sqrt{N})$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c16:prop-polyak"><div class="head">Proposición el paso de Polyak</div><div class="body"><p>Con $\alpha_{k}=(f(x_{k})-f^{*})/\norm{g_{k}}^{2}$ la sucesión es Fejér monótona
+respecto de $X^{*}$, y si $\norm{g_{k}}\le M$,
+$\min_{k&lt;N}(f(x_{k})-f^{*})\le M\dist(x_{0},X^{*})/\sqrt{N}$.</p></div></div>
+<h3 id="ambas-convexa-x16">El caso fuertemente convexo</h3>
+<div class="stmt lema" id="ambas-c16:lem-fuerte"><div class="head">Lema</div><div class="body"><p>Si $f$ es $\mu$-fuertemente convexa y $g\in\subdif f(x)$, entonces
+$f(y)\ge f(x)+\ip{g}{y-x}+\frac{\mu}{2}\norm{y-x}^{2}$, y el subdiferencial es
+$\mu$-fuertemente monótono.</p></div></div>
+<div class="stmt teorema" id="ambas-c16:teo-fuerte"><div class="head">Teorema subgradiente bajo convexidad fuerte</div><div class="body"><p>Si $f$ es $\mu$-fuertemente convexa, $\norm{g_{k}}\le M$,
+$\alpha_{k}=\frac{2}{\mu(k+1)}$ desde $k=1$ y
+$\hat{x}_{N}=\frac{2}{N(N+1)}\sum_{k=1}^{N}k\,x_{k}$, entonces
+$f(\hat{x}_{N})-f^{*}\le\frac{2M^{2}}{\mu(N+1)}$.</p></div></div>
+<h3 id="ambas-convexa-x17">Geometría de Bregman</h3>
+<div class="stmt proposicion" id="ambas-c16:prop-subproblema"><div class="head">Proposición la proyección es un subproblema</div><div class="body"><p>$x_{k+1}=\argmin_{x\in C}\bigl\{\alpha_{k}\ip{g_{k}}{x}+\frac12\norm{x-x_{k}}^{2}\bigr\}$.</p></div></div>
+<p>A partir de aquí $E$ es un Banach con norma $\norm{\cdot}$, su dual lleva
+$\norm{g}_{*}=\sup_{\norm{x}\le1}\ip{g}{x}$, y $h:C\to\R$ es
+$\sigma$-fuertemente convexa respecto de $\norm{\cdot}$ en el conjunto $C_{h}$
+donde es Gâteaux diferenciable.</p>
+<div class="stmt definicion" id="ambas-c16:def-bregman"><div class="head">Definición divergencia de Bregman</div><div class="body"><p>$D_{h}(x,y)=h(x)-h(y)-\ip{\nabla h(y)}{x-y}$ para $x\in C$, $y\in C_{h}$. Cumple
+$D_{h}(x,y)\ge\frac{\sigma}{2}\norm{x-y}^{2}$, y no es simétrica ni cumple la
+desigualdad triangular.</p></div></div>
+<div class="stmt lema" id="ambas-c16:lem-tres-puntos"><div class="head">Lema identidad de los tres puntos</div><div class="body"><p>$\ip{\nabla h(u)-\nabla h(v)}{w-u}=D_{h}(w,v)-D_{h}(w,u)-D_{h}(u,v)$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c16:ej-euclidea"><div class="head">Ejemplo la geometría hilbertiana</div><div class="body"><p>En $\Hs$, $h=\frac12\norm{\cdot}^{2}$ da $D_{h}(x,y)=\frac12\norm{x-y}^{2}$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c16:ej-entropia"><div class="head">Ejemplo la entropía negativa</div><div class="body"><p>En el símplex $\simplex_{n}$, $h(x)=\sum_{i}x_{i}\log x_{i}$ da la divergencia
+de Kullback–Leibler $D_{h}(x,y)=\sum_{i}x_{i}\log(x_{i}/y_{i})$, y por la
+<span class="df">desigualdad de Pinsker</span>,
+$D_{h}(x,y)\ge\frac12\norm{x-y}_{1}^{2}$, con la misma constante para todo
+$n$. Localmente $D_{h}(x+d,x)=\frac12\sum_{i}d_{i}^{2}/x_{i}+o(\norm{d}^{2})$.</p></div></div>
+<h3 id="ambas-convexa-x18">Mirror descent</h3>
+<div class="stmt definicion" id="ambas-c16:def-mirror"><div class="head">Definición mirror descent</div><div class="body"><p>Para $f:E\to\R\cup\{\infty\}$ convexa, el método de <span class="df">mirror descent</span> genera
+$x_{k+1}\in\argmin_{x\in C}\{\alpha_{k}\ip{g_{k}}{x}+D_{h}(x,x_{k})\}$ con
+$g_{k}\in\subdif f(x_{k})\subset E^{*}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c16:obs-espejo"><div class="head">Observación el espejo es el teorema de Riesz</div><div class="body"><p>Sin restricción, el paso es $\nabla h(x_{k+1})=\nabla h(x_{k})-\alpha_{k}g_{k}$,
+una igualdad en $E^{*}$. En un Banach el paso $x-\alpha g$ del capítulo 13 no
+tiene sentido, porque $g$ vive en $E^{*}$ y no en $E$; mirror descent lo
+resuelve dando el paso en el dual y volviendo con $(\nabla h)^{-1}$. En $\Hs$ con
+$h=\frac12\norm{\cdot}^{2}$ el espejo $\nabla h$ es la identificación de Riesz,
+y el método es el subgradiente proyectado. Lo que hay de nuevo aquí es
+justamente lo que la dimensión finita y el producto interno esconden: que el
+subgradiente es un funcional y no un vector.</p></div></div>
+<div class="stmt lema" id="ambas-c16:lem-un-paso"><div class="head">Lema desigualdad de un paso</div><div class="body"><p>Para todo $x\in C$,
+$\alpha_{k}\ip{g_{k}}{x_{k}-x}\le D_{h}(x,x_{k})-D_{h}(x,x_{k+1})+\frac{\alpha_{k}^{2}}{2\sigma}\norm{g_{k}}_{*}^{2}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c16:teo-mirror"><div class="head">Teorema tasa de mirror descent</div><div class="body"><p>Si $\norm{g_{k}}_{*}\le M$, $D_{h}(x^{*},x_{0})\le R_{h}^{2}$ y
+$\alpha_{k}=\sqrt{2\sigma}R_{h}/(M\sqrt{N})$, el promedio ponderado cumple
+$f(\bar{x}_{N})-f^{*}\le MR_{h}\sqrt{2/(\sigma N)}$.</p></div></div>
+<h3 id="ambas-convexa-x19">Entropía y símplex</h3>
+<div class="stmt proposicion" id="ambas-c16:prop-exponenciado"><div class="head">Proposición gradiente exponenciado</div><div class="body"><p>En $E=(\R^{n},\norm{\cdot}_{1})$, con $C=\simplex_{n}$ y la entropía, el paso es
+$x_{k+1,i}=x_{k,i}e^{-\alpha_{k}g_{k,i}}/\sum_{j}x_{k,j}e^{-\alpha_{k}g_{k,j}}$,
+y si $\norm{g_{k}}_{\infty}\le M$ y $x_{0}=\frac1n\1$,</p>
+<div class="display">\[
+  f(\bar{x}_{N})-f^{*}\le M\sqrt{\frac{2\log n}{N}} .
+\]</div></div></div>
+<div class="stmt observacion" id="ambas-c16:obs-simplex-infinito"><div class="head">Observación el símplex infinito no tiene centro</div><div class="body"><p>La cota usa $D_{h}(x,\frac1n\1)\le\log n$, y $\log n$ es el precio de la
+dimensión. En el símplex de las sucesiones de probabilidad,
+$\simplex_{\infty}\subset\ell^{1}$, no hay distribución uniforme, y para todo
+$x_{0}\in\simplex_{\infty}$ el radio es infinito:
+$D_{h}(e_{i},x_{0})=\log(1/x_{0,i})$, y $x_{0,i}\to0$. La entropía cambia una
+dependencia $\sqrt{n}$ por $\sqrt{\log n}$, que es mucho mejor, pero no por una
+constante.</p></div></div>
+<h3 id="ambas-convexa-x20">Multiplicative weights</h3>
+<div class="stmt proposicion" id="ambas-c16:prop-mw"><div class="head">Proposición multiplicative weights</div><div class="body"><p>Con pérdidas $\norm{\ell_{k}}_{\infty}\le M$, el paso entrópico desde
+$x_{0}=\frac1n\1$ tiene arrepentimiento
+$\sum_{k&lt;N}\ip{\ell_{k}}{x_{k}-u}\le\frac{\log n}{\eta}+\frac{\eta M^{2}N}{2}$
+frente a todo $u\in\simplex_{n}$, que con el $\eta$ óptimo es
+$M\sqrt{2N\log n}$.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:proximal">Métodos proximales</h2>
+<div class="stmt observacion" id="ambas-c17:obs-compuesto"><div class="head">Observación el problema compuesto</div><div class="body"><p>Muchos problemas son $\min f+g$ con $f$ convexa y suave y $g$ convexa y
+sencilla pero quizá no diferenciable. El subgradiente sobre $f+g$ se queda en
+$O(1/\sqrt{k})$; los métodos proximales tratan $g$ de forma implícita.</p></div></div>
+<p>En el resto del capítulo $\Hs$ es un espacio de Hilbert, que en dimensión finita
+es $\R^{n}$, $g\in\Gamma_{0}(\Hs)$ y $\lambda&gt;0$.</p>
+<div class="stmt definicion" id="ambas-c17:def-prox"><div class="head">Definición el operador proximal</div><div class="body"><p>$\prox_{\lambda g}(v)=\argmin_{x\in\Hs}\bigl\{g(x)+\frac{1}{2\lambda}\norm{x-v}^{2}\bigr\}$,
+que existe y es único para todo $v$.</p></div></div>
+<div class="stmt observacion" id="ambas-c17:obs-existencia"><div class="head">Observación de dónde sale el minimizador</div><div class="body"><p>El objetivo es coercivo, porque $g$ tiene una minorante afín, y
+$\frac1\lambda$-fuertemente convexo. En $\R^{n}$ eso basta con Weierstrass,
+porque las bolas son compactas. En $\Hs$ no lo son, y el minimizador lo da el
+teorema de existencia en un reflexivo: la convexidad hace que la
+semicontinuidad inferior sobreviva al paso a la topología débil, donde las bolas
+sí son compactas. Es el mismo cambio que en la proyección y en el capítulo de
+existencia.</p></div></div>
+<div class="stmt proposicion" id="ambas-c17:prop-caracterizacion"><div class="head">Proposición caracterización</div><div class="body"><p>$p=\prox_{\lambda g}(v)$ si y solo si $\frac{v-p}{\lambda}\in\subdif g(p)$. Es
+decir, $\prox_{\lambda g}=(\Id+\lambda\subdif g)^{-1}$, el <span class="df">resolvente</span> de
+$\subdif g$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c17:prop-firme"><div class="head">Proposición no expansividad firme</div><div class="body"><p>$\norm{p-q}^{2}\le\ip{p-q}{u-v}$ para $p=\prox_{\lambda g}(u)$ y
+$q=\prox_{\lambda g}(v)$, y lo mismo para $\Id-\prox_{\lambda g}$. En particular
+$\prox_{\lambda g}$ es $1$-Lipschitz.</p></div></div>
+<h3 id="ambas-convexa-x21">Ejemplos</h3>
+<div class="stmt ejemplo" id="ambas-c17:ej-indicadora"><div class="head">Ejemplo la indicadora</div><div class="body"><p>$\prox_{\lambda\delta_{C}}=\Proy_{C}$ para todo $C$ convexo, cerrado y no vacío.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c17:ej-umbral"><div class="head">Ejemplo el umbral suave</div><div class="body"><p>En $\ell^{2}(I)$, para $g=\tau\norm{\cdot}_{1}$,
+$\bigl(\prox_{\lambda\tau\norm{\cdot}_{1}}(v)\bigr)_{i}=\operatorname{sgn}(v_{i})\max\{\abs{v_{i}}-\lambda\tau,0\}$,
+que se escribe $S_{\lambda\tau}(v)$.</p></div></div>
+<div class="stmt observacion" id="ambas-c17:obs-l1"><div class="head">Observación la norma $\ell^{1}$ dentro de $\ell^{2}$</div><div class="body"><p>En $\R^{n}$, $\tau\norm{\cdot}_{1}$ es una norma más, finita y continua. En
+$\ell^{2}$ vale $\infty$ fuera de $\ell^{1}$, que es un subespacio denso y de
+interior vacío: la función es discontinua en todos los puntos de su dominio, y
+aun así está en $\Gamma_{0}(\ell^{2})$ y su proximal es el mismo umbral suave,
+coordenada a coordenada. Y el umbral hace algo más fuerte que en dimensión
+finita: como $v\in\ell^{2}$ cumple $v_{i}\to0$, solo una cantidad finita de
+coordenadas pasa de $\lambda\tau$, así que $\prox_{\lambda\tau\norm{\cdot}_{1}}(v)$
+tiene <em>soporte finito</em>. La dispersión se vuelve finitud.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c17:ej-norma2"><div class="head">Ejemplo la norma y el <em>elastic net</em></div><div class="body"><p>$\prox_{\lambda\tau\norm{\cdot}}(v)=\bigl(1-\lambda\tau/\max\{\norm{v},\lambda\tau\}\bigr)v$,
+y en $\ell^{2}(I)$, para
+$g=\tau_{1}\norm{\cdot}_{1}+\frac{\tau_{2}}{2}\norm{\cdot}^{2}$,
+$\prox_{\lambda g}(v)=\frac{1}{1+\lambda\tau_{2}}S_{\lambda\tau_{1}}(v)$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c17:ej-nuclear"><div class="head">Ejemplo la norma nuclear</div><div class="body"><p>En $\R^{m\times n}$, si $X=U\Sigma V\trans$,
+$\prox_{\lambda\tau\norm{\cdot}_{*}}(X)=U\operatorname{diag}\bigl((\sigma_{i}-\lambda\tau)_{+}\bigr)V\trans$:
+el umbral suave sobre los valores singulares. Es un enunciado sobre matrices y se
+queda en dimensión finita.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c17:ej-lasso"><div class="head">Ejemplo Lasso y completar una matriz</div><div class="body"><p>$\min\frac12\norm{Ax-b}_{2}^{2}+\tau\norm{x}_{1}$ y
+$\min\frac12\norm{P_{\Omega}(X-A)}_{F}^{2}+\lambda\norm{X}_{*}$ son compuestos, con
+proximales explícitos: el umbral suave y el umbral sobre los valores singulares.
+El segundo es la relajación convexa de completar con rango bajo una matriz de
+calificaciones observada en las entradas $\Omega$.</p></div></div>
+<h3 id="ambas-convexa-x22">El método del punto proximal</h3>
+<div class="stmt definicion" id="ambas-c17:def-punto"><div class="head">Definición el punto proximal</div><div class="body"><p>Para $\varphi\in\Gamma_{0}(\Hs)$, $x_{k+1}=\prox_{\lambda_{k}\varphi}(x_{k})$. Es
+Euler implícito para $\dot{x}=-\nabla\varphi(x)$, con el subgradiente evaluado en
+el punto nuevo, mientras que el subgradiente es Euler explícito.</p></div></div>
+<div class="stmt teorema" id="ambas-c17:teo-tasa"><div class="head">Teorema tasa del punto proximal</div><div class="body"><p>Los valores no crecen, $\varphi(\bar{x}_{N})-\varphi^{*}\le\norm{x_{0}-x^{*}}^{2}/(2\Lambda_{N})$
+con $\Lambda_{N}=\sum_{k&lt;N}\lambda_{k}$, y con paso constante
+$\varphi(x_{N})-\varphi^{*}\le\norm{x_{0}-x^{*}}^{2}/(2\lambda N)$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c17:prop-debil"><div class="head">Proposición convergencia de los iterados</div><div class="body"><p>Si $\sum_{k}\lambda_{k}=\infty$, la sucesión es Fejér monótona respecto de
+$\argmin\varphi$, y:</p>
+<ol class="lista"><li><p>en $\R^{n}$, $(x_{k})$ converge a un minimizador;</p></li><li><p>en $\Hs$, $(x_{k})$ converge débilmente a un minimizador.</p></li></ol></div></div>
+<div class="stmt observacion" id="ambas-c17:obs-debil"><div class="head">Observación otra vez la débil</div><div class="body"><p>Es el mismo fenómeno que en el método del gradiente: la prueba en $\R^{n}$ extrae
+una subsucesión convergente de una sucesión acotada, y en $\Hs$ solo hay
+subsucesiones débilmente convergentes, que el lema de Opial convierte en
+convergencia débil de toda la sucesión. La prueba no da convergencia en norma.</p></div></div>
+<div class="stmt proposicion" id="ambas-c17:prop-contraccion"><div class="head">Proposición contracción bajo convexidad fuerte</div><div class="body"><p>Si $\varphi$ es $\mu$-fuertemente convexa,
+$\prox_{\lambda\varphi}$ es $\frac{1}{1+\lambda\mu}$-Lipschitz, y con paso
+constante $\norm{x_{k}-x^{*}}\le(1+\lambda\mu)^{-k}\norm{x_{0}-x^{*}}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c17:obs-fuerte"><div class="head">Observación y la convexidad fuerte la devuelve</div><div class="body"><p>La contracción es en norma, así que con convexidad fuerte los iterados
+convergen en norma también en $\Hs$, y linealmente. Igual que en el capítulo
+del gradiente, la convexidad fuerte recupera lo que la dimensión infinita
+quitaba.</p></div></div>
+<h3 id="ambas-convexa-x23">La envolvente de Moreau</h3>
+<div class="stmt definicion" id="ambas-c17:def-moreau"><div class="head">Definición envolvente de Moreau</div><div class="body"><p>$\env{\lambda}{g}(v)=\min_{x\in\Hs}\bigl\{g(x)+\frac{1}{2\lambda}\norm{x-v}^{2}\bigr\}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c17:teo-moreau"><div class="head">Teorema suavidad de la envolvente</div><div class="body"><p>$\env{\lambda}{g}$ es convexa, finita y Fréchet diferenciable en todo $\Hs$, con
+$\nabla\env{\lambda}{g}=\frac1\lambda(\Id-\prox_{\lambda g})$, que es
+$\frac1\lambda$-Lipschitz. Tiene los mismos minimizadores que $g$ y
+$\env{\lambda}{g}\le g$.</p></div></div>
+<div class="stmt observacion" id="ambas-c17:obs-envolvente"><div class="head">Observación la envolvente no pide nada a $g$</div><div class="body"><p>El teorema vale igual en $\R^{n}$ y en $\Hs$, y lo notable en dimensión infinita
+es lo poco que pide. Para $g=\tau\norm{\cdot}_{1}$ en $\ell^{2}$, que vale $\infty$
+en un subconjunto denso y no es continua en ningún punto de su dominio,
+$\env{\lambda}{g}$ es finita en todo $\ell^{2}$ y con gradiente Lipschitz: en
+cada coordenada es la función de Huber.</p></div></div>
+<div class="stmt teorema" id="ambas-c17:teo-identidad"><div class="head">Teorema identidad de Moreau</div><div class="body"><p>$\prox_{\lambda g}(v)+\lambda\prox_{\lambda^{-1}g^{*}}(v/\lambda)=v$, es decir
+$\nabla\env{\lambda}{g}(v)=\prox_{\lambda^{-1}g^{*}}(v/\lambda)$. En particular
+el proximal de una norma es la identidad menos la proyección sobre una bola de
+la norma dual.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
