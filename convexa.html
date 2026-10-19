@@ -228,6 +228,16 @@ button.term{
 
 .display{overflow-x:auto; overflow-y:hidden; margin:1.1em 0; padding:.15em 0}
 
+/* Tablas de \begin{tabular}, con filetes a la manera de booktabs. El
+   contenedor hace scroll en pantallas estrechas en vez de desbordar. */
+.tabla{overflow-x:auto; margin:1em 0}
+.tabla table{border-collapse:collapse; margin:0 auto;
+  border-top:1.5px solid currentColor; border-bottom:1.5px solid currentColor}
+.tabla th{font-weight:600; text-align:left; border-bottom:1px solid currentColor}
+.tabla th, .tabla td{padding:.3em .8em; text-align:left; vertical-align:top}
+.centro{text-align:center}
+.centro .tabla table{text-align:left}
+
 /* Las dos ramas de \fin y \displayfin. Se emiten LAS DOS y se ensena una:
    es lo que permite conmutar la notacion en el navegador sin volver a
    generar nada. Una nota sin \fin no produce ni un .v, y entonces el
@@ -2464,34 +2474,24 @@ acumulación es estacionario, y en el caso convexo eso es óptimo.</p></div></di
 <h3 id="clase-convexa-x15">Comparación</h3>
 <div class="stmt observacion" id="clase-c15:obs-tabla"><div class="head">Observación</div><div class="body"><p>Con $\kappa=L/\mu$, y midiendo cuántas iteraciones hacen falta para
 $f(x_{k})-f^{*}\le\varepsilon$:</p>
-<p>\begin{tabular}{@{}lll@{}}
-\toprule
-Método &amp; Iteraciones &amp; Condiciones \\
-\midrule
-Gradiente          &amp; $O\bigl(\frac1\varepsilon\bigr)$                        &amp; $L$-suave \\
-Nesterov           &amp; $O\bigl(\frac{1}{\sqrt\varepsilon}\bigr)$               &amp; $L$-suave \\
-Gradiente          &amp; $O\bigl(\kappa\log\frac1\varepsilon\bigr)$              &amp; $L$-suave y $\mu$-fuerte \\
-Nesterov           &amp; $O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$         &amp; $L$-suave y $\mu$-fuerte \\
-Newton             &amp; $O\bigl(\log\log\frac1\varepsilon\bigr)$                &amp; $H$ $\rho$-Lipschitz, $H\succeq mI$, \\
-                   &amp;                                                         &amp; y $\theta_{0}&lt;1$ \\
-\bottomrule
-\end{tabular}</p>
+<div class="centro"><div class="tabla"><table><tr><th>Método</th><th>Iteraciones</th><th>Condiciones</th></tr>
+<tr><td>Gradiente</td><td>$O\bigl(\frac1\varepsilon\bigr)$</td><td>$L$-suave</td></tr>
+<tr><td>Nesterov</td><td>$O\bigl(\frac{1}{\sqrt\varepsilon}\bigr)$</td><td>$L$-suave</td></tr>
+<tr><td>Gradiente</td><td>$O\bigl(\kappa\log\frac1\varepsilon\bigr)$</td><td>$L$-suave y $\mu$-fuerte</td></tr>
+<tr><td>Nesterov</td><td>$O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$</td><td>$L$-suave y $\mu$-fuerte</td></tr>
+<tr><td>Newton</td><td>$O\bigl(\log\log\frac1\varepsilon\bigr)$</td><td>$H$ $\rho$-Lipschitz, $H\succeq mI$,</td></tr>
+<tr><td></td><td></td><td>y $\theta_{0}&lt;1$</td></tr></table></div></div>
 <p>La última fila no es comparable con las otras cuatro: es local, y su hipótesis
 $\theta_{0}=\frac{\rho}{2m}\norm{x_{0}-x^{*}}&lt;1$ habla del punto de partida y no
 solo de la función. Newton amortiguado cierra esa brecha, a cambio de una fase
 previa cuya longitud depende de $f(x_{0})-f^{*}$.</p></div></div>
 <div class="stmt observacion" id="clase-c15:obs-tabla-recursos"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Contar iteraciones tampoco basta, porque cuestan cosas distintas:</p>
-<p>\begin{tabular}{@{}llp{2.5cm}@{}}
-\toprule
-Método &amp; Por iteración &amp; Memoria \\
-\midrule
-Newton directo        &amp; gradiente y Hessiana        &amp; $O(n^{2})$, menos si es dispersa \\
-Newton-CG             &amp; gradiente y productos $Hv$  &amp; la del precondicionador \\
-BFGS                  &amp; gradientes                  &amp; $O(n^{2})$ \\
-L-BFGS                &amp; gradientes                  &amp; $O(mn)$ \\
-Región de confianza   &amp; modelo cuadrático           &amp; variable \\
-\bottomrule
-\end{tabular}</p>
+<div class="centro"><div class="tabla"><table><tr><th>Método</th><th>Por iteración</th><th>Memoria</th></tr>
+<tr><td>Newton directo</td><td>gradiente y Hessiana</td><td>$O(n^{2})$, menos si es dispersa</td></tr>
+<tr><td>Newton-CG</td><td>gradiente y productos $Hv$</td><td>la del precondicionador</td></tr>
+<tr><td>BFGS</td><td>gradientes</td><td>$O(n^{2})$</td></tr>
+<tr><td>L-BFGS</td><td>gradientes</td><td>$O(mn)$</td></tr>
+<tr><td>Región de confianza</td><td>modelo cuadrático</td><td>variable</td></tr></table></div></div>
 <p>Los métodos de primer orden salen a cuenta cuando basta precisión moderada o
 cuando una factorización es prohibitiva; Newton y sus variantes, cuando se
 quiere precisión alta y la estructura lineal se puede explotar.</p></div></div></section>
@@ -2946,15 +2946,9 @@ es</p>
   x_{k+1}=x_{k}-\lambda_{k}s_{k+1},\qquad s_{k+1}=\frac{x_{k}-x_{k+1}}{\lambda_{k}}\in\subdif\varphi(x_{k+1}),
 \]</div>
 <p>con el subgradiente evaluado en el punto nuevo:</p>
-<p>\begin{tabular}{ll}
-\toprule
-Implícito (<em>backward</em>) &amp; Explícito (<em>forward</em>) \\
-\midrule
-Punto proximal &amp; Subgradiente \\
-$x_{k+1}=x_{k}-\lambda_{k}s_{k+1}$, $s_{k+1}\in\subdif\varphi(x_{k+1})$ &amp;
-$x_{k+1}=x_{k}-\lambda_{k}s_{k}$, $s_{k}\in\subdif\varphi(x_{k})$ \\
-\bottomrule
-\end{tabular}</p></div></div>
+<div class="centro"><div class="tabla"><table><tr><th>Implícito (<em>backward</em>)</th><th>Explícito (<em>forward</em>)</th></tr>
+<tr><td>Punto proximal</td><td>Subgradiente</td></tr>
+<tr><td>$x_{k+1}=x_{k}-\lambda_{k}s_{k+1}$, $s_{k+1}\in\subdif\varphi(x_{k+1})$</td><td>$x_{k+1}=x_{k}-\lambda_{k}s_{k}$, $s_{k}\in\subdif\varphi(x_{k})$</td></tr></table></div></div></div></div>
 <div class="stmt lema" id="clase-c17:lem-proximal"><div class="head">Lema desigualdad proximal</div><div class="body"><p>Sea $x^{*}\in\argmin\varphi$ y $\varphi^{*}=\varphi(x^{*})$. Entonces</p>
 <div class="display">\[
   \lambda_{k}\bigl(\varphi(x_{k+1})-\varphi^{*}\bigr)
@@ -4790,18 +4784,13 @@ Cauchy,</p>
 <h3 id="general-convexa-x11">Comparación</h3>
 <div class="stmt observacion" id="general-c15:obs-tabla"><div class="head">Observación</div><div class="body"><p>Con $\kappa=L/\mu$, y midiendo cuántas iteraciones hacen falta para
 $f(x_{k})-f^{*}\le\varepsilon$:</p>
-<p>\begin{tabular}{@{}lll@{}}
-\toprule
-Método &amp; Iteraciones &amp; Condiciones \\
-\midrule
-Gradiente          &amp; $O\bigl(\frac1\varepsilon\bigr)$                        &amp; $L$-suave \\
-Nesterov           &amp; $O\bigl(\frac{1}{\sqrt\varepsilon}\bigr)$               &amp; $L$-suave \\
-Gradiente          &amp; $O\bigl(\kappa\log\frac1\varepsilon\bigr)$              &amp; $L$-suave y $\mu$-fuerte \\
-Nesterov           &amp; $O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$         &amp; $L$-suave y $\mu$-fuerte \\
-Newton             &amp; $O\bigl(\log\log\frac1\varepsilon\bigr)$                &amp; $H$ $\rho$-Lipschitz, $H\succeq mI$, \\
-                   &amp;                                                         &amp; y $\theta_{0}&lt;1$ \\
-\bottomrule
-\end{tabular}</p>
+<div class="centro"><div class="tabla"><table><tr><th>Método</th><th>Iteraciones</th><th>Condiciones</th></tr>
+<tr><td>Gradiente</td><td>$O\bigl(\frac1\varepsilon\bigr)$</td><td>$L$-suave</td></tr>
+<tr><td>Nesterov</td><td>$O\bigl(\frac{1}{\sqrt\varepsilon}\bigr)$</td><td>$L$-suave</td></tr>
+<tr><td>Gradiente</td><td>$O\bigl(\kappa\log\frac1\varepsilon\bigr)$</td><td>$L$-suave y $\mu$-fuerte</td></tr>
+<tr><td>Nesterov</td><td>$O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$</td><td>$L$-suave y $\mu$-fuerte</td></tr>
+<tr><td>Newton</td><td>$O\bigl(\log\log\frac1\varepsilon\bigr)$</td><td>$H$ $\rho$-Lipschitz, $H\succeq mI$,</td></tr>
+<tr><td></td><td></td><td>y $\theta_{0}&lt;1$</td></tr></table></div></div>
 <p>Ninguna de las cinco depende de la dimensión. La última fila no es comparable
 con las otras cuatro: es local, y su hipótesis
 $\theta_{0}=\frac{\rho}{2m}\norm{x_{0}-x^{*}}&lt;1$ habla del punto de partida y no
@@ -6332,18 +6321,13 @@ compacta. Es el mismo cambio de topología que hizo falta para la existencia de
 minimizadores, y aquí reaparece por tercera vez.</p></div></div>
 <h3 id="ambas-convexa-x14">Comparación</h3>
 <div class="stmt observacion" id="ambas-c15:obs-tabla"><div class="head">Observación</div><div class="body"><p>Con $\kappa=L/\mu$, iteraciones para $f(x_{k})-f^{*}\le\varepsilon$:</p>
-<p>\begin{tabular}{@{}lll@{}}
-\toprule
-Método &amp; Iteraciones &amp; Condiciones \\
-\midrule
-Gradiente          &amp; $O\bigl(\frac1\varepsilon\bigr)$                        &amp; $L$-suave \\
-Nesterov           &amp; $O\bigl(\frac{1}{\sqrt\varepsilon}\bigr)$               &amp; $L$-suave \\
-Gradiente          &amp; $O\bigl(\kappa\log\frac1\varepsilon\bigr)$              &amp; $L$-suave y $\mu$-fuerte \\
-Nesterov           &amp; $O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$         &amp; $L$-suave y $\mu$-fuerte \\
-Newton             &amp; $O\bigl(\log\log\frac1\varepsilon\bigr)$                &amp; $H$ $\rho$-Lipschitz, $H\succeq mI$, \\
-                   &amp;                                                         &amp; y $\theta_{0}&lt;1$ \\
-\bottomrule
-\end{tabular}</p>
+<div class="centro"><div class="tabla"><table><tr><th>Método</th><th>Iteraciones</th><th>Condiciones</th></tr>
+<tr><td>Gradiente</td><td>$O\bigl(\frac1\varepsilon\bigr)$</td><td>$L$-suave</td></tr>
+<tr><td>Nesterov</td><td>$O\bigl(\frac{1}{\sqrt\varepsilon}\bigr)$</td><td>$L$-suave</td></tr>
+<tr><td>Gradiente</td><td>$O\bigl(\kappa\log\frac1\varepsilon\bigr)$</td><td>$L$-suave y $\mu$-fuerte</td></tr>
+<tr><td>Nesterov</td><td>$O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$</td><td>$L$-suave y $\mu$-fuerte</td></tr>
+<tr><td>Newton</td><td>$O\bigl(\log\log\frac1\varepsilon\bigr)$</td><td>$H$ $\rho$-Lipschitz, $H\succeq mI$,</td></tr>
+<tr><td></td><td></td><td>y $\theta_{0}&lt;1$</td></tr></table></div></div>
 <p>Ninguna de las cinco filas depende de la dimensión, y la última no es comparable
 con las otras cuatro: es local, y su condición $\theta_{0}&lt;1$ habla del punto de
 partida y no solo de la función.</p></div></div>

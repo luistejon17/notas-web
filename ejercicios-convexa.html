@@ -228,6 +228,16 @@ button.term{
 
 .display{overflow-x:auto; overflow-y:hidden; margin:1.1em 0; padding:.15em 0}
 
+/* Tablas de \begin{tabular}, con filetes a la manera de booktabs. El
+   contenedor hace scroll en pantallas estrechas en vez de desbordar. */
+.tabla{overflow-x:auto; margin:1em 0}
+.tabla table{border-collapse:collapse; margin:0 auto;
+  border-top:1.5px solid currentColor; border-bottom:1.5px solid currentColor}
+.tabla th{font-weight:600; text-align:left; border-bottom:1px solid currentColor}
+.tabla th, .tabla td{padding:.3em .8em; text-align:left; vertical-align:top}
+.centro{text-align:center}
+.centro .tabla table{text-align:left}
+
 /* Las dos ramas de \fin y \displayfin. Se emiten LAS DOS y se ensena una:
    es lo que permite conmutar la notacion en el navegador sin volver a
    generar nada. Una nota sin \fin no produce ni un .v, y entonces el
@@ -978,17 +988,12 @@ note que</p>
 $\Rightarrow \operatorname{int}(\PSD{n}) = \{A \in \PSD{n} : A \succ 0\}$.  □</p>
 <p class="aviso">Falta la clausura relativa, que el enunciado pide en los cuatro apartados.</p></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p14" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p14"><p>Las doce respuestas, y debajo de dónde salen:</p>
-<p>\small
-\begin{tabular}{llll}
-\toprule
- &amp; $\aff C$ &amp; $\rint C$ &amp; $\cl C$ \\
-\midrule
-<em>a)</em> $[x,y]$ &amp; $y+\gene(x-y)$ &amp; $(x,y)$ &amp; $[x,y]$ \\
-<em>b)</em> $\Delta_{n}$ &amp; $\{\mathbf{1}\trans x = 1\}$ &amp; $\{x&gt;0 : \mathbf{1}\trans x=1\}$ &amp; $\Delta_{n}$ \\
-<em>c)</em> $\{Ax=b,\ x \geq 0\}$ &amp; $\{Ax=b\}$ &amp; $\{x&gt;0 : Ax=b\}$ &amp; $C$ \\
-<em>d)</em> $\PSD{n}$ &amp; $\Sym{n}$ &amp; $\{X \succ 0\}$ &amp; $\PSD{n}$ \\
-\bottomrule
-\end{tabular}</p>
+<div class="centro"><p>\small</p>
+<div class="tabla"><table><tr><th></th><th>$\aff C$</th><th>$\rint C$</th><th>$\cl C$</th></tr>
+<tr><td><em>a)</em> $[x,y]$</td><td>$y+\gene(x-y)$</td><td>$(x,y)$</td><td>$[x,y]$</td></tr>
+<tr><td><em>b)</em> $\Delta_{n}$</td><td>$\{\mathbf{1}\trans x = 1\}$</td><td>$\{x&gt;0 : \mathbf{1}\trans x=1\}$</td><td>$\Delta_{n}$</td></tr>
+<tr><td><em>c)</em> $\{Ax=b,\ x \geq 0\}$</td><td>$\{Ax=b\}$</td><td>$\{x&gt;0 : Ax=b\}$</td><td>$C$</td></tr>
+<tr><td><em>d)</em> $\PSD{n}$</td><td>$\Sym{n}$</td><td>$\{X \succ 0\}$</td><td>$\PSD{n}$</td></tr></table></div></div>
 <p>Los tres primeros apartados son el mismo teorema, y conviene enunciarlo una vez.
 Antes, una observación que resuelve la clausura relativa de golpe: la clausura
 relativa de $C$ es su clausura dentro de $\aff C$, y como $\aff C$ es cerrado en
