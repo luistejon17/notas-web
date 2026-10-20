@@ -3241,10 +3241,1748 @@ $\lVert x_{1}-x_{2}\rVert&gt;0$,</p>
 <p>$\therefore$ la conjugada de una función propia, cerrada y $\mu$-fuertemente
 convexa es diferenciable en todo $\mathbb{R}^{n}$ y su gradiente es
 $\frac{1}{\mu}$-Lipschitz.  □</p></div>
-<h3 id="ejercicios-convexa-x8">Los ejemplos de las notas que hacen falta aquí</h3>
+<h4 id="ejercicios-convexa-x8">Tarea 7</h4>
+<div class="stmt ejercicio" id="ej:t7-1"><div class="head">Ejercicio 1</div><div class="body"><p>Muestre, mediante un ejemplo, que la constante $L/2$ no puede mejorarse en el
+lema del descenso.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p66" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p66"><p>Sea $f(x)=\frac{x^{2}}{2}$, con $f&#x27;(x)=x$. Un $\alpha\in\mathbb{R}$ sirve en el
+lema del descenso si</p>
+<div class="display">\[
+  \Bigl|\tfrac{(x+h)^{2}}{2}-\tfrac{x^{2}}{2}-xh\Bigr|\leq\alpha h^{2}
+  \qquad\forall x,\ \forall h ,
+\]</div>
+<p>y</p>
+<div class="display">\[
+  \Bigl|\tfrac{x^{2}}{2}+xh+\tfrac{h^{2}}{2}-\tfrac{x^{2}}{2}-xh\Bigr|
+  =\tfrac{h^{2}}{2}\leq\alpha h^{2}
+  \iff \tfrac12\leq\alpha .
+\]</div>
+<p>$\therefore$ $\tfrac12$ es la menor constante posible.  □</p>
+<p class="aviso">El $\tfrac12$ que sale es $L/2$ con $L=1$, no $L$; la última línea escribe
+«$L=\tfrac12$».</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p67" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p67"><p>La constante no se puede bajar en ningún ejemplo, y eso se ve sin elegir
+ninguno. Sea $f\in C^{2}(\mathbb{R}^{n})$ con $\nabla f$ $L$-Lipschitz, y
+suponga que $c&gt;0$ cumple</p>
+<div class="display">\[
+  f(y)\leq f(x)+\langle\nabla f(x),y-x\rangle+\tfrac{c}{2}\lVert y-x\rVert^{2}
+  \qquad\forall x,y .
+\]</div>
+<p>Tome $y=x+td$ con $\lVert d\rVert=1$ y $t&gt;0$. Por Taylor,</p>
+<div class="display">\[
+  f(x+td)=f(x)+t\langle\nabla f(x),d\rangle
+   +\tfrac{t^{2}}{2}\langle\nabla^{2}f(x)d,d\rangle+o(t^{2}),
+\]</div>
+<p>y sustituyendo en la hipótesis y dividiendo por $t^{2}/2$,</p>
+<div class="display">\[
+  \langle\nabla^{2}f(x)d,d\rangle+o(1)\leq c
+  \ \Rightarrow\ \langle\nabla^{2}f(x)d,d\rangle\leq c
+  \quad\forall x,\ \forall\lVert d\rVert=1 ,
+\]</div>
+<p>es decir $\nabla^{2}f(x)\preceq cI$ en todo punto. Si $f$ es además convexa,
+$\lVert\nabla^{2}f(x)\rVert_{\mathrm{op}}=\lambda_{\max}(\nabla^{2}f(x))\leq c$,
+y por el Ejercicio 2 de esta misma tarea la menor constante de Lipschitz de
+$\nabla f$ es $\sup_{x}\lVert\nabla^{2}f(x)\rVert_{\mathrm{op}}$
+$\Rightarrow c\geq L$.</p>
+<p>El ejemplo que realiza la igualdad es $f(x)=\frac{L}{2}\lVert x\rVert^{2}$, con
+$\nabla f(x)=Lx$ exactamente $L$-Lipschitz y</p>
+<div class="display">\[
+  f(y)-f(x)-\langle\nabla f(x),y-x\rangle=\tfrac{L}{2}\lVert y-x\rVert^{2}
+\]</div>
+<p>para todo par $x,y$: el lema del descenso se cumple con igualdad en cada par de
+puntos, de modo que ninguna constante menor que $L/2$ sirve.  □</p></div>
+<div class="stmt ejercicio" id="ej:t7-2"><div class="head">Ejercicio 2</div><div class="body"><p>Sea $U\subset\mathbb{R}^{n}$ abierto y convexo y sea $f\in C^{2}(U)$. Recuerde
+que para una matriz simétrica $A$ se tiene que
+$\lVert A\rVert_{\mathrm{op}}=\max_{i}|\lambda_{i}|$.</p>
+<ol class="lista"><li><p>Suponga que $\nabla f$ es $L$-Lipschitz. Pruebe que
+    $\lVert\nabla^{2}f(x)\rVert_{\mathrm{op}}\leq L$ para todo $x\in U$. Deduzca
+    que $-LI\preceq\nabla^{2}f(x)\preceq LI$.</p></li><li><p>Recíprocamente, suponga que
+    $\lVert\nabla^{2}f(x)\rVert_{\mathrm{op}}\leq L$ para todo $x\in U$. Pruebe
+    que $\lVert\nabla f(x)-\nabla f(y)\rVert\leq L\lVert x-y\rVert$.</p></li><li><p>Suponga además que $f$ es convexa. Muestre que las condiciones
+    anteriores equivalen a $0\preceq\nabla^{2}f(x)\preceq LI$ para todo
+    $x\in U$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p68" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p68"><p><em>a)</em> Sea $d\in\mathbb{R}^{n}$ con $\lVert d\rVert=1$ y
+$H=\nabla^{2}f(x)$. Como $\nabla f$ es diferenciable en $x$,</p>
+<div class="display">\[
+  \lim_{t\to0}\frac{\lVert\nabla f(x+td)-\nabla f(x)-tHd\rVert}{t}=0
+\]</div>
+<p>$\Rightarrow$</p>
+<div class="display">\[
+  \lVert Hd\rVert=\lim_{t\to0}\frac{\lVert\nabla f(x+td)-\nabla f(x)\rVert}{t}
+   \leq\lim_{t\to0}\frac{L\lVert td\rVert}{t}=L .
+\]</div>
+<p>Así $\lVert H\rVert_{\mathrm{op}}\leq L$, y como $H$ es simétrica,
+$\sigma(H)\subseteq[-L,L]$
+$\Rightarrow-L\leq\lambda_{\min}\leq\langle Hd,d\rangle\leq\lambda_{\max}\leq L$
+para todo $\lVert d\rVert=1$
+$\Rightarrow\langle(H+LI)d,d\rangle\geq0$ y $\langle(LI-H)d,d\rangle\geq0$
+$\Rightarrow-LI\preceq H\preceq LI$.  □</p>
+<p><em>b)</em> Como $U$ es abierto y convexo, sea $h=y-x$ y
+$g(t)=\nabla f(x+th)$, con $g:\mathbb{R}\to\mathbb{R}^{n}$. Entonces</p>
+<div class="display">\[
+  g(1)-g(0)=\int_{0}^{1}\nabla^{2}f(x+th)h\,dt
+\]</div>
+<p>$\Rightarrow$</p>
+<div class="display">\[
+  \lVert g(1)-g(0)\rVert\leq\int_{0}^{1}\lVert\nabla^{2}f(x+th)h\rVert\,dt
+   \leq\int_{0}^{1}L\lVert y-x\rVert\,dt=L\lVert y-x\rVert . \qquad
+\]</div>
+<p><em>c)</em> Si $f$ es $C^{2}$, $f$ es convexa
+$\iff0\preceq\nabla^{2}f(x)$. Así, $\nabla f$ es $L$-Lipschitz
+$\iff\lVert\nabla^{2}f\rVert_{\mathrm{op}}\leq L\iff0\preceq\nabla^{2}f\preceq LI$,
+pues trivialmente $-LI\preceq\nabla^{2}f$.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p69" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p69"><p>La misma equivalencia sin integrar funciones con valores vectoriales: todo se
+hace con escalares, emparejando contra una dirección fija.</p>
+<p><em>a)</em> Fije $x\in U$ y $d$ unitario. Para $t$ pequeño $x+td\in U$, y</p>
+<div class="display">\[
+  \langle\nabla^{2}f(x)d,d\rangle
+   =\lim_{t\to0}\frac{\langle\nabla f(x+td)-\nabla f(x),\,d\rangle}{t} .
+\]</div>
+<p>Por Cauchy–Schwarz el cociente está acotado en valor absoluto por
+$L\lVert td\rVert\lVert d\rVert/t=L$
+$\Rightarrow|\langle\nabla^{2}f(x)d,d\rangle|\leq L$ para todo $d$ unitario.
+Para una matriz simétrica,
+$\lVert A\rVert_{\mathrm{op}}=\max_{\lVert d\rVert=1}|\langle Ad,d\rangle|$
+$\Rightarrow\lVert\nabla^{2}f(x)\rVert_{\mathrm{op}}\leq L$, y las dos
+desigualdades $-L\leq\langle\nabla^{2}f(x)d,d\rangle\leq L$ son exactamente
+$-LI\preceq\nabla^{2}f(x)\preceq LI$.  □</p>
+<p><em>b)</em> Fije $x,y\in U$ y $v$ unitario, y sea
+$\varphi(t)=\langle\nabla f(x+t(y-x)),v\rangle$, que es $C^{1}$ en $[0,1]$
+porque $[x,y]\subseteq U$ por convexidad. Por el teorema del valor medio existe
+$\theta\in(0,1)$ con</p>
+<div class="display">\[
+  \langle\nabla f(y)-\nabla f(x),v\rangle=\varphi(1)-\varphi(0)=\varphi&#x27;(\theta)
+   =\langle\nabla^{2}f(x+\theta(y-x))(y-x),\,v\rangle\leq L\lVert y-x\rVert .
+\]</div>
+<p>Tomando el supremo sobre $\lVert v\rVert=1$,
+$\lVert\nabla f(y)-\nabla f(x)\rVert\leq L\lVert y-x\rVert$.  □</p>
+<p><em>c)</em> Por <em>a)</em> y <em>b)</em>, $\nabla f$ es $L$-Lipschitz en $U$
+$\iff\lVert\nabla^{2}f(x)\rVert_{\mathrm{op}}\leq L$ en $U$. Si $f$ es convexa y
+$C^{2}$, $\nabla^{2}f(x)\succeq0$, de modo que sus valores propios son no
+negativos y
+$\lVert\nabla^{2}f(x)\rVert_{\mathrm{op}}=\lambda_{\max}(\nabla^{2}f(x))$
+$\Rightarrow$</p>
+<div class="display">\[
+  \lVert\nabla^{2}f(x)\rVert_{\mathrm{op}}\leq L
+  \iff\lambda_{\max}(\nabla^{2}f(x))\leq L
+  \iff0\preceq\nabla^{2}f(x)\preceq LI . \qquad
+\]</div></div>
+<div class="stmt ejercicio" id="ej:t7-3"><div class="head">Ejercicio 3</div><div class="body"><p>Suponga que $f$ es $L$-suave y $\mu$-fuertemente convexa. Sea $u$ el punto
+inicial de una fase y ejecute desde $u$ el método acelerado del caso convexo
+durante $m$ iteraciones.</p>
+<ol class="lista"><li><p>Use la tasa $O(1/k^{2})$ y el crecimiento cuadrático para probar</p>
+<div class="display">\[
+      f(x_{m})-f^{\star}\leq\frac{4\kappa}{(m+1)^{2}}\bigl(f(u)-f^{\star}\bigr).
+    \]</div></li><li><p>Determine una elección de $m$ que garantice una reducción por un factor
+    de al menos $1/2$ en cada fase.</p></li><li><p>Deduzca la complejidad $O\bigl(\sqrt{\kappa}\log\frac1\varepsilon\bigr)$.</p></li><li><p>Explique qué parte de la iteración dentro de una fase utiliza $\mu$ y
+    qué parte de la garantía de convergencia la utiliza.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p70" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p70"><p><em>a)</em> Como</p>
+<div class="display">\[
+  \tfrac{\mu}{2}\lVert x_{0}-x^{*}\rVert^{2}\leq f(x_{m})-f^{*}
+   \leq\frac{2L\lVert x_{0}-x^{*}\rVert^{2}}{(m+1)^{2}}\qquad\forall m
+\]</div>
+<p>$\Rightarrow\lVert x_{0}-x^{*}\rVert^{2}\leq\frac{2}{\mu}\bigl(f(x_{0})-f^{*}\bigr)$
+$\Rightarrow f(x_{m})-f^{*}\leq\frac{4\kappa}{(m+1)^{2}}\bigl(f(x_{0})-f^{*}\bigr)$.</p>
+<p><em>b)</em> Quiero $\frac{4\kappa}{(m+1)^{2}}\leq\frac12
+\iff2\kappa\leq(m+1)^{2}\iff m\geq\sqrt{2\kappa}-1$.</p>
+<p><em>c)</em> Si se quiere que después de $n$ fases</p>
+<div class="display">\[
+  f(x_{n})-f^{*}\leq\frac{1}{2^{n}}\bigl(f(x_{0})-f^{*}\bigr)&lt;\varepsilon ,
+\]</div>
+<p>necesito $2^{n}&gt;C\cdot\frac1\varepsilon\iff n=O(\log\frac1\varepsilon)$ fases, y
+como cada fase hace $O(\sqrt\kappa)$ iteraciones, el algoritmo hace
+$O\bigl(\sqrt\kappa\log\frac1\varepsilon\bigr)$ iteraciones.  □</p>
+<p class="aviso">El primer renglón de <em>a)</em> no es el crecimiento cuadrático, que va
+en $x_{0}$ y no en $x_{m}$; en <em>b)</em> la cuenta correcta es
+$8\kappa\leq(m+1)^{2}$; y falta <em>d)</em>.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p71" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p71"><p><em>a)</em> El crecimiento cuadrático de una función $\mu$-fuertemente convexa,
+evaluado en el punto inicial de la fase, dice</p>
+<div class="display">\[
+  f(u)-f^{\star}\geq\tfrac{\mu}{2}\lVert u-x^{\star}\rVert^{2}
+  \ \Rightarrow\
+  \lVert u-x^{\star}\rVert^{2}\leq\tfrac{2}{\mu}\bigl(f(u)-f^{\star}\bigr).
+\]</div>
+<p>La tasa del método acelerado del caso convexo con paso $1/L$, arrancado en $u$
+(§14 de las notas), da
+$f(x_{m})-f^{\star}\leq\frac{2L\lVert u-x^{\star}\rVert^{2}}{(m+1)^{2}}$.
+Combinando las dos,</p>
+<div class="display">\[
+  f(x_{m})-f^{\star}\leq\frac{4L}{\mu(m+1)^{2}}\bigl(f(u)-f^{\star}\bigr)
+   =\frac{4\kappa}{(m+1)^{2}}\bigl(f(u)-f^{\star}\bigr). \qquad
+\]</div>
+<p><em>b)</em> Basta $\frac{4\kappa}{(m+1)^{2}}\leq\frac12$, es decir
+$(m+1)^{2}\geq8\kappa$
+$\Rightarrow m=\lceil\sqrt{8\kappa}\,\rceil-1$ sirve, y en particular
+$m+1\approx\sqrt{8\kappa}=O(\sqrt\kappa)$.  □</p>
+<p><em>c)</em> Reinicie al final de cada fase, tomando como punto inicial de la
+fase $j+1$ el último iterado de la fase $j$. Con $\Delta_{j}=f(u_{j})-f^{\star}$
+y la elección de <em>b)</em>, $\Delta_{j+1}\leq\frac12\Delta_{j}$
+$\Rightarrow\Delta_{n}\leq2^{-n}\Delta_{0}$, y $\Delta_{n}\leq\varepsilon$ en
+cuanto $n\geq\log_{2}(\Delta_{0}/\varepsilon)$. Cada fase cuesta
+$m+1=O(\sqrt\kappa)$ iteraciones, de modo que el total es</p>
+<div class="display">\[
+  n(m+1)=O\Bigl(\sqrt\kappa\,\log\frac{\Delta_{0}}{\varepsilon}\Bigr)
+   =O\Bigl(\sqrt\kappa\,\log\frac1\varepsilon\Bigr). \qquad
+\]</div>
+<p><em>d)</em> Dentro de una fase la iteración es la del caso convexo: paso $1/L$ y
+momento $\beta_{k}=\frac{t_{k}-1}{t_{k+1}}$ con
+$t_{k+1}=\frac{1+\sqrt{1+4t_{k}^{2}}}{2}$. Ninguna de esas dos cantidades
+contiene $\mu$: la iteración no lo usa en ningún punto. $\mu$ entra en dos
+sitios, los dos fuera de la actualización:</p>
+<ol class="lista"><li><p>en la <em>duración</em> de la fase, porque $m+1\approx\sqrt{8\kappa}$
+    depende de $\kappa=L/\mu$;</p></li><li><p>en la <em>garantía</em>, a través del crecimiento cuadrático de
+    <em>a)</em>, que es lo único que convierte una cota en
+    $\lVert u-x^{\star}\rVert^{2}$ en una cota en $f(u)-f^{\star}$ y permite
+    componer las fases.</p></li></ol>
+<p>$\therefore$ el esquema alcanza la complejidad
+$O(\sqrt\kappa\log\frac1\varepsilon)$ del caso fuertemente convexo sin usar
+nunca $\mu$ dentro de la iteración, que es lo que lo distingue del método con
+momento constante $\beta=\frac{\sqrt L-\sqrt\mu}{\sqrt L+\sqrt\mu}$, donde $\mu$
+está en la propia fórmula del paso.  □</p></div>
+<div class="stmt ejercicio" id="ej:t7-4"><div class="head">Ejercicio 4</div><div class="body"><p>Considere la función</p>
+<div class="display">\[
+  f(x)=\langle c,x\rangle-\sum_{j=1}^{m}\log\bigl(1-\langle a_{j},x\rangle\bigr)
+   -\sum_{i=1}^{n}\log\bigl(1-x_{i}^{2}\bigr).
+\]</div>
+<ol class="lista"><li><p>Muestre que $f$ es $2$-fuertemente convexa pero no es $L$-suave
+    globalmente en su dominio.</p></li><li><p>Para valores de $m$ y $n$ grandes y datos generados de tal forma que las
+    direcciones de los vectores $a_{j}$ sean uniformes en la esfera, sus
+    magnitudes sean muy cercanas y $c$ tenga una magnitud más grande que la de
+    los vectores $a_{j}$, compare las siguientes variantes del descenso del
+    gradiente
+    \begin{enumerate}[label=\arabic*)]</p></li><li><p>Paso constante con tamaño $\frac1L$ para algún valor de $L$ estimado
+        (diga cómo lo estima).</p></li><li><p>Paso constante con tamaño $\frac{2}{2+L}$ para el mismo valor de $L$
+        anterior.</p></li><li><p>Paso $\frac{1}{M_{k}}$ con <em>backtracking</em>.</p></li><li><p>Paso $\frac{2}{2+M_{k}}$ con <em>backtracking</em>. Defina la
+        condición de aceptación del <em>backtracking</em> que usaría.</p></li></ol>
+<p>Reporte el valor objetivo, la norma del gradiente, el número de
+    evaluaciones de $f$ y $\nabla f$, y el tiempo total para un número fijo de
+    iteraciones.
+  \item ¿Prevee algún problema con el método acelerado en esta función?
+\end{enumerate}</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p72" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p72"><p><em>a)</em> Sea $h_{i}(x)=-\log(1-x_{i}^{2})$, con
+$\nabla h_{1}(x)=\bigl(\frac{2x_{1}}{1-x_{1}^{2}},0,\dots,0\bigr)$
+$\Rightarrow$</p>
+<div class="display">\[
+  \langle\nabla h_{1}(x)-\nabla h_{1}(y),x-y\rangle
+   =2\Bigl(\frac{x_{1}}{1-x_{1}^{2}}-\frac{y_{1}}{1-y_{1}^{2}}\Bigr)(x_{1}-y_{1})
+   =2(x_{1}-y_{1})^{2}\frac{1+x_{1}y_{1}}{(1-x_{1}^{2})(1-y_{1}^{2})} .
+\]</div>
+<p>Ahora, sea $h(x)=\sum_{i}h_{i}(x)$; como
+$\nabla h=\bigl((\nabla h_{1})_{1},\dots,(\nabla h_{n})_{n}\bigr)$,</p>
+<div class="display">\[
+  \langle\nabla h(x)-\nabla h(y),x-y\rangle
+   =\sum_{i=1}^{n}2\,\frac{1+x_{i}y_{i}}{(1-x_{i}^{2})(1-y_{i}^{2})}(x_{i}-y_{i})^{2}
+   \ \overset{(!)}{\geq}\ \sum_{i=1}^{n}(x_{i}-y_{i})^{2}=\lVert x-y\rVert^{2},
+\]</div>
+<p>es decir $h$ es $2$-fuertemente convexa, donde $(!)$ es verdad porque
+$1-x_{i}^{2}&gt;0$ y</p>
+<div class="display">\[
+  2\,\frac{1+x_{i}y_{i}}{(1-x_{i}^{2})(1-y_{i}^{2})}\geq1
+  \iff2+2x_{i}y_{i}\geq1-x_{i}^{2}-y_{i}^{2}+x_{i}^{2}y_{i}^{2}
+  \iff1+(x_{i}+y_{i})^{2}\geq x_{i}^{2}y_{i}^{2},
+\]</div>
+<p>y como $x_{i}^{2}y_{i}^{2}&lt;1$ en $\operatorname{dom} f$, la última siempre se
+tiene.</p>
+<p>También se podía notar que</p>
+<div class="display">\[
+  \nabla^{2}h=\operatorname{diag}\bigl(h_{i}&#x27;&#x27;(x_{i})\bigr)
+   =\operatorname{diag}\Bigl(\frac{2(1+x_{i}^{2})}{(1-x_{i}^{2})^{2}}\Bigr)\succeq2I,
+\]</div>
+<p>pues $1+x_{i}^{2}\geq1-x_{i}^{2}$ y, como $0\leq1-x_{i}^{2}\leq1$, se tiene
+$(1-x_{i}^{2})^{2}\leq1-x_{i}^{2}$
+$\Rightarrow\frac{1+x_{i}^{2}}{(1-x_{i}^{2})^{2}}\geq1$.</p>
+<p>Finalmente, como
+$f(x)=\langle c,x\rangle-\sum_{j}\log(1-\langle a_{j},x\rangle)+h(x)$ es suma de
+convexa con $2$-fuertemente convexa $\Rightarrow f$ es $2$-fuertemente convexa.</p>
+<p>Por otro lado, sea $g(x)=-\sum_{j=1}^{m}\log(1-\langle a_{j},x\rangle)$, de modo
+que $\nabla^{2}f(x)=\nabla^{2}g(x)+\nabla^{2}h(x)$. Si $f$ fuera $L$-suave
+$\Rightarrow\nabla^{2}g(x)+\nabla^{2}h(x)\preceq LI$, pero $\nabla^{2}h(x)$
+explota cuando $x_{i}\to0$.  □</p>
+<p class="aviso">La cota $(!)$ da $\lVert x-y\rVert^{2}$, que es convexidad fuerte con
+$\mu=1$ y no con $\mu=2$; la Hessiana sí da $\succeq2I$. Y $\nabla^{2}h$ explota
+cuando $x_{i}\to\pm1$, no cuando $x_{i}\to0$. Falta <em>c)</em>, y <em>b)</em>
+es el apartado computacional.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p73" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p73"><p><em>a)</em> El dominio es</p>
+<div class="display">\[
+  \operatorname{dom} f=\bigl\{x:\ \langle a_{j},x\rangle&lt;1\ \forall j,\
+   |x_{i}|&lt;1\ \forall i\bigr\},
+\]</div>
+<p>abierto, convexo y <em>acotado</em>, pues está contenido en el cubo $(-1,1)^{n}$.
+En él,</p>
+<div class="display">\[
+  \nabla^{2}f(x)=\sum_{j=1}^{m}\frac{a_{j}a_{j}\trans}{(1-\langle a_{j},x\rangle)^{2}}
+   +\operatorname{diag}\Bigl(\frac{2(1+x_{i}^{2})}{(1-x_{i}^{2})^{2}}\Bigr).
+\]</div>
+<p>El primer sumando es semidefinido positivo por ser suma de matrices de rango
+uno con coeficiente positivo. Para el segundo, con $t=x_{i}\in(-1,1)$,</p>
+<div class="display">\[
+  \frac{2(1+t^{2})}{(1-t^{2})^{2}}\geq2\iff1+t^{2}\geq(1-t^{2})^{2},
+\]</div>
+<p>y como $0&lt;1-t^{2}\leq1$ se tiene $(1-t^{2})^{2}\leq1-t^{2}\leq1+t^{2}$
+$\Rightarrow\nabla^{2}f(x)\succeq2I$ en $\operatorname{dom} f$
+$\Rightarrow f$ es $2$-fuertemente convexa.  □</p>
+<p>Para la segunda parte, basta ver que $f$ <em>no está acotada superiormente</em>
+en $\operatorname{dom} f$. En efecto, note que $0\in\operatorname{dom} f$; tome
+$d\neq0$ y sea</p>
+<div class="display">\[
+  s^{*}=\sup\{s&gt;0:\ sd\in\operatorname{dom} f\},
+\]</div>
+<p>que es finito y positivo porque $\operatorname{dom} f$ es abierto y acotado. Por
+definición de $s^{*}$, al menos uno de los argumentos
+$1-\langle a_{j},sd\rangle$ o $1-s^{2}d_{i}^{2}$ tiende a $0^{+}$ cuando
+$s\uparrow s^{*}$, de modo que el logaritmo correspondiente tiende a $-\infty$;
+los demás términos están acotados inferiormente sobre el conjunto acotado
+$\operatorname{dom} f$ $\Rightarrow f(sd)\to+\infty$.</p>
+<p>Ahora bien, si $\nabla f$ fuera $L$-Lipschitz en $\operatorname{dom} f$, el lema
+del descenso (§13 de las notas), aplicable porque $\operatorname{dom} f$ es
+convexo, daría para todo $y\in\operatorname{dom} f$</p>
+<div class="display">\[
+  f(y)\leq f(0)+\langle\nabla f(0),y\rangle+\tfrac{L}{2}\lVert y\rVert^{2}
+   \leq f(0)+\lVert\nabla f(0)\rVert R+\tfrac{L}{2}R^{2},
+  \qquad R:=\sup_{y\in\operatorname{dom} f}\lVert y\rVert\leq\sqrt n ,
+\]</div>
+<p>es decir $f$ acotada superiormente. Contradicción. $\therefore f$ no es
+$L$-suave globalmente en su dominio.  □</p>
+<p><em>c)</em> Sí, y son dos problemas distintos.</p>
+<p>Primero, el método acelerado del caso convexo necesita el paso $1/L$ con $L$ una
+constante de suavidad global, y por <em>a)</em> no existe ninguna: cualquier $L$
+fijo falla cerca del borde de $\operatorname{dom} f$, donde la curvatura es
+arbitrariamente grande.</p>
+<p>Segundo, y es el problema serio: el paso de extrapolación</p>
+<div class="display">\[
+  y_{k}=x_{k}+\beta_{k}(x_{k}-x_{k-1}),\qquad\beta_{k}\in[0,1),
+\]</div>
+<p>no es una combinación convexa de $x_{k}$ y $x_{k-1}$, sino que sale del segmento
+por el lado de $x_{k}$. Como $\operatorname{dom} f$ es acotado y $f=+\infty$
+fuera, $y_{k}$ puede caer fuera del dominio, donde ni $f$ ni $\nabla f$ están
+definidos: el método no se degrada, se detiene.</p>
+<p>$\therefore$ sobre esta $f$ hay que o bien hacer <em>backtracking</em> con una
+condición de aceptación que rechace todo paso que salga de
+$\operatorname{dom} f$, o bien usar un método de segundo orden: $f$ es una
+barrera logarítmica, y la curvatura que arruina al gradiente es justamente la
+información que el paso de Newton usa.  □</p></div>
+<h4 id="ejercicios-convexa-x9">Tarea 8</h4>
+<div class="stmt ejercicio" id="ej:t8-1"><div class="head">Ejercicio 1</div><div class="body"><p>Considere una cuadrática diagonal</p>
+<div class="display">\[
+  f(x)=\frac12\sum_{i=1}^{n}\lambda_{i}x_{i}^{2},\qquad0&lt;\mu\leq\lambda_{i}\leq L.
+\]</div>
+<p>Aplique descenso del gradiente y el método acelerado de Nesterov con paso $1/L$.</p>
+<ol class="lista"><li><p>Derive las recurrencias escalares que satisface cada coordenada.</p></li><li><p>Para el método acelerado, escriba la ecuación característica en una
+    coordenada con curvatura $\lambda_{i}$.</p></li><li><p>Explique por qué algunas coordenadas pueden cambiar de signo y producir
+    oscilaciones del valor objetivo aun cuando la cota teórica de convergencia
+    sea mejor que la del descenso del gradiente.</p></li><li><p>Discuta cómo cambia este comportamiento cuando $\lambda_{i}$ está cerca
+    de $\mu$ y cuando está cerca de $L$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p74" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p74"><p><em>a)</em> $\nabla f(x)=(\lambda_{i}x_{i})_{i}$. Sea $x^{0}\in\mathbb{R}^{n}$
+$\Rightarrow x^{1}=x^{0}-\frac1L\nabla f(x^{0})
+=\bigl(x_{i}^{0}(1-\frac{\lambda_{i}}{L})\bigr)_{i}$, y en general</p>
+<div class="display">\[
+  x_{i}^{k}=\Bigl(1-\frac{\lambda_{i}}{L}\Bigr)x_{i}^{k-1}
+   =\Bigl(1-\frac{\lambda_{i}}{L}\Bigr)^{k}x_{i}^{0}.
+\]</div>
+<p>Método de Nesterov: $t_{0}=1$ y $t_{k+1}=\frac{1+\sqrt{1+4t_{k}^{2}}}{2}$, es
+decir $t_{k+1}^{2}=t_{k+1}+t_{k}^{2}$. Sea $y^{0}=x^{0}$,
+$\alpha_{i}:=1-\frac{\lambda_{i}}{L}$ y $\beta_{k+1}=\frac{t_{k}-1}{t_{k+1}}$
+$\Rightarrow x_{i}^{k+1}=\alpha_{i}y_{i}^{k}$ con
+$y_{i}^{k}=x_{i}^{k}+\beta_{k}(x_{i}^{k}-x_{i}^{k-1})$
+$\Rightarrow$</p>
+<div class="display">\[
+  x_{i}^{k+1}=(1+\beta_{k})\alpha_{i}x_{i}^{k}-\alpha_{i}\beta_{k}x_{i}^{k-1}.
+\]</div>
+<p>Método acelerado usando $\mu$: lo mismo pero tomando
+$\beta=\frac{\sqrt L-\sqrt\mu}{\sqrt L+\sqrt\mu}$, con lo que
+$x_{i}^{k+1}=(1+\beta)\alpha_{i}x_{i}^{k}-\alpha_{i}\beta x_{i}^{k-1}$.</p>
+<p><em>b)</em> Considere $V=\{f:\mathbb{R}\to\mathbb{R}\}$ y</p>
+<div class="display">\[
+  W_{i}=\bigl\{f\in V:\ f(k+1)=(1+\beta)\alpha_{i}f(k)-\alpha_{i}\beta f(k-1)\bigr\},
+\]</div>
+<p>que es un subespacio de $V$ con $\dim W_{i}=2$. Con $f(k)=r^{k}$,</p>
+<div class="display">\[
+  r^{k+1}-(1+\beta)\alpha_{i}r^{k}+\alpha_{i}\beta r^{k-1}=0
+  \iff r^{2}-(1+\beta)\alpha_{i}r+\alpha_{i}\beta=0
+\]</div>
+<p>$\Rightarrow r_{\pm}=\frac{(1+\beta)\alpha_{i}\pm\sqrt{(1+\beta)^{2}\alpha_{i}^{2}-4\alpha_{i}\beta}}{2}$.
+Como $k\mapsto x_{i}^{k}$ está en $W_{i}$, $x_{i}^{k}=ar_{+}^{k}+br_{-}^{k}$, y
+como $x_{i}^{1}=\alpha_{i}x_{i}^{0}$,</p>
+<div class="display">\[
+  \begin{pmatrix}1&amp;1\\ r_{+}&amp;r_{-}\end{pmatrix}\begin{pmatrix}a\\ b\end{pmatrix}
+   =\begin{pmatrix}x_{i}^{0}\\ \alpha_{i}x_{i}^{0}\end{pmatrix}
+  \iff
+  \begin{pmatrix}a\\ b\end{pmatrix}
+   =\frac{x_{i}^{0}}{\sqrt\Delta}\begin{pmatrix}\alpha_{i}-r_{-}\\ r_{+}-\alpha_{i}\end{pmatrix},
+\]</div>
+<p>donde $\Delta:=(1+\beta)^{2}\alpha_{i}^{2}-4\alpha_{i}\beta$
+$\Rightarrow x_{i}^{k}=\frac{x_{i}^{0}}{\sqrt\Delta}
+\bigl[(\alpha_{i}-r_{-})r_{+}^{k}+(r_{+}-\alpha_{i})r_{-}^{k}\bigr]$.</p>
+<p><em>c)</em> Si $\Delta$ es negativo no se puede expresar como combinación de
+geométricas $r_{+}^{k},r_{-}^{k}$: $x_{i}^{k}$ sería combinación de cosenos y
+senos y tendría que oscilar cambiando de signo periódicamente.</p>
+<p><em>d)</em> Si $\lambda_{i}\approx L$:
+$\alpha_{i}=1-\frac{\lambda_{i}}{L}\approx0
+\Rightarrow x_{i}^{1}=\alpha_{i}x_{i}^{0}\approx0$, es decir las coordenadas con
+mucha curvatura se hacen $0$ muy rápido.</p>
+<p>Si $\lambda_{i}=\mu$: $\alpha_{i}=1-q^{2}$ donde $q=\sqrt{\mu/L}$, y
+$\beta=\frac{1-q}{1+q}$
+$\Rightarrow\alpha_{i}\beta=\frac{(1-q)^{2}(1+q)}{1+q}=(1-q)^{2}$ y
+$(1+\beta)\alpha_{i}=\frac{2}{1+q}(1-q^{2})=2(1-q)$, de modo que la recurrencia
+es $r^{2}-2(1-q)r+(1-q)^{2}=0$, con $\Delta=0$ y raíz múltiple $r=1-q$
+$\Rightarrow x_{i}^{k}=a(1-q)^{k}+bk(1-q)^{k}$, y de $x_{i}^{0}=a$ y
+$x_{i}^{1}=(1-q^{2})x_{i}^{0}$ sale $b=qx_{i}^{0}$
+$\Rightarrow x_{i}^{k}=x_{i}^{0}(1-q)^{k}(1+qk)$.</p>
+<p>Cuando $\lambda_{i}\approx\mu$ hay poca curvatura y $x_{i}^{k}\to0$, pero
+dependiendo del número de condición $L/\mu$: si $\mu\ll L$, la convergencia es
+lenta al principio.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p75" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p75"><p>La misma cuenta escrita como un sistema de primer orden: la ecuación
+característica es el polinomio característico de una matriz $2\times2$, y
+entonces las tres preguntas que siguen son preguntas sobre sus valores propios.</p>
+<p><em>a)</em> Como $\nabla f(x)=(\lambda_{i}x_{i})_{i}$, todo se desacopla. Para el
+descenso del gradiente con paso $1/L$,</p>
+<div class="display">\[
+  x_{i}^{k+1}=\Bigl(1-\frac{\lambda_{i}}{L}\Bigr)x_{i}^{k}=\alpha_{i}^{k+1}x_{i}^{0},
+  \qquad\alpha_{i}:=1-\frac{\lambda_{i}}{L}\in[0,1),
+\]</div>
+<p>monótona y sin cambio de signo. Para el método acelerado con momento $\beta$, de
+$x^{k+1}=y^{k}-\frac1L\nabla f(y^{k})$ e
+$y^{k}=x^{k}+\beta(x^{k}-x^{k-1})$ sale</p>
+<div class="display">\[
+  x_{i}^{k+1}=(1+\beta)\alpha_{i}x_{i}^{k}-\beta\alpha_{i}x_{i}^{k-1}. \qquad
+\]</div>
+<p><em>b)</em> Escriba la recurrencia como</p>
+<div class="display">\[
+  \begin{pmatrix}x_{i}^{k+1}\\ x_{i}^{k}\end{pmatrix}
+   =M_{i}\begin{pmatrix}x_{i}^{k}\\ x_{i}^{k-1}\end{pmatrix},
+  \qquad
+  M_{i}=\begin{pmatrix}(1+\beta)\alpha_{i}&amp;-\beta\alpha_{i}\\ 1&amp;0\end{pmatrix}.
+\]</div>
+<p>El polinomio característico de $M_{i}$ es</p>
+<div class="display">\[
+  r^{2}-(1+\beta)\alpha_{i}\,r+\beta\alpha_{i}=0,
+\]</div>
+<p>que es la ecuación característica de la coordenada $i$, con discriminante
+$\Delta_{i}=(1+\beta)^{2}\alpha_{i}^{2}-4\beta\alpha_{i}$ y raíces de producto
+$r_{+}r_{-}=\beta\alpha_{i}$. La coordenada decae como
+$\rho(M_{i})^{k}=\max\{|r_{+}|,|r_{-}|\}^{k}$, con un factor polinomial extra si
+hay raíz doble.  □</p>
+<p><em>c)</em> Tome el momento del caso fuertemente convexo,
+$\beta=\frac{\sqrt L-\sqrt\mu}{\sqrt L+\sqrt\mu}$, y escriba
+$q=\sqrt{\mu/L}\in(0,1]$, de modo que $\beta=\frac{1-q}{1+q}$ y
+$1+\beta=\frac{2}{1+q}$. Pero entonces</p>
+<div class="display">\[
+  \frac{4\beta}{(1+\beta)^{2}}
+   =4\cdot\frac{1-q}{1+q}\cdot\frac{(1+q)^{2}}{4}=(1-q)(1+q)=1-\frac{\mu}{L},
+\]</div>
+<p>y para $\alpha_{i}&gt;0$,</p>
+<div class="display">\[
+  \Delta_{i}&lt;0\iff\alpha_{i}&lt;\frac{4\beta}{(1+\beta)^{2}}=1-\frac{\mu}{L}
+  \iff1-\frac{\lambda_{i}}{L}&lt;1-\frac{\mu}{L}\iff\lambda_{i}&gt;\mu .
+\]</div>
+<p>Es decir: toda coordenada con $\lambda_{i}&gt;\mu$ tiene raíces complejas
+conjugadas, y entonces</p>
+<div class="display">\[
+  x_{i}^{k}=|r|^{k}\bigl(A\cos k\theta+B\sin k\theta\bigr),
+  \qquad|r|=\sqrt{\beta\alpha_{i}},
+\]</div>
+<p>que cambia de signo cada media vuelta de $\theta$. Como
+$f(x^{k})-f^{\star}=\frac12\sum_{i}\lambda_{i}(x_{i}^{k})^{2}$ es una suma de
+esas oscilaciones con fases distintas, el valor objetivo oscila.</p>
+<p>Nada de esto contradice la cota teórica. En efecto,</p>
+<div class="display">\[
+  |r_{\pm}|=\sqrt{\beta\alpha_{i}}\leq\sqrt{\beta\Bigl(1-\frac\mu L\Bigr)}
+   =\sqrt{\frac{1-q}{1+q}(1-q^{2})}=1-q=1-\frac{1}{\sqrt\kappa},
+\]</div>
+<p>frente al factor $\max_{i}\alpha_{i}=1-\frac\mu L=1-\frac1\kappa$ del descenso
+del gradiente: la envolvente del método acelerado contrae más rápido aunque cada
+coordenada haya dejado de ser monótona. $\therefore$ la monotonía y la velocidad
+son cosas distintas, y acelerar compra la segunda vendiendo la primera.  □</p>
+<p><em>d)</em> La cuenta de <em>c)</em> dice exactamente qué pasa en los dos
+extremos.</p>
+<p>Si $\lambda_{i}=\mu$, entonces $\Delta_{i}=0$: hay raíz doble
+$r=\sqrt{\beta\alpha_{i}}=1-q$, la matriz $M_{i}$ no es diagonalizable, y el
+bloque de Jordan aporta el factor polinomial</p>
+<div class="display">\[
+  x_{i}^{k}=x_{i}^{0}(1-q)^{k}(1+qk).
+\]</div>
+<p>Es el caso críticamente amortiguado: no oscila, y es el más lento, porque $1-q$
+es el mayor de todos los módulos. Esta coordenada es la que fija la tasa.</p>
+<p>Si $\lambda_{i}=L$, entonces $\alpha_{i}=0$: las dos raíces son $0$ y
+$x_{i}^{1}=0$, la coordenada muere en un paso. Para $\lambda_{i}$ cerca de $L$
+pero menor, $\alpha_{i}$ es pequeño y $|r|=\sqrt{\beta\alpha_{i}}$ también, de
+modo que la coordenada oscila pero con una amplitud que se apaga enseguida.</p>
+<p>$\therefore$ las oscilaciones las producen las coordenadas de curvatura
+intermedia y alta, que son las que se amortiguan rápido, mientras que la
+coordenada lenta $\lambda_{i}=\mu$ es monótona: por eso el valor objetivo
+oscila al principio y se vuelve monótono al final.  □</p></div>
+<div class="stmt ejercicio" id="ej:t8-2"><div class="head">Ejercicio 2</div><div class="body"><p>Muestre que si $f\in C^{2}$ y con Hessiana $\rho$-Lipschitz, entonces para todo
+$x,p$ se tiene que</p>
+<div class="display">\[
+  f(x+p)\leq f(x)+\langle\nabla f(x),p\rangle+\tfrac12p\trans H(x)p
+   +\tfrac{\rho}{6}\lVert p\rVert^{3}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p76" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p76"><p>Por Taylor con residuo de orden $2$,</p>
+<div class="display">\[
+  f(x+p)=f(x)+\langle\nabla f(x),p\rangle
+   +\int_{0}^{1}(1-t)\underbrace{\langle H(x+tp)p,p\rangle}_{A}\,dt .
+\]</div>
+<p>Note que</p>
+<div class="display">\[
+  A=\underbrace{\bigl\langle(H(x+tp)-H(x))p,\,p\bigr\rangle}_{\alpha}
+   +\langle H(x)p,p\rangle ,
+\]</div>
+<p>y claramente $\int_{0}^{1}(1-t)\langle H(x)p,p\rangle\,dt=\frac12\langle H(x)p,p\rangle$.
+Por otro lado,</p>
+<div class="display">\[
+  |\alpha|\leq\lVert H(x+tp)-H(x)\rVert_{\mathrm{op}}\lVert p\rVert\lVert p\rVert
+   \leq\rho\lVert tp\rVert\lVert p\rVert^{2}=\rho\lVert p\rVert^{3}t
+\]</div>
+<p>$\Rightarrow$</p>
+<div class="display">\[
+  \int_{0}^{1}(1-t)A\,dt\leq\tfrac12\langle H(x)p,p\rangle
+   +\rho\lVert p\rVert^{3}\int_{0}^{1}(1-t)t\,dt
+   =\tfrac12p\trans H(x)p+\tfrac{\rho}{6}\lVert p\rVert^{3}. \qquad
+\]</div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p77" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p77"><p>La idea es acotar primero el gradiente y después integrar una sola vez.</p>
+<p>Para $t\in[0,1]$,</p>
+<div class="display">\[
+  \nabla f(x+tp)-\nabla f(x)-tH(x)p=\int_{0}^{t}\bigl(H(x+sp)-H(x)\bigr)p\,ds
+\]</div>
+<p>$\Rightarrow$</p>
+<div class="display">\[
+  \bigl\lVert\nabla f(x+tp)-\nabla f(x)-tH(x)p\bigr\rVert
+   \leq\int_{0}^{t}\rho s\lVert p\rVert\cdot\lVert p\rVert\,ds
+   =\frac{\rho t^{2}}{2}\lVert p\rVert^{2} .
+\]</div>
+<p>Ahora bien, por el teorema fundamental del cálculo,</p>
+<div class="display">\[
+  f(x+p)-f(x)-\langle\nabla f(x),p\rangle
+   =\int_{0}^{1}\langle\nabla f(x+tp)-\nabla f(x),\,p\rangle\,dt ,
+\]</div>
+<p>y restando $\tfrac12p\trans H(x)p=\int_{0}^{1}t\langle H(x)p,p\rangle\,dt$,</p>
+<div class="display">\[
+  f(x+p)-f(x)-\langle\nabla f(x),p\rangle-\tfrac12p\trans H(x)p
+   =\int_{0}^{1}\bigl\langle\nabla f(x+tp)-\nabla f(x)-tH(x)p,\ p\bigr\rangle\,dt .
+\]</div>
+<p>Por Cauchy–Schwarz y la cota de arriba el integrando es a lo sumo
+$\frac{\rho t^{2}}{2}\lVert p\rVert^{3}$, y $\int_{0}^{1}\frac{t^{2}}{2}\,dt=\frac16$
+$\Rightarrow$</p>
+<div class="display">\[
+  f(x+p)\leq f(x)+\langle\nabla f(x),p\rangle+\tfrac12p\trans H(x)p
+   +\tfrac{\rho}{6}\lVert p\rVert^{3}. \qquad
+\]</div>
+<p>La cota intermedia
+$\lVert\nabla f(y)-\nabla f(x)-H(x)(y-x)\rVert\leq\frac{\rho}{2}\lVert y-x\rVert^{2}$
+es, con $\nu=1$, la estimación del Ejercicio 1 de la Tarea 9.</p></div>
+<h4 id="ejercicios-convexa-x10">Tarea 9</h4>
+<div class="stmt ejercicio" id="ej:t9-1"><div class="head">Ejercicio 1</div><div class="body"><p>Suponga que $x^{\star}$ satisface $\nabla f(x^{\star})=0$, que
+$H(x)\succeq mI$ en un entorno convexo de $x^{\star}$, y que para algún
+$\nu\in(0,1]$ y $\rho&gt;0$,</p>
+<div class="display">\[
+  \lVert H(x)-H(y)\rVert\leq\rho\lVert x-y\rVert^{\nu}.
+\]</div>
+<ol class="lista"><li><p>Muestre que</p>
+<div class="display">\[
+      \lVert x_{k+1}-x^{\star}\rVert\leq\frac{\rho}{m(1+\nu)}
+       \lVert x_{k}-x^{\star}\rVert^{1+\nu}
+    \]</div>
+<p>siempre que el segmento relevante permanezca en el entorno.</p></li><li><p>Muestre que para $\nu=1$ se recupera convergencia cuadrática.</p></li><li><p>Deduzca la dependencia del número de iteraciones con la precisión
+    $\varepsilon$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p78" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p78"><p><em>a)</em> <strong>Demostración: </strong> Sea $e_{k}=x_{k}-x^{\star}$ y
+$F(t)=\nabla f(x^{\star}+te_{k})$. Así
+$F(1)=\nabla f(x_{k})$ y $F(0)=0$
+$\Rightarrow\nabla f(x_{k})=\int_{0}^{1}F&#x27;(t)\,dt
+=\int_{0}^{1}H(x^{\star}+te_{k})e_{k}\,dt$, y como
+$x_{k+1}=x_{k}-H_{k}^{-1}g_{k}$ con $H_{k}=H(x_{k})$ y $g_{k}=\nabla f(x_{k})$,</p>
+<div class="display">\[
+  e_{k+1}=e_{k}-H_{k}^{-1}g_{k}=H_{k}^{-1}(H_{k}e_{k}-g_{k})
+   =H_{k}^{-1}\int_{0}^{1}\bigl(H_{k}-H(x^{\star}+te_{k})\bigr)e_{k}\,dt
+\]</div>
+<p>$\Rightarrow$</p>
+<div class="display">\[
+  \lVert e_{k+1}\rVert\leq\lVert H_{k}^{-1}\rVert
+   \int_{0}^{1}\lVert H(x_{k})-H(x^{\star}+te_{k})\rVert\,\lVert e_{k}\rVert\,dt
+   \leq\frac1m\int_{0}^{1}\rho\lVert e_{k}\rVert^{1+\nu}(1-t)^{\nu}\,dt
+   =\frac{\rho}{m(\nu+1)}\lVert e_{k}\rVert^{1+\nu}. \qquad
+\]</div>
+<p><em>b)</em> Tome $\nu=1$.</p>
+<p><em>c)</em> Sean $C=\frac{\rho}{m(\nu+1)}$ y
+$\theta_{0}=C\lVert x_{0}-x^{\star}\rVert$
+$\Rightarrow C^{\nu}\lVert e_{k+1}\rVert\leq C^{\nu}C\lVert e_{k}\rVert^{1+\nu}
+=(C\lVert e_{k}\rVert)^{1+\nu}\leq\theta_{0}^{(1+\nu)^{k+1}}$.</p>
+<p>Además, note que
+$\lVert H(x)\rVert\leq\lVert H(x^{\star})\rVert+\rho\lVert x-x^{\star}\rVert^{\nu}$,
+así que en una vecindad de radio $r$, con
+$M=\lVert H(x^{\star})\rVert+\rho r^{\nu}$, se tiene $\lVert H\rVert\leq M$
+$\Rightarrow\nabla f$ es $M$-Lipschitz en esa vecindad
+$\Rightarrow\bigl|f(x^{\star})-f(x)-\langle\nabla f(x^{\star}),x^{\star}-x\rangle\bigr|
+\leq\frac M2\lVert x^{\star}-x\rVert^{2}$
+$\Rightarrow f(x)-f(x^{\star})\leq\frac M2\lVert x-x^{\star}\rVert^{2}$
+$\Rightarrow$</p>
+<div class="display">\[
+  f(x_{k})-f(x^{\star})\leq\frac M2\lVert e_{k}\rVert^{2}
+   \leq\frac{M}{2C^{\nu}}\theta_{0}^{2(1+\nu)^{k}} .
+\]</div>
+<p>Si quiero $f(x_{k})-f(x^{\star})\leq\varepsilon$ y $\theta_{0}\in(0,1)$,</p>
+<div class="display">\[
+  \theta_{0}^{2(1+\nu)^{k}}\leq\frac{2C^{\nu}}{M}\varepsilon
+  \iff2(1+\nu)^{k}\log(1/\theta_{0})\geq\log(C&#x27;/\varepsilon)
+  \iff(1+\nu)^{k}\geq C&#x27;&#x27;\log(C&#x27;/\varepsilon)
+\]</div>
+<div class="display">\[
+  \iff k\geq C&#x27;&#x27;&#x27;\log\bigl(C&#x27;&#x27;\log(C&#x27;/\varepsilon)\bigr)
+  \ \therefore\ k=O\Bigl(\log\log\frac1\varepsilon\Bigr). \qquad
+\]</div>
+<p class="aviso"><em>b)</em> queda en «tome $\nu=1$», sin escribir la desigualdad que
+resulta.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p79" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p79"><p><em>a)</em> Como $\nabla f(x^{\star})=0$, con $e_{k}=x_{k}-x^{\star}$,</p>
+<div class="display">\[
+  g_{k}=\nabla f(x_{k})-\nabla f(x^{\star})=\int_{0}^{1}H(x^{\star}+te_{k})e_{k}\,dt
+  \quad\Longrightarrow\quad
+  H_{k}e_{k}-g_{k}=\int_{0}^{1}\bigl(H(x_{k})-H(x^{\star}+te_{k})\bigr)e_{k}\,dt .
+\]</div>
+<p>Pero entonces, como $\lVert x_{k}-(x^{\star}+te_{k})\rVert=(1-t)\lVert e_{k}\rVert$,</p>
+<div class="display">\[
+  \lVert H_{k}e_{k}-g_{k}\rVert\leq\rho\lVert e_{k}\rVert^{1+\nu}
+   \int_{0}^{1}(1-t)^{\nu}\,dt=\frac{\rho}{1+\nu}\lVert e_{k}\rVert^{1+\nu},
+\]</div>
+<p>y de $H\succeq mI$ sale $\lVert H_{k}^{-1}\rVert\leq1/m$, de modo que</p>
+<div class="display">\[
+  \lVert e_{k+1}\rVert=\bigl\lVert H_{k}^{-1}(H_{k}e_{k}-g_{k})\bigr\rVert
+   \leq\frac{\rho}{m(1+\nu)}\lVert e_{k}\rVert^{1+\nu}. \qquad
+\]</div>
+<p><em>b)</em> Con $\nu=1$ queda</p>
+<div class="display">\[
+  \lVert x_{k+1}-x^{\star}\rVert\leq\frac{\rho}{2m}\lVert x_{k}-x^{\star}\rVert^{2},
+\]</div>
+<p>que es exactamente la convergencia local cuadrática de Newton de §15 de las
+notas: el error nuevo es del orden del cuadrado del viejo, de modo que el
+número de dígitos correctos se duplica en cada paso.  □</p>
+<p><em>c)</em> Sea $C=\frac{\rho}{m(1+\nu)}$ y $\theta_{k}=C^{1/\nu}\lVert e_{k}\rVert$.
+De <em>a)</em>,</p>
+<div class="display">\[
+  \theta_{k+1}\leq C^{1/\nu}C\lVert e_{k}\rVert^{1+\nu}
+   =\bigl(C^{1/\nu}\lVert e_{k}\rVert\bigr)^{1+\nu}=\theta_{k}^{1+\nu}
+  \quad\Longrightarrow\quad\theta_{k}\leq\theta_{0}^{(1+\nu)^{k}} .
+\]</div>
+<p>Suponga $\theta_{0}&lt;1$, lo que ocurre si $x_{0}$ está suficientemente cerca de
+$x^{\star}$. Pero entonces $\lVert e_{k}\rVert\leq\varepsilon$ en cuanto
+$\theta_{0}^{(1+\nu)^{k}}\leq C^{1/\nu}\varepsilon$, es decir</p>
+<div class="display">\[
+  (1+\nu)^{k}\geq\frac{\log\bigl(1/(C^{1/\nu}\varepsilon)\bigr)}{\log(1/\theta_{0})}
+  \iff
+  k\geq\frac{1}{\log(1+\nu)}\,
+   \log\frac{\log\bigl(1/(C^{1/\nu}\varepsilon)\bigr)}{\log(1/\theta_{0})} ,
+\]</div>
+<p>$\therefore$</p>
+<div class="display">\[
+  k=O\Bigl(\frac{1}{\log(1+\nu)}\log\log\frac1\varepsilon\Bigr).
+\]</div>
+<p>El número de iteraciones crece como $\log\log(1/\varepsilon)$, y $\nu$ solo
+aparece en la constante $1/\log(1+\nu)$: con $\nu=1$ vale $1/\log2$, y cuando
+$\nu\to0^{+}$ esa constante explota, que es la forma cuantitativa de decir que
+sin continuidad Hölder de la Hessiana la convergencia deja de ser superlineal.
+ □</p></div>
+<div class="stmt ejercicio" id="ej:t9-2"><div class="head">Ejercicio 2</div><div class="body"><p>Suponga las hipótesis locales usuales para demostrar la convergencia del método
+de Newton, y considere un paso inexacto tal que</p>
+<div class="display">\[
+  x_{k+1}=x_{k}+p_{k},\qquad r_{k}:=H_{k}p_{k}+g_{k}.
+\]</div>
+<ol class="lista"><li><p>Demuestre que
+    $\lVert x_{k+1}-x^{\star}\rVert\leq\frac{\rho}{2m}\lVert x_{k}-x^{\star}\rVert^{2}
+     +\frac1m\lVert r_{k}\rVert$.</p></li><li><p>Si además $\lVert H(x)\rVert\leq M$ en la vecindad considerada y
+    $\lVert r_{k}\rVert\leq\eta_{k}\lVert g_{k}\rVert$, deduzca
+    $\lVert x_{k+1}-x^{\star}\rVert\leq\frac{\rho}{2m}\lVert x_{k}-x^{\star}\rVert^{2}
+     +\frac Mm\eta_{k}\lVert x_{k}-x^{\star}\rVert$.</p></li><li><p>Use esta desigualdad para explicar por qué $\eta_{k}\to0$ conduce a un
+    comportamiento superlineal y por qué
+    $\eta_{k}=O(\lVert x_{k}-x^{\star}\rVert)$ recupera convergencia cuadrática.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p80" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p80"><p><em>a)</em> En este caso
+$x_{k+1}=x_{k}+p_{k}=x_{k}-H_{k}^{-1}g_{k}+H_{k}^{-1}r_{k}$
+$\Rightarrow e_{k+1}=H_{k}^{-1}(H_{k}e_{k}-g_{k}+r_{k})$
+$\Rightarrow$</p>
+<div class="display">\[
+  e_{k+1}=H_{k}^{-1}\Bigl[\int_{0}^{1}
+   \bigl(H_{k}-H(x^{\star}+te_{k})\bigr)e_{k}\,dt+r_{k}\Bigr]
+  \ \Rightarrow\
+  \lVert e_{k+1}\rVert\leq\frac{\rho}{2m}\lVert e_{k}\rVert^{2}
+   +\frac{\lVert r_{k}\rVert}{m},
+\]</div>
+<p>con los mismos pasos de antes.  □</p>
+<p><em>b)</em> Simplemente usar que $\nabla f$ es $M$-Lipschitz:</p>
+<div class="display">\[
+  \lVert r_{k}\rVert\leq\eta_{k}\lVert g_{k}\rVert
+   =\eta_{k}\lVert\nabla f(x_{k})-\nabla f(x^{\star})\rVert
+   \leq\eta_{k}M\lVert x_{k}-x^{\star}\rVert . \qquad
+\]</div>
+<p><em>c)</em> $\frac{\lVert e_{k+1}\rVert}{\lVert e_{k}\rVert}
+\leq\frac{\rho}{2m}\lVert e_{k}\rVert+\frac Mm\eta_{k}$. Si $\eta_{k}\to0$, como
+$\lVert e_{k}\rVert\to0$, entonces
+$\frac{\lVert e_{k+1}\rVert}{\lVert e_{k}\rVert}\to0$. Si
+$\eta_{k}\leq C\lVert e_{k}\rVert$
+$\Rightarrow\frac{\lVert e_{k+1}\rVert}{\lVert e_{k}\rVert}\leq K\lVert e_{k}\rVert
+\Rightarrow\lVert e_{k+1}\rVert\leq K\lVert e_{k}\rVert^{2}$.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p81" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p81"><p><em>a)</em> El paso inexacto es el exacto más una perturbación, y eso ahorra
+repetir la integral. De $r_{k}=H_{k}p_{k}+g_{k}$ sale
+$p_{k}=-H_{k}^{-1}g_{k}+H_{k}^{-1}r_{k}$, de modo que</p>
+<div class="display">\[
+  x_{k+1}=\underbrace{x_{k}-H_{k}^{-1}g_{k}}_{=:x_{k+1}^{\mathrm{ex}}}+H_{k}^{-1}r_{k}.
+\]</div>
+<p>Por la desigualdad triangular,
+$\lVert x_{k+1}-x^{\star}\rVert\leq\lVert x_{k+1}^{\mathrm{ex}}-x^{\star}\rVert
++\lVert H_{k}^{-1}r_{k}\rVert$. El primer término es el error de un paso de
+Newton exacto desde $x_{k}$, acotado por el Ejercicio 1 de esta tarea con
+$\nu=1$, y el segundo por $\lVert H_{k}^{-1}\rVert\leq1/m$:</p>
+<div class="display">\[
+  \lVert x_{k+1}-x^{\star}\rVert\leq\frac{\rho}{2m}\lVert x_{k}-x^{\star}\rVert^{2}
+   +\frac1m\lVert r_{k}\rVert . \qquad
+\]</div>
+<p><em>b)</em> Como $\nabla f(x^{\star})=0$ y $\lVert H\rVert\leq M$ en la vecindad,
+$\nabla f$ es $M$-Lipschitz ahí
+$\Rightarrow\lVert g_{k}\rVert=\lVert\nabla f(x_{k})-\nabla f(x^{\star})\rVert
+\leq M\lVert e_{k}\rVert$, y sustituyendo
+$\lVert r_{k}\rVert\leq\eta_{k}\lVert g_{k}\rVert\leq M\eta_{k}\lVert e_{k}\rVert$
+en <em>a)</em>,</p>
+<div class="display">\[
+  \lVert x_{k+1}-x^{\star}\rVert\leq\frac{\rho}{2m}\lVert x_{k}-x^{\star}\rVert^{2}
+   +\frac Mm\eta_{k}\lVert x_{k}-x^{\star}\rVert . \qquad
+\]</div>
+<p><em>c)</em> Dividiendo por $\lVert e_{k}\rVert\neq0$,</p>
+<div class="display">\[
+  \frac{\lVert e_{k+1}\rVert}{\lVert e_{k}\rVert}
+   \leq\underbrace{\frac{\rho}{2m}\lVert e_{k}\rVert}_{\to\,0}
+   +\frac Mm\eta_{k} .
+\]</div>
+<p>El primer sumando tiende a $0$ solo, así que la razón entre errores consecutivos
+está gobernada por $\eta_{k}$. Si $\eta_{k}\to0$, el cociente tiende a $0$: la
+convergencia es superlineal, y el orden lo fija el más lento de los dos términos,
+es decir el residuo relativo. Si además $\eta_{k}\leq c\lVert e_{k}\rVert$, los
+dos sumandos son $O(\lVert e_{k}\rVert)$ y</p>
+<div class="display">\[
+  \lVert e_{k+1}\rVert\leq\Bigl(\frac{\rho}{2m}+\frac{cM}{m}\Bigr)
+   \lVert e_{k}\rVert^{2},
+\]</div>
+<p>que es convergencia cuadrática con una constante peor que la del paso exacto.
+$\therefore$ resolver el sistema de Newton de manera aproximada no cuesta nada
+en el orden de convergencia mientras la tolerancia relativa se apriete al ritmo
+del error, que es la regla de los métodos de Newton truncados (§15 de las
+notas).  □</p></div>
+<div class="stmt ejercicio" id="ej:t9-3"><div class="head">Ejercicio 3</div><div class="body"><p>Considere el problema no restringido $\min_{x\in\mathbb{R}}f(x)$ con
+$f(x)=|x|$, para el cual $f^{\star}=0$. Suponga, sin embargo, que se usa una
+cota inferior estricta $\underline{f}=-\delta$, $\delta&gt;0$, en lugar del valor
+óptimo, y se define</p>
+<div class="display">\[
+  \alpha_{k}=\frac{f(x_{k})-\underline{f}}{|g_{k}|^{2}},\qquad
+  g_{k}\in\partial f(x_{k}).
+\]</div>
+<p>Tome $x_{0}&gt;0$.</p>
+<ol class="lista"><li><p>Muestre que, mientras $x_{k}\neq0$, puede tomarse
+    $g_{k}=\operatorname{sign}(x_{k})$ y que $\alpha_{k}=|x_{k}|+\delta$.</p></li><li><p>Calcule explícitamente $x_{1},x_{2},x_{3},\dots$ y pruebe que, después
+    de la primera iteración, $x_{k}\in\{-\delta,\delta\}$.</p></li><li><p>Concluya que los valores $f(x_{k})$ no convergen a $f^{\star}$.</p></li><li><p>Compare este comportamiento con el que se obtiene usando el valor
+    correcto $f^{\star}=0$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p82" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p82"><p><em>a)</em> Si $x_{k}\neq0\Rightarrow g_{k}=f&#x27;(x_{k})=\operatorname{sign}(x_{k})$
+$\Rightarrow\alpha_{k}=\frac{f(x_{k})+\delta}{|\operatorname{sign}(x_{k})|^{2}}
+=|x_{k}|+\delta$.  □</p>
+<p><em>b)</em></p>
+<div class="display">\[
+  x_{1}=x_{0}-(|x_{0}|+\delta)\operatorname{sign}(x_{0})
+   =x_{0}-|x_{0}|\operatorname{sign}(x_{0})-\delta\operatorname{sign}(x_{0})
+   =-\delta\operatorname{sign}(x_{0})
+\]</div>
+<p>$\Rightarrow x_{1}\in\{-\delta,\delta\}$.</p>
+<p><em>c)</em> Como
+$x_{k+1}=x_{k}-|x_{k}|\operatorname{sign}(x_{k})-\delta\operatorname{sign}(x_{k})
+=-\delta\operatorname{sign}(x_{k})$
+$\Rightarrow x_{k}=\pm\delta$ para todo $k\geq1$
+$\therefore f(x_{k})\equiv\delta$ y $f(x_{k})\not\to f^{\star}=0$.  □</p>
+<p><em>d)</em> En tal caso $\alpha_{k}=|x_{k}|
+\Rightarrow x_{k+1}=x_{k}-|x_{k}|\operatorname{sign}(x_{k})=0$, es decir converge
+en un paso.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p83" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p83"><p>La idea es leer el paso de Polyak con cota inferior como el paso de Polyak
+exacto más un sobrepaso fijo, y medir ese sobrepaso en la recurrencia básica del
+método del subgradiente.</p>
+<p><em>a)</em> Para $x_{k}\neq0$, $f$ es diferenciable en $x_{k}$ y
+$\partial f(x_{k})=\{\operatorname{sign}(x_{k})\}$, de modo que la única
+selección posible es $g_{k}=\operatorname{sign}(x_{k})$, con $|g_{k}|=1$. Pero
+entonces</p>
+<div class="display">\[
+  \alpha_{k}=\frac{f(x_{k})-\underline f}{|g_{k}|^{2}}=|x_{k}|+\delta . \qquad
+\]</div>
+<p><em>b)</em> Con $x_{0}&gt;0$, $x_{1}=x_{0}-(x_{0}+\delta)=-\delta$. Y si
+$x_{k}=\pm\delta$ para algún $k\geq1$, entonces $|x_{k}|=\delta$ y</p>
+<div class="display">\[
+  x_{k+1}=x_{k}-(\delta+\delta)\operatorname{sign}(x_{k})
+   =x_{k}-2\delta\operatorname{sign}(x_{k})=-x_{k}.
+\]</div>
+<p>$\therefore x_{1}=-\delta$, $x_{2}=\delta$, $x_{3}=-\delta$, y por inducción
+$x_{k}=(-1)^{k}\delta$ para todo $k\geq1$: la sucesión entra en un ciclo de
+período $2$ y no vuelve a salir de $\{-\delta,\delta\}$.  □</p>
+<p><em>c)</em> $f(x_{k})=|x_{k}|=\delta$ para todo $k\geq1$
+$\Rightarrow f(x_{k})\to\delta\neq0=f^{\star}$.  □</p>
+<p>La razón se ve en la recurrencia básica del método del subgradiente (§16 de las
+notas): de $x_{k+1}=x_{k}-\alpha_{k}g_{k}$ y
+$\langle g_{k},x_{k}-x^{\star}\rangle\geq f(x_{k})-f^{\star}$,</p>
+<div class="display">\[
+  \lVert x_{k+1}-x^{\star}\rVert^{2}\leq\lVert x_{k}-x^{\star}\rVert^{2}
+   -2\alpha_{k}\bigl(f(x_{k})-f^{\star}\bigr)+\alpha_{k}^{2}\lVert g_{k}\rVert^{2},
+\]</div>
+<p>y sustituyendo
+$\alpha_{k}=(f(x_{k})-\underline f)/\lVert g_{k}\rVert^{2}$,</p>
+<div class="display">\[
+  \lVert x_{k+1}-x^{\star}\rVert^{2}\leq\lVert x_{k}-x^{\star}\rVert^{2}
+   -\frac{\bigl(f(x_{k})-\underline f\bigr)
+          \bigl(f(x_{k})+\underline f-2f^{\star}\bigr)}{\lVert g_{k}\rVert^{2}} .
+\]</div>
+<p>Con $f^{\star}=0$ y $\underline f=-\delta$ el numerador es
+$f(x_{k})^{2}-\delta^{2}$: el paso garantiza acercarse a $x^{\star}$ mientras
+$f(x_{k})&gt;\delta$, y deja de garantizarlo exactamente en el nivel $\delta$, que
+es donde la sucesión se queda. El $\delta$ del ciclo no es un accidente de
+$f(x)=|x|$: es la altura a la que la cota deja de dar información.</p>
+<p><em>d)</em> Con el valor correcto $\underline f=f^{\star}=0$ se tiene
+$\alpha_{k}=|x_{k}|$ y</p>
+<div class="display">\[
+  x_{1}=x_{0}-|x_{0}|\operatorname{sign}(x_{0})=0 ,
+\]</div>
+<p>de modo que el método llega al mínimo en una sola iteración. En la cota de
+arriba el numerador pasa a ser $f(x_{k})^{2}\geq0$: el paso de Polyak exacto
+nunca se aleja de $x^{\star}$, y la holgura $f^{\star}-\underline f$ es
+exactamente la que mide el error residual en valor objetivo.  □</p></div>
+<div class="stmt ejercicio" id="ej:t9-4"><div class="head">Ejercicio 4</div><div class="body"><p>Sea $C\subset\mathbb{R}^{n}$ no vacío, cerrado y convexo, y sea $h$
+diferenciable y estrictamente convexa en un conjunto abierto que contiene a $C$.
+Fije un punto $y$ en el dominio de $\nabla h$ y suponga que el problema
+$p\in\operatorname{argmin}_{z\in C}D_{h}(z,y)$ tiene solución.</p>
+<ol class="lista"><li><p>Use la condición de optimalidad de primer orden para probar que
+    $\langle\nabla h(p)-\nabla h(y),x-p\rangle\geq0$ para todo $x\in C$.</p></li><li><p>Para $u,v,w$ en el dominio de diferenciabilidad de $h$, muestre que
+    $\langle\nabla h(u)-\nabla h(v),w-u\rangle=D_{h}(w,v)-D_{h}(w,u)-D_{h}(u,v)$.</p></li><li><p>Muestre la desigualdad pitagórica de Bregman
+    $D_{h}(x,y)\geq D_{h}(x,p)+D_{h}(p,y)$, $x\in C$.</p></li><li><p>Tome $h(x)=\frac12\lVert x\rVert_{2}^{2}$. Muestre que
+    $p=\operatorname{proj}_{C}(y)$ y que la desigualdad anterior se reduce a
+    $\lVert x-y\rVert_{2}^{2}\geq\lVert x-p\rVert_{2}^{2}+\lVert p-y\rVert_{2}^{2}$,
+    $x\in C$. Compare esta relación con la caracterización variacional de la
+    proyección euclidiana.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p84" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p84"><p><em>a)</em> Recuerde que
+$N_{C}(p)=\{v\in\mathbb{R}^{n}:\langle v,c-p\rangle\leq0\ \forall c\in C\}$.
+Como $D_{h}(z,y)=h(z)-h(y)-\langle\nabla h(y),z-y\rangle\geq0$, la regla de
+Fermat para $\min_{z\in C}D_{h}(z,y)$ da</p>
+<div class="display">\[
+  0\in\partial_{z}D_{h}(p,y)+\partial\delta_{C}(p)
+  \iff0\in\nabla h(p)-\nabla h(y)+N_{C}(p)
+  \iff\nabla h(y)-\nabla h(p)\in N_{C}(p)
+\]</div>
+<p>$\iff\langle\nabla h(y)-\nabla h(p),c-p\rangle\leq0$ para todo $c\in C$
+$\iff\langle\nabla h(p)-\nabla h(y),c-p\rangle\geq0$ para todo $c\in C$.  □</p>
+<p><em>b)</em></p>
+<div class="display">\begin{align*}
+  D_{h}(w,v)-D_{h}(w,u)-D_{h}(u,v)
+   &amp;=h(w)-h(v)-\langle\nabla h(v),w-v\rangle\\
+   &amp;\quad-h(w)+h(u)+\langle\nabla h(u),w-u\rangle\\
+   &amp;\quad-h(u)+h(v)+\langle\nabla h(v),u-v\rangle\\
+   &amp;=\langle\nabla h(u),w-u\rangle-\langle\nabla h(v),w-u\rangle
+    =\langle\nabla h(u)-\nabla h(v),w-u\rangle. \qquad
+\end{align*}</div>
+<p><em>c)</em> Tome $u=p$, $v=y$ y $w=x$. Por <em>a)</em> y <em>b)</em>,</p>
+<div class="display">\[
+  0\leq\langle\nabla h(p)-\nabla h(y),x-p\rangle
+   =D_{h}(x,y)-D_{h}(x,p)-D_{h}(p,y)
+  \iff D_{h}(x,y)\geq D_{h}(x,p)+D_{h}(p,y). \qquad
+\]</div>
+<p><em>d)</em> Con $h=\frac12\lVert\cdot\rVert_{2}^{2}$,
+$D_{h}(x,y)=\lVert x-y\rVert_{2}^{2}$
+$\therefore\lVert x-y\rVert_{2}^{2}\geq\lVert x-p\rVert_{2}^{2}+\lVert p-y\rVert_{2}^{2}$.
+Como</p>
+<div class="display">\[
+  p=\operatorname{argmin}_{z\in C}D_{h}(z,y)
+   =\operatorname{argmin}_{z\in C}\tfrac12\lVert z-y\rVert^{2}
+   =\operatorname{argmin}_{z\in C}\lVert z-y\rVert
+  \ \Rightarrow\ p=\operatorname{proj}_{C}(y).
+\]</div>
+<p>La caracterización variacional dice que $\langle y-p,x-p\rangle\leq0$ para todo
+$x\in C$, es decir $2\langle p-y,x-p\rangle\geq0$
+$\Rightarrow$</p>
+<div class="display">\[
+  \lVert p-y\rVert^{2}+2\langle p-y,x-p\rangle+\lVert x-p\rVert^{2}
+   \geq\lVert p-y\rVert^{2}+\lVert x-p\rVert^{2}
+  \iff\lVert x-y\rVert^{2}\geq\lVert p-y\rVert^{2}+\lVert x-p\rVert^{2}.
+\]</div>
+<p>$\therefore$ la desigualdad pitagórica de Bregman equivale a la caracterización
+variacional de la proyección cuando $h=\frac12\lVert\cdot\rVert^{2}$.  □</p>
+<p class="aviso">Con $h=\frac12\lVert\cdot\rVert_{2}^{2}$ la divergencia es
+$D_{h}(x,y)=\frac12\lVert x-y\rVert_{2}^{2}$, no $\lVert x-y\rVert_{2}^{2}$; el
+factor se cancela en los dos lados y la conclusión no cambia.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p85" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p85"><p><em>a)</em> Sin pasar por la regla de la suma del subdiferencial. Sea $x\in C$ y</p>
+<div class="display">\[
+  \varphi(t)=D_{h}\bigl(p+t(x-p),\,y\bigr),\qquad t\in[0,1],
+\]</div>
+<p>bien definida porque $C$ es convexo y $h$ es diferenciable en un abierto que
+contiene a $C$. Como $p$ minimiza, $\varphi(t)\geq\varphi(0)$ para todo
+$t\in[0,1]$
+$\Rightarrow\varphi&#x27;(0^{+})\geq0$. Pero entonces, derivando $D_{h}(\cdot,y)$
+respecto del primer argumento, cuyo gradiente es
+$\nabla h(\cdot)-\nabla h(y)$,</p>
+<div class="display">\[
+  \varphi&#x27;(0^{+})=\langle\nabla h(p)-\nabla h(y),\ x-p\rangle\geq0 . \qquad
+\]</div>
+<p><em>b)</em> Es la identidad de los tres puntos de §16 de las notas. Escribiendo
+las tres divergencias y cancelando $h(w)$ y $h(u)$,</p>
+<div class="display">\[
+  D_{h}(w,v)-D_{h}(w,u)-D_{h}(u,v)
+   =\langle\nabla h(u),w-u\rangle-\langle\nabla h(v),w-u\rangle
+   =\langle\nabla h(u)-\nabla h(v),w-u\rangle . \qquad
+\]</div>
+<p><em>c)</em> Con $u=p$, $v=y$, $w=x$, la identidad de <em>b)</em> es</p>
+<div class="display">\[
+  \langle\nabla h(p)-\nabla h(y),x-p\rangle=D_{h}(x,y)-D_{h}(x,p)-D_{h}(p,y),
+\]</div>
+<p>y el lado izquierdo es $\geq0$ por <em>a)</em>
+$\Rightarrow D_{h}(x,y)\geq D_{h}(x,p)+D_{h}(p,y)$ para todo $x\in C$.  □</p>
+<p><em>d)</em> Con $h=\frac12\lVert\cdot\rVert_{2}^{2}$ se tiene
+$\nabla h=\mathrm{Id}$ y</p>
+<div class="display">\[
+  D_{h}(x,y)=\tfrac12\lVert x\rVert^{2}-\tfrac12\lVert y\rVert^{2}
+   -\langle y,x-y\rangle=\tfrac12\lVert x-y\rVert^{2}.
+\]</div>
+<p>Minimizar $D_{h}(z,y)$ sobre $C$ es minimizar $\lVert z-y\rVert$ sobre $C$, cuyo
+único minimizador es $\operatorname{proj}_{C}(y)$ (§5 de las notas)
+$\Rightarrow p=\operatorname{proj}_{C}(y)$, y multiplicando por $2$ la
+desigualdad de <em>c)</em>,</p>
+<div class="display">\[
+  \lVert x-y\rVert_{2}^{2}\geq\lVert x-p\rVert_{2}^{2}+\lVert p-y\rVert_{2}^{2},
+  \qquad x\in C. \qquad
+\]</div>
+<p>Más aún, en este caso <em>a)</em> se lee $\langle p-y,x-p\rangle\geq0$, que es
+exactamente la caracterización variacional $\langle y-p,x-p\rangle\leq0$, y la
+identidad</p>
+<div class="display">\[
+  \lVert x-y\rVert^{2}=\lVert x-p\rVert^{2}+2\langle x-p,p-y\rangle
+   +\lVert p-y\rVert^{2}
+\]</div>
+<p>muestra que la desigualdad pitagórica es la caracterización variacional con el
+término cruzado puesto aparte. $\therefore$ las dos son la misma afirmación, y
+la desigualdad de Bregman es su versión para una geometría cualquiera: el
+ángulo recto euclidiano se vuelve la desigualdad $\varphi&#x27;(0^{+})\geq0$ de
+<em>a)</em>.  □</p></div>
+<div class="stmt ejercicio" id="ej:t9-5"><div class="head">Ejercicio 5$^{*}$</div><div class="body"><p>Pruebe la desigualdad de Pinsker</p>
+<div class="display">\[
+  D_{\mathrm{KL}}(x,y)\geq\tfrac12\lVert x-y\rVert_{1}^{2}
+\]</div>
+<p>para $x,y\in\Delta_{n}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p86" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p86"><p><strong>Demostración: </strong> $D_{\mathrm{KL}}=D_{h}$ con
+$h(x)=\sum_{i}x_{i}\log x_{i}$
+$\Rightarrow\nabla h(x)=(\log x_{i}+1)_{i}$ si $x\in\rint(\Delta_{n})$, y
+$\nabla^{2}h(x)=\operatorname{diag}(1/x_{i})$. Sea $d=x-y$, de modo que
+$x=y+d$
+$\Rightarrow$</p>
+<div class="display">\begin{align*}
+  D_{\mathrm{KL}}(x,y)&amp;=h(x)-h(y)-\langle\nabla h(y),x-y\rangle
+   =h(y+d)-h(y)-\langle\nabla h(y),d\rangle\\
+   &amp;=\int_{0}^{1}(1-t)\langle\nabla^{2}h(y+td)d,d\rangle\,dt
+   =\int_{0}^{1}(1-t)\sum_{i=1}^{n}\frac{d_{i}^{2}}{y_{i}+td_{i}}\,dt .
+\end{align*}</div>
+<p>Usando que $\sum_{i}(y_{i}+td_{i})=\sum_{i}y_{i}+t\sum_{i}d_{i}=1+t\cdot0=1$,
+por Cauchy–Schwarz</p>
+<div class="display">\[
+  \lVert d\rVert_{1}^{2}
+   =\Bigl(\sum_{i}\frac{|d_{i}|}{\sqrt{y_{i}+td_{i}}}\sqrt{y_{i}+td_{i}}\Bigr)^{2}
+   \leq\sum_{i}\frac{d_{i}^{2}}{y_{i}+td_{i}}\cdot\sum_{i}(y_{i}+td_{i})
+   =\sum_{i}\frac{d_{i}^{2}}{y_{i}+td_{i}}
+\]</div>
+<p>$\therefore D_{\mathrm{KL}}(x,y)\geq\lVert d\rVert_{1}^{2}\int_{0}^{1}(1-t)\,dt
+=\frac12\lVert x-y\rVert_{1}^{2}$.  □</p>
+<p class="aviso">El cálculo pide $y+td$ con todas las coordenadas estrictamente positivas,
+así que cubre $x,y\in\rint\Delta_{n}$; falta el paso al borde del símplex.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p87" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p87"><p>Otra ruta, que no integra nada: se reduce el problema a dos coordenadas y se
+resuelve ahí con cálculo de una variable.</p>
+<p><strong>Paso 1: el caso escalar.</strong> Para $p\in[0,1]$ y $q\in(0,1)$ sea</p>
+<div class="display">\[
+  d(p,q)=p\log\frac pq+(1-p)\log\frac{1-p}{1-q},
+\]</div>
+<p>con la convención $0\log0=0$. <strong>Afirmación: </strong> $d(p,q)\geq2(p-q)^{2}$.</p>
+<p>En efecto, fije $p$ y sea $\psi(q)=d(p,q)-2(p-q)^{2}$ en $q\in(0,1)$. Se tiene
+$\psi(p)=0$ si $p\in(0,1)$, y</p>
+<div class="display">\[
+  \psi&#x27;(q)=-\frac pq+\frac{1-p}{1-q}+4(p-q)
+   =\frac{q-p}{q(1-q)}+4(p-q)
+   =(p-q)\Bigl(4-\frac{1}{q(1-q)}\Bigr).
+\]</div>
+<p>Como $q(1-q)\leq\frac14$ en $(0,1)$, el paréntesis es $\leq0$, así que
+$\psi&#x27;(q)\leq0$ para $q&lt;p$ y $\psi&#x27;(q)\geq0$ para $q&gt;p$: $\psi$ decrece hasta
+$p$ y crece después $\Rightarrow\psi(q)\geq\psi(p)=0$.  □</p>
+<p><strong>Paso 2: la desigualdad log-sum.</strong> Para $a_{i}\geq0$ y $b_{i}&gt;0$,</p>
+<div class="display">\[
+  \sum_{i}a_{i}\log\frac{a_{i}}{b_{i}}
+   \geq\Bigl(\sum_{i}a_{i}\Bigr)\log\frac{\sum_{i}a_{i}}{\sum_{i}b_{i}} .
+\]</div>
+<p>En efecto, sea $b=\sum_{i}b_{i}$ y $\phi(t)=t\log t$, que es convexa. Los pesos
+$b_{i}/b$ suman $1$, así que por Jensen</p>
+<div class="display">\[
+  \sum_{i}a_{i}\log\frac{a_{i}}{b_{i}}
+   =b\sum_{i}\frac{b_{i}}{b}\,\phi\Bigl(\frac{a_{i}}{b_{i}}\Bigr)
+   \geq b\,\phi\Bigl(\sum_{i}\frac{b_{i}}{b}\frac{a_{i}}{b_{i}}\Bigr)
+   =b\,\phi\Bigl(\frac{\sum_{i}a_{i}}{b}\Bigr)
+   =\Bigl(\sum_{i}a_{i}\Bigr)\log\frac{\sum_{i}a_{i}}{\sum_{i}b_{i}} . \qquad
+\]</div>
+<p><strong>Paso 3: la reducción.</strong> Sea $A=\{i:x_{i}\geq y_{i}\}$ y</p>
+<div class="display">\[
+  p=\sum_{i\in A}x_{i},\qquad q=\sum_{i\in A}y_{i}.
+\]</div>
+<p>Como $\sum_{i}(x_{i}-y_{i})=0$,</p>
+<div class="display">\[
+  \lVert x-y\rVert_{1}=\sum_{i\in A}(x_{i}-y_{i})+\sum_{i\notin A}(y_{i}-x_{i})
+   =2(p-q).
+\]</div>
+<p>Puede suponerse $0&lt;q&lt;1$: si $q=0$ y $p&gt;0$ hay un $i$ con $x_{i}&gt;0=y_{i}$ y
+$D_{\mathrm{KL}}(x,y)=+\infty$, y los casos $q=0$ con $p=0$ y $q=1$ obligan a
+$x=y$, donde los dos lados son $0$. Aplicando la log-sum por separado a $A$ y a
+su complemento,</p>
+<div class="display">\[
+  D_{\mathrm{KL}}(x,y)=\sum_{i}x_{i}\log\frac{x_{i}}{y_{i}}
+   \geq p\log\frac pq+(1-p)\log\frac{1-p}{1-q}=d(p,q)
+   \geq2(p-q)^{2}=\tfrac12\lVert x-y\rVert_{1}^{2}. \qquad
+\]</div>
+<p>La desigualdad vale entonces para todo $x,y\in\Delta_{n}$, borde incluido, con
+la convención $D_{\mathrm{KL}}(x,y)=+\infty$ cuando algún $y_{i}=0&lt;x_{i}$.</p></div>
+<h4 id="ejercicios-convexa-x11">Tarea 10</h4>
+<div class="stmt ejercicio" id="ej:t10-1"><div class="head">Ejercicio 1</div><div class="body"><p>Suponga que los subgradientes seleccionados por el método del subgradiente
+proyectado satisfacen que $\lVert g_{k}\rVert\leq M$, y que
+$\operatorname{dist}(x_{0},X^{\star})\leq R$. Considere la regla de pasos</p>
+<div class="display">\[
+  \alpha_{k}=\frac{a}{(k+1)^{p}},\qquad a&gt;0,
+\]</div>
+<p>y use la cota general del método del subgradiente para responder las siguientes
+preguntas.</p>
+<ol class="lista"><li><p>Para $p=\frac12$, pruebe que la cota para el promedio ponderado y para
+    el mejor iterado es de orden $O\bigl(\frac{\log N}{\sqrt N}\bigr)$.</p></li><li><p>Para $p\in(1/2,1)$, pruebe que la cota es de orden $O(N^{-(1-p)})$.</p></li><li><p>Para $p=1$, pruebe que la cota obtenida directamente es de orden
+    $O\bigl(\frac1{\log N}\bigr)$.</p></li><li><p>Compare estas tasas con la tasa $O(N^{-1/2})$ obtenida cuando se conoce
+    de antemano el horizonte $N$ y se usa un paso constante optimizado para ese
+    horizonte.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p88" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p88"><p>Sean $A_{N}=\sum_{k=0}^{N-1}\alpha_{k}$,
+$\bar x_{N}=\frac1{A_{N}}\sum_{k}\alpha_{k}x_{k}$ y
+$R=\lVert x_{0}-x^{\star}\rVert$, de modo que</p>
+<div class="display">\[
+  f(\bar x_{N})-f^{\star}\leq\frac{R^{2}+M^{2}\sum_{k}\alpha_{k}^{2}}{2A_{N}} .
+\]</div>
+<p><em>a)</em> $A_{N}=a\sum_{k=0}^{N-1}\frac1{\sqrt{k+1}}=a\sum_{k=1}^{N}\frac1{\sqrt k}$
+y $\sum_{k}\alpha_{k}^{2}=a^{2}\sum_{k=1}^{N}\frac1k$. Basta ver que existen
+$C&gt;0$ y $\varepsilon&gt;0$ tales que</p>
+<ol class="lista"><li><p>$\sum_{k=1}^{N}\frac1{\sqrt k}\geq\varepsilon\sqrt N$ para todo
+    $N\in\mathbb{N}$;</p></li><li><p>$\sum_{k=1}^{N}\frac1k\leq C\log N$ para todo $N\geq2$.</p></li></ol>
+<p>(i) Como $\frac1{\sqrt k}\geq\int_{k}^{k+1}\frac{dt}{\sqrt t}$,</p>
+<div class="display">\[
+  \sum_{k=1}^{N}\frac1{\sqrt k}\geq\int_{1}^{N+1}\frac{dt}{\sqrt t}
+   =\frac{2t^{3/2}}{3}\Big|_{1}^{N+1}=\frac{2(N+1)^{3/2}}{3}-\frac23 ,
+\]</div>
+<p>y</p>
+<div class="display">\[
+  \frac{\frac23\bigl[(N+1)^{3/2}-1\bigr]}{\sqrt{N+1}}
+   =\frac23(N+1)-\frac23\frac{1}{\sqrt{N+1}}
+   \geq\frac43-\frac{2}{3\sqrt{N+1}}\longrightarrow\frac43 ,
+\]</div>
+<p>de modo que con $\varepsilon&#x27;&lt;\frac43$ se tiene
+$\sum_{k=1}^{N}\frac1{\sqrt k}\geq\varepsilon&#x27;\sqrt{N+1}\geq\varepsilon&#x27;\sqrt N$
+para $N$ grande, y por tanto existe $\varepsilon&gt;0$ con
+$\sum_{k=1}^{N}\frac1{\sqrt k}\geq\varepsilon\sqrt N$.</p>
+<p>(ii) Similarmente,
+$\sum_{k=1}^{N}\frac1k=1+\sum_{k=2}^{N}\frac1k\leq1+\int_{1}^{N}\frac{dt}{t}
+=1+\log N\leq C\log N$ para todo $N\geq2$
+$\Rightarrow$ la cota es $O\bigl(\frac{\log N}{\sqrt N}\bigr)$.</p>
+<p><em>b)</em> Si $p\in(\frac12,1)\Rightarrow2p\in(1,2)
+\Rightarrow\sum_{k}\alpha_{k}^{2}=a^{2}\sum_{k=1}^{N}\frac1{k^{2p}}\leq C$, pues
+$\sum_{k=1}^{\infty}k^{-2p}&lt;\infty$. Por otro lado,
+$\sum_{k=0}^{N-1}\alpha_{k}=a\sum_{k=1}^{N}k^{-p}$, y basta ver que existe
+$C&gt;0$ con $\sum_{k=1}^{N}k^{-p}\geq CN^{1-p}$. En efecto,
+$\frac1{k^{p}}\geq\int_{k}^{k+1}\frac{dt}{t^{p}}$
+$\Rightarrow$</p>
+<div class="display">\[
+  \sum_{k=1}^{N}\frac1{k^{p}}\geq\int_{1}^{N+1}\frac{dt}{t^{p}}
+   =\frac{(N+1)^{1-p}-1}{1-p}\geq CN^{1-p}
+\]</div>
+<p>para alguna $C$ $\Rightarrow$ la cota es $O(N^{-(1-p)})$.</p>
+<p><em>c)</em> En este caso
+$\sum_{k}\alpha_{k}^{2}=a^{2}\sum_{k=1}^{N}\frac1{k^{2}}\leq\frac{a^{2}\pi^{2}}{6}$
+está acotado, y $\sum_{k}\alpha_{k}=a\sum_{k=1}^{N}\frac1k$. Basta ver que
+$\sum_{k=1}^{N}\frac1k\geq\varepsilon\log N$, y similarmente a antes
+$\frac1k\geq\int_{k}^{k+1}\frac{dt}{t}$
+$\Rightarrow\sum_{k=1}^{N}\frac1k\geq\int_{1}^{N+1}\frac{dt}{t}\geq\varepsilon\log N$
+para algún $\varepsilon&gt;0$ $\Rightarrow$ la cota es
+$O\bigl(\frac1{\log N}\bigr)$.</p>
+<p><em>d)</em> Lo que se concluye es que, en caso de conocer de antemano el número
+de iteraciones, el paso constante da la mejor cota del error posible, mientras
+que si no se conoce, lo mejor es tomar $p=\frac12$, pues la cota
+$\log N/\sqrt N$ es la mejor entre todas las posibilidades.  □</p>
+<p class="aviso">En <em>a)</em>(i) la primitiva de $t^{-1/2}$ es $2\sqrt t$ y no
+$\frac23t^{3/2}$, con lo que los dos renglones siguientes no dicen nada; la
+desigualdad que se quiere sí es cierta.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p89" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p89"><p>La cota general del método del subgradiente proyectado (§16 de las notas) vale a
+la vez para el promedio ponderado $\bar x_{N}$ y para el mejor iterado
+$x_{N}^{\mathrm{mej}}$:</p>
+<div class="display">\[
+  \min\bigl\{f(\bar x_{N}),\,f(x_{N}^{\mathrm{mej}})\bigr\}-f^{\star}
+   \leq\frac{R^{2}+M^{2}\sum_{k=0}^{N-1}\alpha_{k}^{2}}
+            {2\sum_{k=0}^{N-1}\alpha_{k}}=:B_{N},
+\]</div>
+<p>así que todo se reduce a acotar por debajo $S_{N}=\sum_{k=1}^{N}k^{-p}$ y por
+arriba $Q_{N}=\sum_{k=1}^{N}k^{-2p}$, pues con $\alpha_{k}=a(k+1)^{-p}$ se tiene
+$\sum_{k=0}^{N-1}\alpha_{k}=aS_{N}$ y $\sum_{k=0}^{N-1}\alpha_{k}^{2}=a^{2}Q_{N}$.</p>
+<p>Para la cota inferior no hace falta ninguna integral: como $k\mapsto k^{-p}$
+decrece, todos los términos son al menos el último,</p>
+<div class="display">\[
+  S_{N}=\sum_{k=1}^{N}\frac1{k^{p}}\geq N\cdot\frac1{N^{p}}=N^{1-p}
+  \qquad(p&lt;1),
+\]</div>
+<p>y para $p=1$, comparando con la integral,
+$S_{N}\geq\int_{1}^{N+1}\frac{dt}{t}=\log(N+1)\geq\log N$. Para la cota
+superior, $\sum_{k=1}^{N}k^{-r}\leq1+\int_{1}^{N}t^{-r}\,dt$, que vale
+$1+\log N$ si $r=1$ y es $\leq1+\frac{1}{r-1}$ si $r&gt;1$.</p>
+<p><em>a)</em> $p=\frac12$: $S_{N}\geq\sqrt N$ y $Q_{N}=\sum_{k=1}^{N}k^{-1}\leq1+\log N$
+$\Rightarrow$</p>
+<div class="display">\[
+  B_{N}\leq\frac{R^{2}+M^{2}a^{2}(1+\log N)}{2a\sqrt N}
+   =O\Bigl(\frac{\log N}{\sqrt N}\Bigr). \qquad
+\]</div>
+<p><em>b)</em> $p\in(\frac12,1)$: ahora $2p&gt;1$, de modo que
+$Q_{N}\leq1+\frac{1}{2p-1}=:C_{p}$ está acotado uniformemente en $N$, y
+$S_{N}\geq N^{1-p}$
+$\Rightarrow$</p>
+<div class="display">\[
+  B_{N}\leq\frac{R^{2}+M^{2}a^{2}C_{p}}{2a\,N^{1-p}}=O\bigl(N^{-(1-p)}\bigr). \qquad
+\]</div>
+<p><em>c)</em> $p=1$: $Q_{N}\leq\sum_{k=1}^{\infty}k^{-2}=\frac{\pi^{2}}{6}$ y
+$S_{N}\geq\log N$
+$\Rightarrow$</p>
+<div class="display">\[
+  B_{N}\leq\frac{R^{2}+M^{2}a^{2}\pi^{2}/6}{2a\log N}
+   =O\Bigl(\frac1{\log N}\Bigr). \qquad
+\]</div>
+<p><em>d)</em> Con el horizonte $N$ conocido se toma $\alpha_{k}\equiv\alpha$, y</p>
+<div class="display">\[
+  B_{N}=\frac{R^{2}+M^{2}N\alpha^{2}}{2N\alpha},
+\]</div>
+<p>que se minimiza en $\alpha=\frac{R}{M\sqrt N}$ y vale entonces
+$\frac{RM}{\sqrt N}=O(N^{-1/2})$. Comparando las cuatro reglas:</p>
+<div class="centro"><div class="tabla"><table><tr><th>Regla</th><th>Cota</th></tr>
+<tr><td>$\alpha_{k}\equiv R/(M\sqrt N)$, con $N$ conocido</td><td>$O(N^{-1/2})$</td></tr>
+<tr><td>$p=1/2$</td><td>$O(N^{-1/2}\log N)$</td></tr>
+<tr><td>$p\in(1/2,1)$</td><td>$O(N^{-(1-p)})$</td></tr>
+<tr><td>$p=1$</td><td>$O(1/\log N)$</td></tr></table></div></div>
+<p>$\therefore$ no conocer el horizonte cuesta exactamente un factor $\log N$ si se
+elige $p=\frac12$, que es el mejor exponente de la familia: para $p&gt;\frac12$ el
+exponente $1-p$ es peor que $\frac12$, y en $p=1$ la cota degenera a
+$1/\log N$, que ni siquiera es polinomial. La razón es que $\alpha_{k}$ debe
+cumplir dos cosas opuestas, $\sum_{k}\alpha_{k}=\infty$ para que el término
+$R^{2}/(2\sum\alpha_{k})$ se vaya y $\sum_{k}\alpha_{k}^{2}&lt;\infty$ para que el
+otro no crezca, y $p=\frac12$ es el punto donde la segunda apenas falla, por un
+logaritmo.  □</p></div>
+<div class="stmt ejercicio" id="ej:t10-2"><div class="head">Ejercicio 2</div><div class="body"><p>Considere un problema de optimización no restringido y suponga que
+$h:\mathbb{R}^{n}\to\mathbb{R}$ es propia, cerrada, diferenciable y
+$\sigma$-fuertemente convexa (con respecto a la norma euclidiana). Use los
+resultados de conjugación para justificar que $h^{*}$ es diferenciable y que
+$\nabla h^{*}=(\nabla h)^{-1}$.</p>
+<ol class="lista"><li><p>Partiendo de la condición de optimalidad del paso de mirror descent
+    $\nabla h(x_{k+1})=\nabla h(x_{k})-\alpha_{k}g_{k}$, demuestre que
+    $x_{k+1}=\nabla h^{*}\bigl(\nabla h(x_{k})-\alpha_{k}g_{k}\bigr)$.
+    Interprete el método como un paso aditivo en coordenadas duales seguido de
+    un regreso al espacio primal.</p></li><li><p>Sea ahora $h(x)=\frac12\langle Qx,x\rangle$, $Q\succ0$. Calcule $h^{*}$,
+    $\nabla h$ y $\nabla h^{*}$, y deduzca que
+    $x_{k+1}=x_{k}-\alpha_{k}Q^{-1}g_{k}$.</p></li><li><p>Muestre que la divergencia de Bregman asociada es
+    $D_{h}(x,y)=\frac12\langle Q(x-y),x-y\rangle$. Explique en qué sentido la
+    matriz $Q^{-1}$ actúa como un precondicionador y cómo la elección de $Q$
+    modifica la geometría en la que se miden los desplazamientos.</p></li><li><p>Verifique que para $Q=I$ se recupera el método usual del subgradiente.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p90" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p90"><p>Por Fenchel–Young, $h(x)+h^{*}(y)=\langle x,y\rangle
+\iff y\in\partial h(x)\iff x\in\partial h^{*}(y)$. En este caso
+$y=\nabla h(x)\iff x=\nabla h^{*}(y)$, es decir $\nabla h^{*}=(\nabla h)^{-1}$
+en el sentido de que $\nabla h(\nabla h^{*}(y))=y$ y
+$\nabla h^{*}(\nabla h(x))=x$.</p>
+<p><em>a)</em> Solo es aplicar $\nabla h^{*}$ a ambos lados.  □</p>
+<p><em>b)</em></p>
+<div class="display">\begin{align*}
+  h&#x27;(x,d)&amp;=\frac12\lim_{t\to0}\frac{\langle Q(x+td),x+td\rangle-\langle Qx,x\rangle}{t}
+   =\frac12\lim_{t\to0}\frac{t\langle Qx,d\rangle+t\langle Qd,x\rangle+t^{2}\langle Qd,d\rangle}{t}\\
+   &amp;=\frac12\bigl(\langle Qx,d\rangle+\langle Q\trans x,d\rangle\bigr)
+    =\Bigl\langle\tfrac12(Q+Q\trans)x,\ d\Bigr\rangle ,
+\end{align*}</div>
+<p>es decir $\nabla h(x)=\frac12(Q+Q\trans)x=Qx$. Ahora,
+$h^{*}(y)=\sup_{x}\langle y,x\rangle-\frac12\langle Qx,x\rangle$, y la condición
+de primer orden $y-Qx=0\iff x=Q^{-1}y$
+$\Rightarrow$</p>
+<div class="display">\[
+  h^{*}(y)=\langle y,Q^{-1}y\rangle-\tfrac12\langle y,Q^{-1}y\rangle
+   =\tfrac12\langle Q^{-1}y,y\rangle
+  \ \Rightarrow\ \nabla h^{*}(y)=Q^{-1}y .
+\]</div>
+<p>Pero entonces</p>
+<div class="display">\[
+  x_{k+1}=\nabla h^{*}\bigl(\nabla h(x_{k})-\alpha_{k}g_{k}\bigr)
+   =Q^{-1}(Qx_{k}-\alpha_{k}g_{k})=x_{k}-\alpha_{k}Q^{-1}g_{k}. \qquad
+\]</div>
+<p><em>c)</em></p>
+<div class="display">\begin{align*}
+  D_{h}(x,y)&amp;=h(x)-h(y)-\langle\nabla h(y),x-y\rangle
+   =\tfrac12\langle Qx,x\rangle-\tfrac12\langle Qy,y\rangle-\langle Qy,x-y\rangle\\
+   &amp;=\tfrac12\langle Q(x-y),x\rangle-\tfrac12\langle Q(x-y),y\rangle
+    =\tfrac12\langle Q(x-y),x-y\rangle .
+\end{align*}</div>
+<p><em>d)</em> $x_{k+1}=x_{k}-\alpha_{k}g_{k}$.  □</p>
+<p class="aviso">Falta justificar con los resultados de conjugación que $h^{*}$ es
+diferenciable, y faltan las dos interpretaciones que pide el enunciado, la del
+paso dual en <em>a)</em> y la del precondicionador en <em>c)</em>.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p91" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p91"><p><strong>La diferenciabilidad de $h^{*}$.</strong> $h$ es propia, cerrada y
+$\sigma$-fuertemente convexa, así que por el Ejercicio 5 de la Tarea 6 su
+conjugada $h^{*}$ es diferenciable en todo $\mathbb{R}^{n}$, con gradiente
+$\frac1\sigma$-Lipschitz, y</p>
+<div class="display">\[
+  \nabla h^{*}(y)=\operatorname{argmin}_{x}\bigl\{h(x)-\langle y,x\rangle\bigr\}.
+\]</div>
+<p>Por la inversión subdiferencial (§11 de las notas),
+$y\in\partial h(x)\iff x\in\partial h^{*}(y)$; siendo $h$ y $h^{*}$
+diferenciables, los dos subdiferenciales son singuletes y la equivalencia se lee</p>
+<div class="display">\[
+  y=\nabla h(x)\iff x=\nabla h^{*}(y),
+\]</div>
+<p>es decir $\nabla h^{*}(\nabla h(x))=x$ y $\nabla h(\nabla h^{*}(y))=y$: $\nabla h$
+es inyectiva y $\nabla h^{*}$ es su inversa.</p>
+<p><em>a)</em> Aplicando $\nabla h^{*}$ a la condición de optimalidad,</p>
+<div class="display">\[
+  x_{k+1}=\nabla h^{*}\bigl(\nabla h(x_{k})-\alpha_{k}g_{k}\bigr). \qquad
+\]</div>
+<p>La lectura es: $\nabla h$ lleva el iterado al espacio dual, que es donde viven
+los subgradientes; allí el paso es aditivo,
+$\nabla h(x_{k})\mapsto\nabla h(x_{k})-\alpha_{k}g_{k}$, que es lo único que
+tiene sentido sumar, porque un subgradiente no es un vector del espacio primal;
+y $\nabla h^{*}$ devuelve el resultado al espacio primal. El método del
+subgradiente usual es el caso $h=\frac12\lVert\cdot\rVert^{2}$, donde
+$\nabla h=\nabla h^{*}=\mathrm{Id}$ y los dos espacios se identifican: esa
+identificación es la que oculta que $x_{k}-\alpha_{k}g_{k}$ suma objetos de
+espacios distintos.</p>
+<p><em>b)</em> $Q$ es simétrica $\Rightarrow\nabla h(x)=Qx$, y $h$ es
+$\lambda_{\min}(Q)$-fuertemente convexa, de modo que el preámbulo aplica. Para
+la conjugada, $x\mapsto\langle y,x\rangle-\frac12\langle Qx,x\rangle$ es
+estrictamente cóncava y su máximo se alcanza en $x=Q^{-1}y$
+$\Rightarrow$</p>
+<div class="display">\[
+  h^{*}(y)=\langle y,Q^{-1}y\rangle-\tfrac12\langle QQ^{-1}y,Q^{-1}y\rangle
+   =\tfrac12\langle Q^{-1}y,y\rangle ,
+  \qquad\nabla h^{*}(y)=Q^{-1}y .
+\]</div>
+<p>Pero entonces
+$x_{k+1}=Q^{-1}(Qx_{k}-\alpha_{k}g_{k})=x_{k}-\alpha_{k}Q^{-1}g_{k}$.  □</p>
+<p><em>c)</em> Desarrollando,
+$D_{h}(x,y)=\frac12\langle Q(x-y),x-y\rangle=\frac12\lVert x-y\rVert_{Q}^{2}$,
+con $\lVert v\rVert_{Q}^{2}:=\langle Qv,v\rangle$. Hay dos lecturas, y son la
+misma:</p>
+<ul class="lista"><li><p><em>Como precondicionador.</em> El paso es
+    $x_{k+1}=x_{k}-\alpha_{k}Q^{-1}g_{k}$: la dirección ya no es $-g_{k}$ sino
+    el subgradiente reescalado por el inverso de la métrica. Si $Q$ se parece a
+    la curvatura del problema, $Q^{-1}g$ apunta mucho mejor hacia el mínimo que
+    $g$, y el método se comporta como el usual sobre un problema cuyo número de
+    condición es el de $Q^{-1/2}\nabla^{2}fQ^{-1/2}$ en vez de el de
+    $\nabla^{2}f$.</p></li><li><p><em>Como cambio de variable.</em> Con $z=Q^{1/2}x$ y
+    $\tilde f(z)=f(Q^{-1/2}z)$, la iteración de <em>b)</em> es exactamente el
+    método del subgradiente usual sobre $\tilde f$, y
+    $D_{h}(x,y)=\frac12\lVert Q^{1/2}x-Q^{1/2}y\rVert_{2}^{2}$: mirror descent
+    con esta $h$ es el método usual medido en las coordenadas $z$.</p></li></ul>
+<p>En la tasa de mirror descent (§16 de las notas), $Q$ aparece en los dos sitios
+que importan: el radio $D_{h}(x^{\star},x_{0})=\frac12\lVert x^{\star}-x_{0}\rVert_{Q}^{2}$
+y la cota de los subgradientes, que pasa a medirse con la norma dual
+$\lVert\cdot\rVert_{Q^{-1}}$. Elegir $Q$ es decidir cuál de los dos se encoge a
+costa del otro.  □</p>
+<p><em>d)</em> Con $Q=I$: $h=\frac12\lVert\cdot\rVert^{2}$,
+$\nabla h=\nabla h^{*}=\mathrm{Id}$, $D_{h}(x,y)=\frac12\lVert x-y\rVert^{2}$ y
+$x_{k+1}=x_{k}-\alpha_{k}g_{k}$, que es el método del subgradiente usual.  □</p></div>
+<div class="stmt ejercicio" id="ej:t10-3"><div class="head">Ejercicio 3$^{*}$</div><div class="body"><p>Sea $X\in\mathbb{R}^{m\times n}$ y considere $g(X)=\tau\lVert X\rVert_{*}$,
+$\tau&gt;0$, donde $\lVert X\rVert_{*}$ denota la norma nuclear. El espacio
+$\mathbb{R}^{m\times n}$ se equipa con el producto interno de Frobenius, de modo
+que para $Y\in\mathbb{R}^{m\times n}$</p>
+<div class="display">\[
+  \operatorname{prox}_{\lambda g}(Y)=\operatorname{argmin}_{X}
+   \Bigl\{\tau\lVert X\rVert_{*}+\frac1{2\lambda}\lVert X-Y\rVert_{F}^{2}\Bigr\}.
+\]</div>
+<p>Sea $Y=U\operatorname{diag}(\sigma_{1},\dots,\sigma_{r})V\trans$,
+$r=\min\{m,n\}$, una descomposición en valores singulares, con
+$\sigma_{1}\geq\dots\geq\sigma_{r}\geq0$.</p>
+<ol class="lista"><li><p>Considere la desigualdad de von Neumann: para todo $X,Y$ se tiene que
+    $\langle X,Y\rangle_{F}\leq\sum_{i=1}^{r}\sigma_{i}(X)\sigma_{i}(Y)$.
+    Compruebe que la igualdad se alcanza cuando las matrices comparten las
+    mismas matrices en la descomposición singular.</p></li><li><p>Muestre que el problema proximal se reduce a los problemas escalares
+    $\min_{s_{i}\geq0}\bigl\{\tau s_{i}+\frac1{2\lambda}(s_{i}-\sigma_{i})^{2}\bigr\}$,
+    $i=1,\dots,r$, y deduzca que
+    $\operatorname{prox}_{\lambda\tau\lVert\cdot\rVert_{*}}(Y)
+     =U\operatorname{diag}\bigl((\sigma_{i}-\lambda\tau)_{+}\bigr)V\trans$.</p></li><li><p>Explique por qué este operador, conocido como <em>singular value
+    thresholding</em>, puede reducir el rango de la matriz.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p92" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p92"><p><em>a)</em> Si $X=UDV\trans$ y $Y=U\Delta V\trans$,</p>
+<div class="display">\begin{align*}
+  \langle X,Y\rangle_{F}=\tr(X\trans Y)
+   &amp;=\tr(VD\trans U\trans U\Delta V\trans)=\tr(VD\trans\Delta V\trans)\\
+   &amp;=\tr(D\trans\Delta V\trans V)=\tr(D\trans\Delta)
+    =\sum_{i=1}^{r}\sigma_{i}(X)\sigma_{i}(Y). \qquad
+\end{align*}</div>
+<p><em>b)</em> El problema prox es
+$\min_{X}\{\tau\lVert X\rVert_{*}+\frac1{2\lambda}\lVert Y-X\rVert_{F}^{2}\}$
+$(*)$. Como $\lVert X\rVert_{*}=\sum_{i}\sigma_{i}(X)$ y, por von Neumann,
+$\lVert X\rVert_{F}^{2}=\sum_{i}\sigma_{i}(X)^{2}$, $(*)$ se convierte en</p>
+<div class="display">\[
+  \min_{X}\ \tau\sum_{i}\sigma_{i}(X)+\frac1{2\lambda}\sum_{i}\sigma_{i}(Y)^{2}
+   -\frac1\lambda\langle X,Y\rangle_{F}+\frac1{2\lambda}\sum_{i}\sigma_{i}(X)^{2},
+\]</div>
+<p>y por von Neumann otra vez, el problema</p>
+<div class="display">\[
+  (**)\qquad\min_{X}\ \tau\sum_{i}\sigma_{i}(X)
+   +\frac1{2\lambda}\sum_{i}\sigma_{i}(Y)^{2}
+   -\frac1\lambda\sum_{i}\sigma_{i}(X)\sigma_{i}(Y)
+   +\frac1{2\lambda}\sum_{i}\sigma_{i}(X)^{2}
+\]</div>
+<p>satisface $(**)\leq(*)$, y $(**)$ depende de $X$ solo a través de los
+$\sigma_{i}(X)$. Más aún, se puede tomar $X$ simultáneamente diagonalizable con
+$Y$, y así $(**)=(*)$. Pero entonces, con $s_{i}=\sigma_{i}(X)$,</p>
+<div class="display">\[
+  (**)=\min_{s\in\mathbb{R}_{+}^{r}}\ \tau\sum_{i}s_{i}
+   +\frac1{2\lambda}\sum_{i}(\sigma_{i}-s_{i})^{2},
+\]</div>
+<p>y cada problema se minimiza por separado. Ahora bien,
+$\operatorname{argmin}_{s\geq0}\{\tau s+\frac1{2\lambda}(s-\sigma)^{2}\}$ se
+alcanza en $\tau+\frac1\lambda(s-\sigma)=0\iff s=\sigma-\lambda\tau$ si ese
+valor es positivo, y en $s=0$ en caso contrario
+$\therefore s_{i}=(\sigma_{i}-\lambda\tau)_{+}$ y
+$X=U\operatorname{diag}(s_{i})V\trans$
+$\Rightarrow\operatorname{prox}_{\lambda\tau\lVert\cdot\rVert_{*}}(Y)
+=U\operatorname{diag}((\sigma_{i}-\lambda\tau)_{+})V\trans$.  □</p>
+<p><em>c)</em> Simplemente estamos matando los valores singulares por debajo de
+cierto umbral, y esas coordenadas que se hacen $0$ reducen el rango de
+$UDV\trans$.  □</p>
+<p class="aviso">$\lVert X\rVert_{F}^{2}=\sum_{i}\sigma_{i}(X)^{2}$ no es von Neumann sino
+la invariancia unitaria de la norma de Frobenius, y falta comprobar que los
+$s_{i}$ óptimos salen en orden decreciente, que es lo que hace realizable el
+mínimo de $(**)$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p93" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p93"><p><em>a)</em> Si $X=UDV\trans$ e $Y=U\Delta V\trans$ con las mismas $U,V$ y
+$D=\operatorname{diag}(d_{i})$, $\Delta=\operatorname{diag}(\delta_{i})$ con
+entradas no negativas y ordenadas de forma decreciente, entonces</p>
+<div class="display">\[
+  \langle X,Y\rangle_{F}=\tr(X\trans Y)=\tr(VDU\trans U\Delta V\trans)
+   =\tr(D\Delta)=\sum_{i=1}^{r}d_{i}\delta_{i}
+   =\sum_{i=1}^{r}\sigma_{i}(X)\sigma_{i}(Y),
+\]</div>
+<p>que es la igualdad en von Neumann.  □</p>
+<p><em>b)</em> Desarrollando el cuadrado y usando la invariancia unitaria de la
+norma de Frobenius, $\lVert X\rVert_{F}^{2}=\sum_{i}\sigma_{i}(X)^{2}$,</p>
+<div class="display">\[
+  \varphi(X):=\tau\lVert X\rVert_{*}+\frac1{2\lambda}\lVert X-Y\rVert_{F}^{2}
+   =\tau\sum_{i}\sigma_{i}(X)+\frac1{2\lambda}\sum_{i}\sigma_{i}(X)^{2}
+    -\frac1\lambda\langle X,Y\rangle_{F}+\frac1{2\lambda}\sum_{i}\sigma_{i}^{2}.
+\]</div>
+<p>Por von Neumann,
+$-\langle X,Y\rangle_{F}\geq-\sum_{i}\sigma_{i}(X)\sigma_{i}$, de donde, con
+$s_{i}=\sigma_{i}(X)$,</p>
+<div class="display">\[
+  \varphi(X)\geq\tau\sum_{i}s_{i}+\frac1{2\lambda}\sum_{i}(s_{i}-\sigma_{i})^{2}
+   =:\Psi(s).
+\]</div>
+<p>La cota inferior solo depende de los valores singulares de $X$, y es alcanzada:
+dado cualquier $s_{1}\geq\dots\geq s_{r}\geq0$, la matriz
+$X_{s}=U\operatorname{diag}(s)V\trans$ tiene $\sigma_{i}(X_{s})=s_{i}$ y cumple
+la igualdad de <em>a)</em>, de modo que $\varphi(X_{s})=\Psi(s)$. Pero entonces</p>
+<div class="display">\[
+  \min_{X}\varphi(X)=\min\bigl\{\Psi(s):\ s_{1}\geq\dots\geq s_{r}\geq0\bigr\}.
+\]</div>
+<p>Sin la restricción de orden, $\Psi$ es separable y cada término se minimiza en</p>
+<div class="display">\[
+  \operatorname{argmin}_{s_{i}\geq0}
+   \Bigl\{\tau s_{i}+\frac1{2\lambda}(s_{i}-\sigma_{i})^{2}\Bigr\}
+   =(\sigma_{i}-\lambda\tau)_{+},
+\]</div>
+<p>porque la derivada $\tau+\frac1\lambda(s_{i}-\sigma_{i})$ se anula en
+$\sigma_{i}-\lambda\tau$ y, si ese valor es negativo, el objetivo es creciente
+en $s_{i}\geq0$. Y como $t\mapsto(t-\lambda\tau)_{+}$ es no decreciente y
+$\sigma_{1}\geq\dots\geq\sigma_{r}$, el minimizador sin restricción ya sale
+ordenado: la restricción de orden no está activa. $\therefore$</p>
+<div class="display">\[
+  \operatorname{prox}_{\lambda\tau\lVert\cdot\rVert_{*}}(Y)
+   =U\operatorname{diag}\bigl((\sigma_{i}-\lambda\tau)_{+}\bigr)V\trans . \qquad
+\]</div>
+<p><em>c)</em> El operador anula todo $\sigma_{i}\leq\lambda\tau$, y como</p>
+<div class="display">\[
+  \operatorname{rango}\bigl(U\operatorname{diag}(s)V\trans\bigr)
+   =\#\{i:\ s_{i}\neq0\},
+\]</div>
+<p>el rango de la salida es $\#\{i:\sigma_{i}&gt;\lambda\tau\}$, estrictamente menor
+que el de $Y$ en cuanto $\lambda\tau$ supere al menor valor singular no nulo de
+$Y$. Es el mismo fenómeno que el umbral suave produce coordenada a coordenada
+(§17 de las notas), trasladado al espectro: la norma nuclear es la norma
+$\ell_{1}$ de los valores singulares, y lo que el $\ell_{1}$ hace con
+coordenadas, ella lo hace con rango.  □</p></div>
+<h4 id="ejercicios-convexa-x12">Tarea 11</h4>
+<div class="stmt ejercicio" id="ej:t11-1"><div class="head">Ejercicio 1</div><div class="body"><p>Sea $g(x)=\frac12\langle x,Qx\rangle+\langle c,x\rangle$, donde $Q\succeq0$.
+Muestre que, para todo $\lambda&gt;0$,</p>
+<div class="display">\[
+  \operatorname{prox}_{\lambda g}(v)=(I+\lambda Q)^{-1}(v-\lambda c).
+\]</div>
+<p>Explique por qué $I+\lambda Q$ es invertible aunque $Q$ sea singular. Interprete
+la iteración del punto proximal aplicada a una función cuadrática como un paso
+implícito y compárela con un paso de descenso del gradiente.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p94" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p94"><p>El problema prox es</p>
+<div class="display">\[
+  \min_{x}\Bigl\{\tfrac12\langle x,Qx\rangle+\langle c,x\rangle
+   +\tfrac1{2\lambda}\lVert x-v\rVert^{2}\Bigr\},
+\]</div>
+<p>que se alcanza si $Qx+c+\frac1\lambda(x-v)=0$</p>
+<div class="display">\[
+  \iff\tfrac1\lambda(I+\lambda Q)x=\tfrac1\lambda v-c
+  \iff(I+\lambda Q)x=v-\lambda c
+  \iff x=(I+\lambda Q)^{-1}(v-\lambda c)
+\]</div>
+<p>$\therefore\operatorname{prox}_{\lambda g}(v)=(I+\lambda Q)^{-1}(v-\lambda c)$.
+Y $I+\lambda Q$ es invertible porque
+$\sigma(I+\lambda Q)=1+\lambda\,\sigma(Q)$.</p>
+<p>Por otro lado también se tiene que
+$\operatorname{prox}_{\lambda g}(v)=v-\lambda\nabla g\bigl(\operatorname{prox}_{\lambda g}(v)\bigr)$,
+así que</p>
+<div class="display">\[
+  x_{k+1}=\operatorname{prox}_{\lambda g}(x_{k})=x_{k}-\lambda\nabla g(x_{k+1}). \qquad
+\]</div>
+<p class="aviso">Falta la comparación con el paso de descenso del gradiente, que es lo
+último que pide el enunciado.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p95" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p95"><p>La condición de optimalidad del problema prox es
+$0=\nabla g(x)+\frac1\lambda(x-v)$, es decir $(I+\lambda\nabla g)(x)=v$:</p>
+<div class="display">\[
+  \operatorname{prox}_{\lambda g}=(I+\lambda\nabla g)^{-1},
+\]</div>
+<p>el <em>resolvente</em> de $\nabla g$. Con $\nabla g(x)=Qx+c$,</p>
+<div class="display">\[
+  (I+\lambda Q)x+\lambda c=v\iff x=(I+\lambda Q)^{-1}(v-\lambda c). \qquad
+\]</div>
+<p><strong>Por qué $I+\lambda Q$ es invertible.</strong> Como $Q\succeq0$ y $\lambda&gt;0$,
+para todo $x\neq0$</p>
+<div class="display">\[
+  \langle(I+\lambda Q)x,x\rangle=\lVert x\rVert^{2}+\lambda\langle Qx,x\rangle
+   \geq\lVert x\rVert^{2}&gt;0,
+\]</div>
+<p>de modo que $I+\lambda Q\succ0$ y en particular no tiene a $0$ por valor propio.
+Dicho con el espectro,
+$\sigma(I+\lambda Q)=\{1+\lambda\eta:\eta\in\sigma(Q)\}\subseteq[1,\infty)$:
+aunque $Q$ sea singular, el $I$ aleja el espectro del origen. No es una
+casualidad de este ejemplo: el resolvente de cualquier operador monótono está
+bien definido, y $\nabla g$ lo es por ser el gradiente de una función convexa.</p>
+<p><strong>Paso implícito frente a paso explícito.</strong> Los dos pasos son</p>
+<div class="display">\[
+  x_{k+1}=x_{k}-\lambda\nabla g(x_{k})=(I-\lambda Q)x_{k}-\lambda c,
+  \qquad
+  x_{k+1}=x_{k}-\lambda\nabla g(x_{k+1})=(I+\lambda Q)^{-1}(x_{k}-\lambda c):
+\]</div>
+<p>el mismo paso, evaluando el gradiente al principio o al final del intervalo. Es
+la diferencia entre el método de Euler explícito y el implícito para el flujo
+$\dot x=-\nabla g(x)$.</p>
+<p>Suponga $Q\succ0$ con espectro en $[\mu,L]$, $0&lt;\mu\leq L$, y sea
+$x^{\star}=-Q^{-1}c$ el minimizador. Restando $x^{\star}$ en las dos
+recurrencias,</p>
+<div class="display">\[
+  x_{k+1}-x^{\star}=(I-\lambda Q)(x_{k}-x^{\star}),
+  \qquad
+  x_{k+1}-x^{\star}=(I+\lambda Q)^{-1}(x_{k}-x^{\star}),
+\]</div>
+<p>con factores de contracción</p>
+<div class="display">\[
+  \rho_{\mathrm{exp}}=\max_{\mu\leq t\leq L}|1-\lambda t|,
+  \qquad
+  \rho_{\mathrm{prox}}=\max_{\mu\leq t\leq L}\frac1{1+\lambda t}
+   =\frac1{1+\lambda\mu}.
+\]</div>
+<p>Pero entonces $\rho_{\mathrm{exp}}&lt;1$ solo si $\lambda&lt;2/L$: el paso explícito
+tiene un techo, y pasado ese techo diverge. En cambio
+$\rho_{\mathrm{prox}}&lt;1$ para <em>todo</em> $\lambda&gt;0$, y además
+$\rho_{\mathrm{prox}}\to0$ cuando $\lambda\to\infty$, caso en el que
+$\operatorname{prox}_{\lambda g}(v)\to x^{\star}$ para cualquier $v$: el paso
+proximal con $\lambda$ grande resuelve el problema de una vez.</p>
+<p>$\therefore$ el paso implícito es incondicionalmente estable y no necesita
+conocer $L$, y su único precio es resolver un sistema lineal por iteración,
+mientras que el explícito solo cuesta un producto matriz–vector pero está
+limitado por la curvatura máxima.  □</p></div>
+<div class="stmt ejercicio" id="ej:t11-2"><div class="head">Ejercicio 2</div><div class="body"><p>Sea $\lVert\cdot\rVert$ una norma en $\mathbb{R}^{n}$, sea
+$\lVert\cdot\rVert_{*}$ su norma dual y denote por
+$B_{*}:=\{y:\lVert y\rVert_{*}\leq1\}$ la bola dual.</p>
+<ol class="lista"><li><p>Muestre que la conjugada de $g(x)=\tau\lVert x\rVert$ es
+    $g^{*}=\delta_{\tau B_{*}}$.</p></li><li><p>Use la identidad de Moreau para probar que
+    $\operatorname{prox}_{\lambda\tau\lVert\cdot\rVert}(v)
+     =v-\operatorname{proj}_{\lambda\tau B_{*}}(v)$.</p></li><li><p>Especialice la fórmula a las normas $\ell_{1}$, $\ell_{2}$ y
+    $\ell_{\infty}$. Recupere el operador de umbral suave en el caso $\ell_{1}$
+    y exprese $\operatorname{prox}_{\lambda\tau\lVert\cdot\rVert_{\infty}}$
+    mediante una proyección sobre una bola $\ell_{1}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p96" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p96"><p><em>a)</em> $g^{*}(y)=\sup_{x}\langle y,x\rangle-\tau\lVert x\rVert$. Si
+$y\notin\tau B_{*}\Rightarrow\lVert y\rVert_{*}&gt;\tau\Rightarrow$ existe $x$ con
+$\langle y,x\rangle-\tau\lVert x\rVert&gt;0$, y tomando $nx$ se ve que
+$g^{*}(y)=\infty$. Si $y\in\tau B_{*}\Rightarrow\langle y,x\rangle-\tau\lVert x\rVert\leq0$
+para todo $x$, y el valor $0$ se alcanza en $x=0$
+$\therefore g^{*}(y)=\max_{x}\langle y,x\rangle-\tau\lVert x\rVert=0$.  □</p>
+<p><em>b)</em> La identidad de Moreau
+$\operatorname{prox}_{\lambda g}(v)+\lambda\operatorname{prox}_{\lambda^{-1}g^{*}}(v/\lambda)=v$,
+con $g=\tau\lVert\cdot\rVert$, da
+$\operatorname{prox}_{\lambda g}(v)=v-\lambda\operatorname{prox}_{\lambda^{-1}g^{*}}(v/\lambda)$,
+donde</p>
+<div class="display">\[
+  \operatorname{prox}_{\lambda^{-1}g^{*}}(v/\lambda)
+   =\operatorname{argmin}_{y}\Bigl\{\delta_{\tau B_{*}}(y)
+    +\frac\lambda2\lVert y-v/\lambda\rVert^{2}\Bigr\}
+   =\operatorname{argmin}_{y\in\tau B_{*}}\frac\lambda2\lVert y-v/\lambda\rVert^{2},
+\]</div>
+<p>y con $z=\lambda y$ esto es
+$\frac1\lambda\operatorname{argmin}_{z\in\lambda\tau B_{*}}
+\frac1{2\lambda}\lVert z-v\rVert^{2}
+=\frac1\lambda\operatorname{proj}_{\lambda\tau B_{*}}(v)$
+$\Rightarrow\operatorname{prox}_{\lambda\tau\lVert\cdot\rVert}(v)
+=v-\operatorname{proj}_{\lambda\tau B_{*}}(v)$.  □</p>
+<p><em>c)</em> Simplemente es usar que
+$\lVert\cdot\rVert_{1}^{*}=\lVert\cdot\rVert_{\infty}$,
+$\lVert\cdot\rVert_{\infty}^{*}=\lVert\cdot\rVert_{1}$ y
+$\lVert\cdot\rVert_{2}^{*}=\lVert\cdot\rVert_{2}$. En particular,</p>
+<div class="display">\[
+  \operatorname{prox}_{\lambda\tau\lVert\cdot\rVert_{\infty}}(v)
+   =v-\operatorname{proj}_{\lambda\tau B_{1}}(v). \qquad
+\]</div>
+<p class="aviso">Falta lo que el enunciado pide explícitamente en <em>c)</em>: recuperar el
+umbral suave en el caso $\ell_{1}$, y el caso $\ell_{2}$.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p97" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p97"><p><em>a)</em> El supremando
+$x\mapsto\langle y,x\rangle-\tau\lVert x\rVert$ es positivamente homogéneo, así
+que su supremo vale $0$ o $+\infty$: vale $+\infty$ exactamente cuando existe
+$x$ con $\langle y,x\rangle&gt;\tau\lVert x\rVert$, es decir cuando
+$\lVert y\rVert_{*}&gt;\tau$, y vale $0$ en el resto, alcanzado en $x=0$
+$\Rightarrow g^{*}=\delta_{\tau B_{*}}$.  □</p>
+<p><em>b)</em> Por la identidad de Moreau (§17 de las notas) con
+$g=\tau\lVert\cdot\rVert$ y $g^{*}=\delta_{\tau B_{*}}$, y usando que
+$\operatorname{prox}_{\mu\delta_{C}}=\operatorname{proj}_{C}$ para todo $\mu&gt;0$,</p>
+<div class="display">\[
+  \operatorname{prox}_{\lambda g}(v)
+   =v-\lambda\operatorname{prox}_{\lambda^{-1}\delta_{\tau B_{*}}}(v/\lambda)
+   =v-\lambda\operatorname{proj}_{\tau B_{*}}(v/\lambda)
+   =v-\operatorname{proj}_{\lambda\tau B_{*}}(v),
+\]</div>
+<p>donde la última igualdad es la homogeneidad de la proyección,
+$\lambda\operatorname{proj}_{C}(w)=\operatorname{proj}_{\lambda C}(\lambda w)$.
+ □</p>
+<p><em>c)</em> En los tres casos hay que proyectar sobre la bola dual.</p>
+<p>$\ell_{1}$: la bola dual es $\lambda\tau B_{\infty}$ y la proyección es el
+recorte coordenada a coordenada,
+$\bigl(\operatorname{proj}_{\lambda\tau B_{\infty}}(v)\bigr)_{i}
+=\operatorname{sign}(v_{i})\min\{|v_{i}|,\lambda\tau\}$. Pero entonces</p>
+<div class="display">\[
+  \bigl(\operatorname{prox}_{\lambda\tau\lVert\cdot\rVert_{1}}(v)\bigr)_{i}
+   =v_{i}-\operatorname{sign}(v_{i})\min\{|v_{i}|,\lambda\tau\}
+   =\operatorname{sign}(v_{i})\bigl(|v_{i}|-\lambda\tau\bigr)_{+},
+\]</div>
+<p>que es el operador de umbral suave $S_{\lambda\tau}$ de §17 de las notas.  □</p>
+<p>$\ell_{2}$: la bola dual es $\lambda\tau B_{2}$, y
+$\operatorname{proj}_{\lambda\tau B_{2}}(v)=v$ si
+$\lVert v\rVert_{2}\leq\lambda\tau$ y $=\lambda\tau v/\lVert v\rVert_{2}$ en caso
+contrario
+$\Rightarrow$</p>
+<div class="display">\[
+  \operatorname{prox}_{\lambda\tau\lVert\cdot\rVert_{2}}(v)
+   =\Bigl(1-\frac{\lambda\tau}{\lVert v\rVert_{2}}\Bigr)_{+}v ,
+\]</div>
+<p>el umbral de bloque: o se anula el vector entero o se encoge su norma en
+$\lambda\tau$ sin girarlo.  □</p>
+<p>$\ell_{\infty}$: la bola dual es $\lambda\tau B_{1}$ y</p>
+<div class="display">\[
+  \operatorname{prox}_{\lambda\tau\lVert\cdot\rVert_{\infty}}(v)
+   =v-\operatorname{proj}_{\lambda\tau B_{1}}(v).
+\]</div>
+<p>No hay fórmula cerrada, pero la proyección sobre la bola $\ell_{1}$ se reduce a
+la del símplex: si $\lVert v\rVert_{1}\leq\lambda\tau$ la proyección es $v$; si
+no, $\bigl(\operatorname{proj}_{\lambda\tau B_{1}}(v)\bigr)_{i}
+=\operatorname{sign}(v_{i})w_{i}$ con
+$w=\operatorname{proj}_{\lambda\tau\Delta_{n}}(|v|)$, y esa se calcula en
+$O(n\log n)$ con el algoritmo por ordenamiento del Ejercicio 6 de la Tarea 2.
+ □</p></div>
+<div class="stmt ejercicio" id="ej:t11-3"><div class="head">Ejercicio 3</div><div class="body"><p>Sea $F=f+g$ y $p=T_{\alpha}(x)=\operatorname{prox}_{\alpha g}(x-\alpha\nabla f(x))$,
+donde $f$ es convexa y $L$-suave y $g$ es propia, convexa y cerrada. Defina
+$G_{\alpha}(x)=\frac1\alpha(x-p)$.</p>
+<ol class="lista"><li><p>Muestre que
+    $r_{\alpha}(x):=G_{\alpha}(x)+\nabla f(p)-\nabla f(x)\in\partial F(p)$.</p></li><li><p>Deduzca que
+    $\operatorname{dist}(0,\partial F(p))\leq(1+\alpha L)\lVert G_{\alpha}(x)\rVert$.</p></li><li><p>Suponga además que $F$ es $\mu$-fuertemente convexa. Pruebe que
+    $F(p)-F^{\star}\leq\frac{(1+\alpha L)^{2}}{2\mu}\lVert G_{\alpha}(x)\rVert^{2}$.
+    Interprete esta desigualdad como una justificación cuantitativa del criterio
+    de parada basado en $\lVert G_{\alpha}(x)\rVert$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p98" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p98"><p><em>a)</em> Como $\partial F(p)=\nabla f(p)+\partial g(p)$,</p>
+<div class="display">\[
+  r_{\alpha}(x)\in\partial F(p)
+  \iff r_{\alpha}(x)-\nabla f(p)\in\partial g(p)
+  \iff G_{\alpha}(x)-\nabla f(x)\in\partial g(p)
+  \iff\frac{x-p}{\alpha}-\nabla f(x)\in\partial g(p). \quad(\star)
+\]</div>
+<p>Por otro lado, $p=\operatorname{prox}_{\alpha g}(x-\alpha\nabla f(x))$</p>
+<div class="display">\[
+  \iff p=\operatorname{argmin}_{z}\Bigl\{g(z)
+   +\frac1{2\alpha}\lVert z-x+\alpha\nabla f(x)\rVert^{2}\Bigr\}
+  \iff0\in\partial g(p)+\frac1\alpha\bigl(p-x+\alpha\nabla f(x)\bigr)
+\]</div>
+<p>$\iff\frac{x-p}{\alpha}-\nabla f(x)\in\partial g(p)$, que es $(\star)$ otra vez.
+ □</p>
+<p><em>b)</em> Simplemente</p>
+<div class="display">\[
+  \lVert r_{\alpha}(x)\rVert\leq\lVert G_{\alpha}(x)\rVert
+   +\lVert\nabla f(x)-\nabla f(p)\rVert
+   \leq\lVert G_{\alpha}(x)\rVert+L\lVert x-p\rVert
+   =(1+\alpha L)\lVert G_{\alpha}(x)\rVert,
+\]</div>
+<p>y como $r_{\alpha}(x)\in\partial F(p)$,
+$\operatorname{dist}(0,\partial F(p))\leq\lVert r_{\alpha}(x)\rVert$.  □</p>
+<p><em>c)</em> Si $F$ es $\mu$-fuertemente convexa, para todo $x,y$ y todo
+$w\in\partial F(x)$,
+$F(y)\geq F(x)+\langle w,y-x\rangle+\frac\mu2\lVert y-x\rVert^{2}$. Tome $x=p$ e
+$y=\operatorname{argmin}F$
+$\Rightarrow F^{\star}-F(p)\geq\langle w,y-p\rangle+\frac\mu2\lVert y-p\rVert^{2}$
+$\Rightarrow$</p>
+<div class="display">\begin{align*}
+  F(p)-F^{\star}&amp;\leq\langle w,p-y\rangle-\frac\mu2\lVert y-p\rVert^{2}
+   =-\frac12\Bigl\lVert\frac{w}{\sqrt\mu}-\sqrt\mu(p-y)\Bigr\rVert^{2}
+    +\frac1{2\mu}\lVert w\rVert^{2}
+   \leq\frac1{2\mu}\lVert w\rVert^{2}
+\end{align*}</div>
+<p>para todo $w\in\partial F(p)$. En particular
+$F(p)-F^{\star}\leq\frac1{2\mu}\bigl(\operatorname{dist}(0,\partial F(p))\bigr)^{2}$,
+y por <em>b)</em></p>
+<div class="display">\[
+  F(p)-F^{\star}\leq\frac{(1+\alpha L)^{2}}{2\mu}\lVert G_{\alpha}(x)\rVert^{2}.
+\]</div>
+<p>Esta cantidad certifica que si
+$\lVert G_{\alpha}(x)\rVert&lt;\frac{\sqrt{2\mu\varepsilon}}{1+\alpha L}
+\Rightarrow F(p)-F^{\star}&lt;\varepsilon$.  □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p99" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p99"><p>La misma cadena, aislando antes el hecho general que hace el trabajo en
+<em>c)</em>.</p>
+<p><strong>Lema (Polyak–Łojasiewicz subdiferencial).</strong> Si $F$ es propia, cerrada y
+$\mu$-fuertemente convexa, entonces para todo $z\in\operatorname{dom}\partial F$</p>
+<div class="display">\[
+  F(z)-F^{\star}\leq\frac1{2\mu}\operatorname{dist}\bigl(0,\partial F(z)\bigr)^{2}.
+\]</div>
+<p><strong>Demostración: </strong> Sea $w\in\partial F(z)$. Minimizando sobre $y$ los dos
+lados de</p>
+<div class="display">\[
+  F(y)\geq F(z)+\langle w,y-z\rangle+\tfrac\mu2\lVert y-z\rVert^{2},
+\]</div>
+<p>el izquierdo da $F^{\star}$ y el derecho se minimiza en $y=z-w/\mu$, con valor
+$F(z)-\frac1{2\mu}\lVert w\rVert^{2}$
+$\Rightarrow F^{\star}\geq F(z)-\frac1{2\mu}\lVert w\rVert^{2}$, y tomando el
+ínfimo sobre $w\in\partial F(z)$ sale el lema.  □</p>
+<p><em>a)</em> Por la caracterización del operador proximal (§17 de las notas),
+$p=\operatorname{prox}_{\alpha g}(u)$ con $u=x-\alpha\nabla f(x)$ equivale a
+$\frac{u-p}{\alpha}\in\partial g(p)$, es decir</p>
+<div class="display">\[
+  \frac{x-p}{\alpha}-\nabla f(x)=G_{\alpha}(x)-\nabla f(x)\in\partial g(p).
+\]</div>
+<p>Sumando $\nabla f(p)$ a los dos lados y usando
+$\partial F(p)=\nabla f(p)+\partial g(p)$, que vale sin hipótesis extra porque
+$f$ es diferenciable en todo punto,</p>
+<div class="display">\[
+  r_{\alpha}(x)=G_{\alpha}(x)+\nabla f(p)-\nabla f(x)
+   \in\nabla f(p)+\partial g(p)=\partial F(p). \qquad
+\]</div>
+<p><em>b)</em> $\lVert x-p\rVert=\alpha\lVert G_{\alpha}(x)\rVert$ y $\nabla f$ es
+$L$-Lipschitz
+$\Rightarrow$</p>
+<div class="display">\[
+  \operatorname{dist}(0,\partial F(p))\leq\lVert r_{\alpha}(x)\rVert
+   \leq\lVert G_{\alpha}(x)\rVert+L\lVert p-x\rVert
+   =(1+\alpha L)\lVert G_{\alpha}(x)\rVert . \qquad
+\]</div>
+<p><em>c)</em> Por el lema aplicado en $z=p$ y por <em>b)</em>,</p>
+<div class="display">\[
+  F(p)-F^{\star}\leq\frac1{2\mu}\operatorname{dist}(0,\partial F(p))^{2}
+   \leq\frac{(1+\alpha L)^{2}}{2\mu}\lVert G_{\alpha}(x)\rVert^{2}. \qquad
+\]</div>
+<p>El criterio de parada $\lVert G_{\alpha}(x)\rVert\leq\eta$ es entonces un
+certificado y no una heurística: garantiza
+$F(p)-F^{\star}\leq\frac{(1+\alpha L)^{2}}{2\mu}\eta^{2}$, de modo que para
+asegurar precisión $\varepsilon$ basta parar en
+$\eta=\frac{\sqrt{2\mu\varepsilon}}{1+\alpha L}$. Note además que
+$G_{\alpha}(x)=0\iff x=p\iff x$ es punto fijo de $T_{\alpha}$, y por <em>a)</em>
+eso equivale a $0\in\partial F(x)$: el mapa gradiente $G_{\alpha}$ hace para
+$F=f+g$ el papel que $\nabla f$ hace en el caso suave, y es por eso que su norma
+sirve de criterio de parada.  □</p></div>
+<div class="stmt ejercicio" id="ej:t11-4"><div class="head">Ejercicio 4$^{*}$</div><div class="body"><p>Considere $\min_{x}F(x):=\frac12\lVert Ax-b\rVert^{2}+\lambda\lVert x\rVert_{1}$.
+El problema dual puede escribirse como</p>
+<div class="display">\[
+  \max_{y}\Bigl\{-\tfrac12\lVert y\rVert^{2}-\langle b,y\rangle:\
+   \lVert A\trans y\rVert_{\infty}\leq\lambda\Bigr\}.
+\]</div>
+<ol class="lista"><li><p>Verifique esta formulación dual usando conjugación de Fenchel.</p></li><li><p>Dado un punto primal $x$, defina $r=Ax-b$ y
+    $c=\min\bigl\{1,\frac{\lambda}{\lVert A\trans r\rVert_{\infty}}\bigr\}$,
+    $\widehat y=cr$, con la convención $c=1$ si $A\trans r=0$. Muestre que
+    $\widehat y$ es dual factible.</p></li><li><p>Deduzca que
+    $\mathcal{G}(x,\widehat y):=F(x)+\frac12\lVert\widehat y\rVert^{2}
+     +\langle b,\widehat y\rangle$ es una cota superior computable para
+    $F(x)-F^{\star}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p100" data-titulo="1">Ver: Solución mía</button><div class="proof" id="ejercicios-convexa-p100"><p><em>a)</em> Sea $f=\lambda\lVert\cdot\rVert_{1}$ y
+$g(z)=\frac12\lVert z-b\rVert^{2}$, de modo que
+$\min_{x}F(x)=\min_{x}f(x)+g(Ax)$, y</p>
+<div class="display">\begin{align*}
+  \min_{x,z}\{f(x)+g(z):\ z=Ax\}
+   &amp;=\min_{x,z}\Bigl\{f(x)+g(z)+\sup_{y}\langle y,Ax-z\rangle\Bigr\}\\
+   &amp;\geq\sup_{y}\Bigl\{\min_{x}\bigl[\langle A\trans y,x\rangle+f(x)\bigr]
+    +\min_{z}\bigl[g(z)-\langle y,z\rangle\bigr]\Bigr\}\\
+   &amp;=\sup_{y}\ -f^{*}(-A\trans y)-g^{*}(y),
+\end{align*}</div>
+<p>que es el problema dual. El enunciado se obtiene al notar que</p>
+<div class="display">\[
+  f^{*}(y)=\delta_{\lambda B_{\infty}}(y),\qquad
+  g^{*}(y)=\sup_{z}\langle y,z\rangle-\tfrac12\lVert z-b\rVert^{2}
+   =\tfrac12\lVert y\rVert^{2}+\langle y,b\rangle ,
+\]</div>
+<p>$\therefore$ el dual es
+$\sup_{y}\{-\frac12\lVert y\rVert^{2}-\langle y,b\rangle:
+\lVert A\trans y\rVert_{\infty}\leq\lambda\}$.  □</p>
+<p><em>b)</em> Si $A\trans r=0\Rightarrow\widehat y=r=Ax-b$ y
+$\lVert A\trans\widehat y\rVert_{\infty}=\lVert A\trans r\rVert_{\infty}=0\leq\lambda$.
+Si $A\trans r\neq0\Rightarrow c\leq\frac{\lambda}{\lVert A\trans r\rVert_{\infty}}$
+$\Rightarrow\lVert A\trans\widehat y\rVert_{\infty}
+=c\lVert A\trans r\rVert_{\infty}\leq\lambda$.  □</p>
+<p><em>c)</em></p>
+<div class="display">\[
+  F(x)-F^{\star}\leq\mathcal{G}(x,\widehat y)
+  \iff-F^{\star}\leq\tfrac12\lVert\widehat y\rVert^{2}+\langle b,\widehat y\rangle
+  \iff-\tfrac12\lVert\widehat y\rVert^{2}-\langle b,\widehat y\rangle\leq F^{\star},
+\]</div>
+<p>y por dualidad débil $d^{\star}\leq F^{\star}$; como $\widehat y$ es admisible,
+$-\frac12\lVert\widehat y\rVert^{2}-\langle b,\widehat y\rangle\leq d^{\star}\leq F^{\star}$.
+ □</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="ejercicios-convexa-p101" data-titulo="1">Ver: Alternativa 1</button><div class="proof" id="ejercicios-convexa-p101"><p><em>a)</em> Con $f=\lambda\lVert\cdot\rVert_{1}$ y
+$g=\frac12\lVert\cdot-b\rVert^{2}$ el problema es $\min_{x}f(x)+g(Ax)$, cuyo
+dual de Fenchel–Rockafellar (§12 de las notas) es</p>
+<div class="display">\[
+  \max_{y}\ -f^{*}(-A\trans y)-g^{*}(y),
+\]</div>
+<p>con igualdad de valores y máximo alcanzado, porque $g$ es finita en todo
+$\mathbb{R}^{m}$ y por tanto la condición de cualificación se cumple. Solo
+faltan las dos conjugadas:</p>
+<ul class="lista"><li><p>Por el Ejercicio 2 de esta tarea con $\tau=\lambda$ y
+    $\lVert\cdot\rVert_{1}^{*}=\lVert\cdot\rVert_{\infty}$, se tiene
+    $f^{*}=\delta_{\lambda B_{\infty}}$, y como $\lambda B_{\infty}$ es
+    simétrica, $f^{*}(-A\trans y)=\delta_{\lambda B_{\infty}}(A\trans y)$: el
+    término vale $0$ si $\lVert A\trans y\rVert_{\infty}\leq\lambda$ y $+\infty$
+    si no, es decir es la restricción del enunciado.</p></li><li><p>$g^{*}(y)=\sup_{z}\{\langle y,z\rangle-\frac12\lVert z-b\rVert^{2}\}$, que
+    se alcanza en $z=y+b$ y vale
+    $\frac12\lVert y\rVert^{2}+\langle y,b\rangle$.</p></li></ul>
+<p>$\therefore$ el dual es
+$\max_{y}\{-\frac12\lVert y\rVert^{2}-\langle b,y\rangle:
+\lVert A\trans y\rVert_{\infty}\leq\lambda\}$.  □</p>
+<p><em>b)</em> Hay que ver $\lVert A\trans\widehat y\rVert_{\infty}\leq\lambda$. Si
+$A\trans r=0$, entonces $c=1$ y $A\trans\widehat y=A\trans r=0$. Si
+$A\trans r\neq0$, entonces
+$c=\min\{1,\lambda/\lVert A\trans r\rVert_{\infty}\}$ y</p>
+<div class="display">\[
+  \lVert A\trans\widehat y\rVert_{\infty}=c\lVert A\trans r\rVert_{\infty}
+   \leq\frac{\lambda}{\lVert A\trans r\rVert_{\infty}}\lVert A\trans r\rVert_{\infty}
+   =\lambda .
+\]</div>
+<p>$\therefore\widehat y$ es dual factible en los dos casos.  □</p>
+<p><em>c)</em> Sea $D(y)=-\frac12\lVert y\rVert^{2}-\langle b,y\rangle$ el objetivo
+dual. Por dualidad débil, $D(y)\leq F^{\star}$ para todo $y$ factible, y en
+particular $D(\widehat y)\leq F^{\star}$ por <em>b)</em>. Pero entonces</p>
+<div class="display">\[
+  F(x)-F^{\star}\leq F(x)-D(\widehat y)
+   =F(x)+\tfrac12\lVert\widehat y\rVert^{2}+\langle b,\widehat y\rangle
+   =\mathcal{G}(x,\widehat y),
+\]</div>
+<p>y $\mathcal{G}$ se calcula con $Ax$, que ya hace falta para evaluar $F(x)$, más
+un producto con $A\trans$.</p>
+<p>Más aún, $\mathcal{G}(x,\widehat y)$ es exactamente la brecha de dualidad
+$f(x)+g(Ax)+f^{*}(-A\trans\widehat y)+g^{*}(\widehat y)$ de §12 de las notas
+evaluada en el par $(x,\widehat y)$, con el término
+$f^{*}(-A\trans\widehat y)$ nulo justamente por la factibilidad de <em>b)</em>.
+$\therefore\mathcal{G}\geq0$ siempre, y $\mathcal{G}(x,\widehat y)=0$ si y solo
+si $x$ es óptimo primal y $\widehat y$ óptimo dual: la cota no solo es
+computable, sino ajustada.  □</p></div>
+<h3 id="ejercicios-convexa-x13">Los ejemplos de las notas que hacen falta aquí</h3>
 <p>Cada entrada es un ejemplo de las lecture notes, con el capítulo donde vive y
 el ejercicio que se apoya en él.</p>
-<h4 id="ejercicios-convexa-x9">Cálculo diferencial (§1)</h4>
+<h4 id="ejercicios-convexa-x14">Cálculo diferencial (§1)</h4>
 <div class="stmt ejercicio" id="ej:not-cuadratica"><div class="head">La cuadrática</div><div class="body"><p>$f(x) = \tfrac{1}{2}\lVert Ax-b\rVert^{2}$ tiene
 $\nabla f(x) = A\trans(Ax-b)$ y $Hf(x) = A\trans A$.</p></div></div>
 <p>Con $A=I$ es la función que se minimiza para proyectar, y es el gradiente
@@ -3268,7 +5006,7 @@ direccionales sí son lineales, y aun así falla la continuidad en uno y la
 diferenciabilidad Fréchet en el otro. La definición de Gâteaux pide
 <em>lineal y acotada</em>, y en $\mathbb{R}^{n}$ lo segundo es gratis, que es lo
 que se usa en el Ejercicio 6 de la Tarea 3.</p>
-<h4 id="ejercicios-convexa-x10">Convexos e interior relativo (§3)</h4>
+<h4 id="ejercicios-convexa-x15">Convexos e interior relativo (§3)</h4>
 <div class="stmt ejercicio" id="ej:not-simplex"><div class="head">Poliedros y el símplex</div><div class="body"><p>Un poliedro $\{x : Ax \leq b\}$ es convexo por ser intersección de
 semiespacios. El símplex $\Delta_{n} = \{x \geq 0 : \mathbf{1}\trans x = 1\}$ es
 la intersección del ortante con un hiperplano, y
@@ -3278,7 +5016,7 @@ Ejercicio 2 de la Tarea 2, para leer $\aff$ y $\rint$; la de envolvente convexa
 en el Ejercicio 2 de la Tarea 5, donde $\sigma_{\Delta_{n}}(y) = \max_{i} y_{i}$
 sale de que el supremo de una lineal sobre una envolvente convexa se alcanza en
 un generador.</p>
-<h4 id="ejercicios-convexa-x11">Conos (§4)</h4>
+<h4 id="ejercicios-convexa-x16">Conos (§4)</h4>
 <div class="stmt ejercicio" id="ej:not-conos"><div class="head">Los cuatro conos autoduales</div><div class="body"><p>$(\mathbb{R}^{n}_{+})^{\circ} = \mathbb{R}^{n}_{+}$; para un subespacio,
 $V^{\circ} = V^{\perp}$; el cono de segundo orden
 $\Qcono{n+1} = \{(t,x) : \lVert x\rVert \leq t\}$ es autodual, y la desigualdad
@@ -3287,7 +5025,7 @@ $\langle A,B\rangle = \tr(A\trans B)$, vía la descomposición espectral.</p></d
 <p>Es el Ejercicio 4 de la Tarea 2 entero. El cono normal en un punto interior es
 $\{0\}$, no vacío, y eso es lo que hace funcionar la suma de Minkowski del
 Ejercicio 1 de la Tarea 6.</p>
-<h4 id="ejercicios-convexa-x12">Proyección y separación (§5)</h4>
+<h4 id="ejercicios-convexa-x17">Proyección y separación (§5)</h4>
 <div class="stmt ejercicio" id="ej:not-proyecciones"><div class="head">Proyecciones explícitas</div><div class="body"><ol class="lista"><li><p>Sobre el ortante $\mathbb{R}^{n}_{+}$:
     $[\operatorname{Proj}(x)]_{i} = \max\{x_{i},0\} = (x_{i})_{+}$.</p></li><li><p>Sobre el hiperplano $H = \{x : \langle a,x\rangle = b\}$ con $a \neq 0$:
     $\operatorname{Proj}_{H}(x) = x - \frac{\langle a,x\rangle-b}{\lVert a\rVert^{2}}\,a$.</p></li><li><p>Sobre la bola $\bar{B}(0;r)$: es $x$ si $\lVert x\rVert \leq r$, y
@@ -3299,7 +5037,7 @@ $\langle z-p, x-p\rangle \leq 0$ para todo $x \in C$ es la que cierra ese
 ejercicio y el 1 de la Tarea 4, y la separación estricta de un punto y un
 convexo cerrado es la del 2 de la Tarea 3, la del 3 de la Tarea 3 y la del 4 de
 la Tarea 4.</p>
-<h4 id="ejercicios-convexa-x13">Funciones convexas (§6)</h4>
+<h4 id="ejercicios-convexa-x18">Funciones convexas (§6)</h4>
 <div class="stmt ejercicio" id="ej:not-max-soporte"><div class="head">Máximo de afines y función de soporte</div><div class="body"><p>$f(x) = \max_{i}\{\langle c_{i},x\rangle+b_{i}\}$ es convexa por ser un supremo
 de afines, y por lo mismo $\sigma_{C}(y) = \sup_{x \in C}\langle y,x\rangle$ es
 convexa para todo $C \neq \varnothing$.</p></div></div>
@@ -3307,7 +5045,7 @@ convexa para todo $C \neq \varnothing$.</p></div></div>
 Tarea 6. La formulación epigráfica, que cambia $\min\max_{i}f_{i}$ por $\min t$
 sujeto a $f_{i}(x) \leq t$, es el mismo truco visto desde el epigrafo, y el
 epigrafo es el objeto del Ejercicio 5 de la Tarea 3.</p>
-<h4 id="ejercicios-convexa-x14">Existencia (§7)</h4>
+<h4 id="ejercicios-convexa-x19">Existencia (§7)</h4>
 <div class="stmt ejercicio" id="ej:not-coerciva"><div class="head">Coercividad</div><div class="body"><p>Si $Q \succ 0$, entonces $f(x) = \tfrac12 x\trans Qx + \langle q,x\rangle + c$ es
 coerciva, pues
 $f(x) \geq \frac{\lambda_{\min}(Q)}{2}\lVert x\rVert^{2} - \lVert q\rVert\lVert x\rVert + c$,
@@ -3317,7 +5055,7 @@ cerrado, convexo y no vacío devuelve la existencia y unicidad de la proyección
 $f - \langle y,\cdot\rangle$ en el Ejercicio 5 de la Tarea 6, con
 $\frac{\mu}{2}$ en lugar de $\frac{\lambda_{\min}}{2}$. Weierstrass sobre un
 conjunto de nivel compacto es lo que se usa en el Ejercicio 4 de la Tarea 3.</p>
-<h4 id="ejercicios-convexa-x15">Regularidad (§8)</h4>
+<h4 id="ejercicios-convexa-x20">Regularidad (§8)</h4>
 <div class="stmt ejercicio" id="ej:not-lipschitz"><div class="head">Convexa y finita implica localmente Lipschitz</div><div class="body"><p>Una función convexa es continua y de hecho localmente Lipschitz en
 $\rint(\operatorname{dom} f)$. En particular, si $f : \mathbb{R}^{n} \to \mathbb{R}$
 es convexa y finita en todo punto, es localmente Lipschitz en todo
@@ -3327,7 +5065,7 @@ el apartado <em>a)</em>. Y las caracterizaciones de primer y segundo orden,
 $f$ convexa $\Longleftrightarrow$ $\nabla f$ monótono $\Longleftrightarrow$
 $Hf \succeq 0$, son las que resuelven el Ejercicio 2 de la Tarea 4 en un
 renglón y el 3 de la misma tarea con una sola Hessiana.</p>
-<h4 id="ejercicios-convexa-x16">Subdiferencial (§9)</h4>
+<h4 id="ejercicios-convexa-x21">Subdiferencial (§9)</h4>
 <div class="stmt ejercicio" id="ej:not-subdif"><div class="head">Los cuatro subdiferenciales de cabecera</div><div class="body"><ol class="lista"><li><p>Si $f$ es diferenciable en $x$, entonces $\partial f(x) = \{\nabla f(x)\}$,
     y recíprocamente un subdiferencial que es un solo vector obliga a que $f$ sea
     diferenciable ahí.</p></li><li><p>$f(t) = |t|$ tiene $\partial f(0) = [-1,1]$.</p></li><li><p>$f(x) = \max_{i}\{\langle a_{i},x\rangle+b_{i}\}$ tiene
@@ -3354,7 +5092,7 @@ cualquiera del dominio. En el
 Ejercicio 3 de la Tarea 5 el que $\partial p(x)$ nunca sea vacío, por ser $p$
 convexa y finita, es justo lo que hace que la igualdad falle cuando no hay
 alcance.</p>
-<h4 id="ejercicios-convexa-x17">Cálculo subdiferencial (§10)</h4>
+<h4 id="ejercicios-convexa-x22">Cálculo subdiferencial (§10)</h4>
 <div class="stmt ejercicio" id="ej:not-reglas"><div class="head">Las tres reglas</div><div class="body"><p>La regla del máximo, $\partial(\max_{i}f_{i})(x) = \conv\bigl(\bigcup_{i \in I(x)}\partial f_{i}(x)\bigr)$;
 la regla de la suma, $\partial(f+g) = \partial f + \partial g$ bajo
 $\rint(\operatorname{dom} f) \cap \rint(\operatorname{dom} g) \neq \varnothing$;
@@ -3364,7 +5102,7 @@ para $f \circ A$.</p></div></div>
 suma, con su calificación, es todo el Ejercicio 1 de la Tarea 6: la hipótesis
 $\bigcap_{i}\rint C_{i} \neq \varnothing$ del enunciado es exactamente la
 calificación aplicada a las indicadoras.</p>
-<h4 id="ejercicios-convexa-x18">Conjugada (§11)</h4>
+<h4 id="ejercicios-convexa-x23">Conjugada (§11)</h4>
 <div class="stmt ejercicio" id="ej:not-conjugadas"><div class="head">Las seis conjugadas de cabecera</div><div class="body"><ol class="lista"><li><p>Afín: si $f(x) = \langle a,x\rangle+b$, entonces
     $f^{*} = \delta_{\{a\}} - b$.</p></li><li><p>Cuadrática: si $Q \succ 0$ y $f(x) = \tfrac12 x\trans Qx$, entonces
     $f^{*}(y) = \tfrac12 y\trans Q^{-1}y$. Con $Q=I$,
@@ -3390,7 +5128,7 @@ tareas: identifica el maximizador en el Ejercicio 4 de la Tarea 5 sin derivar
 nada, da el apartado <em>a)</em> del Ejercicio 2 de la Tarea 6, y con la
 inversión cierra el Ejercicio 5 de la Tarea 6. Fenchel–Moreau es lo que
 convierte la conjugada en representación variacional.</p>
-<h4 id="ejercicios-convexa-x19">Dos reglas de cálculo que no son ejemplos pero se usan igual</h4>
+<h4 id="ejercicios-convexa-x24">Dos reglas de cálculo que no son ejemplos pero se usan igual</h4>
 <div class="stmt ejercicio" id="ej:not-extra"><div class="head">Funciones de soporte e ínfimos parciales</div><div class="body"><p>Para $C,D \neq \varnothing$ y $A$ lineal:
 $\sigma_{C+D} = \sigma_{C}+\sigma_{D}$ y $\sigma_{AC}(y) = \sigma_{C}(A\trans y)$.
 Y si $F(x,z)$ es conjuntamente convexa, entonces $x \mapsto \inf_{z}F(x,z)$ es
