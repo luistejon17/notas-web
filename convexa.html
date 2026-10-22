@@ -2932,7 +2932,7 @@ norma nuclear es la relajación convexa del rango:</p>
 <div class="display">\[
   \min_{X\in\R^{m\times n}}\ \frac12\norm{P_{\Omega}(X-A)}_{F}^{2}+\lambda\norm{X}_{*}.
 \]</div></div></div>
-<h3 id="clase-convexa-x23">El método del punto proximal</h3>
+<h3 id="clase-convexa-x23">El punto proximal: minimizar una sola función</h3>
 <div class="stmt definicion" id="clase-c17:def-punto"><div class="head">Definición el punto proximal</div><div class="body"><p>Para $\min\varphi$ con $\varphi\in\Gamma_{0}(\R^{n})$, dados $x_{0}$ y
 $\lambda_{k}&gt;0$, el <span class="df">método del punto proximal</span> genera</p>
 <div class="display">\[
@@ -3030,10 +3030,10 @@ corolario de la no expansividad,</p>
 <p>que es la constante de Lipschitz. El gradiente es además monótono, por la
 desigualdad de antes, y una función de clase $C^{1}$ con gradiente monótono es
 convexa.</p></div>
-<div class="stmt observacion" id="clase-c17:obs-moreau"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Tomando $x=v$ en la definición, $\env{\lambda}{g}\le g$. Las dos tienen los
+<div class="stmt observacion" id="clase-c17:obs-moreau"><div class="head">Observación</div><div class="body"><p>Tomando $x=v$ en la definición, $\env{\lambda}{g}\le g$. Las dos tienen los
 mismos minimizadores, porque $\nabla\env{\lambda}{g}(v)=0$ si y solo si
-$v=\prox_{\lambda g}(v)$, que por la caracterización es $0\in\subdif g(v)$. El
-parámetro mide el compromiso entre fidelidad y suavidad: cuando
+$v=\prox_{\lambda g}(v)$, que por la caracterización es $0\in\subdif g(v)$.</p></div></div>
+<div class="stmt observacion" id="clase-c17:obs-moreau-lambda"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El parámetro mide el compromiso entre fidelidad y suavidad: cuando
 $\lambda\downarrow0$ la envolvente se acerca a $g$, y su gradiente, con
 constante $1/\lambda$, empeora.</p></div></div>
 <div class="stmt teorema" id="clase-c17:teo-identidad"><div class="head">Teorema identidad de Moreau<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para todo $v\in\R^{n}$,</p>
@@ -3051,7 +3051,391 @@ $\tau\norm{\cdot}$ es la indicadora de la bola de radio $\tau$ de la norma dual,
 y su proximal es la proyección sobre ella, así que
 $\prox_{\lambda\tau\norm{\cdot}}(v)=v-\Proy_{\lambda\tau\Ball_{*}}(v)$, con
 $\Ball_{*}$ la bola unidad dual. Con $\norm{\cdot}_{1}$, la bola dual es el
-cubo $[-1,1]^{n}$ y sale otra vez el umbral suave.</p></div></div></section></div>
+cubo $[-1,1]^{n}$ y sale otra vez el umbral suave.</p></div></div>
+<h3 id="clase-convexa-x25">Una función o una suma</h3>
+<div class="stmt observacion" id="clase-c17:obs-cual"><div class="head">Observación qué minimiza cada método</div><div class="body"><p>Los métodos de los capítulos de algoritmos se distinguen por el problema que
+resuelven y por lo que piden de cada término:</p>
+<div class="centro"><div class="tabla"><table><tr><th>Método</th><th>Problema</th><th>Usa en cada paso</th></tr>
+<tr><td>Gradiente, Nesterov</td><td>$\min f$, con $f$ convexa y $L$-suave</td><td>$\nabla f$</td></tr>
+<tr><td>Newton</td><td>$\min f$, con $f$ de clase $C^{2}$</td><td>$\nabla f$ y $Hf$</td></tr>
+<tr><td>Subgradiente, <em>mirror descent</em></td><td>$\min_{C}f$, con $f$ convexa y Lipschitz</td><td>un $s\in\subdif f(x)$</td></tr>
+<tr><td>Punto proximal</td><td>$\min\varphi$, con $\varphi\in\Gamma_{0}(\R^{n})$</td><td>$\prox_{\lambda\varphi}$</td></tr>
+<tr><td>Gradiente proximal, ISTA, FISTA</td><td>$\min f+g$, con $f$ convexa y $L$-suave y $g\in\Gamma_{0}(\R^{n})$</td><td>$\nabla f$ y $\prox_{\alpha g}$</td></tr></table></div></div>
+<p>El punto proximal minimiza una sola función sin pedirle suavidad, pero cada paso
+es un problema de minimización que solo es barato si $\prox_{\lambda\varphi}$
+tiene fórmula. El gradiente proximal parte el objetivo: la parte suave $f$ se
+trata con un paso de gradiente y solo la parte $g$ pasa por el proximal, que es
+la que se escoge sencilla. Con $g=0$ es el método del gradiente; con $f=0$, que
+es $L$-suave para todo $L&gt;0$, es el punto proximal; con $g=\delta_{C}$ es el
+gradiente proyectado. Y la envolvente de Moreau pasa del tercer renglón al
+primero: es $\frac1\lambda$-suave, y el gradiente sobre ella con paso $\lambda$
+es $v-\lambda\nabla\env{\lambda}{g}(v)=\prox_{\lambda g}(v)$, el punto proximal.</p></div></div>
+<h3 id="clase-convexa-x26">El gradiente proximal: minimizar $f+g$</h3>
+<p>En lo que sigue $F=f+g$, con $f:\R^{n}\to\R$ convexa y $L$-suave y
+$g\in\Gamma_{0}(\R^{n})$. Cuando $F$ tiene minimizadores se escribe
+$X^{*}=\argmin F$ y $F^{*}=\min F$.</p>
+<div class="stmt proposicion" id="clase-c17:prop-punto-fijo"><div class="head">Proposición el punto fijo</div><div class="body"><p>Para todo $\alpha&gt;0$,</p>
+<div class="display">\[
+  x^{*}\in X^{*}
+  \iff 0\in\nabla f(x^{*})+\subdif g(x^{*})
+  \iff x^{*}=\prox_{\alpha g}\bigl(x^{*}-\alpha\nabla f(x^{*})\bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p119">Ver demostración</button><div class="proof" id="clase-convexa-p119"><p>La primera equivalencia es la regla de Fermat con la regla de la suma, que se
+aplica porque $f$ es finita en todo $\R^{n}$, y $\subdif f(x)=\{\nabla f(x)\}$.
+La segunda es la caracterización del proximal en el punto
+$v=x^{*}-\alpha\nabla f(x^{*})$, donde $\frac{v-x^{*}}{\alpha}=-\nabla f(x^{*})$.</p></div>
+<div class="stmt definicion" id="clase-c17:def-gradiente-proximal"><div class="head">Definición el gradiente proximal</div><div class="body"><p>Para $\alpha&gt;0$ sea</p>
+<div class="display">\[
+  T_{\alpha}(x)=\prox_{\alpha g}\bigl(x-\alpha\nabla f(x)\bigr).
+\]</div>
+<p>Dado $x_{0}\in\dom g$, el <span class="df">método del gradiente proximal</span>, o
+<span class="df"><em>forward-backward splitting</em></span>, genera $x_{k+1}=T_{\alpha_{k}}(x_{k})$.
+El paso sobre $f$ es explícito (<em>forward</em>, un paso de gradiente) y el paso
+sobre $g$ es implícito (<em>backward</em>, un proximal).</p></div></div>
+<div class="stmt proposicion" id="clase-c17:prop-modelo"><div class="head">Proposición el modelo que se minimiza</div><div class="body"><p>Sea</p>
+<div class="display">\[
+  Q_{\alpha}(z;x)=f(x)+\ip{\nabla f(x)}{z-x}+\frac{1}{2\alpha}\norm{z-x}^{2}+g(z).
+\]</div>
+<p>Entonces</p>
+<div class="display">\[
+  Q_{\alpha}(z;x)=g(z)+\frac{1}{2\alpha}\bigl\|z-\bigl(x-\alpha\nabla f(x)\bigr)\bigr\|^{2}+f(x)-\frac{\alpha}{2}\norm{\nabla f(x)}^{2},
+\]</div>
+<p>así que $T_{\alpha}(x)$ es el único minimizador de $Q_{\alpha}(\cdot\,;x)$. Si
+$\alpha\le1/L$, además $Q_{\alpha}(z;x)\ge F(z)$ para todo $z$, con igualdad en
+$z=x$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p120">Ver demostración</button><div class="proof" id="clase-convexa-p120"><p>La identidad es desarrollar el cuadrado:
+$\frac{1}{2\alpha}\norm{z-x+\alpha\nabla f(x)}^{2}=\frac{1}{2\alpha}\norm{z-x}^{2}+\ip{\nabla f(x)}{z-x}+\frac{\alpha}{2}\norm{\nabla f(x)}^{2}$.
+Lo que queda de $z$ es el objetivo que define $\prox_{\alpha g}(x-\alpha\nabla f(x))$.
+La cota es el lema del descenso con $\frac{1}{\alpha}\ge L$.</p></div>
+<div class="stmt definicion" id="clase-c17:def-mapeo"><div class="head">Definición el mapeo de gradiente proximal</div><div class="body"><div class="display">\[
+  G_{\alpha}(x)=\frac{1}{\alpha}\bigl(x-T_{\alpha}(x)\bigr),
+\]</div>
+<p>de modo que el método es $x_{k+1}=x_{k}-\alpha G_{\alpha}(x_{k})$.</p></div></div>
+<div class="stmt proposicion" id="clase-c17:prop-mapeo"><div class="head">Proposición</div><div class="body"><p>$G_{\alpha}(x)=0$ si y solo si $x\in X^{*}$. Si $g=0$, $G_{\alpha}=\nabla f$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p121">Ver demostración</button><div class="proof" id="clase-convexa-p121"><p>Lo primero es el punto fijo. Si $g=0$, el proximal es la identidad y
+$T_{\alpha}(x)=x-\alpha\nabla f(x)$.</p></div>
+<div class="stmt lema" id="clase-c17:lem-fundamental"><div class="head">Lema desigualdad fundamental</div><div class="body"><p>Sea $0&lt;\alpha\le1/L$, $x\in\R^{n}$ y $p=T_{\alpha}(x)$. Para todo $z\in\dom g$,</p>
+<div class="display">\[
+  F(p)-F(z)\le\frac{1}{2\alpha}\Bigl(\norm{x-z}^{2}-\norm{p-z}^{2}\Bigr)
+  -\Bigl(\frac{1}{2\alpha}-\frac{L}{2}\Bigr)\norm{p-x}^{2}.
+\]</div>
+<p>En particular, si $x\in\dom g$,</p>
+<div class="display">\[
+  F(p)\le F(x)-\alpha\Bigl(1-\frac{\alpha L}{2}\Bigr)\norm{G_{\alpha}(x)}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p122">Ver demostración</button><div class="proof" id="clase-convexa-p122"><p>Por la caracterización del proximal,
+$s=-\nabla f(x)-\frac{1}{\alpha}(p-x)\in\subdif g(p)$, y la desigualdad del
+subgradiente da</p>
+<div class="display">\[
+  g(p)-g(z)\le\ip{s}{p-z}=-\ip{\nabla f(x)}{p-z}-\frac{1}{\alpha}\ip{p-x}{p-z}.
+\]</div>
+<p>El lema del descenso y la convexidad de $f$ dan
+$f(p)\le f(x)+\ip{\nabla f(x)}{p-x}+\frac{L}{2}\norm{p-x}^{2}$ y
+$f(x)\le f(z)+\ip{\nabla f(x)}{x-z}$, que sumadas son
+$f(p)-f(z)\le\ip{\nabla f(x)}{p-z}+\frac{L}{2}\norm{p-x}^{2}$. Sumando,</p>
+<div class="display">\[
+  F(p)-F(z)\le\frac{L}{2}\norm{p-x}^{2}-\frac{1}{\alpha}\ip{p-x}{p-z},
+\]</div>
+<p>y basta $-2\ip{p-x}{p-z}=\norm{x-z}^{2}-\norm{p-x}^{2}-\norm{p-z}^{2}$. Con
+$z=x$ queda $F(p)-F(x)\le-\bigl(\frac1\alpha-\frac L2\bigr)\norm{p-x}^{2}$, y
+$\norm{p-x}=\alpha\norm{G_{\alpha}(x)}$.</p></div>
+<div class="stmt observacion" id="clase-c17:obs-mapeo"><div class="head">Observación</div><div class="body"><p>$G_{\alpha}$ hace el papel de $\nabla f$: se anula exactamente en los
+minimizadores, y cada paso baja $F$ en proporción a $\norm{G_{\alpha}}^{2}$.
+Cuando $\norm{G_{\alpha}(x)}$ es pequeño, $x$ está cerca de ser óptimo.</p></div></div>
+<div class="stmt teorema" id="clase-c17:teo-tasa-fb"><div class="head">Teorema tasa $O(1/k)$</div><div class="body"><p>Sean $X^{*}\neq\varnothing$, $x^{*}\in X^{*}$, $x_{0}\in\dom g$ y
+$0&lt;\alpha\le1/L$. El gradiente proximal con paso $\alpha$ cumple, para
+$k\ge1$,</p>
+<div class="display">\[
+  F(x_{k})-F^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2\alpha k},
+\]</div>
+<p>y con $\alpha=1/L$, $F(x_{k})-F^{*}\le\frac{L\norm{x_{0}-x^{*}}^{2}}{2k}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p123">Ver demostración</button><div class="proof" id="clase-convexa-p123"><p>La desigualdad fundamental con $x=x_{i}$ y $z=x^{*}$ da
+$F(x_{i+1})-F^{*}\le\frac{1}{2\alpha}\bigl(\norm{x_{i}-x^{*}}^{2}-\norm{x_{i+1}-x^{*}}^{2}\bigr)$,
+y su segunda parte dice que los valores no crecen. Luego</p>
+<div class="display">\[
+  k\bigl(F(x_{k})-F^{*}\bigr)\le\sum_{i=0}^{k-1}\bigl(F(x_{i+1})-F^{*}\bigr)\le\frac{1}{2\alpha}\norm{x_{0}-x^{*}}^{2}.
+\]</div></div>
+<div class="stmt proposicion" id="clase-c17:prop-parada"><div class="head">Proposición criterio de parada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $F^{*}=\inf F$ es finito y $0&lt;\alpha\le1/L$,</p>
+<div class="display">\[
+  \min_{0\le i&lt;k}\norm{G_{\alpha}(x_{i})}^{2}\le\frac{2\bigl(F(x_{0})-F^{*}\bigr)}{\alpha k}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p124">Ver demostración</button><div class="proof" id="clase-convexa-p124"><p>Como $\alpha L\le1$, la segunda parte de la desigualdad fundamental da
+$\frac{\alpha}{2}\norm{G_{\alpha}(x_{i})}^{2}\le F(x_{i})-F(x_{i+1})$, y la suma
+telescópica está acotada por $F(x_{0})-F^{*}$.</p></div>
+<div class="stmt observacion" id="clase-c17:obs-parada"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Esa segunda parte no usó la convexidad de $f$, solo el lema del descenso. El
+criterio vale, pues, para $f$ $L$-suave no convexa y $g$ convexa, y entonces
+mide estacionariedad y no optimalidad.</p></div></div>
+<div class="stmt definicion" id="clase-c17:def-backtracking"><div class="head">Definición <em>backtracking</em></div><div class="body"><p>Cuando no se conoce $L$: dados $x_{k}$, un estimador $L_{k}&gt;0$ y $\eta&gt;1$, se
+calcula</p>
+<div class="display">\[
+  p_{k}=\prox_{g/L_{k}}\Bigl(x_{k}-\frac{1}{L_{k}}\nabla f(x_{k})\Bigr)
+\]</div>
+<p>y, mientras
+$f(p_{k})&gt;f(x_{k})+\ip{\nabla f(x_{k})}{p_{k}-x_{k}}+\frac{L_{k}}{2}\norm{p_{k}-x_{k}}^{2}$,
+se reemplaza $L_{k}$ por $\eta L_{k}$ y se recalcula $p_{k}$. Al salir,
+$x_{k+1}=p_{k}$.</p></div></div>
+<div class="stmt observacion" id="clase-c17:obs-backtracking"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El ciclo termina: en cuanto $L_{k}\ge L$, la condición se cumple por el lema
+del descenso. Y la prueba de la desigualdad fundamental solo usó el lema del
+descenso entre $x$ y $p$, que es justo lo que el ciclo comprueba, así que vale
+con $\alpha=1/L_{k}$ sin conocer $L$.</p></div></div>
+<div class="stmt proposicion" id="clase-c17:prop-contraccion-fb"><div class="head">Proposición contracción bajo convexidad fuerte</div><div class="body"><p>Si $f$ es además $\mu$-fuertemente convexa y $\alpha=\frac{2}{L+\mu}$,</p>
+<div class="display">\[
+  \norm{T_{\alpha}(x)-T_{\alpha}(y)}\le\frac{L-\mu}{L+\mu}\norm{x-y},
+\]</div>
+<p>y el gradiente proximal converge linealmente al único minimizador:
+$\norm{x_{k}-x^{*}}\le\bigl(\frac{L-\mu}{L+\mu}\bigr)^{k}\norm{x_{0}-x^{*}}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p125">Ver demostración</button><div class="proof" id="clase-convexa-p125"><p>Sean $a=\nabla f(x)-\nabla f(y)$ y $d=x-y$. Como en la prueba del paso óptimo,
+el lema de interpolación da</p>
+<div class="display">\[
+  \norm{d-\alpha a}^{2}=\norm{d}^{2}-2\alpha\ip{a}{d}+\alpha^{2}\norm{a}^{2}
+  \le\Bigl(\frac{L-\mu}{L+\mu}\Bigr)^{2}\norm{d}^{2},
+\]</div>
+<p>así que $x\mapsto x-\alpha\nabla f(x)$ es una contracción con esa constante, y
+el proximal es $1$-Lipschitz. Por el punto fijo, $x^{*}=T_{\alpha}(x^{*})$.</p></div>
+<h3 id="clase-convexa-x27">FISTA</h3>
+<div class="stmt definicion" id="clase-c17:def-fista"><div class="head">Definición FISTA</div><div class="body"><p>Dados $x_{0}\in\dom g$, $y_{1}=x_{0}$ y $t_{1}=1$, para $k=1,2,\dots$</p>
+<div class="display">\[
+  \begin{aligned}
+  x_{k}&amp;=T_{1/L}(y_{k})=\prox_{g/L}\Bigl(y_{k}-\frac1L\nabla f(y_{k})\Bigr),\\
+  t_{k+1}&amp;=\frac{1+\sqrt{1+4t_{k}^{2}}}{2},\\
+  y_{k+1}&amp;=x_{k}+\frac{t_{k}-1}{t_{k+1}}(x_{k}-x_{k-1}).
+  \end{aligned}
+\]</div>
+<p>Es el gradiente proximal acelerado, y vale para cualquier $f+g$, no solo para
+Lasso.</p></div></div>
+<div class="stmt teorema" id="clase-c17:teo-fista"><div class="head">Teorema tasa $O(1/k^{2})$ de FISTA<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $x^{*}\in X^{*}$, para todo $k\ge1$</p>
+<div class="display">\[
+  F(x_{k})-F^{*}\le\frac{2L\norm{x_{0}-x^{*}}^{2}}{(k+1)^{2}}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p126">Ver demostración</button><div class="proof" id="clase-convexa-p126"><p>Sean $\delta_{k}=F(x_{k})-F^{*}$ y $v_{k}=t_{k}x_{k}-(t_{k}-1)x_{k-1}-x^{*}$. La
+desigualdad fundamental con $\alpha=1/L$ dice que, si $p=T_{1/L}(y)$ y
+$z\in\dom g$, entonces
+$\frac{2}{L}\bigl(F(p)-F(z)\bigr)\le\norm{y-z}^{2}-\norm{p-z}^{2}$. Con $y=x_{0}$
+y $z=x^{*}$ es $\frac2L\delta_{1}+\norm{v_{1}}^{2}\le\norm{x_{0}-x^{*}}^{2}$,
+porque $t_{1}=1$. Para $k\ge2$ sea
+$z_{k}=(1-t_{k}^{-1})x_{k-1}+t_{k}^{-1}x^{*}$, que está en $\dom g$ porque
+$t_{k}\ge1$. Por convexidad $F(z_{k})-F^{*}\le(1-t_{k}^{-1})\delta_{k-1}$, y con
+$y=y_{k}$ y $z=z_{k}$, multiplicando por $t_{k}^{2}$,</p>
+<div class="display">\[
+  \frac2L\Bigl(t_{k}^{2}\delta_{k}-t_{k}(t_{k}-1)\delta_{k-1}\Bigr)
+  \le\norm{t_{k}(z_{k}-y_{k})}^{2}-\norm{t_{k}(z_{k}-x_{k})}^{2}.
+\]</div>
+<p>Por definición $t_{k}(z_{k}-x_{k})=-v_{k}$, y como
+$t_{k}y_{k}=t_{k}x_{k-1}+(t_{k-1}-1)(x_{k-1}-x_{k-2})$, también
+$t_{k}(z_{k}-y_{k})=-v_{k-1}$. La recurrencia de $t_{k}$ equivale a
+$t_{k}^{2}-t_{k}=t_{k-1}^{2}$, y queda</p>
+<div class="display">\[
+  \frac2Lt_{k}^{2}\delta_{k}+\norm{v_{k}}^{2}\le\frac2Lt_{k-1}^{2}\delta_{k-1}+\norm{v_{k-1}}^{2}
+  \le\dots\le\norm{x_{0}-x^{*}}^{2}.
+\]</div>
+<p>Por último $t_{k+1}\ge\frac{1+2t_{k}}{2}=t_{k}+\frac12$, así que
+$t_{k}\ge\frac{k+1}{2}$ y $\delta_{k}\le\frac{L\norm{x_{0}-x^{*}}^{2}}{2t_{k}^{2}}$.</p></div>
+<div class="stmt observacion" id="clase-c17:obs-fista"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>FISTA no es monótono, igual que el método acelerado del capítulo anterior. Hay
+tres ajustes habituales: <em>backtracking</em>, con el $L_{k}$ aceptado en lugar de
+$L$; la versión monótona, que se queda con el mejor entre el paso acelerado y
+el iterado anterior; y el reinicio, que vuelve a $t_{k}=1$ cuando el momento
+apunta mal, por ejemplo si $\ip{x_{k}-x_{k-1}}{y_{k}-x_{k}}&gt;0$ o si el objetivo
+sube demasiado.</p></div></div>
+<div class="stmt proposicion" id="clase-c17:prop-reinicio"><div class="head">Proposición reinicio bajo convexidad fuerte<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $F$ es $\mu$-fuertemente convexa y FISTA se reinicia, partiendo del último
+iterado, cada $N$ iteraciones con $N+1\ge\sqrt{8L/\mu}$, entonces cada etapa
+divide a la mitad $F-F^{*}$, y se llega a $F-F^{*}\le\varepsilon$ en
+$O\bigl(\sqrt{L/\mu}\log\frac1\varepsilon\bigr)$ iteraciones.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p127">Ver demostración</button><div class="proof" id="clase-convexa-p127"><p>Como $0\in\subdif F(x^{*})$, la desigualdad del subgradiente con convexidad
+fuerte da $F(x)-F^{*}\ge\frac\mu2\norm{x-x^{*}}^{2}$. Si una etapa parte de
+$x_{0}$, la tasa de FISTA da</p>
+<div class="display">\[
+  F(x_{N})-F^{*}\le\frac{2L\norm{x_{0}-x^{*}}^{2}}{(N+1)^{2}}
+  \le\frac{4L}{\mu(N+1)^{2}}\bigl(F(x_{0})-F^{*}\bigr)\le\frac12\bigl(F(x_{0})-F^{*}\bigr).
+\]</div>
+<p>Bastan $\log_{2}\frac{F(x_{0})-F^{*}}{\varepsilon}$ etapas de
+$N=O(\sqrt{L/\mu})$ iteraciones.</p></div>
+<h3 id="clase-convexa-x28">Ejemplos estructurados</h3>
+<div class="stmt ejemplo" id="clase-c17:ej-ista"><div class="head">Ejemplo ISTA</div><div class="body"><p>Para Lasso, $f(x)=\frac12\norm{Ax-b}_{2}^{2}$ tiene
+$\nabla f(x)=A\trans(Ax-b)$ y es $L$-suave con $L=\norm{A\trans A}=\norm{A}^{2}$.
+El gradiente proximal, que en Lasso se llama <span class="df">ISTA</span>, es</p>
+<div class="display">\[
+  x_{k+1}=S_{\alpha\tau}\Bigl(x_{k}-\alpha A\trans(Ax_{k}-b)\Bigr),
+\]</div>
+<p>y con la extrapolación de FISTA se obtiene la tasa $O(1/k^{2})$. El costo de
+cada paso son los productos por $A$ y por $A\trans$.</p></div></div>
+<div class="stmt ejemplo" id="clase-c17:ej-proyectado"><div class="head">Ejemplo gradiente proyectado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $\min_{x\in C}f(x)$ con $C$ convexo, cerrado y no vacío, se toma
+$g=\delta_{C}$, y el método es</p>
+<div class="display">\[
+  x_{k+1}=\Proy_{C}\bigl(x_{k}-\alpha\nabla f(x_{k})\bigr).
+\]</div>
+<p>Tiene la tasa $O(1/k)$ y, acelerado, la $O(1/k^{2})$, siempre que proyectar
+sobre $C$ sea barato.</p></div></div>
+<div class="stmt ejemplo" id="clase-c17:ej-netflix-paso"><div class="head">Ejemplo completar una matriz, el paso</div><div class="body"><p>Para $f(X)=\frac12\norm{P_{\Omega}(X-A)}_{F}^{2}$ es
+$\nabla f(X)=P_{\Omega}(X-A)$ y $L=1$. Con paso $1$,</p>
+<div class="display">\[
+  Y_{k}=X_{k}-P_{\Omega}(X_{k}-A)=P_{\Omega^{c}}(X_{k})+P_{\Omega}(A),
+  \qquad
+  X_{k+1}=\prox_{\lambda\norm{\cdot}_{*}}(Y_{k}),
+\]</div>
+<p>el umbral suave sobre los valores singulares de $Y_{k}$, que se escribe
+$\operatorname{SVT}_{\lambda}(Y_{k})$. Cada paso repone las entradas observadas
+con los datos, conserva la estimación en las demás, y recorta el rango.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p128">Ver demostración</button><div class="proof" id="clase-convexa-p128"><p>$f(X)=\frac12\sum_{(i,j)\in\Omega}(X_{ij}-A_{ij})^{2}$, cuyo gradiente es
+$P_{\Omega}(X-A)$. Como $P_{\Omega}$ es una proyección ortogonal,
+$\norm{P_{\Omega}(X-Y)}_{F}\le\norm{X-Y}_{F}$, y $L=1$. Además
+$X-P_{\Omega}(X)=P_{\Omega^{c}}(X)$.</p></div>
+<div class="stmt ejemplo" id="clase-c17:ej-grupos"><div class="head">Ejemplo regularización por grupos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si las coordenadas se parten en grupos $G_{1},\dots,G_{m}$ y
+$g(x)=\lambda\sum_{j}w_{j}\norm{x_{G_{j}}}_{2}$ con $w_{j}&gt;0$, el proximal se
+separa por grupos:</p>
+<div class="display">\[
+  \bigl(\prox_{\alpha g}(v)\bigr)_{G_{j}}=\Bigl(1-\frac{\alpha\lambda w_{j}}{\norm{v_{G_{j}}}_{2}}\Bigr)_{+}v_{G_{j}}.
+\]</div>
+<p>Así se anulan o se conservan grupos enteros de variables.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p129">Ver demostración</button><div class="proof" id="clase-convexa-p129"><p>El objetivo del proximal es una suma de términos que dependen cada uno de un
+solo bloque $x_{G_{j}}$, y en cada bloque es el de la norma euclídea.</p></div>
+<div class="stmt observacion" id="clase-c17:obs-dificil"><div class="head">Observación el proximal también puede ser difícil<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Separar el objetivo en $f+g$ solo sirve si $\prox_{\alpha g}$ es más fácil que
+el problema original. Con la variación total, con composiciones $g(Ax)$ o con
+restricciones acopladas, el proximal pide a su vez un algoritmo, y eso motiva
+ADMM, Douglas–Rachford y los métodos primal-duales.</p></div></div></section>
+<section class="capitulo"><h2 id="clase-cap:lagrange">Dualidad lagrangiana</h2>
+<div class="stmt definicion" id="clase-c18:def-problema"><div class="head">Definición el problema con restricciones</div><div class="body"><p>Sean $F\in\Gamma_{0}(\R^{n})$, $g_{1},\dots,g_{m}:\R^{n}\to\R$ convexas, $A$
+una matriz $p\times n$ y $b\in\R^{p}$. El problema es</p>
+<div class="display">\[
+  p^{*}=\inf\ F(x)\quad\text{sujeto a}\quad g_{i}(x)\le0,\ i=1,\dots,m,\qquad Ax=b,
+  \tag{P}
+\]</div>
+<p>y se escribe $D=\dom F$.</p></div></div>
+<div class="stmt observacion" id="clase-c18:obs-conjunto"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Una restricción $x\in C$, con $C$ convexo y cerrado, se incorpora cambiando $F$
+por $F+\delta_{C}$, así que no hace falta tratarla aparte.</p></div></div>
+<div class="stmt definicion" id="clase-c18:def-lagrangiano"><div class="head">Definición Lagrangiano y problema dual</div><div class="body"><p>Para $x\in\R^{n}$ (la variable primal) y $\lambda\in\R^{m}$, $\nu\in\R^{p}$ (las
+variables duales), el <span class="df">Lagrangiano</span> es</p>
+<div class="display">\[
+  \mathcal{L}(x,\lambda,\nu)=F(x)+\sum_{i=1}^{m}\lambda_{i}g_{i}(x)+\ip{\nu}{Ax-b}.
+\]</div>
+<p>La <span class="df">función dual</span> es $q(\lambda,\nu)=\inf_{x\in\R^{n}}\mathcal{L}(x,\lambda,\nu)$,
+y el <span class="df">problema dual</span> es</p>
+<div class="display">\[
+  d^{*}=\sup_{\lambda\ge0,\ \nu}\ q(\lambda,\nu).
+  \tag{D}
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c18:obs-concava"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para cada $x$, $(\lambda,\nu)\mapsto\mathcal{L}(x,\lambda,\nu)$ es afín, así que
+$q$ es cóncava por ser un ínfimo de funciones afines, aunque el primal no fuera
+convexo. Puede valer $-\infty$, y un par dual sirve justo cuando el ínfimo que
+lo define es finito. Para $\lambda\ge0$, $x\mapsto\mathcal{L}(x,\lambda,\nu)$ es
+convexa.</p></div></div>
+<div class="stmt ejemplo" id="clase-c18:ej-cuadratico"><div class="head">Ejemplo cuadrático con restricciones de igualdad</div><div class="body"><p>Para $\min\frac12x\trans Qx+c\trans x$ sujeto a $Ax=b$, con $Q\succ0$,</p>
+<div class="display">\[
+  q(\nu)=-\frac12(c+A\trans\nu)\trans Q^{-1}(c+A\trans\nu)-b\trans\nu,
+\]</div>
+<p>y el dual es maximizar una cuadrática cóncava sin restricciones.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p130">Ver demostración</button><div class="proof" id="clase-convexa-p130"><p>$\mathcal{L}(x,\nu)=\frac12x\trans Qx+c\trans x+\ip{\nu}{Ax-b}$ es convexa en
+$x$, y su gradiente $Qx+c+A\trans\nu$ se anula en $x=-Q^{-1}(c+A\trans\nu)$.
+Sustituyendo sale $q(\nu)$.</p></div>
+<div class="stmt ejemplo" id="clase-c18:ej-fenchel"><div class="head">Ejemplo la dualidad de Fenchel vista desde Lagrange</div><div class="body"><p>El primal de la dualidad de Fenchel–Rockafellar,
+$\inf_{x}f(x)+g(Ax)$, se escribe con una variable más como</p>
+<div class="display">\[
+  \inf_{x,z}\ f(x)+g(z)\quad\text{sujeto a}\quad Ax-z=0.
+\]</div>
+<p>Con multiplicador $y$, $\mathcal{L}(x,z;y)=f(x)+g(z)+y\trans Ax-y\trans z$, y</p>
+<div class="display">\[
+  q(y)=-f^{*}(-A\trans y)-g^{*}(y),
+\]</div>
+<p>que es la función que maximiza el dual de Fenchel–Rockafellar.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p131">Ver demostración</button><div class="proof" id="clase-convexa-p131"><p>El ínfimo se separa:</p>
+<div class="display">\[
+  \begin{aligned}
+  q(y)&amp;=\inf_{x}\bigl\{f(x)+\ip{A\trans y}{x}\bigr\}+\inf_{z}\bigl\{g(z)-\ip{y}{z}\bigr\}\\
+  &amp;=-\sup_{x}\bigl\{\ip{-A\trans y}{x}-f(x)\bigr\}-\sup_{z}\bigl\{\ip{y}{z}-g(z)\bigr\},
+  \end{aligned}
+\]</div>
+<p>y los dos supremos son las conjugadas.</p></div>
+<div class="stmt teorema" id="clase-c18:teo-debil"><div class="head">Teorema dualidad débil</div><div class="body"><p>Si $x$ es factible para (P) y $\lambda\ge0$, entonces $q(\lambda,\nu)\le F(x)$.
+En particular $d^{*}\le p^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p132">Ver demostración</button><div class="proof" id="clase-convexa-p132"><p>Como $g_{i}(x)\le0$, $\lambda_{i}\ge0$ y $Ax=b$,</p>
+<div class="display">\[
+  q(\lambda,\nu)\le\mathcal{L}(x,\lambda,\nu)=F(x)+\sum_{i=1}^{m}\lambda_{i}g_{i}(x)+\ip{\nu}{Ax-b}\le F(x),
+\]</div>
+<p>y se toma el supremo en $(\lambda,\nu)$ y el ínfimo en $x$.</p></div>
+<div class="stmt definicion" id="clase-c18:def-brecha"><div class="head">Definición brecha de dualidad</div><div class="body"><p>Para $x$ factible y $\lambda\ge0$, la <span class="df">brecha de dualidad</span> es
+$\mathcal{G}(x;\lambda,\nu)=F(x)-q(\lambda,\nu)\ge0$, y</p>
+<div class="display">\[
+  0\le F(x)-p^{*}\le\mathcal{G}(x;\lambda,\nu).
+\]</div>
+<p>Una brecha pequeña certifica que $x$ es casi óptimo sin conocer $p^{*}$.</p></div></div>
+<h3 id="clase-convexa-x29">La condición de Slater y la dualidad fuerte</h3>
+<div class="stmt definicion" id="clase-c18:def-slater"><div class="head">Definición condición de Slater</div><div class="body"><p>El problema (P) cumple la <span class="df">condición de Slater</span> si existe $\bar{x}\in\ri D$
+con</p>
+<div class="display">\[
+  g_{i}(\bar{x})&lt;0,\quad i=1,\dots,m,\qquad A\bar{x}=b.
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c18:obs-redundantes"><div class="head">Observación igualdades redundantes</div><div class="body"><p>Sea $V=\paral(\aff D)$. Sin pérdida de generalidad $A(V)=\R^{p}$, es decir,
+para todo $d\in\R^{p}$ existe $w\in V$ con $Aw=d$. En efecto, si $x\in D$ y
+$\bar{x}$ es el punto de Slater, $Ax-b=A(x-\bar{x})\in A(V)$. Si
+$A(V)\neq\R^{p}$, se escoge una matriz $M$ de tamaño $r\times p$, con
+$r=\dim A(V)$, que sea inyectiva sobre $A(V)$; entonces, para $x\in D$,
+$Ax=b$ equivale a $MAx=Mb$, y $MA(V)=\R^{r}$. Se cambian $A$ y $b$ por $MA$ y
+$Mb$, que dan el mismo problema con $r$ igualdades. Un multiplicador $\nu&#x27;$
+del problema reducido da uno del original, $\nu=M\trans\nu&#x27;$, porque
+$\ip{M\trans\nu&#x27;}{Ax-b}=\ip{\nu&#x27;}{MAx-Mb}$.</p></div></div>
+<div class="stmt observacion" id="clase-c18:obs-slater"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El interior relativo, y no el interior, es esencial: si $D$ vive en un afín de
+dimensión menor que $n$, su interior es vacío aunque el problema esté bien
+planteado. Si $F$ es finita en todo $\R^{n}$, Slater es la existencia de un punto
+que cumple las desigualdades estrictamente y las igualdades exactamente.</p></div></div>
+<div class="stmt definicion" id="clase-c18:def-valor"><div class="head">Definición la función de valor</div><div class="body"><p>Para $u\in\R^{m}$ y $v\in\R^{p}$,</p>
+<div class="display">\[
+  \varphi(u,v)=\inf\bigl\{F(x):\ g_{i}(x)\le u_{i},\ i=1,\dots,m,\quad Ax-b=v\bigr\},
+\]</div>
+<p>con $\varphi(u,v)=\infty$ si no hay puntos factibles. Es el valor del problema
+perturbado, y $\varphi(0,0)=p^{*}$.</p></div></div>
+<div class="stmt proposicion" id="clase-c18:prop-valor-convexa"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\varphi$ es convexa.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p133">Ver demostración</button><div class="proof" id="clase-convexa-p133"><p>Sean $w_{1}=(u_{1},v_{1})$ y $w_{2}=(u_{2},v_{2})$, $\theta\in[0,1]$, y
+$r_{j}&gt;\varphi(w_{j})$. Hay $x_{j}$ factibles para $w_{j}$ con $F(x_{j})&lt;r_{j}$.
+Por convexidad, $x_{\theta}=\theta x_{1}+(1-\theta)x_{2}$ cumple
+$g_{i}(x_{\theta})\le\theta u_{1,i}+(1-\theta)u_{2,i}$ y
+$Ax_{\theta}-b=\theta v_{1}+(1-\theta)v_{2}$, así que es factible para
+$\theta w_{1}+(1-\theta)w_{2}$, y
+$\varphi(\theta w_{1}+(1-\theta)w_{2})\le F(x_{\theta})&lt;\theta r_{1}+(1-\theta)r_{2}$.</p></div>
+<div class="stmt lema" id="clase-c18:lem-valor"><div class="head">Lema la función de valor cerca del origen</div><div class="body"><p>Si (P) cumple Slater, $A(V)=\R^{p}$ y $p^{*}\in\R$, entonces
+$(0,0)\in\intr(\dom\varphi)$ y $\varphi$ no toma el valor $-\infty$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p134">Ver demostración</button><div class="proof" id="clase-convexa-p134"><p>Como $A(V)=\R^{p}$, hay una aplicación lineal $B:\R^{p}\to V$ con $AB=I$: basta
+escoger una preimagen en $V$ de cada vector de la base. Sea $\bar{x}$ el punto
+de Slater y $x(v)=\bar{x}+Bv$. Como $\bar{x}\in\ri D$ y $Bv\in V$, es
+$x(v)\in D$ para $\norm{v}$ pequeño, y $Ax(v)-b=v$. Las $g_{i}$ son convexas y
+finitas, luego continuas, y $g_{i}(\bar{x})&lt;0$; así que hay $\varepsilon&gt;0$ tal
+que $\norm{(u,v)}&lt;\varepsilon$ implica $g_{i}(x(v))\le u_{i}$ para todo $i$.
+Entonces $x(v)$ es factible para $(u,v)$ y $\varphi(u,v)\le F(x(v))&lt;\infty$: el
+origen es interior a $\dom\varphi$.</p>
+<p>Supóngase que $\varphi(w_{0})=-\infty$ para algún $w_{0}=(u_{0},v_{0})$. Para
+$t&gt;0$ pequeño, $-tw_{0}$ está en esa vecindad, así que hay $x^{-}\in D$ con
+$g_{i}(x^{-})\le-tu_{0,i}$ y $Ax^{-}-b=-tv_{0}$. Y hay $x^{j}\in D$ factibles
+para $w_{0}$ con $F(x^{j})\to-\infty$. Sean $\theta=\frac{t}{1+t}$, de modo que
+$(1-\theta)t=\theta$, y $z^{j}=\theta x^{j}+(1-\theta)x^{-}$. Entonces</p>
+<div class="display">\[
+  g_{i}(z^{j})\le\theta u_{0,i}-(1-\theta)tu_{0,i}=0,
+  \qquad
+  Az^{j}-b=\theta v_{0}-(1-\theta)tv_{0}=0,
+\]</div>
+<p>así que $z^{j}$ es factible para (P), y
+$F(z^{j})\le\theta F(x^{j})+(1-\theta)F(x^{-})\to-\infty$, contra $p^{*}\in\R$.</p></div>
+<div class="stmt teorema" id="clase-c18:teo-fuerte"><div class="head">Teorema dualidad fuerte</div><div class="body"><p>Si (P) cumple Slater y $p^{*}\in\R$, entonces $p^{*}=d^{*}$ y el dual alcanza su
+valor: existe $(\lambda^{*},\nu^{*})$ con $\lambda^{*}\ge0$ y
+$q(\lambda^{*},\nu^{*})=d^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p135">Ver demostración</button><div class="proof" id="clase-convexa-p135"><p>Por la observación de las igualdades redundantes se puede suponer
+$A(V)=\R^{p}$. Por el lema, $\varphi$ es convexa, propia y $(0,0)$ es interior a
+su dominio, así que su subdiferencial en $(0,0)$ no es vacío. Sea
+$(\alpha,\beta)\in\subdif\varphi(0,0)$:</p>
+<div class="display">\[
+  \varphi(u,v)\ge p^{*}+\ip{\alpha}{u}+\ip{\beta}{v}\qquad\text{para todo }(u,v).
+\]</div>
+<p>Con $(u,v)=(te_{i},0)$ y $t&gt;0$, la restricción se relaja y
+$p^{*}\ge\varphi(te_{i},0)\ge p^{*}+t\alpha_{i}$, así que $\alpha_{i}\le0$. Sean
+$\lambda^{*}=-\alpha\ge0$ y $\nu^{*}=-\beta$. Si $x\in D$, $x$ es factible para
+$u_{i}=g_{i}(x)$ y $v=Ax-b$, luego</p>
+<div class="display">\[
+  F(x)\ge\varphi(u,v)\ge p^{*}-\sum_{i=1}^{m}\lambda_{i}^{*}g_{i}(x)-\ip{\nu^{*}}{Ax-b},
+\]</div>
+<p>es decir $\mathcal{L}(x,\lambda^{*},\nu^{*})\ge p^{*}$; fuera de $D$ el
+Lagrangiano vale $\infty$. Por tanto
+$d^{*}\ge q(\lambda^{*},\nu^{*})=\inf_{x}\mathcal{L}(x,\lambda^{*},\nu^{*})\ge p^{*}\ge d^{*}$.</p></div>
+<div class="stmt observacion" id="clase-c18:obs-precios"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La factibilidad estricta hace el problema estable frente a perturbaciones
+pequeñas de las restricciones, y esa estabilidad es la que permite sostener la
+función de valor con un hiperplano en el origen. Sus pendientes son los
+multiplicadores óptimos: $-(\lambda^{*},\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -5157,7 +5541,7 @@ completa tiene rango bajo, y la norma nuclear es la relajación convexa del rang
 <div class="display">\[
   \min_{X\in\R^{m\times n}}\ \frac12\norm{P_{\Omega}(X-A)}_{F}^{2}+\lambda\norm{X}_{*}.
 \]</div></div></div>
-<h3 id="general-convexa-x19">El método del punto proximal</h3>
+<h3 id="general-convexa-x19">El punto proximal: minimizar una sola función</h3>
 <div class="stmt definicion" id="general-c17:def-punto"><div class="head">Definición el punto proximal</div><div class="body"><p>Para $\min\varphi$ con $\varphi\in\Gamma_{0}(\Hs)$, dados $x_{0}$ y
 $\lambda_{k}&gt;0$, el <span class="df">método del punto proximal</span> genera
 $x_{k+1}=\prox_{\lambda_{k}\varphi}(x_{k})$.</p></div></div>
@@ -5235,10 +5619,11 @@ expansividad, sale la misma cota por debajo con signo menos. Eso es la
 diferenciabilidad de Fréchet con ese gradiente. La constante de Lipschitz es la
 no expansividad de $\Id-\prox_{\lambda g}$, que es firme, y la monotonía del
 gradiente da la convexidad.</p></div>
-<div class="stmt observacion" id="general-c17:obs-moreau"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\env{\lambda}{g}\le g$, y las dos tienen los mismos minimizadores, porque
+<div class="stmt observacion" id="general-c17:obs-moreau"><div class="head">Observación</div><div class="body"><p>$\env{\lambda}{g}\le g$, y las dos tienen los mismos minimizadores, porque
 $\nabla\env{\lambda}{g}(v)=0$ si y solo si $v=\prox_{\lambda g}(v)$, es decir
-$0\in\subdif g(v)$. Cuando $\lambda\downarrow0$, $\env{\lambda}{g}(v)\uparrow g(v)$
-en todo punto, y la constante $1/\lambda$ del gradiente empeora.</p></div></div>
+$0\in\subdif g(v)$.</p></div></div>
+<div class="stmt observacion" id="general-c17:obs-moreau-lambda"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Cuando $\lambda\downarrow0$, $\env{\lambda}{g}(v)\uparrow g(v)$ en todo punto, y
+la constante $1/\lambda$ del gradiente empeora.</p></div></div>
 <div class="stmt teorema" id="general-c17:teo-identidad"><div class="head">Teorema identidad de Moreau<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para todo $v\in\Hs$,</p>
 <div class="display">\[
   \prox_{\lambda g}(v)+\lambda\prox_{\lambda^{-1}g^{*}}(v/\lambda)=v,
@@ -5250,7 +5635,270 @@ $p=\lambda(v/\lambda-y)$, la caracterización aplicada a $g^{*}\in\Gamma_{0}(\Hs
 dice $y=\prox_{\lambda^{-1}g^{*}}(v/\lambda)$.</p></div>
 <div class="stmt observacion" id="general-c17:obs-identidad"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La conjugada de $\tau\norm{\cdot}$ es la indicadora de la bola de radio $\tau$,
 así que $\prox_{\lambda\tau\norm{\cdot}}(v)=v-\Proy_{\Ball(0;\lambda\tau)}(v)$,
-que es otra vez el ejemplo de la norma.</p></div></div></section></div>
+que es otra vez el ejemplo de la norma.</p></div></div>
+<h3 id="general-convexa-x21">Una función o una suma</h3>
+<div class="stmt observacion" id="general-c17:obs-cual"><div class="head">Observación qué minimiza cada método</div><div class="body"><p>Los métodos de los capítulos de algoritmos se distinguen por el problema que
+resuelven y por lo que piden de cada término:</p>
+<div class="centro"><div class="tabla"><table><tr><th>Método</th><th>Problema</th><th>Usa en cada paso</th></tr>
+<tr><td>Gradiente, Nesterov</td><td>$\min f$, con $f$ convexa y $L$-suave</td><td>$\nabla f$</td></tr>
+<tr><td>Newton</td><td>$\min f$, con $f$ de clase $C^{2}$</td><td>$\nabla f$ y $\nabla^{2}f$</td></tr>
+<tr><td>Subgradiente, <em>mirror descent</em></td><td>$\min_{C}f$, con $f$ convexa y Lipschitz</td><td>un $s\in\subdif f(x)$</td></tr>
+<tr><td>Punto proximal</td><td>$\min\varphi$, con $\varphi\in\Gamma_{0}(\Hs)$</td><td>$\prox_{\lambda\varphi}$</td></tr>
+<tr><td>Gradiente proximal, ISTA, FISTA</td><td>$\min f+g$, con $f$ convexa y $L$-suave y $g\in\Gamma_{0}(\Hs)$</td><td>$\nabla f$ y $\prox_{\alpha g}$</td></tr></table></div></div>
+<p>El punto proximal minimiza una sola función sin pedirle suavidad, pero cada paso
+es un problema de minimización que solo es barato si $\prox_{\lambda\varphi}$
+tiene fórmula. El gradiente proximal parte el objetivo: la parte suave $f$ se
+trata con un paso de gradiente y solo la parte $g$ pasa por el proximal, que es
+la que se escoge sencilla. Con $g=0$ es el método del gradiente; con $f=0$, que
+es $L$-suave para todo $L&gt;0$, es el punto proximal; con $g=\delta_{C}$ es el
+gradiente proyectado. Y la envolvente de Moreau pasa del tercer renglón al
+primero: es $\frac1\lambda$-suave, y el gradiente sobre ella con paso $\lambda$
+es $v-\lambda\nabla\env{\lambda}{g}(v)=\prox_{\lambda g}(v)$, el punto proximal.</p></div></div>
+<h3 id="general-convexa-x22">El gradiente proximal: minimizar $f+g$</h3>
+<p>En lo que sigue $F=f+g$, con $f:\Hs\to\R$ convexa, Fréchet diferenciable y
+$L$-suave, y $g\in\Gamma_{0}(\Hs)$. Cuando $F$ tiene minimizadores se escribe
+$X^{*}=\argmin F$ y $F^{*}=\min F$.</p>
+<div class="stmt proposicion" id="general-c17:prop-punto-fijo"><div class="head">Proposición el punto fijo</div><div class="body"><p>Para todo $\alpha&gt;0$,</p>
+<div class="display">\[
+  x^{*}\in X^{*}
+  \iff 0\in\nabla f(x^{*})+\subdif g(x^{*})
+  \iff x^{*}=\prox_{\alpha g}\bigl(x^{*}-\alpha\nabla f(x^{*})\bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p109">Ver demostración</button><div class="proof" id="general-convexa-p109"><p>La primera equivalencia es la regla de Fermat con la regla de la suma, que se
+aplica porque $f$ es continua en todo $\Hs$, y $\subdif f(x)=\{\nabla f(x)\}$.
+La segunda es la caracterización del proximal en
+$v=x^{*}-\alpha\nabla f(x^{*})$.</p></div>
+<div class="stmt definicion" id="general-c17:def-gradiente-proximal"><div class="head">Definición el gradiente proximal</div><div class="body"><p>Para $\alpha&gt;0$ sea $T_{\alpha}(x)=\prox_{\alpha g}\bigl(x-\alpha\nabla f(x)\bigr)$.
+Dado $x_{0}\in\dom g$, el <span class="df">método del gradiente proximal</span>, o
+<span class="df"><em>forward-backward splitting</em></span>, genera $x_{k+1}=T_{\alpha_{k}}(x_{k})$:
+un paso explícito (<em>forward</em>) sobre $f$ y uno implícito (<em>backward</em>)
+sobre $g$.</p></div></div>
+<div class="stmt proposicion" id="general-c17:prop-modelo"><div class="head">Proposición el modelo que se minimiza</div><div class="body"><p>Sea
+$Q_{\alpha}(z;x)=f(x)+\ip{\nabla f(x)}{z-x}+\frac{1}{2\alpha}\norm{z-x}^{2}+g(z)$.
+Entonces</p>
+<div class="display">\[
+  Q_{\alpha}(z;x)=g(z)+\frac{1}{2\alpha}\bigl\|z-\bigl(x-\alpha\nabla f(x)\bigr)\bigr\|^{2}+f(x)-\frac{\alpha}{2}\norm{\nabla f(x)}^{2},
+\]</div>
+<p>así que $T_{\alpha}(x)$ es el único minimizador de $Q_{\alpha}(\cdot\,;x)$. Si
+$\alpha\le1/L$, además $Q_{\alpha}(z;x)\ge F(z)$, con igualdad en $z=x$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p110">Ver demostración</button><div class="proof" id="general-convexa-p110"><p>Desarrollar el cuadrado, y el lema del descenso con $\frac{1}{\alpha}\ge L$.</p></div>
+<div class="stmt definicion" id="general-c17:def-mapeo"><div class="head">Definición el mapeo de gradiente proximal</div><div class="body"><p>$G_{\alpha}(x)=\frac{1}{\alpha}\bigl(x-T_{\alpha}(x)\bigr)$, de modo que
+$x_{k+1}=x_{k}-\alpha G_{\alpha}(x_{k})$.</p></div></div>
+<div class="stmt proposicion" id="general-c17:prop-mapeo"><div class="head">Proposición</div><div class="body"><p>$G_{\alpha}(x)=0$ si y solo si $x\in X^{*}$. Si $g=0$, $G_{\alpha}=\nabla f$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p111">Ver demostración</button><div class="proof" id="general-convexa-p111"><p>Lo primero es el punto fijo; si $g=0$, el proximal es la identidad.</p></div>
+<div class="stmt lema" id="general-c17:lem-fundamental"><div class="head">Lema desigualdad fundamental</div><div class="body"><p>Sea $0&lt;\alpha\le1/L$, $x\in\Hs$ y $p=T_{\alpha}(x)$. Para todo $z\in\dom g$,</p>
+<div class="display">\[
+  F(p)-F(z)\le\frac{1}{2\alpha}\Bigl(\norm{x-z}^{2}-\norm{p-z}^{2}\Bigr)
+  -\Bigl(\frac{1}{2\alpha}-\frac{L}{2}\Bigr)\norm{p-x}^{2},
+\]</div>
+<p>y si $x\in\dom g$,
+$F(p)\le F(x)-\alpha\bigl(1-\frac{\alpha L}{2}\bigr)\norm{G_{\alpha}(x)}^{2}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p112">Ver demostración</button><div class="proof" id="general-convexa-p112"><p>Por la caracterización del proximal,
+$s=-\nabla f(x)-\frac{1}{\alpha}(p-x)\in\subdif g(p)$, así que
+$g(p)-g(z)\le-\ip{\nabla f(x)}{p-z}-\frac{1}{\alpha}\ip{p-x}{p-z}$. El lema del
+descenso y la caracterización de primer orden de la convexidad dan
+$f(p)-f(z)\le\ip{\nabla f(x)}{p-z}+\frac{L}{2}\norm{p-x}^{2}$. Se suman y se usa
+$-2\ip{p-x}{p-z}=\norm{x-z}^{2}-\norm{p-x}^{2}-\norm{p-z}^{2}$. Con $z=x$ sale
+la segunda, porque $\norm{p-x}=\alpha\norm{G_{\alpha}(x)}$.</p></div>
+<div class="stmt observacion" id="general-c17:obs-mapeo"><div class="head">Observación</div><div class="body"><p>$G_{\alpha}$ hace el papel de $\nabla f$: se anula exactamente en los
+minimizadores, y cada paso baja $F$ en proporción a $\norm{G_{\alpha}}^{2}$.</p></div></div>
+<div class="stmt teorema" id="general-c17:teo-tasa-fb"><div class="head">Teorema tasa $O(1/k)$</div><div class="body"><p>Sean $X^{*}\neq\varnothing$, $x^{*}\in X^{*}$, $x_{0}\in\dom g$ y
+$0&lt;\alpha\le1/L$. Para $k\ge1$,
+$F(x_{k})-F^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2\alpha k}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p113">Ver demostración</button><div class="proof" id="general-convexa-p113"><p>La desigualdad fundamental con $x=x_{i}$ y $z=x^{*}$, sumada de $0$ a $k-1$, y
+que los valores no crecen.</p></div>
+<div class="stmt proposicion" id="general-c17:prop-debil-fb"><div class="head">Proposición convergencia de los iterados</div><div class="body"><p>En las mismas hipótesis, $(x_{k})$ converge débilmente a un punto de $X^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p114">Ver demostración</button><div class="proof" id="general-convexa-p114"><p>La desigualdad fundamental con $z=x^{*}\in X^{*}$ da
+$\norm{x_{k+1}-x^{*}}\le\norm{x_{k}-x^{*}}$, porque $F(x_{k+1})\ge F^{*}$: la
+sucesión es Fejér monótona respecto de $X^{*}$. Por la tasa, $F(x_{k})\to F^{*}$.
+Si $x_{k_{j}}\rightharpoonup\bar{x}$, como $F$ es convexa y s.c.i. es
+débilmente s.c.i., y $F(\bar{x})\le F^{*}$. Basta el lema de Opial con
+$C=X^{*}$.</p></div>
+<div class="stmt proposicion" id="general-c17:prop-parada"><div class="head">Proposición criterio de parada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $F^{*}=\inf F$ es finito y $0&lt;\alpha\le1/L$,
+$\min_{0\le i&lt;k}\norm{G_{\alpha}(x_{i})}^{2}\le\frac{2(F(x_{0})-F^{*})}{\alpha k}$.
+Su prueba no usa la convexidad de $f$, y para $f$ no convexa mide
+estacionariedad.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p115">Ver demostración</button><div class="proof" id="general-convexa-p115"><p>$\frac{\alpha}{2}\norm{G_{\alpha}(x_{i})}^{2}\le F(x_{i})-F(x_{i+1})$, por la
+segunda parte de la desigualdad fundamental, que solo usó el lema del descenso.</p></div>
+<div class="stmt definicion" id="general-c17:def-backtracking"><div class="head">Definición <em>backtracking</em></div><div class="body"><p>Dados $x_{k}$, $L_{k}&gt;0$ y $\eta&gt;1$, se calcula
+$p_{k}=\prox_{g/L_{k}}\bigl(x_{k}-\frac{1}{L_{k}}\nabla f(x_{k})\bigr)$ y,
+mientras
+$f(p_{k})&gt;f(x_{k})+\ip{\nabla f(x_{k})}{p_{k}-x_{k}}+\frac{L_{k}}{2}\norm{p_{k}-x_{k}}^{2}$,
+se reemplaza $L_{k}$ por $\eta L_{k}$. Al salir, $x_{k+1}=p_{k}$.</p></div></div>
+<div class="stmt observacion" id="general-c17:obs-backtracking"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El ciclo termina en cuanto $L_{k}\ge L$, por el lema del descenso, y la
+desigualdad fundamental vale con $\alpha=1/L_{k}$ porque es justo lo que el
+ciclo comprueba.</p></div></div>
+<div class="stmt proposicion" id="general-c17:prop-contraccion-fb"><div class="head">Proposición contracción bajo convexidad fuerte</div><div class="body"><p>Si $f$ es además $\mu$-fuertemente convexa y $\alpha=\frac{2}{L+\mu}$,
+$T_{\alpha}$ es $\frac{L-\mu}{L+\mu}$-Lipschitz, y
+$\norm{x_{k}-x^{*}}\le\bigl(\frac{L-\mu}{L+\mu}\bigr)^{k}\norm{x_{0}-x^{*}}$: el
+gradiente proximal converge linealmente, y en norma, al único minimizador.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p116">Ver demostración</button><div class="proof" id="general-convexa-p116"><p>Como en la prueba del paso óptimo, el lema de interpolación hace de
+$x\mapsto x-\alpha\nabla f(x)$ una contracción con esa constante, y el proximal
+es $1$-Lipschitz. Por el punto fijo, $x^{*}=T_{\alpha}(x^{*})$.</p></div>
+<h3 id="general-convexa-x23">FISTA</h3>
+<div class="stmt definicion" id="general-c17:def-fista"><div class="head">Definición FISTA</div><div class="body"><p>Dados $x_{0}\in\dom g$, $y_{1}=x_{0}$ y $t_{1}=1$, para $k=1,2,\dots$</p>
+<div class="display">\[
+  x_{k}=T_{1/L}(y_{k}),
+  \qquad
+  t_{k+1}=\frac{1+\sqrt{1+4t_{k}^{2}}}{2},
+  \qquad
+  y_{k+1}=x_{k}+\frac{t_{k}-1}{t_{k+1}}(x_{k}-x_{k-1}).
+\]</div></div></div>
+<div class="stmt teorema" id="general-c17:teo-fista"><div class="head">Teorema tasa $O(1/k^{2})$ de FISTA<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $x^{*}\in X^{*}$, para todo $k\ge1$,
+$F(x_{k})-F^{*}\le\frac{2L\norm{x_{0}-x^{*}}^{2}}{(k+1)^{2}}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p117">Ver demostración</button><div class="proof" id="general-convexa-p117"><p>Sean $\delta_{k}=F(x_{k})-F^{*}$ y $v_{k}=t_{k}x_{k}-(t_{k}-1)x_{k-1}-x^{*}$. La
+desigualdad fundamental con $\alpha=1/L$ es
+$\frac{2}{L}\bigl(F(T_{1/L}(y))-F(z)\bigr)\le\norm{y-z}^{2}-\norm{T_{1/L}(y)-z}^{2}$.
+Con $y=x_{0}$ y $z=x^{*}$ da el caso $k=1$. Para $k\ge2$, con
+$z_{k}=(1-t_{k}^{-1})x_{k-1}+t_{k}^{-1}x^{*}\in\dom g$, la convexidad da
+$F(z_{k})-F^{*}\le(1-t_{k}^{-1})\delta_{k-1}$, y la desigualdad con $y=y_{k}$ y
+$z=z_{k}$, multiplicada por $t_{k}^{2}$, es
+$\frac2L\bigl(t_{k}^{2}\delta_{k}-t_{k}(t_{k}-1)\delta_{k-1}\bigr)\le\norm{v_{k-1}}^{2}-\norm{v_{k}}^{2}$,
+porque $t_{k}(z_{k}-y_{k})=-v_{k-1}$ y $t_{k}(z_{k}-x_{k})=-v_{k}$. Como
+$t_{k}(t_{k}-1)=t_{k-1}^{2}$, la cantidad
+$\frac2Lt_{k}^{2}\delta_{k}+\norm{v_{k}}^{2}$ no crece, y
+$t_{k}\ge\frac{k+1}{2}$.</p></div>
+<div class="stmt observacion" id="general-c17:obs-fista"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>FISTA no es monótono. Se le añade <em>backtracking</em>, una versión monótona que
+se queda con el mejor entre el paso acelerado y el iterado anterior, o un
+reinicio de $t_{k}=1$ cuando $\ip{x_{k}-x_{k-1}}{y_{k}-x_{k}}&gt;0$ o el objetivo
+sube demasiado.</p></div></div>
+<div class="stmt proposicion" id="general-c17:prop-reinicio"><div class="head">Proposición reinicio bajo convexidad fuerte<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $F$ es $\mu$-fuertemente convexa y FISTA se reinicia desde el último iterado
+cada $N$ iteraciones con $N+1\ge\sqrt{8L/\mu}$, cada etapa divide a la mitad
+$F-F^{*}$, y se llega a $F-F^{*}\le\varepsilon$ en
+$O\bigl(\sqrt{L/\mu}\log\frac1\varepsilon\bigr)$ iteraciones.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p118">Ver demostración</button><div class="proof" id="general-convexa-p118"><p>La desigualdad del subgradiente con convexidad fuerte en $x^{*}$, donde
+$0\in\subdif F(x^{*})$, da $F(x)-F^{*}\ge\frac\mu2\norm{x-x^{*}}^{2}$, y con la
+tasa de FISTA
+$F(x_{N})-F^{*}\le\frac{4L}{\mu(N+1)^{2}}\bigl(F(x_{0})-F^{*}\bigr)\le\frac12\bigl(F(x_{0})-F^{*}\bigr)$.</p></div>
+<h3 id="general-convexa-x24">Ejemplos estructurados</h3>
+<div class="stmt ejemplo" id="general-c17:ej-ista"><div class="head">Ejemplo ISTA</div><div class="body"><p>Sean $\Ks$ un espacio de Hilbert, $A\in\mathcal{B}(\ell^{2}(I),\Ks)$ y
+$b\in\Ks$. Para $\frac12\norm{Ax-b}^{2}+\tau\norm{x}_{1}$ en $\ell^{2}(I)$, la
+parte suave tiene $\nabla f(x)=A^{*}(Ax-b)$ y $L=\norm{A}^{2}$, y el gradiente
+proximal, que se llama <span class="df">ISTA</span>, es</p>
+<div class="display">\[
+  x_{k+1}=S_{\alpha\tau}\bigl(x_{k}-\alpha A^{*}(Ax_{k}-b)\bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p119">Ver demostración</button><div class="proof" id="general-convexa-p119"><p>El gradiente de $\frac12\norm{Ax-b}^{2}$ es $A^{*}(Ax-b)$, y
+$\norm{A^{*}A(x-y)}\le\norm{A}^{2}\norm{x-y}$. El proximal es el umbral suave
+en $\ell^{2}(I)$.</p></div>
+<div class="stmt ejemplo" id="general-c17:ej-proyectado"><div class="head">Ejemplo gradiente proyectado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $\min_{x\in C}f(x)$ con $C\subset\Hs$ convexo, cerrado y no vacío, con
+$g=\delta_{C}$ el método es
+$x_{k+1}=\Proy_{C}\bigl(x_{k}-\alpha\nabla f(x_{k})\bigr)$, con las mismas
+tasas y la misma convergencia débil.</p></div></div>
+<div class="stmt ejemplo" id="general-c17:ej-netflix-paso"><div class="head">Ejemplo completar una matriz, el paso</div><div class="body"><p>En $\R^{m\times n}$ con el producto de Frobenius, para
+$f(X)=\frac12\norm{P_{\Omega}(X-A)}_{F}^{2}$ es $\nabla f(X)=P_{\Omega}(X-A)$ y
+$L=1$, y con paso $1$</p>
+<div class="display">\[
+  Y_{k}=P_{\Omega^{c}}(X_{k})+P_{\Omega}(A),
+  \qquad
+  X_{k+1}=\prox_{\lambda\norm{\cdot}_{*}}(Y_{k})=\operatorname{SVT}_{\lambda}(Y_{k}).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p120">Ver demostración</button><div class="proof" id="general-convexa-p120"><p>$P_{\Omega}$ es una proyección ortogonal, así que es $1$-Lipschitz, y
+$X-P_{\Omega}(X)=P_{\Omega^{c}}(X)$.</p></div>
+<div class="stmt ejemplo" id="general-c17:ej-grupos"><div class="head">Ejemplo regularización por grupos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $\Hs=\Hs_{1}\oplus\dots\oplus\Hs_{m}$ y
+$g(x)=\lambda\sum_{j}w_{j}\norm{x_{j}}$ con $w_{j}&gt;0$. Entonces</p>
+<div class="display">\[
+  \bigl(\prox_{\alpha g}(v)\bigr)_{j}=\Bigl(1-\frac{\alpha\lambda w_{j}}{\max\{\norm{v_{j}},\alpha\lambda w_{j}\}}\Bigr)v_{j}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p121">Ver demostración</button><div class="proof" id="general-convexa-p121"><p>El proximal de una suma separable sobre una suma directa se calcula componente
+a componente, y en cada una es el de la norma.</p></div>
+<div class="stmt observacion" id="general-c17:obs-dificil"><div class="head">Observación el proximal también puede ser difícil<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Separar el objetivo en $f+g$ solo sirve si $\prox_{\alpha g}$ es más fácil que
+el problema original. Con la variación total, con composiciones $g(Ax)$ o con
+restricciones acopladas, el proximal pide a su vez un algoritmo, y eso motiva
+ADMM, Douglas–Rachford y los métodos primal-duales.</p></div></div></section>
+<section class="capitulo"><h2 id="general-cap:lagrange">Dualidad lagrangiana</h2>
+<div class="stmt definicion" id="general-c18:def-problema"><div class="head">Definición el problema con restricciones</div><div class="body"><p>Sean $\Hs$ un espacio de Hilbert, $F\in\Gamma_{0}(\Hs)$,
+$g_{1},\dots,g_{m}:\Hs\to\R$ convexas y continuas, $A:\Hs\to\R^{p}$ lineal y
+continua y $b\in\R^{p}$. El problema es</p>
+<div class="display">\[
+  p^{*}=\inf\ F(x)\quad\text{sujeto a}\quad g_{i}(x)\le0,\ i=1,\dots,m,\qquad Ax=b,
+  \tag{P}
+\]</div>
+<p>y se escribe $D=\dom F$.</p></div></div>
+<div class="stmt observacion" id="general-c18:obs-conjunto"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Una restricción $x\in C$, con $C$ convexo y cerrado, se incorpora cambiando $F$
+por $F+\delta_{C}$.</p></div></div>
+<div class="stmt definicion" id="general-c18:def-lagrangiano"><div class="head">Definición Lagrangiano y problema dual</div><div class="body"><p>Para $x\in\Hs$, $\lambda\in\R^{m}$ y $\nu\in\R^{p}$,</p>
+<div class="display">\[
+  \mathcal{L}(x,\lambda,\nu)=F(x)+\sum_{i=1}^{m}\lambda_{i}g_{i}(x)+\ip{\nu}{Ax-b},
+\]</div>
+<p>la <span class="df">función dual</span> es $q(\lambda,\nu)=\inf_{x\in\Hs}\mathcal{L}(x,\lambda,\nu)$
+y el <span class="df">problema dual</span> es</p>
+<div class="display">\[
+  d^{*}=\sup_{\lambda\ge0,\ \nu}\ q(\lambda,\nu).
+  \tag{D}
+\]</div></div></div>
+<div class="stmt observacion" id="general-c18:obs-concava"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$q$ es cóncava por ser un ínfimo de funciones afines de $(\lambda,\nu)$, y puede
+valer $-\infty$. Para $\lambda\ge0$, $x\mapsto\mathcal{L}(x,\lambda,\nu)$ es
+convexa.</p></div></div>
+<div class="stmt ejemplo" id="general-c18:ej-cuadratico"><div class="head">Ejemplo cuadrático con restricciones de igualdad</div><div class="body"><p>Sea $Q:\Hs\to\Hs$ lineal, continuo y autoadjunto con
+$\ip{Qx}{x}\ge\mu\norm{x}^{2}$ para algún $\mu&gt;0$, y sea $c\in\Hs$. Para
+$\min\frac12\ip{Qx}{x}+\ip{c}{x}$ sujeto a $Ax=b$,</p>
+<div class="display">\[
+  q(\nu)=-\frac12\bigl\langle c+A^{*}\nu,\ Q^{-1}(c+A^{*}\nu)\bigr\rangle-\ip{b}{\nu}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p122">Ver demostración</button><div class="proof" id="general-convexa-p122"><p>Por el teorema de Lax–Milgram, $Q$ es biyectivo con inverso continuo, y el
+único minimizador de la función convexa
+$x\mapsto\frac12\ip{Qx}{x}+\ip{c+A^{*}\nu}{x}$ es el cero de su gradiente
+$Qx+c+A^{*}\nu$, es decir $x=-Q^{-1}(c+A^{*}\nu)$. Sustituyendo sale $q(\nu)$.</p></div>
+<div class="stmt ejemplo" id="general-c18:ej-fenchel"><div class="head">Ejemplo la dualidad de Fenchel vista desde Lagrange</div><div class="body"><p>Sean $\Ks$ otro espacio de Hilbert, $f\in\Gamma_{0}(\Hs)$, $g\in\Gamma_{0}(\Ks)$ y
+$A:\Hs\to\Ks$ lineal y continua. El problema $\inf_{x}f(x)+g(Ax)$ es
+$\inf_{x,z}f(x)+g(z)$ sujeto a $Ax-z=0$, y la misma construcción con un
+multiplicador $y\in\Ks$ da
+$\mathcal{L}(x,z;y)=f(x)+g(z)+\ip{y}{Ax-z}$ y</p>
+<div class="display">\[
+  q(y)=-f^{*}(-A^{*}y)-g^{*}(y),
+\]</div>
+<p>la función del dual de Fenchel–Rockafellar.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p123">Ver demostración</button><div class="proof" id="general-convexa-p123"><p>$q(y)=\inf_{x}\{f(x)+\ip{A^{*}y}{x}\}+\inf_{z}\{g(z)-\ip{y}{z}\}$, y los dos
+ínfimos son menos las conjugadas.</p></div>
+<div class="stmt teorema" id="general-c18:teo-debil"><div class="head">Teorema dualidad débil</div><div class="body"><p>Si $x$ es factible y $\lambda\ge0$, $q(\lambda,\nu)\le F(x)$. En particular
+$d^{*}\le p^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p124">Ver demostración</button><div class="proof" id="general-convexa-p124"><p>$q(\lambda,\nu)\le\mathcal{L}(x,\lambda,\nu)\le F(x)$, porque
+$\lambda_{i}g_{i}(x)\le0$ y $Ax=b$.</p></div>
+<div class="stmt definicion" id="general-c18:def-brecha"><div class="head">Definición brecha de dualidad</div><div class="body"><p>Para $x$ factible y $\lambda\ge0$,
+$\mathcal{G}(x;\lambda,\nu)=F(x)-q(\lambda,\nu)$, y
+$0\le F(x)-p^{*}\le\mathcal{G}(x;\lambda,\nu)$.</p></div></div>
+<h3 id="general-convexa-x25">La condición de Slater y la dualidad fuerte</h3>
+<div class="stmt definicion" id="general-c18:def-slater"><div class="head">Definición condición de Slater</div><div class="body"><p>El problema (P) cumple la <span class="df">condición de Slater</span> si existe
+$\bar{x}\in\intr D$ con $g_{i}(\bar{x})&lt;0$ para todo $i$ y $A\bar{x}=b$.</p></div></div>
+<div class="stmt observacion" id="general-c18:obs-redundantes"><div class="head">Observación igualdades redundantes</div><div class="body"><p>Sin pérdida de generalidad $A(\Hs)=\R^{p}$: si $r=\dim A(\Hs)&lt;p$, se toma una
+matriz $M$ de tamaño $r\times p$ inyectiva sobre $A(\Hs)$, y $Ax=b$ equivale a
+$MAx=Mb$, porque $Ax-b=A(x-\bar{x})\in A(\Hs)$. Un multiplicador $\nu&#x27;$ del
+problema reducido da $\nu=M\trans\nu&#x27;$ para el original.</p></div></div>
+<div class="stmt definicion" id="general-c18:def-valor"><div class="head">Definición la función de valor</div><div class="body"><p>Para $(u,v)\in\R^{m}\times\R^{p}$,
+$\varphi(u,v)=\inf\{F(x):\ g_{i}(x)\le u_{i},\ Ax-b=v\}$, con
+$\varphi(u,v)=\infty$ si no hay puntos factibles. Es $\varphi(0,0)=p^{*}$.</p></div></div>
+<div class="stmt proposicion" id="general-c18:prop-valor-convexa"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\varphi$ es convexa.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p125">Ver demostración</button><div class="proof" id="general-convexa-p125"><p>Si $r_{j}&gt;\varphi(w_{j})$ y $x_{j}$ es factible para $w_{j}$ con
+$F(x_{j})&lt;r_{j}$, la combinación $\theta x_{1}+(1-\theta)x_{2}$ es factible para
+$\theta w_{1}+(1-\theta)w_{2}$ por la convexidad de las $g_{i}$ y la linealidad
+de $A$, y su valor es menor que $\theta r_{1}+(1-\theta)r_{2}$.</p></div>
+<div class="stmt lema" id="general-c18:lem-valor"><div class="head">Lema la función de valor cerca del origen</div><div class="body"><p>Si (P) cumple Slater, $A(\Hs)=\R^{p}$ y $p^{*}\in\R$, entonces
+$(0,0)\in\intr(\dom\varphi)$ y $\varphi$ no toma el valor $-\infty$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p126">Ver demostración</button><div class="proof" id="general-convexa-p126"><p>Sea $B:\R^{p}\to\Hs$ lineal con $AB=I$, que existe porque $A$ es sobreyectiva y
+basta escoger una preimagen de cada vector de la base; es continua por ser de
+rango finito. Con $x(v)=\bar{x}+Bv$ es $Ax(v)-b=v$, y $x(v)\in D$ para
+$\norm{v}$ pequeño porque $\bar{x}\in\intr D$. Como las $g_{i}$ son continuas y
+$g_{i}(\bar{x})&lt;0$, hay $\varepsilon&gt;0$ tal que $\norm{(u,v)}&lt;\varepsilon$
+implica $g_{i}(x(v))\le u_{i}$, y entonces $\varphi(u,v)\le F(x(v))&lt;\infty$.</p>
+<p>Si $\varphi(w_{0})=-\infty$, para $t&gt;0$ pequeño hay $x^{-}\in D$ factible para
+$-tw_{0}$, y hay $x^{j}$ factibles para $w_{0}$ con $F(x^{j})\to-\infty$. Con
+$\theta=\frac{t}{1+t}$, los puntos $z^{j}=\theta x^{j}+(1-\theta)x^{-}$ son
+factibles para (P), porque $(1-\theta)t=\theta$, y
+$F(z^{j})\le\theta F(x^{j})+(1-\theta)F(x^{-})\to-\infty$, contra $p^{*}\in\R$.</p></div>
+<div class="stmt teorema" id="general-c18:teo-fuerte"><div class="head">Teorema dualidad fuerte</div><div class="body"><p>Si (P) cumple Slater y $p^{*}\in\R$, entonces $p^{*}=d^{*}$ y existe
+$(\lambda^{*},\nu^{*})$ con $\lambda^{*}\ge0$ y $q(\lambda^{*},\nu^{*})=d^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p127">Ver demostración</button><div class="proof" id="general-convexa-p127"><p>Se supone $A(\Hs)=\R^{p}$. La función $\varphi$ es convexa y propia en el espacio
+de dimensión finita $\R^{m}\times\R^{p}$, y $(0,0)$ es interior a su dominio,
+así que es continua allí y tiene un subgradiente $(\alpha,\beta)$:
+$\varphi(u,v)\ge p^{*}+\ip{\alpha}{u}+\ip{\beta}{v}$. Con $(te_{i},0)$ sale
+$\alpha_{i}\le0$. Con $\lambda^{*}=-\alpha$, $\nu^{*}=-\beta$, y para $x\in D$
+con $u_{i}=g_{i}(x)$ y $v=Ax-b$, queda
+$F(x)\ge\varphi(u,v)\ge p^{*}-\sum_{i}\lambda^{*}_{i}g_{i}(x)-\ip{\nu^{*}}{Ax-b}$,
+es decir $\mathcal{L}(x,\lambda^{*},\nu^{*})\ge p^{*}$. Luego
+$d^{*}\ge q(\lambda^{*},\nu^{*})\ge p^{*}\ge d^{*}$.</p></div>
+<div class="stmt observacion" id="general-c18:obs-precios"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Las pendientes del hiperplano que sostiene a $\varphi$ en el origen son los
+multiplicadores óptimos: $-(\lambda^{*},\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -6490,7 +7138,7 @@ $\min\frac12\norm{P_{\Omega}(X-A)}_{F}^{2}+\lambda\norm{X}_{*}$ son compuestos, 
 proximales explícitos: el umbral suave y el umbral sobre los valores singulares.
 El segundo es la relajación convexa de completar con rango bajo una matriz de
 calificaciones observada en las entradas $\Omega$.</p></div></div>
-<h3 id="ambas-convexa-x22">El método del punto proximal</h3>
+<h3 id="ambas-convexa-x22">El punto proximal: minimizar una sola función</h3>
 <div class="stmt definicion" id="ambas-c17:def-punto"><div class="head">Definición el punto proximal</div><div class="body"><p>Para $\varphi\in\Gamma_{0}(\Hs)$, $x_{k+1}=\prox_{\lambda_{k}\varphi}(x_{k})$. Es
 Euler implícito para $\dot{x}=-\nabla\varphi(x)$, con el subgradiente evaluado en
 el punto nuevo, mientras que el subgradiente es Euler explícito.</p></div></div>
@@ -6525,7 +7173,136 @@ cada coordenada es la función de Huber.</p></div></div>
 <div class="stmt teorema" id="ambas-c17:teo-identidad"><div class="head">Teorema identidad de Moreau</div><div class="body"><p>$\prox_{\lambda g}(v)+\lambda\prox_{\lambda^{-1}g^{*}}(v/\lambda)=v$, es decir
 $\nabla\env{\lambda}{g}(v)=\prox_{\lambda^{-1}g^{*}}(v/\lambda)$. En particular
 el proximal de una norma es la identidad menos la proyección sobre una bola de
-la norma dual.</p></div></div></section></div>
+la norma dual.</p></div></div>
+<h3 id="ambas-convexa-x24">Una función o una suma</h3>
+<div class="stmt observacion" id="ambas-c17:obs-cual"><div class="head">Observación qué minimiza cada método</div><div class="body"><div class="centro"><div class="tabla"><table><tr><th>Método</th><th>Problema</th><th>Usa en cada paso</th></tr>
+<tr><td>Gradiente, Nesterov</td><td>$\min f$, con $f$ convexa y $L$-suave</td><td>$\nabla f$</td></tr>
+<tr><td>Newton</td><td>$\min f$, con $f$ de clase $C^{2}$</td><td>$\nabla f$ y $\nabla^{2}f$</td></tr>
+<tr><td>Subgradiente, <em>mirror descent</em></td><td>$\min_{C}f$, con $f$ convexa y Lipschitz</td><td>un $s\in\subdif f(x)$</td></tr>
+<tr><td>Punto proximal</td><td>$\min\varphi$, con $\varphi\in\Gamma_{0}(\Hs)$</td><td>$\prox_{\lambda\varphi}$</td></tr>
+<tr><td>Gradiente proximal, ISTA, FISTA</td><td>$\min f+g$, con $f$ convexa y $L$-suave y $g\in\Gamma_{0}(\Hs)$</td><td>$\nabla f$ y $\prox_{\alpha g}$</td></tr></table></div></div>
+<p>El punto proximal minimiza una sola función sin pedirle suavidad; el gradiente
+proximal parte el objetivo y solo pasa por el proximal la parte no suave. Con
+$g=0$ es el gradiente, con $f=0$ el punto proximal y con $g=\delta_{C}$ el
+gradiente proyectado. El gradiente con paso $\lambda$ sobre la envolvente
+$\env{\lambda}{g}$ es otra vez el punto proximal. La tabla es la misma en
+$\R^{n}$ y en $\Hs$.</p></div></div>
+<h3 id="ambas-convexa-x25">El gradiente proximal: minimizar $f+g$</h3>
+<p>En lo que sigue $F=f+g$, con $f:\Hs\to\R$ convexa, diferenciable y $L$-suave, y
+$g\in\Gamma_{0}(\Hs)$; $X^{*}=\argmin F$ y $F^{*}=\min F$.</p>
+<div class="stmt proposicion" id="ambas-c17:prop-punto-fijo"><div class="head">Proposición el punto fijo</div><div class="body"><p>Para todo $\alpha&gt;0$, $x^{*}\in X^{*}$ si y solo si
+$0\in\nabla f(x^{*})+\subdif g(x^{*})$, si y solo si
+$x^{*}=T_{\alpha}(x^{*})$, donde
+$T_{\alpha}(x)=\prox_{\alpha g}\bigl(x-\alpha\nabla f(x)\bigr)$.</p></div></div>
+<div class="stmt definicion" id="ambas-c17:def-gradiente-proximal"><div class="head">Definición el gradiente proximal</div><div class="body"><p>$x_{k+1}=T_{\alpha_{k}}(x_{k})$ desde $x_{0}\in\dom g$: <em>forward</em> sobre
+$f$, <em>backward</em> sobre $g$. Su paso minimiza el modelo
+$Q_{\alpha}(z;x)=f(x)+\ip{\nabla f(x)}{z-x}+\frac{1}{2\alpha}\norm{z-x}^{2}+g(z)$,
+que si $\alpha\le1/L$ es una cota superior de $F$ que coincide con ella en $x$.
+El <span class="df">mapeo de gradiente proximal</span> es $G_{\alpha}=\frac1\alpha(\Id-T_{\alpha})$,
+que se anula exactamente en $X^{*}$ y es $\nabla f$ si $g=0$.</p></div></div>
+<div class="stmt lema" id="ambas-c17:lem-fundamental"><div class="head">Lema desigualdad fundamental</div><div class="body"><p>Si $0&lt;\alpha\le1/L$, $p=T_{\alpha}(x)$ y $z\in\dom g$,
+$F(p)-F(z)\le\frac{1}{2\alpha}\bigl(\norm{x-z}^{2}-\norm{p-z}^{2}\bigr)-\bigl(\frac{1}{2\alpha}-\frac{L}{2}\bigr)\norm{p-x}^{2}$,
+y $F(p)\le F(x)-\alpha\bigl(1-\frac{\alpha L}{2}\bigr)\norm{G_{\alpha}(x)}^{2}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c17:teo-tasa-fb"><div class="head">Teorema tasa $O(1/k)$ y parada</div><div class="body"><p>Con $0&lt;\alpha\le1/L$, $F(x_{k})-F^{*}\le\norm{x_{0}-x^{*}}^{2}/(2\alpha k)$, y
+$\min_{i&lt;k}\norm{G_{\alpha}(x_{i})}^{2}\le2(F(x_{0})-F^{*})/(\alpha k)$. Con
+<em>backtracking</em> sobre el modelo cuadrático no hace falta conocer $L$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c17:prop-debil-fb"><div class="head">Proposición convergencia de los iterados</div><div class="body"><p>Con $0&lt;\alpha\le1/L$ y $X^{*}\neq\varnothing$, la sucesión es Fejér monótona
+respecto de $X^{*}$, y:</p>
+<ol class="lista"><li><p>en $\R^{n}$, $(x_{k})$ converge a un minimizador;</p></li><li><p>en $\Hs$, $(x_{k})$ converge débilmente a un minimizador.</p></li></ol></div></div>
+<div class="stmt proposicion" id="ambas-c17:prop-contraccion-fb"><div class="head">Proposición contracción bajo convexidad fuerte</div><div class="body"><p>Si $f$ es $\mu$-fuertemente convexa y $\alpha=\frac{2}{L+\mu}$, $T_{\alpha}$ es
+$\frac{L-\mu}{L+\mu}$-Lipschitz, y los iterados convergen linealmente y en norma,
+también en $\Hs$.</p></div></div>
+<div class="stmt observacion" id="ambas-c17:obs-debil-fb"><div class="head">Observación lo que la dimensión infinita quita, otra vez</div><div class="body"><p>Es el patrón del gradiente y del punto proximal: la tasa en valores es idéntica
+en los dos mundos porque su prueba es álgebra de producto interno; la
+convergencia de los iterados pasa de fuerte a débil, porque la prueba de
+$\R^{n}$ extrae una subsucesión convergente y en $\Hs$ hay que conformarse con
+Opial; y la convexidad fuerte devuelve la norma.</p></div></div>
+<h3 id="ambas-convexa-x26">FISTA</h3>
+<div class="stmt definicion" id="ambas-c17:def-fista"><div class="head">Definición FISTA</div><div class="body"><p>Con $y_{1}=x_{0}\in\dom g$ y $t_{1}=1$:
+$x_{k}=T_{1/L}(y_{k})$, $t_{k+1}=\frac{1+\sqrt{1+4t_{k}^{2}}}{2}$ e
+$y_{k+1}=x_{k}+\frac{t_{k}-1}{t_{k+1}}(x_{k}-x_{k-1})$.</p></div></div>
+<div class="stmt teorema" id="ambas-c17:teo-fista"><div class="head">Teorema tasa $O(1/k^{2})$ de FISTA</div><div class="body"><p>$F(x_{k})-F^{*}\le\frac{2L\norm{x_{0}-x^{*}}^{2}}{(k+1)^{2}}$. FISTA no es
+monótono, y si $F$ es $\mu$-fuertemente convexa, reiniciarlo cada
+$O(\sqrt{L/\mu})$ iteraciones da $O\bigl(\sqrt{L/\mu}\log\frac1\varepsilon\bigr)$.</p></div></div>
+<div class="stmt observacion" id="ambas-c17:obs-fista-iterados"><div class="head">Observación FISTA no dice nada de los iterados</div><div class="body"><p>La prueba de la tasa controla $F(x_{k})$ y no la sucesión: a diferencia del
+gradiente proximal, de ella no sale que $(x_{k})$ sea Fejér monótona, ni en
+$\R^{n}$ ni en $\Hs$. Aquí el contraste no es entre las dos dimensiones sino
+entre los dos métodos.</p></div></div>
+<h3 id="ambas-convexa-x27">Ejemplos estructurados</h3>
+<div class="stmt ejemplo" id="ambas-c17:ej-ista"><div class="head">Ejemplo ISTA</div><div class="body"><p>En $\ell^{2}(I)$, con $A$ acotado, ISTA es
+$x_{k+1}=S_{\alpha\tau}\bigl(x_{k}-\alpha A^{*}(Ax_{k}-b)\bigr)$ con
+$L=\norm{A}^{2}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c17:obs-ista"><div class="head">Observación ISTA en $\ell^{2}$</div><div class="body"><p>En $\R^{n}$ los iterados de ISTA son vectores dispersos. En $\ell^{2}(I)$ con
+$I$ infinito pasa algo más fuerte: como el umbral suave de un elemento de
+$\ell^{2}$ tiene soporte finito, todos los iterados desde $x_{1}$ tienen soporte
+finito. Y también las soluciones: por el punto fijo, toda solución es
+$x^{*}=S_{\alpha\tau}\bigl(x^{*}-\alpha A^{*}(Ax^{*}-b)\bigr)$, el umbral de un
+elemento de $\ell^{2}$. En $\ell^{2}$, Lasso solo tiene soluciones de soporte
+finito.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c17:ej-proyectado"><div class="head">Ejemplo gradiente proyectado y grupos</div><div class="body"><p>Con $g=\delta_{C}$ el método es $x_{k+1}=\Proy_{C}(x_{k}-\alpha\nabla f(x_{k}))$.
+Con $g=\lambda\sum_{j}w_{j}\norm{x_{j}}$ sobre
+$\Hs=\Hs_{1}\oplus\dots\oplus\Hs_{m}$, el proximal es la contracción radial de
+la norma en cada bloque.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c17:ej-netflix-paso"><div class="head">Ejemplo completar una matriz, el paso</div><div class="body"><p>$Y_{k}=P_{\Omega^{c}}(X_{k})+P_{\Omega}(A)$ y
+$X_{k+1}=\operatorname{SVT}_{\lambda}(Y_{k})$: repone los datos observados y
+recorta el rango. Es de matrices y se queda en dimensión finita.</p></div></div>
+<div class="stmt observacion" id="ambas-c17:obs-dificil"><div class="head">Observación el proximal también puede ser difícil</div><div class="body"><p>Separar en $f+g$ solo sirve si $\prox_{\alpha g}$ es barato. Con la variación
+total, con $g(Ax)$ o con restricciones acopladas no lo es, y eso motiva ADMM,
+Douglas–Rachford y los métodos primal-duales.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:lagrange">Dualidad lagrangiana</h2>
+<div class="stmt definicion" id="ambas-c18:def-problema"><div class="head">Definición el problema con restricciones</div><div class="body"><p>Sean $F\in\Gamma_{0}(\Hs)$, con $\Hs$ un espacio de Hilbert o $\R^{n}$,
+$g_{1},\dots,g_{m}:\Hs\to\R$ convexas y continuas, $A:\Hs\to\R^{p}$ lineal y
+continua y $b\in\R^{p}$:</p>
+<div class="display">\[
+  p^{*}=\inf\ F(x)\quad\text{sujeto a}\quad g_{i}(x)\le0,\qquad Ax=b,
+  \tag{P}
+\]</div>
+<p>con $D=\dom F$. Una restricción $x\in C$ entra en $F$ como $\delta_{C}$.</p></div></div>
+<div class="stmt definicion" id="ambas-c18:def-lagrangiano"><div class="head">Definición Lagrangiano y problema dual</div><div class="body"><p>$\mathcal{L}(x,\lambda,\nu)=F(x)+\sum_{i}\lambda_{i}g_{i}(x)+\ip{\nu}{Ax-b}$,
+$q(\lambda,\nu)=\inf_{x}\mathcal{L}(x,\lambda,\nu)$, que es cóncava y puede
+valer $-\infty$, y $d^{*}=\sup_{\lambda\ge0,\nu}q(\lambda,\nu)$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c18:ej-cuadratico"><div class="head">Ejemplo cuadrático con restricciones de igualdad</div><div class="body"><p>Para $\min\frac12\ip{Qx}{x}+\ip{c}{x}$ sujeto a $Ax=b$,
+$q(\nu)=-\frac12\ip{c+A^{*}\nu}{Q^{-1}(c+A^{*}\nu)}-\ip{b}{\nu}$. En $\R^{n}$
+basta $Q\succ0$; en $\Hs$ se pide $\ip{Qx}{x}\ge\mu\norm{x}^{2}$ con $\mu&gt;0$.</p></div></div>
+<div class="stmt observacion" id="ambas-c18:obs-cuadratico"><div class="head">Observación definida positiva no basta</div><div class="body"><p>En $\R^{n}$, $\ip{Qx}{x}&gt;0$ para todo $x\neq0$ da, por compacidad de la esfera,
+$\ip{Qx}{x}\ge\lambda_{\min}(Q)\norm{x}^{2}$ con $\lambda_{\min}(Q)&gt;0$, y $Q$ es
+invertible. En $\ell^{2}$ no: $Q=\operatorname{diag}(1/k)$ es autoadjunto, acotado
+y definido positivo, pero con $c=(-1/k)_{k}\in\ell^{2}$ y $x=(1,\dots,1,0,\dots)$
+con $N$ unos,</p>
+<div class="display">\[
+  \frac12\ip{Qx}{x}+\ip{c}{x}=\sum_{k=1}^{N}\Bigl(\frac{1}{2k}-\frac1k\Bigr)\to-\infty .
+\]</div>
+<p>Ni siquiera el problema sin restricciones tiene valor finito, y la fórmula de
+$q$ deja de tener sentido. La hipótesis que la repone es la coercividad, vía
+Lax–Milgram.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c18:ej-fenchel"><div class="head">Ejemplo la dualidad de Fenchel vista desde Lagrange</div><div class="body"><p>$\inf_{x}f(x)+g(Ax)$ es $\inf_{x,z}f(x)+g(z)$ sujeto a $Ax-z=0$, y con
+multiplicador $y$ la función dual es $q(y)=-f^{*}(-A^{*}y)-g^{*}(y)$, la del dual
+de Fenchel–Rockafellar.</p></div></div>
+<div class="stmt teorema" id="ambas-c18:teo-debil"><div class="head">Teorema dualidad débil y brecha</div><div class="body"><p>Si $x$ es factible y $\lambda\ge0$, $q(\lambda,\nu)\le F(x)$, así que
+$d^{*}\le p^{*}$ y $0\le F(x)-p^{*}\le\mathcal{G}(x;\lambda,\nu)=F(x)-q(\lambda,\nu)$.</p></div></div>
+<h3 id="ambas-convexa-x28">La condición de Slater y la dualidad fuerte</h3>
+<div class="stmt definicion" id="ambas-c18:def-slater"><div class="head">Definición condición de Slater</div><div class="body"><p>Existe $\bar{x}$ con $g_{i}(\bar{x})&lt;0$ y $A\bar{x}=b$, y además:</p>
+<ol class="lista"><li><p>en $\R^{n}$, $\bar{x}\in\ri D$, y sin pérdida de generalidad $A$ es
+    sobreyectiva sobre $\paral(\aff D)$;</p></li><li><p>en $\Hs$, $\bar{x}\in\intr D$, y sin pérdida de generalidad $A$ es
+    sobreyectiva.</p></li></ol></div></div>
+<div class="stmt observacion" id="ambas-c18:obs-slater"><div class="head">Observación por qué el interior relativo no sube</div><div class="body"><p>En $\R^{n}$ todo convexo no vacío tiene interior relativo no vacío, y eso
+permite pedir el punto de Slater en $\ri D$ aunque $D$ tenga interior vacío. En
+$\Hs$ esa garantía no existe, y la versión que sube con la misma prueba pide un
+punto interior. El caso que se pierde es real: el dominio de
+$\tau\norm{\cdot}_{1}$ en $\ell^{2}$ es $\ell^{1}$, que tiene interior vacío.</p></div></div>
+<div class="stmt definicion" id="ambas-c18:def-valor"><div class="head">Definición la función de valor</div><div class="body"><p>$\varphi(u,v)=\inf\{F(x):\ g_{i}(x)\le u_{i},\ Ax-b=v\}$ sobre
+$\R^{m}\times\R^{p}$, con $\varphi(0,0)=p^{*}$. Es convexa, y bajo Slater con
+$p^{*}\in\R$ el origen es interior a su dominio y $\varphi$ no toma el valor
+$-\infty$.</p></div></div>
+<div class="stmt teorema" id="ambas-c18:teo-fuerte"><div class="head">Teorema dualidad fuerte</div><div class="body"><p>Bajo Slater y $p^{*}\in\R$, $p^{*}=d^{*}$ y el dual alcanza su valor en
+$(\lambda^{*},\nu^{*})$, con $-(\lambda^{*},\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div>
+<div class="stmt observacion" id="ambas-c18:obs-finita"><div class="head">Observación las perturbaciones viven en dimensión finita</div><div class="body"><p>La prueba es la misma en $\R^{n}$ y en $\Hs$ por una razón concreta: la función
+de valor no está definida en $\Hs$ sino en $\R^{m}\times\R^{p}$, porque hay
+finitas restricciones. El único paso que necesita un teorema, que una convexa
+propia tenga subgradiente en un punto interior de su dominio, se da en dimensión
+finita aunque $\Hs$ no lo sea. Con infinitas restricciones el espacio de
+perturbaciones sería de dimensión infinita, y ese paso pediría continuidad, no
+solo interior.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
