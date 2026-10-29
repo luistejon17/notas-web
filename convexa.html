@@ -3435,7 +3435,276 @@ $d^{*}\ge q(\lambda^{*},\nu^{*})=\inf_{x}\mathcal{L}(x,\lambda^{*},\nu^{*})\ge p
 <div class="stmt observacion" id="clase-c18:obs-precios"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La factibilidad estricta hace el problema estable frente a perturbaciones
 pequeñas de las restricciones, y esa estabilidad es la que permite sostener la
 función de valor con un hiperplano en el origen. Sus pendientes son los
-multiplicadores óptimos: $-(\lambda^{*},\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div></section></div>
+multiplicadores óptimos: $-(\lambda^{*},\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div>
+<h3 id="clase-convexa-x30">Programación lineal</h3>
+<div class="stmt definicion" id="clase-c18:def-pl"><div class="head">Definición programa lineal y su dual</div><div class="body"><p>Sean $A$ una matriz $p\times n$, $b\in\R^{p}$ y $c\in\R^{n}$. El
+<span class="df">programa lineal</span> y su <span class="df">dual</span> son</p>
+<div class="display">\[
+  \begin{aligned}
+  p^{*}&amp;=\min\ c\trans x\quad\text{sujeto a}\quad Ax=b,\ x\ge0,\\
+  d^{*}&amp;=\max\ b\trans y\quad\text{sujeto a}\quad A\trans y\le c,
+  \end{aligned}
+\]</div>
+<p>y $P=\{x\in\R^{n}:Ax=b,\ x\ge0\}$ es el conjunto factible del primal.</p></div></div>
+<div class="stmt lema" id="clase-c18:lem-cono-cerrado"><div class="head">Lema los conos finitamente generados son cerrados<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $A$ es una matriz $n\times r$ con columnas $a_{1},\dots,a_{r}$, entonces
+$\{Ax:x\ge0\}=\cono\{a_{1},\dots,a_{r}\}$ es un cono convexo cerrado.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p136">Ver demostración</button><div class="proof" id="clase-convexa-p136"><p>Sea $y=Ax$ con $x\ge0$ y $J=\{j:x_{j}&gt;0\}$. Si las $a_{j}$ con $j\in J$ son
+linealmente dependientes, hay $\mu\neq0$ con soporte en $J$ y $A\mu=0$, y
+cambiándole el signo si hace falta, algún $\mu_{j}&gt;0$. Con
+$t=\min\{x_{j}/\mu_{j}:\mu_{j}&gt;0\}$, el vector $x-t\mu$ es no negativo, cumple
+$A(x-t\mu)=y$ y tiene un cero más. Repitiendo, $y=A_{J}z$ con $z\ge0$, donde
+$A_{J}$ son las columnas de un $J$ linealmente independiente (incluido
+$J=\varnothing$, que da el origen). Así el cono es la unión finita de los
+conjuntos $A_{J}(\R^{J}_{+})$. Como $A_{J}$ es inyectiva y la esfera unidad de
+$\R^{J}$ es compacta, $\norm{A_{J}z}\ge\sigma_{J}\norm{z}$ con $\sigma_{J}&gt;0$.
+Si $A_{J}z_{k}\to y$, los $z_{k}$ están acotados, una subsucesión converge a
+algún $z\ge0$ y $y=A_{J}z$. Cada pieza es cerrada, y la unión es finita.</p></div>
+<div class="stmt teorema" id="clase-c18:teo-farkas"><div class="head">Teorema lema de Farkas</div><div class="body"><p>Sean $A$ una matriz $n\times r$ y $b\in\R^{n}$. Exactamente una de las dos
+afirmaciones es cierta:</p>
+<ol class="lista"><li><p>existe $x\ge0$ con $Ax=b$, es decir, $b$ está en el cono generado por
+    las columnas de $A$;</p></li><li><p>existe $y\in\R^{n}$ con $A\trans y\ge0$ y $b\trans y&lt;0$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p137">Ver demostración</button><div class="proof" id="clase-convexa-p137"><p>Las dos a la vez darían $0&gt;b\trans y=x\trans A\trans y\ge0$. Si (a) falla,
+$b\notin K=\{Ax:x\ge0\}$, que es un cono convexo cerrado por el lema anterior.
+Por el teorema bipolar $b\notin\polar{(\polar{K})}$, así que hay
+$y\in\polar{K}$ con $\ip{b}{y}&lt;0$. Y $y\in\polar{K}$ significa que
+$\ip{x}{A\trans y}=\ip{Ax}{y}\ge0$ para todo $x\ge0$, que es $A\trans y\ge0$.</p></div>
+<div class="stmt teorema" id="clase-c18:teo-pl"><div class="head">Teorema dualidad fuerte en programación lineal</div><div class="body"><p>Si $p^{*}\in\R$, el primal tiene un mínimo $x^{*}\in P$, el dual tiene un
+máximo $y^{*}$ y $p^{*}=d^{*}$. No hace falta ninguna condición de Slater.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p138">Ver demostración</button><div class="proof" id="clase-convexa-p138"><p>Si $x\in P$ y $A\trans y\le c$, entonces $b\trans y=x\trans A\trans y\le x\trans c$
+porque $x\ge0$, así que $d^{*}\le p^{*}$.</p>
+<p>El cono $\hat{K}=\{(Ax,c\trans x):x\ge0\}\subset\R^{p+1}$ está generado por las
+columnas de la matriz que apila $A$ y $c\trans$, así que es cerrado. Si
+$x_{k}\in P$ y $c\trans x_{k}\to p^{*}$, los puntos $(b,c\trans x_{k})\in\hat{K}$
+convergen a $(b,p^{*})$, que está en $\hat{K}$: hay $x^{*}\ge0$ con $Ax^{*}=b$
+y $c\trans x^{*}=p^{*}$.</p>
+<p>Sea $I=\{i:x^{*}_{i}=0\}$. Si $z\in\R^{n}$ cumple $Az=0$ y $z_{i}\ge0$ para
+$i\in I$, entonces $x^{*}+tz\in P$ para $t&gt;0$ pequeño, porque las coordenadas de
+$x^{*}$ fuera de $I$ son positivas; luego $c\trans(x^{*}+tz)\ge c\trans x^{*}$ y
+$c\trans z\ge0$. Sea $\tilde{A}$ la matriz de tamaño
+$n\times(2p+\lvert I\rvert)$ cuyas columnas son las de $A\trans$, las de
+$-A\trans$ y los $e_{i}$ con $i\in I$. Como $\tilde{A}\trans z\ge0$ dice
+exactamente que $Az=0$ y que $z_{i}\ge0$ en $I$, no hay ningún $z$ con
+$\tilde{A}\trans z\ge0$ y $c\trans z&lt;0$. Por el lema de Farkas existe
+$\tilde{x}=(y^{+},y^{-},\tilde{s})\ge0$ con $\tilde{A}\tilde{x}=c$, es decir</p>
+<div class="display">\[
+  A\trans y^{+}-A\trans y^{-}+\sum_{i\in I}\tilde{s}_{i}e_{i}=c .
+\]</div>
+<p>Con $y^{*}=y^{+}-y^{-}$ y $s\in\R^{n}$ igual a $\tilde{s}_{i}$ en $I$ y a $0$
+fuera, es $A\trans y^{*}+s=c$ con $s\ge0$, así que</p>
+<div class="display">\[
+  A\trans y^{*}\le c
+  \qquad\text{y}\qquad
+  s\trans x^{*}=\sum_{i\in I}\tilde{s}_{i}x^{*}_{i}=0 .
+\]</div>
+<p>Entonces
+$p^{*}=c\trans x^{*}=(A\trans y^{*}+s)\trans x^{*}=b\trans y^{*}\le d^{*}\le p^{*}$.</p></div>
+<div class="stmt observacion" id="clase-c18:obs-certificados-pl"><div class="head">Observación certificados de optimalidad</div><div class="body"><p>Si $x\in P$ e $y$ cumplen $A\trans y\le c$ y $(c-A\trans y)\trans x=0$, entonces
+$x$ es óptimo para el primal e $y$ para el dual, porque
+$c\trans x=y\trans Ax=b\trans y\le d^{*}\le p^{*}\le c\trans x$. Son las dos
+condiciones que produce la demostración anterior.</p></div></div>
+<div class="stmt observacion" id="clase-c18:obs-complementariedad-pl"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $s=c-A\trans y\ge0$ y $x\ge0$, la condición $s\trans x=0$ equivale a
+$x_{i}s_{i}=0$ para cada $i$, porque es una suma de términos no negativos. Es la
+holgura complementaria de la programación lineal.</p></div></div>
+<h3 id="clase-convexa-x31">Los multiplicadores y la función de valor</h3>
+<div class="stmt proposicion" id="clase-c18:prop-mult-subgrad"><div class="head">Proposición los multiplicadores óptimos son subgradientes de la función de valor</div><div class="body"><p>Si $p^{*}\in\R$, $\lambda^{*}\ge0$ y $q(\lambda^{*},\nu^{*})=p^{*}$, entonces</p>
+<div class="display">\[
+  \varphi(u,v)\ge p^{*}-\ip{\lambda^{*}}{u}-\ip{\nu^{*}}{v}
+  \qquad\text{para todo }(u,v),
+\]</div>
+<p>es decir, $(-\lambda^{*},-\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p139">Ver demostración</button><div class="proof" id="clase-convexa-p139"><p>Si $\varphi(u,v)=\infty$ no hay nada que probar. Si no, sea $x$ con
+$g_{i}(x)\le u_{i}$ y $Ax-b=v$. Como $\lambda^{*}\ge0$ y
+$\mathcal{L}(x,\lambda^{*},\nu^{*})\ge q(\lambda^{*},\nu^{*})=p^{*}$,</p>
+<div class="display">\[
+  \begin{aligned}
+  F(x)&amp;=\mathcal{L}(x,\lambda^{*},\nu^{*})-\sum_{i=1}^{m}\lambda^{*}_{i}g_{i}(x)-\ip{\nu^{*}}{Ax-b}\\
+  &amp;\ge\mathcal{L}(x,\lambda^{*},\nu^{*})-\ip{\lambda^{*}}{u}-\ip{\nu^{*}}{v}
+  \ge p^{*}-\ip{\lambda^{*}}{u}-\ip{\nu^{*}}{v}.
+  \end{aligned}
+\]</div>
+<p>Se toma el ínfimo en $x$, y $p^{*}=\varphi(0,0)$.</p></div>
+<div class="stmt corolario" id="clase-c18:cor-subdif-valor"><div class="head">Corolario el subdiferencial de la función de valor</div><div class="body"><p>Si $p^{*}\in\R$, entonces</p>
+<div class="display">\[
+  \subdif\varphi(0,0)=\bigl\{(-\lambda^{*},-\nu^{*}):\ \lambda^{*}\ge0,\ q(\lambda^{*},\nu^{*})=p^{*}\bigr\},
+\]</div>
+<p>y bajo Slater este conjunto no es vacío: los multiplicadores óptimos son,
+cambiados de signo, los subgradientes de $\varphi$ en el origen.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p140">Ver demostración</button><div class="proof" id="clase-convexa-p140"><p>La inclusión $\supset$ es la proposición anterior. Si
+$(\alpha,\beta)\in\subdif\varphi(0,0)$, la demostración de la dualidad fuerte
+usa solo eso para obtener $\alpha\le0$ y
+$q(-\alpha,-\beta)\ge p^{*}$, y la dualidad débil da la igualdad. Bajo Slater
+la dualidad fuerte da un par con $q(\lambda^{*},\nu^{*})=p^{*}$.</p></div>
+<div class="stmt corolario" id="clase-c18:cor-sensibilidad"><div class="head">Corolario sensibilidad<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $p^{*}\in\R$ y $\varphi$ es propia y diferenciable en $(0,0)$, el dual tiene
+una sola solución $(\lambda^{*},\nu^{*})$, no hay brecha, y</p>
+<div class="display">\[
+  \nabla_{u}\varphi(0,0)=-\lambda^{*},\qquad\nabla_{v}\varphi(0,0)=-\nu^{*}.
+\]</div>
+<p>Relajar un poco la restricción $g_{i}\le0$ baja el valor óptimo a razón
+$\lambda^{*}_{i}$, y si $\lambda^{*}_{i}=0$ la restricción no tiene efecto de
+primer orden. Por eso a los multiplicadores se les llama precios sombra.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p141">Ver demostración</button><div class="proof" id="clase-convexa-p141"><p>Ser diferenciable en $(0,0)$ obliga a que $\varphi$ sea finita cerca, así que
+$(0,0)\in\intr(\dom\varphi)$ y, por la caracterización de la diferenciabilidad
+con el subdiferencial, $\subdif\varphi(0,0)=\{\nabla\varphi(0,0)\}$. Se
+concluye con el corolario anterior.</p></div>
+<h3 id="clase-convexa-x32">Condiciones KKT</h3>
+<div class="stmt definicion" id="clase-c18:def-kkt"><div class="head">Definición condiciones KKT</div><div class="body"><p>Una terna $(x^{*},\lambda^{*},\nu^{*})$ con $x^{*}\in D$ <span class="df">satisface KKT</span> si</p>
+<ol class="lista"><li><p><em>factibilidad primal</em>: $g_{i}(x^{*})\le0$ para todo $i$ y
+    $Ax^{*}=b$;</p></li><li><p><em>factibilidad dual</em>: $\lambda^{*}\ge0$;</p></li><li><p><em>estacionariedad</em>:
+    $0\in\subdif F(x^{*})+\sum_{i=1}^{m}\lambda^{*}_{i}\subdif g_{i}(x^{*})+A\trans\nu^{*}$;</p></li><li><p><em>holgura complementaria</em>: $\lambda^{*}_{i}g_{i}(x^{*})=0$ para
+    todo $i$.</p></li></ol></div></div>
+<div class="stmt proposicion" id="clase-c18:prop-estacionariedad"><div class="head">Proposición la estacionariedad es minimizar el Lagrangiano</div><div class="body"><p>Si $x^{*}\in D$ y $\lambda^{*}\ge0$, la estacionariedad equivale a
+$x^{*}\in\argmin_{x}\mathcal{L}(x,\lambda^{*},\nu^{*})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p142">Ver demostración</button><div class="proof" id="clase-convexa-p142"><p>Por la definición de subgradiente, $x^{*}$ minimiza
+$\mathcal{L}(\cdot,\lambda^{*},\nu^{*})$ si y solo si
+$0\in\subdif\mathcal{L}(\cdot,\lambda^{*},\nu^{*})(x^{*})$. Las $g_{i}$ son
+finitas en $\R^{n}$, así que la intersección de los interiores relativos de los
+dominios es $\ri D\neq\varnothing$ y la regla de la suma da la igualdad. El
+escalamiento da $\lambda^{*}_{i}\subdif g_{i}(x^{*})$ si $\lambda^{*}_{i}&gt;0$, y
+si $\lambda^{*}_{i}=0$ el término es $\{0\}=0\cdot\subdif g_{i}(x^{*})$, porque
+$\subdif g_{i}(x^{*})\neq\varnothing$. El término afín aporta $A\trans\nu^{*}$.</p></div>
+<div class="stmt observacion" id="clase-c18:obs-kkt-diferenciable"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $F$ y las $g_{i}$ son diferenciables, la estacionariedad es
+$\nabla F(x^{*})+\sum_{i}\lambda^{*}_{i}\nabla g_{i}(x^{*})+A\trans\nu^{*}=0$.
+Si se incorporó una restricción $x\in C$ cambiando $F$ por $F+\delta_{C}$ y
+$\ri(\dom F)\cap\ri C\neq\varnothing$, la estacionariedad es
+$0\in\subdif F(x^{*})+\sum_{i}\lambda^{*}_{i}\subdif g_{i}(x^{*})+A\trans\nu^{*}+\Ncono_{C}(x^{*})$.</p></div></div>
+<div class="stmt teorema" id="clase-c18:teo-kkt-suf"><div class="head">Teorema suficiencia de KKT</div><div class="body"><p>Si $(x^{*},\lambda^{*},\nu^{*})$ satisface KKT, entonces $x^{*}$ es óptimo para
+(P), $(\lambda^{*},\nu^{*})$ es óptimo para (D) y $p^{*}=d^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p143">Ver demostración</button><div class="proof" id="clase-convexa-p143"><p>Por la estacionariedad $x^{*}$ minimiza $\mathcal{L}(\cdot,\lambda^{*},\nu^{*})$,
+y por la factibilidad primal y la holgura complementaria</p>
+<div class="display">\[
+  q(\lambda^{*},\nu^{*})=\mathcal{L}(x^{*},\lambda^{*},\nu^{*})
+  =F(x^{*})+\sum_{i=1}^{m}\lambda^{*}_{i}g_{i}(x^{*})+\ip{\nu^{*}}{Ax^{*}-b}=F(x^{*}).
+\]</div>
+<p>Con la dualidad débil,
+$F(x^{*})=q(\lambda^{*},\nu^{*})\le d^{*}\le p^{*}\le F(x^{*})$.</p></div>
+<div class="stmt teorema" id="clase-c18:teo-kkt-nec"><div class="head">Teorema necesidad de KKT bajo Slater</div><div class="body"><p>Si (P) cumple Slater y $x^{*}$ es óptimo, existe $(\lambda^{*},\nu^{*})$ tal que
+$(x^{*},\lambda^{*},\nu^{*})$ satisface KKT.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p144">Ver demostración</button><div class="proof" id="clase-convexa-p144"><p>El punto de Slater da $p^{*}&lt;\infty$, y $p^{*}=F(x^{*})&gt;-\infty$. Por la
+dualidad fuerte hay $\lambda^{*}\ge0$ y $\nu^{*}$ con
+$q(\lambda^{*},\nu^{*})=p^{*}$. Como $x^{*}$ es factible,</p>
+<div class="display">\[
+  F(x^{*})=q(\lambda^{*},\nu^{*})\le\mathcal{L}(x^{*},\lambda^{*},\nu^{*})
+  =F(x^{*})+\sum_{i=1}^{m}\lambda^{*}_{i}g_{i}(x^{*})\le F(x^{*}),
+\]</div>
+<p>y todo es igualdad. Los términos $\lambda^{*}_{i}g_{i}(x^{*})$ son no positivos
+y suman cero, así que cada uno es cero; y $x^{*}$ minimiza
+$\mathcal{L}(\cdot,\lambda^{*},\nu^{*})$, que es la estacionariedad.</p></div>
+<div class="stmt ejemplo" id="clase-c18:ej-qp"><div class="head">Ejemplo programa cuadrático</div><div class="body"><p>Sean $Q\succ0$, $G$ una matriz $k\times n$ y $h\in\R^{k}$. Para</p>
+<div class="display">\[
+  \min\ \frac12x\trans Qx+c\trans x\quad\text{sujeto a}\quad Ax=b,\quad Gx+z=h,\quad z\ge0,
+\]</div>
+<p>el Lagrangiano es
+$\mathcal{L}(x,\lambda,\nu)=\frac12x\trans Qx+c\trans x+\ip{\lambda}{Gx-h}+\ip{\nu}{Ax-b}$,
+y las condiciones KKT son el sistema</p>
+<div class="display">\[
+  \begin{aligned}
+  Qx+G\trans\lambda+A\trans\nu&amp;=-c, &amp;\qquad Ax&amp;=b,\\
+  Gx+z&amp;=h, &amp; Z\lambda&amp;=0,
+  \end{aligned}
+\]</div>
+<p>con $\lambda\ge0$ y $z\ge0$, donde $Z=\operatorname{diag}(z)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p145">Ver demostración</button><div class="proof" id="clase-convexa-p145"><p>La holgura $z=h-Gx\ge0$ escribe $Gx\le h$ como igualdad. La estacionariedad es
+que se anule el gradiente $Qx+c+G\trans\lambda+A\trans\nu$, y la holgura
+complementaria es $\lambda_{i}(Gx-h)_{i}=-\lambda_{i}z_{i}=0$ para todo $i$, que
+es $Z\lambda=0$.</p></div>
+<div class="stmt observacion" id="clase-c18:obs-qp-igualdades"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sin desigualdades, las condiciones KKT son el sistema lineal</p>
+<div class="display">\[
+  \begin{pmatrix}Q&amp;A\trans\\A&amp;0\end{pmatrix}
+  \begin{pmatrix}x^{*}\\\nu^{*}\end{pmatrix}
+  =\begin{pmatrix}-c\\b\end{pmatrix}.
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c18:obs-activas"><div class="head">Observación restricciones activas<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Por la holgura complementaria, una restricción inactiva, $g_{i}(x^{*})&lt;0$, tiene
+$\lambda^{*}_{i}=0$. El recíproco es falso: en $\min x^{2}$ sujeto a $x\le0$ la
+restricción está activa en $x^{*}=0$, y la estacionariedad $2x^{*}+\lambda^{*}=0$
+da $\lambda^{*}=0$.</p></div></div>
+<h3 id="clase-convexa-x33">Puntos de silla</h3>
+<div class="stmt proposicion" id="clase-c18:prop-minmax"><div class="head">Proposición el primal y el dual como problemas min-max</div><div class="body"><div class="display">\[
+  p^{*}=\inf_{x\in\R^{n}}\ \sup_{\lambda\ge0,\ \nu}\ \mathcal{L}(x,\lambda,\nu),
+  \qquad
+  d^{*}=\sup_{\lambda\ge0,\ \nu}\ \inf_{x\in\R^{n}}\ \mathcal{L}(x,\lambda,\nu).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p146">Ver demostración</button><div class="proof" id="clase-convexa-p146"><p>Lo segundo es la definición de $q$. Si $x$ es factible, el supremo vale $F(x)$:
+se alcanza con $\lambda=0$, y es cota porque $\lambda_{i}g_{i}(x)\le0$. Si
+$g_{i}(x)&gt;0$, con $\lambda_{i}\to\infty$ el supremo es $\infty$, y si
+$Ax\neq b$, con $\nu=t(Ax-b)$ y $t\to\infty$ también.</p></div>
+<div class="stmt definicion" id="clase-c18:def-silla"><div class="head">Definición punto de silla del Lagrangiano</div><div class="body"><p>$(x^{*},\lambda^{*},\nu^{*})$, con $x^{*}\in D$ y $\lambda^{*}\ge0$, es un
+<span class="df">punto de silla</span> de $\mathcal{L}$ si</p>
+<div class="display">\[
+  \mathcal{L}(x^{*},\lambda,\nu)\le\mathcal{L}(x^{*},\lambda^{*},\nu^{*})\le\mathcal{L}(x,\lambda^{*},\nu^{*})
+  \qquad\text{para todos }x\in D,\ \lambda\ge0,\ \nu .
+\]</div></div></div>
+<div class="stmt teorema" id="clase-c18:teo-silla"><div class="head">Teorema puntos de silla, KKT y dualidad fuerte</div><div class="body"><p>Para $(x^{*},\lambda^{*},\nu^{*})$ con $x^{*}\in D$ y $\lambda^{*}\ge0$ son
+equivalentes:</p>
+<ol class="lista"><li><p>es un punto de silla de $\mathcal{L}$;</p></li><li><p>satisface KKT;</p></li><li><p>$x^{*}$ es óptimo para (P), $(\lambda^{*},\nu^{*})$ es óptimo para (D) y
+    $p^{*}=d^{*}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p147">Ver demostración</button><div class="proof" id="clase-convexa-p147"><p>(i)$\Rightarrow$(iii). La desigualdad de la izquierda dice que
+$\sup_{\lambda\ge0,\nu}\mathcal{L}(x^{*},\lambda,\nu)=\mathcal{L}(x^{*},\lambda^{*},\nu^{*})$,
+que es finito porque $x^{*}\in D$. Por la proposición anterior $x^{*}$ es
+factible y ese supremo es $F(x^{*})$. La de la derecha dice que
+$\mathcal{L}(x^{*},\lambda^{*},\nu^{*})=q(\lambda^{*},\nu^{*})$, porque fuera de
+$D$ el Lagrangiano vale $\infty$. Así
+$F(x^{*})=q(\lambda^{*},\nu^{*})\le d^{*}\le p^{*}\le F(x^{*})$.</p>
+<p>(iii)$\Rightarrow$(ii). Es la demostración de la necesidad de KKT a partir de
+$q(\lambda^{*},\nu^{*})=p^{*}=F(x^{*})$, que aquí se tiene sin Slater.</p>
+<p>(ii)$\Rightarrow$(i). La estacionariedad es la desigualdad de la derecha. Para
+la de la izquierda, si $\lambda\ge0$, por la factibilidad primal y la holgura
+complementaria
+$\mathcal{L}(x^{*},\lambda,\nu)=F(x^{*})+\sum_{i}\lambda_{i}g_{i}(x^{*})\le F(x^{*})=\mathcal{L}(x^{*},\lambda^{*},\nu^{*})$.</p></div></section>
+<section class="capitulo"><h2 id="clase-cap:minmax">Problemas min-max</h2>
+<div class="stmt definicion" id="clase-c19:def-valores"><div class="head">Definición valores min-max y max-min</div><div class="body"><p>Sean $X\subset\R^{n}$ e $Y\subset\R^{m}$ convexos y no vacíos, y
+$\phi:X\times Y\to\R$ convexa en $x$ para cada $y$ y cóncava en $y$ para cada
+$x$. Se definen</p>
+<div class="display">\[
+  p^{*}=\inf_{x\in X}\ \sup_{y\in Y}\ \phi(x,y),
+  \qquad
+  d^{*}=\sup_{y\in Y}\ \inf_{x\in X}\ \phi(x,y).
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c19:prop-minmax"><div class="head">Proposición desigualdad min-max</div><div class="body"><p>$d^{*}\le p^{*}$, y vale para cualquier $\phi$ y cualesquiera $X$, $Y$ no
+vacíos.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p148">Ver demostración</button><div class="proof" id="clase-convexa-p148"><p>Para todos $x\in X$ e $y\in Y$,
+$\inf_{u\in X}\phi(u,y)\le\phi(x,y)\le\sup_{v\in Y}\phi(x,v)$. El extremo
+izquierdo no depende de $x$ y el derecho no depende de $y$: se toma el supremo
+en $y$ a la izquierda y después el ínfimo en $x$ a la derecha.</p></div>
+<div class="stmt definicion" id="clase-c19:def-silla"><div class="head">Definición punto de silla<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$(x^{*},y^{*})\in X\times Y$ es un <span class="df">punto de silla</span> de $\phi$ si</p>
+<div class="display">\[
+  \phi(x^{*},y)\le\phi(x^{*},y^{*})\le\phi(x,y^{*})
+  \qquad\text{para todos }x\in X,\ y\in Y .
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c19:prop-silla"><div class="head">Proposición punto de silla y brecha cero<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla si y solo si $x^{*}$ alcanza el ínfimo que
+define $p^{*}$, $y^{*}$ alcanza el supremo que define $d^{*}$ y $p^{*}=d^{*}$.
+En ese caso $p^{*}=d^{*}=\phi(x^{*},y^{*})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p149">Ver demostración</button><div class="proof" id="clase-convexa-p149"><p>Si es punto de silla,
+$p^{*}\le\sup_{y}\phi(x^{*},y)=\phi(x^{*},y^{*})=\inf_{x}\phi(x,y^{*})\le d^{*}$,
+y con la desigualdad min-max todo es igual. Recíprocamente, si
+$S=\sup_{y}\phi(x^{*},y)=p^{*}=d^{*}=\inf_{x}\phi(x,y^{*})$, entonces para todos
+$x$ e $y$</p>
+<div class="display">\[
+  \phi(x^{*},y)\le S\le\phi(x^{*},y^{*})\le S\le\phi(x,y^{*}). 
+\]</div></div>
+<div class="stmt proposicion" id="clase-c19:prop-estructura"><div class="head">Proposición estructura de los puntos de silla<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\phi$ tiene algún punto de silla, sean $X^{*}$ e $Y^{*}$ los conjuntos de
+primeras y de segundas componentes de sus puntos de silla. Entonces $X^{*}$ e
+$Y^{*}$ son convexos y el conjunto de puntos de silla es $X^{*}\times Y^{*}$. Si
+$\phi(\cdot,y)$ es estrictamente convexa para cada $y\in Y^{*}$, $X^{*}$ tiene
+un solo punto, y lo análogo vale para $Y^{*}$ con concavidad estricta.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p150">Ver demostración</button><div class="proof" id="clase-convexa-p150"><p>Hay un punto de silla, así que $p^{*}=d^{*}$, y por la proposición anterior el
+conjunto de puntos de silla es el producto de los minimizadores de
+$\Phi(x)=\sup_{y}\phi(x,y)$ por los maximizadores de
+$\Psi(y)=\inf_{x}\phi(x,y)$. $\Phi$ es convexa por ser un supremo de convexas,
+así que $X^{*}=\{x:\Phi(x)\le p^{*}\}$ es convexo, y lo mismo $Y^{*}$ con $\Psi$
+cóncava. Si $y^{*}\in Y^{*}$, todo $x\in X^{*}$ minimiza $\phi(\cdot,y^{*})$,
+porque $(x,y^{*})$ es punto de silla, y una función estrictamente convexa tiene a
+lo sumo un minimizador.</p></div>
+<div class="stmt ejemplo" id="clase-c19:ej-juego"><div class="head">Ejemplo juego matricial de suma cero<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $A$ una matriz $n\times m$ y $\phi(x,y)=x\trans Ay$ sobre
+$\simplex_{n}\times\simplex_{m}$, los símplex de probabilidad. Es el juego de
+suma cero en estrategias mixtas, y</p>
+<div class="display">\[
+  \max_{y\in\simplex_{m}}x\trans Ay=\max_{j}\,(A\trans x)_{j},
+  \qquad
+  \min_{x\in\simplex_{n}}x\trans Ay=\min_{i}\,(Ay)_{i}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p151">Ver demostración</button><div class="proof" id="clase-convexa-p151"><p>$x\trans Ay=\sum_{j}(A\trans x)_{j}y_{j}$ es un promedio de las
+$(A\trans x)_{j}$ con pesos $y_{j}$, así que no supera a la mayor, y la alcanza
+en el vértice $e_{j}$ correspondiente. Lo otro es igual.</p></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -4236,10 +4505,11 @@ y los dos conjuntos son convexos y cerrados.</p></div>
 <p>En $\R^{n}$ el adjunto $A^{*}$ es la traspuesta $A\trans$.</p>
 <div class="stmt teorema" id="general-c10:teo-suma"><div class="head">Teorema regla de la suma</div><div class="body"><p>Sean $f_{1},\ldots,f_{m}$ convexas y propias. Entonces
 $\sum_{i}\subdif f_{i}(x)\subset\subdif(\sum_{i}f_{i})(x)$ para todo $x$, con
-igualdad si alguna $f_{i}$ es continua en un punto de
+igualdad si $f_{2},\ldots,f_{m}$ son continuas en un mismo punto de
 $\bigcap_{j}\dom f_{j}$.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p45">Ver demostración</button><div class="proof" id="general-convexa-p45"><p>La inclusión es inmediata sumando las desigualdades de definición. Para la
-igualdad basta el caso $m=2$, con $f$ y $h$, y se separa con la separación de dos convexos el epígrafo de $\varphi(y)=f(y)-f(x)$ del
+igualdad basta el caso $m=2$, con $f$ y $h$, porque el resto sale por inducción
+sumando una función continua cada vez; y se separa con la separación de dos convexos el epígrafo de $\varphi(y)=f(y)-f(x)$ del
 hipógrafo de $-\psi$, con $\psi(y)=h(y)-h(x)-g(y-x)$, igual que en dimensión
 finita. La continuidad de una de las dos es lo que da el interior no vacío que
 la separación necesita.</p></div>
@@ -5898,7 +6168,181 @@ $F(x)\ge\varphi(u,v)\ge p^{*}-\sum_{i}\lambda^{*}_{i}g_{i}(x)-\ip{\nu^{*}}{Ax-b}
 es decir $\mathcal{L}(x,\lambda^{*},\nu^{*})\ge p^{*}$. Luego
 $d^{*}\ge q(\lambda^{*},\nu^{*})\ge p^{*}\ge d^{*}$.</p></div>
 <div class="stmt observacion" id="general-c18:obs-precios"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Las pendientes del hiperplano que sostiene a $\varphi$ en el origen son los
-multiplicadores óptimos: $-(\lambda^{*},\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div></section></div>
+multiplicadores óptimos: $-(\lambda^{*},\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div>
+<h3 id="general-convexa-x26">Programación lineal</h3>
+<div class="stmt definicion" id="general-c18:def-pl"><div class="head">Definición programa lineal y su dual</div><div class="body"><p>Sean $A$ una matriz $p\times n$, $b\in\R^{p}$ y $c\in\R^{n}$. El
+<span class="df">programa lineal</span> y su <span class="df">dual</span> son</p>
+<div class="display">\[
+  \begin{aligned}
+  p^{*}&amp;=\min\ c\trans x\quad\text{sujeto a}\quad Ax=b,\ x\ge0,\\
+  d^{*}&amp;=\max\ b\trans y\quad\text{sujeto a}\quad A\trans y\le c,
+  \end{aligned}
+\]</div>
+<p>y $P=\{x\in\R^{n}:Ax=b,\ x\ge0\}$. El orden coordenada a coordenada hace que
+este problema viva en $\R^{n}$.</p></div></div>
+<div class="stmt lema" id="general-c18:lem-cono-cerrado"><div class="head">Lema los conos finitamente generados son cerrados<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $u_{1},\dots,u_{r}\in\Hs$ y $A:\R^{r}\to\Hs$, $Ax=\sum_{j}x_{j}u_{j}$.
+Entonces $\{Ax:x\ge0\}=\cono\{u_{1},\dots,u_{r}\}$ es un cono convexo cerrado.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p128">Ver demostración</button><div class="proof" id="general-convexa-p128"><p>La prueba de dimensión finita pasa sin cambios, porque la compacidad que usa
+es la de la esfera unidad del dominio $\R^{J}$: con el argumento de
+Carathéodory, todo $y=Ax$ con $x\ge0$ se
+escribe $y=A_{J}z$ con $z\ge0$ y $\{u_{j}\}_{j\in J}$ linealmente
+independiente; cada $A_{J}$ cumple $\norm{A_{J}z}\ge\sigma_{J}\norm{z}$ con
+$\sigma_{J}&gt;0$, así que $A_{J}(\R^{J}_{+})$ es cerrado, y el cono es la unión
+finita de esos conjuntos.</p></div>
+<div class="stmt teorema" id="general-c18:teo-farkas"><div class="head">Teorema lema de Farkas</div><div class="body"><p>Sean $A:\R^{r}\to\Hs$ lineal y $b\in\Hs$. Exactamente una de las dos
+afirmaciones es cierta:</p>
+<ol class="lista"><li><p>existe $x\in\R^{r}$, $x\ge0$, con $Ax=b$;</p></li><li><p>existe $y\in\Hs$ con $A^{*}y\ge0$ y $\ip{b}{y}&lt;0$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p129">Ver demostración</button><div class="proof" id="general-convexa-p129"><p>Las dos alternativas a la vez darían
+$0&gt;\ip{b}{y}=\ip{x}{A^{*}y}\ge0$. Si (a) falla, $b\notin K=\{Ax:x\ge0\}$, que es
+convexo y cerrado por el lema anterior; por el teorema bipolar hay
+$y\in\polar{K}$ con $\ip{b}{y}&lt;0$, y $y\in\polar{K}$ es $A^{*}y\ge0$.</p></div>
+<div class="stmt teorema" id="general-c18:teo-pl"><div class="head">Teorema dualidad fuerte en programación lineal</div><div class="body"><p>Si $p^{*}\in\R$, el primal tiene un mínimo $x^{*}\in P$, el dual tiene un
+máximo $y^{*}$ y $p^{*}=d^{*}$. No hace falta ninguna condición de Slater.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p130">Ver demostración</button><div class="proof" id="general-convexa-p130"><p>Si $x\in P$ y $A\trans y\le c$, es $b\trans y=x\trans A\trans y\le c\trans x$, así
+que $d^{*}\le p^{*}$. El cono $\{(Ax,c\trans x):x\ge0\}\subset\R^{p+1}$ es
+cerrado por el lema, y contiene los $(b,c\trans x_{k})$ con $x_{k}\in P$ y
+$c\trans x_{k}\to p^{*}$; luego contiene a $(b,p^{*})$, y hay un mínimo
+$x^{*}$. Con $I=\{i:x^{*}_{i}=0\}$, todo $z$ con $Az=0$ y $z_{i}\ge0$ en $I$
+cumple $x^{*}+tz\in P$ para $t&gt;0$ pequeño, así que $c\trans z\ge0$. Si
+$\tilde{A}$ tiene por columnas las de $A\trans$, las de $-A\trans$ y los $e_{i}$
+con $i\in I$, eso dice que no hay $z$ con $\tilde{A}\trans z\ge0$ y
+$c\trans z&lt;0$, y Farkas da $(y^{+},y^{-},\tilde{s})\ge0$ con
+$A\trans(y^{+}-y^{-})+\sum_{i\in I}\tilde{s}_{i}e_{i}=c$. Con $y^{*}=y^{+}-y^{-}$
+y $s$ igual a $\tilde{s}$ en $I$ y a $0$ fuera, es $A\trans y^{*}\le c$ y
+$s\trans x^{*}=0$, y
+$p^{*}=c\trans x^{*}=(A\trans y^{*}+s)\trans x^{*}=b\trans y^{*}\le d^{*}\le p^{*}$.</p></div>
+<div class="stmt observacion" id="general-c18:obs-certificados-pl"><div class="head">Observación certificados de optimalidad</div><div class="body"><p>Si $x\in P$ e $y$ cumplen $A\trans y\le c$ y $(c-A\trans y)\trans x=0$, entonces
+$c\trans x=b\trans y$, y $x$ e $y$ son óptimos para el primal y el dual.</p></div></div>
+<div class="stmt observacion" id="general-c18:obs-complementariedad-pl"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $s=c-A\trans y\ge0$ y $x\ge0$, la condición $s\trans x=0$ equivale a
+$x_{i}s_{i}=0$ para cada $i$. Es la holgura complementaria de la programación
+lineal.</p></div></div>
+<h3 id="general-convexa-x27">Los multiplicadores y la función de valor</h3>
+<div class="stmt proposicion" id="general-c18:prop-mult-subgrad"><div class="head">Proposición los multiplicadores óptimos son subgradientes de la función de valor</div><div class="body"><p>Si $p^{*}\in\R$, $\lambda^{*}\ge0$ y $q(\lambda^{*},\nu^{*})=p^{*}$, entonces
+$\varphi(u,v)\ge p^{*}-\ip{\lambda^{*}}{u}-\ip{\nu^{*}}{v}$ para todo $(u,v)$,
+es decir, $(-\lambda^{*},-\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p131">Ver demostración</button><div class="proof" id="general-convexa-p131"><p>Si $x\in\Hs$ es factible para $(u,v)$, como $\lambda^{*}\ge0$,</p>
+<div class="display">\[
+  F(x)=\mathcal{L}(x,\lambda^{*},\nu^{*})-\sum_{i}\lambda^{*}_{i}g_{i}(x)-\ip{\nu^{*}}{Ax-b}
+  \ge p^{*}-\ip{\lambda^{*}}{u}-\ip{\nu^{*}}{v},
+\]</div>
+<p>y se toma el ínfimo en $x$.</p></div>
+<div class="stmt corolario" id="general-c18:cor-subdif-valor"><div class="head">Corolario el subdiferencial de la función de valor</div><div class="body"><p>Si $p^{*}\in\R$,
+$\subdif\varphi(0,0)=\{(-\lambda^{*},-\nu^{*}):\lambda^{*}\ge0,\ q(\lambda^{*},\nu^{*})=p^{*}\}$,
+y bajo Slater no es vacío.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p132">Ver demostración</button><div class="proof" id="general-convexa-p132"><p>$\supset$ es la proposición. Para $\subset$, la demostración de la dualidad
+fuerte obtiene $\alpha\le0$ y $q(-\alpha,-\beta)\ge p^{*}$ de
+$(\alpha,\beta)\in\subdif\varphi(0,0)$ sin usar nada más, y la dualidad débil da
+la igualdad. Bajo Slater, la dualidad fuerte da un elemento.</p></div>
+<div class="stmt corolario" id="general-c18:cor-sensibilidad"><div class="head">Corolario sensibilidad<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $p^{*}\in\R$ y $\varphi$ es propia y diferenciable en $(0,0)$, el dual tiene
+una sola solución, no hay brecha, y
+$\nabla_{u}\varphi(0,0)=-\lambda^{*}$, $\nabla_{v}\varphi(0,0)=-\nu^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p133">Ver demostración</button><div class="proof" id="general-convexa-p133"><p>$\varphi$ vive en $\R^{m}\times\R^{p}$, es finita cerca del origen, y allí
+$\subdif\varphi(0,0)=\{\nabla\varphi(0,0)\}$. Se concluye con el corolario
+anterior.</p></div>
+<h3 id="general-convexa-x28">Condiciones KKT</h3>
+<div class="stmt definicion" id="general-c18:def-kkt"><div class="head">Definición condiciones KKT</div><div class="body"><p>Una terna $(x^{*},\lambda^{*},\nu^{*})$ con $x^{*}\in D$ <span class="df">satisface KKT</span> si</p>
+<ol class="lista"><li><p><em>factibilidad primal</em>: $g_{i}(x^{*})\le0$ para todo $i$ y $Ax^{*}=b$;</p></li><li><p><em>factibilidad dual</em>: $\lambda^{*}\ge0$;</p></li><li><p><em>estacionariedad</em>:
+    $0\in\subdif F(x^{*})+\sum_{i=1}^{m}\lambda^{*}_{i}\subdif g_{i}(x^{*})+A^{*}\nu^{*}$;</p></li><li><p><em>holgura complementaria</em>: $\lambda^{*}_{i}g_{i}(x^{*})=0$ para todo $i$.</p></li></ol></div></div>
+<div class="stmt proposicion" id="general-c18:prop-estacionariedad"><div class="head">Proposición la estacionariedad es minimizar el Lagrangiano</div><div class="body"><p>Si $x^{*}\in D$ y $\lambda^{*}\ge0$, la estacionariedad equivale a
+$x^{*}\in\argmin_{x}\mathcal{L}(x,\lambda^{*},\nu^{*})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p134">Ver demostración</button><div class="proof" id="general-convexa-p134"><p>Por la definición de subgradiente, minimizar es
+$0\in\subdif\mathcal{L}(\cdot,\lambda^{*},\nu^{*})(x^{*})$. Las $g_{i}$ y el
+término afín son convexos, continuos y de dominio $\Hs$, así que la regla de la
+suma, aplicada término a término, parte el subdiferencial. Si
+$\lambda^{*}_{i}=0$ el término es $\{0\}=0\cdot\subdif g_{i}(x^{*})$, porque una
+convexa continua tiene subgradientes en todo punto.</p></div>
+<div class="stmt observacion" id="general-c18:obs-kkt-diferenciable"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $F$ y las $g_{i}$ son diferenciables, la estacionariedad es
+$\nabla F(x^{*})+\sum_{i}\lambda^{*}_{i}\nabla g_{i}(x^{*})+A^{*}\nu^{*}=0$. Si se
+incorporó $x\in C$ con $\delta_{C}$ y $\dom F\cap\intr C\neq\varnothing$, aparece
+además el sumando $\Ncono_{C}(x^{*})$.</p></div></div>
+<div class="stmt teorema" id="general-c18:teo-kkt-suf"><div class="head">Teorema suficiencia de KKT</div><div class="body"><p>Si $(x^{*},\lambda^{*},\nu^{*})$ satisface KKT, entonces $x^{*}$ es óptimo para
+(P), $(\lambda^{*},\nu^{*})$ para (D) y $p^{*}=d^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p135">Ver demostración</button><div class="proof" id="general-convexa-p135"><p>$x^{*}$ minimiza el Lagrangiano, así que, con la holgura complementaria y la
+factibilidad,
+$q(\lambda^{*},\nu^{*})=\mathcal{L}(x^{*},\lambda^{*},\nu^{*})=F(x^{*})$, y la
+dualidad débil cierra $F(x^{*})\le d^{*}\le p^{*}\le F(x^{*})$.</p></div>
+<div class="stmt teorema" id="general-c18:teo-kkt-nec"><div class="head">Teorema necesidad de KKT bajo Slater</div><div class="body"><p>Si (P) cumple Slater y $x^{*}$ es óptimo, existe $(\lambda^{*},\nu^{*})$ tal que
+$(x^{*},\lambda^{*},\nu^{*})$ satisface KKT.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p136">Ver demostración</button><div class="proof" id="general-convexa-p136"><p>$p^{*}=F(x^{*})\in\R$, y la dualidad fuerte da $(\lambda^{*},\nu^{*})$ con
+$q(\lambda^{*},\nu^{*})=p^{*}$. Entonces
+$F(x^{*})=q(\lambda^{*},\nu^{*})\le\mathcal{L}(x^{*},\lambda^{*},\nu^{*})\le F(x^{*})$,
+lo que da la holgura complementaria término a término y que $x^{*}$ minimiza el
+Lagrangiano.</p></div>
+<div class="stmt ejemplo" id="general-c18:ej-qp"><div class="head">Ejemplo programa cuadrático</div><div class="body"><p>Sean $Q$ como en el ejemplo cuadrático, $G:\Hs\to\R^{k}$ lineal y continua y
+$h\in\R^{k}$. Para $\min\frac12\ip{Qx}{x}+\ip{c}{x}$ sujeto a $Ax=b$,
+$Gx+z=h$, $z\ge0$, las condiciones KKT son</p>
+<div class="display">\[
+  Qx+G^{*}\lambda+A^{*}\nu=-c,\qquad Ax=b,\qquad Gx+z=h,\qquad Z\lambda=0,
+\]</div>
+<p>con $\lambda\ge0$, $z\ge0$ y $Z=\operatorname{diag}(z)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p137">Ver demostración</button><div class="proof" id="general-convexa-p137"><p>El gradiente del Lagrangiano es $Qx+c+G^{*}\lambda+A^{*}\nu$, y la holgura
+complementaria es $\lambda_{i}(Gx-h)_{i}=-\lambda_{i}z_{i}=0$.</p></div>
+<div class="stmt observacion" id="general-c18:obs-qp-igualdades"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sin desigualdades, las condiciones KKT son el sistema
+$Qx^{*}+A^{*}\nu^{*}=-c$, $Ax^{*}=b$, que en $\R^{n}$ es el sistema lineal por
+bloques con matriz $</p>
+<div class="display">\begin{pmatrix}Q&amp;A\trans\\A&amp;0\end{pmatrix}</div>
+<p>$.</p></div></div>
+<div class="stmt observacion" id="general-c18:obs-activas"><div class="head">Observación restricciones activas<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Una restricción inactiva tiene multiplicador cero, y el recíproco es falso: en
+$\min x^{2}$ sujeto a $x\le0$ la restricción está activa en $0$ y
+$\lambda^{*}=0$.</p></div></div>
+<h3 id="general-convexa-x29">Puntos de silla</h3>
+<div class="stmt proposicion" id="general-c18:prop-minmax"><div class="head">Proposición el primal y el dual como problemas min-max</div><div class="body"><p>$p^{*}=\inf_{x\in\Hs}\sup_{\lambda\ge0,\nu}\mathcal{L}(x,\lambda,\nu)$ y
+$d^{*}=\sup_{\lambda\ge0,\nu}\inf_{x\in\Hs}\mathcal{L}(x,\lambda,\nu)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p138">Ver demostración</button><div class="proof" id="general-convexa-p138"><p>El supremo en $(\lambda,\nu)$ vale $F(x)$ si $x$ es factible y $\infty$ si no.</p></div>
+<div class="stmt definicion" id="general-c18:def-silla"><div class="head">Definición punto de silla del Lagrangiano</div><div class="body"><p>$(x^{*},\lambda^{*},\nu^{*})$, con $x^{*}\in D$ y $\lambda^{*}\ge0$, es un
+<span class="df">punto de silla</span> de $\mathcal{L}$ si
+$\mathcal{L}(x^{*},\lambda,\nu)\le\mathcal{L}(x^{*},\lambda^{*},\nu^{*})\le\mathcal{L}(x,\lambda^{*},\nu^{*})$
+para todos $x\in D$, $\lambda\ge0$ y $\nu$.</p></div></div>
+<div class="stmt teorema" id="general-c18:teo-silla"><div class="head">Teorema puntos de silla, KKT y dualidad fuerte</div><div class="body"><p>Para $(x^{*},\lambda^{*},\nu^{*})$ con $x^{*}\in D$ y $\lambda^{*}\ge0$ son
+equivalentes: <em>(i)</em> es un punto de silla; <em>(ii)</em> satisface KKT;
+<em>(iii)</em> $x^{*}$ es óptimo para (P), $(\lambda^{*},\nu^{*})$ para (D) y
+$p^{*}=d^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p139">Ver demostración</button><div class="proof" id="general-convexa-p139"><p>(i)$\Rightarrow$(iii): la desigualdad de la izquierda y la proposición anterior
+dan $x^{*}$ factible con $F(x^{*})=\mathcal{L}(x^{*},\lambda^{*},\nu^{*})$, y la
+de la derecha da $\mathcal{L}(x^{*},\lambda^{*},\nu^{*})=q(\lambda^{*},\nu^{*})$.
+(iii)$\Rightarrow$(ii) es la prueba de la necesidad de KKT, sin Slater porque
+ya se tiene $q(\lambda^{*},\nu^{*})=F(x^{*})$. (ii)$\Rightarrow$(i): la
+estacionariedad es la desigualdad de la derecha, y la factibilidad con la
+holgura complementaria dan
+$\mathcal{L}(x^{*},\lambda,\nu)\le F(x^{*})=\mathcal{L}(x^{*},\lambda^{*},\nu^{*})$.</p></div></section>
+<section class="capitulo"><h2 id="general-cap:minmax">Problemas min-max</h2>
+<div class="stmt definicion" id="general-c19:def-valores"><div class="head">Definición valores min-max y max-min</div><div class="body"><p>Sean $\Hs$ y $\Ks$ espacios de Hilbert, $X\subset\Hs$ e $Y\subset\Ks$ convexos
+y no vacíos, y $\phi:X\times Y\to\R$ convexa en $x$ y cóncava en $y$. Se
+definen</p>
+<div class="display">\[
+  p^{*}=\inf_{x\in X}\ \sup_{y\in Y}\ \phi(x,y),
+  \qquad
+  d^{*}=\sup_{y\in Y}\ \inf_{x\in X}\ \phi(x,y).
+\]</div></div></div>
+<div class="stmt proposicion" id="general-c19:prop-minmax"><div class="head">Proposición desigualdad min-max</div><div class="body"><p>$d^{*}\le p^{*}$, para cualquier $\phi$ y cualesquiera conjuntos $X$, $Y$ no
+vacíos.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p140">Ver demostración</button><div class="proof" id="general-convexa-p140"><p>$\inf_{u}\phi(u,y)\le\phi(x,y)\le\sup_{v}\phi(x,v)$; se toma el supremo en $y$
+a la izquierda y el ínfimo en $x$ a la derecha.</p></div>
+<div class="stmt definicion" id="general-c19:def-silla"><div class="head">Definición punto de silla<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$(x^{*},y^{*})\in X\times Y$ es un <span class="df">punto de silla</span> de $\phi$ si
+$\phi(x^{*},y)\le\phi(x^{*},y^{*})\le\phi(x,y^{*})$ para todos $x\in X$,
+$y\in Y$.</p></div></div>
+<div class="stmt proposicion" id="general-c19:prop-silla"><div class="head">Proposición punto de silla y brecha cero<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla si y solo si $x^{*}$ alcanza el ínfimo que
+define $p^{*}$, $y^{*}$ alcanza el supremo que define $d^{*}$ y $p^{*}=d^{*}$, y
+entonces $p^{*}=d^{*}=\phi(x^{*},y^{*})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p141">Ver demostración</button><div class="proof" id="general-convexa-p141"><p>Si es punto de silla,
+$p^{*}\le\sup_{y}\phi(x^{*},y)=\phi(x^{*},y^{*})=\inf_{x}\phi(x,y^{*})\le d^{*}\le p^{*}$.
+Si $S=\sup_{y}\phi(x^{*},y)=\inf_{x}\phi(x,y^{*})$, entonces
+$\phi(x^{*},y)\le S\le\phi(x^{*},y^{*})\le S\le\phi(x,y^{*})$.</p></div>
+<div class="stmt proposicion" id="general-c19:prop-estructura"><div class="head">Proposición estructura de los puntos de silla<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\phi$ tiene algún punto de silla, los conjuntos $X^{*}$ e $Y^{*}$ de sus
+primeras y segundas componentes son convexos y el conjunto de puntos de silla es
+$X^{*}\times Y^{*}$. Si $\phi(\cdot,y)$ es estrictamente convexa para
+$y\in Y^{*}$, $X^{*}$ tiene un solo punto, y lo análogo vale para $Y^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p142">Ver demostración</button><div class="proof" id="general-convexa-p142"><p>Por la proposición anterior, los puntos de silla son
+$\argmin\Phi\times\argmax\Psi$, con $\Phi(x)=\sup_{y}\phi(x,y)$ convexa y
+$\Psi(y)=\inf_{x}\phi(x,y)$ cóncava, y esos conjuntos son de nivel, luego
+convexos. Si $y^{*}\in Y^{*}$, todo $x\in X^{*}$ minimiza la función
+estrictamente convexa $\phi(\cdot,y^{*})$, que tiene a lo sumo un minimizador.</p></div>
+<div class="stmt ejemplo" id="general-c19:ej-juego"><div class="head">Ejemplo juego matricial de suma cero<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $A$ una matriz $n\times m$ y $\phi(x,y)=x\trans Ay$ sobre
+$\simplex_{n}\times\simplex_{m}$. Entonces
+$\max_{y\in\simplex_{m}}x\trans Ay=\max_{j}(A\trans x)_{j}$ y
+$\min_{x\in\simplex_{n}}x\trans Ay=\min_{i}(Ay)_{i}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p143">Ver demostración</button><div class="proof" id="general-convexa-p143"><p>Una función lineal sobre el símplex es un promedio de sus valores en los
+vértices, y alcanza su máximo y su mínimo en uno de ellos.</p></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -7302,7 +7746,92 @@ finitas restricciones. El único paso que necesita un teorema, que una convexa
 propia tenga subgradiente en un punto interior de su dominio, se da en dimensión
 finita aunque $\Hs$ no lo sea. Con infinitas restricciones el espacio de
 perturbaciones sería de dimensión infinita, y ese paso pediría continuidad, no
-solo interior.</p></div></div></section></div>
+solo interior.</p></div></div>
+<h3 id="ambas-convexa-x29">Programación lineal</h3>
+<div class="stmt definicion" id="ambas-c18:def-pl"><div class="head">Definición programa lineal y su dual</div><div class="body"><p>Con $A$ una matriz $p\times n$, $b\in\R^{p}$ y $c\in\R^{n}$,
+$p^{*}=\min c\trans x$ sujeto a $Ax=b$, $x\ge0$, y
+$d^{*}=\max b\trans y$ sujeto a $A\trans y\le c$. Es un problema de $\R^{n}$ en
+las dos versiones, porque usa el orden coordenada a coordenada.</p></div></div>
+<div class="stmt lema" id="ambas-c18:lem-cono-cerrado"><div class="head">Lema los conos finitamente generados son cerrados</div><div class="body"><p>Si $u_{1},\dots,u_{r}$ están en $\R^{n}$ o en $\Hs$, el cono
+$\cono\{u_{1},\dots,u_{r}\}$ es convexo y cerrado.</p></div></div>
+<div class="stmt teorema" id="ambas-c18:teo-farkas"><div class="head">Teorema lema de Farkas</div><div class="body"><p>Sean $A:\R^{r}\to\Hs$ lineal, que en $\R^{n}$ es una matriz $n\times r$, y
+$b\in\Hs$. Exactamente una es cierta: <em>(a)</em> existe $x\ge0$ con $Ax=b$;
+<em>(b)</em> existe $y$ con $A^{*}y\ge0$ y $\ip{b}{y}&lt;0$.</p></div></div>
+<div class="stmt observacion" id="ambas-c18:obs-farkas-infinito"><div class="head">Observación con infinitos generadores, Farkas falla</div><div class="body"><p>Farkas se sostiene en que el cono $\{Ax:x\ge0\}$ sea cerrado. Con finitos
+generadores lo es en cualquier Hilbert, porque vive en un subespacio de
+dimensión finita; con infinitos deja de serlo. En $\ell^{2}$, con el orden
+coordenada a coordenada, sean $A=\operatorname{diag}(1/k)$ y $b=(1/k)_{k}$. No
+hay $x\ge0$ en $\ell^{2}$ con $Ax=b$, porque tendría que ser $x=(1,1,\dots)$. Y
+no hay $y$ con $A^{*}y\ge0$ y $\ip{b}{y}&lt;0$, porque $A^{*}y=(y_{k}/k)_{k}\ge0$
+obliga a $y\ge0$, y entonces $\ip{b}{y}\ge0$. Ninguna de las dos alternativas se
+cumple.</p></div></div>
+<div class="stmt teorema" id="ambas-c18:teo-pl"><div class="head">Teorema dualidad fuerte en programación lineal</div><div class="body"><p>Si $p^{*}\in\R$, el primal y el dual alcanzan sus valores y $p^{*}=d^{*}$, sin
+ninguna condición de Slater. Si $x$ es factible, $A\trans y\le c$ y
+$(c-A\trans y)\trans x=0$, los dos son óptimos, y esa condición es
+$x_{i}(c-A\trans y)_{i}=0$ para cada $i$.</p></div></div>
+<h3 id="ambas-convexa-x30">Los multiplicadores y la función de valor</h3>
+<div class="stmt proposicion" id="ambas-c18:prop-mult-subgrad"><div class="head">Proposición los multiplicadores óptimos son subgradientes de la función de valor</div><div class="body"><p>Si $p^{*}\in\R$, $\lambda^{*}\ge0$ y $q(\lambda^{*},\nu^{*})=p^{*}$, entonces
+$\varphi(u,v)\ge p^{*}-\ip{\lambda^{*}}{u}-\ip{\nu^{*}}{v}$ para todo $(u,v)$.
+En consecuencia
+$\subdif\varphi(0,0)=\{(-\lambda^{*},-\nu^{*}):\lambda^{*}\ge0,\ q(\lambda^{*},\nu^{*})=p^{*}\}$,
+que bajo Slater no es vacío. Si además $\varphi$ es diferenciable en el origen,
+la solución dual es única y $\nabla\varphi(0,0)=-(\lambda^{*},\nu^{*})$: los
+multiplicadores son precios sombra.</p></div></div>
+<h3 id="ambas-convexa-x31">Condiciones KKT</h3>
+<div class="stmt definicion" id="ambas-c18:def-kkt"><div class="head">Definición condiciones KKT</div><div class="body"><p>$(x^{*},\lambda^{*},\nu^{*})$ con $x^{*}\in D$ satisface KKT si $x^{*}$ es
+factible, $\lambda^{*}\ge0$,
+$0\in\subdif F(x^{*})+\sum_{i}\lambda^{*}_{i}\subdif g_{i}(x^{*})+A^{*}\nu^{*}$
+y $\lambda^{*}_{i}g_{i}(x^{*})=0$ para todo $i$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c18:prop-estacionariedad"><div class="head">Proposición la estacionariedad es minimizar el Lagrangiano</div><div class="body"><p>Si $\lambda^{*}\ge0$, la estacionariedad equivale a
+$x^{*}\in\argmin\mathcal{L}(\cdot,\lambda^{*},\nu^{*})$.</p></div></div>
+<div class="stmt observacion" id="ambas-c18:obs-suma"><div class="head">Observación la regla de la suma, en cada versión</div><div class="body"><p>La equivalencia es partir el subdiferencial de
+$F+\sum_{i}\lambda^{*}_{i}g_{i}+\ip{\nu^{*}}{A\cdot-b}$. En $\R^{n}$ basta que
+las $g_{i}$ sean finitas, porque entonces los interiores relativos de los
+dominios se cortan en $\ri D\neq\varnothing$. En $\Hs$ el interior relativo
+no está disponible, y la cualificación que se usa es que las $g_{i}$ son
+continuas, que es como la versión general las pide desde la definición del
+problema.</p></div></div>
+<div class="stmt teorema" id="ambas-c18:teo-kkt"><div class="head">Teorema suficiencia y necesidad de KKT</div><div class="body"><p>Si una terna satisface KKT, $x^{*}$ es óptimo, $(\lambda^{*},\nu^{*})$ es óptimo
+dual y $p^{*}=d^{*}$. Recíprocamente, bajo Slater (con $\ri D$ en $\R^{n}$, con
+$\intr D$ en $\Hs$), todo óptimo $x^{*}$ tiene multiplicadores que cumplen KKT.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c18:ej-qp"><div class="head">Ejemplo programa cuadrático</div><div class="body"><p>Para $\min\frac12\ip{Qx}{x}+\ip{c}{x}$ sujeto a $Ax=b$, $Gx+z=h$, $z\ge0$, las
+condiciones KKT son $Qx+G^{*}\lambda+A^{*}\nu=-c$, $Ax=b$, $Gx+z=h$ y
+$Z\lambda=0$, con $\lambda,z\ge0$ y $Z=\operatorname{diag}(z)$. Sin
+desigualdades, en $\R^{n}$, es el sistema lineal con matriz
+$</p>
+<div class="display">\begin{pmatrix}Q&amp;A\trans\\A&amp;0\end{pmatrix}</div>
+<p>$.</p></div></div>
+<div class="stmt observacion" id="ambas-c18:obs-activas"><div class="head">Observación restricciones activas</div><div class="body"><p>Una restricción inactiva tiene multiplicador cero, y no al revés: en $\min x^{2}$
+sujeto a $x\le0$ la restricción está activa y $\lambda^{*}=0$.</p></div></div>
+<h3 id="ambas-convexa-x32">Puntos de silla</h3>
+<div class="stmt proposicion" id="ambas-c18:prop-minmax"><div class="head">Proposición el primal y el dual como problemas min-max</div><div class="body"><p>$p^{*}=\inf_{x}\sup_{\lambda\ge0,\nu}\mathcal{L}(x,\lambda,\nu)$ y
+$d^{*}=\sup_{\lambda\ge0,\nu}\inf_{x}\mathcal{L}(x,\lambda,\nu)$.</p></div></div>
+<div class="stmt teorema" id="ambas-c18:teo-silla"><div class="head">Teorema puntos de silla, KKT y dualidad fuerte</div><div class="body"><p>$(x^{*},\lambda^{*},\nu^{*})$, con $x^{*}\in D$ y $\lambda^{*}\ge0$, es un
+punto de silla de $\mathcal{L}$, es decir
+$\mathcal{L}(x^{*},\lambda,\nu)\le\mathcal{L}(x^{*},\lambda^{*},\nu^{*})\le\mathcal{L}(x,\lambda^{*},\nu^{*})$
+para todos $x\in D$, $\lambda\ge0$ y $\nu$, si y solo si satisface KKT, si y solo
+si $x^{*}$ y $(\lambda^{*},\nu^{*})$ son óptimos y $p^{*}=d^{*}$.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:minmax">Problemas min-max</h2>
+<div class="stmt definicion" id="ambas-c19:def-valores"><div class="head">Definición valores min-max y max-min</div><div class="body"><p>Sean $X\subset\Hs$ e $Y\subset\Ks$ convexos y no vacíos, con $\Hs$, $\Ks$
+espacios de Hilbert o euclídeos, y $\phi:X\times Y\to\R$ convexa en $x$ y
+cóncava en $y$:
+$p^{*}=\inf_{x\in X}\sup_{y\in Y}\phi(x,y)$ y
+$d^{*}=\sup_{y\in Y}\inf_{x\in X}\phi(x,y)$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c19:prop-minmax"><div class="head">Proposición desigualdad min-max</div><div class="body"><p>$d^{*}\le p^{*}$, para cualquier $\phi$ y cualesquiera $X$, $Y$ no vacíos.</p></div></div>
+<div class="stmt definicion" id="ambas-c19:def-silla"><div class="head">Definición punto de silla</div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla de $\phi$ si
+$\phi(x^{*},y)\le\phi(x^{*},y^{*})\le\phi(x,y^{*})$ para todos $x\in X$,
+$y\in Y$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c19:prop-silla"><div class="head">Proposición punto de silla y brecha cero</div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla si y solo si los dos problemas exteriores
+alcanzan su valor en $x^{*}$ y en $y^{*}$ y $p^{*}=d^{*}$; entonces
+$p^{*}=d^{*}=\phi(x^{*},y^{*})$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c19:prop-estructura"><div class="head">Proposición estructura de los puntos de silla</div><div class="body"><p>Si hay algún punto de silla, el conjunto de puntos de silla es un producto
+$X^{*}\times Y^{*}$ de convexos, y $X^{*}$ es un punto si $\phi(\cdot,y)$ es
+estrictamente convexa para $y\in Y^{*}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c19:obs-algebra"><div class="head">Observación todo esto es álgebra</div><div class="body"><p>Ninguno de estos enunciados usa topología, así que son los mismos en $\R^{n}$ y
+en $\Hs$, con la misma demostración.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c19:ej-juego"><div class="head">Ejemplo juego matricial de suma cero</div><div class="body"><p>Para $\phi(x,y)=x\trans Ay$ sobre $\simplex_{n}\times\simplex_{m}$,
+$\max_{y}x\trans Ay=\max_{j}(A\trans x)_{j}$ y
+$\min_{x}x\trans Ay=\min_{i}(Ay)_{i}$.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
