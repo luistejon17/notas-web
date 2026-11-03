@@ -29,6 +29,8 @@
   --abierto:#a05a00; --abierto-bg:#fdf3e6;
   --link:#1d4f87; --shadow:rgba(16,25,40,.15);
   --btn:#eef1f6; --btn-on:#16324f; --btn-on-ink:#ffffff;
+  /* Estados del mapa de resultados (tecla M), los del «proof map» de Camilo. */
+  --m-ok:#1f8a4c; --m-known:#d4622a; --m-todo:#a3abb6; --m-open:#c0392b;
 
   /* Fondo de los paneles (barra, TOC, cuadernos): ligeramente distinto del
      fondo del texto, para que se note donde acaba uno y empieza el otro.
@@ -82,6 +84,8 @@
     --vive:#bda3e6; --vive-bg:#211a2c; --abierto:#e0a55f; --abierto-bg:#2a2015;
     --link:#79a9dd; --shadow:rgba(0,0,0,.55);
     --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
+    --m-ok:#5cc283; --m-known:#e8875a; --m-todo:#59626d; --m-open:#e06c5f;
+    color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
@@ -91,6 +95,8 @@
   --vive:#bda3e6; --vive-bg:#211a2c; --abierto:#e0a55f; --abierto-bg:#2a2015;
   --link:#79a9dd; --shadow:rgba(0,0,0,.55);
   --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
+  --m-ok:#5cc283; --m-known:#e8875a; --m-todo:#59626d; --m-open:#e06c5f;
+  color-scheme:dark;
 }
 
 *{box-sizing:border-box}
@@ -221,6 +227,14 @@ button.term{
 }
 #pop[data-on="true"]{display:block}
 #pop p{margin:0}
+/* Vista previa de una referencia: el enunciado o la ecuacion a la que apunta
+   un (26) o un 3.6, copiada tal cual ya compuesta por MathJax. */
+#pop .pop-eq{display:flex; align-items:center; gap:1em}
+#pop .pop-eq .eqbody{flex:1; min-width:0; overflow-x:auto}
+#pop .pop-eq .num{color:var(--muted)}
+#pop .pop-eq .v[data-on="true"]{display:block}
+#pop .pop-stmt{margin:0; max-height:45vh; overflow:hidden}
+#pop .pop-stmt .proof-btn,#pop .pop-stmt .proof{display:none}
 
 /* Una referencia cuyo destino no existe: se deja el rotulo y se le quita el
    enlace. Un enlace muerto es peor, porque parece que funciona. */
@@ -523,15 +537,63 @@ body.arrastrando #cuadernos{transition:none}
 
 @media (max-width:560px){
   :root{--fs:16px}
-  main{padding:24px 14px 90px}
+  main{padding:24px 16px 90px}
 }
+
+/* --- mapa de resultados ------------------------------------------------ */
+/* Se SOBREPONE a lo que se esta leyendo, con la tecla M o el boton «Mapa», y
+   la misma tecla lo quita. Las posiciones las calcula build.py; las flechas
+   de una caja salen al pasarle el cursor, porque todas a la vez son una
+   madeja. En pantalla estrecha el dibujo no se encoge hasta ser ilegible: el
+   panel se desplaza de lado por dentro. */
+.mapa{
+  position:fixed; inset:0; z-index:70; display:flex;
+  align-items:flex-start; justify-content:center;
+  padding:28px 16px; background:rgba(10,14,20,.42); overflow:auto;
+}
+.mapa[hidden]{display:none}
+/* min-width:0 porque es un hijo flex: sin eso crece hasta el min-width del
+   dibujo y se sale de la pantalla en vez de desplazarse por dentro. El aspa
+   va fuera de la zona que se desplaza, para que no se vaya con el dibujo. */
+.mapa-panel{
+  position:relative; width:100%; min-width:0; max-width:1040px;
+  background:var(--paper); border:1px solid var(--rule); border-radius:12px;
+  box-shadow:0 18px 50px var(--shadow); padding:6px;
+}
+.mapa-scroll{overflow-x:auto}
+.mapa-cerrar{position:absolute; top:12px; right:12px; z-index:1}
+.mapa-svg{display:block; width:100%; min-width:720px; height:auto}
+.mapa-svg text{font-family:"Segoe UI",system-ui,-apple-system,sans-serif; fill:var(--ink)}
+.mapa-svg .mapa-tit{font-size:19px; font-weight:650}
+.mapa-svg .mapa-sub,.mapa-svg .banda-t{font-size:13px; fill:var(--muted)}
+.mapa-svg .banda{fill:var(--raise)}
+.mapa-svg .mn{cursor:pointer; outline:none; transition:opacity .15s}
+.mapa-svg .mn rect{fill:var(--paper); stroke:var(--m-todo); stroke-width:2}
+.mapa-svg .mn.central rect{fill:var(--raise2)}
+.mapa-svg .mn.est-probado rect{stroke:var(--m-ok)}
+.mapa-svg .mn.est-conocido rect{stroke:var(--m-known)}
+.mapa-svg .mn.est-abierto rect{stroke:var(--m-open); stroke-dasharray:5 4}
+.mapa-svg .mn.ley{cursor:default}
+.mapa-svg .mn.ley.central rect{stroke:var(--m-todo)}
+.mapa-svg .mn .t{font-size:14px; font-weight:600}
+.mapa-svg .mn .s{font-size:12px; fill:var(--muted)}
+.mapa-svg .ley-t{font-size:13px; fill:var(--muted)}
+.mapa-svg .mn:focus-visible rect,.mapa-svg .mn.foco rect{stroke-width:3.5}
+.mapa-svg.activo .mn:not(.foco):not(.usa):not(.usado):not(.ley){opacity:.28}
+#mapa-aristas{pointer-events:none}
+.mapa-svg .arista{fill:none; stroke:var(--link); stroke-width:1.6}
+.mapa-svg .arista.sale{stroke:var(--faint); stroke-dasharray:4 3}
+.mapa-svg .punta{fill:var(--link)}
+.mapa-svg .punta-sale{fill:var(--faint)}
+.mapa-svg .flecha-capa{stroke:var(--faint); stroke-width:1.25; fill:none}
+.mapa-svg .punta-capa{fill:var(--faint)}
 
 /* Sin esto, imprimir la pagina imprime tambien la barra de control, el TOC,
    los cuadernos y sus pestanas/tiradores: son navegacion de pantalla, no
    parte de la nota. Las demostraciones plegadas SI se imprimen abiertas,
    porque en papel no hay boton que pulsar. */
 @media print{
-  .bar,#volver,#toc,#cuadernos,.pestana,.tirador{display:none!important}
+  .bar,#volver,#toc,#cuadernos,.pestana,.tirador,.mapa{display:none!important}
   .wrap{display:block}
   main{padding:0; max-width:none}
   .proof{display:block!important}
@@ -601,6 +663,7 @@ window.MathJax = {
     <span class="val" id="s-val">17</span>
   </div>
   <button class="plain" id="b-all">Abrir todas las demostraciones</button>
+
   <button class="plain icon" id="b-bar" aria-controls="barra" aria-expanded="true"
           aria-label="Ocultar la barra" title="Ocultar la barra">&#9650;</button>
 </div>
@@ -3661,21 +3724,25 @@ $x$. Se definen</p>
 \]</div></div></div>
 <div class="stmt proposicion" id="clase-c19:prop-minmax"><div class="head">Proposición desigualdad min-max</div><div class="body"><p>$d^{*}\le p^{*}$, y vale para cualquier $\phi$ y cualesquiera $X$, $Y$ no
 vacíos.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p148">Ver demostración</button><div class="proof" id="clase-convexa-p148"><p>Para todos $x\in X$ e $y\in Y$,
-$\inf_{u\in X}\phi(u,y)\le\phi(x,y)\le\sup_{v\in Y}\phi(x,v)$. El extremo
-izquierdo no depende de $x$ y el derecho no depende de $y$: se toma el supremo
-en $y$ a la izquierda y después el ínfimo en $x$ a la derecha.</p></div>
-<div class="stmt definicion" id="clase-c19:def-silla"><div class="head">Definición punto de silla<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$(x^{*},y^{*})\in X\times Y$ es un <span class="df">punto de silla</span> de $\phi$ si</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p148">Ver demostración</button><div class="proof" id="clase-convexa-p148"><p>Para todos $\bar{x}\in X$ e $\bar{y}\in Y$,
+$\inf_{x\in X}\phi(x,\bar{y})\le\phi(\bar{x},\bar{y})\le\sup_{y\in Y}\phi(\bar{x},y)$.
+El extremo izquierdo no depende de $\bar{x}$ y el derecho no depende de
+$\bar{y}$: se toma el supremo en $\bar{y}$ a la izquierda y después el ínfimo
+en $\bar{x}$ a la derecha.</p></div>
+<div class="stmt definicion" id="clase-c19:def-silla"><div class="head">Definición punto de silla</div><div class="body"><p>$(x^{*},y^{*})\in X\times Y$ es un <span class="df">punto de silla</span> de $\phi$ si</p>
 <div class="display">\[
   \phi(x^{*},y)\le\phi(x^{*},y^{*})\le\phi(x,y^{*})
   \qquad\text{para todos }x\in X,\ y\in Y .
 \]</div></div></div>
-<div class="stmt proposicion" id="clase-c19:prop-silla"><div class="head">Proposición punto de silla y brecha cero<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla si y solo si $x^{*}$ alcanza el ínfimo que
-define $p^{*}$, $y^{*}$ alcanza el supremo que define $d^{*}$ y $p^{*}=d^{*}$.
-En ese caso $p^{*}=d^{*}=\phi(x^{*},y^{*})$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p149">Ver demostración</button><div class="proof" id="clase-convexa-p149"><p>Si es punto de silla,
-$p^{*}\le\sup_{y}\phi(x^{*},y)=\phi(x^{*},y^{*})=\inf_{x}\phi(x,y^{*})\le d^{*}$,
-y con la desigualdad min-max todo es igual. Recíprocamente, si
+<div class="stmt proposicion" id="clase-c19:prop-silla"><div class="head">Proposición punto de silla y brecha cero</div><div class="body"><p>Si $(x^{*},y^{*})$ es un punto de silla, entonces $p^{*}=d^{*}=\phi(x^{*},y^{*})$,
+y $x^{*}$ e $y^{*}$ alcanzan el ínfimo que define $p^{*}$ y el supremo que
+define $d^{*}$. Recíprocamente, si $x^{*}$ e $y^{*}$ los alcanzan y
+$p^{*}=d^{*}$, entonces $(x^{*},y^{*})$ es un punto de silla.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p149">Ver demostración</button><div class="proof" id="clase-convexa-p149"><p>Si es punto de silla,</p>
+<div class="display">\[
+  p^{*}\le\sup_{y}\phi(x^{*},y)=\phi(x^{*},y^{*})=\inf_{x}\phi(x,y^{*})\le d^{*},
+\]</div>
+<p>y con la desigualdad min-max todo es igual. Recíprocamente, si
 $S=\sup_{y}\phi(x^{*},y)=p^{*}=d^{*}=\inf_{x}\phi(x,y^{*})$, entonces para todos
 $x$ e $y$</p>
 <div class="display">\[
@@ -3688,23 +3755,169 @@ $\phi(\cdot,y)$ es estrictamente convexa para cada $y\in Y^{*}$, $X^{*}$ tiene
 un solo punto, y lo análogo vale para $Y^{*}$ con concavidad estricta.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p150">Ver demostración</button><div class="proof" id="clase-convexa-p150"><p>Hay un punto de silla, así que $p^{*}=d^{*}$, y por la proposición anterior el
 conjunto de puntos de silla es el producto de los minimizadores de
-$\Phi(x)=\sup_{y}\phi(x,y)$ por los maximizadores de
-$\Psi(y)=\inf_{x}\phi(x,y)$. $\Phi$ es convexa por ser un supremo de convexas,
-así que $X^{*}=\{x:\Phi(x)\le p^{*}\}$ es convexo, y lo mismo $Y^{*}$ con $\Psi$
+$P(x)=\sup_{y}\phi(x,y)$ por los maximizadores de
+$D(y)=\inf_{x}\phi(x,y)$. $P$ es convexa por ser un supremo de convexas,
+así que $X^{*}=\{x:P(x)\le p^{*}\}$ es convexo, y lo mismo $Y^{*}$ con $D$
 cóncava. Si $y^{*}\in Y^{*}$, todo $x\in X^{*}$ minimiza $\phi(\cdot,y^{*})$,
 porque $(x,y^{*})$ es punto de silla, y una función estrictamente convexa tiene a
 lo sumo un minimizador.</p></div>
-<div class="stmt ejemplo" id="clase-c19:ej-juego"><div class="head">Ejemplo juego matricial de suma cero<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $A$ una matriz $n\times m$ y $\phi(x,y)=x\trans Ay$ sobre
-$\simplex_{n}\times\simplex_{m}$, los símplex de probabilidad. Es el juego de
-suma cero en estrategias mixtas, y</p>
+<h3 id="clase-convexa-x34">El teorema minimax de Sion</h3>
+<div class="stmt lema" id="clase-c19:lem-max-finito"><div class="head">Lema el máximo de finitas convexas</div><div class="body"><p>Sean $X\subset\R^{n}$ convexo y compacto y $f_{1},\dots,f_{k}:X\to\R$ convexas
+y continuas, y sea $\alpha=\min_{x\in X}\max_{i}f_{i}(x)$. Existe
+$\lambda\in\simplex_{k}$ con</p>
 <div class="display">\[
-  \max_{y\in\simplex_{m}}x\trans Ay=\max_{j}\,(A\trans x)_{j},
-  \qquad
-  \min_{x\in\simplex_{n}}x\trans Ay=\min_{i}\,(Ay)_{i}.
+  \alpha=\min_{x\in X}\ \sum_{i=1}^{k}\lambda_{i}f_{i}(x).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p151">Ver demostración</button><div class="proof" id="clase-convexa-p151"><p>$x\trans Ay=\sum_{j}(A\trans x)_{j}y_{j}$ es un promedio de las
-$(A\trans x)_{j}$ con pesos $y_{j}$, así que no supera a la mayor, y la alcanza
-en el vértice $e_{j}$ correspondiente. Lo otro es igual.</p></div></section></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p151">Ver demostración</button><div class="proof" id="clase-convexa-p151"><p>Sea $C=\{u\in\R^{k}:\ \text{existe }x\in X\text{ con }f_{i}(x)\le u_{i},\ i=1,\dots,k\}$.
+Es convexo: si $f_{i}(x)\le v_{i}$ y $f_{i}(z)\le w_{i}$, el punto
+$\bar{x}=\theta x+(1-\theta)z\in X$ cumple
+$f_{i}(\bar{x})\le\theta f_{i}(x)+(1-\theta)f_{i}(z)\le\theta v_{i}+(1-\theta)w_{i}$.
+El conjunto $\mathcal{U}=\{u\in\R^{k}:u_{i}&lt;\alpha,\ i=1,\dots,k\}$ es convexo y
+abierto, y no corta a $C$: un $u$ en los dos daría un $x$ con
+$\max_{i}f_{i}(x)&lt;\alpha$. Por la separación de dos convexos hay $\lambda\neq0$
+con</p>
+<div class="display">\[
+  \ip{\lambda}{u}\le\ip{\lambda}{v}\qquad\text{para todos }u\in\mathcal{U},\ v\in C .
+\]</div>
+<p>Como $C$ es estable al aumentar una coordenada, $\lambda\ge0$ (si
+$\lambda_{i}&lt;0$, el lado derecho con $v+te_{i}$ tiende a $-\infty$), y
+normalizando, $\lambda\in\simplex_{k}$. Haciendo tender $u$ a
+$(\alpha,\dots,\alpha)$ y tomando $v=(f_{1}(x),\dots,f_{k}(x))\in C$, queda
+$\alpha\le\sum_{i}\lambda_{i}f_{i}(x)$ para todo $x\in X$. Y
+$\sum_{i}\lambda_{i}f_{i}(x)\le\max_{i}f_{i}(x)$, así que en el minimizador de
+$\max_{i}f_{i}$ se alcanza $\alpha$.</p></div>
+<div class="stmt teorema" id="clase-c19:teo-sion"><div class="head">Teorema de Sion, versión compacta</div><div class="body"><p>Si además $X$ e $Y$ son compactos y $\phi$ es continua en $X\times Y$, entonces</p>
+<div class="display">\[
+  \min_{x\in X}\ \max_{y\in Y}\ \phi(x,y)=\max_{y\in Y}\ \min_{x\in X}\ \phi(x,y),
+\]</div>
+<p>y existe un punto de silla.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p152">Ver demostración</button><div class="proof" id="clase-convexa-p152"><p>Sean $P(x)=\max_{y}\phi(x,y)$ y $D(y)=\min_{x}\phi(x,y)$. Como $\phi$ es
+uniformemente continua en el compacto $X\times Y$, $P$ y $D$ son continuas, y
+alcanzan su mínimo en algún $x^{*}$ y su máximo en algún $y^{*}$. Si fuera
+$p^{*}&gt;d^{*}$, sea $t$ con $p^{*}&gt;t&gt;d^{*}$. Para cada $x\in X$ hay $y$ con
+$\phi(x,y)&gt;t$, así que los abiertos $U_{y}=\{x\in X:\phi(x,y)&gt;t\}$ cubren $X$,
+y por compacidad bastan $U_{y_{1}},\dots,U_{y_{k}}$. Con
+$f_{i}=\phi(\cdot,y_{i})$, convexas y continuas, es $\max_{i}f_{i}(x)&gt;t$ para
+todo $x$, luego $\beta=\min_{x}\max_{i}f_{i}(x)&gt;t$, y el lema da
+$\lambda\in\simplex_{k}$ con $\sum_{i}\lambda_{i}f_{i}(x)\ge\beta$ para todo
+$x$. Sea $\bar{y}=\sum_{i}\lambda_{i}y_{i}\in Y$. Por la concavidad en $y$,</p>
+<div class="display">\[
+  \phi(x,\bar{y})\ge\sum_{i=1}^{k}\lambda_{i}\phi(x,y_{i})\ge\beta&gt;t
+  \qquad\text{para todo }x\in X,
+\]</div>
+<p>así que $d^{*}\ge D(\bar{y})\ge\beta&gt;t$, contra la elección de $t$. Luego
+$p^{*}=d^{*}$, y por la proposición del punto de silla $(x^{*},y^{*})$ lo es.</p></div>
+<div class="stmt observacion" id="clase-c19:obs-sion-original"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La versión original de Sion pide menos: basta que uno de los dos conjuntos sea
+compacto, la continuidad puede cambiarse por semicontinuidad de un lado en cada
+variable, y la convexidad y la concavidad por cuasiconvexidad y
+cuasiconcavidad.</p></div></div>
+<div class="stmt observacion" id="clase-c19:obs-sion-slater"><div class="head">Observación Sion no sustituye a Slater<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En el Lagrangiano los multiplicadores viven en $\R^{m}_{+}\times\R^{p}$, que no
+es compacto, y el Lagrangiano puede valer $\infty$. Por eso la dualidad fuerte
+del capítulo anterior se probó con la función de valor y Slater, no con un
+teorema minimax: son dos formas emparentadas, pero distintas, de que no haya
+brecha.</p></div></div>
+<div class="stmt ejemplo" id="clase-c19:ej-juego"><div class="head">Ejemplo juego matricial de suma cero</div><div class="body"><p>Sea $A$ una matriz $n\times m$. El jugador $J_{1}$ escoge una fila $i$, el
+jugador $J_{2}$ una columna $j$, y $J_{2}$ gana $A_{ij}$: $J_{1}$ quiere
+minimizar lo que gana $J_{2}$, y $J_{2}$ maximizarlo. Con estrategias puras,</p>
+<div class="display">\[
+  \max_{j}\ \min_{i}\ e_{i}\trans Ae_{j}\le\min_{i}\ \max_{j}\ e_{i}\trans Ae_{j},
+\]</div>
+<p>y la desigualdad puede ser estricta: con
+$A=</p>
+<div class="display">\begin{pmatrix}1&amp;-1\\-1&amp;1\end{pmatrix}</div>
+<p>$ el lado izquierdo vale $-1$ y el
+derecho $1$.</p></div></div>
+<div class="stmt corolario" id="clase-c19:cor-von-neumann"><div class="head">Corolario teorema minimax de von Neumann</div><div class="body"><p>Si los jugadores aleatorizan su decisión,</p>
+<div class="display">\[
+  \min_{x\in\simplex_{n}}\ \max_{y\in\simplex_{m}}\ x\trans Ay
+  =\max_{y\in\simplex_{m}}\ \min_{x\in\simplex_{n}}\ x\trans Ay .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p153">Ver demostración</button><div class="proof" id="clase-convexa-p153"><p>Los símplex son convexos y compactos, y $x\trans Ay$ es continua y lineal en
+cada variable. Es el teorema de Sion.</p></div>
+<div class="stmt observacion" id="clase-c19:obs-juego-vertices"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\max_{y\in\simplex_{m}}x\trans Ay=\max_{j}(A\trans x)_{j}$ y
+$\min_{x\in\simplex_{n}}x\trans Ay=\min_{i}(Ay)_{i}$, porque
+$x\trans Ay=\sum_{j}(A\trans x)_{j}y_{j}$ es un promedio de las $(A\trans x)_{j}$
+con pesos $y_{j}$, que no supera a la mayor y la alcanza en el vértice $e_{j}$
+correspondiente.</p></div></div>
+<h3 id="clase-convexa-x35">Funciones primal y dual, y la brecha</h3>
+<div class="stmt definicion" id="clase-c19:def-primal-dual"><div class="head">Definición funciones primal y dual</div><div class="body"><p>$P(x)=\sup_{y\in Y}\phi(x,y)$ y $D(y)=\inf_{x\in X}\phi(x,y)$, con valores en
+$(-\infty,\infty]$ y $[-\infty,\infty)$.</p></div></div>
+<div class="stmt proposicion" id="clase-c19:prop-primal-dual"><div class="head">Proposición las dos funciones y los dos valores</div><div class="body"><p>$P$ es convexa, $D$ es cóncava, y $p^{*}=\inf_{X}P\ge d^{*}=\sup_{Y}D$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p154">Ver demostración</button><div class="proof" id="clase-convexa-p154"><p>Un supremo de convexas es convexo y un ínfimo de cóncavas es cóncavo. Lo demás
+es la definición y la desigualdad min-max.</p></div>
+<div class="stmt definicion" id="clase-c19:def-brecha"><div class="head">Definición brecha primal-dual</div><div class="body"><p>Para $(x,y)\in X\times Y$, la <span class="df">brecha primal-dual</span> es
+$\mathcal{G}(x,y)=P(x)-D(y)\ge0$.</p></div></div>
+<div class="stmt proposicion" id="clase-c19:prop-brecha-cero"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\phi$ tiene algún punto de silla, $\mathcal{G}(x,y)=0$ si y solo si $(x,y)$
+es un punto de silla. La brecha certifica a la vez la optimalidad primal y la
+dual.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p155">Ver demostración</button><div class="proof" id="clase-convexa-p155"><p>Hay silla, así que $p^{*}=d^{*}$, y $D(y)\le d^{*}=p^{*}\le P(x)$. La brecha es
+cero si y solo si $P(x)=p^{*}$ y $D(y)=d^{*}$, que por la proposición del punto
+de silla es serlo.</p></div>
+<div class="stmt observacion" id="clase-c19:obs-brecha-restringida"><div class="head">Observación brecha restringida<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X$ o $Y$ no son acotados, $\mathcal{G}$ puede ser infinita aun cerca de la
+solución. Para analizar algoritmos se usa la brecha restringida
+$\mathcal{G}_{X_{0},Y_{0}}(x,y)=\sup_{v\in Y_{0}}\phi(x,v)-\inf_{u\in X_{0}}\phi(u,y)$,
+con $X_{0}\subset X$ e $Y_{0}\subset Y$ acotados que contengan las soluciones.</p></div></div>
+<div class="stmt ejemplo" id="clase-c19:ej-brecha-juego"><div class="head">Ejemplo la brecha del juego matricial<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En el juego matricial,
+$\mathcal{G}(x,y)=\max_{j}(A\trans x)_{j}-\min_{i}(Ay)_{i}$, que evalúa un par de
+estrategias sin conocer el valor del juego.</p></div></div>
+<h3 id="clase-convexa-x36">Desigualdades variacionales y operadores monótonos</h3>
+<div class="stmt definicion" id="clase-c19:def-operador"><div class="head">Definición el operador de un problema min-max</div><div class="body"><p>Si $\phi$ es diferenciable en un abierto que contiene a $Z=X\times Y$, para
+$z=(x,y)$ se define</p>
+<div class="display">\[
+  F(z)=\begin{pmatrix}\nabla_{x}\phi(x,y)\\-\nabla_{y}\phi(x,y)\end{pmatrix}.
+\]</div></div></div>
+<div class="stmt proposicion" id="clase-c19:prop-vi"><div class="head">Proposición punto de silla como desigualdad variacional</div><div class="body"><p>$z^{*}=(x^{*},y^{*})\in Z$ es un punto de silla si y solo si</p>
+<div class="display">\[
+  \ip{F(z^{*})}{z-z^{*}}\ge0\qquad\text{para todo }z\in Z .
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p156">Ver demostración</button><div class="proof" id="clase-convexa-p156"><p>Una función convexa $f$, diferenciable, alcanza su mínimo sobre un convexo $X$
+en $x^{*}$ si y solo si $\ip{\nabla f(x^{*})}{x-x^{*}}\ge0$ para todo $x\in X$:
+si es mínimo, esa es la derivada direccional hacia $x$, que no puede ser
+negativa; y si la desigualdad vale,
+$f(x)\ge f(x^{*})+\ip{\nabla f(x^{*})}{x-x^{*}}\ge f(x^{*})$. Ser punto de
+silla es que $x^{*}$ minimice $\phi(\cdot,y^{*})$ sobre $X$ e $y^{*}$ minimice
+$-\phi(x^{*},\cdot)$ sobre $Y$, es decir</p>
+<div class="display">\[
+  \ip{\nabla_{x}\phi(x^{*},y^{*})}{x-x^{*}}\ge0
+  \qquad\text{y}\qquad
+  \ip{-\nabla_{y}\phi(x^{*},y^{*})}{y-y^{*}}\ge0
+\]</div>
+<p>para todos $x\in X$, $y\in Y$. Sumándolas sale la desigualdad, y tomando en ella
+$z=(x,y^{*})$ o $z=(x^{*},y)$ salen las dos.</p></div>
+<div class="stmt observacion" id="clase-c19:obs-vi-normal"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Por la definición del cono normal, la desigualdad variacional es
+$0\in F(z^{*})+\Ncono_{Z}(z^{*})$.</p></div></div>
+<div class="stmt definicion" id="clase-c19:def-monotono"><div class="head">Definición operador monótono</div><div class="body"><p>$F:Z\to\R^{n+m}$ es <span class="df">monótono</span> si</p>
+<div class="display">\[
+  \ip{F(z)-F(w)}{z-w}\ge0\qquad\text{para todos }z,w\in Z,
+\]</div>
+<p>y <span class="df">$\mu$-fuertemente monótono</span>, con $\mu&gt;0$, si el lado izquierdo es al
+menos $\mu\norm{z-w}^{2}$.</p></div></div>
+<div class="stmt proposicion" id="clase-c19:prop-monotono"><div class="head">Proposición convexo-cóncava da monótono<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El operador de un problema min-max es monótono. Si $\phi$ es
+$\mu_{x}$-fuertemente convexa en $x$ y $\mu_{y}$-fuertemente cóncava en $y$,
+es $\min\{\mu_{x},\mu_{y}\}$-fuertemente monótono.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p157">Ver demostración</button><div class="proof" id="clase-convexa-p157"><p>Sean $z=(x,y)$ y $w=(u,v)$. Por la caracterización de primer orden de la
+convexidad en $x$ y de la concavidad en $y$,</p>
+<div class="display">\[
+  \begin{aligned}
+  \phi(u,y)&amp;\ge\phi(x,y)+\ip{\nabla_{x}\phi(x,y)}{u-x}, &amp;
+  \phi(x,v)&amp;\ge\phi(u,v)+\ip{\nabla_{x}\phi(u,v)}{x-u},\\
+  \phi(x,v)&amp;\le\phi(x,y)+\ip{\nabla_{y}\phi(x,y)}{v-y}, &amp;
+  \phi(u,y)&amp;\le\phi(u,v)+\ip{\nabla_{y}\phi(u,v)}{y-v}.
+  \end{aligned}
+\]</div>
+<p>Sumando las dos de arriba y, por separado, las dos de abajo, en los dos casos
+aparece la misma $S=\phi(u,y)-\phi(x,y)+\phi(x,v)-\phi(u,v)$, y queda</p>
+<div class="display">\[
+  -\ip{\nabla_{x}\phi(z)-\nabla_{x}\phi(w)}{x-u}\le S\le-\ip{\nabla_{y}\phi(z)-\nabla_{y}\phi(w)}{y-v},
+\]</div>
+<p>que es $\ip{F(z)-F(w)}{z-w}\ge0$. Con convexidad fuerte cada desigualdad de
+arriba gana $\frac{\mu_{x}}{2}\norm{u-x}^{2}$ y cada una de abajo
+$\frac{\mu_{y}}{2}\norm{v-y}^{2}$, y la cuenta da
+$\ip{F(z)-F(w)}{z-w}\ge\mu_{x}\norm{x-u}^{2}+\mu_{y}\norm{y-v}^{2}\ge\min\{\mu_{x},\mu_{y}\}\norm{z-w}^{2}$.</p></div>
+<div class="stmt definicion" id="clase-c19:def-vi"><div class="head">Definición desigualdad variacional<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Dados un convexo cerrado $Z$ y un operador monótono $F$, el problema de
+<span class="df">desigualdad variacional</span> es hallar $z^{*}\in Z$ con
+$\ip{F(z^{*})}{z-z^{*}}\ge0$ para todo $z\in Z$. Es más general que el
+problema min-max, y permite analizar algoritmos sin usar una $\phi$.</p></div></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -6316,12 +6529,13 @@ definen</p>
 \]</div></div></div>
 <div class="stmt proposicion" id="general-c19:prop-minmax"><div class="head">Proposición desigualdad min-max</div><div class="body"><p>$d^{*}\le p^{*}$, para cualquier $\phi$ y cualesquiera conjuntos $X$, $Y$ no
 vacíos.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p140">Ver demostración</button><div class="proof" id="general-convexa-p140"><p>$\inf_{u}\phi(u,y)\le\phi(x,y)\le\sup_{v}\phi(x,v)$; se toma el supremo en $y$
-a la izquierda y el ínfimo en $x$ a la derecha.</p></div>
-<div class="stmt definicion" id="general-c19:def-silla"><div class="head">Definición punto de silla<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$(x^{*},y^{*})\in X\times Y$ es un <span class="df">punto de silla</span> de $\phi$ si
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p140">Ver demostración</button><div class="proof" id="general-convexa-p140"><p>$\inf_{x}\phi(x,\bar{y})\le\phi(\bar{x},\bar{y})\le\sup_{y}\phi(\bar{x},y)$; se
+toma el supremo en $\bar{y}$ a la izquierda y el ínfimo en $\bar{x}$ a la
+derecha.</p></div>
+<div class="stmt definicion" id="general-c19:def-silla"><div class="head">Definición punto de silla</div><div class="body"><p>$(x^{*},y^{*})\in X\times Y$ es un <span class="df">punto de silla</span> de $\phi$ si
 $\phi(x^{*},y)\le\phi(x^{*},y^{*})\le\phi(x,y^{*})$ para todos $x\in X$,
 $y\in Y$.</p></div></div>
-<div class="stmt proposicion" id="general-c19:prop-silla"><div class="head">Proposición punto de silla y brecha cero<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla si y solo si $x^{*}$ alcanza el ínfimo que
+<div class="stmt proposicion" id="general-c19:prop-silla"><div class="head">Proposición punto de silla y brecha cero</div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla si y solo si $x^{*}$ alcanza el ínfimo que
 define $p^{*}$, $y^{*}$ alcanza el supremo que define $d^{*}$ y $p^{*}=d^{*}$, y
 entonces $p^{*}=d^{*}=\phi(x^{*},y^{*})$.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p141">Ver demostración</button><div class="proof" id="general-convexa-p141"><p>Si es punto de silla,
@@ -6333,16 +6547,86 @@ primeras y segundas componentes son convexos y el conjunto de puntos de silla es
 $X^{*}\times Y^{*}$. Si $\phi(\cdot,y)$ es estrictamente convexa para
 $y\in Y^{*}$, $X^{*}$ tiene un solo punto, y lo análogo vale para $Y^{*}$.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p142">Ver demostración</button><div class="proof" id="general-convexa-p142"><p>Por la proposición anterior, los puntos de silla son
-$\argmin\Phi\times\argmax\Psi$, con $\Phi(x)=\sup_{y}\phi(x,y)$ convexa y
-$\Psi(y)=\inf_{x}\phi(x,y)$ cóncava, y esos conjuntos son de nivel, luego
+$\argmin P\times\argmax D$, con $P(x)=\sup_{y}\phi(x,y)$ convexa y
+$D(y)=\inf_{x}\phi(x,y)$ cóncava, y esos conjuntos son de nivel, luego
 convexos. Si $y^{*}\in Y^{*}$, todo $x\in X^{*}$ minimiza la función
 estrictamente convexa $\phi(\cdot,y^{*})$, que tiene a lo sumo un minimizador.</p></div>
-<div class="stmt ejemplo" id="general-c19:ej-juego"><div class="head">Ejemplo juego matricial de suma cero<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $A$ una matriz $n\times m$ y $\phi(x,y)=x\trans Ay$ sobre
-$\simplex_{n}\times\simplex_{m}$. Entonces
-$\max_{y\in\simplex_{m}}x\trans Ay=\max_{j}(A\trans x)_{j}$ y
-$\min_{x\in\simplex_{n}}x\trans Ay=\min_{i}(Ay)_{i}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p143">Ver demostración</button><div class="proof" id="general-convexa-p143"><p>Una función lineal sobre el símplex es un promedio de sus valores en los
-vértices, y alcanza su máximo y su mínimo en uno de ellos.</p></div></section></div>
+<h3 id="general-convexa-x30">El teorema minimax de Sion</h3>
+<div class="stmt lema" id="general-c19:lem-max-finito"><div class="head">Lema el máximo de finitas convexas</div><div class="body"><p>Sean $X\subset\Hs$ convexo y compacto y $f_{1},\dots,f_{k}:X\to\R$ convexas y
+continuas, y sea $\alpha=\min_{x\in X}\max_{i}f_{i}(x)$. Existe
+$\lambda\in\simplex_{k}$ con $\alpha=\min_{x\in X}\sum_{i}\lambda_{i}f_{i}(x)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p143">Ver demostración</button><div class="proof" id="general-convexa-p143"><p>La prueba de dimensión finita pasa sin cambios, porque la separación que usa
+es en $\R^{k}$: el conjunto
+$C=\{u\in\R^{k}:\exists x\in X,\ f_{i}(x)\le u_{i}\ \forall i\}$ es convexo,
+no corta al abierto convexo $\{u:u_{i}&lt;\alpha\ \forall i\}$, y un hiperplano
+que los separa tiene normal $\lambda\ge0$, que normalizada da
+$\alpha\le\sum_{i}\lambda_{i}f_{i}(x)\le\max_{i}f_{i}(x)$ para todo $x$.</p></div>
+<div class="stmt teorema" id="general-c19:teo-sion"><div class="head">Teorema de Sion, versión compacta</div><div class="body"><p>Si además $X$ e $Y$ son compactos y $\phi$ es continua en $X\times Y$, entonces
+$\min_{x\in X}\max_{y\in Y}\phi(x,y)=\max_{y\in Y}\min_{x\in X}\phi(x,y)$, y
+existe un punto de silla.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p144">Ver demostración</button><div class="proof" id="general-convexa-p144"><p>Es la de dimensión finita: solo usa compacidad, continuidad y el lema. $P$ y $D$
+son continuas por la continuidad uniforme de $\phi$ en el compacto $X\times Y$,
+y alcanzan sus valores. Si $p^{*}&gt;t&gt;d^{*}$, los abiertos
+$\{x:\phi(x,y)&gt;t\}$ cubren $X$, bastan finitos $y_{1},\dots,y_{k}$, el lema da
+$\lambda\in\simplex_{k}$ con $\sum_{i}\lambda_{i}\phi(x,y_{i})\ge\beta&gt;t$ para
+todo $x$, y la concavidad da $D(\sum_{i}\lambda_{i}y_{i})&gt;t$, contra $t&gt;d^{*}$.</p></div>
+<div class="stmt observacion" id="general-c19:obs-sion-original"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La versión original de Sion pide menos: un solo conjunto compacto,
+semicontinuidad de un lado en cada variable, y cuasiconvexidad y
+cuasiconcavidad.</p></div></div>
+<div class="stmt observacion" id="general-c19:obs-sion-slater"><div class="head">Observación Sion no sustituye a Slater<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Los multiplicadores de un Lagrangiano viven en un conjunto no compacto y el
+Lagrangiano puede valer $\infty$, así que la dualidad fuerte del capítulo
+anterior no sale de este teorema.</p></div></div>
+<div class="stmt ejemplo" id="general-c19:ej-juego"><div class="head">Ejemplo juego matricial de suma cero</div><div class="body"><p>Si $J_{1}$ escoge la fila $i$ de una matriz $A$ de tamaño $n\times m$, $J_{2}$
+la columna $j$, y $J_{2}$ gana $A_{ij}$, entonces
+$\max_{j}\min_{i}A_{ij}\le\min_{i}\max_{j}A_{ij}$, y puede ser estricta: con
+$A=</p>
+<div class="display">\begin{pmatrix}1&amp;-1\\-1&amp;1\end{pmatrix}</div>
+<p>$ vale $-1&lt;1$.</p></div></div>
+<div class="stmt corolario" id="general-c19:cor-von-neumann"><div class="head">Corolario teorema minimax de von Neumann</div><div class="body"><p>$\min_{x\in\simplex_{n}}\max_{y\in\simplex_{m}}x\trans Ay=\max_{y\in\simplex_{m}}\min_{x\in\simplex_{n}}x\trans Ay$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p145">Ver demostración</button><div class="proof" id="general-convexa-p145"><p>Es el teorema de Sion sobre dos símplex.</p></div>
+<div class="stmt observacion" id="general-c19:obs-juego-vertices"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\max_{y\in\simplex_{m}}x\trans Ay=\max_{j}(A\trans x)_{j}$ y
+$\min_{x\in\simplex_{n}}x\trans Ay=\min_{i}(Ay)_{i}$: una función lineal sobre el
+símplex alcanza su máximo y su mínimo en un vértice.</p></div></div>
+<h3 id="general-convexa-x31">Funciones primal y dual, y la brecha</h3>
+<div class="stmt definicion" id="general-c19:def-primal-dual"><div class="head">Definición funciones primal y dual</div><div class="body"><p>$P(x)=\sup_{y\in Y}\phi(x,y)$ y $D(y)=\inf_{x\in X}\phi(x,y)$.</p></div></div>
+<div class="stmt proposicion" id="general-c19:prop-primal-dual"><div class="head">Proposición las dos funciones y los dos valores</div><div class="body"><p>$P$ es convexa, $D$ es cóncava, y $p^{*}=\inf_{X}P\ge d^{*}=\sup_{Y}D$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p146">Ver demostración</button><div class="proof" id="general-convexa-p146"><p>Supremo de convexas e ínfimo de cóncavas, y la desigualdad min-max.</p></div>
+<div class="stmt definicion" id="general-c19:def-brecha"><div class="head">Definición brecha primal-dual</div><div class="body"><p>$\mathcal{G}(x,y)=P(x)-D(y)\ge0$ para $(x,y)\in X\times Y$.</p></div></div>
+<div class="stmt proposicion" id="general-c19:prop-brecha-cero"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\phi$ tiene algún punto de silla, $\mathcal{G}(x,y)=0$ si y solo si $(x,y)$
+es un punto de silla.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p147">Ver demostración</button><div class="proof" id="general-convexa-p147"><p>$D(y)\le d^{*}=p^{*}\le P(x)$, y la brecha es cero si y solo si las dos son
+igualdades.</p></div>
+<div class="stmt observacion" id="general-c19:obs-brecha-restringida"><div class="head">Observación brecha restringida<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X$ o $Y$ no son acotados se usa
+$\mathcal{G}_{X_{0},Y_{0}}(x,y)=\sup_{v\in Y_{0}}\phi(x,v)-\inf_{u\in X_{0}}\phi(u,y)$
+con $X_{0}$, $Y_{0}$ acotados que contengan las soluciones.</p></div></div>
+<div class="stmt ejemplo" id="general-c19:ej-brecha-juego"><div class="head">Ejemplo la brecha del juego matricial<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\mathcal{G}(x,y)=\max_{j}(A\trans x)_{j}-\min_{i}(Ay)_{i}$.</p></div></div>
+<h3 id="general-convexa-x32">Desigualdades variacionales y operadores monótonos</h3>
+<div class="stmt definicion" id="general-c19:def-operador"><div class="head">Definición el operador de un problema min-max</div><div class="body"><p>Si $\phi$ es diferenciable en un abierto que contiene a $Z=X\times Y$, en
+$\Hs\times\Ks$ se define $F(x,y)=(\nabla_{x}\phi(x,y),-\nabla_{y}\phi(x,y))$.</p></div></div>
+<div class="stmt proposicion" id="general-c19:prop-vi"><div class="head">Proposición punto de silla como desigualdad variacional</div><div class="body"><p>$z^{*}\in Z$ es un punto de silla si y solo si $\ip{F(z^{*})}{z-z^{*}}\ge0$
+para todo $z\in Z$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p148">Ver demostración</button><div class="proof" id="general-convexa-p148"><p>Para $f$ convexa y diferenciable, $x^{*}$ minimiza $f$ sobre el convexo $X$ si y
+solo si $\ip{\nabla f(x^{*})}{x-x^{*}}\ge0$ para todo $x\in X$, por la derivada
+direccional y la desigualdad del gradiente. Se aplica en $x$ y en $y$, y se
+suma o se separa.</p></div>
+<div class="stmt observacion" id="general-c19:obs-vi-normal"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Es $0\in F(z^{*})+\Ncono_{Z}(z^{*})$.</p></div></div>
+<div class="stmt definicion" id="general-c19:def-monotono"><div class="head">Definición operador monótono</div><div class="body"><p>$F:Z\to\Hs\times\Ks$ es <span class="df">monótono</span> si</p>
+<div class="display">\[
+  \ip{F(z)-F(w)}{z-w}\ge0\qquad\text{para todos }z,w\in Z,
+\]</div>
+<p>y <span class="df">$\mu$-fuertemente monótono</span> si el lado izquierdo es al menos
+$\mu\norm{z-w}^{2}$.</p></div></div>
+<div class="stmt proposicion" id="general-c19:prop-monotono"><div class="head">Proposición convexo-cóncava da monótono<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El operador de un problema min-max es monótono, y
+$\min\{\mu_{x},\mu_{y}\}$-fuertemente monótono si $\phi$ es
+$\mu_{x}$-fuertemente convexa en $x$ y $\mu_{y}$-fuertemente cóncava en $y$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p149">Ver demostración</button><div class="proof" id="general-convexa-p149"><p>Son las cuatro desigualdades del gradiente en $(x,y)$ y $(u,v)$, dos de
+convexidad en $x$ y dos de concavidad en $y$: sumadas de dos en dos acotan la
+misma combinación de valores de $\phi$ por los dos lados, y eso es
+$\ip{F(z)-F(w)}{z-w}\ge0$, con $\mu_{x}\norm{x-u}^{2}+\mu_{y}\norm{y-v}^{2}$ a la
+derecha en el caso fuerte.</p></div>
+<div class="stmt definicion" id="general-c19:def-vi"><div class="head">Definición desigualdad variacional<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Dados un convexo cerrado $Z$ y un operador monótono $F$, el problema de
+<span class="df">desigualdad variacional</span> es hallar $z^{*}\in Z$ con
+$\ip{F(z^{*})}{z-z^{*}}\ge0$ para todo $z\in Z$.</p></div></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -7827,11 +8111,46 @@ $p^{*}=d^{*}=\phi(x^{*},y^{*})$.</p></div></div>
 <div class="stmt proposicion" id="ambas-c19:prop-estructura"><div class="head">Proposición estructura de los puntos de silla</div><div class="body"><p>Si hay algún punto de silla, el conjunto de puntos de silla es un producto
 $X^{*}\times Y^{*}$ de convexos, y $X^{*}$ es un punto si $\phi(\cdot,y)$ es
 estrictamente convexa para $y\in Y^{*}$.</p></div></div>
-<div class="stmt observacion" id="ambas-c19:obs-algebra"><div class="head">Observación todo esto es álgebra</div><div class="body"><p>Ninguno de estos enunciados usa topología, así que son los mismos en $\R^{n}$ y
+<div class="stmt observacion" id="ambas-c19:obs-algebra"><div class="head">Observación hasta aquí, todo es álgebra</div><div class="body"><p>Ninguno de estos enunciados usa topología, así que son los mismos en $\R^{n}$ y
 en $\Hs$, con la misma demostración.</p></div></div>
-<div class="stmt ejemplo" id="ambas-c19:ej-juego"><div class="head">Ejemplo juego matricial de suma cero</div><div class="body"><p>Para $\phi(x,y)=x\trans Ay$ sobre $\simplex_{n}\times\simplex_{m}$,
-$\max_{y}x\trans Ay=\max_{j}(A\trans x)_{j}$ y
-$\min_{x}x\trans Ay=\min_{i}(Ay)_{i}$.</p></div></div></section></div>
+<h3 id="ambas-convexa-x33">El teorema minimax de Sion</h3>
+<div class="stmt lema" id="ambas-c19:lem-max-finito"><div class="head">Lema el máximo de finitas convexas</div><div class="body"><p>Si $X$ es convexo y compacto y $f_{1},\dots,f_{k}$ son convexas y continuas en
+$X$, existe $\lambda\in\simplex_{k}$ con
+$\min_{x}\max_{i}f_{i}(x)=\min_{x}\sum_{i}\lambda_{i}f_{i}(x)$.</p></div></div>
+<div class="stmt teorema" id="ambas-c19:teo-sion"><div class="head">Teorema de Sion, versión compacta</div><div class="body"><p>Si $X$ e $Y$ son convexos y compactos y $\phi$ es continua, convexa en $x$ y
+cóncava en $y$, entonces $\min_{x}\max_{y}\phi=\max_{y}\min_{x}\phi$ y hay un
+punto de silla.</p></div></div>
+<div class="stmt observacion" id="ambas-c19:obs-sion-compacto"><div class="head">Observación la misma prueba, pero menos conjuntos</div><div class="body"><p>La demostración es la misma en $\R^{n}$ y en $\Hs$: la única separación que usa
+es en $\R^{k}$, con $k$ el número de elementos de un subrecubrimiento finito. Lo
+que cambia es cuántos conjuntos cumplen la hipótesis. En $\R^{n}$ basta que $X$
+e $Y$ sean cerrados y acotados; en $\ell^{2}$ ni la bola unidad cerrada es
+compacta, porque la base canónica no tiene subsucesiones convergentes. La forma
+útil en dimensión infinita es la original de Sion, que el libro de Junca cita y
+pide menos, y que no está en las fuentes del proyecto.</p></div></div>
+<div class="stmt observacion" id="ambas-c19:obs-sion-slater"><div class="head">Observación Sion no sustituye a Slater</div><div class="body"><p>Los multiplicadores de un Lagrangiano viven en un conjunto no compacto, así que
+la dualidad fuerte del capítulo anterior no sale de este teorema.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c19:ej-juego"><div class="head">Ejemplo juego matricial de suma cero</div><div class="body"><p>Con estrategias puras $\max_{j}\min_{i}A_{ij}\le\min_{i}\max_{j}A_{ij}$ puede ser
+estricta; con estrategias mixtas,
+$\min_{x\in\simplex_{n}}\max_{y\in\simplex_{m}}x\trans Ay=\max_{y\in\simplex_{m}}\min_{x\in\simplex_{n}}x\trans Ay$,
+que es el teorema de von Neumann. El máximo interior es $\max_{j}(A\trans x)_{j}$.</p></div></div>
+<h3 id="ambas-convexa-x34">Funciones primal y dual, y la brecha</h3>
+<div class="stmt definicion" id="ambas-c19:def-primal-dual"><div class="head">Definición funciones primal y dual, y brecha</div><div class="body"><p>$P(x)=\sup_{y}\phi(x,y)$ es convexa, $D(y)=\inf_{x}\phi(x,y)$ es cóncava,
+$p^{*}=\inf P\ge d^{*}=\sup D$, y la brecha es
+$\mathcal{G}(x,y)=P(x)-D(y)\ge0$. Si hay punto de silla, $\mathcal{G}(x,y)=0$
+si y solo si $(x,y)$ lo es. Con conjuntos no acotados se usa una brecha
+restringida a acotados que contengan las soluciones.</p></div></div>
+<h3 id="ambas-convexa-x35">Desigualdades variacionales y operadores monótonos</h3>
+<div class="stmt definicion" id="ambas-c19:def-operador"><div class="head">Definición el operador de un problema min-max</div><div class="body"><p>Para $\phi$ diferenciable, $F(x,y)=(\nabla_{x}\phi(x,y),-\nabla_{y}\phi(x,y))$
+en $\Hs\times\Ks$. En $\Hs$ el gradiente es el que da el teorema de Riesz.</p></div></div>
+<div class="stmt proposicion" id="ambas-c19:prop-vi"><div class="head">Proposición punto de silla como desigualdad variacional</div><div class="body"><p>$z^{*}$ es un punto de silla si y solo si $\ip{F(z^{*})}{z-z^{*}}\ge0$ para todo
+$z\in Z$, es decir $0\in F(z^{*})+\Ncono_{Z}(z^{*})$.</p></div></div>
+<div class="stmt definicion" id="ambas-c19:def-monotono"><div class="head">Definición operador monótono</div><div class="body"><p>$F$ es monótono si $\ip{F(z)-F(w)}{z-w}\ge0$, y $\mu$-fuertemente monótono si
+el lado izquierdo es al menos $\mu\norm{z-w}^{2}$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c19:prop-monotono"><div class="head">Proposición convexo-cóncava da monótono</div><div class="body"><p>El operador de un problema min-max es monótono, y
+$\min\{\mu_{x},\mu_{y}\}$-fuertemente monótono con convexidad y concavidad
+fuertes.</p></div></div>
+<div class="stmt definicion" id="ambas-c19:def-vi"><div class="head">Definición desigualdad variacional</div><div class="body"><p>Dados un convexo cerrado $Z$ y $F$ monótono, hallar $z^{*}\in Z$ con
+$\ip{F(z^{*})}{z-z^{*}}\ge0$ para todo $z\in Z$.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
@@ -7848,6 +8167,7 @@ $\min_{x}x\trans Ay=\min_{i}(Ay)_{i}$.</p></div></div></section></div>
         title="Cuadernos">&#9666;</button>
 </div>
 
+
 <script>
 const $ = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
@@ -7855,7 +8175,22 @@ const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 /* Los rotulos y las notaciones los inyecta el generador, porque dependen de
    que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
    una de lecture notes dice «demostraciones». */
-const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [], "idiomas": [{"id": "clase", "rotulo": "Clase", "carpeta": "clase"}, {"id": "general", "rotulo": "General", "carpeta": "general"}, {"id": "ambas", "rotulo": "Ambas", "carpeta": "ambas"}], "glosario": {}};
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [], "idiomas": [{"id": "clase", "rotulo": "Clase", "carpeta": "clase"}, {"id": "general", "rotulo": "General", "carpeta": "general"}, {"id": "ambas", "rotulo": "Ambas", "carpeta": "ambas"}], "glosario": {}, "artefacto": false};
+
+/* Una nota privada se publica como artefacto de Claude, y alli el hash lo
+   vigila el visor y solo admite #nombres sencillos; las anclas de la nota
+   llevan «:». Asi que dentro del artefacto los enlaces internos se resuelven
+   con scroll, sin tocar el hash. */
+if(CFG.artefacto){
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]');
+    if(!a || e.defaultPrevented) return;
+    const destino = document.getElementById(decodeURIComponent(a.getAttribute("href").slice(1)));
+    if(!destino) return;
+    e.preventDefault();
+    destino.scrollIntoView({block:"start"});
+  });
+}
 
 /* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
    navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
@@ -7892,8 +8227,11 @@ function setNota(n){
   $$(".v[data-var]").forEach(v => {
     v.dataset.on = (n === "ambas" || v.dataset.var === n) ? "true" : "false";
   });
-  CFG.notaciones.forEach(x =>
-    $("#n-"+x.id).setAttribute("aria-pressed", String(x.id === n)));
+  // Con una sola notacion no hay botones (grupo_notacion en build.py).
+  CFG.notaciones.forEach(x => {
+    const b = $("#n-"+x.id);
+    if(b) b.setAttribute("aria-pressed", String(x.id === n));
+  });
   recuerda("nota", n);
 }
 
@@ -7946,12 +8284,38 @@ function colocaPop(){
 }
 function escondePop(){ pop.dataset.on = "false"; anclado = null; }
 
+/* Pasar el cursor por una referencia, «(26)» o «3.6», ensena en el mismo
+   cuadro la ecuacion o el enunciado al que apunta (peticion del 2026-10-30).
+   Se copia lo que ya hay en la pagina, con la notacion que este puesta. */
+function muestraRef(a){
+  const dest = document.getElementById(decodeURIComponent(a.getAttribute("href").slice(1)));
+  if(!dest) return;
+  let caja;
+  if(dest.classList.contains("numerado")){
+    caja = document.createElement("div");
+    caja.className = "pop-eq";
+    caja.append(dest.querySelector(".eqbody").cloneNode(true));
+    const n = dest.querySelector(".num");
+    if(n) caja.append(n.cloneNode(true));
+  }else if(dest.classList.contains("stmt")){
+    caja = dest.cloneNode(true);
+    caja.classList.add("pop-stmt");
+  }else return;
+  caja.removeAttribute("id");
+  caja.querySelectorAll("[id]").forEach(x => x.removeAttribute("id"));
+  pop.replaceChildren(caja);
+  pop.dataset.on = "true";
+  anclado = a;
+  colocaPop();
+}
 document.addEventListener("mouseover", e => {
   const t = e.target.closest("button.term");
-  if(t) muestraPop(t);
+  if(t) return muestraPop(t);
+  const r = e.target.closest("a.xref");
+  if(r) muestraRef(r);
 });
 document.addEventListener("mouseout", e => {
-  const t = e.target.closest("button.term");
+  const t = e.target.closest("button.term, a.xref");
   if(t && !pop.contains(e.relatedTarget)) escondePop();
 });
 document.addEventListener("focusin", e => {
@@ -8218,6 +8582,12 @@ document.addEventListener("keydown", e => {
   if(enCampo) return;
   if(e.key === "[") tocPanel.setAbierto(document.documentElement.dataset.toc !== "on", true);
   else if(e.key === "]") cuadernosPanel.setAbierto(document.documentElement.dataset.cuadernos !== "on", true);
+  // F pasa a la notacion siguiente (peticion del 2026-10-29). Con dos, alterna.
+  else if((e.key === "f" || e.key === "F") && CFG.notaciones.length > 1){
+    const ids = CFG.notaciones.map(x => x.id);
+    const k = ids.indexOf(document.documentElement.dataset.nota);
+    setNota(ids[(k + 1) % ids.length]);
+  }
 });
 
 /* Plegar la barra devuelve su altura al texto. Arranca desplegada, que es donde
@@ -8266,6 +8636,95 @@ $("#b-all").addEventListener("click", () => {
   refrescaBotonGlobal();
 });
 
+/* --- mapa de resultados ----------------------------------------------- */
+/* Solo existe si la nota declara `mapa` en notas.json. La M lo pone y lo
+   quita; Escape y el aspa tambien lo quitan. Pasar el cursor por una caja
+   dibuja lo que usa (flecha llena) y lo que la usa (punteada); un clic cierra
+   el mapa y lleva al enunciado. */
+const mapa = $("#mapa");
+if(mapa){
+  const svg = $(".mapa-svg", mapa), aristas = $("#mapa-aristas", mapa);
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const nodo = id => $('.mn[data-id="' + CSS.escape(id) + '"]', svg);
+  const caja = n => ({x:+n.dataset.x, y:+n.dataset.y, w:+n.dataset.w, h:+n.dataset.h});
+
+  function curva(de, a, clase){
+    const A = caja(de), B = caja(a);
+    let d;
+    if(A.y + A.h <= B.y){
+      const x1 = A.x + A.w/2, y1 = A.y + A.h, x2 = B.x + B.w/2, y2 = B.y, m = (y2 - y1)/2;
+      d = `M${x1},${y1} C${x1},${y1+m} ${x2},${y2-m} ${x2},${y2}`;
+    }else if(B.y + B.h <= A.y){
+      const x1 = A.x + A.w/2, y1 = A.y, x2 = B.x + B.w/2, y2 = B.y + B.h, m = (y1 - y2)/2;
+      d = `M${x1},${y1} C${x1},${y1-m} ${x2},${y2+m} ${x2},${y2}`;
+    }else if(Math.abs(B.x - A.x) < A.w + 30){
+      // vecinas en la misma fila: de lado a lado
+      const y = A.y + A.h/2, x1 = A.x < B.x ? A.x + A.w : A.x, x2 = A.x < B.x ? B.x : B.x + B.w;
+      d = `M${x1},${y} L${x2},${y}`;
+    }else{
+      // misma fila pero lejos: un arco por encima de las de en medio
+      const x1 = A.x + A.w/2, x2 = B.x + B.w/2, y = A.y;
+      d = `M${x1},${y} C${x1},${y-30} ${x2},${y-30} ${x2},${y}`;
+    }
+    const p = document.createElementNS(SVGNS, "path");
+    p.setAttribute("d", d);
+    p.setAttribute("class", "arista " + clase);
+    p.setAttribute("marker-end", clase === "sale" ? "url(#mapa-punta-sale)" : "url(#mapa-punta)");
+    return p;
+  }
+  function enfoca(id){
+    aristas.replaceChildren();
+    $$(".mn", svg).forEach(n => n.classList.remove("foco", "usa", "usado"));
+    svg.classList.toggle("activo", !!id);
+    if(!id) return;
+    const yo = nodo(id);
+    yo.classList.add("foco");
+    (yo.dataset.dep || "").split(" ").filter(Boolean).forEach(d => {
+      const o = nodo(d);
+      if(o){ o.classList.add("usa"); aristas.append(curva(o, yo, "entra")); }
+    });
+    $$(".mn[data-dep]", svg).forEach(o => {
+      if(o.dataset.dep.split(" ").includes(id)){
+        o.classList.add("usado"); aristas.append(curva(yo, o, "sale"));
+      }
+    });
+  }
+  let antesDelMapa = null;
+  function setMapa(on){
+    if(on === !mapa.hidden) return;
+    mapa.hidden = !on;
+    $("#b-mapa")?.setAttribute("aria-expanded", String(on));
+    document.documentElement.style.overflow = on ? "hidden" : "";
+    if(on){ antesDelMapa = document.activeElement; $(".mapa-cerrar", mapa).focus(); }
+    else{ enfoca(null); antesDelMapa?.focus?.(); }
+  }
+  // Sin tocar location.hash: dentro de un artefacto de Claude el hash lo
+  // vigila el visor, y una etiqueta con «:» no es un #nombre que acepte.
+  function ve(n){
+    const destino = document.getElementById(n.dataset.ancla);
+    setMapa(false);
+    if(destino) destino.scrollIntoView({block:"start"});
+  }
+  $$(".mn[data-id]", svg).forEach(n => {
+    n.addEventListener("pointerenter", () => enfoca(n.dataset.id));
+    n.addEventListener("pointerleave", () => enfoca(null));
+    n.addEventListener("focus", () => enfoca(n.dataset.id));
+    n.addEventListener("blur", () => enfoca(null));
+    n.addEventListener("click", () => ve(n));
+    n.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); ve(n); } });
+  });
+  $(".mapa-cerrar", mapa).addEventListener("click", () => setMapa(false));
+  $("#b-mapa")?.addEventListener("click", () => setMapa(true));
+  // Un clic en el velo, fuera del panel, tambien lo cierra.
+  mapa.addEventListener("pointerdown", e => { if(e.target === mapa) setMapa(false); });
+  document.addEventListener("keydown", e => {
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName) || e.target.isContentEditable) return;
+    if(e.key === "m" || e.key === "M"){ e.preventDefault(); setMapa(mapa.hidden); }
+    else if(e.key === "Escape" && !mapa.hidden) setMapa(false);
+  });
+}
+
 /* --- arranque -------------------------------------------------------- */
 $("#f-serif").addEventListener("click", () => setFuente("serif"));
 $("#f-sans").addEventListener("click",  () => setFuente("sans"));
@@ -8277,8 +8736,10 @@ $("#volver").addEventListener("click", () => {
   setBarra(true);
   $("#b-bar").focus();   // el foco iba en un boton que acaba de desaparecer
 });
-CFG.notaciones.forEach(x =>
-  $("#n-"+x.id).addEventListener("click", () => setNota(x.id)));
+CFG.notaciones.forEach(x => {
+  const b = $("#n-"+x.id);
+  if(b) b.addEventListener("click", () => setNota(x.id));
+});
 CFG.idiomas.forEach(x =>
   $("#i-"+x.id).addEventListener("click", () => setIdioma(x.id)));
 
