@@ -3670,6 +3670,9 @@ y las condiciones KKT son el sistema</p>
 que se anule el gradiente $Qx+c+G\trans\lambda+A\trans\nu$, y la holgura
 complementaria es $\lambda_{i}(Gx-h)_{i}=-\lambda_{i}z_{i}=0$ para todo $i$, que
 es $Z\lambda=0$.</p></div>
+<div class="stmt observacion" id="clase-c18:obs-qp-central"><div class="head">Observación la única ecuación no lineal</div><div class="body"><p>Todas las ecuaciones del sistema son lineales salvo $Z\lambda=0$. Los métodos
+de punto interior la cambian por $Z\lambda=\mu\1$ con $z,\lambda&gt;0$, resuelven
+el sistema con el método de Newton y hacen tender $\mu$ a $0$.</p></div></div>
 <div class="stmt observacion" id="clase-c18:obs-qp-igualdades"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sin desigualdades, las condiciones KKT son el sistema lineal</p>
 <div class="display">\[
   \begin{pmatrix}Q&amp;A\trans\\A&amp;0\end{pmatrix}
@@ -3892,10 +3895,15 @@ $0\in F(z^{*})+\Ncono_{Z}(z^{*})$.</p></div></div>
 \]</div>
 <p>y <span class="df">$\mu$-fuertemente monótono</span>, con $\mu&gt;0$, si el lado izquierdo es al
 menos $\mu\norm{z-w}^{2}$.</p></div></div>
-<div class="stmt proposicion" id="clase-c19:prop-monotono"><div class="head">Proposición convexo-cóncava da monótono<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El operador de un problema min-max es monótono. Si $\phi$ es
-$\mu_{x}$-fuertemente convexa en $x$ y $\mu_{y}$-fuertemente cóncava en $y$,
-es $\min\{\mu_{x},\mu_{y}\}$-fuertemente monótono.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p157">Ver demostración</button><div class="proof" id="clase-convexa-p157"><p>Sean $z=(x,y)$ y $w=(u,v)$. Por la caracterización de primer orden de la
+<div class="stmt ejemplo" id="clase-c19:ej-gradiente-monotono"><div class="head">Ejemplo el gradiente de una convexa</div><div class="body"><p>Si $f:\R^{n}\to\R$ es convexa y diferenciable, $\nabla f$ es monótono, y si
+además es $\mu$-fuertemente convexa, $\nabla f$ es $\mu$-fuertemente monótono.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p157">Ver demostración</button><div class="proof" id="clase-convexa-p157"><p>Se suman $f(w)\ge f(z)+\ip{\nabla f(z)}{w-z}+\frac{\mu}{2}\norm{w-z}^{2}$ y la
+misma con $z$ y $w$ intercambiados, y queda
+$\ip{\nabla f(z)-\nabla f(w)}{z-w}\ge\mu\norm{z-w}^{2}$, con $\mu=0$ en el caso
+convexo.</p></div>
+<div class="stmt proposicion" id="clase-c19:prop-monotono"><div class="head">Proposición convexo-cóncava da monótono</div><div class="body"><p>Si $\phi$ es diferenciable en un abierto que contiene a $Z=X\times Y$, convexa en
+$x$ y cóncava en $y$, su operador $F$ es monótono.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p158">Ver demostración</button><div class="proof" id="clase-convexa-p158"><p>Sean $z=(x,y)$ y $w=(u,v)$. Por la caracterización de primer orden de la
 convexidad en $x$ y de la concavidad en $y$,</p>
 <div class="display">\[
   \begin{aligned}
@@ -3910,14 +3918,293 @@ aparece la misma $S=\phi(u,y)-\phi(x,y)+\phi(x,v)-\phi(u,v)$, y queda</p>
 <div class="display">\[
   -\ip{\nabla_{x}\phi(z)-\nabla_{x}\phi(w)}{x-u}\le S\le-\ip{\nabla_{y}\phi(z)-\nabla_{y}\phi(w)}{y-v},
 \]</div>
-<p>que es $\ip{F(z)-F(w)}{z-w}\ge0$. Con convexidad fuerte cada desigualdad de
-arriba gana $\frac{\mu_{x}}{2}\norm{u-x}^{2}$ y cada una de abajo
+<p>que es $\ip{F(z)-F(w)}{z-w}\ge0$.</p></div>
+<div class="stmt proposicion" id="clase-c19:prop-monotono-fuerte"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\phi$ es $\mu_{x}$-fuertemente convexa en $x$ y $\mu_{y}$-fuertemente
+cóncava en $y$, su operador es $\min\{\mu_{x},\mu_{y}\}$-fuertemente monótono.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p159">Ver demostración</button><div class="proof" id="clase-convexa-p159"><p>En la prueba anterior cada desigualdad de arriba gana
+$\frac{\mu_{x}}{2}\norm{u-x}^{2}$ y cada una de abajo
 $\frac{\mu_{y}}{2}\norm{v-y}^{2}$, y la cuenta da
 $\ip{F(z)-F(w)}{z-w}\ge\mu_{x}\norm{x-u}^{2}+\mu_{y}\norm{y-v}^{2}\ge\min\{\mu_{x},\mu_{y}\}\norm{z-w}^{2}$.</p></div>
-<div class="stmt definicion" id="clase-c19:def-vi"><div class="head">Definición desigualdad variacional<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Dados un convexo cerrado $Z$ y un operador monótono $F$, el problema de
+<div class="stmt definicion" id="clase-c19:def-vi"><div class="head">Definición desigualdad variacional</div><div class="body"><p>Dados un convexo cerrado $Z$ y un operador monótono $F$, el problema de
 <span class="df">desigualdad variacional</span> es hallar $z^{*}\in Z$ con
 $\ip{F(z^{*})}{z-z^{*}}\ge0$ para todo $z\in Z$. Es más general que el
-problema min-max, y permite analizar algoritmos sin usar una $\phi$.</p></div></div></section></div>
+problema min-max, y permite analizar algoritmos sin usar una $\phi$.</p></div></div>
+<h3 id="clase-convexa-x37">Descenso-ascenso del gradiente</h3>
+<div class="stmt definicion" id="clase-c19:def-dag"><div class="head">Definición descenso-ascenso del gradiente</div><div class="body"><p>Sean $Z\subset\R^{n+m}$ convexo, cerrado y no vacío y $F:Z\to\R^{n+m}$. El
+método de <span class="df">descenso-ascenso del gradiente</span> con paso $\alpha&gt;0$ parte de
+$z^{0}\in Z$ y genera</p>
+<div class="display">\[
+  z^{k+1}=\Proy_{Z}\bigl(z^{k}-\alpha F(z^{k})\bigr).
+\]</div>
+<p>Para el operador de un problema min-max, como
+$\Proy_{X\times Y}(a,b)=(\Proy_{X}a,\Proy_{Y}b)$, es</p>
+<div class="display">\[
+  x^{k+1}=\Proy_{X}\bigl(x^{k}-\alpha\nabla_{x}\phi(x^{k},y^{k})\bigr),\qquad
+  y^{k+1}=\Proy_{Y}\bigl(y^{k}+\alpha\nabla_{y}\phi(x^{k},y^{k})\bigr):
+\]</div>
+<p>se desciende en $x$ y se asciende en $y$.</p></div></div>
+<div class="stmt lema" id="clase-c19:lem-punto-fijo"><div class="head">Lema las soluciones son puntos fijos</div><div class="body"><p>Para $\alpha&gt;0$, $z^{*}\in Z$ resuelve la desigualdad variacional si y solo si
+$z^{*}=\Proy_{Z}(z^{*}-\alpha F(z^{*}))$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p160">Ver demostración</button><div class="proof" id="clase-convexa-p160"><p>Por la caracterización variacional de la proyección,
+$z^{*}=\Proy_{Z}(z^{*}-\alpha F(z^{*}))$ si y solo si
+$\ip{z^{*}-\alpha F(z^{*})-z^{*}}{z-z^{*}}\le0$ para todo $z\in Z$, que es
+$\ip{F(z^{*})}{z-z^{*}}\ge0$.</p></div>
+<div class="stmt teorema" id="clase-c19:teo-dag"><div class="head">Teorema convergencia bajo monotonía fuerte</div><div class="body"><p>Sean $F$ $\mu$-fuertemente monótono y $L$-Lipschitz en $Z$ y $z^{*}$ una
+solución de la desigualdad variacional. Si $0&lt;\alpha&lt;2\mu/L^{2}$, entonces</p>
+<div class="display">\[
+  \norm{z^{k+1}-z^{*}}^{2}\le\bigl(1-2\alpha\mu+\alpha^{2}L^{2}\bigr)\norm{z^{k}-z^{*}}^{2},
+\]</div>
+<p>y como el factor es menor que $1$, los iterados convergen linealmente a $z^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p161">Ver demostración</button><div class="proof" id="clase-convexa-p161"><p>Por el lema, $z^{*}=\Proy_{Z}(z^{*}-\alpha F(z^{*}))$, y la proyección no
+expande distancias, así que</p>
+<div class="display">\[
+\begin{aligned}
+  \norm{z^{k+1}-z^{*}}^{2}
+  &amp;\le\norm{z^{k}-z^{*}-\alpha(F(z^{k})-F(z^{*}))}^{2}\\
+  &amp;=\norm{z^{k}-z^{*}}^{2}-2\alpha\ip{F(z^{k})-F(z^{*})}{z^{k}-z^{*}}+\alpha^{2}\norm{F(z^{k})-F(z^{*})}^{2}\\
+  &amp;\le\bigl(1-2\alpha\mu+\alpha^{2}L^{2}\bigr)\norm{z^{k}-z^{*}}^{2},
+\end{aligned}
+\]</div>
+<p>y $1-2\alpha\mu+\alpha^{2}L^{2}&lt;1$ es $\alpha&lt;2\mu/L^{2}$.</p></div>
+<div class="stmt ejemplo" id="clase-c19:ej-bilineal"><div class="head">Ejemplo el problema bilineal<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $\phi(x,y)=xy$ en $\R\times\R$ el único punto de silla es $(0,0)$, y
+$F(x,y)=(y,-x)$ es monótono y $1$-Lipschitz pero no fuertemente monótono, porque
+$\ip{F(z)-F(w)}{z-w}=0$. El método con paso $\alpha$ es</p>
+<div class="display">\[
+  \begin{pmatrix}x^{k+1}\\y^{k+1}\end{pmatrix}
+  =\begin{pmatrix}1&amp;-\alpha\\\alpha&amp;1\end{pmatrix}
+  \begin{pmatrix}x^{k}\\y^{k}\end{pmatrix},
+  \qquad
+  (x^{k+1})^{2}+(y^{k+1})^{2}=(1+\alpha^{2})\bigl((x^{k})^{2}+(y^{k})^{2}\bigr),
+\]</div>
+<p>así que para todo $\alpha&gt;0$ los iterados se alejan del punto de silla girando
+alrededor de él.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p162">Ver demostración</button><div class="proof" id="clase-convexa-p162"><p>Si $x^{*}\neq0$, $\phi(x^{*},y)=x^{*}y$ no está acotada en $y$, así que un
+punto de silla tiene $x^{*}=0$, y por lo mismo $y^{*}=0$; y $(0,0)$ lo es porque
+$\phi(0,y)=\phi(x,0)=0$. El método es $x^{k+1}=x^{k}-\alpha y^{k}$,
+$y^{k+1}=y^{k}+\alpha x^{k}$, y al desarrollar los cuadrados los términos
+cruzados se cancelan.</p></div>
+<h3 id="clase-convexa-x38">El método extragradiente</h3>
+<div class="stmt definicion" id="clase-c19:def-extragradiente"><div class="head">Definición método extragradiente</div><div class="body"><p>Desde $z^{0}\in Z$, el <span class="df">método extragradiente</span> genera</p>
+<div class="display">\[
+  w^{k}=\Proy_{Z}\bigl(z^{k}-\alpha F(z^{k})\bigr),\qquad
+  z^{k+1}=\Proy_{Z}\bigl(z^{k}-\alpha F(w^{k})\bigr).
+\]</div>
+<p>El primer paso predice hacia dónde va la trayectoria, y el segundo corrige desde
+$z^{k}$ con el operador evaluado en la predicción.</p></div></div>
+<div class="stmt lema" id="clase-c19:lem-extragradiente"><div class="head">Lema desigualdad fundamental del extragradiente</div><div class="body"><p>Si $F$ es $L$-Lipschitz en $Z$, para todo $z\in Z$</p>
+<div class="display">\[
+  2\alpha\ip{F(w^{k})}{w^{k}-z}\le\norm{z^{k}-z}^{2}-\norm{z^{k+1}-z}^{2}-(1-\alpha^{2}L^{2})\norm{z^{k}-w^{k}}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p163">Ver demostración</button><div class="proof" id="clase-convexa-p163"><p>Se usa dos veces que
+$2\ip{a-b}{b-c}=\norm{a-c}^{2}-\norm{a-b}^{2}-\norm{b-c}^{2}$. Por la
+caracterización variacional de la proyección que define $z^{k+1}$,
+$\ip{z^{k}-\alpha F(w^{k})-z^{k+1}}{z-z^{k+1}}\le0$, es decir</p>
+<div class="display">\[
+\begin{aligned}
+  2\alpha\ip{F(w^{k})}{z^{k+1}-z}&amp;\le2\ip{z^{k}-z^{k+1}}{z^{k+1}-z}\\
+  &amp;=\norm{z^{k}-z}^{2}-\norm{z^{k}-z^{k+1}}^{2}-\norm{z^{k+1}-z}^{2}.
+\end{aligned}
+\]</div>
+<p>La que define $w^{k}$, en el punto $z^{k+1}\in Z$, da</p>
+<div class="display">\[
+  \alpha\ip{F(z^{k})}{w^{k}-z^{k+1}}\le\ip{z^{k}-w^{k}}{w^{k}-z^{k+1}},
+\]</div>
+<p>y con Cauchy–Schwarz, la constante de Lipschitz y $2ab\le a^{2}+b^{2}$,</p>
+<div class="display">\[
+\begin{aligned}
+  2\alpha\ip{F(w^{k})}{w^{k}-z^{k+1}}
+  &amp;\le2\ip{z^{k}-w^{k}}{w^{k}-z^{k+1}}+2\alpha L\norm{z^{k}-w^{k}}\norm{w^{k}-z^{k+1}}\\
+  &amp;\le\norm{z^{k}-z^{k+1}}^{2}-\norm{z^{k}-w^{k}}^{2}+\alpha^{2}L^{2}\norm{z^{k}-w^{k}}^{2}.
+\end{aligned}
+\]</div>
+<p>Al sumar las dos se cancela $\norm{z^{k}-z^{k+1}}^{2}$ y queda el lema.</p></div>
+<div class="stmt teorema" id="clase-c19:teo-extragradiente"><div class="head">Teorema convergencia del extragradiente</div><div class="body"><p>Sean $F$ monótono y $L$-Lipschitz en $Z$ y $0&lt;\alpha&lt;1/L$, y supongamos que la
+desigualdad variacional tiene solución. Entonces $z^{k}$ converge a una
+solución.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p164">Ver demostración</button><div class="proof" id="clase-convexa-p164"><p>Sea $z^{*}$ una solución. Como $w^{k}\in Z$, la monotonía y la desigualdad
+variacional dan
+$\ip{F(w^{k})}{w^{k}-z^{*}}\ge\ip{F(z^{*})}{w^{k}-z^{*}}\ge0$, y el lema con
+$z=z^{*}$ da</p>
+<div class="display">\[
+  \norm{z^{k+1}-z^{*}}^{2}+(1-\alpha^{2}L^{2})\norm{z^{k}-w^{k}}^{2}\le\norm{z^{k}-z^{*}}^{2}.
+\]</div>
+<p>Como $1-\alpha^{2}L^{2}&gt;0$, la sucesión es Fejér monótona respecto del conjunto
+de soluciones, luego acotada, y sumando,
+$(1-\alpha^{2}L^{2})\sum_{k=0}^{N-1}\norm{z^{k}-w^{k}}^{2}\le\norm{z^{0}-z^{*}}^{2}$
+para todo $N$, así que $z^{k}-w^{k}\to0$. Una subsucesión cumple
+$z^{k_{j}}\to\hat{z}\in Z$, y entonces también $w^{k_{j}}\to\hat{z}$. Por la
+continuidad de la proyección y de $F$, el límite en
+$w^{k_{j}}=\Proy_{Z}(z^{k_{j}}-\alpha F(z^{k_{j}}))$ es
+$\hat{z}=\Proy_{Z}(\hat{z}-\alpha F(\hat{z}))$, y por el lema de los puntos
+fijos $\hat{z}$ es solución. Con $z^{*}=\hat{z}$ en lo anterior,
+$\norm{z^{k}-\hat{z}}$ es decreciente y tiene una subsucesión que tiende a $0$,
+así que $z^{k}\to\hat{z}$.</p></div>
+<div class="stmt lema" id="clase-c19:lem-brecha-operador"><div class="head">Lema la brecha y el operador</div><div class="body"><p>Si $\phi$ es diferenciable, convexa en $x$ y cóncava en $y$, para todos
+$w=(w_{x},w_{y})$ y $z=(x,y)$ en $Z$</p>
+<div class="display">\[
+  \phi(w_{x},y)-\phi(x,w_{y})\le\ip{F(w)}{w-z}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p165">Ver demostración</button><div class="proof" id="clase-convexa-p165"><p>Por la desigualdad del gradiente en cada variable,
+$\phi(x,w_{y})\ge\phi(w)+\ip{\nabla_{x}\phi(w)}{x-w_{x}}$ y
+$\phi(w_{x},y)\le\phi(w)+\ip{\nabla_{y}\phi(w)}{y-w_{y}}$. Restando,</p>
+<div class="display">\[
+  \phi(w_{x},y)-\phi(x,w_{y})\le\ip{\nabla_{x}\phi(w)}{w_{x}-x}+\ip{-\nabla_{y}\phi(w)}{w_{y}-y}=\ip{F(w)}{w-z}. 
+\]</div></div>
+<div class="stmt teorema" id="clase-c19:teo-extragradiente-ergodico"><div class="head">Teorema tasa ergódica del extragradiente</div><div class="body"><p>Sean $F$ el operador de un problema min-max, $L$-Lipschitz en $Z$, y
+$0&lt;\alpha\le1/L$. El promedio de las predicciones</p>
+<div class="display">\[
+  \bar{w}_{N}=\frac1N\sum_{k=0}^{N-1}w^{k}=(\bar{x}_{N},\bar{y}_{N})
+\]</div>
+<p>cumple, para todo $(x,y)\in Z$,</p>
+<div class="display">\[
+  \phi(\bar{x}_{N},y)-\phi(x,\bar{y}_{N})\le\frac{\norm{z^{0}-(x,y)}^{2}}{2\alpha N}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p166">Ver demostración</button><div class="proof" id="clase-convexa-p166"><p>Sea $z=(x,y)$. Por el lema anterior y la desigualdad fundamental, descartando
+su último término, que no es positivo porque $\alpha L\le1$,</p>
+<div class="display">\[
+  2\alpha\bigl(\phi(w^{k}_{x},y)-\phi(x,w^{k}_{y})\bigr)\le\norm{z^{k}-z}^{2}-\norm{z^{k+1}-z}^{2}.
+\]</div>
+<p>La suma de $0$ a $N-1$ telescopa, y dividiendo por $2\alpha N$,</p>
+<div class="display">\[
+  \frac1N\sum_{k=0}^{N-1}\bigl(\phi(w^{k}_{x},y)-\phi(x,w^{k}_{y})\bigr)\le\frac{\norm{z^{0}-z}^{2}}{2\alpha N}.
+\]</div>
+<p>Por la desigualdad de Jensen en cada variable,
+$\phi(\bar{x}_{N},y)\le\frac1N\sum_{k}\phi(w^{k}_{x},y)$ y
+$\phi(x,\bar{y}_{N})\ge\frac1N\sum_{k}\phi(x,w^{k}_{y})$.</p></div>
+<div class="stmt corolario" id="clase-c19:cor-brecha-restringida"><div class="head">Corolario la brecha restringida<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X_{0}\subset X$ e $Y_{0}\subset Y$ son acotados,</p>
+<div class="display">\[
+  \mathcal{G}_{X_{0},Y_{0}}(\bar{x}_{N},\bar{y}_{N})\le\frac{1}{2\alpha N}\sup_{z\in X_{0}\times Y_{0}}\norm{z^{0}-z}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p167">Ver demostración</button><div class="proof" id="clase-convexa-p167"><p>$\mathcal{G}_{X_{0},Y_{0}}(\bar{x}_{N},\bar{y}_{N})$ es el supremo de
+$\phi(\bar{x}_{N},y)-\phi(x,\bar{y}_{N})$ sobre $(x,y)\in X_{0}\times Y_{0}$, y
+el teorema acota cada término.</p></div>
+<div class="stmt observacion" id="clase-c19:obs-tasa-extragradiente"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La tasa $O(1/N)$ mejora el $O(1/\sqrt{N})$ del subgradiente para una convexa
+Lipschitz tratada como caja negra. Lo que la paga es la estructura suave
+convexo-cóncava y dos evaluaciones de $F$ por iteración.</p></div></div>
+<h3 id="clase-convexa-x39">Mirror-Prox</h3>
+<div class="stmt definicion" id="clase-c19:def-mirror-prox"><div class="head">Definición Mirror-Prox<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $\norm{\cdot}$ una norma en $\R^{n+m}$ y $h$ $1$-fuertemente convexa
+respecto de ella en $Z$, con divergencia de Bregman $D_{h}$. El método
+<span class="df">Mirror-Prox</span> genera</p>
+<div class="display">\[
+\begin{aligned}
+  w^{k}&amp;=\argmin_{u\in Z}\bigl\{\alpha\ip{F(z^{k})}{u}+D_{h}(u,z^{k})\bigr\},\\
+  z^{k+1}&amp;=\argmin_{u\in Z}\bigl\{\alpha\ip{F(w^{k})}{u}+D_{h}(u,z^{k})\bigr\},
+\end{aligned}
+\]</div>
+<p>suponiendo que los subproblemas tienen solución y que los iterados se quedan en
+$\ri Z$. Con $h=\frac12\norm{\cdot}_{2}^{2}$ es el extragradiente, por la
+proposición de la proyección como subproblema.</p></div></div>
+<div class="stmt teorema" id="clase-c19:teo-mirror-prox"><div class="head">Teorema tasa de Mirror-Prox<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $F$ el operador de un problema min-max, con
+$\norm{F(z)-F(w)}_{*}\le L\norm{z-w}$ en $Z$, y $0&lt;\alpha\le1/L$. Si
+$(\bar{x}_{N},\bar{y}_{N})$ es el promedio de $w^{0},\dots,w^{N-1}$, para todo
+$z=(x,y)\in Z$</p>
+<div class="display">\[
+  \phi(\bar{x}_{N},y)-\phi(x,\bar{y}_{N})\le\frac{D_{h}(z,z^{0})}{\alpha N}.
+\]</div>
+<p>Con $\alpha=1/L$ y $\Omega=\sup_{z\in X_{0}\times Y_{0}}D_{h}(z,z^{0})$, la
+brecha restringida a $X_{0}\times Y_{0}$ es a lo sumo $L\Omega/N$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p168">Ver demostración</button><div class="proof" id="clase-convexa-p168"><p>Si $u^{+}$ minimiza $\ip{\xi}{u}+D_{h}(u,v)$ sobre $Z$, la condición de primer
+orden y la identidad de los tres puntos dan, como en la desigualdad de un paso
+de mirror descent,</p>
+<div class="display">\[
+  \ip{\xi}{u^{+}-u}\le D_{h}(u,v)-D_{h}(u,u^{+})-D_{h}(u^{+},v)\qquad\text{para todo }u\in Z .
+\]</div>
+<p>Con $\xi=\alpha F(w^{k})$, $v=z^{k}$, $u^{+}=z^{k+1}$, $u=z$, y con
+$\xi=\alpha F(z^{k})$, $v=z^{k}$, $u^{+}=w^{k}$, $u=z^{k+1}$,</p>
+<div class="display">\[
+\begin{aligned}
+  \alpha\ip{F(w^{k})}{z^{k+1}-z}&amp;\le D_{h}(z,z^{k})-D_{h}(z,z^{k+1})-D_{h}(z^{k+1},z^{k}),\\
+  \alpha\ip{F(z^{k})}{w^{k}-z^{k+1}}&amp;\le D_{h}(z^{k+1},z^{k})-D_{h}(z^{k+1},w^{k})-D_{h}(w^{k},z^{k}).
+\end{aligned}
+\]</div>
+<p>Por la norma dual y $\alpha L\le1$,</p>
+<div class="display">\[
+  \alpha\ip{F(w^{k})-F(z^{k})}{w^{k}-z^{k+1}}\le\norm{w^{k}-z^{k}}\norm{w^{k}-z^{k+1}},
+\]</div>
+<p>y sumando las tres,</p>
+<div class="display">\[
+\begin{aligned}
+  \alpha\ip{F(w^{k})}{w^{k}-z}\le{}&amp;D_{h}(z,z^{k})-D_{h}(z,z^{k+1})\\
+  &amp;-D_{h}(z^{k+1},w^{k})-D_{h}(w^{k},z^{k})+\norm{w^{k}-z^{k}}\norm{w^{k}-z^{k+1}}.
+\end{aligned}
+\]</div>
+<p>Los tres últimos términos suman a lo sumo cero, porque cada divergencia es al
+menos la mitad del cuadrado de la norma y $ab\le\frac12a^{2}+\frac12b^{2}$. Se
+suma de $0$ a $N-1$, se descarta $D_{h}(z,z^{N})\ge0$, y se concluye con el lema
+de la brecha y el operador y la desigualdad de Jensen, como en el
+extragradiente.</p></div>
+<div class="stmt observacion" id="clase-c19:obs-mirror-prox-juego"><div class="head">Observación Mirror-Prox en un juego matricial<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En el juego matricial $\phi(x,y)=x\trans Ay$ y $F(x,y)=(Ay,-A\trans x)$. Con la
+entropía negativa en cada símplex, los subproblemas se separan en $x$ y en $y$,
+y por el paso entrópico cada uno es una actualización multiplicativa:</p>
+<div class="display">\[
+  w^{k}_{x,i}=\frac{x^{k}_{i}e^{-\alpha(Ay^{k})_{i}}}{\sum_{l}x^{k}_{l}e^{-\alpha(Ay^{k})_{l}}},
+  \qquad
+  w^{k}_{y,j}=\frac{y^{k}_{j}e^{\alpha(A\trans x^{k})_{j}}}{\sum_{l}y^{k}_{l}e^{\alpha(A\trans x^{k})_{l}}},
+\]</div>
+<p>y lo mismo el segundo paso con $w^{k}$ en lugar de $z^{k}$ dentro de $F$. No
+hay que proyectar sobre el símplex.</p></div></div>
+<h3 id="clase-convexa-x40">Métodos optimistas</h3>
+<div class="stmt definicion" id="clase-c19:def-optimista"><div class="head">Definición gradiente optimista</div><div class="body"><p>El <span class="df">método del gradiente optimista</span> reutiliza la evaluación anterior:</p>
+<div class="display">\[
+  z^{k+1}=\Proy_{Z}\bigl(z^{k}-2\alpha F(z^{k})+\alpha F(z^{k-1})\bigr).
+\]</div>
+<p>Es el paso $z^{k}-\alpha F(z^{k})$ corregido con
+$-\alpha\bigl(F(z^{k})-F(z^{k-1})\bigr)$, que predice el cambio del operador con
+lo ya calculado, y pide una sola evaluación nueva de $F$ por iteración, contra
+las dos del extragradiente.</p></div></div>
+<div class="stmt observacion" id="clase-c19:obs-optimista"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En problemas bilineales esa corrección amortigua la rotación del ejemplo
+bilineal, y bajo hipótesis apropiadas y con pasos pequeños el método converge.
+Fuera del caso monótono o bilineal sus garantías piden cuidado, y no reemplaza
+en general al extragradiente.</p></div></div>
+<h3 id="clase-convexa-x41">Problemas estructurados</h3>
+<div class="stmt proposicion" id="clase-c19:prop-compuesto"><div class="head">Proposición el problema compuesto como min-max</div><div class="body"><p>Sean $f:\R^{n}\to\R\cup\{\infty\}$ y $g:\R^{m}\to\R\cup\{\infty\}$ propias,
+convexas y cerradas, y $K$ una matriz $m\times n$. Para todo $x\in\R^{n}$,</p>
+<div class="display">\[
+  \sup_{y\in\R^{m}}\bigl\{f(x)+\ip{Kx}{y}-g^{*}(y)\bigr\}=f(x)+g(Kx),
+\]</div>
+<p>así que $\min_{x}f(x)+g(Kx)$ es el problema min-max de
+$\phi(x,y)=f(x)+\ip{Kx}{y}-g^{*}(y)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p169">Ver demostración</button><div class="proof" id="clase-convexa-p169"><p>$\sup_{y}\{\ip{Kx}{y}-g^{*}(y)\}=g^{**}(Kx)$, que es $g(Kx)$ por el teorema de
+Fenchel–Moreau.</p></div>
+<div class="stmt proposicion" id="clase-c19:prop-silla-compuesto"><div class="head">Proposición las condiciones de punto de silla</div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla de $\phi$ en $\dom f\times\dom g^{*}$ si y
+solo si</p>
+<div class="display">\[
+  0\in\subdif f(x^{*})+K\trans y^{*}\qquad\text{y}\qquad0\in\subdif g^{*}(y^{*})-Kx^{*}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p170">Ver demostración</button><div class="proof" id="clase-convexa-p170"><p>Ser punto de silla es que $x^{*}$ minimice $f+\ip{K\trans y^{*}}{\cdot}$ e
+$y^{*}$ minimice $g^{*}-\ip{Kx^{*}}{\cdot}$. Por la definición de subgradiente,
+$x^{*}$ minimiza una convexa $\psi$ si y solo si $0\in\subdif\psi(x^{*})$, y
+sumar una función lineal $\ip{c}{\cdot}$ traslada el subdiferencial en $c$.</p></div>
+<div class="stmt observacion" id="clase-c19:obs-descomposicion"><div class="head">Observación la parte diagonal y la parte antisimétrica</div><div class="body"><p>Con $z=(x,y)$, las condiciones dicen</p>
+<div class="display">\[
+  0\in\begin{pmatrix}\subdif f&amp;0\\0&amp;\subdif g^{*}\end{pmatrix}(z^{*})
+  +\begin{pmatrix}0&amp;K\trans\\-K&amp;0\end{pmatrix}z^{*}.
+\]</div>
+<p>La primera parte actúa por separado en $x$ y en $y$, y sus resolventes son
+$\prox_{f}$ y $\prox_{g^{*}}$. La segunda es una matriz antisimétrica $B$, con
+$\ip{Bz}{z}=0$, y solo pide productos por $K$ y $K\trans$. Es la separación que
+aprovechan los métodos primal-duales.</p></div></div>
+<div class="stmt ejemplo" id="clase-c19:ej-restricciones-lineales"><div class="head">Ejemplo restricciones lineales</div><div class="body"><p>$\min f(x)$ sujeto a $Ax=b$ es $\min_{x}f(x)+\delta_{\{b\}}(Ax)$, y como
+$\delta_{\{b\}}^{*}(y)=\ip{b}{y}$, es el problema min-max del Lagrangiano</p>
+<div class="display">\[
+  \min_{x}\ \max_{y}\ f(x)+\ip{Ax-b}{y}.
+\]</div>
+<p>La variable dual no está regularizada y $\phi$ es lineal en $y$: el acoplamiento
+introduce una componente rotacional, como en el problema bilineal, y por eso el
+descenso-ascenso directo puede ser inestable aunque $f$ sea convexa.</p></div></div>
+<div class="stmt ejemplo" id="clase-c19:ej-tv"><div class="head">Ejemplo variación total</div><div class="body"><p>En recuperación de imágenes, con $D$ una matriz de diferencias y $\lambda&gt;0$,</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\Bigl\{\frac12\norm{x-b}^{2}+\lambda\norm{Dx}_{1}\Bigr\}
+  =\min_{x}\ \max_{\norm{y}_{\infty}\le\lambda}\ \frac12\norm{x-b}^{2}+\ip{Dx}{y},
+\]</div>
+<p>porque la conjugada de $\lambda\norm{\cdot}_{1}$ es la indicadora de la bola de
+radio $\lambda$ de $\norm{\cdot}_{\infty}$.</p></div></div>
+<div class="stmt ejemplo" id="clase-c19:ej-robusta"><div class="head">Ejemplo optimización robusta<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\Phi(x,u)$ es convexa en la decisión $x\in X$ y cóncava en la perturbación
+$u\in U$, el problema $\min_{x\in X}\max_{u\in U}\Phi(x,u)$ busca la decisión que
+minimiza el peor escenario. Si $X$ y $U$ son compactos y $\Phi$ es continua, el
+teorema de Sion permite intercambiar el orden y leer el problema desde el
+adversario. Si $\Phi$ no es cóncava en $u$, la igualdad puede fallar y esta
+teoría no se aplica directamente.</p></div></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -6490,6 +6777,10 @@ $Gx+z=h$, $z\ge0$, las condiciones KKT son</p>
 <p>con $\lambda\ge0$, $z\ge0$ y $Z=\operatorname{diag}(z)$.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p137">Ver demostración</button><div class="proof" id="general-convexa-p137"><p>El gradiente del Lagrangiano es $Qx+c+G^{*}\lambda+A^{*}\nu$, y la holgura
 complementaria es $\lambda_{i}(Gx-h)_{i}=-\lambda_{i}z_{i}=0$.</p></div>
+<div class="stmt observacion" id="general-c18:obs-qp-central"><div class="head">Observación la única ecuación no lineal</div><div class="body"><p>Todas las ecuaciones del sistema son lineales salvo $Z\lambda=0$, que vive en
+$\R^{k}$. Los métodos de punto interior la cambian por $Z\lambda=\mu\1$ con
+$z,\lambda&gt;0$, resuelven el sistema con el método de Newton y hacen tender $\mu$
+a $0$.</p></div></div>
 <div class="stmt observacion" id="general-c18:obs-qp-igualdades"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sin desigualdades, las condiciones KKT son el sistema
 $Qx^{*}+A^{*}\nu^{*}=-c$, $Ax^{*}=b$, que en $\R^{n}$ es el sistema lineal por
 bloques con matriz $</p>
@@ -6616,17 +6907,180 @@ suma o se separa.</p></div>
 \]</div>
 <p>y <span class="df">$\mu$-fuertemente monótono</span> si el lado izquierdo es al menos
 $\mu\norm{z-w}^{2}$.</p></div></div>
-<div class="stmt proposicion" id="general-c19:prop-monotono"><div class="head">Proposición convexo-cóncava da monótono<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El operador de un problema min-max es monótono, y
-$\min\{\mu_{x},\mu_{y}\}$-fuertemente monótono si $\phi$ es
-$\mu_{x}$-fuertemente convexa en $x$ y $\mu_{y}$-fuertemente cóncava en $y$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p149">Ver demostración</button><div class="proof" id="general-convexa-p149"><p>Son las cuatro desigualdades del gradiente en $(x,y)$ y $(u,v)$, dos de
+<div class="stmt ejemplo" id="general-c19:ej-gradiente-monotono"><div class="head">Ejemplo el gradiente de una convexa</div><div class="body"><p>Si $f:\Hs\to\R$ es convexa y Gâteaux diferenciable, $\nabla f$ es monótono, y
+$\mu$-fuertemente monótono si $f$ es $\mu$-fuertemente convexa.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p149">Ver demostración</button><div class="proof" id="general-convexa-p149"><p>Se suman la desigualdad del gradiente en $z$ hacia $w$ y en $w$ hacia $z$, con
+$\frac{\mu}{2}\norm{w-z}^{2}$ a la derecha de cada una en el caso fuerte.</p></div>
+<div class="stmt proposicion" id="general-c19:prop-monotono"><div class="head">Proposición convexo-cóncava da monótono</div><div class="body"><p>Si $\phi$ es diferenciable en un abierto que contiene a $Z$, convexa en $x$ y
+cóncava en $y$, su operador $F$ es monótono.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p150">Ver demostración</button><div class="proof" id="general-convexa-p150"><p>Son las cuatro desigualdades del gradiente en $(x,y)$ y $(u,v)$, dos de
 convexidad en $x$ y dos de concavidad en $y$: sumadas de dos en dos acotan la
 misma combinación de valores de $\phi$ por los dos lados, y eso es
-$\ip{F(z)-F(w)}{z-w}\ge0$, con $\mu_{x}\norm{x-u}^{2}+\mu_{y}\norm{y-v}^{2}$ a la
-derecha en el caso fuerte.</p></div>
-<div class="stmt definicion" id="general-c19:def-vi"><div class="head">Definición desigualdad variacional<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Dados un convexo cerrado $Z$ y un operador monótono $F$, el problema de
+$\ip{F(z)-F(w)}{z-w}\ge0$.</p></div>
+<div class="stmt proposicion" id="general-c19:prop-monotono-fuerte"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\phi$ es $\mu_{x}$-fuertemente convexa en $x$ y $\mu_{y}$-fuertemente
+cóncava en $y$, su operador es $\min\{\mu_{x},\mu_{y}\}$-fuertemente monótono.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p151">Ver demostración</button><div class="proof" id="general-convexa-p151"><p>La misma cuenta, con $\mu_{x}\norm{x-u}^{2}+\mu_{y}\norm{y-v}^{2}$ a la derecha.</p></div>
+<div class="stmt definicion" id="general-c19:def-vi"><div class="head">Definición desigualdad variacional</div><div class="body"><p>Dados un convexo cerrado $Z$ y un operador monótono $F$, el problema de
 <span class="df">desigualdad variacional</span> es hallar $z^{*}\in Z$ con
-$\ip{F(z^{*})}{z-z^{*}}\ge0$ para todo $z\in Z$.</p></div></div></section></div>
+$\ip{F(z^{*})}{z-z^{*}}\ge0$ para todo $z\in Z$.</p></div></div>
+<h3 id="general-convexa-x33">Descenso-ascenso del gradiente</h3>
+<div class="stmt definicion" id="general-c19:def-dag"><div class="head">Definición descenso-ascenso del gradiente</div><div class="body"><p>Sean $Z\subset\Hs\times\Ks$ convexo, cerrado y no vacío y
+$F:Z\to\Hs\times\Ks$. El método de <span class="df">descenso-ascenso del gradiente</span> con paso
+$\alpha&gt;0$ parte de $z^{0}\in Z$ y genera
+$z^{k+1}=\Proy_{Z}(z^{k}-\alpha F(z^{k}))$. Para un problema min-max es
+$x^{k+1}=\Proy_{X}(x^{k}-\alpha\nabla_{x}\phi(x^{k},y^{k}))$ e
+$y^{k+1}=\Proy_{Y}(y^{k}+\alpha\nabla_{y}\phi(x^{k},y^{k}))$.</p></div></div>
+<div class="stmt lema" id="general-c19:lem-punto-fijo"><div class="head">Lema las soluciones son puntos fijos</div><div class="body"><p>Para $\alpha&gt;0$, $z^{*}\in Z$ resuelve la desigualdad variacional si y solo si
+$z^{*}=\Proy_{Z}(z^{*}-\alpha F(z^{*}))$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p152">Ver demostración</button><div class="proof" id="general-convexa-p152"><p>Es la caracterización variacional de la proyección en el punto
+$z^{*}-\alpha F(z^{*})$.</p></div>
+<div class="stmt teorema" id="general-c19:teo-dag"><div class="head">Teorema convergencia bajo monotonía fuerte</div><div class="body"><p>Sean $F$ $\mu$-fuertemente monótono y $L$-Lipschitz en $Z$ y
+$0&lt;\alpha&lt;2\mu/L^{2}$. La desigualdad variacional tiene una única solución
+$z^{*}$, y</p>
+<div class="display">\[
+  \norm{z^{k+1}-z^{*}}^{2}\le\bigl(1-2\alpha\mu+\alpha^{2}L^{2}\bigr)\norm{z^{k}-z^{*}}^{2},
+\]</div>
+<p>con factor menor que $1$: la convergencia es lineal.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p153">Ver demostración</button><div class="proof" id="general-convexa-p153"><p>Sea $T(z)=\Proy_{Z}(z-\alpha F(z))$, que manda $Z$ en $Z$. Como la proyección es
+no expansiva, para $z,w\in Z$</p>
+<div class="display">\[
+\begin{aligned}
+  \norm{Tz-Tw}^{2}&amp;\le\norm{z-w}^{2}-2\alpha\ip{F(z)-F(w)}{z-w}+\alpha^{2}\norm{F(z)-F(w)}^{2}\\
+  &amp;\le\bigl(1-2\alpha\mu+\alpha^{2}L^{2}\bigr)\norm{z-w}^{2}.
+\end{aligned}
+\]</div>
+<p>$T$ es una contracción del espacio métrico completo $Z$, así que tiene un único
+punto fijo, que por el lema es la única solución, y la desigualdad con $w=z^{*}$
+es la del enunciado.</p></div>
+<div class="stmt ejemplo" id="general-c19:ej-bilineal"><div class="head">Ejemplo el problema bilineal<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $\phi(x,y)=xy$ en $\R\times\R$ el único punto de silla es $(0,0)$, y
+$F(x,y)=(y,-x)$ es monótono y $1$-Lipschitz pero no fuertemente monótono. El
+método con paso $\alpha$ cumple
+$(x^{k+1})^{2}+(y^{k+1})^{2}=(1+\alpha^{2})\bigl((x^{k})^{2}+(y^{k})^{2}\bigr)$,
+y se aleja del punto de silla para todo $\alpha&gt;0$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p154">Ver demostración</button><div class="proof" id="general-convexa-p154"><p>Un punto de silla tiene $x^{*}=0$, porque si no $x^{*}y$ no está acotada en $y$,
+y lo mismo $y^{*}=0$. El método es $x^{k+1}=x^{k}-\alpha y^{k}$,
+$y^{k+1}=y^{k}+\alpha x^{k}$, y los términos cruzados se cancelan.</p></div>
+<h3 id="general-convexa-x34">El método extragradiente</h3>
+<div class="stmt definicion" id="general-c19:def-extragradiente"><div class="head">Definición método extragradiente</div><div class="body"><p>Desde $z^{0}\in Z$, el <span class="df">método extragradiente</span> genera</p>
+<div class="display">\[
+  w^{k}=\Proy_{Z}\bigl(z^{k}-\alpha F(z^{k})\bigr),\qquad
+  z^{k+1}=\Proy_{Z}\bigl(z^{k}-\alpha F(w^{k})\bigr).
+\]</div></div></div>
+<div class="stmt lema" id="general-c19:lem-extragradiente"><div class="head">Lema desigualdad fundamental del extragradiente</div><div class="body"><p>Si $F$ es $L$-Lipschitz en $Z$, para todo $z\in Z$</p>
+<div class="display">\[
+  2\alpha\ip{F(w^{k})}{w^{k}-z}\le\norm{z^{k}-z}^{2}-\norm{z^{k+1}-z}^{2}-(1-\alpha^{2}L^{2})\norm{z^{k}-w^{k}}^{2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p155">Ver demostración</button><div class="proof" id="general-convexa-p155"><p>Es álgebra de producto interno y la caracterización variacional de la
+proyección, como en dimensión finita: la de $z^{k+1}$ en el punto $z$ da
+$2\alpha\ip{F(w^{k})}{z^{k+1}-z}\le\norm{z^{k}-z}^{2}-\norm{z^{k}-z^{k+1}}^{2}-\norm{z^{k+1}-z}^{2}$;
+la de $w^{k}$ en el punto $z^{k+1}$, con Cauchy–Schwarz y la constante de
+Lipschitz, da
+$2\alpha\ip{F(w^{k})}{w^{k}-z^{k+1}}\le\norm{z^{k}-z^{k+1}}^{2}-(1-\alpha^{2}L^{2})\norm{z^{k}-w^{k}}^{2}$,
+y se suman.</p></div>
+<div class="stmt teorema" id="general-c19:teo-extragradiente"><div class="head">Teorema convergencia del extragradiente</div><div class="body"><p>Sean $F$ monótono y $L$-Lipschitz en $Z$ y $0&lt;\alpha&lt;1/L$, y supongamos que el
+conjunto $S$ de soluciones de la desigualdad variacional no es vacío. Entonces
+$z^{k}$ converge débilmente a un punto de $S$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p156">Ver demostración</button><div class="proof" id="general-convexa-p156"><p>Como en dimensión finita, la monotonía y el lema con $z^{*}\in S$ dan
+$\norm{z^{k+1}-z^{*}}^{2}+(1-\alpha^{2}L^{2})\norm{z^{k}-w^{k}}^{2}\le\norm{z^{k}-z^{*}}^{2}$:
+la sucesión es Fejér monótona respecto de $S$, acotada, y $z^{k}-w^{k}\to0$.
+Sea $z^{k_{j}}\rightharpoonup\hat{z}$; entonces $w^{k_{j}}\rightharpoonup\hat{z}$, y
+$\hat{z}\in Z$ porque un convexo cerrado es débilmente cerrado. Para $z\in Z$,
+la caracterización variacional de la proyección que define $w^{k}$ da
+$\alpha\ip{F(z^{k})}{w^{k}-z}\le\ip{z^{k}-w^{k}}{w^{k}-z}$, y con la monotonía
+y la constante de Lipschitz,</p>
+<div class="display">\[
+  \ip{F(z)}{w^{k}-z}\le\ip{F(w^{k})}{w^{k}-z}
+  \le\Bigl(\frac1\alpha+L\Bigr)\norm{z^{k}-w^{k}}\norm{w^{k}-z}\longrightarrow0 .
+\]</div>
+<p>En el límite débil, $\ip{F(z)}{\hat{z}-z}\le0$ para todo $z\in Z$. Con
+$z=\hat{z}+t(u-\hat{z})$, $u\in Z$ y $t\in(0,1]$, eso es
+$\ip{F(\hat{z}+t(u-\hat{z}))}{u-\hat{z}}\ge0$, y haciendo $t\downarrow0$ por la
+continuidad de $F$, $\hat{z}\in S$. Todo punto de acumulación débil está en $S$,
+y el lema de Opial con $C=S$ concluye.</p></div>
+<div class="stmt lema" id="general-c19:lem-brecha-operador"><div class="head">Lema la brecha y el operador</div><div class="body"><p>Si $\phi$ es diferenciable, convexa en $x$ y cóncava en $y$, para todos
+$w=(w_{x},w_{y})$ y $z=(x,y)$ en $Z$,
+$\phi(w_{x},y)-\phi(x,w_{y})\le\ip{F(w)}{w-z}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p157">Ver demostración</button><div class="proof" id="general-convexa-p157"><p>Se restan las desigualdades del gradiente
+$\phi(x,w_{y})\ge\phi(w)+\ip{\nabla_{x}\phi(w)}{x-w_{x}}$ y
+$\phi(w_{x},y)\le\phi(w)+\ip{\nabla_{y}\phi(w)}{y-w_{y}}$.</p></div>
+<div class="stmt teorema" id="general-c19:teo-extragradiente-ergodico"><div class="head">Teorema tasa ergódica del extragradiente</div><div class="body"><p>Sean $F$ el operador de un problema min-max, $L$-Lipschitz en $Z$, y
+$0&lt;\alpha\le1/L$. El promedio $(\bar{x}_{N},\bar{y}_{N})$ de
+$w^{0},\dots,w^{N-1}$ cumple, para todo $(x,y)\in Z$,</p>
+<div class="display">\[
+  \phi(\bar{x}_{N},y)-\phi(x,\bar{y}_{N})\le\frac{\norm{z^{0}-(x,y)}^{2}}{2\alpha N}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p158">Ver demostración</button><div class="proof" id="general-convexa-p158"><p>El lema anterior y la desigualdad fundamental dan
+$2\alpha(\phi(w^{k}_{x},y)-\phi(x,w^{k}_{y}))\le\norm{z^{k}-z}^{2}-\norm{z^{k+1}-z}^{2}$;
+se suma, telescopa, y la desigualdad de Jensen en cada variable concluye.</p></div>
+<div class="stmt corolario" id="general-c19:cor-brecha-restringida"><div class="head">Corolario la brecha restringida<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X_{0}\subset X$ e $Y_{0}\subset Y$ son acotados,
+$\mathcal{G}_{X_{0},Y_{0}}(\bar{x}_{N},\bar{y}_{N})\le\frac{1}{2\alpha N}\sup_{z\in X_{0}\times Y_{0}}\norm{z^{0}-z}^{2}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p159">Ver demostración</button><div class="proof" id="general-convexa-p159"><p>Se toma el supremo del teorema sobre $(x,y)\in X_{0}\times Y_{0}$.</p></div>
+<div class="stmt observacion" id="general-c19:obs-tasa-extragradiente"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La tasa $O(1/N)$ mejora el $O(1/\sqrt{N})$ del subgradiente, a cambio de la
+estructura suave convexo-cóncava y de dos evaluaciones de $F$ por iteración.</p></div></div>
+<h3 id="general-convexa-x35">Mirror-Prox</h3>
+<p>En esta sección $Z=X\times Y$ es un convexo de un espacio de Banach $E$ con norma
+$\norm{\cdot}$, $F$ toma valores en $E^{*}$, $h:Z\to\R$ y $D_{h}$ son como en
+mirror descent, con $\sigma=1$, y $Z_{h}$ es el conjunto donde $h$ es Gâteaux
+diferenciable. El lema de la brecha y el operador vale igual con derivadas de
+Gâteaux.</p>
+<div class="stmt definicion" id="general-c19:def-mirror-prox"><div class="head">Definición Mirror-Prox<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El método <span class="df">Mirror-Prox</span> genera</p>
+<div class="display">\[
+\begin{aligned}
+  w^{k}&amp;=\argmin_{u\in Z}\bigl\{\alpha\ip{F(z^{k})}{u}+D_{h}(u,z^{k})\bigr\},\\
+  z^{k+1}&amp;=\argmin_{u\in Z}\bigl\{\alpha\ip{F(w^{k})}{u}+D_{h}(u,z^{k})\bigr\},
+\end{aligned}
+\]</div>
+<p>suponiendo que los subproblemas tienen solución y que los iterados se quedan en
+$Z_{h}$. En $\Hs$ con $h=\frac12\norm{\cdot}^{2}$ es el extragradiente.</p></div></div>
+<div class="stmt teorema" id="general-c19:teo-mirror-prox"><div class="head">Teorema tasa de Mirror-Prox<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $F$ el operador de un problema min-max, con
+$\norm{F(z)-F(w)}_{*}\le L\norm{z-w}$ en $Z$, y $0&lt;\alpha\le1/L$. El promedio
+$(\bar{x}_{N},\bar{y}_{N})$ de $w^{0},\dots,w^{N-1}$ cumple, para todo
+$z=(x,y)\in Z$,</p>
+<div class="display">\[
+  \phi(\bar{x}_{N},y)-\phi(x,\bar{y}_{N})\le\frac{D_{h}(z,z^{0})}{\alpha N}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p160">Ver demostración</button><div class="proof" id="general-convexa-p160"><p>La de dimensión finita, que solo usa la condición de primer orden de los
+subproblemas, la identidad de los tres puntos, la norma dual y
+$D_{h}(u,v)\ge\frac12\norm{u-v}^{2}$: cada iteración da
+$\alpha\ip{F(w^{k})}{w^{k}-z}\le D_{h}(z,z^{k})-D_{h}(z,z^{k+1})$, y se concluye
+con el lema de la brecha y el operador y la desigualdad de Jensen.</p></div>
+<div class="stmt observacion" id="general-c19:obs-mirror-prox-juego"><div class="head">Observación Mirror-Prox en un juego matricial<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En el juego matricial, con la entropía negativa en cada símplex, los dos pasos
+son actualizaciones multiplicativas, como el paso entrópico de mirror descent, y
+no hay que proyectar sobre el símplex.</p></div></div>
+<h3 id="general-convexa-x36">Métodos optimistas</h3>
+<div class="stmt definicion" id="general-c19:def-optimista"><div class="head">Definición gradiente optimista</div><div class="body"><p>El <span class="df">método del gradiente optimista</span> es
+$z^{k+1}=\Proy_{Z}(z^{k}-2\alpha F(z^{k})+\alpha F(z^{k-1}))$, que reutiliza la
+evaluación anterior y pide una sola evaluación nueva de $F$ por iteración.</p></div></div>
+<div class="stmt observacion" id="general-c19:obs-optimista"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>En problemas bilineales la corrección amortigua la rotación, y bajo hipótesis
+apropiadas el método converge; fuera del caso monótono o bilineal sus garantías
+piden cuidado.</p></div></div>
+<h3 id="general-convexa-x37">Problemas estructurados</h3>
+<div class="stmt proposicion" id="general-c19:prop-compuesto"><div class="head">Proposición el problema compuesto como min-max</div><div class="body"><p>Sean $f:\Hs\to\R\cup\{\infty\}$ y $g:\Ks\to\R\cup\{\infty\}$ propias, convexas
+y cerradas, y $K\in\Bop{\Hs,\Ks}$. Para todo $x\in\Hs$,
+$\sup_{y\in\Ks}\{f(x)+\ip{Kx}{y}-g^{*}(y)\}=f(x)+g(Kx)$, así que
+$\min_{x}f(x)+g(Kx)$ es el problema min-max de
+$\phi(x,y)=f(x)+\ip{Kx}{y}-g^{*}(y)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p161">Ver demostración</button><div class="proof" id="general-convexa-p161"><p>El supremo es $g^{**}(Kx)=g(Kx)$, por el teorema de Fenchel–Moreau.</p></div>
+<div class="stmt proposicion" id="general-c19:prop-silla-compuesto"><div class="head">Proposición las condiciones de punto de silla</div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla de $\phi$ en $\dom f\times\dom g^{*}$ si y
+solo si $0\in\subdif f(x^{*})+K^{*}y^{*}$ y $0\in\subdif g^{*}(y^{*})-Kx^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p162">Ver demostración</button><div class="proof" id="general-convexa-p162"><p>$x^{*}$ minimiza $f+\ip{K^{*}y^{*}}{\cdot}$ e $y^{*}$ minimiza
+$g^{*}-\ip{Kx^{*}}{\cdot}$, y sumar una función lineal continua traslada el
+subdiferencial.</p></div>
+<div class="stmt observacion" id="general-c19:obs-descomposicion"><div class="head">Observación la parte diagonal y la parte antisimétrica</div><div class="body"><p>En $\Hs\times\Ks$ las condiciones son
+$0\in(\subdif f\times\subdif g^{*})(z^{*})+Bz^{*}$ con $B(x,y)=(K^{*}y,-Kx)$. La
+primera parte tiene por resolventes $\prox_{f}$ y $\prox_{g^{*}}$; $B$ es lineal,
+continua y antisimétrica, $B^{*}=-B$, y solo pide aplicar $K$ y $K^{*}$.</p></div></div>
+<div class="stmt ejemplo" id="general-c19:ej-restricciones-lineales"><div class="head">Ejemplo restricciones lineales</div><div class="body"><p>Para $A\in\Bop{\Hs,\Ks}$, $\min f(x)$ sujeto a $Ax=b$ es
+$\min_{x}f(x)+\delta_{\{b\}}(Ax)$, y como $\delta_{\{b\}}^{*}=\ip{b}{\cdot}$, es
+el problema min-max del Lagrangiano $f(x)+\ip{Ax-b}{y}$, lineal en $y$.</p></div></div>
+<div class="stmt ejemplo" id="general-c19:ej-tv"><div class="head">Ejemplo variación total</div><div class="body"><p>En $\R^{n}$, con $D$ una matriz de diferencias,
+$\min_{x}\frac12\norm{x-b}^{2}+\lambda\norm{Dx}_{1}=\min_{x}\max_{\norm{y}_{\infty}\le\lambda}\frac12\norm{x-b}^{2}+\ip{Dx}{y}$,
+porque la conjugada de $\lambda\norm{\cdot}_{1}$ es la indicadora de la bola de
+radio $\lambda$ de $\norm{\cdot}_{\infty}$.</p></div></div>
+<div class="stmt ejemplo" id="general-c19:ej-robusta"><div class="head">Ejemplo optimización robusta<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\min_{x\in X}\max_{u\in U}\Phi(x,u)$, con $\Phi$ convexa en la decisión y
+cóncava en la perturbación, busca la decisión que minimiza el peor escenario. Si
+$X$ y $U$ son compactos y $\Phi$ es continua, el teorema de Sion permite
+intercambiar el orden; sin concavidad en $u$ la igualdad puede fallar.</p></div></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -8085,6 +8539,10 @@ desigualdades, en $\R^{n}$, es el sistema lineal con matriz
 $</p>
 <div class="display">\begin{pmatrix}Q&amp;A\trans\\A&amp;0\end{pmatrix}</div>
 <p>$.</p></div></div>
+<div class="stmt observacion" id="ambas-c18:obs-qp-central"><div class="head">Observación la única ecuación no lineal</div><div class="body"><p>Todas las ecuaciones del sistema son lineales salvo $Z\lambda=0$. Los métodos
+de punto interior la cambian por $Z\lambda=\mu\1$ con $z,\lambda&gt;0$, resuelven
+con Newton y hacen tender $\mu$ a $0$. Esa ecuación vive en $\R^{k}$, así que no
+depende de la dimensión de $\Hs$.</p></div></div>
 <div class="stmt observacion" id="ambas-c18:obs-activas"><div class="head">Observación restricciones activas</div><div class="body"><p>Una restricción inactiva tiene multiplicador cero, y no al revés: en $\min x^{2}$
 sujeto a $x\le0$ la restricción está activa y $\lambda^{*}=0$.</p></div></div>
 <h3 id="ambas-convexa-x32">Puntos de silla</h3>
@@ -8146,11 +8604,83 @@ en $\Hs\times\Ks$. En $\Hs$ el gradiente es el que da el teorema de Riesz.</p></
 $z\in Z$, es decir $0\in F(z^{*})+\Ncono_{Z}(z^{*})$.</p></div></div>
 <div class="stmt definicion" id="ambas-c19:def-monotono"><div class="head">Definición operador monótono</div><div class="body"><p>$F$ es monótono si $\ip{F(z)-F(w)}{z-w}\ge0$, y $\mu$-fuertemente monótono si
 el lado izquierdo es al menos $\mu\norm{z-w}^{2}$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c19:ej-gradiente-monotono"><div class="head">Ejemplo el gradiente de una convexa</div><div class="body"><p>El gradiente de una convexa diferenciable es monótono, y $\mu$-fuertemente
+monótono si es $\mu$-fuertemente convexa.</p></div></div>
 <div class="stmt proposicion" id="ambas-c19:prop-monotono"><div class="head">Proposición convexo-cóncava da monótono</div><div class="body"><p>El operador de un problema min-max es monótono, y
 $\min\{\mu_{x},\mu_{y}\}$-fuertemente monótono con convexidad y concavidad
-fuertes.</p></div></div>
+fuertes. Basta la diferenciabilidad, en $\R^{n}$ y en $\Hs$.</p></div></div>
 <div class="stmt definicion" id="ambas-c19:def-vi"><div class="head">Definición desigualdad variacional</div><div class="body"><p>Dados un convexo cerrado $Z$ y $F$ monótono, hallar $z^{*}\in Z$ con
-$\ip{F(z^{*})}{z-z^{*}}\ge0$ para todo $z\in Z$.</p></div></div></section></div>
+$\ip{F(z^{*})}{z-z^{*}}\ge0$ para todo $z\in Z$. Para $\alpha&gt;0$, es lo mismo
+que $z^{*}=\Proy_{Z}(z^{*}-\alpha F(z^{*}))$.</p></div></div>
+<h3 id="ambas-convexa-x36">Descenso-ascenso del gradiente</h3>
+<div class="stmt definicion" id="ambas-c19:def-dag"><div class="head">Definición descenso-ascenso del gradiente</div><div class="body"><p>$z^{k+1}=\Proy_{Z}(z^{k}-\alpha F(z^{k}))$: un paso de descenso en $x$ y uno de
+ascenso en $y$, proyectados.</p></div></div>
+<div class="stmt teorema" id="ambas-c19:teo-dag"><div class="head">Teorema convergencia bajo monotonía fuerte</div><div class="body"><p>Si $F$ es $\mu$-fuertemente monótono y $L$-Lipschitz en $Z$ y
+$0&lt;\alpha&lt;2\mu/L^{2}$, la desigualdad variacional tiene una única solución
+$z^{*}$, y
+$\norm{z^{k+1}-z^{*}}^{2}\le(1-2\alpha\mu+\alpha^{2}L^{2})\norm{z^{k}-z^{*}}^{2}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c19:obs-dag-contraste"><div class="head">Observación una contracción en los dos settings</div><div class="body"><p>La prueba es que $z\mapsto\Proy_{Z}(z-\alpha F(z))$ es una contracción de $Z$,
+que es completo por ser cerrado, y no usa compacidad. Vale igual en $\R^{n}$ y
+en $\Hs$, con convergencia lineal en norma en los dos.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c19:ej-bilineal"><div class="head">Ejemplo el problema bilineal</div><div class="body"><p>Para $\phi(x,y)=xy$, $F(x,y)=(y,-x)$ es monótono y Lipschitz pero no
+fuertemente monótono, y el método multiplica $(x^{k})^{2}+(y^{k})^{2}$ por
+$1+\alpha^{2}$ en cada paso: se aleja del punto de silla girando.</p></div></div>
+<h3 id="ambas-convexa-x37">El método extragradiente</h3>
+<div class="stmt definicion" id="ambas-c19:def-extragradiente"><div class="head">Definición método extragradiente</div><div class="body"><p>$w^{k}=\Proy_{Z}(z^{k}-\alpha F(z^{k}))$ y
+$z^{k+1}=\Proy_{Z}(z^{k}-\alpha F(w^{k}))$: se predice y se corrige desde
+$z^{k}$.</p></div></div>
+<div class="stmt lema" id="ambas-c19:lem-extragradiente"><div class="head">Lema desigualdad fundamental del extragradiente</div><div class="body"><p>Si $F$ es $L$-Lipschitz, para todo $z\in Z$</p>
+<div class="display">\[
+  2\alpha\ip{F(w^{k})}{w^{k}-z}\le\norm{z^{k}-z}^{2}-\norm{z^{k+1}-z}^{2}-(1-\alpha^{2}L^{2})\norm{z^{k}-w^{k}}^{2}.
+\]</div>
+<p>Es álgebra de producto interno, la misma en los dos settings.</p></div></div>
+<div class="stmt teorema" id="ambas-c19:teo-extragradiente"><div class="head">Teorema convergencia del extragradiente</div><div class="body"><p>Si $F$ es monótono y $L$-Lipschitz, $0&lt;\alpha&lt;1/L$ y hay solución, $z^{k}$
+converge a una solución: en norma en $\R^{n}$, y débilmente en $\Hs$.</p></div></div>
+<div class="stmt observacion" id="ambas-c19:obs-extragradiente-contraste"><div class="head">Observación dónde se separan las dos pruebas</div><div class="body"><p>Las dos empiezan igual: la sucesión es Fejér monótona respecto de las soluciones
+y $z^{k}-w^{k}\to0$. En $\R^{n}$ una subsucesión converge en norma, se pasa al
+límite en $w^{k}=\Proy_{Z}(z^{k}-\alpha F(z^{k}))$ por continuidad, y Fejér
+convierte la subsucesión en la sucesión entera. En $\Hs$ solo hay subsucesiones
+débilmente convergentes, y ni la proyección ni $F$ son débilmente continuas en
+general: con $e_{n}$ ortonormales, $e_{1}+e_{2n}\rightharpoonup e_{1}$, pero su
+proyección sobre la bola unidad, $(e_{1}+e_{2n})/\sqrt{2}$, tiende débilmente a
+$e_{1}/\sqrt{2}$ y no a $e_{1}$. Ese límite no se puede tomar. Se pasa al límite débil en la
+desigualdad $\ip{F(z)}{w^{k}-z}\le\ip{F(w^{k})}{w^{k}-z}$, que es lineal en
+$w^{k}$, y la continuidad de $F$ en los segmentos devuelve la desigualdad
+variacional. Lo que se obtiene es convergencia débil: una sucesión Fejér
+monótona no tiene por qué converger en norma, como muestra una sucesión
+ortonormal respecto de $\{0\}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c19:teo-extragradiente-ergodico"><div class="head">Teorema tasa ergódica del extragradiente</div><div class="body"><p>Para el operador de un problema min-max, $L$-Lipschitz, y $0&lt;\alpha\le1/L$, el
+promedio $(\bar{x}_{N},\bar{y}_{N})$ de las predicciones cumple
+$\phi(\bar{x}_{N},y)-\phi(x,\bar{y}_{N})\le\norm{z^{0}-(x,y)}^{2}/(2\alpha N)$, y
+la brecha restringida a acotados $X_{0}\times Y_{0}$ es $O(1/N)$. Sale de
+$\phi(w_{x},y)-\phi(x,w_{y})\le\ip{F(w)}{w-z}$, del lema y de la desigualdad de
+Jensen, sin topología: es la misma en los dos settings.</p></div></div>
+<h3 id="ambas-convexa-x38">Mirror-Prox</h3>
+<div class="stmt teorema" id="ambas-c19:teo-mirror-prox"><div class="head">Teorema Mirror-Prox</div><div class="body"><p>Con una función $h$ $1$-fuertemente convexa respecto de una norma y su
+divergencia de Bregman en lugar de $\frac12\norm{\cdot}^{2}$, el extragradiente
+se vuelve Mirror-Prox, y si $\norm{F(z)-F(w)}_{*}\le L\norm{z-w}$ y
+$0&lt;\alpha\le1/L$, la brecha del promedio es a lo sumo $D_{h}(z,z^{0})/(\alpha N)$.
+La prueba es la misma en $\R^{n}$ con una norma cualquiera y en un espacio de
+Banach, y en el juego matricial con entropía cada paso es multiplicativo.</p></div></div>
+<h3 id="ambas-convexa-x39">Métodos optimistas</h3>
+<div class="stmt definicion" id="ambas-c19:def-optimista"><div class="head">Definición gradiente optimista</div><div class="body"><p>$z^{k+1}=\Proy_{Z}(z^{k}-2\alpha F(z^{k})+\alpha F(z^{k-1}))$: una sola
+evaluación nueva de $F$ por iteración. Amortigua la rotación en problemas
+bilineales, y sus garantías fuera de ese caso y del monótono piden cuidado.</p></div></div>
+<h3 id="ambas-convexa-x40">Problemas estructurados</h3>
+<div class="stmt proposicion" id="ambas-c19:prop-compuesto"><div class="head">Proposición el problema compuesto como min-max</div><div class="body"><p>Para $f$, $g$ propias, convexas y cerradas y $K$ lineal y continuo,
+$\min_{x}f(x)+g(Kx)$ es el problema min-max de
+$f(x)+\ip{Kx}{y}-g^{*}(y)$, por Fenchel–Moreau, y sus puntos de silla son los
+$z^{*}=(x^{*},y^{*})$ con $0\in\subdif f(x^{*})+K^{*}y^{*}$ y
+$0\in\subdif g^{*}(y^{*})-Kx^{*}$. En $\R^{n}$, $K^{*}=K\trans$.</p></div></div>
+<div class="stmt observacion" id="ambas-c19:obs-descomposicion"><div class="head">Observación la parte diagonal y la parte antisimétrica</div><div class="body"><p>Las condiciones son $0\in(\subdif f\times\subdif g^{*})(z^{*})+Bz^{*}$, con
+$B(x,y)=(K^{*}y,-Kx)$ antisimétrico. La primera parte se resuelve con $\prox_{f}$
+y $\prox_{g^{*}}$, y la segunda solo pide aplicar $K$ y $K^{*}$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c19:ej-restricciones-lineales"><div class="head">Ejemplo restricciones lineales, variación total y optimización robusta</div><div class="body"><p>$\min f(x)$ sujeto a $Ax=b$ es el min-max del Lagrangiano $f(x)+\ip{Ax-b}{y}$,
+lineal en $y$. La variación total
+$\min\frac12\norm{x-b}^{2}+\lambda\norm{Dx}_{1}$ es el min-max de
+$\frac12\norm{x-b}^{2}+\ip{Dx}{y}$ con $\norm{y}_{\infty}\le\lambda$. Y
+$\min_{x\in X}\max_{u\in U}\Phi(x,u)$ minimiza el peor escenario, con Sion para
+intercambiar el orden si $X$ y $U$ son compactos.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
