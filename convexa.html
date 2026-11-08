@@ -611,7 +611,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "prox": "\\operatorname{prox}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "env": ["{}^{#1}\\!#2", 2], "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "prox": "\\operatorname{prox}", "gra": "\\operatorname{gra}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "env": ["{}^{#1}\\!#2", 2], "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
   startup: {
@@ -4204,7 +4204,163 @@ $u\in U$, el problema $\min_{x\in X}\max_{u\in U}\Phi(x,u)$ busca la decisión q
 minimiza el peor escenario. Si $X$ y $U$ son compactos y $\Phi$ es continua, el
 teorema de Sion permite intercambiar el orden y leer el problema desde el
 adversario. Si $\Phi$ no es cóncava en $u$, la igualdad puede fallar y esta
-teoría no se aplica directamente.</p></div></div></section></div>
+teoría no se aplica directamente.</p></div></div></section>
+<section class="capitulo"><h2 id="clase-cap:splitting" data-toc="Métodos de splitting">Métodos de splitting y algoritmos primal-duales</h2>
+<div class="stmt observacion" id="clase-c20:obs-separable"><div class="head">Observación los problemas separables</div><div class="body"><p>Los métodos de <span class="df">splitting</span> atacan problemas de la forma</p>
+<div class="display">\[
+  \min_{x,z}\ f(x)+g(z)\qquad\text{sujeto a}\qquad Ax+Bz=c,
+\]</div>
+<p>con $f$ y $g$ convexas, tratando cada bloque por separado. Dos de ellos son el
+método de Douglas–Rachford y el método primal-dual híbrido de gradiente
+(PDHG).</p></div></div>
+<h3 id="clase-convexa-x42">Operadores monótonos y resolventes</h3>
+<div class="stmt definicion" id="clase-c20:def-monotono"><div class="head">Definición operador monótono<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Un operador $T:\R^{n}\rightrightarrows\R^{n}$ asigna a cada $x$ un conjunto
+$T(x)\subset\R^{n}$, quizá vacío, y su <span class="df">grafo</span> es
+$\gra T=\{(x,v):v\in T(x)\}$. Es <span class="df">monótono</span> si</p>
+<div class="display">\[
+  \ip{u-v}{x-y}\ge0\qquad\text{para todos }u\in T(x),\ v\in T(y).
+\]</div>
+<p>El subdiferencial de una función convexa y propia es monótono: basta sumar la
+desigualdad del subgradiente de $x$ hacia $y$ y la de $y$ hacia $x$.</p></div></div>
+<div class="stmt definicion" id="clase-c20:def-resolvente"><div class="head">Definición resolvente y reflexión</div><div class="body"><p>Para $\gamma&gt;0$, el <span class="df">resolvente</span> de $T$ es $J_{\gamma T}=(I+\gamma T)^{-1}$,
+es decir, $J_{\gamma T}(u)=\{x:u\in x+\gamma T(x)\}$, y el <span class="df">operador
+reflexión</span> es $R_{\gamma T}=2J_{\gamma T}-I$.</p></div></div>
+<div class="stmt ejemplo" id="clase-c20:ej-prox"><div class="head">Ejemplo el proximal y la proyección</div><div class="body"><p>Si $h\in\Gamma_{0}(\R^{n})$, entonces $J_{\gamma\subdif h}=\prox_{\gamma h}$. En
+particular, si $C$ es convexo, cerrado y no vacío, $J_{\gamma\subdif\delta_{C}}=\Proy_{C}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p171">Ver demostración</button><div class="proof" id="clase-convexa-p171"><p>Por la caracterización del proximal, $u\in p+\gamma\subdif h(p)$ si y solo si
+$p=\prox_{\gamma h}(u)$, y $\prox_{\gamma\delta_{C}}=\Proy_{C}$ es el ejemplo de la
+indicadora.</p></div>
+<div class="stmt observacion" id="clase-c20:obs-inclusion"><div class="head">Observación inclusiones monótonas<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Minimizar $f+g$, con $f,g\in\Gamma_{0}(\R^{n})$, es resolver
+$0\in\subdif f(x)+\subdif g(x)$ cuando vale la regla de la suma, que es un caso de
+la inclusión $0\in A(x)+B(x)$ con $A$ y $B$ monótonos. El punto proximal aplicado
+a la suma pide el resolvente de $A+B$, que puede ser difícil aunque los de $A$ y
+$B$ sean sencillos. Los métodos de splitting usan los dos resolventes por
+separado. Lo mismo pasa con $\min_{x}f(x)+g(Kx)$: componer con $K$ destruye la
+estructura proximal de $g$.</p></div></div>
+<div class="stmt lema" id="clase-c20:lem-univaluado"><div class="head">Lema el resolvente es univaluado</div><div class="body"><p>Si $T$ es monótono y $\gamma&gt;0$, para cada $u$ hay a lo sumo un $x$ con
+$u\in x+\gamma T(x)$. Así, $J_{\gamma T}$ es una función en el conjunto de los
+$u$ donde no es vacío.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p172">Ver demostración</button><div class="proof" id="clase-convexa-p172"><p>Si $u=x_{1}+\gamma v_{1}=x_{2}+\gamma v_{2}$ con $v_{i}\in T(x_{i})$, entonces</p>
+<div class="display">\[
+  0=\ip{u-u}{x_{1}-x_{2}}=\norm{x_{1}-x_{2}}^{2}+\gamma\ip{v_{1}-v_{2}}{x_{1}-x_{2}}\ge\norm{x_{1}-x_{2}}^{2},
+\]</div>
+<p>así que $x_{1}=x_{2}$.</p></div>
+<div class="stmt definicion" id="clase-c20:def-maximal"><div class="head">Definición maximalmente monótono</div><div class="body"><p>Un operador monótono $T$ es <span class="df">maximalmente monótono</span> si su grafo no está
+contenido propiamente en el de otro operador monótono. Es decir, si $(a,b)$
+cumple $\ip{a-x}{b-v}\ge0$ para todo $(x,v)\in\gra T$, entonces
+$(a,b)\in\gra T$.</p></div></div>
+<div class="stmt teorema" id="clase-c20:teo-minty"><div class="head">Teorema Minty</div><div class="body"><p>Sea $T$ monótono. Entonces $T$ es maximalmente monótono si y solo si
+$I+\gamma T$ es sobreyectivo para algún $\gamma&gt;0$, y en ese caso lo es para
+todo $\gamma&gt;0$. En particular, si $T$ es maximalmente monótono, $J_{\gamma T}$
+es una función definida en todo $\R^{n}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p173">Ver demostración</button><div class="proof" id="clase-convexa-p173"><p>Sean $I+\gamma T$ sobreyectivo y $(a,b)$ con $\ip{a-x}{b-v}\ge0$ para todo
+$(x,v)\in\gra T$. Tomando $(x,v)\in\gra T$ con $a+\gamma b=x+\gamma v$, se tiene
+$a-x=\gamma(v-b)$ y</p>
+<div class="display">\[
+  0\le\ip{a-x}{b-v}=-\gamma\norm{b-v}^{2},
+\]</div>
+<p>así que $b=v$, $a=x$ y $(a,b)\in\gra T$. La implicación directa, para todo
+$\gamma&gt;0$, es la parte difícil del teorema y se admite. La última afirmación es
+la sobreyectividad junto con el lema anterior.</p></div>
+<div class="stmt ejemplo" id="clase-c20:ej-no-maximal"><div class="head">Ejemplo un monótono que no es maximal</div><div class="body"><p>En $\R$, el operador $T(x)=\{0\}$ si $x\ge0$ y $T(x)=\varnothing$ si $x&lt;0$ es
+monótono, pero su grafo está contenido propiamente en el de</p>
+<div class="display">\[
+  \Ncono_{[0,\infty)}(x)=
+  \begin{cases}
+    \{0\}, &amp; x&gt;0,\\
+    (-\infty,0], &amp; x=0,\\
+    \varnothing, &amp; x&lt;0,
+  \end{cases}
+\]</div>
+<p>que es $\subdif\delta_{[0,\infty)}$ y por tanto monótono. De acuerdo con el
+teorema de Minty, $I+\gamma T$ tiene imagen $[0,\infty)$, mientras que
+$J_{\gamma\Ncono_{[0,\infty)}}(u)=\Proy_{[0,\infty)}(u)=\max\{u,0\}$ está definido
+en todo $\R$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p174">Ver demostración</button><div class="proof" id="clase-convexa-p174"><p>$T$ es monótono porque sus valores son nulos, y $(0,-1)$ está en el grafo del
+cono normal y no en el de $T$. Un $v$ es subgradiente de $\delta_{[0,\infty)}$ en
+$0$ si y solo si $v(y-0)\le0$ para todo $y\ge0$, es decir, $v\le0$. La imagen de
+$I+\gamma T$ es $\{x:x\ge0\}$, y el resolvente del cono normal es el ejemplo del
+proximal y la proyección.</p></div>
+<div class="stmt teorema" id="clase-c20:teo-subdif-maximal"><div class="head">Teorema el subdiferencial es maximalmente monótono</div><div class="body"><p>Si $h\in\Gamma_{0}(\R^{n})$, $\subdif h$ es maximalmente monótono.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p175">Ver demostración</button><div class="proof" id="clase-convexa-p175"><p>Es monótono. Para cada $u$, $p=\prox_{h}(u)$ existe y, por la caracterización
+del proximal, $u-p\in\subdif h(p)$, es decir, $u\in(I+\subdif h)(p)$. Así
+$I+\subdif h$ es sobreyectivo, y la implicación que se demostró del teorema de
+Minty concluye.</p></div>
+<div class="stmt teorema" id="clase-c20:teo-firme"><div class="head">Teorema no expansividad firme del resolvente</div><div class="body"><p>Si $T$ es maximalmente monótono y $\gamma&gt;0$, para todos $u,v\in\R^{n}$</p>
+<div class="display">\[
+  \norm{J_{\gamma T}(u)-J_{\gamma T}(v)}^{2}\le\ip{J_{\gamma T}(u)-J_{\gamma T}(v)}{u-v},
+\]</div>
+<p>y tanto $J_{\gamma T}$ como $R_{\gamma T}$ son no expansivos.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p176">Ver demostración</button><div class="proof" id="clase-convexa-p176"><p>Sean $p=J_{\gamma T}(u)$ y $q=J_{\gamma T}(v)$. Entonces
+$\frac{u-p}{\gamma}\in T(p)$ y $\frac{v-q}{\gamma}\in T(q)$, y la monotonía da
+$\ip{(u-p)-(v-q)}{p-q}\ge0$, que es la desigualdad. Con Cauchy–Schwarz,
+$J_{\gamma T}$ es no expansivo, y</p>
+<div class="display">\[
+  \norm{R_{\gamma T}(u)-R_{\gamma T}(v)}^{2}
+  =4\norm{p-q}^{2}-4\ip{p-q}{u-v}+\norm{u-v}^{2}\le\norm{u-v}^{2}.
+\]</div></div>
+<h3 id="clase-convexa-x43">El Lagrangiano aumentado</h3>
+<div class="stmt definicion" id="clase-c20:def-aumentado"><div class="head">Definición Lagrangiano aumentado</div><div class="body"><p>Sean $f\in\Gamma_{0}(\R^{n})$, $A$ una matriz $m\times n$ y $b\in\R^{m}$, y el
+problema</p>
+<div class="display">\[
+  \min_{x}\ f(x)\qquad\text{sujeto a}\qquad Ax=b,
+\]</div>
+<p>que es el caso $g=0$, $B=0$ y $c=b$ del problema separable. Su Lagrangiano es
+$\mathcal{L}(x,y)=f(x)+\ip{y}{Ax-b}$, con valores $p^{*}=\inf_{x}\sup_{y}\mathcal{L}$
+y $d^{*}=\sup_{y}\inf_{x}\mathcal{L}$. Para $\rho&gt;0$, el <span class="df">Lagrangiano
+aumentado</span> es</p>
+<div class="display">\[
+  \mathcal{L}_{\rho}(x,y)=f(x)+\ip{y}{Ax-b}+\frac{\rho}{2}\norm{Ax-b}^{2}
+  =f(x)+\frac{\rho}{2}\Bigl\|Ax-b+\frac{1}{\rho}y\Bigr\|^{2}-\frac{1}{2\rho}\norm{y}^{2},
+\]</div>
+<p>donde la segunda forma sale de completar el cuadrado.</p></div></div>
+<div class="stmt observacion" id="clase-c20:obs-penalizacion"><div class="head">Observación penalización y Lagrangiano aumentado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La penalización cuadrática pura minimiza $f(x)+\frac{\rho}{2}\norm{Ax-b}^{2}$, y
+en general necesita $\rho\to\infty$ para forzar la factibilidad, lo que empeora
+el condicionamiento del subproblema. El Lagrangiano aumentado mantiene un $\rho$
+moderado y actualiza también el multiplicador, que va absorbiendo el sesgo que
+introduce la penalización.</p></div></div>
+<div class="stmt definicion" id="clase-c20:def-multiplicadores"><div class="head">Definición método de multiplicadores</div><div class="body"><p>El <span class="df">método de multiplicadores</span> parte de $y^{0}$ y genera</p>
+<div class="display">\[
+  x^{k+1}\in\argmin_{x}\mathcal{L}_{\rho}(x,y^{k}),\qquad
+  y^{k+1}=y^{k}+\rho\bigl(Ax^{k+1}-b\bigr).
+\]</div>
+<p>Como $y\mapsto\mathcal{L}(x,y)$ es diferenciable con gradiente $Ax-b$, la
+actualización dual es un paso de ascenso de paso $\rho$ en la dirección del
+residuo $r^{k+1}=Ax^{k+1}-b$.</p></div></div>
+<div class="stmt proposicion" id="clase-c20:prop-dual-proximal"><div class="head">Proposición es el punto proximal en el dual</div><div class="body"><p>Sea $q(y)=\inf_{x}\mathcal{L}(x,y)$ la función dual. Si los mínimos del método
+existen,</p>
+<div class="display">\[
+  y^{k+1}=\prox_{\rho(-q)}(y^{k})
+  =\argmax_{y}\Bigl\{q(y)-\frac{1}{2\rho}\norm{y-y^{k}}^{2}\Bigr\},
+\]</div>
+<p>es decir, el método de multiplicadores es el método del punto proximal aplicado
+a $-q$ con paso $\rho$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p177">Ver demostración</button><div class="proof" id="clase-convexa-p177"><p>El término $\ip{y^{k}}{Ax-b}+\frac{\rho}{2}\norm{Ax-b}^{2}$ es finito y
+diferenciable en $x$, con gradiente $A\trans\bigl(y^{k}+\rho(Ax-b)\bigr)$, así que
+la regla de la suma y la regla de Fermat dan</p>
+<div class="display">\[
+  0\in\subdif f(x^{k+1})+A\trans\bigl(y^{k}+\rho(Ax^{k+1}-b)\bigr)
+  =\subdif f(x^{k+1})+A\trans y^{k+1}.
+\]</div>
+<p>Por tanto $x^{k+1}$ minimiza $\mathcal{L}(\cdot,y^{k+1})$, y
+$q(y^{k+1})=f(x^{k+1})+\ip{y^{k+1}}{r^{k+1}}$. Para todo $y$,</p>
+<div class="display">\[
+  q(y)\le\mathcal{L}(x^{k+1},y)=f(x^{k+1})+\ip{y}{r^{k+1}}
+  =q(y^{k+1})+\ip{y-y^{k+1}}{r^{k+1}},
+\]</div>
+<p>es decir, $-r^{k+1}\in\subdif(-q)(y^{k+1})$, y como
+$r^{k+1}=\frac{1}{\rho}(y^{k+1}-y^{k})$,</p>
+<div class="display">\[
+  \frac{y^{k}-y^{k+1}}{\rho}\in\subdif(-q)(y^{k+1}).
+\]</div>
+<p>La función $-q$ es un supremo de funciones afines de $y$, finita en $y^{k+1}$ y
+mayor que $-\infty$ porque $\dom f\neq\varnothing$, así que está en
+$\Gamma_{0}(\R^{m})$, y por la caracterización del proximal la inclusión es
+$y^{k+1}=\prox_{\rho(-q)}(y^{k})$.</p></div>
+<div class="stmt observacion" id="clase-c20:obs-multiplicadores"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Por eso el método es robusto: hereda en el espacio dual las propiedades del punto
+proximal. Su inconveniente es que la minimización en $x$ puede ser costosa
+cuando $x$ tiene varios bloques con estructuras distintas, y ADMM la reemplaza por
+minimizaciones alternadas.</p></div></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -7080,7 +7236,102 @@ radio $\lambda$ de $\norm{\cdot}_{\infty}$.</p></div></div>
 <div class="stmt ejemplo" id="general-c19:ej-robusta"><div class="head">Ejemplo optimización robusta<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\min_{x\in X}\max_{u\in U}\Phi(x,u)$, con $\Phi$ convexa en la decisión y
 cóncava en la perturbación, busca la decisión que minimiza el peor escenario. Si
 $X$ y $U$ son compactos y $\Phi$ es continua, el teorema de Sion permite
-intercambiar el orden; sin concavidad en $u$ la igualdad puede fallar.</p></div></div></section></div>
+intercambiar el orden; sin concavidad en $u$ la igualdad puede fallar.</p></div></div></section>
+<section class="capitulo"><h2 id="general-cap:splitting" data-toc="Métodos de splitting">Métodos de splitting y algoritmos primal-duales</h2>
+<div class="stmt observacion" id="general-c20:obs-separable"><div class="head">Observación los problemas separables</div><div class="body"><p>Los métodos de <span class="df">splitting</span> atacan
+$\min_{x,z}f(x)+g(z)$ sujeto a $Ax+Bz=c$, con $f$ y $g$ convexas, tratando cada
+bloque por separado. Dos de ellos son Douglas–Rachford y el método primal-dual
+híbrido de gradiente (PDHG).</p></div></div>
+<p>En el resto del capítulo $\Hs$ y $\Ks$ son espacios de Hilbert.</p>
+<h3 id="general-convexa-x38">Operadores monótonos y resolventes</h3>
+<div class="stmt definicion" id="general-c20:def-monotono"><div class="head">Definición operador monótono<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Un operador $T:\Hs\rightrightarrows\Hs$ asigna a cada $x$ un conjunto
+$T(x)\subset\Hs$, quizá vacío, y su <span class="df">grafo</span> es
+$\gra T=\{(x,v):v\in T(x)\}$. Es <span class="df">monótono</span> si $\ip{u-v}{x-y}\ge0$ para todos
+$u\in T(x)$ y $v\in T(y)$. El subdiferencial de una función convexa y propia es
+monótono.</p></div></div>
+<div class="stmt definicion" id="general-c20:def-resolvente"><div class="head">Definición resolvente y reflexión</div><div class="body"><p>Para $\gamma&gt;0$, $J_{\gamma T}=(\Id+\gamma T)^{-1}$, es decir,
+$J_{\gamma T}(u)=\{x:u\in x+\gamma T(x)\}$, y $R_{\gamma T}=2J_{\gamma T}-\Id$.</p></div></div>
+<div class="stmt ejemplo" id="general-c20:ej-prox"><div class="head">Ejemplo el proximal y la proyección</div><div class="body"><p>Si $h\in\Gamma_{0}(\Hs)$, $J_{\gamma\subdif h}=\prox_{\gamma h}$, y si
+$C\subset\Hs$ es convexo, cerrado y no vacío, $J_{\gamma\subdif\delta_{C}}=\Proy_{C}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p163">Ver demostración</button><div class="proof" id="general-convexa-p163"><p>Es la caracterización del proximal, y $\prox_{\gamma\delta_{C}}=\Proy_{C}$ es el
+ejemplo de la indicadora.</p></div>
+<div class="stmt observacion" id="general-c20:obs-inclusion"><div class="head">Observación inclusiones monótonas<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Minimizar $f+g$, con $f,g\in\Gamma_{0}(\Hs)$, es resolver
+$0\in\subdif f(x)+\subdif g(x)$ cuando vale la regla de la suma, un caso de
+$0\in A(x)+B(x)$ con $A$ y $B$ monótonos. El punto proximal sobre la suma pide el
+resolvente de $A+B$; los métodos de splitting usan los de $A$ y $B$ por
+separado. Lo mismo pasa con $\min_{x}f(x)+g(Kx)$, con $K\in\Bop{\Hs,\Ks}$.</p></div></div>
+<div class="stmt lema" id="general-c20:lem-univaluado"><div class="head">Lema el resolvente es univaluado</div><div class="body"><p>Si $T$ es monótono y $\gamma&gt;0$, para cada $u$ hay a lo sumo un $x$ con
+$u\in x+\gamma T(x)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p164">Ver demostración</button><div class="proof" id="general-convexa-p164"><p>Si $u=x_{1}+\gamma v_{1}=x_{2}+\gamma v_{2}$ con $v_{i}\in T(x_{i})$, entonces
+$0=\ip{u-u}{x_{1}-x_{2}}=\norm{x_{1}-x_{2}}^{2}+\gamma\ip{v_{1}-v_{2}}{x_{1}-x_{2}}\ge\norm{x_{1}-x_{2}}^{2}$.</p></div>
+<div class="stmt definicion" id="general-c20:def-maximal"><div class="head">Definición maximalmente monótono</div><div class="body"><p>Un operador monótono $T$ es <span class="df">maximalmente monótono</span> si su grafo no está
+contenido propiamente en el de otro operador monótono: si $(a,b)$ cumple
+$\ip{a-x}{b-v}\ge0$ para todo $(x,v)\in\gra T$, entonces $(a,b)\in\gra T$.</p></div></div>
+<div class="stmt teorema" id="general-c20:teo-minty"><div class="head">Teorema Minty</div><div class="body"><p>Sea $T:\Hs\rightrightarrows\Hs$ monótono. Entonces $T$ es maximalmente monótono
+si y solo si $\Id+\gamma T$ es sobreyectivo para algún $\gamma&gt;0$, y en ese caso
+lo es para todo $\gamma&gt;0$. En particular, si $T$ es maximalmente monótono,
+$J_{\gamma T}$ es una función definida en todo $\Hs$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p165">Ver demostración</button><div class="proof" id="general-convexa-p165"><p>Sean $\Id+\gamma T$ sobreyectivo y $(a,b)$ con $\ip{a-x}{b-v}\ge0$ para todo
+$(x,v)\in\gra T$. Con $(x,v)\in\gra T$ tal que $a+\gamma b=x+\gamma v$ queda
+$0\le\ip{a-x}{b-v}=-\gamma\norm{b-v}^{2}$, así que $(a,b)=(x,v)\in\gra T$. La
+implicación directa se admite. La última afirmación es la sobreyectividad junto
+con el lema anterior.</p></div>
+<div class="stmt ejemplo" id="general-c20:ej-no-maximal"><div class="head">Ejemplo un monótono que no es maximal</div><div class="body"><p>En $\R$, $T(x)=\{0\}$ si $x\ge0$ y $T(x)=\varnothing$ si $x&lt;0$ es monótono, y su
+grafo está contenido propiamente en el de $\Ncono_{[0,\infty)}=\subdif\delta_{[0,\infty)}$,
+que vale $\{0\}$ en $x&gt;0$, $(-\infty,0]$ en $x=0$ y $\varnothing$ en $x&lt;0$. La
+imagen de $I+\gamma T$ es $[0,\infty)$, y
+$J_{\gamma\Ncono_{[0,\infty)}}(u)=\max\{u,0\}$ está definido en todo $\R$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p166">Ver demostración</button><div class="proof" id="general-convexa-p166"><p>$(0,-1)$ está en el grafo del cono normal y no en el de $T$; lo demás es el
+ejemplo del proximal y la proyección con $C=[0,\infty)$.</p></div>
+<div class="stmt teorema" id="general-c20:teo-subdif-maximal"><div class="head">Teorema el subdiferencial es maximalmente monótono</div><div class="body"><p>Si $h\in\Gamma_{0}(\Hs)$, $\subdif h$ es maximalmente monótono.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p167">Ver demostración</button><div class="proof" id="general-convexa-p167"><p>Es monótono, y para cada $u$ el punto $p=\prox_{h}(u)$ existe y cumple
+$u\in(\Id+\subdif h)(p)$ por la caracterización del proximal. La implicación
+que se demostró del teorema de Minty concluye.</p></div>
+<div class="stmt teorema" id="general-c20:teo-firme"><div class="head">Teorema no expansividad firme del resolvente</div><div class="body"><p>Si $T$ es maximalmente monótono y $\gamma&gt;0$, para todos $u,v\in\Hs$</p>
+<div class="display">\[
+  \norm{J_{\gamma T}(u)-J_{\gamma T}(v)}^{2}\le\ip{J_{\gamma T}(u)-J_{\gamma T}(v)}{u-v},
+\]</div>
+<p>y $J_{\gamma T}$ y $R_{\gamma T}$ son no expansivos.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p168">Ver demostración</button><div class="proof" id="general-convexa-p168"><p>Con $p=J_{\gamma T}(u)$ y $q=J_{\gamma T}(v)$, $\frac{u-p}{\gamma}\in T(p)$ y
+$\frac{v-q}{\gamma}\in T(q)$, y la monotonía da la desigualdad. Cauchy–Schwarz da
+la no expansividad de $J_{\gamma T}$, y
+$\norm{R_{\gamma T}(u)-R_{\gamma T}(v)}^{2}=4\norm{p-q}^{2}-4\ip{p-q}{u-v}+\norm{u-v}^{2}\le\norm{u-v}^{2}$.</p></div>
+<h3 id="general-convexa-x39">El Lagrangiano aumentado</h3>
+<div class="stmt definicion" id="general-c20:def-aumentado"><div class="head">Definición Lagrangiano aumentado</div><div class="body"><p>Sean $f\in\Gamma_{0}(\Hs)$, $A\in\Bop{\Hs,\Ks}$, $b\in\Ks$ y el problema
+$\min_{x}f(x)$ sujeto a $Ax=b$, que es el caso $g=0$, $B=0$ y $c=b$ del problema
+separable. Su Lagrangiano es $\mathcal{L}(x,y)=f(x)+\ip{y}{Ax-b}$, con valores
+$p^{*}=\inf_{x}\sup_{y}\mathcal{L}$ y $d^{*}=\sup_{y}\inf_{x}\mathcal{L}$, y para
+$\rho&gt;0$ el <span class="df">Lagrangiano aumentado</span> es</p>
+<div class="display">\[
+  \mathcal{L}_{\rho}(x,y)=f(x)+\ip{y}{Ax-b}+\frac{\rho}{2}\norm{Ax-b}^{2}
+  =f(x)+\frac{\rho}{2}\Bigl\|Ax-b+\frac{1}{\rho}y\Bigr\|^{2}-\frac{1}{2\rho}\norm{y}^{2}.
+\]</div></div></div>
+<div class="stmt observacion" id="general-c20:obs-penalizacion"><div class="head">Observación penalización y Lagrangiano aumentado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La penalización cuadrática pura necesita en general $\rho\to\infty$ para forzar la
+factibilidad, y eso empeora el condicionamiento. El Lagrangiano aumentado mantiene
+$\rho$ moderado y actualiza el multiplicador, que absorbe el sesgo de la
+penalización.</p></div></div>
+<div class="stmt definicion" id="general-c20:def-multiplicadores"><div class="head">Definición método de multiplicadores</div><div class="body"><p>$x^{k+1}\in\argmin_{x}\mathcal{L}_{\rho}(x,y^{k})$ e
+$y^{k+1}=y^{k}+\rho(Ax^{k+1}-b)$: la actualización dual es un paso de ascenso
+de paso $\rho$ en la dirección del gradiente $r^{k+1}=Ax^{k+1}-b$ de
+$y\mapsto\mathcal{L}(x^{k+1},y)$.</p></div></div>
+<div class="stmt proposicion" id="general-c20:prop-dual-proximal"><div class="head">Proposición es el punto proximal en el dual</div><div class="body"><p>Sea $q(y)=\inf_{x}\mathcal{L}(x,y)$ la función dual. Si los mínimos del método
+existen, $y^{k+1}=\prox_{\rho(-q)}(y^{k})$: el método de multiplicadores es el
+punto proximal aplicado a $-q\in\Gamma_{0}(\Ks)$ con paso $\rho$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p169">Ver demostración</button><div class="proof" id="general-convexa-p169"><p>El término $\ip{y^{k}}{Ax-b}+\frac{\rho}{2}\norm{Ax-b}^{2}$ es continuo y
+Fréchet diferenciable en $x$, con gradiente $A^{*}(y^{k}+\rho(Ax-b))$, así que la
+regla de la suma y la de Fermat dan
+$0\in\subdif f(x^{k+1})+A^{*}y^{k+1}$. Entonces $x^{k+1}$ minimiza
+$\mathcal{L}(\cdot,y^{k+1})$, y para todo $y$</p>
+<div class="display">\[
+  q(y)\le\mathcal{L}(x^{k+1},y)=q(y^{k+1})+\ip{y-y^{k+1}}{r^{k+1}},
+\]</div>
+<p>es decir, $\frac{1}{\rho}(y^{k}-y^{k+1})=-r^{k+1}\in\subdif(-q)(y^{k+1})$. La
+función $-q$ es un supremo de funciones afines continuas, finita en $y^{k+1}$ y
+mayor que $-\infty$ porque $\dom f\neq\varnothing$, así que está en
+$\Gamma_{0}(\Ks)$, y la caracterización del proximal concluye.</p></div>
+<div class="stmt observacion" id="general-c20:obs-multiplicadores"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El método hereda en el dual las propiedades del punto proximal. Su inconveniente
+es que la minimización en $x$ puede ser costosa cuando $x$ tiene varios bloques
+con estructuras distintas, y ADMM la reemplaza por minimizaciones alternadas.</p></div></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -8680,7 +8931,68 @@ lineal en $y$. La variación total
 $\min\frac12\norm{x-b}^{2}+\lambda\norm{Dx}_{1}$ es el min-max de
 $\frac12\norm{x-b}^{2}+\ip{Dx}{y}$ con $\norm{y}_{\infty}\le\lambda$. Y
 $\min_{x\in X}\max_{u\in U}\Phi(x,u)$ minimiza el peor escenario, con Sion para
-intercambiar el orden si $X$ y $U$ son compactos.</p></div></div></section></div>
+intercambiar el orden si $X$ y $U$ son compactos.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:splitting" data-toc="Métodos de splitting">Métodos de splitting y algoritmos primal-duales</h2>
+<div class="stmt observacion" id="ambas-c20:obs-separable"><div class="head">Observación los problemas separables</div><div class="body"><p>Los métodos de <span class="df">splitting</span> atacan
+$\min_{x,z}f(x)+g(z)$ sujeto a $Ax+Bz=c$ tratando cada bloque por separado. Dos
+de ellos son Douglas–Rachford y PDHG.</p></div></div>
+<p>En el resto del capítulo $\Hs$ y $\Ks$ son espacios de Hilbert, que en dimensión
+finita son $\R^{n}$ y $\R^{m}$.</p>
+<h3 id="ambas-convexa-x41">Operadores monótonos y resolventes</h3>
+<div class="stmt definicion" id="ambas-c20:def-monotono"><div class="head">Definición operador monótono<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$T:\Hs\rightrightarrows\Hs$, con grafo $\gra T=\{(x,v):v\in T(x)\}$, es
+<span class="df">monótono</span> si $\ip{u-v}{x-y}\ge0$ para todos $u\in T(x)$ y $v\in T(y)$. El
+subdiferencial de una convexa propia lo es.</p></div></div>
+<div class="stmt definicion" id="ambas-c20:def-resolvente"><div class="head">Definición resolvente y reflexión</div><div class="body"><p>$J_{\gamma T}=(\Id+\gamma T)^{-1}$ y $R_{\gamma T}=2J_{\gamma T}-\Id$, para
+$\gamma&gt;0$. Si $h\in\Gamma_{0}(\Hs)$, $J_{\gamma\subdif h}=\prox_{\gamma h}$, y
+$J_{\gamma\subdif\delta_{C}}=\Proy_{C}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-inclusion"><div class="head">Observación inclusiones monótonas<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\min f+g$ es $0\in\subdif f(x)+\subdif g(x)$ bajo la regla de la suma. El punto
+proximal pediría el resolvente de la suma; los métodos de splitting usan los de
+cada sumando.</p></div></div>
+<div class="stmt lema" id="ambas-c20:lem-univaluado"><div class="head">Lema el resolvente es univaluado</div><div class="body"><p>Si $T$ es monótono, para cada $u$ hay a lo sumo un $x$ con $u\in x+\gamma T(x)$.</p></div></div>
+<div class="stmt definicion" id="ambas-c20:def-maximal"><div class="head">Definición maximalmente monótono</div><div class="body"><p>$T$ monótono es <span class="df">maximalmente monótono</span> si su grafo no está contenido
+propiamente en el de otro operador monótono.</p></div></div>
+<div class="stmt teorema" id="ambas-c20:teo-minty"><div class="head">Teorema Minty</div><div class="body"><p>Un monótono $T$ es maximalmente monótono si y solo si $\Id+\gamma T$ es
+sobreyectivo para algún $\gamma&gt;0$, y entonces para todos. En ese caso
+$J_{\gamma T}$ es una función definida en todo $\Hs$.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-minty-contraste"><div class="head">Observación la mitad difícil, en un lado y en el otro</div><div class="body"><p>La implicación recíproca es la misma cuenta en $\R^{n}$ y en $\Hs$. La directa
+es la difícil, y vale en los dos: el cambio de coordenadas
+$(x,v)\mapsto(x+v,v-x)$ convierte el grafo de un monótono en el de una
+aplicación no expansiva, y la maximalidad en que esa aplicación no se pueda
+extender. Que toda no expansiva definida en un subconjunto se extienda a todo
+el espacio es el teorema de Kirszbraun en $\R^{n}$, y sigue siendo cierto en
+$\Hs$, donde se llama de Kirszbraun–Valentine. Y en un Banach $E$ el enunciado ni
+siquiera se escribe: $T$ va de $E$ en $E^{*}$, así que $\Id+\gamma T$ suma
+elementos de espacios distintos. Es el mismo obstáculo que con el gradiente,
+que en un Banach vive en el dual.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c20:ej-no-maximal"><div class="head">Ejemplo un monótono que no es maximal</div><div class="body"><p>En $\R$, $T=\{0\}$ en $[0,\infty)$ y vacío fuera es monótono pero no maximal: su
+grafo está dentro del de $\Ncono_{[0,\infty)}=\subdif\delta_{[0,\infty)}$. La
+imagen de $I+\gamma T$ es $[0,\infty)$, y $J_{\gamma\Ncono_{[0,\infty)}}(u)=\max\{u,0\}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c20:teo-subdif-maximal"><div class="head">Teorema el subdiferencial es maximalmente monótono</div><div class="body"><p>Si $h\in\Gamma_{0}(\Hs)$, $\subdif h$ es maximalmente monótono.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-subdif-contraste"><div class="head">Observación por qué este no necesita la mitad difícil</div><div class="body"><p>La sobreyectividad de $\Id+\subdif h$ la da la existencia del proximal, y con eso
+basta la implicación recíproca de Minty, que es elemental. Lo único que cambia de
+$\R^{n}$ a $\Hs$ es de dónde sale el minimizador del proximal: de Weierstrass en
+$\R^{n}$ y del teorema de existencia en un reflexivo en $\Hs$.</p></div></div>
+<div class="stmt teorema" id="ambas-c20:teo-firme"><div class="head">Teorema no expansividad firme del resolvente</div><div class="body"><p>Si $T$ es maximalmente monótono,
+$\norm{J_{\gamma T}u-J_{\gamma T}v}^{2}\le\ip{J_{\gamma T}u-J_{\gamma T}v}{u-v}$,
+y $J_{\gamma T}$ y $R_{\gamma T}$ son no expansivos.</p></div></div>
+<h3 id="ambas-convexa-x42">El Lagrangiano aumentado</h3>
+<div class="stmt definicion" id="ambas-c20:def-aumentado"><div class="head">Definición Lagrangiano aumentado</div><div class="body"><p>Para $\min f(x)$ sujeto a $Ax=b$, con $f\in\Gamma_{0}(\Hs)$ y
+$A\in\Bop{\Hs,\Ks}$,
+$\mathcal{L}_{\rho}(x,y)=f(x)+\ip{y}{Ax-b}+\frac{\rho}{2}\norm{Ax-b}^{2}
+=f(x)+\frac{\rho}{2}\norm{Ax-b+y/\rho}^{2}-\frac{1}{2\rho}\norm{y}^{2}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-penalizacion"><div class="head">Observación penalización y Lagrangiano aumentado<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La penalización pura necesita $\rho\to\infty$; el Lagrangiano aumentado mantiene
+$\rho$ moderado y actualiza el multiplicador.</p></div></div>
+<div class="stmt definicion" id="ambas-c20:def-multiplicadores"><div class="head">Definición método de multiplicadores</div><div class="body"><p>$x^{k+1}\in\argmin_{x}\mathcal{L}_{\rho}(x,y^{k})$ e
+$y^{k+1}=y^{k}+\rho(Ax^{k+1}-b)$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c20:prop-dual-proximal"><div class="head">Proposición es el punto proximal en el dual</div><div class="body"><p>Si los mínimos existen, $y^{k+1}=\prox_{\rho(-q)}(y^{k})$, con $q$ la función
+dual.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-multiplicadores-contraste"><div class="head">Observación lo que hereda del punto proximal</div><div class="body"><p>Si además el dual tiene solución, la convergencia de los iterados del punto
+proximal se traslada a los multiplicadores: en $\R^{m}$, $(y^{k})$ converge a
+una solución dual, y en $\Ks$ solo débilmente. Es el mismo paso de la norma a la
+topología débil que en el capítulo de métodos proximales, ahora en el espacio de
+los multiplicadores.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-multiplicadores"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La minimización en $x$ puede ser costosa con varios bloques, y ADMM la reemplaza
+por minimizaciones alternadas.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
