@@ -611,7 +611,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "prox": "\\operatorname{prox}", "gra": "\\operatorname{gra}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "env": ["{}^{#1}\\!#2", 2], "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "prox": "\\operatorname{prox}", "gra": "\\operatorname{gra}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "env": ["{}^{#1}\\!#2", 2], "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "daga": "\\kern0.05em\\textsuperscript{\\textcolor{dagacolor}{\\textdagger}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
   startup: {
@@ -2457,8 +2457,41 @@ escoger una.</p></div></div>
   \bigl(I-\rho_{k}y_{k}s_{k}\trans\bigr)+\rho_{k}s_{k}s_{k}\trans,
   \qquad\rho_{k}=\frac{1}{y_{k}\trans s_{k}} .
 \]</div></div></div>
+<div class="stmt teorema" id="clase-c15:teo-bfgs-variacional"><div class="head">Teorema caracterización variacional de BFGS<sup style="color:#6e3caa;font-weight:700">&#8224;</sup></div><div class="body"><p>Sean $G_{k}$ simétrica, $y_{k}\trans s_{k}&gt;0$ y $W\succ0$ simétrica con
+$Ws_{k}=y_{k}$, y sea $\norm{A}_{W}=\norm{W^{1/2}AW^{1/2}}_{F}$. La matriz
+$G_{k+1}$ de BFGS es la única solución de</p>
+<div class="display">\[
+  \min_{G}\ \norm{G-G_{k}}_{W}\qquad\text{sujeto a}\qquad G=G\trans,\quad Gy_{k}=s_{k}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p90">Ver demostración</button><div class="proof" id="clase-convexa-p90"><p>Sean $M=W^{1/2}$ y $u=M^{-1}y_{k}=Ms_{k}$, que son iguales porque
+$Ws_{k}=y_{k}$, de modo que $\norm{u}^{2}=s_{k}\trans y_{k}$. Con $\hat{G}=MGM$ y
+$A=MG_{k}M$, el problema es minimizar $\norm{\hat{G}-A}_{F}$ entre las
+$\hat{G}$ simétricas con $\hat{G}u=u$. Sean $Q=uu\trans/\norm{u}^{2}$ y
+$P=I-Q$. De $\hat{G}u=u$ y la simetría salen $\hat{G}Q=Q\hat{G}=Q$, así que
+$\hat{G}=Q+P\hat{G}P$. Como $\norm{X}_{F}^{2}$ es la suma de los cuadrados de
+$\norm{QXQ}_{F}$, $\norm{QXP}_{F}$, $\norm{PXQ}_{F}$ y $\norm{PXP}_{F}$,</p>
+<div class="display">\[
+  \norm{\hat{G}-A}_{F}^{2}=\norm{Q-QAQ}_{F}^{2}+\norm{QAP}_{F}^{2}
+  +\norm{PAQ}_{F}^{2}+\norm{P\hat{G}P-PAP}_{F}^{2},
+\]</div>
+<p>y solo el último sumando depende de $\hat{G}$: el único mínimo es
+$\hat{G}=Q+PAP$. De vuelta, $M^{-1}QM^{-1}=\rho_{k}s_{k}s_{k}\trans$ y
+$M^{-1}PM=I-\rho_{k}s_{k}y_{k}\trans$, porque $M^{-1}u=s_{k}$ y $Mu=y_{k}$, así que</p>
+<div class="display">\[
+  G=M^{-1}(Q+PAP)M^{-1}
+  =\bigl(I-\rho_{k}s_{k}y_{k}\trans\bigr)G_{k}\bigl(I-\rho_{k}y_{k}s_{k}\trans\bigr)+\rho_{k}s_{k}s_{k}\trans .
+\]</div></div>
+<div class="stmt observacion" id="clase-c15:obs-bfgs-variacional"><div class="head">Observación <sup style="color:#6e3caa;font-weight:700">&#8224;</sup></div><div class="body"><p>Una $W$ así existe siempre que $y_{k}\trans s_{k}&gt;0$, por ejemplo
+$W=\rho_{k}y_{k}y_{k}\trans+I-s_{k}s_{k}\trans/\norm{s_{k}}^{2}$, y si la
+Hessiana es definida positiva en el segmento, la Hessiana promedio
+$\int_{0}^{1}H(x_{k}+ts_{k})\dd t$ es una: BFGS cambia la inversa lo menos
+posible, medido con la Hessiana, entre las que cumplen la ecuación secante.
+Intercambiando $s_{k}$ con $y_{k}$ y $G$ con $B$, la misma cuenta da DFP:
+$B_{k+1}=(I-\rho_{k}y_{k}s_{k}\trans)B_{k}(I-\rho_{k}s_{k}y_{k}\trans)+\rho_{k}y_{k}y_{k}\trans$
+es la simétrica más cercana a $B_{k}$ con $Bs_{k}=y_{k}$, en la norma con
+$Wy_{k}=s_{k}$.</p></div></div>
 <div class="stmt proposicion" id="clase-c15:prop-bfgs-positiva"><div class="head">Proposición preservación de la positividad</div><div class="body"><p>Si $G_{k}\succ0$ y $y_{k}\trans s_{k}&gt;0$, entonces $G_{k+1}\succ0$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p90">Ver demostración</button><div class="proof" id="clase-convexa-p90"><p>Sea $V_{k}=I-\rho_{k}y_{k}s_{k}\trans$. Para todo $v\neq0$,</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p91">Ver demostración</button><div class="proof" id="clase-convexa-p91"><p>Sea $V_{k}=I-\rho_{k}y_{k}s_{k}\trans$. Para todo $v\neq0$,</p>
 <div class="display">\[
   v\trans G_{k+1}v=(V_{k}v)\trans G_{k}(V_{k}v)+\rho_{k}(s_{k}\trans v)^{2},
 \]</div>
@@ -2578,7 +2611,7 @@ o con promedios.</p></div></div>
 <div class="display">\[
   \norm{x_{k+1}-x^{*}}^{2}\le\norm{x_{k}-x^{*}}^{2}-2\alpha_{k}\bigl(f(x_{k})-f^{*}\bigr)+\alpha_{k}^{2}\norm{g_{k}}^{2}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p91">Ver demostración</button><div class="proof" id="clase-convexa-p91"><p>Como $x^{*}\in C$, es $x^{*}=\Proy_{C}(x^{*})$, y la proyección es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p92">Ver demostración</button><div class="proof" id="clase-convexa-p92"><p>Como $x^{*}\in C$, es $x^{*}=\Proy_{C}(x^{*})$, y la proyección es
 $1$-Lipschitz por la no expansividad firme. Luego</p>
 <div class="display">\[
   \norm{x_{k+1}-x^{*}}^{2}\le\norm{x_{k}-\alpha_{k}g_{k}-x^{*}}^{2}
@@ -2602,7 +2635,7 @@ Lipschitz.</p></div></div>
 \]</div>
 <p>y la misma cota vale para el mejor valor
 $f_{N}^{\min}=\min_{0\le k&lt;N}f(x_{k})$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p92">Ver demostración</button><div class="proof" id="clase-convexa-p92"><p>Sumando la recurrencia básica de $k=0$ a $N-1$ y descartando
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p93">Ver demostración</button><div class="proof" id="clase-convexa-p93"><p>Sumando la recurrencia básica de $k=0$ a $N-1$ y descartando
 $\norm{x_{N}-x^{*}}^{2}\ge0$,</p>
 <div class="display">\[
   2\sum_{k=0}^{N-1}\alpha_{k}\bigl(f(x_{k})-f^{*}\bigr)\le\norm{x_{0}-x^{*}}^{2}+M^{2}\sum_{k=0}^{N-1}\alpha_{k}^{2}.
@@ -2623,7 +2656,7 @@ constante</p>
 \]</div>
 <p>entonces $f(\bar{x}_{N})-f^{*}\le\frac{MR}{\sqrt{N}}$, y lo mismo
 $f_{N}^{\min}-f^{*}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p93">Ver demostración</button><div class="proof" id="clase-convexa-p93"><p>Con $\alpha_{k}=\alpha$ la cota del teorema es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p94">Ver demostración</button><div class="proof" id="clase-convexa-p94"><p>Con $\alpha_{k}=\alpha$ la cota del teorema es
 $\frac{R^{2}}{2N\alpha}+\frac{M^{2}\alpha}{2}$, que se minimiza en
 $\alpha=R/(M\sqrt{N})$ con valor $MR/\sqrt{N}$.</p></div>
 <div class="stmt observacion" id="clase-c16:obs-optimo"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Garantizar $f(\bar{x}_{N})-f^{*}\le\varepsilon$ pide entonces
@@ -2637,7 +2670,7 @@ falta de suavidad, no la prueba.</p></div></div>
 \]</div>
 <p>entonces $f_{N}^{\min}\to f^{*}$. Sirve, por ejemplo, $\alpha_{k}=1/(k+1)^{p}$
 con $p\in(\frac12,1]$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p94">Ver demostración</button><div class="proof" id="clase-convexa-p94"><p>En la cota del teorema el numerador está acotado y el denominador
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p95">Ver demostración</button><div class="proof" id="clase-convexa-p95"><p>En la cota del teorema el numerador está acotado y el denominador
 $2A_{N}$ tiende a infinito.</p></div>
 <div class="stmt observacion" id="clase-c16:obs-etapas"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Los pasos decrecientes dan convergencia pero su cota de peor caso es
 conservadora. Para conservar la tasa $O(1/\sqrt{N})$ sin conocer el horizonte
@@ -2657,7 +2690,7 @@ $\norm{g_{k}}\le M$,</p>
 <div class="display">\[
   \min_{0\le k&lt;N}\bigl(f(x_{k})-f^{*}\bigr)\le\frac{M\dist(x_{0},X^{*})}{\sqrt{N}}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p95">Ver demostración</button><div class="proof" id="clase-convexa-p95"><p>La primera desigualdad es la recurrencia básica con ese $\alpha_{k}$. Sumándola,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p96">Ver demostración</button><div class="proof" id="clase-convexa-p96"><p>La primera desigualdad es la recurrencia básica con ese $\alpha_{k}$. Sumándola,
 $\sum_{k&lt;N}(f(x_{k})-f^{*})^{2}\le M^{2}\norm{x_{0}-x^{*}}^{2}$, luego
 $N\min_{k&lt;N}(f(x_{k})-f^{*})^{2}$ también lo está, y se toma $x^{*}$ la
 proyección de $x_{0}$ sobre $X^{*}$, que es convexo y cerrado.</p></div>
@@ -2671,7 +2704,7 @@ recortes.</p></div></div>
 \]</div>
 <p>En particular $\ip{g-g&#x27;}{x-x&#x27;}\ge\mu\norm{x-x&#x27;}^{2}$ si $g\in\subdif f(x)$ y
 $g&#x27;\in\subdif f(x&#x27;)$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p96">Ver demostración</button><div class="proof" id="clase-convexa-p96"><p>Sea $t\in(0,1)$. La desigualdad del subgradiente de $x$, evaluada en
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p97">Ver demostración</button><div class="proof" id="clase-convexa-p97"><p>Sea $t\in(0,1)$. La desigualdad del subgradiente de $x$, evaluada en
 $x+t(y-x)$, y la caracterización de la convexidad fuerte con $\lambda=t$ dan</p>
 <div class="display">\[
   f(x)+t\ip{g}{y-x}\le f\bigl(x+t(y-x)\bigr)\le tf(y)+(1-t)f(x)-\frac{\mu}{2}t(1-t)\norm{y-x}^{2}.
@@ -2690,7 +2723,7 @@ iteración que parte de $x_{1}\in C$ con</p>
 <div class="display">\[
   f(\hat{x}_{N})-f^{*}\le\frac{2M^{2}}{\mu(N+1)}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p97">Ver demostración</button><div class="proof" id="clase-convexa-p97"><p>Sea $r_{k}=\norm{x_{k}-x^{*}}$. Por el lema anterior,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p98">Ver demostración</button><div class="proof" id="clase-convexa-p98"><p>Sea $r_{k}=\norm{x_{k}-x^{*}}$. Por el lema anterior,
 $\ip{g_{k}}{x_{k}-x^{*}}\ge f(x_{k})-f^{*}+\frac{\mu}{2}r_{k}^{2}$, y llevado a
 la prueba de la recurrencia básica da</p>
 <div class="display">\[
@@ -2708,7 +2741,7 @@ $\sum_{k=1}^{N}k=N(N+1)/2$, la desigualdad de Jensen concluye.</p></div>
 <div class="display">\[
   x_{k+1}=\argmin_{x\in C}\Bigl\{\alpha_{k}\ip{g_{k}}{x}+\frac12\norm{x-x_{k}}^{2}\Bigr\}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p98">Ver demostración</button><div class="proof" id="clase-convexa-p98"><p>Completando el cuadrado,</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p99">Ver demostración</button><div class="proof" id="clase-convexa-p99"><p>Completando el cuadrado,</p>
 <div class="display">\[
   \alpha_{k}\ip{g_{k}}{x}+\frac12\norm{x-x_{k}}^{2}
   =\frac12\norm{x-(x_{k}-\alpha_{k}g_{k})}^{2}+\alpha_{k}\ip{g_{k}}{x_{k}}-\frac{\alpha_{k}^{2}}{2}\norm{g_{k}}^{2},
@@ -2736,7 +2769,7 @@ distancia.</p></div></div>
 <div class="display">\[
   \ip{\nabla h(u)-\nabla h(v)}{w-u}=D_{h}(w,v)-D_{h}(w,u)-D_{h}(u,v).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p99">Ver demostración</button><div class="proof" id="clase-convexa-p99"><p>Al desarrollar las tres divergencias de la derecha los valores de $h$ se
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p100">Ver demostración</button><div class="proof" id="clase-convexa-p100"><p>Al desarrollar las tres divergencias de la derecha los valores de $h$ se
 cancelan y queda
 $-\ip{\nabla h(v)}{w-v}+\ip{\nabla h(u)}{w-u}+\ip{\nabla h(v)}{u-v}$, que es el
 lado izquierdo.</p></div>
@@ -2758,7 +2791,7 @@ $i$, como $\sum_{i}(x_{i}-y_{i})=0$,</p>
 \]</div>
 <p>Es decir, la entropía negativa es $1$-fuertemente convexa respecto de
 $\norm{\cdot}_{1}$ en el símplex.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p100">Ver demostración</button><div class="proof" id="clase-convexa-p100"><p>Supongamos primero $x\in\ri\simplex_{n}$, y sean $d=x-y$ y $z_{t}=y+td$, que
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p101">Ver demostración</button><div class="proof" id="clase-convexa-p101"><p>Supongamos primero $x\in\ri\simplex_{n}$, y sean $d=x-y$ y $z_{t}=y+td$, que
 está en $\ri\simplex_{n}$ para $t\in[0,1]$. La Hessiana de $h$ es
 $\operatorname{diag}(1/z_{i})$, y el resto integral de Taylor da</p>
 <div class="display">\[
@@ -2800,7 +2833,7 @@ $(\nabla h)^{-1}$; de ahí el nombre.</p></div></div>
 <div class="display">\[
   \alpha_{k}\ip{g_{k}}{x_{k}-x}\le D_{h}(x,x_{k})-D_{h}(x,x_{k+1})+\frac{\alpha_{k}^{2}}{2\sigma}\norm{g_{k}}_{*}^{2}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p101">Ver demostración</button><div class="proof" id="clase-convexa-p101"><p>La función $\varphi(x)=\alpha_{k}\ip{g_{k}}{x}+D_{h}(x,x_{k})$ es diferenciable
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p102">Ver demostración</button><div class="proof" id="clase-convexa-p102"><p>La función $\varphi(x)=\alpha_{k}\ip{g_{k}}{x}+D_{h}(x,x_{k})$ es diferenciable
 en $x_{k+1}$ con gradiente $\alpha_{k}g_{k}+\nabla h(x_{k+1})-\nabla h(x_{k})$, y
 alcanza en $x_{k+1}$ su mínimo sobre $C$. Como en la caracterización variacional
 de la proyección, $\varphi(x_{k+1}+t(x-x_{k+1}))\ge\varphi(x_{k+1})$ para
@@ -2830,7 +2863,7 @@ $\alpha_{k}=\frac{\sqrt{2\sigma}R_{h}}{M\sqrt{N}}$,</p>
 <div class="display">\[
   f(\bar{x}_{N})-f^{*}\le MR_{h}\sqrt{\frac{2}{\sigma N}} .
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p102">Ver demostración</button><div class="proof" id="clase-convexa-p102"><p>Por la desigualdad del subgradiente,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p103">Ver demostración</button><div class="proof" id="clase-convexa-p103"><p>Por la desigualdad del subgradiente,
 $\alpha_{k}(f(x_{k})-f^{*})\le\alpha_{k}\ip{g_{k}}{x_{k}-x^{*}}$. Se aplica la
 desigualdad de un paso con $x=x^{*}$, se suma de $0$ a $N-1$, se descarta
 $D_{h}(x^{*},x_{N})\ge0$ y se usa la desigualdad de Jensen. Con paso constante
@@ -2847,7 +2880,7 @@ El paso de mirror descent es</p>
 \]</div>
 <p>y se llama <span class="df">gradiente exponenciado</span>. Conserva la positividad y no necesita
 proyectar.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p103">Ver demostración</button><div class="proof" id="clase-convexa-p103"><p>Sea $Z=\sum_{j}x_{k,j}e^{-\alpha_{k}g_{k,j}}$ y sea $x_{k+1}$ el de la
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p104">Ver demostración</button><div class="proof" id="clase-convexa-p104"><p>Sea $Z=\sum_{j}x_{k,j}e^{-\alpha_{k}g_{k,j}}$ y sea $x_{k+1}$ el de la
 fórmula. Para $x\in\simplex_{n}$, como $\sum_{i}x_{i}=1$,</p>
 <div class="display">\[
   \alpha_{k}\ip{g_{k}}{x}+D_{\mathrm{KL}}(x\,\|\,x_{k})
@@ -2864,7 +2897,7 @@ $x=x_{k+1}$.</p></div>
 <div class="display">\[
   f(\bar{x}_{N})-f^{*}\le M\sqrt{\frac{2\log n}{N}} .
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p104">Ver demostración</button><div class="proof" id="clase-convexa-p104"><p>Para $x\in\simplex_{n}$,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p105">Ver demostración</button><div class="proof" id="clase-convexa-p105"><p>Para $x\in\simplex_{n}$,
 $D_{h}(x,x_{0})=\sum_{i}x_{i}\log(nx_{i})=\log n+\sum_{i}x_{i}\log x_{i}\le\log n$.
 La norma dual de $\norm{\cdot}_{1}$ es $\norm{\cdot}_{\infty}$, y la desigualdad de
 Pinsker da $\sigma=1$, así que basta el teorema con $R_{h}^{2}=\log n$.</p></div>
@@ -2889,7 +2922,7 @@ un vector de pérdidas $\ell_{k}\in\R^{n}$ y se paga $\ip{\ell_{k}}{x_{k}}$. El
 \]</div>
 <p>y con $\eta=\sqrt{2\log n}/(M\sqrt{N})$ el arrepentimiento promedio es a lo sumo
 $M\sqrt{2\log n/N}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p105">Ver demostración</button><div class="proof" id="clase-convexa-p105"><p>Es el paso entrópico con $g_{k}=\ell_{k}$. La desigualdad de un paso con
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p106">Ver demostración</button><div class="proof" id="clase-convexa-p106"><p>Es el paso entrópico con $g_{k}=\ell_{k}$. La desigualdad de un paso con
 $x=u$ y $\sigma=1$, sumada de $0$ a $N-1$, da
 $\eta\,\mathrm{Reg}_{N}(u)\le D_{h}(u,x_{0})+\frac{\eta^{2}}{2}M^{2}N$, y
 $D_{h}(u,x_{0})\le\log n$.</p></div>
@@ -2913,7 +2946,7 @@ $O(1/\sqrt{k})$. Los métodos proximales tratan $g$ de forma implícita.</p></di
   \prox_{\lambda g}(v)=\argmin_{x\in\R^{n}}\Bigl\{g(x)+\frac{1}{2\lambda}\norm{x-v}^{2}\Bigr\}.
 \]</div></div></div>
 <div class="stmt proposicion" id="clase-c17:prop-existe"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para todo $v\in\R^{n}$ el mínimo de la definición existe y es único.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p106">Ver demostración</button><div class="proof" id="clase-convexa-p106"><p>Como $g$ es convexa, cerrada y propia, admite una minorante afín
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p107">Ver demostración</button><div class="proof" id="clase-convexa-p107"><p>Como $g$ es convexa, cerrada y propia, admite una minorante afín
 $\ip{a}{x}+b$, así que $g(x)+\frac{1}{2\lambda}\norm{x-v}^{2}$ es coerciva; es
 además s.c.i. y propia, y el teorema de Weierstrass da un minimizador. Es
 $\frac1\lambda$-fuertemente convexa, así que no hay dos.</p></div>
@@ -2922,7 +2955,7 @@ $\frac1\lambda$-fuertemente convexa, así que no hay dos.</p></div>
   \iff 0\in\subdif g(p)+\frac{1}{\lambda}(p-v)
   \iff \frac{v-p}{\lambda}\in\subdif g(p).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p107">Ver demostración</button><div class="proof" id="clase-convexa-p107"><p>Es la regla de Fermat para $g+\frac{1}{2\lambda}\norm{\cdot-v}^{2}$, y la regla de
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p108">Ver demostración</button><div class="proof" id="clase-convexa-p108"><p>Es la regla de Fermat para $g+\frac{1}{2\lambda}\norm{\cdot-v}^{2}$, y la regla de
 la suma se aplica sin condición porque el segundo sumando es finito en todo
 $\R^{n}$ y diferenciable, con gradiente $\frac1\lambda(x-v)$.</p></div>
 <div class="stmt observacion" id="clase-c17:obs-resolvente"><div class="head">Observación el resolvente<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La caracterización dice que $v\in p+\lambda\subdif g(p)$, es decir,</p>
@@ -2934,12 +2967,12 @@ $\R^{n}$ y diferenciable, con gradiente $\frac1\lambda(x-v)$.</p></div>
 <div class="display">\[
   \norm{p-q}^{2}\le\ip{p-q}{u-v}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p108">Ver demostración</button><div class="proof" id="clase-convexa-p108"><p>Por la caracterización, $\frac{u-p}{\lambda}\in\subdif g(p)$ y
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p109">Ver demostración</button><div class="proof" id="clase-convexa-p109"><p>Por la caracterización, $\frac{u-p}{\lambda}\in\subdif g(p)$ y
 $\frac{v-q}{\lambda}\in\subdif g(q)$. Sumando la desigualdad del subgradiente de
 $p$ hacia $q$ y la de $q$ hacia $p$ queda
 $\ip{(u-p)-(v-q)}{p-q}\ge0$, que es la afirmación.</p></div>
 <div class="stmt corolario" id="clase-c17:cor-lipschitz"><div class="head">Corolario</div><div class="body"><p>$\norm{\prox_{\lambda g}(u)-\prox_{\lambda g}(v)}\le\norm{u-v}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p109">Ver demostración</button><div class="proof" id="clase-convexa-p109"><p>Cauchy–Schwarz en la no expansividad firme.</p></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p110">Ver demostración</button><div class="proof" id="clase-convexa-p110"><p>Cauchy–Schwarz en la no expansividad firme.</p></div>
 <h3 id="clase-convexa-x22">Ejemplos</h3>
 <div class="stmt ejemplo" id="clase-c17:ej-indicadora"><div class="head">Ejemplo la indicadora</div><div class="body"><p>Si $C$ es convexo, cerrado y no vacío, $\prox_{\lambda\delta_{C}}(v)=\Proy_{C}(v)$,
 y $\lambda$ no interviene: el mínimo de $\frac{1}{2\lambda}\norm{x-v}^{2}$ sobre
@@ -2950,7 +2983,7 @@ $C$ es la proyección.</p></div></div>
 \]</div>
 <p>Este operador se escribe $S_{\lambda\tau}(v)$, y anula exactamente las
 coordenadas pequeñas.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p110">Ver demostración</button><div class="proof" id="clase-convexa-p110"><p>El objetivo $\sum_{i}\bigl(\tau\abs{x_{i}}+\frac{1}{2\lambda}(x_{i}-v_{i})^{2}\bigr)$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p111">Ver demostración</button><div class="proof" id="clase-convexa-p111"><p>El objetivo $\sum_{i}\bigl(\tau\abs{x_{i}}+\frac{1}{2\lambda}(x_{i}-v_{i})^{2}\bigr)$
 se separa por coordenadas, y multiplicando por $\lambda$ basta minimizar
 $a\abs{x}+\frac12(x-v)^{2}$ en $\R$ con $a=\lambda\tau$. Por la caracterización,
 $p$ es el minimizador si y solo si $v-p\in a\,\subdif\abs{\cdot}(p)$:</p>
@@ -2961,7 +2994,7 @@ $p$ es el minimizador si y solo si $v-p\in a\,\subdif\abs{\cdot}(p)$:</p>
   \prox_{\lambda\tau\norm{\cdot}_{2}}(v)=\Bigl(1-\frac{\lambda\tau}{\norm{v}_{2}}\Bigr)_{+}v,
 \]</div>
 <p>con valor $0$ si $v=0$. Es la contracción radial del <em>group Lasso</em>.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p111">Ver demostración</button><div class="proof" id="clase-convexa-p111"><p>Si $\norm{v}\le\lambda\tau$, entonces $p=0$ cumple la caracterización, porque
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p112">Ver demostración</button><div class="proof" id="clase-convexa-p112"><p>Si $\norm{v}\le\lambda\tau$, entonces $p=0$ cumple la caracterización, porque
 $\subdif(\tau\norm{\cdot})(0)$ es la bola de radio $\tau$. Si no,
 $p=(1-\lambda\tau/\norm{v})v\neq0$ y $\frac{v-p}{\lambda}=\tau\frac{v}{\norm{v}}=\tau\frac{p}{\norm{p}}$,
 que es el gradiente de $\tau\norm{\cdot}$ en $p$.</p></div>
@@ -2969,7 +3002,7 @@ que es el gradiente de $\tau\norm{\cdot}$ en $p$.</p></div>
 <div class="display">\[
   \prox_{\lambda g}(v)=\frac{1}{1+\lambda\tau_{2}}S_{\lambda\tau_{1}}(v).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p112">Ver demostración</button><div class="proof" id="clase-convexa-p112"><p>Coordenada a coordenada, la caracterización es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p113">Ver demostración</button><div class="proof" id="clase-convexa-p113"><p>Coordenada a coordenada, la caracterización es
 $v-(1+\lambda\tau_{2})p\in\lambda\tau_{1}\subdif\abs{\cdot}(p)$. Con
 $q=(1+\lambda\tau_{2})p$, y como $\subdif\abs{\cdot}(p)=\subdif\abs{\cdot}(q)$,
 queda $v-q\in\lambda\tau_{1}\subdif\abs{\cdot}(q)$, es decir
@@ -3021,7 +3054,7 @@ es</p>
 <div class="display">\[
   \varphi(x_{k+1})+\frac{1}{2\lambda_{k}}\norm{x_{k+1}-x_{k}}^{2}\le\varphi(x_{k}).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p113">Ver demostración</button><div class="proof" id="clase-convexa-p113"><p>Como $s_{k+1}\in\subdif\varphi(x_{k+1})$,</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p114">Ver demostración</button><div class="proof" id="clase-convexa-p114"><p>Como $s_{k+1}\in\subdif\varphi(x_{k+1})$,</p>
 <div class="display">\[
   \varphi(x_{k+1})-\varphi^{*}\le\ip{s_{k+1}}{x_{k+1}-x^{*}}
   =\frac{1}{2\lambda_{k}}\Bigl(\norm{x_{k}-x^{*}}^{2}-\norm{x_{k+1}-x^{*}}^{2}-\norm{x_{k}-x_{k+1}}^{2}\Bigr),
@@ -3038,7 +3071,7 @@ $\bar{x}_{N}=\frac{1}{\Lambda_{N}}\sum_{k=0}^{N-1}\lambda_{k}x_{k+1}$. Entonces<
 <div class="display">\[
   \varphi(x_{N})-\varphi^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2\lambda N}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p114">Ver demostración</button><div class="proof" id="clase-convexa-p114"><p>Sumando la desigualdad proximal de $0$ a $N-1$ y descartando los términos no
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p115">Ver demostración</button><div class="proof" id="clase-convexa-p115"><p>Sumando la desigualdad proximal de $0$ a $N-1$ y descartando los términos no
 positivos,
 $\sum_{k&lt;N}\lambda_{k}(\varphi(x_{k+1})-\varphi^{*})\le\frac12\norm{x_{0}-x^{*}}^{2}$,
 y la desigualdad de Jensen da la primera cota. La segunda parte del lema dice
@@ -3048,7 +3081,7 @@ $N\lambda(\varphi(x_{N})-\varphi^{*})$ queda por debajo de la misma suma.</p></d
 <div class="display">\[
   \norm{\prox_{\lambda\varphi}(u)-\prox_{\lambda\varphi}(v)}\le\frac{1}{1+\lambda\mu}\norm{u-v}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p115">Ver demostración</button><div class="proof" id="clase-convexa-p115"><p>Sean $p=\prox_{\lambda\varphi}(u)$ y $q=\prox_{\lambda\varphi}(v)$, de modo que
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p116">Ver demostración</button><div class="proof" id="clase-convexa-p116"><p>Sean $p=\prox_{\lambda\varphi}(u)$ y $q=\prox_{\lambda\varphi}(v)$, de modo que
 $\frac{u-p}{\lambda}\in\subdif\varphi(p)$ y
 $\frac{v-q}{\lambda}\in\subdif\varphi(q)$. La desigualdad del subgradiente con
 convexidad fuerte da
@@ -3057,7 +3090,7 @@ $\ip{u-v}{p-q}\ge(1+\lambda\mu)\norm{p-q}^{2}$, y basta Cauchy–Schwarz.</p></d
 <div class="stmt corolario" id="clase-c17:cor-lineal"><div class="head">Corolario <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\varphi$ es $\mu$-fuertemente convexa y $\lambda_{k}=\lambda$, el punto
 proximal converge linealmente a su único minimizador:
 $\norm{x_{k}-x^{*}}\le(1+\lambda\mu)^{-k}\norm{x_{0}-x^{*}}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p116">Ver demostración</button><div class="proof" id="clase-convexa-p116"><p>$x^{*}=\prox_{\lambda\varphi}(x^{*})$, porque $0\in\subdif\varphi(x^{*})$, y se
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p117">Ver demostración</button><div class="proof" id="clase-convexa-p117"><p>$x^{*}=\prox_{\lambda\varphi}(x^{*})$, porque $0\in\subdif\varphi(x^{*})$, y se
 aplica la contracción $k$ veces.</p></div>
 <h3 id="clase-convexa-x24">La envolvente de Moreau</h3>
 <div class="stmt definicion" id="clase-c17:def-moreau"><div class="head">Definición envolvente de Moreau</div><div class="body"><p>La <span class="df">envolvente de Moreau</span> de $g$ con parámetro $\lambda$ es</p>
@@ -3070,7 +3103,7 @@ aplica la contracción $k$ veces.</p></div>
   \nabla\env{\lambda}{g}(v)=\frac{1}{\lambda}\bigl(v-\prox_{\lambda g}(v)\bigr),
 \]</div>
 <p>y ese gradiente es $\frac1\lambda$-Lipschitz.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p117">Ver demostración</button><div class="proof" id="clase-convexa-p117"><p>Sean $p=\prox_{\lambda g}(v)$ y $q=\prox_{\lambda g}(u)$. Usando $p$ como
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p118">Ver demostración</button><div class="proof" id="clase-convexa-p118"><p>Sean $p=\prox_{\lambda g}(v)$ y $q=\prox_{\lambda g}(u)$. Usando $p$ como
 competidor para $u$ y desarrollando $\norm{p-u}^{2}=\norm{(p-v)+(v-u)}^{2}$,</p>
 <div class="display">\[
   \env{\lambda}{g}(u)\le g(p)+\frac{1}{2\lambda}\norm{p-u}^{2}
@@ -3104,7 +3137,7 @@ constante $1/\lambda$, empeora.</p></div></div>
   \prox_{\lambda g}(v)+\lambda\prox_{\lambda^{-1}g^{*}}(v/\lambda)=v,
 \]</div>
 <p>es decir, $\nabla\env{\lambda}{g}(v)=\prox_{\lambda^{-1}g^{*}}(v/\lambda)$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p118">Ver demostración</button><div class="proof" id="clase-convexa-p118"><p>Sean $p=\prox_{\lambda g}(v)$ e $y=(v-p)/\lambda$, que está en $\subdif g(p)$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p119">Ver demostración</button><div class="proof" id="clase-convexa-p119"><p>Sean $p=\prox_{\lambda g}(v)$ e $y=(v-p)/\lambda$, que está en $\subdif g(p)$
 por la caracterización. Por la desigualdad de Fenchel–Young, $p\in\subdif g^{*}(y)$,
 y como $p=v-\lambda y=\lambda(v/\lambda-y)$, eso es
 $\frac{v/\lambda-y}{1/\lambda}\in\subdif g^{*}(y)$, que por la caracterización
@@ -3143,7 +3176,7 @@ $X^{*}=\argmin F$ y $F^{*}=\min F$.</p>
   \iff 0\in\nabla f(x^{*})+\subdif g(x^{*})
   \iff x^{*}=\prox_{\alpha g}\bigl(x^{*}-\alpha\nabla f(x^{*})\bigr).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p119">Ver demostración</button><div class="proof" id="clase-convexa-p119"><p>La primera equivalencia es la regla de Fermat con la regla de la suma, que se
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p120">Ver demostración</button><div class="proof" id="clase-convexa-p120"><p>La primera equivalencia es la regla de Fermat con la regla de la suma, que se
 aplica porque $f$ es finita en todo $\R^{n}$, y $\subdif f(x)=\{\nabla f(x)\}$.
 La segunda es la caracterización del proximal en el punto
 $v=x^{*}-\alpha\nabla f(x^{*})$, donde $\frac{v-x^{*}}{\alpha}=-\nabla f(x^{*})$.</p></div>
@@ -3166,7 +3199,7 @@ sobre $g$ es implícito (<em>backward</em>, un proximal).</p></div></div>
 <p>así que $T_{\alpha}(x)$ es el único minimizador de $Q_{\alpha}(\cdot\,;x)$. Si
 $\alpha\le1/L$, además $Q_{\alpha}(z;x)\ge F(z)$ para todo $z$, con igualdad en
 $z=x$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p120">Ver demostración</button><div class="proof" id="clase-convexa-p120"><p>La identidad es desarrollar el cuadrado:
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p121">Ver demostración</button><div class="proof" id="clase-convexa-p121"><p>La identidad es desarrollar el cuadrado:
 $\frac{1}{2\alpha}\norm{z-x+\alpha\nabla f(x)}^{2}=\frac{1}{2\alpha}\norm{z-x}^{2}+\ip{\nabla f(x)}{z-x}+\frac{\alpha}{2}\norm{\nabla f(x)}^{2}$.
 Lo que queda de $z$ es el objetivo que define $\prox_{\alpha g}(x-\alpha\nabla f(x))$.
 La cota es el lema del descenso con $\frac{1}{\alpha}\ge L$.</p></div>
@@ -3175,7 +3208,7 @@ La cota es el lema del descenso con $\frac{1}{\alpha}\ge L$.</p></div>
 \]</div>
 <p>de modo que el método es $x_{k+1}=x_{k}-\alpha G_{\alpha}(x_{k})$.</p></div></div>
 <div class="stmt proposicion" id="clase-c17:prop-mapeo"><div class="head">Proposición</div><div class="body"><p>$G_{\alpha}(x)=0$ si y solo si $x\in X^{*}$. Si $g=0$, $G_{\alpha}=\nabla f$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p121">Ver demostración</button><div class="proof" id="clase-convexa-p121"><p>Lo primero es el punto fijo. Si $g=0$, el proximal es la identidad y
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p122">Ver demostración</button><div class="proof" id="clase-convexa-p122"><p>Lo primero es el punto fijo. Si $g=0$, el proximal es la identidad y
 $T_{\alpha}(x)=x-\alpha\nabla f(x)$.</p></div>
 <div class="stmt lema" id="clase-c17:lem-fundamental"><div class="head">Lema desigualdad fundamental</div><div class="body"><p>Sea $0&lt;\alpha\le1/L$, $x\in\R^{n}$ y $p=T_{\alpha}(x)$. Para todo $z\in\dom g$,</p>
 <div class="display">\[
@@ -3186,7 +3219,7 @@ $T_{\alpha}(x)=x-\alpha\nabla f(x)$.</p></div>
 <div class="display">\[
   F(p)\le F(x)-\alpha\Bigl(1-\frac{\alpha L}{2}\Bigr)\norm{G_{\alpha}(x)}^{2}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p122">Ver demostración</button><div class="proof" id="clase-convexa-p122"><p>Por la caracterización del proximal,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p123">Ver demostración</button><div class="proof" id="clase-convexa-p123"><p>Por la caracterización del proximal,
 $s=-\nabla f(x)-\frac{1}{\alpha}(p-x)\in\subdif g(p)$, y la desigualdad del
 subgradiente da</p>
 <div class="display">\[
@@ -3212,7 +3245,7 @@ $k\ge1$,</p>
   F(x_{k})-F^{*}\le\frac{\norm{x_{0}-x^{*}}^{2}}{2\alpha k},
 \]</div>
 <p>y con $\alpha=1/L$, $F(x_{k})-F^{*}\le\frac{L\norm{x_{0}-x^{*}}^{2}}{2k}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p123">Ver demostración</button><div class="proof" id="clase-convexa-p123"><p>La desigualdad fundamental con $x=x_{i}$ y $z=x^{*}$ da
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p124">Ver demostración</button><div class="proof" id="clase-convexa-p124"><p>La desigualdad fundamental con $x=x_{i}$ y $z=x^{*}$ da
 $F(x_{i+1})-F^{*}\le\frac{1}{2\alpha}\bigl(\norm{x_{i}-x^{*}}^{2}-\norm{x_{i+1}-x^{*}}^{2}\bigr)$,
 y su segunda parte dice que los valores no crecen. Luego</p>
 <div class="display">\[
@@ -3222,7 +3255,7 @@ y su segunda parte dice que los valores no crecen. Luego</p>
 <div class="display">\[
   \min_{0\le i&lt;k}\norm{G_{\alpha}(x_{i})}^{2}\le\frac{2\bigl(F(x_{0})-F^{*}\bigr)}{\alpha k}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p124">Ver demostración</button><div class="proof" id="clase-convexa-p124"><p>Como $\alpha L\le1$, la segunda parte de la desigualdad fundamental da
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p125">Ver demostración</button><div class="proof" id="clase-convexa-p125"><p>Como $\alpha L\le1$, la segunda parte de la desigualdad fundamental da
 $\frac{\alpha}{2}\norm{G_{\alpha}(x_{i})}^{2}\le F(x_{i})-F(x_{i+1})$, y la suma
 telescópica está acotada por $F(x_{0})-F^{*}$.</p></div>
 <div class="stmt observacion" id="clase-c17:obs-parada"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Esa segunda parte no usó la convexidad de $f$, solo el lema del descenso. El
@@ -3247,7 +3280,7 @@ con $\alpha=1/L_{k}$ sin conocer $L$.</p></div></div>
 \]</div>
 <p>y el gradiente proximal converge linealmente al único minimizador:
 $\norm{x_{k}-x^{*}}\le\bigl(\frac{L-\mu}{L+\mu}\bigr)^{k}\norm{x_{0}-x^{*}}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p125">Ver demostración</button><div class="proof" id="clase-convexa-p125"><p>Sean $a=\nabla f(x)-\nabla f(y)$ y $d=x-y$. Como en la prueba del paso óptimo,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p126">Ver demostración</button><div class="proof" id="clase-convexa-p126"><p>Sean $a=\nabla f(x)-\nabla f(y)$ y $d=x-y$. Como en la prueba del paso óptimo,
 el lema de interpolación da</p>
 <div class="display">\[
   \norm{d-\alpha a}^{2}=\norm{d}^{2}-2\alpha\ip{a}{d}+\alpha^{2}\norm{a}^{2}
@@ -3270,7 +3303,7 @@ Lasso.</p></div></div>
 <div class="display">\[
   F(x_{k})-F^{*}\le\frac{2L\norm{x_{0}-x^{*}}^{2}}{(k+1)^{2}}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p126">Ver demostración</button><div class="proof" id="clase-convexa-p126"><p>Sean $\delta_{k}=F(x_{k})-F^{*}$ y $v_{k}=t_{k}x_{k}-(t_{k}-1)x_{k-1}-x^{*}$. La
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p127">Ver demostración</button><div class="proof" id="clase-convexa-p127"><p>Sean $\delta_{k}=F(x_{k})-F^{*}$ y $v_{k}=t_{k}x_{k}-(t_{k}-1)x_{k-1}-x^{*}$. La
 desigualdad fundamental con $\alpha=1/L$ dice que, si $p=T_{1/L}(y)$ y
 $z\in\dom g$, entonces
 $\frac{2}{L}\bigl(F(p)-F(z)\bigr)\le\norm{y-z}^{2}-\norm{p-z}^{2}$. Con $y=x_{0}$
@@ -3303,7 +3336,7 @@ sube demasiado.</p></div></div>
 iterado, cada $N$ iteraciones con $N+1\ge\sqrt{8L/\mu}$, entonces cada etapa
 divide a la mitad $F-F^{*}$, y se llega a $F-F^{*}\le\varepsilon$ en
 $O\bigl(\sqrt{L/\mu}\log\frac1\varepsilon\bigr)$ iteraciones.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p127">Ver demostración</button><div class="proof" id="clase-convexa-p127"><p>Como $0\in\subdif F(x^{*})$, la desigualdad del subgradiente con convexidad
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p128">Ver demostración</button><div class="proof" id="clase-convexa-p128"><p>Como $0\in\subdif F(x^{*})$, la desigualdad del subgradiente con convexidad
 fuerte da $F(x)-F^{*}\ge\frac\mu2\norm{x-x^{*}}^{2}$. Si una etapa parte de
 $x_{0}$, la tasa de FISTA da</p>
 <div class="display">\[
@@ -3338,7 +3371,7 @@ $\nabla f(X)=P_{\Omega}(X-A)$ y $L=1$. Con paso $1$,</p>
 <p>el umbral suave sobre los valores singulares de $Y_{k}$, que se escribe
 $\operatorname{SVT}_{\lambda}(Y_{k})$. Cada paso repone las entradas observadas
 con los datos, conserva la estimación en las demás, y recorta el rango.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p128">Ver demostración</button><div class="proof" id="clase-convexa-p128"><p>$f(X)=\frac12\sum_{(i,j)\in\Omega}(X_{ij}-A_{ij})^{2}$, cuyo gradiente es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p129">Ver demostración</button><div class="proof" id="clase-convexa-p129"><p>$f(X)=\frac12\sum_{(i,j)\in\Omega}(X_{ij}-A_{ij})^{2}$, cuyo gradiente es
 $P_{\Omega}(X-A)$. Como $P_{\Omega}$ es una proyección ortogonal,
 $\norm{P_{\Omega}(X-Y)}_{F}\le\norm{X-Y}_{F}$, y $L=1$. Además
 $X-P_{\Omega}(X)=P_{\Omega^{c}}(X)$.</p></div>
@@ -3349,7 +3382,7 @@ separa por grupos:</p>
   \bigl(\prox_{\alpha g}(v)\bigr)_{G_{j}}=\Bigl(1-\frac{\alpha\lambda w_{j}}{\norm{v_{G_{j}}}_{2}}\Bigr)_{+}v_{G_{j}}.
 \]</div>
 <p>Así se anulan o se conservan grupos enteros de variables.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p129">Ver demostración</button><div class="proof" id="clase-convexa-p129"><p>El objetivo del proximal es una suma de términos que dependen cada uno de un
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p130">Ver demostración</button><div class="proof" id="clase-convexa-p130"><p>El objetivo del proximal es una suma de términos que dependen cada uno de un
 solo bloque $x_{G_{j}}$, y en cada bloque es el de la norma euclídea.</p></div>
 <div class="stmt observacion" id="clase-c17:obs-dificil"><div class="head">Observación el proximal también puede ser difícil<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Separar el objetivo en $f+g$ solo sirve si $\prox_{\alpha g}$ es más fácil que
 el problema original. Con la variación total, con composiciones $g(Ax)$ o con
@@ -3386,7 +3419,7 @@ convexa.</p></div></div>
   q(\nu)=-\frac12(c+A\trans\nu)\trans Q^{-1}(c+A\trans\nu)-b\trans\nu,
 \]</div>
 <p>y el dual es maximizar una cuadrática cóncava sin restricciones.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p130">Ver demostración</button><div class="proof" id="clase-convexa-p130"><p>$\mathcal{L}(x,\nu)=\frac12x\trans Qx+c\trans x+\ip{\nu}{Ax-b}$ es convexa en
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p131">Ver demostración</button><div class="proof" id="clase-convexa-p131"><p>$\mathcal{L}(x,\nu)=\frac12x\trans Qx+c\trans x+\ip{\nu}{Ax-b}$ es convexa en
 $x$, y su gradiente $Qx+c+A\trans\nu$ se anula en $x=-Q^{-1}(c+A\trans\nu)$.
 Sustituyendo sale $q(\nu)$.</p></div>
 <div class="stmt ejemplo" id="clase-c18:ej-fenchel"><div class="head">Ejemplo la dualidad de Fenchel vista desde Lagrange</div><div class="body"><p>El primal de la dualidad de Fenchel–Rockafellar,
@@ -3399,7 +3432,7 @@ $\inf_{x}f(x)+g(Ax)$, se escribe con una variable más como</p>
   q(y)=-f^{*}(-A\trans y)-g^{*}(y),
 \]</div>
 <p>que es la función que maximiza el dual de Fenchel–Rockafellar.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p131">Ver demostración</button><div class="proof" id="clase-convexa-p131"><p>El ínfimo se separa:</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p132">Ver demostración</button><div class="proof" id="clase-convexa-p132"><p>El ínfimo se separa:</p>
 <div class="display">\[
   \begin{aligned}
   q(y)&amp;=\inf_{x}\bigl\{f(x)+\ip{A\trans y}{x}\bigr\}+\inf_{z}\bigl\{g(z)-\ip{y}{z}\bigr\}\\
@@ -3409,7 +3442,7 @@ $\inf_{x}f(x)+g(Ax)$, se escribe con una variable más como</p>
 <p>y los dos supremos son las conjugadas.</p></div>
 <div class="stmt teorema" id="clase-c18:teo-debil"><div class="head">Teorema dualidad débil</div><div class="body"><p>Si $x$ es factible para (P) y $\lambda\ge0$, entonces $q(\lambda,\nu)\le F(x)$.
 En particular $d^{*}\le p^{*}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p132">Ver demostración</button><div class="proof" id="clase-convexa-p132"><p>Como $g_{i}(x)\le0$, $\lambda_{i}\ge0$ y $Ax=b$,</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p133">Ver demostración</button><div class="proof" id="clase-convexa-p133"><p>Como $g_{i}(x)\le0$, $\lambda_{i}\ge0$ y $Ax=b$,</p>
 <div class="display">\[
   q(\lambda,\nu)\le\mathcal{L}(x,\lambda,\nu)=F(x)+\sum_{i=1}^{m}\lambda_{i}g_{i}(x)+\ip{\nu}{Ax-b}\le F(x),
 \]</div>
@@ -3446,7 +3479,7 @@ que cumple las desigualdades estrictamente y las igualdades exactamente.</p></di
 <p>con $\varphi(u,v)=\infty$ si no hay puntos factibles. Es el valor del problema
 perturbado, y $\varphi(0,0)=p^{*}$.</p></div></div>
 <div class="stmt proposicion" id="clase-c18:prop-valor-convexa"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\varphi$ es convexa.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p133">Ver demostración</button><div class="proof" id="clase-convexa-p133"><p>Sean $w_{1}=(u_{1},v_{1})$ y $w_{2}=(u_{2},v_{2})$, $\theta\in[0,1]$, y
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p134">Ver demostración</button><div class="proof" id="clase-convexa-p134"><p>Sean $w_{1}=(u_{1},v_{1})$ y $w_{2}=(u_{2},v_{2})$, $\theta\in[0,1]$, y
 $r_{j}&gt;\varphi(w_{j})$. Hay $x_{j}$ factibles para $w_{j}$ con $F(x_{j})&lt;r_{j}$.
 Por convexidad, $x_{\theta}=\theta x_{1}+(1-\theta)x_{2}$ cumple
 $g_{i}(x_{\theta})\le\theta u_{1,i}+(1-\theta)u_{2,i}$ y
@@ -3455,7 +3488,7 @@ $\theta w_{1}+(1-\theta)w_{2}$, y
 $\varphi(\theta w_{1}+(1-\theta)w_{2})\le F(x_{\theta})&lt;\theta r_{1}+(1-\theta)r_{2}$.</p></div>
 <div class="stmt lema" id="clase-c18:lem-valor"><div class="head">Lema la función de valor cerca del origen</div><div class="body"><p>Si (P) cumple Slater, $A(V)=\R^{p}$ y $p^{*}\in\R$, entonces
 $(0,0)\in\intr(\dom\varphi)$ y $\varphi$ no toma el valor $-\infty$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p134">Ver demostración</button><div class="proof" id="clase-convexa-p134"><p>Como $A(V)=\R^{p}$, hay una aplicación lineal $B:\R^{p}\to V$ con $AB=I$: basta
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p135">Ver demostración</button><div class="proof" id="clase-convexa-p135"><p>Como $A(V)=\R^{p}$, hay una aplicación lineal $B:\R^{p}\to V$ con $AB=I$: basta
 escoger una preimagen en $V$ de cada vector de la base. Sea $\bar{x}$ el punto
 de Slater y $x(v)=\bar{x}+Bv$. Como $\bar{x}\in\ri D$ y $Bv\in V$, es
 $x(v)\in D$ para $\norm{v}$ pequeño, y $Ax(v)-b=v$. Las $g_{i}$ son convexas y
@@ -3478,7 +3511,7 @@ $F(z^{j})\le\theta F(x^{j})+(1-\theta)F(x^{-})\to-\infty$, contra $p^{*}\in\R$.<
 <div class="stmt teorema" id="clase-c18:teo-fuerte"><div class="head">Teorema dualidad fuerte</div><div class="body"><p>Si (P) cumple Slater y $p^{*}\in\R$, entonces $p^{*}=d^{*}$ y el dual alcanza su
 valor: existe $(\lambda^{*},\nu^{*})$ con $\lambda^{*}\ge0$ y
 $q(\lambda^{*},\nu^{*})=d^{*}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p135">Ver demostración</button><div class="proof" id="clase-convexa-p135"><p>Por la observación de las igualdades redundantes se puede suponer
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p136">Ver demostración</button><div class="proof" id="clase-convexa-p136"><p>Por la observación de las igualdades redundantes se puede suponer
 $A(V)=\R^{p}$. Por el lema, $\varphi$ es convexa, propia y $(0,0)$ es interior a
 su dominio, así que su subdiferencial en $(0,0)$ no es vacío. Sea
 $(\alpha,\beta)\in\subdif\varphi(0,0)$:</p>
@@ -3511,7 +3544,7 @@ multiplicadores óptimos: $-(\lambda^{*},\nu^{*})\in\subdif\varphi(0,0)$.</p></d
 <p>y $P=\{x\in\R^{n}:Ax=b,\ x\ge0\}$ es el conjunto factible del primal.</p></div></div>
 <div class="stmt lema" id="clase-c18:lem-cono-cerrado"><div class="head">Lema los conos finitamente generados son cerrados<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $A$ es una matriz $n\times r$ con columnas $a_{1},\dots,a_{r}$, entonces
 $\{Ax:x\ge0\}=\cono\{a_{1},\dots,a_{r}\}$ es un cono convexo cerrado.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p136">Ver demostración</button><div class="proof" id="clase-convexa-p136"><p>Sea $y=Ax$ con $x\ge0$ y $J=\{j:x_{j}&gt;0\}$. Si las $a_{j}$ con $j\in J$ son
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p137">Ver demostración</button><div class="proof" id="clase-convexa-p137"><p>Sea $y=Ax$ con $x\ge0$ y $J=\{j:x_{j}&gt;0\}$. Si las $a_{j}$ con $j\in J$ son
 linealmente dependientes, hay $\mu\neq0$ con soporte en $J$ y $A\mu=0$, y
 cambiándole el signo si hace falta, algún $\mu_{j}&gt;0$. Con
 $t=\min\{x_{j}/\mu_{j}:\mu_{j}&gt;0\}$, el vector $x-t\mu$ es no negativo, cumple
@@ -3526,14 +3559,14 @@ algún $z\ge0$ y $y=A_{J}z$. Cada pieza es cerrada, y la unión es finita.</p></
 afirmaciones es cierta:</p>
 <ol class="lista"><li><p>existe $x\ge0$ con $Ax=b$, es decir, $b$ está en el cono generado por
     las columnas de $A$;</p></li><li><p>existe $y\in\R^{n}$ con $A\trans y\ge0$ y $b\trans y&lt;0$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p137">Ver demostración</button><div class="proof" id="clase-convexa-p137"><p>Las dos a la vez darían $0&gt;b\trans y=x\trans A\trans y\ge0$. Si (a) falla,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p138">Ver demostración</button><div class="proof" id="clase-convexa-p138"><p>Las dos a la vez darían $0&gt;b\trans y=x\trans A\trans y\ge0$. Si (a) falla,
 $b\notin K=\{Ax:x\ge0\}$, que es un cono convexo cerrado por el lema anterior.
 Por el teorema bipolar $b\notin\polar{(\polar{K})}$, así que hay
 $y\in\polar{K}$ con $\ip{b}{y}&lt;0$. Y $y\in\polar{K}$ significa que
 $\ip{x}{A\trans y}=\ip{Ax}{y}\ge0$ para todo $x\ge0$, que es $A\trans y\ge0$.</p></div>
 <div class="stmt teorema" id="clase-c18:teo-pl"><div class="head">Teorema dualidad fuerte en programación lineal</div><div class="body"><p>Si $p^{*}\in\R$, el primal tiene un mínimo $x^{*}\in P$, el dual tiene un
 máximo $y^{*}$ y $p^{*}=d^{*}$. No hace falta ninguna condición de Slater.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p138">Ver demostración</button><div class="proof" id="clase-convexa-p138"><p>Si $x\in P$ y $A\trans y\le c$, entonces $b\trans y=x\trans A\trans y\le x\trans c$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p139">Ver demostración</button><div class="proof" id="clase-convexa-p139"><p>Si $x\in P$ y $A\trans y\le c$, entonces $b\trans y=x\trans A\trans y\le x\trans c$
 porque $x\ge0$, así que $d^{*}\le p^{*}$.</p>
 <p>El cono $\hat{K}=\{(Ax,c\trans x):x\ge0\}\subset\R^{p+1}$ está generado por las
 columnas de la matriz que apila $A$ y $c\trans$, así que es cerrado. Si
@@ -3575,7 +3608,7 @@ holgura complementaria de la programación lineal.</p></div></div>
   \qquad\text{para todo }(u,v),
 \]</div>
 <p>es decir, $(-\lambda^{*},-\nu^{*})\in\subdif\varphi(0,0)$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p139">Ver demostración</button><div class="proof" id="clase-convexa-p139"><p>Si $\varphi(u,v)=\infty$ no hay nada que probar. Si no, sea $x$ con
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p140">Ver demostración</button><div class="proof" id="clase-convexa-p140"><p>Si $\varphi(u,v)=\infty$ no hay nada que probar. Si no, sea $x$ con
 $g_{i}(x)\le u_{i}$ y $Ax-b=v$. Como $\lambda^{*}\ge0$ y
 $\mathcal{L}(x,\lambda^{*},\nu^{*})\ge q(\lambda^{*},\nu^{*})=p^{*}$,</p>
 <div class="display">\[
@@ -3592,7 +3625,7 @@ $\mathcal{L}(x,\lambda^{*},\nu^{*})\ge q(\lambda^{*},\nu^{*})=p^{*}$,</p>
 \]</div>
 <p>y bajo Slater este conjunto no es vacío: los multiplicadores óptimos son,
 cambiados de signo, los subgradientes de $\varphi$ en el origen.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p140">Ver demostración</button><div class="proof" id="clase-convexa-p140"><p>La inclusión $\supset$ es la proposición anterior. Si
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p141">Ver demostración</button><div class="proof" id="clase-convexa-p141"><p>La inclusión $\supset$ es la proposición anterior. Si
 $(\alpha,\beta)\in\subdif\varphi(0,0)$, la demostración de la dualidad fuerte
 usa solo eso para obtener $\alpha\le0$ y
 $q(-\alpha,-\beta)\ge p^{*}$, y la dualidad débil da la igualdad. Bajo Slater
@@ -3605,7 +3638,7 @@ una sola solución $(\lambda^{*},\nu^{*})$, no hay brecha, y</p>
 <p>Relajar un poco la restricción $g_{i}\le0$ baja el valor óptimo a razón
 $\lambda^{*}_{i}$, y si $\lambda^{*}_{i}=0$ la restricción no tiene efecto de
 primer orden. Por eso a los multiplicadores se les llama precios sombra.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p141">Ver demostración</button><div class="proof" id="clase-convexa-p141"><p>Ser diferenciable en $(0,0)$ obliga a que $\varphi$ sea finita cerca, así que
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p142">Ver demostración</button><div class="proof" id="clase-convexa-p142"><p>Ser diferenciable en $(0,0)$ obliga a que $\varphi$ sea finita cerca, así que
 $(0,0)\in\intr(\dom\varphi)$ y, por la caracterización de la diferenciabilidad
 con el subdiferencial, $\subdif\varphi(0,0)=\{\nabla\varphi(0,0)\}$. Se
 concluye con el corolario anterior.</p></div>
@@ -3617,7 +3650,7 @@ concluye con el corolario anterior.</p></div>
     todo $i$.</p></li></ol></div></div>
 <div class="stmt proposicion" id="clase-c18:prop-estacionariedad"><div class="head">Proposición la estacionariedad es minimizar el Lagrangiano</div><div class="body"><p>Si $x^{*}\in D$ y $\lambda^{*}\ge0$, la estacionariedad equivale a
 $x^{*}\in\argmin_{x}\mathcal{L}(x,\lambda^{*},\nu^{*})$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p142">Ver demostración</button><div class="proof" id="clase-convexa-p142"><p>Por la definición de subgradiente, $x^{*}$ minimiza
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p143">Ver demostración</button><div class="proof" id="clase-convexa-p143"><p>Por la definición de subgradiente, $x^{*}$ minimiza
 $\mathcal{L}(\cdot,\lambda^{*},\nu^{*})$ si y solo si
 $0\in\subdif\mathcal{L}(\cdot,\lambda^{*},\nu^{*})(x^{*})$. Las $g_{i}$ son
 finitas en $\R^{n}$, así que la intersección de los interiores relativos de los
@@ -3632,7 +3665,7 @@ $\ri(\dom F)\cap\ri C\neq\varnothing$, la estacionariedad es
 $0\in\subdif F(x^{*})+\sum_{i}\lambda^{*}_{i}\subdif g_{i}(x^{*})+A\trans\nu^{*}+\Ncono_{C}(x^{*})$.</p></div></div>
 <div class="stmt teorema" id="clase-c18:teo-kkt-suf"><div class="head">Teorema suficiencia de KKT</div><div class="body"><p>Si $(x^{*},\lambda^{*},\nu^{*})$ satisface KKT, entonces $x^{*}$ es óptimo para
 (P), $(\lambda^{*},\nu^{*})$ es óptimo para (D) y $p^{*}=d^{*}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p143">Ver demostración</button><div class="proof" id="clase-convexa-p143"><p>Por la estacionariedad $x^{*}$ minimiza $\mathcal{L}(\cdot,\lambda^{*},\nu^{*})$,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p144">Ver demostración</button><div class="proof" id="clase-convexa-p144"><p>Por la estacionariedad $x^{*}$ minimiza $\mathcal{L}(\cdot,\lambda^{*},\nu^{*})$,
 y por la factibilidad primal y la holgura complementaria</p>
 <div class="display">\[
   q(\lambda^{*},\nu^{*})=\mathcal{L}(x^{*},\lambda^{*},\nu^{*})
@@ -3642,7 +3675,7 @@ y por la factibilidad primal y la holgura complementaria</p>
 $F(x^{*})=q(\lambda^{*},\nu^{*})\le d^{*}\le p^{*}\le F(x^{*})$.</p></div>
 <div class="stmt teorema" id="clase-c18:teo-kkt-nec"><div class="head">Teorema necesidad de KKT bajo Slater</div><div class="body"><p>Si (P) cumple Slater y $x^{*}$ es óptimo, existe $(\lambda^{*},\nu^{*})$ tal que
 $(x^{*},\lambda^{*},\nu^{*})$ satisface KKT.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p144">Ver demostración</button><div class="proof" id="clase-convexa-p144"><p>El punto de Slater da $p^{*}&lt;\infty$, y $p^{*}=F(x^{*})&gt;-\infty$. Por la
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p145">Ver demostración</button><div class="proof" id="clase-convexa-p145"><p>El punto de Slater da $p^{*}&lt;\infty$, y $p^{*}=F(x^{*})&gt;-\infty$. Por la
 dualidad fuerte hay $\lambda^{*}\ge0$ y $\nu^{*}$ con
 $q(\lambda^{*},\nu^{*})=p^{*}$. Como $x^{*}$ es factible,</p>
 <div class="display">\[
@@ -3666,7 +3699,7 @@ y las condiciones KKT son el sistema</p>
   \end{aligned}
 \]</div>
 <p>con $\lambda\ge0$ y $z\ge0$, donde $Z=\operatorname{diag}(z)$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p145">Ver demostración</button><div class="proof" id="clase-convexa-p145"><p>La holgura $z=h-Gx\ge0$ escribe $Gx\le h$ como igualdad. La estacionariedad es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p146">Ver demostración</button><div class="proof" id="clase-convexa-p146"><p>La holgura $z=h-Gx\ge0$ escribe $Gx\le h$ como igualdad. La estacionariedad es
 que se anule el gradiente $Qx+c+G\trans\lambda+A\trans\nu$, y la holgura
 complementaria es $\lambda_{i}(Gx-h)_{i}=-\lambda_{i}z_{i}=0$ para todo $i$, que
 es $Z\lambda=0$.</p></div>
@@ -3689,7 +3722,7 @@ da $\lambda^{*}=0$.</p></div></div>
   \qquad
   d^{*}=\sup_{\lambda\ge0,\ \nu}\ \inf_{x\in\R^{n}}\ \mathcal{L}(x,\lambda,\nu).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p146">Ver demostración</button><div class="proof" id="clase-convexa-p146"><p>Lo segundo es la definición de $q$. Si $x$ es factible, el supremo vale $F(x)$:
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p147">Ver demostración</button><div class="proof" id="clase-convexa-p147"><p>Lo segundo es la definición de $q$. Si $x$ es factible, el supremo vale $F(x)$:
 se alcanza con $\lambda=0$, y es cota porque $\lambda_{i}g_{i}(x)\le0$. Si
 $g_{i}(x)&gt;0$, con $\lambda_{i}\to\infty$ el supremo es $\infty$, y si
 $Ax\neq b$, con $\nu=t(Ax-b)$ y $t\to\infty$ también.</p></div>
@@ -3703,7 +3736,7 @@ $Ax\neq b$, con $\nu=t(Ax-b)$ y $t\to\infty$ también.</p></div>
 equivalentes:</p>
 <ol class="lista"><li><p>es un punto de silla de $\mathcal{L}$;</p></li><li><p>satisface KKT;</p></li><li><p>$x^{*}$ es óptimo para (P), $(\lambda^{*},\nu^{*})$ es óptimo para (D) y
     $p^{*}=d^{*}$.</p></li></ol></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p147">Ver demostración</button><div class="proof" id="clase-convexa-p147"><p>(i)$\Rightarrow$(iii). La desigualdad de la izquierda dice que
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p148">Ver demostración</button><div class="proof" id="clase-convexa-p148"><p>(i)$\Rightarrow$(iii). La desigualdad de la izquierda dice que
 $\sup_{\lambda\ge0,\nu}\mathcal{L}(x^{*},\lambda,\nu)=\mathcal{L}(x^{*},\lambda^{*},\nu^{*})$,
 que es finito porque $x^{*}\in D$. Por la proposición anterior $x^{*}$ es
 factible y ese supremo es $F(x^{*})$. La de la derecha dice que
@@ -3727,7 +3760,7 @@ $x$. Se definen</p>
 \]</div></div></div>
 <div class="stmt proposicion" id="clase-c19:prop-minmax"><div class="head">Proposición desigualdad min-max</div><div class="body"><p>$d^{*}\le p^{*}$, y vale para cualquier $\phi$ y cualesquiera $X$, $Y$ no
 vacíos.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p148">Ver demostración</button><div class="proof" id="clase-convexa-p148"><p>Para todos $\bar{x}\in X$ e $\bar{y}\in Y$,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p149">Ver demostración</button><div class="proof" id="clase-convexa-p149"><p>Para todos $\bar{x}\in X$ e $\bar{y}\in Y$,
 $\inf_{x\in X}\phi(x,\bar{y})\le\phi(\bar{x},\bar{y})\le\sup_{y\in Y}\phi(\bar{x},y)$.
 El extremo izquierdo no depende de $\bar{x}$ y el derecho no depende de
 $\bar{y}$: se toma el supremo en $\bar{y}$ a la izquierda y después el ínfimo
@@ -3741,7 +3774,7 @@ en $\bar{x}$ a la derecha.</p></div>
 y $x^{*}$ e $y^{*}$ alcanzan el ínfimo que define $p^{*}$ y el supremo que
 define $d^{*}$. Recíprocamente, si $x^{*}$ e $y^{*}$ los alcanzan y
 $p^{*}=d^{*}$, entonces $(x^{*},y^{*})$ es un punto de silla.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p149">Ver demostración</button><div class="proof" id="clase-convexa-p149"><p>Si es punto de silla,</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p150">Ver demostración</button><div class="proof" id="clase-convexa-p150"><p>Si es punto de silla,</p>
 <div class="display">\[
   p^{*}\le\sup_{y}\phi(x^{*},y)=\phi(x^{*},y^{*})=\inf_{x}\phi(x,y^{*})\le d^{*},
 \]</div>
@@ -3756,7 +3789,7 @@ primeras y de segundas componentes de sus puntos de silla. Entonces $X^{*}$ e
 $Y^{*}$ son convexos y el conjunto de puntos de silla es $X^{*}\times Y^{*}$. Si
 $\phi(\cdot,y)$ es estrictamente convexa para cada $y\in Y^{*}$, $X^{*}$ tiene
 un solo punto, y lo análogo vale para $Y^{*}$ con concavidad estricta.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p150">Ver demostración</button><div class="proof" id="clase-convexa-p150"><p>Hay un punto de silla, así que $p^{*}=d^{*}$, y por la proposición anterior el
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p151">Ver demostración</button><div class="proof" id="clase-convexa-p151"><p>Hay un punto de silla, así que $p^{*}=d^{*}$, y por la proposición anterior el
 conjunto de puntos de silla es el producto de los minimizadores de
 $P(x)=\sup_{y}\phi(x,y)$ por los maximizadores de
 $D(y)=\inf_{x}\phi(x,y)$. $P$ es convexa por ser un supremo de convexas,
@@ -3771,7 +3804,7 @@ $\lambda\in\simplex_{k}$ con</p>
 <div class="display">\[
   \alpha=\min_{x\in X}\ \sum_{i=1}^{k}\lambda_{i}f_{i}(x).
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p151">Ver demostración</button><div class="proof" id="clase-convexa-p151"><p>Sea $C=\{u\in\R^{k}:\ \text{existe }x\in X\text{ con }f_{i}(x)\le u_{i},\ i=1,\dots,k\}$.
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p152">Ver demostración</button><div class="proof" id="clase-convexa-p152"><p>Sea $C=\{u\in\R^{k}:\ \text{existe }x\in X\text{ con }f_{i}(x)\le u_{i},\ i=1,\dots,k\}$.
 Es convexo: si $f_{i}(x)\le v_{i}$ y $f_{i}(z)\le w_{i}$, el punto
 $\bar{x}=\theta x+(1-\theta)z\in X$ cumple
 $f_{i}(\bar{x})\le\theta f_{i}(x)+(1-\theta)f_{i}(z)\le\theta v_{i}+(1-\theta)w_{i}$.
@@ -3794,7 +3827,7 @@ $\max_{i}f_{i}$ se alcanza $\alpha$.</p></div>
   \min_{x\in X}\ \max_{y\in Y}\ \phi(x,y)=\max_{y\in Y}\ \min_{x\in X}\ \phi(x,y),
 \]</div>
 <p>y existe un punto de silla.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p152">Ver demostración</button><div class="proof" id="clase-convexa-p152"><p>Sean $P(x)=\max_{y}\phi(x,y)$ y $D(y)=\min_{x}\phi(x,y)$. Como $\phi$ es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p153">Ver demostración</button><div class="proof" id="clase-convexa-p153"><p>Sean $P(x)=\max_{y}\phi(x,y)$ y $D(y)=\min_{x}\phi(x,y)$. Como $\phi$ es
 uniformemente continua en el compacto $X\times Y$, $P$ y $D$ son continuas, y
 alcanzan su mínimo en algún $x^{*}$ y su máximo en algún $y^{*}$. Si fuera
 $p^{*}&gt;d^{*}$, sea $t$ con $p^{*}&gt;t&gt;d^{*}$. Para cada $x\in X$ hay $y$ con
@@ -3835,7 +3868,7 @@ derecho $1$.</p></div></div>
   \min_{x\in\simplex_{n}}\ \max_{y\in\simplex_{m}}\ x\trans Ay
   =\max_{y\in\simplex_{m}}\ \min_{x\in\simplex_{n}}\ x\trans Ay .
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p153">Ver demostración</button><div class="proof" id="clase-convexa-p153"><p>Los símplex son convexos y compactos, y $x\trans Ay$ es continua y lineal en
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p154">Ver demostración</button><div class="proof" id="clase-convexa-p154"><p>Los símplex son convexos y compactos, y $x\trans Ay$ es continua y lineal en
 cada variable. Es el teorema de Sion.</p></div>
 <div class="stmt observacion" id="clase-c19:obs-juego-vertices"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\max_{y\in\simplex_{m}}x\trans Ay=\max_{j}(A\trans x)_{j}$ y
 $\min_{x\in\simplex_{n}}x\trans Ay=\min_{i}(Ay)_{i}$, porque
@@ -3846,14 +3879,14 @@ correspondiente.</p></div></div>
 <div class="stmt definicion" id="clase-c19:def-primal-dual"><div class="head">Definición funciones primal y dual</div><div class="body"><p>$P(x)=\sup_{y\in Y}\phi(x,y)$ y $D(y)=\inf_{x\in X}\phi(x,y)$, con valores en
 $(-\infty,\infty]$ y $[-\infty,\infty)$.</p></div></div>
 <div class="stmt proposicion" id="clase-c19:prop-primal-dual"><div class="head">Proposición las dos funciones y los dos valores</div><div class="body"><p>$P$ es convexa, $D$ es cóncava, y $p^{*}=\inf_{X}P\ge d^{*}=\sup_{Y}D$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p154">Ver demostración</button><div class="proof" id="clase-convexa-p154"><p>Un supremo de convexas es convexo y un ínfimo de cóncavas es cóncavo. Lo demás
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p155">Ver demostración</button><div class="proof" id="clase-convexa-p155"><p>Un supremo de convexas es convexo y un ínfimo de cóncavas es cóncavo. Lo demás
 es la definición y la desigualdad min-max.</p></div>
 <div class="stmt definicion" id="clase-c19:def-brecha"><div class="head">Definición brecha primal-dual</div><div class="body"><p>Para $(x,y)\in X\times Y$, la <span class="df">brecha primal-dual</span> es
 $\mathcal{G}(x,y)=P(x)-D(y)\ge0$.</p></div></div>
 <div class="stmt proposicion" id="clase-c19:prop-brecha-cero"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\phi$ tiene algún punto de silla, $\mathcal{G}(x,y)=0$ si y solo si $(x,y)$
 es un punto de silla. La brecha certifica a la vez la optimalidad primal y la
 dual.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p155">Ver demostración</button><div class="proof" id="clase-convexa-p155"><p>Hay silla, así que $p^{*}=d^{*}$, y $D(y)\le d^{*}=p^{*}\le P(x)$. La brecha es
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p156">Ver demostración</button><div class="proof" id="clase-convexa-p156"><p>Hay silla, así que $p^{*}=d^{*}$, y $D(y)\le d^{*}=p^{*}\le P(x)$. La brecha es
 cero si y solo si $P(x)=p^{*}$ y $D(y)=d^{*}$, que por la proposición del punto
 de silla es serlo.</p></div>
 <div class="stmt observacion" id="clase-c19:obs-brecha-restringida"><div class="head">Observación brecha restringida<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X$ o $Y$ no son acotados, $\mathcal{G}$ puede ser infinita aun cerca de la
@@ -3873,7 +3906,7 @@ $z=(x,y)$ se define</p>
 <div class="display">\[
   \ip{F(z^{*})}{z-z^{*}}\ge0\qquad\text{para todo }z\in Z .
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p156">Ver demostración</button><div class="proof" id="clase-convexa-p156"><p>Una función convexa $f$, diferenciable, alcanza su mínimo sobre un convexo $X$
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p157">Ver demostración</button><div class="proof" id="clase-convexa-p157"><p>Una función convexa $f$, diferenciable, alcanza su mínimo sobre un convexo $X$
 en $x^{*}$ si y solo si $\ip{\nabla f(x^{*})}{x-x^{*}}\ge0$ para todo $x\in X$:
 si es mínimo, esa es la derivada direccional hacia $x$, que no puede ser
 negativa; y si la desigualdad vale,
@@ -3897,13 +3930,13 @@ $0\in F(z^{*})+\Ncono_{Z}(z^{*})$.</p></div></div>
 menos $\mu\norm{z-w}^{2}$.</p></div></div>
 <div class="stmt ejemplo" id="clase-c19:ej-gradiente-monotono"><div class="head">Ejemplo el gradiente de una convexa</div><div class="body"><p>Si $f:\R^{n}\to\R$ es convexa y diferenciable, $\nabla f$ es monótono, y si
 además es $\mu$-fuertemente convexa, $\nabla f$ es $\mu$-fuertemente monótono.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p157">Ver demostración</button><div class="proof" id="clase-convexa-p157"><p>Se suman $f(w)\ge f(z)+\ip{\nabla f(z)}{w-z}+\frac{\mu}{2}\norm{w-z}^{2}$ y la
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p158">Ver demostración</button><div class="proof" id="clase-convexa-p158"><p>Se suman $f(w)\ge f(z)+\ip{\nabla f(z)}{w-z}+\frac{\mu}{2}\norm{w-z}^{2}$ y la
 misma con $z$ y $w$ intercambiados, y queda
 $\ip{\nabla f(z)-\nabla f(w)}{z-w}\ge\mu\norm{z-w}^{2}$, con $\mu=0$ en el caso
 convexo.</p></div>
 <div class="stmt proposicion" id="clase-c19:prop-monotono"><div class="head">Proposición convexo-cóncava da monótono</div><div class="body"><p>Si $\phi$ es diferenciable en un abierto que contiene a $Z=X\times Y$, convexa en
 $x$ y cóncava en $y$, su operador $F$ es monótono.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p158">Ver demostración</button><div class="proof" id="clase-convexa-p158"><p>Sean $z=(x,y)$ y $w=(u,v)$. Por la caracterización de primer orden de la
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p159">Ver demostración</button><div class="proof" id="clase-convexa-p159"><p>Sean $z=(x,y)$ y $w=(u,v)$. Por la caracterización de primer orden de la
 convexidad en $x$ y de la concavidad en $y$,</p>
 <div class="display">\[
   \begin{aligned}
@@ -3921,7 +3954,7 @@ aparece la misma $S=\phi(u,y)-\phi(x,y)+\phi(x,v)-\phi(u,v)$, y queda</p>
 <p>que es $\ip{F(z)-F(w)}{z-w}\ge0$.</p></div>
 <div class="stmt proposicion" id="clase-c19:prop-monotono-fuerte"><div class="head">Proposición <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $\phi$ es $\mu_{x}$-fuertemente convexa en $x$ y $\mu_{y}$-fuertemente
 cóncava en $y$, su operador es $\min\{\mu_{x},\mu_{y}\}$-fuertemente monótono.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p159">Ver demostración</button><div class="proof" id="clase-convexa-p159"><p>En la prueba anterior cada desigualdad de arriba gana
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p160">Ver demostración</button><div class="proof" id="clase-convexa-p160"><p>En la prueba anterior cada desigualdad de arriba gana
 $\frac{\mu_{x}}{2}\norm{u-x}^{2}$ y cada una de abajo
 $\frac{\mu_{y}}{2}\norm{v-y}^{2}$, y la cuenta da
 $\ip{F(z)-F(w)}{z-w}\ge\mu_{x}\norm{x-u}^{2}+\mu_{y}\norm{y-v}^{2}\ge\min\{\mu_{x},\mu_{y}\}\norm{z-w}^{2}$.</p></div>
@@ -3945,7 +3978,7 @@ $\Proy_{X\times Y}(a,b)=(\Proy_{X}a,\Proy_{Y}b)$, es</p>
 <p>se desciende en $x$ y se asciende en $y$.</p></div></div>
 <div class="stmt lema" id="clase-c19:lem-punto-fijo"><div class="head">Lema las soluciones son puntos fijos</div><div class="body"><p>Para $\alpha&gt;0$, $z^{*}\in Z$ resuelve la desigualdad variacional si y solo si
 $z^{*}=\Proy_{Z}(z^{*}-\alpha F(z^{*}))$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p160">Ver demostración</button><div class="proof" id="clase-convexa-p160"><p>Por la caracterización variacional de la proyección,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p161">Ver demostración</button><div class="proof" id="clase-convexa-p161"><p>Por la caracterización variacional de la proyección,
 $z^{*}=\Proy_{Z}(z^{*}-\alpha F(z^{*}))$ si y solo si
 $\ip{z^{*}-\alpha F(z^{*})-z^{*}}{z-z^{*}}\le0$ para todo $z\in Z$, que es
 $\ip{F(z^{*})}{z-z^{*}}\ge0$.</p></div>
@@ -3955,7 +3988,7 @@ solución de la desigualdad variacional. Si $0&lt;\alpha&lt;2\mu/L^{2}$, entonce
   \norm{z^{k+1}-z^{*}}^{2}\le\bigl(1-2\alpha\mu+\alpha^{2}L^{2}\bigr)\norm{z^{k}-z^{*}}^{2},
 \]</div>
 <p>y como el factor es menor que $1$, los iterados convergen linealmente a $z^{*}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p161">Ver demostración</button><div class="proof" id="clase-convexa-p161"><p>Por el lema, $z^{*}=\Proy_{Z}(z^{*}-\alpha F(z^{*}))$, y la proyección no
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p162">Ver demostración</button><div class="proof" id="clase-convexa-p162"><p>Por el lema, $z^{*}=\Proy_{Z}(z^{*}-\alpha F(z^{*}))$, y la proyección no
 expande distancias, así que</p>
 <div class="display">\[
 \begin{aligned}
@@ -3978,7 +4011,7 @@ $\ip{F(z)-F(w)}{z-w}=0$. El método con paso $\alpha$ es</p>
 \]</div>
 <p>así que para todo $\alpha&gt;0$ los iterados se alejan del punto de silla girando
 alrededor de él.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p162">Ver demostración</button><div class="proof" id="clase-convexa-p162"><p>Si $x^{*}\neq0$, $\phi(x^{*},y)=x^{*}y$ no está acotada en $y$, así que un
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p163">Ver demostración</button><div class="proof" id="clase-convexa-p163"><p>Si $x^{*}\neq0$, $\phi(x^{*},y)=x^{*}y$ no está acotada en $y$, así que un
 punto de silla tiene $x^{*}=0$, y por lo mismo $y^{*}=0$; y $(0,0)$ lo es porque
 $\phi(0,y)=\phi(x,0)=0$. El método es $x^{k+1}=x^{k}-\alpha y^{k}$,
 $y^{k+1}=y^{k}+\alpha x^{k}$, y al desarrollar los cuadrados los términos
@@ -3995,7 +4028,7 @@ $z^{k}$ con el operador evaluado en la predicción.</p></div></div>
 <div class="display">\[
   2\alpha\ip{F(w^{k})}{w^{k}-z}\le\norm{z^{k}-z}^{2}-\norm{z^{k+1}-z}^{2}-(1-\alpha^{2}L^{2})\norm{z^{k}-w^{k}}^{2}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p163">Ver demostración</button><div class="proof" id="clase-convexa-p163"><p>Se usa dos veces que
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p164">Ver demostración</button><div class="proof" id="clase-convexa-p164"><p>Se usa dos veces que
 $2\ip{a-b}{b-c}=\norm{a-c}^{2}-\norm{a-b}^{2}-\norm{b-c}^{2}$. Por la
 caracterización variacional de la proyección que define $z^{k+1}$,
 $\ip{z^{k}-\alpha F(w^{k})-z^{k+1}}{z-z^{k+1}}\le0$, es decir</p>
@@ -4021,7 +4054,7 @@ $\ip{z^{k}-\alpha F(w^{k})-z^{k+1}}{z-z^{k+1}}\le0$, es decir</p>
 <div class="stmt teorema" id="clase-c19:teo-extragradiente"><div class="head">Teorema convergencia del extragradiente</div><div class="body"><p>Sean $F$ monótono y $L$-Lipschitz en $Z$ y $0&lt;\alpha&lt;1/L$, y supongamos que la
 desigualdad variacional tiene solución. Entonces $z^{k}$ converge a una
 solución.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p164">Ver demostración</button><div class="proof" id="clase-convexa-p164"><p>Sea $z^{*}$ una solución. Como $w^{k}\in Z$, la monotonía y la desigualdad
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p165">Ver demostración</button><div class="proof" id="clase-convexa-p165"><p>Sea $z^{*}$ una solución. Como $w^{k}\in Z$, la monotonía y la desigualdad
 variacional dan
 $\ip{F(w^{k})}{w^{k}-z^{*}}\ge\ip{F(z^{*})}{w^{k}-z^{*}}\ge0$, y el lema con
 $z=z^{*}$ da</p>
@@ -4044,7 +4077,7 @@ $w=(w_{x},w_{y})$ y $z=(x,y)$ en $Z$</p>
 <div class="display">\[
   \phi(w_{x},y)-\phi(x,w_{y})\le\ip{F(w)}{w-z}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p165">Ver demostración</button><div class="proof" id="clase-convexa-p165"><p>Por la desigualdad del gradiente en cada variable,
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p166">Ver demostración</button><div class="proof" id="clase-convexa-p166"><p>Por la desigualdad del gradiente en cada variable,
 $\phi(x,w_{y})\ge\phi(w)+\ip{\nabla_{x}\phi(w)}{x-w_{x}}$ y
 $\phi(w_{x},y)\le\phi(w)+\ip{\nabla_{y}\phi(w)}{y-w_{y}}$. Restando,</p>
 <div class="display">\[
@@ -4059,7 +4092,7 @@ $0&lt;\alpha\le1/L$. El promedio de las predicciones</p>
 <div class="display">\[
   \phi(\bar{x}_{N},y)-\phi(x,\bar{y}_{N})\le\frac{\norm{z^{0}-(x,y)}^{2}}{2\alpha N}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p166">Ver demostración</button><div class="proof" id="clase-convexa-p166"><p>Sea $z=(x,y)$. Por el lema anterior y la desigualdad fundamental, descartando
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p167">Ver demostración</button><div class="proof" id="clase-convexa-p167"><p>Sea $z=(x,y)$. Por el lema anterior y la desigualdad fundamental, descartando
 su último término, que no es positivo porque $\alpha L\le1$,</p>
 <div class="display">\[
   2\alpha\bigl(\phi(w^{k}_{x},y)-\phi(x,w^{k}_{y})\bigr)\le\norm{z^{k}-z}^{2}-\norm{z^{k+1}-z}^{2}.
@@ -4075,7 +4108,7 @@ $\phi(x,\bar{y}_{N})\ge\frac1N\sum_{k}\phi(x,w^{k}_{y})$.</p></div>
 <div class="display">\[
   \mathcal{G}_{X_{0},Y_{0}}(\bar{x}_{N},\bar{y}_{N})\le\frac{1}{2\alpha N}\sup_{z\in X_{0}\times Y_{0}}\norm{z^{0}-z}^{2}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p167">Ver demostración</button><div class="proof" id="clase-convexa-p167"><p>$\mathcal{G}_{X_{0},Y_{0}}(\bar{x}_{N},\bar{y}_{N})$ es el supremo de
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p168">Ver demostración</button><div class="proof" id="clase-convexa-p168"><p>$\mathcal{G}_{X_{0},Y_{0}}(\bar{x}_{N},\bar{y}_{N})$ es el supremo de
 $\phi(\bar{x}_{N},y)-\phi(x,\bar{y}_{N})$ sobre $(x,y)\in X_{0}\times Y_{0}$, y
 el teorema acota cada término.</p></div>
 <div class="stmt observacion" id="clase-c19:obs-tasa-extragradiente"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La tasa $O(1/N)$ mejora el $O(1/\sqrt{N})$ del subgradiente para una convexa
@@ -4103,7 +4136,7 @@ $z=(x,y)\in Z$</p>
 \]</div>
 <p>Con $\alpha=1/L$ y $\Omega=\sup_{z\in X_{0}\times Y_{0}}D_{h}(z,z^{0})$, la
 brecha restringida a $X_{0}\times Y_{0}$ es a lo sumo $L\Omega/N$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p168">Ver demostración</button><div class="proof" id="clase-convexa-p168"><p>Si $u^{+}$ minimiza $\ip{\xi}{u}+D_{h}(u,v)$ sobre $Z$, la condición de primer
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p169">Ver demostración</button><div class="proof" id="clase-convexa-p169"><p>Si $u^{+}$ minimiza $\ip{\xi}{u}+D_{h}(u,v)$ sobre $Z$, la condición de primer
 orden y la identidad de los tres puntos dan, como en la desigualdad de un paso
 de mirror descent,</p>
 <div class="display">\[
@@ -4164,14 +4197,14 @@ convexas y cerradas, y $K$ una matriz $m\times n$. Para todo $x\in\R^{n}$,</p>
 \]</div>
 <p>así que $\min_{x}f(x)+g(Kx)$ es el problema min-max de
 $\phi(x,y)=f(x)+\ip{Kx}{y}-g^{*}(y)$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p169">Ver demostración</button><div class="proof" id="clase-convexa-p169"><p>$\sup_{y}\{\ip{Kx}{y}-g^{*}(y)\}=g^{**}(Kx)$, que es $g(Kx)$ por el teorema de
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p170">Ver demostración</button><div class="proof" id="clase-convexa-p170"><p>$\sup_{y}\{\ip{Kx}{y}-g^{*}(y)\}=g^{**}(Kx)$, que es $g(Kx)$ por el teorema de
 Fenchel–Moreau.</p></div>
 <div class="stmt proposicion" id="clase-c19:prop-silla-compuesto"><div class="head">Proposición las condiciones de punto de silla</div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla de $\phi$ en $\dom f\times\dom g^{*}$ si y
 solo si</p>
 <div class="display">\[
   0\in\subdif f(x^{*})+K\trans y^{*}\qquad\text{y}\qquad0\in\subdif g^{*}(y^{*})-Kx^{*}.
 \]</div></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p170">Ver demostración</button><div class="proof" id="clase-convexa-p170"><p>Ser punto de silla es que $x^{*}$ minimice $f+\ip{K\trans y^{*}}{\cdot}$ e
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p171">Ver demostración</button><div class="proof" id="clase-convexa-p171"><p>Ser punto de silla es que $x^{*}$ minimice $f+\ip{K\trans y^{*}}{\cdot}$ e
 $y^{*}$ minimice $g^{*}-\ip{Kx^{*}}{\cdot}$. Por la definición de subgradiente,
 $x^{*}$ minimiza una convexa $\psi$ si y solo si $0\in\subdif\psi(x^{*})$, y
 sumar una función lineal $\ip{c}{\cdot}$ traslada el subdiferencial en $c$.</p></div>
@@ -4227,7 +4260,7 @@ es decir, $J_{\gamma T}(u)=\{x:u\in x+\gamma T(x)\}$, y el <span class="df">oper
 reflexión</span> es $R_{\gamma T}=2J_{\gamma T}-I$.</p></div></div>
 <div class="stmt ejemplo" id="clase-c20:ej-prox"><div class="head">Ejemplo el proximal y la proyección</div><div class="body"><p>Si $h\in\Gamma_{0}(\R^{n})$, entonces $J_{\gamma\subdif h}=\prox_{\gamma h}$. En
 particular, si $C$ es convexo, cerrado y no vacío, $J_{\gamma\subdif\delta_{C}}=\Proy_{C}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p171">Ver demostración</button><div class="proof" id="clase-convexa-p171"><p>Por la caracterización del proximal, $u\in p+\gamma\subdif h(p)$ si y solo si
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p172">Ver demostración</button><div class="proof" id="clase-convexa-p172"><p>Por la caracterización del proximal, $u\in p+\gamma\subdif h(p)$ si y solo si
 $p=\prox_{\gamma h}(u)$, y $\prox_{\gamma\delta_{C}}=\Proy_{C}$ es el ejemplo de la
 indicadora.</p></div>
 <div class="stmt observacion" id="clase-c20:obs-inclusion"><div class="head">Observación inclusiones monótonas<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Minimizar $f+g$, con $f,g\in\Gamma_{0}(\R^{n})$, es resolver
@@ -4240,7 +4273,7 @@ estructura proximal de $g$.</p></div></div>
 <div class="stmt lema" id="clase-c20:lem-univaluado"><div class="head">Lema el resolvente es univaluado</div><div class="body"><p>Si $T$ es monótono y $\gamma&gt;0$, para cada $u$ hay a lo sumo un $x$ con
 $u\in x+\gamma T(x)$. Así, $J_{\gamma T}$ es una función en el conjunto de los
 $u$ donde no es vacío.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p172">Ver demostración</button><div class="proof" id="clase-convexa-p172"><p>Si $u=x_{1}+\gamma v_{1}=x_{2}+\gamma v_{2}$ con $v_{i}\in T(x_{i})$, entonces</p>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p173">Ver demostración</button><div class="proof" id="clase-convexa-p173"><p>Si $u=x_{1}+\gamma v_{1}=x_{2}+\gamma v_{2}$ con $v_{i}\in T(x_{i})$, entonces</p>
 <div class="display">\[
   0=\ip{u-u}{x_{1}-x_{2}}=\norm{x_{1}-x_{2}}^{2}+\gamma\ip{v_{1}-v_{2}}{x_{1}-x_{2}}\ge\norm{x_{1}-x_{2}}^{2},
 \]</div>
@@ -4253,7 +4286,7 @@ $(a,b)\in\gra T$.</p></div></div>
 $I+\gamma T$ es sobreyectivo para algún $\gamma&gt;0$, y en ese caso lo es para
 todo $\gamma&gt;0$. En particular, si $T$ es maximalmente monótono, $J_{\gamma T}$
 es una función definida en todo $\R^{n}$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p173">Ver demostración</button><div class="proof" id="clase-convexa-p173"><p>Sean $I+\gamma T$ sobreyectivo y $(a,b)$ con $\ip{a-x}{b-v}\ge0$ para todo
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p174">Ver demostración</button><div class="proof" id="clase-convexa-p174"><p>Sean $I+\gamma T$ sobreyectivo y $(a,b)$ con $\ip{a-x}{b-v}\ge0$ para todo
 $(x,v)\in\gra T$. Tomando $(x,v)\in\gra T$ con $a+\gamma b=x+\gamma v$, se tiene
 $a-x=\gamma(v-b)$ y</p>
 <div class="display">\[
@@ -4276,13 +4309,13 @@ monótono, pero su grafo está contenido propiamente en el de</p>
 teorema de Minty, $I+\gamma T$ tiene imagen $[0,\infty)$, mientras que
 $J_{\gamma\Ncono_{[0,\infty)}}(u)=\Proy_{[0,\infty)}(u)=\max\{u,0\}$ está definido
 en todo $\R$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p174">Ver demostración</button><div class="proof" id="clase-convexa-p174"><p>$T$ es monótono porque sus valores son nulos, y $(0,-1)$ está en el grafo del
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p175">Ver demostración</button><div class="proof" id="clase-convexa-p175"><p>$T$ es monótono porque sus valores son nulos, y $(0,-1)$ está en el grafo del
 cono normal y no en el de $T$. Un $v$ es subgradiente de $\delta_{[0,\infty)}$ en
 $0$ si y solo si $v(y-0)\le0$ para todo $y\ge0$, es decir, $v\le0$. La imagen de
 $I+\gamma T$ es $\{x:x\ge0\}$, y el resolvente del cono normal es el ejemplo del
 proximal y la proyección.</p></div>
 <div class="stmt teorema" id="clase-c20:teo-subdif-maximal"><div class="head">Teorema el subdiferencial es maximalmente monótono</div><div class="body"><p>Si $h\in\Gamma_{0}(\R^{n})$, $\subdif h$ es maximalmente monótono.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p175">Ver demostración</button><div class="proof" id="clase-convexa-p175"><p>Es monótono. Para cada $u$, $p=\prox_{h}(u)$ existe y, por la caracterización
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p176">Ver demostración</button><div class="proof" id="clase-convexa-p176"><p>Es monótono. Para cada $u$, $p=\prox_{h}(u)$ existe y, por la caracterización
 del proximal, $u-p\in\subdif h(p)$, es decir, $u\in(I+\subdif h)(p)$. Así
 $I+\subdif h$ es sobreyectivo, y la implicación que se demostró del teorema de
 Minty concluye.</p></div>
@@ -4291,7 +4324,7 @@ Minty concluye.</p></div>
   \norm{J_{\gamma T}(u)-J_{\gamma T}(v)}^{2}\le\ip{J_{\gamma T}(u)-J_{\gamma T}(v)}{u-v},
 \]</div>
 <p>y tanto $J_{\gamma T}$ como $R_{\gamma T}$ son no expansivos.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p176">Ver demostración</button><div class="proof" id="clase-convexa-p176"><p>Sean $p=J_{\gamma T}(u)$ y $q=J_{\gamma T}(v)$. Entonces
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p177">Ver demostración</button><div class="proof" id="clase-convexa-p177"><p>Sean $p=J_{\gamma T}(u)$ y $q=J_{\gamma T}(v)$. Entonces
 $\frac{u-p}{\gamma}\in T(p)$ y $\frac{v-q}{\gamma}\in T(q)$, y la monotonía da
 $\ip{(u-p)-(v-q)}{p-q}\ge0$, que es la desigualdad. Con Cauchy–Schwarz,
 $J_{\gamma T}$ es no expansivo, y</p>
@@ -4335,7 +4368,7 @@ existen,</p>
 \]</div>
 <p>es decir, el método de multiplicadores es el método del punto proximal aplicado
 a $-q$ con paso $\rho$.</p></div></div>
-<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p177">Ver demostración</button><div class="proof" id="clase-convexa-p177"><p>El término $\ip{y^{k}}{Ax-b}+\frac{\rho}{2}\norm{Ax-b}^{2}$ es finito y
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p178">Ver demostración</button><div class="proof" id="clase-convexa-p178"><p>El término $\ip{y^{k}}{Ax-b}+\frac{\rho}{2}\norm{Ax-b}^{2}$ es finito y
 diferenciable en $x$, con gradiente $A\trans\bigl(y^{k}+\rho(Ax-b)\bigr)$, así que
 la regla de la suma y la regla de Fermat dan</p>
 <div class="display">\[
