@@ -29,6 +29,8 @@
   --abierto:#a05a00; --abierto-bg:#fdf3e6;
   --link:#1d4f87; --shadow:rgba(16,25,40,.15);
   --btn:#eef1f6; --btn-on:#16324f; --btn-on-ink:#ffffff;
+  /* Estados del mapa de resultados (tecla M), los del «proof map» de Camilo. */
+  --m-ok:#1f8a4c; --m-known:#d4622a; --m-todo:#a3abb6; --m-open:#c0392b;
 
   /* Fondo de los paneles (barra, TOC, cuadernos): ligeramente distinto del
      fondo del texto, para que se note donde acaba uno y empieza el otro.
@@ -82,6 +84,8 @@
     --vive:#bda3e6; --vive-bg:#211a2c; --abierto:#e0a55f; --abierto-bg:#2a2015;
     --link:#79a9dd; --shadow:rgba(0,0,0,.55);
     --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
+    --m-ok:#5cc283; --m-known:#e8875a; --m-todo:#59626d; --m-open:#e06c5f;
+    color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
@@ -91,6 +95,8 @@
   --vive:#bda3e6; --vive-bg:#211a2c; --abierto:#e0a55f; --abierto-bg:#2a2015;
   --link:#79a9dd; --shadow:rgba(0,0,0,.55);
   --btn:#222831; --btn-on:#cfe0f2; --btn-on-ink:#10161d;
+  --m-ok:#5cc283; --m-known:#e8875a; --m-todo:#59626d; --m-open:#e06c5f;
+  color-scheme:dark;
 }
 
 *{box-sizing:border-box}
@@ -221,6 +227,14 @@ button.term{
 }
 #pop[data-on="true"]{display:block}
 #pop p{margin:0}
+/* Vista previa de una referencia: el enunciado o la ecuacion a la que apunta
+   un (26) o un 3.6, copiada tal cual ya compuesta por MathJax. */
+#pop .pop-eq{display:flex; align-items:center; gap:1em}
+#pop .pop-eq .eqbody{flex:1; min-width:0; overflow-x:auto}
+#pop .pop-eq .num{color:var(--muted)}
+#pop .pop-eq .v[data-on="true"]{display:block}
+#pop .pop-stmt{margin:0; max-height:45vh; overflow:hidden}
+#pop .pop-stmt .proof-btn,#pop .pop-stmt .proof{display:none}
 
 /* Una referencia cuyo destino no existe: se deja el rotulo y se le quita el
    enlace. Un enlace muerto es peor, porque parece que funciona. */
@@ -523,15 +537,63 @@ body.arrastrando #cuadernos{transition:none}
 
 @media (max-width:560px){
   :root{--fs:16px}
-  main{padding:24px 14px 90px}
+  main{padding:24px 16px 90px}
 }
+
+/* --- mapa de resultados ------------------------------------------------ */
+/* Se SOBREPONE a lo que se esta leyendo, con la tecla M o el boton «Mapa», y
+   la misma tecla lo quita. Las posiciones las calcula build.py; las flechas
+   de una caja salen al pasarle el cursor, porque todas a la vez son una
+   madeja. En pantalla estrecha el dibujo no se encoge hasta ser ilegible: el
+   panel se desplaza de lado por dentro. */
+.mapa{
+  position:fixed; inset:0; z-index:70; display:flex;
+  align-items:flex-start; justify-content:center;
+  padding:28px 16px; background:rgba(10,14,20,.42); overflow:auto;
+}
+.mapa[hidden]{display:none}
+/* min-width:0 porque es un hijo flex: sin eso crece hasta el min-width del
+   dibujo y se sale de la pantalla en vez de desplazarse por dentro. El aspa
+   va fuera de la zona que se desplaza, para que no se vaya con el dibujo. */
+.mapa-panel{
+  position:relative; width:100%; min-width:0; max-width:1040px;
+  background:var(--paper); border:1px solid var(--rule); border-radius:12px;
+  box-shadow:0 18px 50px var(--shadow); padding:6px;
+}
+.mapa-scroll{overflow-x:auto}
+.mapa-cerrar{position:absolute; top:12px; right:12px; z-index:1}
+.mapa-svg{display:block; width:100%; min-width:720px; height:auto}
+.mapa-svg text{font-family:"Segoe UI",system-ui,-apple-system,sans-serif; fill:var(--ink)}
+.mapa-svg .mapa-tit{font-size:19px; font-weight:650}
+.mapa-svg .mapa-sub,.mapa-svg .banda-t{font-size:13px; fill:var(--muted)}
+.mapa-svg .banda{fill:var(--raise)}
+.mapa-svg .mn{cursor:pointer; outline:none; transition:opacity .15s}
+.mapa-svg .mn rect{fill:var(--paper); stroke:var(--m-todo); stroke-width:2}
+.mapa-svg .mn.central rect{fill:var(--raise2)}
+.mapa-svg .mn.est-probado rect{stroke:var(--m-ok)}
+.mapa-svg .mn.est-conocido rect{stroke:var(--m-known)}
+.mapa-svg .mn.est-abierto rect{stroke:var(--m-open); stroke-dasharray:5 4}
+.mapa-svg .mn.ley{cursor:default}
+.mapa-svg .mn.ley.central rect{stroke:var(--m-todo)}
+.mapa-svg .mn .t{font-size:14px; font-weight:600}
+.mapa-svg .mn .s{font-size:12px; fill:var(--muted)}
+.mapa-svg .ley-t{font-size:13px; fill:var(--muted)}
+.mapa-svg .mn:focus-visible rect,.mapa-svg .mn.foco rect{stroke-width:3.5}
+.mapa-svg.activo .mn:not(.foco):not(.usa):not(.usado):not(.ley){opacity:.28}
+#mapa-aristas{pointer-events:none}
+.mapa-svg .arista{fill:none; stroke:var(--link); stroke-width:1.6}
+.mapa-svg .arista.sale{stroke:var(--faint); stroke-dasharray:4 3}
+.mapa-svg .punta{fill:var(--link)}
+.mapa-svg .punta-sale{fill:var(--faint)}
+.mapa-svg .flecha-capa{stroke:var(--faint); stroke-width:1.25; fill:none}
+.mapa-svg .punta-capa{fill:var(--faint)}
 
 /* Sin esto, imprimir la pagina imprime tambien la barra de control, el TOC,
    los cuadernos y sus pestanas/tiradores: son navegacion de pantalla, no
    parte de la nota. Las demostraciones plegadas SI se imprimen abiertas,
    porque en papel no hay boton que pulsar. */
 @media print{
-  .bar,#volver,#toc,#cuadernos,.pestana,.tirador{display:none!important}
+  .bar,#volver,#toc,#cuadernos,.pestana,.tirador,.mapa{display:none!important}
   .wrap{display:block}
   main{padding:0; max-width:none}
   .proof{display:block!important}
@@ -594,6 +656,7 @@ window.MathJax = {
     <span class="val" id="s-val">17</span>
   </div>
   <button class="plain" id="b-all">Abrir todas las soluciones</button>
+
   <button class="plain icon" id="b-bar" aria-controls="barra" aria-expanded="true"
           aria-label="Ocultar la barra" title="Ocultar la barra">&#9650;</button>
 </div>
@@ -5154,6 +5217,7 @@ saberlas de memoria y no buscarlas.</p></section>
         title="Cuadernos">&#9666;</button>
 </div>
 
+
 <script>
 const $ = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
@@ -5161,7 +5225,22 @@ const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 /* Los rotulos y las notaciones los inyecta el generador, porque dependen de
    que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
    una de lecture notes dice «demostraciones». */
-const CFG = {"ver": "Ver solución", "ocultar": "Ocultar solución", "abrirTodas": "Abrir todas las soluciones", "cerrarTodas": "Cerrar todas las soluciones", "notaciones": [], "idiomas": [], "glosario": {}};
+const CFG = {"ver": "Ver solución", "ocultar": "Ocultar solución", "abrirTodas": "Abrir todas las soluciones", "cerrarTodas": "Cerrar todas las soluciones", "notaciones": [], "idiomas": [], "glosario": {}, "artefacto": false};
+
+/* Una nota privada se publica como artefacto de Claude, y alli el hash lo
+   vigila el visor y solo admite #nombres sencillos; las anclas de la nota
+   llevan «:». Asi que dentro del artefacto los enlaces internos se resuelven
+   con scroll, sin tocar el hash. */
+if(CFG.artefacto){
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]');
+    if(!a || e.defaultPrevented) return;
+    const destino = document.getElementById(decodeURIComponent(a.getAttribute("href").slice(1)));
+    if(!destino) return;
+    e.preventDefault();
+    destino.scrollIntoView({block:"start"});
+  });
+}
 
 /* Preferencias de lectura. Todo acceso a localStorage va envuelto: si el
    navegador lo tiene bloqueado la pagina funciona igual, solo que arranca
@@ -5198,8 +5277,11 @@ function setNota(n){
   $$(".v[data-var]").forEach(v => {
     v.dataset.on = (n === "ambas" || v.dataset.var === n) ? "true" : "false";
   });
-  CFG.notaciones.forEach(x =>
-    $("#n-"+x.id).setAttribute("aria-pressed", String(x.id === n)));
+  // Con una sola notacion no hay botones (grupo_notacion en build.py).
+  CFG.notaciones.forEach(x => {
+    const b = $("#n-"+x.id);
+    if(b) b.setAttribute("aria-pressed", String(x.id === n));
+  });
   recuerda("nota", n);
 }
 
@@ -5252,12 +5334,38 @@ function colocaPop(){
 }
 function escondePop(){ pop.dataset.on = "false"; anclado = null; }
 
+/* Pasar el cursor por una referencia, «(26)» o «3.6», ensena en el mismo
+   cuadro la ecuacion o el enunciado al que apunta (peticion del 2026-10-30).
+   Se copia lo que ya hay en la pagina, con la notacion que este puesta. */
+function muestraRef(a){
+  const dest = document.getElementById(decodeURIComponent(a.getAttribute("href").slice(1)));
+  if(!dest) return;
+  let caja;
+  if(dest.classList.contains("numerado")){
+    caja = document.createElement("div");
+    caja.className = "pop-eq";
+    caja.append(dest.querySelector(".eqbody").cloneNode(true));
+    const n = dest.querySelector(".num");
+    if(n) caja.append(n.cloneNode(true));
+  }else if(dest.classList.contains("stmt")){
+    caja = dest.cloneNode(true);
+    caja.classList.add("pop-stmt");
+  }else return;
+  caja.removeAttribute("id");
+  caja.querySelectorAll("[id]").forEach(x => x.removeAttribute("id"));
+  pop.replaceChildren(caja);
+  pop.dataset.on = "true";
+  anclado = a;
+  colocaPop();
+}
 document.addEventListener("mouseover", e => {
   const t = e.target.closest("button.term");
-  if(t) muestraPop(t);
+  if(t) return muestraPop(t);
+  const r = e.target.closest("a.xref");
+  if(r) muestraRef(r);
 });
 document.addEventListener("mouseout", e => {
-  const t = e.target.closest("button.term");
+  const t = e.target.closest("button.term, a.xref");
   if(t && !pop.contains(e.relatedTarget)) escondePop();
 });
 document.addEventListener("focusin", e => {
@@ -5524,6 +5632,12 @@ document.addEventListener("keydown", e => {
   if(enCampo) return;
   if(e.key === "[") tocPanel.setAbierto(document.documentElement.dataset.toc !== "on", true);
   else if(e.key === "]") cuadernosPanel.setAbierto(document.documentElement.dataset.cuadernos !== "on", true);
+  // F pasa a la notacion siguiente (peticion del 2026-10-29). Con dos, alterna.
+  else if((e.key === "f" || e.key === "F") && CFG.notaciones.length > 1){
+    const ids = CFG.notaciones.map(x => x.id);
+    const k = ids.indexOf(document.documentElement.dataset.nota);
+    setNota(ids[(k + 1) % ids.length]);
+  }
 });
 
 /* Plegar la barra devuelve su altura al texto. Arranca desplegada, que es donde
@@ -5572,6 +5686,95 @@ $("#b-all").addEventListener("click", () => {
   refrescaBotonGlobal();
 });
 
+/* --- mapa de resultados ----------------------------------------------- */
+/* Solo existe si la nota declara `mapa` en notas.json. La M lo pone y lo
+   quita; Escape y el aspa tambien lo quitan. Pasar el cursor por una caja
+   dibuja lo que usa (flecha llena) y lo que la usa (punteada); un clic cierra
+   el mapa y lleva al enunciado. */
+const mapa = $("#mapa");
+if(mapa){
+  const svg = $(".mapa-svg", mapa), aristas = $("#mapa-aristas", mapa);
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const nodo = id => $('.mn[data-id="' + CSS.escape(id) + '"]', svg);
+  const caja = n => ({x:+n.dataset.x, y:+n.dataset.y, w:+n.dataset.w, h:+n.dataset.h});
+
+  function curva(de, a, clase){
+    const A = caja(de), B = caja(a);
+    let d;
+    if(A.y + A.h <= B.y){
+      const x1 = A.x + A.w/2, y1 = A.y + A.h, x2 = B.x + B.w/2, y2 = B.y, m = (y2 - y1)/2;
+      d = `M${x1},${y1} C${x1},${y1+m} ${x2},${y2-m} ${x2},${y2}`;
+    }else if(B.y + B.h <= A.y){
+      const x1 = A.x + A.w/2, y1 = A.y, x2 = B.x + B.w/2, y2 = B.y + B.h, m = (y1 - y2)/2;
+      d = `M${x1},${y1} C${x1},${y1-m} ${x2},${y2+m} ${x2},${y2}`;
+    }else if(Math.abs(B.x - A.x) < A.w + 30){
+      // vecinas en la misma fila: de lado a lado
+      const y = A.y + A.h/2, x1 = A.x < B.x ? A.x + A.w : A.x, x2 = A.x < B.x ? B.x : B.x + B.w;
+      d = `M${x1},${y} L${x2},${y}`;
+    }else{
+      // misma fila pero lejos: un arco por encima de las de en medio
+      const x1 = A.x + A.w/2, x2 = B.x + B.w/2, y = A.y;
+      d = `M${x1},${y} C${x1},${y-30} ${x2},${y-30} ${x2},${y}`;
+    }
+    const p = document.createElementNS(SVGNS, "path");
+    p.setAttribute("d", d);
+    p.setAttribute("class", "arista " + clase);
+    p.setAttribute("marker-end", clase === "sale" ? "url(#mapa-punta-sale)" : "url(#mapa-punta)");
+    return p;
+  }
+  function enfoca(id){
+    aristas.replaceChildren();
+    $$(".mn", svg).forEach(n => n.classList.remove("foco", "usa", "usado"));
+    svg.classList.toggle("activo", !!id);
+    if(!id) return;
+    const yo = nodo(id);
+    yo.classList.add("foco");
+    (yo.dataset.dep || "").split(" ").filter(Boolean).forEach(d => {
+      const o = nodo(d);
+      if(o){ o.classList.add("usa"); aristas.append(curva(o, yo, "entra")); }
+    });
+    $$(".mn[data-dep]", svg).forEach(o => {
+      if(o.dataset.dep.split(" ").includes(id)){
+        o.classList.add("usado"); aristas.append(curva(yo, o, "sale"));
+      }
+    });
+  }
+  let antesDelMapa = null;
+  function setMapa(on){
+    if(on === !mapa.hidden) return;
+    mapa.hidden = !on;
+    $("#b-mapa")?.setAttribute("aria-expanded", String(on));
+    document.documentElement.style.overflow = on ? "hidden" : "";
+    if(on){ antesDelMapa = document.activeElement; $(".mapa-cerrar", mapa).focus(); }
+    else{ enfoca(null); antesDelMapa?.focus?.(); }
+  }
+  // Sin tocar location.hash: dentro de un artefacto de Claude el hash lo
+  // vigila el visor, y una etiqueta con «:» no es un #nombre que acepte.
+  function ve(n){
+    const destino = document.getElementById(n.dataset.ancla);
+    setMapa(false);
+    if(destino) destino.scrollIntoView({block:"start"});
+  }
+  $$(".mn[data-id]", svg).forEach(n => {
+    n.addEventListener("pointerenter", () => enfoca(n.dataset.id));
+    n.addEventListener("pointerleave", () => enfoca(null));
+    n.addEventListener("focus", () => enfoca(n.dataset.id));
+    n.addEventListener("blur", () => enfoca(null));
+    n.addEventListener("click", () => ve(n));
+    n.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); ve(n); } });
+  });
+  $(".mapa-cerrar", mapa).addEventListener("click", () => setMapa(false));
+  $("#b-mapa")?.addEventListener("click", () => setMapa(true));
+  // Un clic en el velo, fuera del panel, tambien lo cierra.
+  mapa.addEventListener("pointerdown", e => { if(e.target === mapa) setMapa(false); });
+  document.addEventListener("keydown", e => {
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+    if(/^(INPUT|TEXTAREA)$/.test(e.target.tagName) || e.target.isContentEditable) return;
+    if(e.key === "m" || e.key === "M"){ e.preventDefault(); setMapa(mapa.hidden); }
+    else if(e.key === "Escape" && !mapa.hidden) setMapa(false);
+  });
+}
+
 /* --- arranque -------------------------------------------------------- */
 $("#f-serif").addEventListener("click", () => setFuente("serif"));
 $("#f-sans").addEventListener("click",  () => setFuente("sans"));
@@ -5583,8 +5786,10 @@ $("#volver").addEventListener("click", () => {
   setBarra(true);
   $("#b-bar").focus();   // el foco iba en un boton que acaba de desaparecer
 });
-CFG.notaciones.forEach(x =>
-  $("#n-"+x.id).addEventListener("click", () => setNota(x.id)));
+CFG.notaciones.forEach(x => {
+  const b = $("#n-"+x.id);
+  if(b) b.addEventListener("click", () => setNota(x.id));
+});
 CFG.idiomas.forEach(x =>
   $("#i-"+x.id).addEventListener("click", () => setIdioma(x.id)));
 
