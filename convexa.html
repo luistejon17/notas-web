@@ -611,7 +611,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "prox": "\\operatorname{prox}", "gra": "\\operatorname{gra}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "env": ["{}^{#1}\\!#2", 2], "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "daga": "\\kern0.05em\\textsuperscript{\\textcolor{dagacolor}{\\textdagger}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "prox": "\\operatorname{prox}", "gra": "\\operatorname{gra}", "zer": "\\operatorname{zer}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "env": ["{}^{#1}\\!#2", 2], "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "daga": "\\kern0.05em\\textsuperscript{\\textcolor{dagacolor}{\\textdagger}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
   startup: {
@@ -4413,7 +4413,191 @@ $y^{k+1}=\prox_{\rho(-q)}(y^{k})$.</p></div>
 <div class="stmt observacion" id="clase-c20:obs-multiplicadores"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Por eso el método es robusto: hereda en el espacio dual las propiedades del punto
 proximal. Su inconveniente es que la minimización en $x$ puede ser costosa
 cuando $x$ tiene varios bloques con estructuras distintas, y ADMM la reemplaza por
-minimizaciones alternadas.</p></div></div></section></div>
+minimizaciones alternadas.</p></div></div>
+<h3 id="clase-convexa-x44">Douglas–Rachford</h3>
+<p>Queremos resolver $0\in A(x)+B(x)$ usando $J_{\gamma A}$ y $J_{\gamma B}$ por
+separado. En toda la sección $A,B:\R^{n}\rightrightarrows\R^{n}$ son
+maximalmente monótonos y $\zer(A+B)=\{x:0\in A(x)+B(x)\}\neq\varnothing$.</p>
+<div class="stmt definicion" id="clase-c20:def-dr"><div class="head">Definición método de Douglas–Rachford</div><div class="body"><p>Dados $\gamma&gt;0$, $z^{0}\in\R^{n}$ y $\theta_{k}\in(0,2)$, el <span class="df">método de
+Douglas–Rachford</span> genera</p>
+<div class="display">\[
+  x^{k}=J_{\gamma B}(z^{k}),\qquad
+  w^{k}=J_{\gamma A}(2x^{k}-z^{k}),\qquad
+  z^{k+1}=z^{k}+\theta_{k}(w^{k}-x^{k}).
+\]</div>
+<p>Si $A=\subdif f$ y $B=\subdif g$ con $f,g\in\Gamma_{0}(\R^{n})$, es
+$x^{k}=\prox_{\gamma g}(z^{k})$ y $w^{k}=\prox_{\gamma f}(2x^{k}-z^{k})$. La forma
+clásica es $\theta_{k}=1$.</p></div></div>
+<div class="stmt lema" id="clase-c20:lem-dr-punto-fijo"><div class="head">Lema es una iteración de punto fijo</div><div class="body"><p>Sean $R=R_{\gamma A}R_{\gamma B}$, $\theta\in(0,2)$, $\alpha=\frac{\theta}{2}\in(0,1)$ y
+$T=(1-\alpha)I+\alpha R$. Si $\theta_{k}=\theta$ para todo $k$, entonces
+$z^{k+1}=Tz^{k}$, y $R$ es no expansivo. Con $\theta=1$, $z^{k+1}=\frac12(I+R)z^{k}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p180">Ver demostración</button><div class="proof" id="clase-convexa-p180"><p>$R_{\gamma B}z^{k}=2x^{k}-z^{k}$ y
+$R_{\gamma A}(2x^{k}-z^{k})=2w^{k}-2x^{k}+z^{k}$, así que
+$Rz^{k}-z^{k}=2(w^{k}-x^{k})$ y $z^{k+1}=z^{k}+\alpha(Rz^{k}-z^{k})=Tz^{k}$. $R$
+es composición de dos no expansivos, por la no expansividad firme del resolvente.</p></div>
+<p>Los puntos fijos de $T$ no son las soluciones, pero las dan a través de $J_{\gamma B}$.</p>
+<div class="stmt proposicion" id="clase-c20:prop-dr-fijos"><div class="head">Proposición los puntos fijos de Douglas–Rachford</div><div class="body"><p>Con la notación del lema, $z=Tz$ si y solo si $x=J_{\gamma B}(z)$ cumple
+$0\in A(x)+B(x)$ y $z=x-\gamma a$ para algún $a\in A(x)$ con $-a\in B(x)$. En
+particular $\zer(A+B)=J_{\gamma B}(\{z:z=Tz\})$, y $T$ tiene puntos fijos.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p181">Ver demostración</button><div class="proof" id="clase-convexa-p181"><p>Sean $x=J_{\gamma B}(z)$ y $w=J_{\gamma A}(2x-z)$. Por el lema, $Tz-z=2\alpha(w-x)$,
+así que $z=Tz$ si y solo si $w=x$. Si $w=x$, la definición del resolvente da
+$\frac{z-x}{\gamma}\in B(x)$ y $\frac{2x-z-x}{\gamma}=\frac{x-z}{\gamma}\in A(x)$, y
+sumando, $0\in A(x)+B(x)$ con $a=\frac{x-z}{\gamma}$. Recíprocamente, si $a\in A(x)$,
+$-a\in B(x)$ y $z=x-\gamma a$, entonces $\frac{z-x}{\gamma}=-a\in B(x)$, es decir,
+$x=J_{\gamma B}(z)$, y $2x-z=x+\gamma a\in x+\gamma A(x)$, es decir,
+$J_{\gamma A}(2x-z)=x$. Así $w=x$ y $z=Tz$.</p></div>
+<div class="stmt teorema" id="clase-c20:teo-dr"><div class="head">Teorema convergencia de Douglas–Rachford</div><div class="body"><p>Si $\theta_{k}=\theta\in(0,2)$ para todo $k$, entonces $z^{k}\to z^{*}$ con
+$z^{*}=Tz^{*}$, y $x^{k}=J_{\gamma B}(z^{k})\to x^{*}=J_{\gamma B}(z^{*})$, que
+cumple $0\in A(x^{*})+B(x^{*})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p182">Ver demostración</button><div class="proof" id="clase-convexa-p182"><p>Sea $z^{*}$ un punto fijo de $T$, que existe por la proposición. Con la identidad
+$\norm{(1-\alpha)a+\alpha b}^{2}=(1-\alpha)\norm{a}^{2}+\alpha\norm{b}^{2}-\alpha(1-\alpha)\norm{a-b}^{2}$,
+$a=z-z^{*}$ y $b=Rz-Rz^{*}$,</p>
+<div class="display">\[
+  \begin{aligned}
+  \norm{Tz-z^{*}}^{2}
+  &amp;=(1-\alpha)\norm{z-z^{*}}^{2}+\alpha\underbrace{\norm{Rz-Rz^{*}}^{2}}_{\le\norm{z-z^{*}}^{2}}-\alpha(1-\alpha)\norm{Rz-z}^{2}\\
+  &amp;\le\norm{z-z^{*}}^{2}-\frac{1-\alpha}{\alpha}\norm{Tz-z}^{2},
+  \end{aligned}
+\]</div>
+<p>porque $Tz-z=\alpha(Rz-z)$. Con $z=z^{k}$, la sucesión $\norm{z^{k}-z^{*}}$ es
+decreciente, así que $(z^{k})$ es acotada, y sumando,</p>
+<div class="display">\[
+  \frac{1-\alpha}{\alpha}\sum_{k}\norm{z^{k+1}-z^{k}}^{2}\le\norm{z^{0}-z^{*}}^{2}&lt;\infty,
+\]</div>
+<p>de donde $Tz^{k}-z^{k}=z^{k+1}-z^{k}\to0$. Una subsucesión cumple
+$z^{k_{j}}\to\hat z$, y como $T$ es continua, $Tz^{k_{j}}\to T\hat z$, así que
+$\hat z=T\hat z$. Aplicando lo anterior con $z^{*}=\hat z$, la sucesión
+$\norm{z^{k}-\hat z}$ es decreciente y tiene una subsucesión que tiende a $0$, así
+que $z^{k}\to\hat z$. Como $J_{\gamma B}$ es no expansivo, $x^{k}\to J_{\gamma B}(\hat z)$,
+que es un cero de $A+B$ por la proposición.</p></div>
+<p>La sucesión $(z^{k})$ no converge a una solución; la que lo hace es la sucesión
+sombra $x^{k}=J_{\gamma B}(z^{k})$.</p>
+<div class="stmt corolario" id="clase-c20:cor-dr-suma"><div class="head">Corolario Douglas–Rachford para una suma<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $f,g\in\Gamma_{0}(\R^{n})$ con $\zer(\subdif f+\subdif g)\neq\varnothing$, lo
+que pasa si $f+g$ tiene minimizador y vale la regla de la suma. Con
+$\theta_{k}=\theta\in(0,2)$, la sucesión $x^{k}=\prox_{\gamma g}(z^{k})$ converge a
+un minimizador de $f+g$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p183">Ver demostración</button><div class="proof" id="clase-convexa-p183"><p>$\subdif f$ y $\subdif g$ son maximalmente monótonos, así que el teorema da
+$x^{k}\to x^{*}$ con $0\in\subdif f(x^{*})+\subdif g(x^{*})\subset\subdif(f+g)(x^{*})$,
+por la regla de la suma, y la regla de Fermat concluye.</p></div>
+<p>ADMM es Douglas–Rachford aplicado al dual de un problema separable, y de ahí
+saca su convergencia.</p>
+<h3 id="clase-convexa-x45">ADMM</h3>
+<p>Volvemos a</p>
+<div class="display">\[
+  p^{*}=\min_{x,z}\ f(x)+g(z)\qquad\text{sujeto a}\qquad Ax+Bz=c,
+\]</div>
+<p>con $f\in\Gamma_{0}(\R^{n})$, $g\in\Gamma_{0}(\R^{m})$, $A$ y $B$ matrices de
+$p\times n$ y $p\times m$ y $c\in\R^{p}$. El método de multiplicadores minimizaría
+en $(x,z)$ a la vez; ADMM minimiza primero en $x$ y luego en $z$.</p>
+<div class="stmt definicion" id="clase-c20:def-admm"><div class="head">Definición ADMM</div><div class="body"><p>Para $\rho&gt;0$, el <span class="df">Lagrangiano aumentado</span> del problema es</p>
+<div class="display">\[
+  \mathcal{L}_{\rho}(x,z,y)=f(x)+g(z)+\ip{y}{Ax+Bz-c}+\frac{\rho}{2}\norm{Ax+Bz-c}^{2},
+\]</div>
+<p>y el <span class="df">método de direcciones alternadas de multiplicadores</span> (ADMM, por
+<em>alternating direction method of multipliers</em>) parte de $(z^{0},y^{0})$ y genera</p>
+<div class="display">\[
+  \begin{aligned}
+  x^{k+1}&amp;\in\argmin_{x}\mathcal{L}_{\rho}(x,z^{k},y^{k}),\\
+  z^{k+1}&amp;\in\argmin_{z}\mathcal{L}_{\rho}(x^{k+1},z,y^{k}),\\
+  y^{k+1}&amp;=y^{k}+\rho\bigl(Ax^{k+1}+Bz^{k+1}-c\bigr).
+  \end{aligned}
+\]</div></div></div>
+<div class="stmt observacion" id="clase-c20:obs-escalada"><div class="head">Observación la forma escalada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $u^{k}=y^{k}/\rho$ y completando el cuadrado, ADMM es
+$x^{k+1}\in\argmin_{x}f(x)+\frac{\rho}{2}\norm{Ax+Bz^{k}-c+u^{k}}^{2}$,
+$z^{k+1}\in\argmin_{z}g(z)+\frac{\rho}{2}\norm{Ax^{k+1}+Bz-c+u^{k}}^{2}$ y
+$u^{k+1}=u^{k}+Ax^{k+1}+Bz^{k+1}-c$.</p></div></div>
+<p>Cada subproblema conserva la estructura de un solo bloque: uno puede ser un
+sistema lineal y el otro un proximal separable.</p>
+<div class="stmt proposicion" id="clase-c20:prop-residuos"><div class="head">Proposición residuos primal y dual</div><div class="body"><p>Sean $r^{k+1}=Ax^{k+1}+Bz^{k+1}-c$, el <span class="df">residuo primal</span>, y
+$s^{k+1}=\rho A\trans B(z^{k+1}-z^{k})$, el <span class="df">residuo dual</span>. Entonces</p>
+<div class="display">\[
+  0\in\subdif f(x^{k+1})+A\trans y^{k+1}-s^{k+1}
+  \qquad\text{y}\qquad
+  0\in\subdif g(z^{k+1})+B\trans y^{k+1}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p184">Ver demostración</button><div class="proof" id="clase-convexa-p184"><p>Los términos cuadráticos son diferenciables, así que la regla de la suma y la de
+Fermat dan</p>
+<div class="display">\[
+  0\in\subdif f(x^{k+1})+A\trans y^{k}+\rho A\trans(Ax^{k+1}+Bz^{k}-c)
+  =\subdif f(x^{k+1})+A\trans y^{k+1}-\rho A\trans B(z^{k+1}-z^{k}),
+\]</div>
+<p>y $0\in\subdif g(z^{k+1})+B\trans\bigl(y^{k}+\rho(Ax^{k+1}+Bz^{k+1}-c)\bigr)=\subdif g(z^{k+1})+B\trans y^{k+1}$.</p></div>
+<p>Así, $r^{k}$ mide la infactibilidad primal y $s^{k}$ lo que le falta a $x^{k}$ para
+la estacionariedad; la condición en $z$ se cumple siempre.</p>
+<div class="stmt proposicion" id="clase-c20:prop-dual-separable"><div class="head">Proposición el dual del problema separable</div><div class="body"><p>Sean $h_{1}(y)=f^{*}(-A\trans y)$ y $h_{2}(y)=g^{*}(-B\trans y)+\ip{c}{y}$. Entonces</p>
+<div class="display">\[
+  d^{*}=\max_{y}\ \min_{x,z}\ f(x)+g(z)+\ip{y}{Ax+Bz-c}=\max_{y}\ -h_{1}(y)-h_{2}(y),
+\]</div>
+<p>es decir, el dual es $\min_{y}h_{1}(y)+h_{2}(y)$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p185">Ver demostración</button><div class="proof" id="clase-convexa-p185"><p>El mínimo en $(x,z)$ se separa en
+$\min_{x}f(x)+\ip{A\trans y}{x}=-\sup_{x}\{\ip{-A\trans y}{x}-f(x)\}=-f^{*}(-A\trans y)$
+y $\min_{z}g(z)+\ip{B\trans y}{z}-\ip{y}{c}=-g^{*}(-B\trans y)-\ip{c}{y}$.</p></div>
+<div class="stmt teorema" id="clase-c20:teo-admm-dr"><div class="head">Teorema ADMM es Douglas–Rachford en el dual</div><div class="body"><p>Sea $t^{k}=y^{k}+\rho(c-Bz^{k})$ para $k\ge1$. Entonces $(t^{k})$ es la sucesión
+$(z^{k})$ de Douglas–Rachford aplicado a $0\in\subdif h_{1}(y)+\subdif h_{2}(y)$
+con $A=\subdif h_{1}$, $B=\subdif h_{2}$, $\gamma=\rho$ y $\theta=1$, y su sucesión
+sombra es $J_{\rho\subdif h_{2}}(t^{k})=y^{k}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p186">Ver demostración</button><div class="proof" id="clase-convexa-p186"><p>El paso en $z$ de la iteración $k-1$ da, por la proposición de los residuos,
+$-B\trans y^{k}\in\subdif g(z^{k})$, es decir, $z^{k}\in\subdif g^{*}(-B\trans y^{k})$
+por Fenchel–Young. Para todo $v$,</p>
+<div class="display">\[
+  \begin{aligned}
+  g^{*}(-B\trans v)+\ip{c}{v}&amp;\ge g^{*}(-B\trans y^{k})+\ip{z^{k}}{-B\trans(v-y^{k})}+\ip{c}{v}\\
+  &amp;=h_{2}(y^{k})+\ip{c-Bz^{k}}{v-y^{k}},
+  \end{aligned}
+\]</div>
+<p>así que $c-Bz^{k}\in\subdif h_{2}(y^{k})$ y $t^{k}=y^{k}+\rho(c-Bz^{k})\in y^{k}+\rho\subdif h_{2}(y^{k})$,
+es decir, $y^{k}=J_{\rho\subdif h_{2}}(t^{k})$. Sea
+$w^{k}=y^{k}+\rho(Ax^{k+1}+Bz^{k}-c)$. El paso en $x$ da
+$-A\trans w^{k}\in\subdif f(x^{k+1})$, y la misma cuenta con $f$ da
+$-Ax^{k+1}\in\subdif h_{1}(w^{k})$. Como $2y^{k}-t^{k}=w^{k}-\rho Ax^{k+1}$, eso es
+$2y^{k}-t^{k}\in w^{k}+\rho\subdif h_{1}(w^{k})$, es decir,
+$w^{k}=J_{\rho\subdif h_{1}}(2y^{k}-t^{k})$. Por último,</p>
+<div class="display">\[
+  t^{k}+w^{k}-y^{k}=y^{k}+\rho Ax^{k+1}=y^{k+1}+\rho(c-Bz^{k+1})=t^{k+1},
+\]</div>
+<p>que es el paso de Douglas–Rachford con $\theta=1$.</p></div>
+<div class="stmt teorema" id="clase-c20:teo-admm"><div class="head">Teorema convergencia de ADMM</div><div class="body"><p>Supongamos que los subproblemas de ADMM tienen solución y que el Lagrangiano
+$\mathcal{L}=\mathcal{L}_{0}$ tiene un punto de silla. Entonces, para todo
+$\rho&gt;0$,</p>
+<div class="display">\[
+  r^{k}\to0,\qquad B(z^{k+1}-z^{k})\to0,\qquad f(x^{k})+g(z^{k})\to p^{*},\qquad y^{k}\to y^{*},
+\]</div>
+<p>con $y^{*}$ una solución del dual.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p187">Ver demostración</button><div class="proof" id="clase-convexa-p187"><p>Si $(x^{*},z^{*},y^{*})$ es un punto de silla, $Ax^{*}+Bz^{*}=c$,
+$-A\trans y^{*}\in\subdif f(x^{*})$ y $-B\trans y^{*}\in\subdif g(z^{*})$, y la
+cuenta de la demostración anterior da $-Ax^{*}\in\subdif h_{1}(y^{*})$ y
+$c-Bz^{*}\in\subdif h_{2}(y^{*})$, que suman $0$. Así
+$\zer(\subdif h_{1}+\subdif h_{2})\neq\varnothing$, y el teorema anterior y la
+convergencia de Douglas–Rachford dan $t^{k}\to t^{*}$ e $y^{k}\to y^{*}$ con
+$0\in\subdif h_{1}(y^{*})+\subdif h_{2}(y^{*})$, que por la regla de la suma y la
+de Fermat minimiza $h_{1}+h_{2}$. Además $w^{k}-y^{k}=t^{k+1}-t^{k}\to0$, es
+decir, $Ax^{k+1}+Bz^{k}-c\to0$, y $\rho r^{k+1}=y^{k+1}-y^{k}\to0$. Restando,
+$B(z^{k+1}-z^{k})\to0$. La convergencia de los valores pide una cuenta aparte
+con el punto de silla y se admite.</p></div>
+<p>No se pide que $(x^{k})$ y $(z^{k})$ converjan por separado, y en general no lo
+hacen sin hipótesis adicionales.</p>
+<div class="stmt ejemplo" id="clase-c20:ej-lasso"><div class="head">Ejemplo el lasso por separación de variables</div><div class="body"><p>Sean $M$ una matriz $m\times n$, $b\in\R^{m}$ y $\lambda&gt;0$. El problema
+$\min_{x}\frac12\norm{Mx-b}^{2}+\lambda\norm{x}_{1}$ es</p>
+<div class="display">\[
+  \min_{x,z}\ \frac12\norm{Mx-b}^{2}+\lambda\norm{z}_{1}\qquad\text{sujeto a}\qquad x-z=0,
+\]</div>
+<p>y ADMM queda</p>
+<div class="display">\[
+  \begin{aligned}
+  x^{k+1}&amp;=\argmin_{x}\ \frac12\norm{Mx-b}^{2}+\ip{y^{k}}{x}+\frac{\rho}{2}\norm{x-z^{k}}^{2}\\
+         &amp;=(M\trans M+\rho I)^{-1}\bigl(M\trans b+\rho z^{k}-y^{k}\bigr),\\
+  z^{k+1}&amp;=\argmin_{z}\ -\ip{y^{k}}{z}+\lambda\norm{z}_{1}+\frac{\rho}{2}\norm{x^{k+1}-z}^{2}\\
+         &amp;=\prox_{\frac{\lambda}{\rho}\norm{\cdot}_{1}}\Bigl(x^{k+1}+\frac{y^{k}}{\rho}\Bigr),\\
+  y^{k+1}&amp;=y^{k}+\rho\bigl(x^{k+1}-z^{k+1}\bigr).
+  \end{aligned}
+\]</div>
+<p>El primer paso es un sistema lineal cuya matriz no cambia, así que se factoriza
+una vez; el segundo es el umbral suave.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p188">Ver demostración</button><div class="proof" id="clase-convexa-p188"><p>El primer objetivo es diferenciable y fuertemente convexo, con gradiente
+$M\trans(Mx-b)+y^{k}+\rho(x-z^{k})$, que se anula en el punto escrito. En el
+segundo, completando el cuadrado,
+$-\ip{y^{k}}{z}+\frac{\rho}{2}\norm{x^{k+1}-z}^{2}=\frac{\rho}{2}\norm{z-x^{k+1}-y^{k}/\rho}^{2}+\text{cte}$,
+y lo que queda es la definición del proximal.</p></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -7408,7 +7592,151 @@ mayor que $-\infty$ porque $\dom f\neq\varnothing$, así que está en
 $\Gamma_{0}(\Ks)$, y la caracterización del proximal concluye.</p></div>
 <div class="stmt observacion" id="general-c20:obs-multiplicadores"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El método hereda en el dual las propiedades del punto proximal. Su inconveniente
 es que la minimización en $x$ puede ser costosa cuando $x$ tiene varios bloques
-con estructuras distintas, y ADMM la reemplaza por minimizaciones alternadas.</p></div></div></section></div>
+con estructuras distintas, y ADMM la reemplaza por minimizaciones alternadas.</p></div></div>
+<h3 id="general-convexa-x40">Douglas–Rachford</h3>
+<p>Queremos resolver $0\in A(x)+B(x)$ usando $J_{\gamma A}$ y $J_{\gamma B}$ por
+separado. En toda la sección $A,B:\Hs\rightrightarrows\Hs$ son maximalmente
+monótonos y $\zer(A+B)=\{x:0\in A(x)+B(x)\}\neq\varnothing$.</p>
+<div class="stmt definicion" id="general-c20:def-dr"><div class="head">Definición método de Douglas–Rachford</div><div class="body"><p>Dados $\gamma&gt;0$, $z^{0}\in\Hs$ y $\theta_{k}\in(0,2)$, el <span class="df">método de
+Douglas–Rachford</span> genera</p>
+<div class="display">\[
+  x^{k}=J_{\gamma B}(z^{k}),\qquad
+  w^{k}=J_{\gamma A}(2x^{k}-z^{k}),\qquad
+  z^{k+1}=z^{k}+\theta_{k}(w^{k}-x^{k}).
+\]</div>
+<p>Si $A=\subdif f$ y $B=\subdif g$ con $f,g\in\Gamma_{0}(\Hs)$, es
+$x^{k}=\prox_{\gamma g}(z^{k})$ y $w^{k}=\prox_{\gamma f}(2x^{k}-z^{k})$. La forma
+clásica es $\theta_{k}=1$.</p></div></div>
+<div class="stmt lema" id="general-c20:lem-dr-punto-fijo"><div class="head">Lema es una iteración de punto fijo</div><div class="body"><p>Sean $R=R_{\gamma A}R_{\gamma B}$, $\theta\in(0,2)$, $\alpha=\frac{\theta}{2}$ y
+$T=(1-\alpha)\Id+\alpha R$. Si $\theta_{k}=\theta$ para todo $k$, entonces
+$z^{k+1}=Tz^{k}$, y $R$ es no expansivo.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p171">Ver demostración</button><div class="proof" id="general-convexa-p171"><p>$Rz^{k}-z^{k}=2w^{k}-2x^{k}+z^{k}-z^{k}=2(w^{k}-x^{k})$, y $R$ es composición de
+dos no expansivos por la no expansividad firme del resolvente.</p></div>
+<p>Los puntos fijos de $T$ no son las soluciones, pero las dan a través de $J_{\gamma B}$.</p>
+<div class="stmt proposicion" id="general-c20:prop-dr-fijos"><div class="head">Proposición los puntos fijos de Douglas–Rachford</div><div class="body"><p>$z=Tz$ si y solo si $x=J_{\gamma B}(z)$ cumple $0\in A(x)+B(x)$ y $z=x-\gamma a$
+para algún $a\in A(x)$ con $-a\in B(x)$. En particular
+$\zer(A+B)=J_{\gamma B}(\{z:z=Tz\})$, y $T$ tiene puntos fijos.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p172">Ver demostración</button><div class="proof" id="general-convexa-p172"><p>Con $x=J_{\gamma B}(z)$ y $w=J_{\gamma A}(2x-z)$, $Tz-z=2\alpha(w-x)$, así que
+$z=Tz$ si y solo si $w=x$. Si $w=x$, $\frac{z-x}{\gamma}\in B(x)$ y
+$\frac{x-z}{\gamma}\in A(x)$. Si $a\in A(x)$, $-a\in B(x)$ y $z=x-\gamma a$,
+entonces $x=J_{\gamma B}(z)$ y $2x-z=x+\gamma a\in x+\gamma A(x)$, así que $w=x$.</p></div>
+<div class="stmt teorema" id="general-c20:teo-dr"><div class="head">Teorema convergencia de Douglas–Rachford</div><div class="body"><p>Si $\theta_{k}=\theta\in(0,2)$ para todo $k$, entonces $z^{k}\rightharpoonup z^{*}$ con
+$z^{*}=Tz^{*}$, $z^{k+1}-z^{k}\to0$, y $x^{k}=J_{\gamma B}(z^{k})\rightharpoonup x^{*}=J_{\gamma B}(z^{*})$,
+que cumple $0\in A(x^{*})+B(x^{*})$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p173">Ver demostración</button><div class="proof" id="general-convexa-p173"><p>Para todo punto fijo $z^{*}$, la misma cuenta que en dimensión finita da</p>
+<div class="display">\[
+  \norm{Tz-z^{*}}^{2}\le\norm{z-z^{*}}^{2}-\frac{1-\alpha}{\alpha}\norm{Tz-z}^{2},
+\]</div>
+<p>así que $\norm{z^{k}-z^{*}}$ decrece y converge, y
+$\sum_{k}\norm{z^{k+1}-z^{k}}^{2}&lt;\infty$, de donde $Tz^{k}-z^{k}\to0$. Si
+$z^{k_{j}}\rightharpoonup\hat z$, como $T$ es no expansivo,</p>
+<div class="display">\[
+  \norm{z^{k_{j}}-T\hat z}\le\norm{z^{k_{j}}-Tz^{k_{j}}}+\norm{z^{k_{j}}-\hat z},
+\]</div>
+<p>y como
+$\norm{z^{k_{j}}-T\hat z}^{2}=\norm{z^{k_{j}}-\hat z}^{2}+2\ip{z^{k_{j}}-\hat z}{\hat z-T\hat z}+\norm{\hat z-T\hat z}^{2}$,
+tomando $\limsup$ queda $\norm{\hat z-T\hat z}=0$. Los puntos de acumulación
+débiles están en $\{z:z=Tz\}$, y el lema de Opial da $z^{k}\rightharpoonup z^{*}$. Que
+la sombra converja débilmente a $J_{\gamma B}(z^{*})$ no sale de la continuidad,
+porque $J_{\gamma B}$ no es débilmente continuo, y se admite.</p></div>
+<p>La sucesión $(z^{k})$ no converge a una solución; la que lo hace es la sucesión
+sombra $x^{k}=J_{\gamma B}(z^{k})$.</p>
+<div class="stmt corolario" id="general-c20:cor-dr-suma"><div class="head">Corolario Douglas–Rachford para una suma<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $f,g\in\Gamma_{0}(\Hs)$ con $\zer(\subdif f+\subdif g)\neq\varnothing$. Con
+$\theta_{k}=\theta\in(0,2)$, $x^{k}=\prox_{\gamma g}(z^{k})$ converge débilmente
+a un minimizador de $f+g$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p174">Ver demostración</button><div class="proof" id="general-convexa-p174"><p>$\subdif f$ y $\subdif g$ son maximalmente monótonos, y
+$\subdif f+\subdif g\subset\subdif(f+g)$ con la regla de Fermat.</p></div>
+<p>ADMM es Douglas–Rachford aplicado al dual de un problema separable, y de ahí
+saca su convergencia.</p>
+<h3 id="general-convexa-x41">ADMM</h3>
+<p>Sean $\mathcal{G}$ un tercer espacio de Hilbert, $f\in\Gamma_{0}(\Hs)$,
+$g\in\Gamma_{0}(\Ks)$, $A\in\Bop{\Hs,\mathcal{G}}$, $B\in\Bop{\Ks,\mathcal{G}}$,
+$c\in\mathcal{G}$ y</p>
+<div class="display">\[
+  p^{*}=\min_{x,z}\ f(x)+g(z)\qquad\text{sujeto a}\qquad Ax+Bz=c.
+\]</div>
+<p>El método de multiplicadores minimizaría en $(x,z)$ a la vez; ADMM minimiza
+primero en $x$ y luego en $z$.</p>
+<div class="stmt definicion" id="general-c20:def-admm"><div class="head">Definición ADMM</div><div class="body"><p>Para $\rho&gt;0$,
+$\mathcal{L}_{\rho}(x,z,y)=f(x)+g(z)+\ip{y}{Ax+Bz-c}+\frac{\rho}{2}\norm{Ax+Bz-c}^{2}$
+es el <span class="df">Lagrangiano aumentado</span>, y el <span class="df">método de direcciones alternadas de
+multiplicadores</span> (ADMM) genera</p>
+<div class="display">\[
+  \begin{aligned}
+  x^{k+1}&amp;\in\argmin_{x}\mathcal{L}_{\rho}(x,z^{k},y^{k}),\\
+  z^{k+1}&amp;\in\argmin_{z}\mathcal{L}_{\rho}(x^{k+1},z,y^{k}),\\
+  y^{k+1}&amp;=y^{k}+\rho\bigl(Ax^{k+1}+Bz^{k+1}-c\bigr).
+  \end{aligned}
+\]</div></div></div>
+<div class="stmt observacion" id="general-c20:obs-escalada"><div class="head">Observación la forma escalada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $u^{k}=y^{k}/\rho$, los pasos son los mismos con
+$f(x)+\frac{\rho}{2}\norm{Ax+Bz^{k}-c+u^{k}}^{2}$, con
+$g(z)+\frac{\rho}{2}\norm{Ax^{k+1}+Bz-c+u^{k}}^{2}$ y con
+$u^{k+1}=u^{k}+Ax^{k+1}+Bz^{k+1}-c$.</p></div></div>
+<p>Cada subproblema conserva la estructura de un solo bloque.</p>
+<div class="stmt proposicion" id="general-c20:prop-residuos"><div class="head">Proposición residuos primal y dual</div><div class="body"><p>Con $r^{k+1}=Ax^{k+1}+Bz^{k+1}-c$, el <span class="df">residuo primal</span>, y
+$s^{k+1}=\rho A^{*}B(z^{k+1}-z^{k})$, el <span class="df">residuo dual</span>,</p>
+<div class="display">\[
+  0\in\subdif f(x^{k+1})+A^{*}y^{k+1}-s^{k+1}
+  \qquad\text{y}\qquad
+  0\in\subdif g(z^{k+1})+B^{*}y^{k+1}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p175">Ver demostración</button><div class="proof" id="general-convexa-p175"><p>Los términos cuadráticos son continuos y Fréchet diferenciables, así que la regla
+de la suma y la de Fermat dan
+$0\in\subdif f(x^{k+1})+A^{*}\bigl(y^{k}+\rho(Ax^{k+1}+Bz^{k}-c)\bigr)$, que es la
+primera, y
+$0\in\subdif g(z^{k+1})+B^{*}\bigl(y^{k}+\rho(Ax^{k+1}+Bz^{k+1}-c)\bigr)$, que es
+la segunda.</p></div>
+<p>Así, $r^{k}$ mide la infactibilidad primal y $s^{k}$ lo que le falta a $x^{k}$ para
+la estacionariedad.</p>
+<div class="stmt proposicion" id="general-c20:prop-dual-separable"><div class="head">Proposición el dual del problema separable</div><div class="body"><p>Con $h_{1}(y)=f^{*}(-A^{*}y)$ y $h_{2}(y)=g^{*}(-B^{*}y)+\ip{c}{y}$,</p>
+<div class="display">\[
+  d^{*}=\sup_{y}\ \inf_{x,z}\ f(x)+g(z)+\ip{y}{Ax+Bz-c}=\sup_{y}\ -h_{1}(y)-h_{2}(y).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p176">Ver demostración</button><div class="proof" id="general-convexa-p176"><p>El ínfimo se separa, y
+$\inf_{x}f(x)+\ip{A^{*}y}{x}=-f^{*}(-A^{*}y)$,
+$\inf_{z}g(z)+\ip{B^{*}y}{z}-\ip{y}{c}=-g^{*}(-B^{*}y)-\ip{c}{y}$.</p></div>
+<div class="stmt teorema" id="general-c20:teo-admm-dr"><div class="head">Teorema ADMM es Douglas–Rachford en el dual</div><div class="body"><p>Sea $t^{k}=y^{k}+\rho(c-Bz^{k})$ para $k\ge1$. Entonces $(t^{k})$ es la sucesión
+$(z^{k})$ de Douglas–Rachford aplicado a $0\in\subdif h_{1}(y)+\subdif h_{2}(y)$
+con $A=\subdif h_{1}$, $B=\subdif h_{2}$, $\gamma=\rho$ y $\theta=1$, y
+$J_{\rho\subdif h_{2}}(t^{k})=y^{k}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p177">Ver demostración</button><div class="proof" id="general-convexa-p177"><p>Por los residuos, $-B^{*}y^{k}\in\subdif g(z^{k})$, es decir,
+$z^{k}\in\subdif g^{*}(-B^{*}y^{k})$ por Fenchel–Young, y para todo $v$</p>
+<div class="display">\[
+  h_{2}(v)\ge g^{*}(-B^{*}y^{k})+\ip{z^{k}}{-B^{*}(v-y^{k})}+\ip{c}{v}=h_{2}(y^{k})+\ip{c-Bz^{k}}{v-y^{k}},
+\]</div>
+<p>así que $c-Bz^{k}\in\subdif h_{2}(y^{k})$ e $y^{k}=J_{\rho\subdif h_{2}}(t^{k})$. Con
+$w^{k}=y^{k}+\rho(Ax^{k+1}+Bz^{k}-c)$, el paso en $x$ da
+$-A^{*}w^{k}\in\subdif f(x^{k+1})$, la misma cuenta da
+$-Ax^{k+1}\in\subdif h_{1}(w^{k})$, y como $2y^{k}-t^{k}=w^{k}-\rho Ax^{k+1}$,
+$w^{k}=J_{\rho\subdif h_{1}}(2y^{k}-t^{k})$. Por último,
+$t^{k}+w^{k}-y^{k}=y^{k}+\rho Ax^{k+1}=t^{k+1}$.</p></div>
+<div class="stmt teorema" id="general-c20:teo-admm"><div class="head">Teorema convergencia de ADMM</div><div class="body"><p>Supongamos que los subproblemas tienen solución y que $\mathcal{L}=\mathcal{L}_{0}$
+tiene un punto de silla. Entonces, para todo $\rho&gt;0$, $r^{k}\to0$,
+$B(z^{k+1}-z^{k})\to0$ e $y^{k}\rightharpoonup y^{*}$, con $y^{*}$ una solución del
+dual.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p178">Ver demostración</button><div class="proof" id="general-convexa-p178"><p>Un punto de silla $(x^{*},z^{*},y^{*})$ da, con las cuentas anteriores,
+$-Ax^{*}\in\subdif h_{1}(y^{*})$ y $c-Bz^{*}\in\subdif h_{2}(y^{*})$, que suman
+$0$. La convergencia de Douglas–Rachford da $t^{k+1}-t^{k}\to0$ e
+$y^{k}\rightharpoonup y^{*}$ con $0\in\subdif h_{1}(y^{*})+\subdif h_{2}(y^{*})$, que
+minimiza $h_{1}+h_{2}$. Como $J_{\rho\subdif h_{2}}$ es no expansivo,
+$\rho r^{k+1}=y^{k+1}-y^{k}\to0$, y $w^{k}-y^{k}=t^{k+1}-t^{k}\to0$ da
+$Ax^{k+1}+Bz^{k}-c\to0$. Restando, $B(z^{k+1}-z^{k})\to0$.</p></div>
+<p>No se pide que $(x^{k})$ y $(z^{k})$ converjan por separado.</p>
+<div class="stmt ejemplo" id="general-c20:ej-lasso"><div class="head">Ejemplo el lasso por separación de variables</div><div class="body"><p>Sean $M$ una matriz $m\times n$, $b\in\R^{m}$ y $\lambda&gt;0$. Para
+$\min_{x,z}\frac12\norm{Mx-b}^{2}+\lambda\norm{z}_{1}$ sujeto a $x-z=0$, ADMM queda</p>
+<div class="display">\[
+  \begin{aligned}
+  x^{k+1}&amp;=(M\trans M+\rho I)^{-1}\bigl(M\trans b+\rho z^{k}-y^{k}\bigr),\\
+  z^{k+1}&amp;=\prox_{\frac{\lambda}{\rho}\norm{\cdot}_{1}}\Bigl(x^{k+1}+\frac{y^{k}}{\rho}\Bigr),\\
+  y^{k+1}&amp;=y^{k}+\rho\bigl(x^{k+1}-z^{k+1}\bigr).
+  \end{aligned}
+\]</div>
+<p>La matriz del primer paso no cambia, así que se factoriza una vez; el segundo es
+el umbral suave.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p179">Ver demostración</button><div class="proof" id="general-convexa-p179"><p>El primer objetivo es diferenciable con gradiente
+$M\trans(Mx-b)+y^{k}+\rho(x-z^{k})$; en el segundo, completando el cuadrado, queda
+$\lambda\norm{z}_{1}+\frac{\rho}{2}\norm{z-x^{k+1}-y^{k}/\rho}^{2}$ más una
+constante.</p></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -10590,7 +10918,144 @@ una solución dual, y en $\Ks$ solo débilmente. Es el mismo paso de la norma a 
 topología débil que en el capítulo de métodos proximales, ahora en el espacio de
 los multiplicadores.</p></div></div>
 <div class="stmt observacion" id="ambas-c20:obs-multiplicadores"><div class="head">Observación <sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>La minimización en $x$ puede ser costosa con varios bloques, y ADMM la reemplaza
-por minimizaciones alternadas.</p></div></div></section></div>
+por minimizaciones alternadas.</p></div></div>
+<h3 id="ambas-convexa-x42">Douglas–Rachford</h3>
+<p>Queremos resolver $0\in A(x)+B(x)$ con $J_{\gamma A}$ y $J_{\gamma B}$ por
+separado, para $A,B:\Hs\rightrightarrows\Hs$ maximalmente monótonos y
+$\zer(A+B)\neq\varnothing$.</p>
+<div class="stmt definicion" id="ambas-c20:def-dr"><div class="head">Definición método de Douglas–Rachford</div><div class="body"><p>Para $\gamma&gt;0$ y $\theta_{k}\in(0,2)$: $x^{k}=J_{\gamma B}(z^{k})$,
+$w^{k}=J_{\gamma A}(2x^{k}-z^{k})$ y $z^{k+1}=z^{k}+\theta_{k}(w^{k}-x^{k})$. Con
+$A=\subdif f$ y $B=\subdif g$ los resolventes son $\prox_{\gamma f}$ y
+$\prox_{\gamma g}$.</p></div></div>
+<div class="stmt lema" id="ambas-c20:lem-dr-punto-fijo"><div class="head">Lema es una iteración de punto fijo</div><div class="body"><p>Con $\theta_{k}=\theta$, $\alpha=\frac{\theta}{2}$ y $R=R_{\gamma A}R_{\gamma B}$, que es no
+expansivo, $z^{k+1}=Tz^{k}$ para $T=(1-\alpha)\Id+\alpha R$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p215" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p215"><p>$Rz^{k}-z^{k}=2w^{k}-2x^{k}+z^{k}-z^{k}=2(w^{k}-x^{k})$, y $R$ es composición de
+dos no expansivos por la no expansividad firme del resolvente.</p></div></div>
+<p>Los puntos fijos de $T$ dan las soluciones a través de $J_{\gamma B}$.</p>
+<div class="stmt proposicion" id="ambas-c20:prop-dr-fijos"><div class="head">Proposición los puntos fijos de Douglas–Rachford</div><div class="body"><p>$z=Tz$ si y solo si $x=J_{\gamma B}(z)$ es un cero de $A+B$ y $z=x-\gamma a$ con
+$a\in A(x)$, $-a\in B(x)$. Así $\zer(A+B)=J_{\gamma B}(\{z:z=Tz\})$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p216" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p216"><p>Con $x=J_{\gamma B}(z)$ y $w=J_{\gamma A}(2x-z)$, $Tz-z=2\alpha(w-x)$, así que
+$z=Tz$ si y solo si $w=x$. Si $w=x$, $\frac{z-x}{\gamma}\in B(x)$ y
+$\frac{x-z}{\gamma}\in A(x)$. Si $a\in A(x)$, $-a\in B(x)$ y $z=x-\gamma a$,
+entonces $x=J_{\gamma B}(z)$ y $2x-z=x+\gamma a\in x+\gamma A(x)$, así que $w=x$.</p></div></div>
+<div class="stmt teorema" id="ambas-c20:teo-dr"><div class="head">Teorema convergencia de Douglas–Rachford</div><div class="body"><p>Con $\theta_{k}=\theta\in(0,2)$, $z^{k}\rightharpoonup z^{*}=Tz^{*}$ y la sucesión
+sombra $x^{k}=J_{\gamma B}(z^{k})\rightharpoonup J_{\gamma B}(z^{*})\in\zer(A+B)$. En
+$\R^{n}$ las dos convergencias son en norma.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p217" data-titulo="1">Demostración en ℝⁿ</button><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p218" data-titulo="1">Demostración en ℋ</button><div class="proof" id="ambas-convexa-p217"><p>Sea $z^{*}$ un punto fijo de $T$, que existe por la proposición. Con la identidad
+$\norm{(1-\alpha)a+\alpha b}^{2}=(1-\alpha)\norm{a}^{2}+\alpha\norm{b}^{2}-\alpha(1-\alpha)\norm{a-b}^{2}$,
+$a=z-z^{*}$ y $b=Rz-Rz^{*}$,</p>
+<div class="display">\[
+  \begin{aligned}
+  \norm{Tz-z^{*}}^{2}
+  &amp;=(1-\alpha)\norm{z-z^{*}}^{2}+\alpha\underbrace{\norm{Rz-Rz^{*}}^{2}}_{\le\norm{z-z^{*}}^{2}}-\alpha(1-\alpha)\norm{Rz-z}^{2}\\
+  &amp;\le\norm{z-z^{*}}^{2}-\frac{1-\alpha}{\alpha}\norm{Tz-z}^{2},
+  \end{aligned}
+\]</div>
+<p>porque $Tz-z=\alpha(Rz-z)$. Con $z=z^{k}$, la sucesión $\norm{z^{k}-z^{*}}$ es
+decreciente, así que $(z^{k})$ es acotada, y sumando,</p>
+<div class="display">\[
+  \frac{1-\alpha}{\alpha}\sum_{k}\norm{z^{k+1}-z^{k}}^{2}\le\norm{z^{0}-z^{*}}^{2}&lt;\infty,
+\]</div>
+<p>de donde $Tz^{k}-z^{k}=z^{k+1}-z^{k}\to0$. Una subsucesión cumple
+$z^{k_{j}}\to\hat z$, y como $T$ es continua, $Tz^{k_{j}}\to T\hat z$, así que
+$\hat z=T\hat z$. Aplicando lo anterior con $z^{*}=\hat z$, la sucesión
+$\norm{z^{k}-\hat z}$ es decreciente y tiene una subsucesión que tiende a $0$, así
+que $z^{k}\to\hat z$. Como $J_{\gamma B}$ es no expansivo, $x^{k}\to J_{\gamma B}(\hat z)$,
+que es un cero de $A+B$ por la proposición.</p></div><div class="proof" id="ambas-convexa-p218"><p>Para todo punto fijo $z^{*}$, la misma cuenta que en dimensión finita da</p>
+<div class="display">\[
+  \norm{Tz-z^{*}}^{2}\le\norm{z-z^{*}}^{2}-\frac{1-\alpha}{\alpha}\norm{Tz-z}^{2},
+\]</div>
+<p>así que $\norm{z^{k}-z^{*}}$ decrece y converge, y
+$\sum_{k}\norm{z^{k+1}-z^{k}}^{2}&lt;\infty$, de donde $Tz^{k}-z^{k}\to0$. Si
+$z^{k_{j}}\rightharpoonup\hat z$, como $T$ es no expansivo,</p>
+<div class="display">\[
+  \norm{z^{k_{j}}-T\hat z}\le\norm{z^{k_{j}}-Tz^{k_{j}}}+\norm{z^{k_{j}}-\hat z},
+\]</div>
+<p>y como
+$\norm{z^{k_{j}}-T\hat z}^{2}=\norm{z^{k_{j}}-\hat z}^{2}+2\ip{z^{k_{j}}-\hat z}{\hat z-T\hat z}+\norm{\hat z-T\hat z}^{2}$,
+tomando $\limsup$ queda $\norm{\hat z-T\hat z}=0$. Los puntos de acumulación
+débiles están en $\{z:z=Tz\}$, y el lema de Opial da $z^{k}\rightharpoonup z^{*}$. Que
+la sombra converja débilmente a $J_{\gamma B}(z^{*})$ no sale de la continuidad,
+porque $J_{\gamma B}$ no es débilmente continuo, y se admite.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-dr-contraste"><div class="head">Observación lo que cambia en la demostración</div><div class="body"><p>La desigualdad que hace a $(z^{k})$ Fejér monótona es la misma cuenta en los dos.
+En $\R^{n}$ una subsucesión converge por compacidad, $T$ continua dice que el
+límite es fijo, y la sombra converge porque $J_{\gamma B}$ es continuo. En $\Hs$
+los puntos de acumulación son débiles, que sean fijos lo da la demiclausura de
+$\Id-T$, que converja toda la sucesión lo da el lema de Opial, y la sombra pide
+un argumento aparte porque $J_{\gamma B}$ no es débilmente continuo. Con $A$ o $B$
+uniformemente monótono la convergencia de la sombra pasa a ser en norma.</p></div></div>
+<div class="stmt corolario" id="ambas-c20:cor-dr-suma"><div class="head">Corolario Douglas–Rachford para una suma<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $f,g\in\Gamma_{0}(\Hs)$ y $\zer(\subdif f+\subdif g)\neq\varnothing$,
+$\prox_{\gamma g}(z^{k})$ converge débilmente a un minimizador de $f+g$, y en norma
+en $\R^{n}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p219" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p219"><p>$\subdif f$ y $\subdif g$ son maximalmente monótonos, y
+$\subdif f+\subdif g\subset\subdif(f+g)$ con la regla de Fermat.</p></div></div>
+<p>ADMM es Douglas–Rachford aplicado al dual de un problema separable.</p>
+<h3 id="ambas-convexa-x43">ADMM</h3>
+<p>Para $\min_{x,z}f(x)+g(z)$ sujeto a $Ax+Bz=c$, con $f\in\Gamma_{0}(\Hs)$,
+$g\in\Gamma_{0}(\Ks)$ y $A$, $B$ acotados con valores en un tercer Hilbert
+$\mathcal{G}$, el método de multiplicadores minimizaría en $(x,z)$ a la vez y
+ADMM lo hace por turnos.</p>
+<div class="stmt definicion" id="ambas-c20:def-admm"><div class="head">Definición ADMM</div><div class="body"><p>Con
+$\mathcal{L}_{\rho}(x,z,y)=f(x)+g(z)+\ip{y}{Ax+Bz-c}+\frac{\rho}{2}\norm{Ax+Bz-c}^{2}$:
+$x^{k+1}\in\argmin_{x}\mathcal{L}_{\rho}(x,z^{k},y^{k})$,
+$z^{k+1}\in\argmin_{z}\mathcal{L}_{\rho}(x^{k+1},z,y^{k})$ e
+$y^{k+1}=y^{k}+\rho(Ax^{k+1}+Bz^{k+1}-c)$.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-escalada"><div class="head">Observación la forma escalada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $u^{k}=y^{k}/\rho$, los dos subproblemas son
+$f(x)+\frac{\rho}{2}\norm{Ax+Bz^{k}-c+u^{k}}^{2}$ y
+$g(z)+\frac{\rho}{2}\norm{Ax^{k+1}+Bz-c+u^{k}}^{2}$, y
+$u^{k+1}=u^{k}+Ax^{k+1}+Bz^{k+1}-c$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c20:prop-residuos"><div class="head">Proposición residuos primal y dual</div><div class="body"><p>Con el <span class="df">residuo primal</span> $r^{k+1}=Ax^{k+1}+Bz^{k+1}-c$ y el <span class="df">residuo dual</span>
+$s^{k+1}=\rho A^{*}B(z^{k+1}-z^{k})$,
+$0\in\subdif f(x^{k+1})+A^{*}y^{k+1}-s^{k+1}$ y
+$0\in\subdif g(z^{k+1})+B^{*}y^{k+1}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p220" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p220"><p>Los términos cuadráticos son continuos y Fréchet diferenciables, así que la regla
+de la suma y la de Fermat dan
+$0\in\subdif f(x^{k+1})+A^{*}\bigl(y^{k}+\rho(Ax^{k+1}+Bz^{k}-c)\bigr)$, que es la
+primera, y
+$0\in\subdif g(z^{k+1})+B^{*}\bigl(y^{k}+\rho(Ax^{k+1}+Bz^{k+1}-c)\bigr)$, que es
+la segunda.</p></div></div>
+<div class="stmt proposicion" id="ambas-c20:prop-dual-separable"><div class="head">Proposición el dual del problema separable</div><div class="body"><p>Con $h_{1}(y)=f^{*}(-A^{*}y)$ y $h_{2}(y)=g^{*}(-B^{*}y)+\ip{c}{y}$, el dual es
+$\sup_{y}-h_{1}(y)-h_{2}(y)$, es decir, $\min_{y}h_{1}+h_{2}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p221" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p221"><p>El ínfimo se separa, y
+$\inf_{x}f(x)+\ip{A^{*}y}{x}=-f^{*}(-A^{*}y)$,
+$\inf_{z}g(z)+\ip{B^{*}y}{z}-\ip{y}{c}=-g^{*}(-B^{*}y)-\ip{c}{y}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c20:teo-admm-dr"><div class="head">Teorema ADMM es Douglas–Rachford en el dual</div><div class="body"><p>$t^{k}=y^{k}+\rho(c-Bz^{k})$ sigue Douglas–Rachford para
+$0\in\subdif h_{1}(y)+\subdif h_{2}(y)$ con $\gamma=\rho$ y $\theta=1$, y su sombra
+es $y^{k}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p222" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p222"><p>Por los residuos, $-B^{*}y^{k}\in\subdif g(z^{k})$, es decir,
+$z^{k}\in\subdif g^{*}(-B^{*}y^{k})$ por Fenchel–Young, y para todo $v$</p>
+<div class="display">\[
+  h_{2}(v)\ge g^{*}(-B^{*}y^{k})+\ip{z^{k}}{-B^{*}(v-y^{k})}+\ip{c}{v}=h_{2}(y^{k})+\ip{c-Bz^{k}}{v-y^{k}},
+\]</div>
+<p>así que $c-Bz^{k}\in\subdif h_{2}(y^{k})$ e $y^{k}=J_{\rho\subdif h_{2}}(t^{k})$. Con
+$w^{k}=y^{k}+\rho(Ax^{k+1}+Bz^{k}-c)$, el paso en $x$ da
+$-A^{*}w^{k}\in\subdif f(x^{k+1})$, la misma cuenta da
+$-Ax^{k+1}\in\subdif h_{1}(w^{k})$, y como $2y^{k}-t^{k}=w^{k}-\rho Ax^{k+1}$,
+$w^{k}=J_{\rho\subdif h_{1}}(2y^{k}-t^{k})$. Por último,
+$t^{k}+w^{k}-y^{k}=y^{k}+\rho Ax^{k+1}=t^{k+1}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c20:teo-admm"><div class="head">Teorema convergencia de ADMM</div><div class="body"><p>Si los subproblemas tienen solución y $\mathcal{L}_{0}$ tiene un punto de silla,
+$r^{k}\to0$, $B(z^{k+1}-z^{k})\to0$ e $y^{k}\rightharpoonup y^{*}$, solución del dual.
+En $\R^{n}$, $y^{k}\to y^{*}$ y además $f(x^{k})+g(z^{k})\to p^{*}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p223" data-titulo="1">Demostración en ℝⁿ</button><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p224" data-titulo="1">Demostración en ℋ</button><div class="proof" id="ambas-convexa-p223"><p>Si $(x^{*},z^{*},y^{*})$ es un punto de silla, $Ax^{*}+Bz^{*}=c$,
+$-A\trans y^{*}\in\subdif f(x^{*})$ y $-B\trans y^{*}\in\subdif g(z^{*})$, y la
+cuenta de la demostración anterior da $-Ax^{*}\in\subdif h_{1}(y^{*})$ y
+$c-Bz^{*}\in\subdif h_{2}(y^{*})$, que suman $0$. Así
+$\zer(\subdif h_{1}+\subdif h_{2})\neq\varnothing$, y el teorema anterior y la
+convergencia de Douglas–Rachford dan $t^{k}\to t^{*}$ e $y^{k}\to y^{*}$ con
+$0\in\subdif h_{1}(y^{*})+\subdif h_{2}(y^{*})$, que por la regla de la suma y la
+de Fermat minimiza $h_{1}+h_{2}$. Además $w^{k}-y^{k}=t^{k+1}-t^{k}\to0$, es
+decir, $Ax^{k+1}+Bz^{k}-c\to0$, y $\rho r^{k+1}=y^{k+1}-y^{k}\to0$. Restando,
+$B(z^{k+1}-z^{k})\to0$. La convergencia de los valores pide una cuenta aparte
+con el punto de silla y se admite.</p></div><div class="proof" id="ambas-convexa-p224"><p>Un punto de silla $(x^{*},z^{*},y^{*})$ da, con las cuentas anteriores,
+$-Ax^{*}\in\subdif h_{1}(y^{*})$ y $c-Bz^{*}\in\subdif h_{2}(y^{*})$, que suman
+$0$. La convergencia de Douglas–Rachford da $t^{k+1}-t^{k}\to0$ e
+$y^{k}\rightharpoonup y^{*}$ con $0\in\subdif h_{1}(y^{*})+\subdif h_{2}(y^{*})$, que
+minimiza $h_{1}+h_{2}$. Como $J_{\rho\subdif h_{2}}$ es no expansivo,
+$\rho r^{k+1}=y^{k+1}-y^{k}\to0$, y $w^{k}-y^{k}=t^{k+1}-t^{k}\to0$ da
+$Ax^{k+1}+Bz^{k}-c\to0$. Restando, $B(z^{k+1}-z^{k})\to0$.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-admm-contraste"><div class="head">Observación los residuos van en norma en los dos</div><div class="body"><p>Los residuos tienden a $0$ en norma también en $\Hs$, porque salen de
+$t^{k+1}-t^{k}\to0$, que es parte de la desigualdad de Fejér, y de que
+$J_{\rho\subdif h_{2}}$ es no expansivo. Lo que se debilita es el multiplicador,
+que es una sucesión sombra.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c20:ej-lasso"><div class="head">Ejemplo el lasso por separación de variables</div><div class="body"><p>En $\R^{n}$, para $\min\frac12\norm{Mx-b}^{2}+\lambda\norm{z}_{1}$ sujeto a
+$x=z$: $x^{k+1}=(M\trans M+\rho I)^{-1}(M\trans b+\rho z^{k}-y^{k})$,
+$z^{k+1}=\prox_{\frac{\lambda}{\rho}\norm{\cdot}_{1}}(x^{k+1}+y^{k}/\rho)$, el umbral
+suave, e $y^{k+1}=y^{k}+\rho(x^{k+1}-z^{k+1})$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p225" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p225"><p>El primer objetivo es diferenciable con gradiente
+$M\trans(Mx-b)+y^{k}+\rho(x-z^{k})$; en el segundo, completando el cuadrado, queda
+$\lambda\norm{z}_{1}+\frac{\rho}{2}\norm{z-x^{k+1}-y^{k}/\rho}^{2}$ más una
+constante.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
@@ -10615,7 +11080,7 @@ const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 /* Los rotulos y las notaciones los inyecta el generador, porque dependen de
    que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
    una de lecture notes dice «demostraciones». */
-const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [], "idiomas": [{"id": "clase", "rotulo": "Clase", "carpeta": "clase"}, {"id": "general", "rotulo": "General", "carpeta": "general"}, {"id": "ambas", "rotulo": "Ambas", "carpeta": "ambas", "pruebas_de": [{"de": "clase", "rotulo": "Demostración en ℝⁿ"}, {"de": "general", "rotulo": "Demostración en ℋ", "rotulo_igual": "Demostración (la misma en ℝⁿ y en ℋ)"}], "pruebas_distintas": ["c1:teo-c1-frechet", "c2:teo-segundo-suficiente", "c5:teo-proyeccion", "c5:cor-semiespacios", "c7:teo-weierstrass", "c9:teo-no-vacio", "c9:teo-soporte-subdif", "c10:teo-max", "c10:teo-cadena", "c10:teo-suma", "c11:ej-norma", "c11:teo-fenchel-moreau", "c13:prop-fejer", "c13:teo-cocoercividad", "c13:prop-sandwich", "c15:prop-descenso", "c15:teo-global", "c17:prop-existe", "c17:prop-firme", "c17:ej-umbral", "c17:ej-elastic", "c18:ej-cuadratico", "c18:lem-valor", "c18:prop-estacionariedad", "c19:teo-dag", "c19:teo-extragradiente"]}], "glosario": {}, "artefacto": false};
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [], "idiomas": [{"id": "clase", "rotulo": "Clase", "carpeta": "clase"}, {"id": "general", "rotulo": "General", "carpeta": "general"}, {"id": "ambas", "rotulo": "Ambas", "carpeta": "ambas", "pruebas_de": [{"de": "clase", "rotulo": "Demostración en ℝⁿ"}, {"de": "general", "rotulo": "Demostración en ℋ", "rotulo_igual": "Demostración (la misma en ℝⁿ y en ℋ)"}], "pruebas_distintas": ["c1:teo-c1-frechet", "c2:teo-segundo-suficiente", "c5:teo-proyeccion", "c5:cor-semiespacios", "c7:teo-weierstrass", "c9:teo-no-vacio", "c9:teo-soporte-subdif", "c10:teo-max", "c10:teo-cadena", "c10:teo-suma", "c11:ej-norma", "c11:teo-fenchel-moreau", "c13:prop-fejer", "c13:teo-cocoercividad", "c13:prop-sandwich", "c15:prop-descenso", "c15:teo-global", "c17:prop-existe", "c17:prop-firme", "c17:ej-umbral", "c17:ej-elastic", "c18:ej-cuadratico", "c18:lem-valor", "c18:prop-estacionariedad", "c19:teo-dag", "c19:teo-extragradiente", "c20:teo-dr", "c20:teo-admm"]}], "glosario": {}, "artefacto": false};
 
 /* Una nota privada se publica como artefacto de Claude, y alli el hash lo
    vigila el visor y solo admite #nombres sencillos; las anclas de la nota
