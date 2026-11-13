@@ -611,7 +611,7 @@ window.MathJax = {
     inlineMath: [['$','$']],
     displayMath: [['\\[','\\]'], ['$$','$$']],
     processEnvironments: true,
-    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "prox": "\\operatorname{prox}", "gra": "\\operatorname{gra}", "zer": "\\operatorname{zer}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "env": ["{}^{#1}\\!#2", 2], "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "daga": "\\kern0.05em\\textsuperscript{\\textcolor{dagacolor}{\\textdagger}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
+    macros: {"Var": "\\operatorname{Var}", "Cov": "\\operatorname{Cov}", "Id": "\\operatorname{Id}", "Tr": "\\operatorname{tr}", "aff": "\\operatorname{aff}", "conv": "\\operatorname{conv}", "cono": "\\operatorname{cone}", "cl": "\\operatorname{cl}", "intr": "\\operatorname{int}", "ri": "\\operatorname{ri}", "fr": "\\operatorname{fr}", "spts": "\\operatorname{spts}", "Proy": "\\operatorname{Proj}", "dom": "\\operatorname{dom}", "epi": "\\operatorname{epi}", "argmin": "\\operatorname*{argmin}", "argmax": "\\operatorname*{argmax}", "dist": "\\operatorname{dist}", "lev": "\\operatorname{lev}", "cont": "\\operatorname{cont}", "sri": "\\operatorname{sri}", "paral": "\\operatorname{par}", "lse": "\\operatorname{lse}", "prox": "\\operatorname{prox}", "gra": "\\operatorname{gra}", "zer": "\\operatorname{zer}", "rang": "\\operatorname{rank}", "chaptermark": ["\\markboth{\\semanaHead}{#1}", 1], "headrulewidth": "0pt", "R": "\\mathbb{R}", "N": "\\mathbb{N}", "E": "\\mathbb{E}", "Prob": "\\mathbb{P}", "F": "\\mathcal{F}", "dd": "\\,\\mathrm{d}", "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "ip": ["\\left\\langle #1,#2\\right\\rangle", 2], "version": "clase", "notaEstandar": "\\modoNota=0\\relax", "notaDeFinetti": "\\modoNota=1\\relax", "notaAmbas": "\\modoNota=2\\relax", "Hs": "\\mathcal{H}", "Ks": "\\mathcal{K}", "Bop": ["\\mathcal{B}(#1)", 1], "Ball": "B", "Dif": "\\mathrm{D}", "dird": ["\\Dif_{#1}#2", 2], "orth": ["#1^{\\perp}", 1], "polar": ["#1^{\\circ}", 1], "Ncono": "N", "simplex": "\\Delta", "subdif": "\\partial", "sop": "\\sigma", "subdifV": "\\subdif_{V}", "env": ["{}^{#1}\\!#2", 2], "trans": "^{\\mathsf{T}}", "Xm": "\\mathcal{X}", "Ym": "\\mathcal{Y}", "mas": "\\kern-0.3em\\textsuperscript{\\textcolor{red}{\\textbf{+}}}", "daga": "\\kern0.05em\\textsuperscript{\\textcolor{dagacolor}{\\textdagger}}", "Sym": ["S^{#1}", 1], "PSD": ["S^{#1}_{+}", 1], "Qcono": ["\\mathcal{Q}^{#1}", 1]}
   },
   options: {skipHtmlTags:['script','noscript','style','textarea','pre','code']},
   startup: {
@@ -4597,7 +4597,405 @@ una vez; el segundo es el umbral suave.</p></div></div>
 $M\trans(Mx-b)+y^{k}+\rho(x-z^{k})$, que se anula en el punto escrito. En el
 segundo, completando el cuadrado,
 $-\ip{y^{k}}{z}+\frac{\rho}{2}\norm{x^{k+1}-z}^{2}=\frac{\rho}{2}\norm{z-x^{k+1}-y^{k}/\rho}^{2}+\text{cte}$,
-y lo que queda es la definición del proximal.</p></div></section></div>
+y lo que queda es la definición del proximal.</p></div>
+<h3 id="clase-convexa-x46">Criterios de parada y elección de $\rho$</h3>
+<p>Los residuos de ADMM sirven también para decidir cuándo parar y cómo mover $\rho$.</p>
+<div class="stmt observacion" id="clase-c20:obs-parada"><div class="head">Observación criterio de parada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Se detiene ADMM cuando $\norm{r^{k}}\le\varepsilon_{\mathrm{pri}}$ y
+$\norm{s^{k}}\le\varepsilon_{\mathrm{dual}}$, con tolerancias que combinan un
+término absoluto y uno relativo. Una elección típica es</p>
+<div class="display">\[
+  \begin{aligned}
+  \varepsilon_{\mathrm{pri}}&amp;=\sqrt{p}\,\varepsilon_{\mathrm{abs}}+\varepsilon_{\mathrm{rel}}\max\{\norm{Ax^{k}},\norm{Bz^{k}},\norm{c}\},\\
+  \varepsilon_{\mathrm{dual}}&amp;=\sqrt{n}\,\varepsilon_{\mathrm{abs}}+\varepsilon_{\mathrm{rel}}\norm{A\trans y^{k}},
+  \end{aligned}
+\]</div>
+<p>donde $p$ es la dimensión de la restricción y $n$ la del bloque $x$.</p></div></div>
+<div class="stmt observacion" id="clase-c20:obs-rho"><div class="head">Observación la elección de $\rho$<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\rho$ no cambia la solución, pero sí la velocidad: un $\rho$ grande castiga la
+infactibilidad primal y uno pequeño deja más libre al dual. Una heurística común
+balancea los residuos: con $\mu&gt;1$ y $\tau&gt;1$, se toma $\rho_{k+1}=\tau\rho_{k}$ si
+$\norm{r^{k}}&gt;\mu\norm{s^{k}}$, $\rho_{k+1}=\rho_{k}/\tau$ si
+$\norm{s^{k}}&gt;\mu\norm{r^{k}}$, y $\rho_{k+1}=\rho_{k}$ en otro caso. En la forma
+escalada hay que reescalar $u=y/\rho$ al cambiar $\rho$, para no mover $y$. Es una
+heurística y no una elección óptima.</p></div></div>
+<div class="stmt observacion" id="clase-c20:obs-sobrerrelajacion"><div class="head">Observación sobrerrelajación<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>También se usa reemplazar $Ax^{k+1}$ en las actualizaciones de $z$ y de $y$ por
+$\alpha Ax^{k+1}+(1-\alpha)(c-Bz^{k})$, con $\alpha\in(0,2)$.</p></div></div>
+<h3 id="clase-convexa-x47">PDHG</h3>
+<p>Volvemos al problema compuesto del capítulo anterior,</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\ f(x)+g(Kx),
+\]</div>
+<p>con $f\in\Gamma_{0}(\R^{n})$, $g\in\Gamma_{0}(\R^{m})$ y $K$ una matriz $m\times n$.
+Por el problema compuesto como min-max, es equivalente a</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\ \max_{y\in\R^{m}}\ S(x,y),\qquad
+  S(x,y)=f(x)+\ip{Kx}{y}-g^{*}(y).
+\]</div>
+<div class="stmt proposicion" id="clase-c20:prop-pdhg-fijos"><div class="head">Proposición los puntos de silla como puntos fijos</div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla de $S$ si y solo si</p>
+<div class="display">\[
+  0\in\subdif f(x^{*})+K\trans y^{*}\qquad\text{y}\qquad0\in\subdif g^{*}(y^{*})-Kx^{*},
+\]</div>
+<p>y esto pasa si y solo si, para todos $\sigma,\tau&gt;0$,</p>
+<div class="display">\[
+  x^{*}=\prox_{\tau f}\bigl(x^{*}-\tau K\trans y^{*}\bigr),\qquad
+  y^{*}=\prox_{\sigma g^{*}}\bigl(y^{*}+\sigma Kx^{*}\bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p189">Ver demostración</button><div class="proof" id="clase-convexa-p189"><p>La primera equivalencia son las condiciones de punto de silla del capítulo
+anterior. Por la caracterización del proximal,
+$x^{*}=\prox_{\tau f}(x^{*}-\tau K\trans y^{*})$ si y solo si
+$-\tau K\trans y^{*}\in\tau\subdif f(x^{*})$, que es la primera inclusión, y lo
+mismo da la segunda con $\sigma Kx^{*}\in\sigma\subdif g^{*}(y^{*})$. Ninguna de las
+dos depende de $\sigma$ ni de $\tau$.</p></div>
+<p>Esto sugiere alternar las dos ecuaciones de punto fijo,
+$y^{k+1}=\prox_{\sigma g^{*}}(y^{k}+\sigma Kx^{k})$ y
+$x^{k+1}=\prox_{\tau f}(x^{k}-\tau K\trans y^{k+1})$, pero eso puede no converger.
+Lo que sí funciona es evaluar $K$ en un punto extrapolado.</p>
+<div class="stmt definicion" id="clase-c20:def-pdhg"><div class="head">Definición PDHG</div><div class="body"><p>Dados $\sigma,\tau&gt;0$, $\theta\in(0,1]$ y $(x^{0},y^{0})$, con $\bar x^{0}=x^{0}$, el
+<span class="df">método primal-dual híbrido de gradiente</span> (PDHG), o de Chambolle–Pock, genera</p>
+<div class="display">\[
+  \begin{aligned}
+  y^{k+1}&amp;=\prox_{\sigma g^{*}}\bigl(y^{k}+\sigma K\bar x^{k}\bigr),\\
+  x^{k+1}&amp;=\prox_{\tau f}\bigl(x^{k}-\tau K\trans y^{k+1}\bigr),\\
+  \bar x^{k+1}&amp;=x^{k+1}+\theta\bigl(x^{k+1}-x^{k}\bigr).
+  \end{aligned}
+\]</div>
+<p>Típicamente $\theta=1$, y entonces $\bar x^{k+1}=2x^{k+1}-x^{k}$.</p></div></div>
+<div class="stmt observacion" id="clase-c20:obs-pdhg-moreau"><div class="head">Observación el paso dual con el proximal de $g$<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Por la identidad de Moreau aplicada a $g^{*}$, con $g^{**}=g$,
+$\prox_{\sigma g^{*}}(v)=v-\sigma\prox_{g/\sigma}(v/\sigma)$, así que basta conocer el
+proximal de $g$.</p></div></div>
+<div class="stmt proposicion" id="clase-c20:prop-pdhg-residuos"><div class="head">Proposición residuos de PDHG</div><div class="body"><p>Sean</p>
+<div class="display">\[
+  r_{x}^{k+1}=\frac{x^{k}-x^{k+1}}{\tau},\qquad
+  r_{y}^{k+1}=\frac{y^{k}-y^{k+1}}{\sigma}+K\bigl(\bar x^{k}-x^{k+1}\bigr)
+\]</div>
+<p>los <span class="df">residuos</span> en $x$ y en $y$. Entonces</p>
+<div class="display">\[
+  r_{x}^{k+1}\in\subdif f(x^{k+1})+K\trans y^{k+1},\qquad
+  r_{y}^{k+1}\in\subdif g^{*}(y^{k+1})-Kx^{k+1}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p190">Ver demostración</button><div class="proof" id="clase-convexa-p190"><p>Por la caracterización del proximal, los dos primeros pasos son</p>
+<div class="display">\[
+  \frac{y^{k}+\sigma K\bar x^{k}-y^{k+1}}{\sigma}\in\subdif g^{*}(y^{k+1}),\qquad
+  \frac{x^{k}-\tau K\trans y^{k+1}-x^{k+1}}{\tau}\in\subdif f(x^{k+1}),
+\]</div>
+<p>y basta restar $Kx^{k+1}$ en la primera y sumar $K\trans y^{k+1}$ en la segunda.</p></div>
+<p>Los residuos miden cuánto le falta a $(x^{k+1},y^{k+1})$ para cumplir las
+condiciones de punto de silla.</p>
+<div class="stmt teorema" id="clase-c20:teo-pdhg"><div class="head">Teorema convergencia de PDHG</div><div class="body"><p>Supongamos que $S$ tiene un punto de silla, que $\theta=1$ y que
+$\tau\sigma\norm{K}^{2}&lt;1$. Entonces</p>
+<div class="display">\[
+  x^{k+1}-x^{k}\to0,\qquad y^{k+1}-y^{k}\to0,\qquad \bar x^{k}-x^{k}\to0,
+\]</div>
+<p>y $(x^{k},y^{k})\to(\hat x,\hat y)$, un punto de silla de $S$. Además, los promedios
+ergódicos</p>
+<div class="display">\[
+  \hat x_{N}=\frac1N\sum_{k=1}^{N}x^{k},\qquad \hat y_{N}=\frac1N\sum_{k=1}^{N}y^{k}
+\]</div>
+<p>convergen a $\hat x$ y a $\hat y$, y para conjuntos acotados $X\subset\R^{n}$ e
+$Y\subset\R^{m}$,</p>
+<div class="display">\[
+  \sup_{y\in Y}S(\hat x_{N},y)-\inf_{x\in X}S(x,\hat y_{N})\le\frac{C_{X,Y}}{N},
+\]</div>
+<p>con $C_{X,Y}$ dependiente de las distancias iniciales y de $\tau$ y $\sigma$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p191">Ver demostración</button><div class="proof" id="clase-convexa-p191"><p>$\bar x^{k}-x^{k}=x^{k}-x^{k-1}$, así que tiende a $0$ con la primera, y los
+promedios convergen a $\hat x$ y a $\hat y$ porque los promedios de Cesàro de una
+sucesión convergente tienen el mismo límite. Lo demás es el teorema de Chambolle
+y Pock, y se admite.</p></div>
+<p>La condición $\tau\sigma\norm{K}^{2}&lt;1$ es la diferencia con el gradiente
+proximal: no hace falta que $g\circ K$ sea suave, y cada iteración pide un producto
+por $K$, uno por $K\trans$ y los proximales de $f$ y de $g^{*}$.</p>
+<div class="stmt ejemplo" id="clase-c20:ej-tv-pdhg"><div class="head">Ejemplo variación total con PDHG</div><div class="body"><p>Para $\min_{x}\frac12\norm{x-b}^{2}+\lambda\norm{Dx}_{1}$, con $D$ una matriz
+$m\times n$ de diferencias y $\lambda&gt;0$, se toman $f(x)=\frac12\norm{x-b}^{2}$,
+$g(z)=\lambda\norm{z}_{1}$ y $K=D$. Entonces $g^{*}=\delta_{C}$ con
+$C=[-\lambda,\lambda]^{m}$, el problema es</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\ \max_{y\in C}\ \frac12\norm{x-b}^{2}+\ip{Dx}{y},
+\]</div>
+<p>sus puntos de silla cumplen $x^{*}-b+D\trans y^{*}=0$ y
+$Dx^{*}\in\Ncono_{C}(y^{*})$, y con $\sigma\tau\norm{D}^{2}&lt;1$ PDHG es</p>
+<div class="display">\[
+  y^{k+1}=\Proy_{C}\bigl(y^{k}+\sigma D\bar x^{k}\bigr),\qquad
+  x^{k+1}=\frac{x^{k}-\tau D\trans y^{k+1}+\tau b}{1+\tau}.
+\]</div>
+<p>Cada iteración pide solo productos por $D$ y $D\trans$ y operaciones coordenada a
+coordenada, sin resolver ningún sistema lineal.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p192">Ver demostración</button><div class="proof" id="clase-convexa-p192"><p>La conjugada es la del ejemplo de la variación total del capítulo anterior. Las
+condiciones son las de la proposición de los puntos de silla, con
+$\subdif f(x)=\{x-b\}$ y $\subdif\delta_{C}=\Ncono_{C}$. Para todo $\sigma&gt;0$,
+$\prox_{\sigma\delta_{C}}=\Proy_{C}$, y $p=\prox_{\tau f}(w)$ es
+$p-w+\tau(p-b)=0$, es decir, $p=\frac{w+\tau b}{1+\tau}$.</p></div>
+<div class="stmt ejemplo" id="clase-c20:ej-clustering"><div class="head">Ejemplo clustering convexo</div><div class="body"><p>Dados $d_{1},\dots,d_{N}\in\R^{n}$, una matriz de pesos $(\omega_{ij})$ y
+$\lambda&gt;0$, el <span class="df">clustering convexo</span> resuelve</p>
+<div class="display">\[
+  \min_{x_{1},\dots,x_{N}\in\R^{n}}\ \frac12\sum_{i=1}^{N}\norm{x_{i}-d_{i}}^{2}
+  +\lambda\sum_{i&lt;j}\omega_{ij}\norm{x_{i}-x_{j}}_{1}.
+\]</div>
+<p>Los pesos se escogen, y una elección típica es
+$\omega_{ij}=e^{-\norm{d_{i}-d_{j}}^{2}/a}\,\1\{\norm{d_{i}-d_{j}}\le\eta\}$, con
+$a,\eta&gt;0$. Los $d_{i}$ cuyos $x_{i}$ coinciden quedan en el mismo grupo. Es del tipo
+de la variación total, con $K(x_{1},\dots,x_{N})=(x_{i}-x_{j})_{i&lt;j}$ y
+$g\bigl((z_{ij})_{i&lt;j}\bigr)=\lambda\sum_{i&lt;j}\omega_{ij}\norm{z_{ij}}_{1}$, así que PDHG
+se aplica igual.</p></div></div>
+<div class="stmt observacion" id="clase-c20:obs-admm-pdhg"><div class="head">Observación ADMM frente a PDHG<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>ADMM parte de $f(x)+g(z)$ con $Ax+Bz=c$; sus subproblemas son minimizaciones
+aumentadas que pueden pedir sistemas lineales, su parámetro es $\rho$ y se
+certifica con los residuos primal y dual. PDHG parte de $f(x)+g(Kx)$ o del
+problema de silla; solo pide los proximales de $f$ y de $g^{*}$ y productos por
+$K$ y $K\trans$, sus pasos $\tau,\sigma$ dependen de $\norm{K}$ y se certifica con
+la brecha primal-dual y los residuos. Si el sistema de ADMM se factoriza una sola
+vez, ADMM es competitivo; si factorizar es caro y multiplicar por $K$ es barato,
+conviene PDHG. No hay un ganador universal.</p></div></div>
+<div class="stmt observacion" id="clase-c20:obs-extensiones"><div class="head">Observación extensiones<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Los pasos escalares se pueden cambiar por métricas que precondicionan, los
+subproblemas se pueden resolver de forma inexacta con errores controlados, y un
+término suave adicional $h$ en $f(x)+h(x)+g(Kx)$ lleva a esquemas
+forward-backward primal-duales. Con convexidad fuerte, pasos variables mejoran las
+tasas. En cambio, ADMM con tres o más bloques no hereda en general la convergencia
+del caso de dos.</p></div></div>
+<p>Todos estos métodos resuelven la inclusión monótona que dan las condiciones KKT.
+El punto proximal la resuelve entera y de forma implícita; Douglas–Rachford, ADMM
+y PDHG la reemplazan por composiciones de resolventes más sencillos.</p></section>
+<section class="capitulo"><h2 id="clase-cap:conica">Programación cónica</h2>
+<p>La programación cónica cambia las desigualdades coordenada a coordenada de la
+programación lineal por la pertenencia a un cono convexo. Programación lineal,
+de segundo orden y semidefinida son casos de una misma estructura primal-dual.</p>
+<h3 id="clase-convexa-x48">Forma cónica primal y dual</h3>
+<div class="stmt definicion" id="clase-c21:def-propio"><div class="head">Definición cono propio</div><div class="body"><p>Un cono convexo y cerrado $K\subset\R^{n}$ es <span class="df">propio</span> si $\intr K\neq\varnothing$
+y es <span class="df">puntiagudo</span>, es decir, $K\cap(-K)=\{0\}$.</p></div></div>
+<div class="stmt definicion" id="clase-c21:def-programa"><div class="head">Definición programa cónico</div><div class="body"><p>Sean $K\subset\R^{n}$ un cono convexo y cerrado, $A$ una matriz $m\times n$,
+$b\in\R^{m}$ y $c\in\R^{n}$. El <span class="df">programa cónico</span> es</p>
+<div class="display">\[
+  p^{*}=\min_{x}\ \ip{c}{x}\qquad\text{sujeto a}\qquad Ax=b,\quad x\in K.
+  \tag{P}
+\]</div></div></div>
+<p>Dualizamos solo la igualdad, con el Lagrangiano
+$\mathcal{L}(x,y)=\ip{c}{x}+\ip{y}{b-Ax}=\ip{b}{y}+\ip{c-A\trans y}{x}$, y
+minimizamos en $x\in K$.</p>
+<div class="stmt proposicion" id="clase-c21:prop-dual"><div class="head">Proposición el dual cónico</div><div class="body"><p>Para todo $y\in\R^{m}$,</p>
+<div class="display">\[
+  \inf_{x\in K}\mathcal{L}(x,y)=
+  \begin{cases}
+    \ip{b}{y}, &amp; c-A\trans y\in\polar{K},\\
+    -\infty, &amp; \text{en otro caso},
+  \end{cases}
+\]</div>
+<p>así que, con la <span class="df">holgura dual</span> $s=c-A\trans y$, el dual es</p>
+<div class="display">\[
+  d^{*}=\max_{y}\ \ip{b}{y}\qquad\text{sujeto a}\qquad A\trans y+s=c,\quad s\in\polar{K}.
+  \tag{D}
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p193">Ver demostración</button><div class="proof" id="clase-convexa-p193"><p>Si $s=c-A\trans y\in\polar{K}$, entonces $\ip{s}{x}\ge0$ para todo $x\in K$, con
+igualdad en $x=0\in K$, así que el ínfimo es $\ip{b}{y}$. Si no, hay $x\in K$ con
+$\ip{s}{x}&lt;0$, y como $tx\in K$ para todo $t&gt;0$, $\ip{s}{tx}\to-\infty$.</p></div>
+<div class="stmt proposicion" id="clase-c21:prop-debil"><div class="head">Proposición dualidad débil</div><div class="body"><p>Si $x$ es factible para (P) y $(y,s)$ lo es para (D), entonces</p>
+<div class="display">\[
+  \ip{c}{x}-\ip{b}{y}=\ip{s}{x}\ge0.
+\]</div>
+<p>En particular, $d^{*}\le p^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p194">Ver demostración</button><div class="proof" id="clase-convexa-p194"><p>Con $Ax=b$ y $c=A\trans y+s$,
+$\ip{c}{x}-\ip{b}{y}=\ip{A\trans y+s}{x}-\ip{Ax}{y}=\ip{s}{x}$, que es no negativo
+porque $x\in K$ y $s\in\polar{K}$.</p></div>
+<div class="stmt definicion" id="clase-c21:def-brecha"><div class="head">Definición dualidad fuerte y brecha</div><div class="body"><p>Si hay $x^{*}$ factible para (P) e $y^{*}$ factible para (D) con
+$\ip{c}{x^{*}}=\ip{b}{y^{*}}$, se tiene <span class="df">dualidad fuerte</span>. Para $x$ e $y$
+factibles, $\mathcal{G}(x,y)=\ip{c}{x}-\ip{b}{y}$ es la <span class="df">brecha de dualidad</span>.</p></div></div>
+<p>La brecha es exactamente la complementariedad $\ip{s}{x}$.</p>
+<div class="stmt proposicion" id="clase-c21:prop-kkt"><div class="head">Proposición condiciones KKT cónicas<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $x$ factible para (P) y $(y,s)$ factible para (D). Si $\ip{x}{s}=0$, entonces
+$x$ y $(y,s)$ son óptimos y $p^{*}=d^{*}$. Recíprocamente, si $p^{*}=d^{*}$ y $x$ y
+$(y,s)$ son óptimos, entonces $\ip{x}{s}=0$. Así, bajo dualidad fuerte, la
+optimalidad es</p>
+<div class="display">\[
+  Ax=b,\qquad A\trans y+s=c,\qquad x\in K,\qquad s\in\polar{K},\qquad\ip{x}{s}=0.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p195">Ver demostración</button><div class="proof" id="clase-convexa-p195"><p>Por la dualidad débil, $\ip{b}{y}\le d^{*}\le p^{*}\le\ip{c}{x}$, y la diferencia
+de los extremos es $\ip{s}{x}$. Si es $0$, todas son igualdades. Si $p^{*}=d^{*}$ y
+los dos son óptimos, $\ip{s}{x}=\ip{c}{x}-\ip{b}{y}=p^{*}-d^{*}=0$.</p></div>
+<div class="stmt teorema" id="clase-c21:teo-slater"><div class="head">Teorema Slater para programas cónicos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><ol class="lista"><li><p>Si existe $\bar x\in\intr K$ con $A\bar x=b$ y $p^{*}$ es finito,
+  entonces el dual alcanza su valor y $p^{*}=d^{*}$.</p></li><li><p>Si existen $\bar y$ y $\bar s\in\intr\polar{K}$ con
+  $A\trans\bar y+\bar s=c$ y $d^{*}$ es finito, entonces el primal alcanza su valor y
+  $p^{*}=d^{*}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p196">Ver demostración</button><div class="proof" id="clase-convexa-p196"><p>a) (P) es el primal de Fenchel de $f(x)=\ip{c}{x}+\delta_{K}(x)$ y
+$g=\delta_{\{b\}}$. Como $f^{*}(u)=\sup_{x\in K}\ip{u-c}{x}$ vale $0$ si
+$c-u\in\polar{K}$ e $\infty$ si no, y $g^{*}(y)=\ip{b}{y}$, su dual de Fenchel es</p>
+<div class="display">\[
+  \sup_{y}\ -f^{*}(-A\trans y)-g^{*}(y)
+  =\sup\bigl\{-\ip{b}{y}:\ c+A\trans y\in\polar{K}\bigr\},
+\]</div>
+<p>que con $y\mapsto-y$ es (D). La condición de Slater de Fenchel pide un punto de
+$\ri(\dom f)=\intr K$ que $A$ lleve a $\ri(\dom g)=\{b\}$, y eso es $\bar x$. El
+teorema de dualidad fuerte da $p^{*}=d^{*}$ con el dual alcanzado.</p>
+<p>b) Ahora $-d^{*}=\inf_{y}\,f(y)+g(A\trans y)$ con $f(y)=-\ip{b}{y}$ y
+$g(u)=\delta_{\polar{K}}(c-u)$. Aquí $f^{*}=\delta_{\{-b\}}$ y</p>
+<div class="display">\[
+  g^{*}(x)=\sup_{s\in\polar{K}}\ip{x}{c-s}=\ip{c}{x}+\delta_{K}(x),
+\]</div>
+<p>porque $\sup_{s\in\polar{K}}\ip{-x}{s}$ es $0$ si $x\in\polar{(\polar{K})}=K$, por
+el teorema bipolar, e $\infty$ si no. Su dual de Fenchel es
+$\sup_{x}\{-\ip{c}{x}:Ax=b,\ x\in K\}=-p^{*}$. Como $\intr\polar{K}\neq\varnothing$,
+$\ri(\dom g)=c-\intr\polar{K}$, que contiene a $A\trans\bar y=c-\bar s$, y
+$\ri(\dom f)=\R^{m}$. El teorema de dualidad fuerte, con $-d^{*}&gt;-\infty$, da
+$-d^{*}=-p^{*}$ con el último supremo alcanzado, es decir, (P) tiene solución.</p></div>
+<div class="stmt proposicion" id="clase-c21:prop-productos"><div class="head">Proposición productos de conos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $K_{i}\subset\R^{n_{i}}$ son conos convexos y cerrados, $i=1,\dots,r$, entonces
+$K=K_{1}\times\cdots\times K_{r}$ es un cono convexo y cerrado y</p>
+<div class="display">\[
+  \polar{K}=\polar{K_{1}}\times\cdots\times\polar{K_{r}}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p197">Ver demostración</button><div class="proof" id="clase-convexa-p197"><p>Lo primero es inmediato. Si $s_{i}\in\polar{K_{i}}$ para todo $i$, entonces
+$\ip{s}{x}=\sum_{i}\ip{s_{i}}{x_{i}}\ge0$ para $x\in K$. Recíprocamente, si
+$s\in\polar{K}$ y $x_{i}\in K_{i}$, tomando $x_{j}=0\in K_{j}$ para $j\neq i$ queda
+$\ip{s_{i}}{x_{i}}\ge0$.</p></div>
+<p>Así se combinan en un mismo modelo restricciones lineales, de segundo orden y
+semidefinidas.</p>
+<h3 id="clase-convexa-x49">Los conos que nos interesan</h3>
+<div class="stmt ejemplo" id="clase-c21:ej-conos"><div class="head">Ejemplo conos estándar</div><div class="body"><p>Los tres primeros son autoduales, y cada uno da una clase de problemas:</p>
+<ul class="lista"><li><p>$K=\R^{n}_{+}$ da la programación lineal (LP);</p></li><li><p>$K=\Qcono{n+1}=\{(t,x)\in\R\times\R^{n}:\norm{x}\le t\}$ y el cono
+  rotado de abajo dan la programación de segundo orden (SOCP);</p></li><li><p>$K=\PSD{n}=\{X\in\Sym{n}:X\succeq0\}$ da la programación semidefinida
+  (SDP);</p></li><li><p>$K=\{X\in\Sym{n}:a\trans Xa\ge0\ \text{para todo }a\ge0\}$ es el <span class="df">cono
+  copositivo</span>.</p></li></ul></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p198">Ver demostración</button><div class="proof" id="clase-convexa-p198"><p>Las tres autodualidades son los ejemplos del ortante, del cono de segundo orden y
+del cono semidefinido del capítulo de conos.</p></div>
+<div class="stmt proposicion" id="clase-c21:prop-rotado"><div class="head">Proposición el cono de segundo orden rotado</div><div class="body"><p>Sea</p>
+<div class="display">\[
+  \Qcono{r}_{n+2}=\{(z,u,v)\in\R^{n}\times\R\times\R:\ u,v\ge0,\ 2uv\ge\norm{z}^{2}\}.
+\]</div>
+<p>La aplicación lineal $T(z,u,v)=\bigl(u+v,(\sqrt{2}z,u-v)\bigr)$ lleva
+$\Qcono{r}_{n+2}$ sobre $\Qcono{n+2}$, y $\frac{1}{\sqrt2}T$ es ortogonal. Así,
+$\Qcono{r}_{n+2}$ es, salvo el factor $\sqrt2$, una rotación de $\Qcono{n+2}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p199">Ver demostración</button><div class="proof" id="clase-convexa-p199"><p>$(u+v)^{2}-(u-v)^{2}=4uv$, así que
+$\norm{(\sqrt2z,u-v)}\le u+v$ si y solo si $u+v\ge0$ y $2\norm{z}^{2}\le4uv$. Y
+$u+v\ge0$ con $uv\ge0$ es $u,v\ge0$. Además
+$\norm{T(z,u,v)}^{2}=(u+v)^{2}+2\norm{z}^{2}+(u-v)^{2}=2\norm{(z,u,v)}^{2}$, así que
+$\frac{1}{\sqrt2}T$ es una isometría lineal de $\R^{n+2}$, es decir, ortogonal.</p></div>
+<h3 id="clase-convexa-x50">Programación lineal</h3>
+<div class="stmt ejemplo" id="clase-c21:ej-lp"><div class="head">Ejemplo programación lineal<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $K=\R^{n}_{+}$, el programa lineal $\min c\trans x$ sujeto a $Ax=b$, $x\ge0$
+tiene dual</p>
+<div class="display">\[
+  \max_{y}\ b\trans y\qquad\text{sujeto a}\qquad A\trans y+s=c,\quad s\ge0,
+\]</div>
+<p>es decir, $A\trans y\le c$, y la complementariedad es $x_{i}s_{i}=0$ para
+$i=1,\dots,n$. Una desigualdad $Gx\le h$ se vuelve igualdad con holguras,
+$Gx+z=h$ y $z\ge0$, y una variable libre es diferencia de dos no negativas, así que
+todas las formas de la programación lineal son programas cónicos sobre ortantes.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p200">Ver demostración</button><div class="proof" id="clase-convexa-p200"><p>El dual es el dual cónico con $\polar{(\R^{n}_{+})}=\R^{n}_{+}$, y
+$\ip{x}{s}=\sum_{i}x_{i}s_{i}$ es una suma de términos no negativos, que es $0$ si
+y solo si cada uno lo es.</p></div>
+<h3 id="clase-convexa-x51">Programación cuadrática</h3>
+<div class="stmt ejemplo" id="clase-c21:ej-qp"><div class="head">Ejemplo programación cuadrática como SOCP</div><div class="body"><p>Sean $Q\in\PSD{n}$, $Q=C\trans C$ con $C$ una matriz $p\times n$, y el problema</p>
+<div class="display">\[
+  \min_{x}\ \frac12x\trans Qx+c\trans x\qquad\text{sujeto a}\qquad
+  Ax=b,\quad Gx+z=h,\quad z\in\R^{m}_{+}.
+\]</div>
+<p>Como $\frac12x\trans Qx=\frac12\norm{Cx}^{2}$, la restricción
+$\omega\ge\frac12x\trans Qx$ es $(Cx,1,\omega)\in\Qcono{r}_{p+2}$, y el problema queda</p>
+<div class="display">\[
+  \min_{x,\omega,z}\ c\trans x+\omega\qquad\text{sujeto a}\qquad
+  Ax=b,\quad Gx+z=h,\quad z\in\R^{m}_{+},\quad(Cx,1,\omega)\in\Qcono{r}_{p+2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p201">Ver demostración</button><div class="proof" id="clase-convexa-p201"><p>$(Cx,1,\omega)\in\Qcono{r}_{p+2}$ es $\omega\ge0$ y $2\omega\ge\norm{Cx}^{2}$, que es
+$\omega\ge\frac12\norm{Cx}^{2}$. En un óptimo del segundo problema
+$\omega=\frac12\norm{Cx}^{2}$, porque bajar $\omega$ baja el objetivo, así que los
+dos tienen el mismo valor y las mismas soluciones en $x$. Una $C$ existe, por
+ejemplo $Q^{1/2}$.</p></div>
+<p>Por eso los solvers cónicos resuelven QP convexos sin un algoritmo aparte.</p>
+<div class="stmt ejemplo" id="clase-c21:ej-minimos-cuadrados"><div class="head">Ejemplo mínimos cuadrados restringidos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $P$ es un poliedro, el problema $\min_{x\in P}\frac12\norm{Bx-d}^{2}$ es</p>
+<div class="display">\[
+  \min_{x,t}\ t\qquad\text{sujeto a}\qquad x\in P,\quad(Bx-d,1,t)\in\Qcono{r},
+\]</div>
+<p>que es un SOCP.</p></div></div>
+<h3 id="clase-convexa-x52">Programación de segundo orden</h3>
+<div class="stmt definicion" id="clase-c21:def-socp"><div class="head">Definición SOCP<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Un <span class="df">programa de segundo orden</span> admite, además de igualdades lineales,
+restricciones</p>
+<div class="display">\[
+  \norm{A_{i}x+b_{i}}\le c_{i}\trans x+d_{i},\qquad i=1,\dots,m,
+\]</div>
+<p>cada una de las cuales es $(c_{i}\trans x+d_{i},A_{i}x+b_{i})\in\Qcono{}$. Así, un
+SOCP es un programa cónico sobre un producto de conos de segundo orden y ortantes.</p></div></div>
+<div class="stmt ejemplo" id="clase-c21:ej-norma-afin"><div class="head">Ejemplo norma de una transformación afín<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\min c\trans x$ sujeto a $\norm{Ax-b}\le\rho$ es un SOCP. La restricción puede ser
+una cota de error, un conjunto de incertidumbre elipsoidal o una restricción de
+riesgo.</p></div></div>
+<div class="stmt ejemplo" id="clase-c21:ej-robusta"><div class="head">Ejemplo optimización robusta</div><div class="body"><p>Sean $\bar a\in\R^{n}$ y $K$ una matriz $n\times q$, y sea
+$P=\{\bar a+Ku:\norm{u}\le1\}$. La restricción $a\trans x\le b$ para todo $a\in P$
+equivale a</p>
+<div class="display">\[
+  \norm{K\trans x}\le b-\bar a\trans x,\qquad\text{es decir,}\qquad
+  \bigl(b-\bar a\trans x,K\trans x\bigr)\in\Qcono{q+1},
+\]</div>
+<p>así que $\min c\trans x$ sujeto a ella es un SOCP.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p202">Ver demostración</button><div class="proof" id="clase-convexa-p202"><p>Por Cauchy–Schwarz,</p>
+<div class="display">\[
+  \sup_{\norm{u}\le1}(\bar a+Ku)\trans x=\bar a\trans x+\sup_{\norm{u}\le1}\ip{u}{K\trans x}=\bar a\trans x+\norm{K\trans x},
+\]</div>
+<p>alcanzado en $u=K\trans x/\norm{K\trans x}$ si $K\trans x\neq0$. La restricción
+robusta es que este supremo sea a lo sumo $b$.</p></div>
+<h3 id="clase-convexa-x53">Programación semidefinida</h3>
+<div class="stmt definicion" id="clase-c21:def-sdp"><div class="head">Definición programa semidefinido</div><div class="body"><p>Sean $A_{1},\dots,A_{m},C\in\Sym{n}$, $b\in\R^{m}$ y
+$\mathcal{A}:\Sym{n}\to\R^{m}$, $\mathcal{A}(X)_{i}=\ip{A_{i}}{X}$, cuyo adjunto es
+$\mathcal{A}^{*}(y)=\sum_{i}y_{i}A_{i}$. El <span class="df">programa semidefinido</span> es</p>
+<div class="display">\[
+  p^{*}=\min_{X}\ \ip{C}{X}\qquad\text{sujeto a}\qquad\mathcal{A}(X)=b,\quad X\succeq0,
+\]</div>
+<p>y, como $\PSD{n}$ es autodual, su dual cónico es</p>
+<div class="display">\[
+  d^{*}=\max_{y\in\R^{m}}\ \ip{b}{y}\qquad\text{sujeto a}\qquad
+  \sum_{i=1}^{m}y_{i}A_{i}+S=C,\quad S\succeq0,
+\]</div>
+<p>o, lo que es lo mismo, $C-\sum_{i}y_{i}A_{i}\succeq0$, que es una <span class="df">desigualdad
+matricial lineal</span> (LMI, por <em>linear matrix inequality</em>).</p></div></div>
+<div class="stmt proposicion" id="clase-c21:prop-brecha-sdp"><div class="head">Proposición la brecha en SDP</div><div class="body"><p>Para $X$ y $(y,S)$ factibles,
+$\ip{C}{X}-\ip{b}{y}=\ip{S}{X}=\Tr(SX)\ge0$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p203">Ver demostración</button><div class="proof" id="clase-convexa-p203"><p>Es la dualidad débil con $\ip{\mathcal{A}^{*}(y)}{X}=\sum_{i}y_{i}\ip{A_{i}}{X}=\ip{y}{\mathcal{A}(X)}$
+y $\polar{(\PSD{n})}=\PSD{n}$.</p></div>
+<div class="stmt proposicion" id="clase-c21:prop-complementariedad-sdp"><div class="head">Proposición complementariedad en SDP<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X,S\succeq0$ y $\Tr(SX)=0$, entonces $SX=0$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p204">Ver demostración</button><div class="proof" id="clase-convexa-p204"><p>$\Tr(SX)=\Tr(X^{1/2}SX^{1/2})=\Tr\bigl((S^{1/2}X^{1/2})\trans S^{1/2}X^{1/2}\bigr)$,
+que es la suma de los cuadrados de las entradas de $S^{1/2}X^{1/2}$. Si es $0$,
+$S^{1/2}X^{1/2}=0$ y $SX=S^{1/2}(S^{1/2}X^{1/2})X^{1/2}=0$.</p></div>
+<div class="stmt ejemplo" id="clase-c21:ej-valor-propio"><div class="head">Ejemplo máximo valor propio<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $M\in\Sym{n}$, $\lambda_{\max}(M)=\min\{t\in\R:tI-M\succeq0\}$. Por tanto,
+minimizar el máximo valor propio de $M(x)=M_{0}+\sum_{i}x_{i}M_{i}$ es un SDP.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p205">Ver demostración</button><div class="proof" id="clase-convexa-p205"><p>Los valores propios de $tI-M$ son $t-\lambda_{i}(M)$, que son todos no negativos si
+y solo si $t\ge\lambda_{\max}(M)$. Así, $\min_{x}\lambda_{\max}(M(x))$ es
+$\min_{x,t}t$ sujeto a la LMI $tI-M_{0}-\sum_{i}x_{i}M_{i}\succeq0$.</p></div>
+<div class="stmt proposicion" id="clase-c21:prop-schur"><div class="head">Proposición complemento de Schur<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X\succ0$, entonces</p>
+<div class="display">\[
+  t\ge z\trans X^{-1}z\qquad\text{si y solo si}\qquad
+  \begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}\succeq0.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p206">Ver demostración</button><div class="proof" id="clase-convexa-p206"><p>Con $P=</p>
+<div class="display">\begin{pmatrix}I&amp;-X^{-1}z\\0&amp;1\end{pmatrix}</div>
+<p>$, que es invertible,</p>
+<div class="display">\[
+  P\trans\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}P
+  =\begin{pmatrix}X&amp;0\\0&amp;t-z\trans X^{-1}z\end{pmatrix},
+\]</div>
+<p>y una congruencia conserva el ser semidefinida positiva. La matriz de la derecha
+lo es si y solo si $t-z\trans X^{-1}z\ge0$.</p></div>
+<div class="stmt ejemplo" id="clase-c21:ej-maxcut"><div class="head">Ejemplo Max-Cut</div><div class="body"><p>Sea $G=(V,E,\omega)$ un grafo no dirigido con $V=\{1,\dots,n\}$ y pesos
+$\omega_{ij}=\omega_{ji}\ge0$, nulos fuera de $E$. Un <span class="df">corte</span> es un $S\subset V$, con
+peso $\omega(S)=\sum_{i\in S,\,j\notin S}\omega_{ij}$, y el problema es
+$\max_{S\subset V}\omega(S)$. Cada $S$ corresponde a un $x\in\{-1,1\}^{n}$, con
+$x_{i}=1$ si y solo si $i\in S$, y el problema es</p>
+<div class="display">\[
+  \max_{x\in\{-1,1\}^{n}}\ \frac14\sum_{i,j}\omega_{ij}(1-x_{i}x_{j}).
+\]</div>
+<p>Para volverlo continuo se toma $X=xx\trans$: los $x\in\{-1,1\}^{n}$ dan exactamente
+las $X\succeq0$ con $X_{ii}=1$ para todo $i$ y $\rang(X)=1$, y el objetivo es
+$\frac14\sum_{i,j}\omega_{ij}(1-X_{ij})$. La condición de rango es muy fuerte. Si se
+permite $\rang(X)\le r$, es decir, $X=VV\trans$ con $V$ una matriz $n\times r$ de
+filas $v_{i}$, queda la relajación</p>
+<div class="display">\[
+  (P_{r})\qquad\max_{v_{1},\dots,v_{n}\in\R^{r}}\ \frac14\sum_{i,j}\omega_{ij}\bigl(1-\ip{v_{i}}{v_{j}}\bigr)
+  \qquad\text{sujeto a}\qquad\norm{v_{i}}=1,
+\]</div>
+<p>y con $r=n$, quitando el rango del todo, el SDP</p>
+<div class="display">\[
+  \max_{X}\ \frac14\sum_{i,j}\omega_{ij}(1-X_{ij})\qquad\text{sujeto a}\qquad
+  X_{ii}=1\ \text{para todo }i,\quad X\succeq0.
+\]</div>
+<p>Su valor es una cota superior del de Max-Cut, y su solución puede redondearse a
+un corte.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p207">Ver demostración</button><div class="proof" id="clase-convexa-p207"><p>Si $i\in S$ y $j\notin S$, o al revés, $1-x_{i}x_{j}=2$, y si no, $0$. La suma sobre
+pares ordenados cuenta cada par separado dos veces, así que da $4\,\omega(S)$. Si
+$X=xx\trans$ con $x_{i}=\pm1$, entonces $X\succeq0$, $\rang(X)=1$ y
+$X_{ii}=x_{i}^{2}=1$. Recíprocamente, una $X\succeq0$ de rango $1$ es $xx\trans$, y
+$X_{ii}=1$ da $x_{i}=\pm1$. Toda $X\succeq0$ es $VV\trans$ con $V$ de $n\times n$, y
+$X_{ii}=\norm{v_{i}}^{2}$, $X_{ij}=\ip{v_{i}}{v_{j}}$; así, $(P_{1})$ es Max-Cut y
+$(P_{n})$ es el SDP. Cada relajación tiene más factibles que la anterior, así que
+su valor es mayor o igual.</p></div></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -7736,7 +8134,341 @@ el umbral suave.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p179">Ver demostración</button><div class="proof" id="general-convexa-p179"><p>El primer objetivo es diferenciable con gradiente
 $M\trans(Mx-b)+y^{k}+\rho(x-z^{k})$; en el segundo, completando el cuadrado, queda
 $\lambda\norm{z}_{1}+\frac{\rho}{2}\norm{z-x^{k+1}-y^{k}/\rho}^{2}$ más una
-constante.</p></div></section></div>
+constante.</p></div>
+<h3 id="general-convexa-x42">Criterios de parada y elección de $\rho$</h3>
+<p>Los residuos de ADMM sirven también para decidir cuándo parar y cómo mover $\rho$.</p>
+<div class="stmt observacion" id="general-c20:obs-parada"><div class="head">Observación criterio de parada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Se detiene ADMM cuando $\norm{r^{k}}\le\varepsilon_{\mathrm{pri}}$ y
+$\norm{s^{k}}\le\varepsilon_{\mathrm{dual}}$, con tolerancias que combinan un
+término absoluto y uno relativo. En $\R^{n}$, con $p$ la dimensión de la
+restricción y $n$ la del bloque $x$, una elección típica es</p>
+<div class="display">\[
+  \begin{aligned}
+  \varepsilon_{\mathrm{pri}}&amp;=\sqrt{p}\,\varepsilon_{\mathrm{abs}}+\varepsilon_{\mathrm{rel}}\max\{\norm{Ax^{k}},\norm{Bz^{k}},\norm{c}\},\\
+  \varepsilon_{\mathrm{dual}}&amp;=\sqrt{n}\,\varepsilon_{\mathrm{abs}}+\varepsilon_{\mathrm{rel}}\norm{A^{*}y^{k}}.
+  \end{aligned}
+\]</div></div></div>
+<div class="stmt observacion" id="general-c20:obs-rho"><div class="head">Observación la elección de $\rho$<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\rho$ no cambia la solución, pero sí la velocidad. Una heurística común
+balancea los residuos: con $\mu&gt;1$ y $\tau&gt;1$, $\rho_{k+1}=\tau\rho_{k}$ si
+$\norm{r^{k}}&gt;\mu\norm{s^{k}}$, $\rho_{k+1}=\rho_{k}/\tau$ si
+$\norm{s^{k}}&gt;\mu\norm{r^{k}}$, y $\rho_{k+1}=\rho_{k}$ en otro caso; en la forma
+escalada hay que reescalar $u=y/\rho$. Es una heurística y no una elección óptima.</p></div></div>
+<div class="stmt observacion" id="general-c20:obs-sobrerrelajacion"><div class="head">Observación sobrerrelajación<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>También se usa reemplazar $Ax^{k+1}$ en las actualizaciones de $z$ y de $y$ por
+$\alpha Ax^{k+1}+(1-\alpha)(c-Bz^{k})$, con $\alpha\in(0,2)$.</p></div></div>
+<h3 id="general-convexa-x43">PDHG</h3>
+<p>Volvemos al problema compuesto $\min_{x\in\Hs}f(x)+g(Kx)$, con
+$f\in\Gamma_{0}(\Hs)$, $g\in\Gamma_{0}(\Ks)$ y $K\in\Bop{\Hs,\Ks}$, que por el
+problema compuesto como min-max es</p>
+<div class="display">\[
+  \min_{x\in\Hs}\ \sup_{y\in\Ks}\ S(x,y),\qquad S(x,y)=f(x)+\ip{Kx}{y}-g^{*}(y).
+\]</div>
+<div class="stmt proposicion" id="general-c20:prop-pdhg-fijos"><div class="head">Proposición los puntos de silla como puntos fijos</div><div class="body"><p>$(x^{*},y^{*})$ es un punto de silla de $S$ si y solo si
+$0\in\subdif f(x^{*})+K^{*}y^{*}$ y $0\in\subdif g^{*}(y^{*})-Kx^{*}$, y esto pasa si
+y solo si, para todos $\sigma,\tau&gt;0$,</p>
+<div class="display">\[
+  x^{*}=\prox_{\tau f}\bigl(x^{*}-\tau K^{*}y^{*}\bigr),\qquad
+  y^{*}=\prox_{\sigma g^{*}}\bigl(y^{*}+\sigma Kx^{*}\bigr).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p180">Ver demostración</button><div class="proof" id="general-convexa-p180"><p>La primera equivalencia son las condiciones de punto de silla del capítulo
+anterior, y la segunda es la caracterización del proximal, que en un Hilbert es
+la misma.</p></div>
+<p>Alternar esas dos ecuaciones de punto fijo puede no converger; lo que funciona es
+evaluar $K$ en un punto extrapolado.</p>
+<div class="stmt definicion" id="general-c20:def-pdhg"><div class="head">Definición PDHG</div><div class="body"><p>Dados $\sigma,\tau&gt;0$, $\theta\in(0,1]$ y $(x^{0},y^{0})$, con $\bar x^{0}=x^{0}$, el
+<span class="df">método primal-dual híbrido de gradiente</span> (PDHG), o de Chambolle–Pock, genera</p>
+<div class="display">\[
+  \begin{aligned}
+  y^{k+1}&amp;=\prox_{\sigma g^{*}}\bigl(y^{k}+\sigma K\bar x^{k}\bigr),\\
+  x^{k+1}&amp;=\prox_{\tau f}\bigl(x^{k}-\tau K^{*}y^{k+1}\bigr),\\
+  \bar x^{k+1}&amp;=x^{k+1}+\theta\bigl(x^{k+1}-x^{k}\bigr).
+  \end{aligned}
+\]</div>
+<p>Típicamente $\theta=1$, y entonces $\bar x^{k+1}=2x^{k+1}-x^{k}$.</p></div></div>
+<div class="stmt observacion" id="general-c20:obs-pdhg-moreau"><div class="head">Observación el paso dual con el proximal de $g$<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Por la identidad de Moreau,
+$\prox_{\sigma g^{*}}(v)=v-\sigma\prox_{g/\sigma}(v/\sigma)$.</p></div></div>
+<div class="stmt proposicion" id="general-c20:prop-pdhg-residuos"><div class="head">Proposición residuos de PDHG</div><div class="body"><p>Con $r_{x}^{k+1}=\frac{x^{k}-x^{k+1}}{\tau}$ y
+$r_{y}^{k+1}=\frac{y^{k}-y^{k+1}}{\sigma}+K(\bar x^{k}-x^{k+1})$,</p>
+<div class="display">\[
+  r_{x}^{k+1}\in\subdif f(x^{k+1})+K^{*}y^{k+1},\qquad
+  r_{y}^{k+1}\in\subdif g^{*}(y^{k+1})-Kx^{k+1}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p181">Ver demostración</button><div class="proof" id="general-convexa-p181"><p>Por la caracterización del proximal,
+$\frac{y^{k}+\sigma K\bar x^{k}-y^{k+1}}{\sigma}\in\subdif g^{*}(y^{k+1})$ y
+$\frac{x^{k}-\tau K^{*}y^{k+1}-x^{k+1}}{\tau}\in\subdif f(x^{k+1})$; se resta
+$Kx^{k+1}$ en la primera y se suma $K^{*}y^{k+1}$ en la segunda.</p></div>
+<div class="stmt teorema" id="general-c20:teo-pdhg"><div class="head">Teorema convergencia de PDHG</div><div class="body"><p>En $\Hs=\R^{n}$ y $\Ks=\R^{m}$, supongamos que $S$ tiene un punto de silla, que
+$\theta=1$ y que $\tau\sigma\norm{K}^{2}&lt;1$. Entonces $x^{k+1}-x^{k}\to0$,
+$y^{k+1}-y^{k}\to0$, $\bar x^{k}-x^{k}\to0$ y $(x^{k},y^{k})\to(\hat x,\hat y)$, un
+punto de silla de $S$. Los promedios
+$\hat x_{N}=\frac1N\sum_{k=1}^{N}x^{k}$ e $\hat y_{N}=\frac1N\sum_{k=1}^{N}y^{k}$
+convergen a $\hat x$ y a $\hat y$, y para conjuntos acotados $X$ e $Y$,</p>
+<div class="display">\[
+  \sup_{y\in Y}S(\hat x_{N},y)-\inf_{x\in X}S(x,\hat y_{N})\le\frac{C_{X,Y}}{N},
+\]</div>
+<p>con $C_{X,Y}$ dependiente de las distancias iniciales y de $\tau$ y $\sigma$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p182">Ver demostración</button><div class="proof" id="general-convexa-p182"><p>$\bar x^{k}-x^{k}=x^{k}-x^{k-1}$, y los promedios de Cesàro de una sucesión
+convergente tienen su límite. Lo demás es el teorema de Chambolle y Pock, y se
+admite.</p></div>
+<p>No hace falta que $g\circ K$ sea suave: cada iteración pide un producto por $K$,
+uno por $K^{*}$ y los proximales de $f$ y de $g^{*}$.</p>
+<div class="stmt ejemplo" id="general-c20:ej-tv-pdhg"><div class="head">Ejemplo variación total con PDHG</div><div class="body"><p>En $\R^{n}$, para $\min_{x}\frac12\norm{x-b}^{2}+\lambda\norm{Dx}_{1}$ con $D$ una
+matriz $m\times n$ de diferencias, $g^{*}=\delta_{C}$ con $C=[-\lambda,\lambda]^{m}$,
+los puntos de silla cumplen $x^{*}-b+D\trans y^{*}=0$ y
+$Dx^{*}\in\Ncono_{C}(y^{*})$, y con $\sigma\tau\norm{D}^{2}&lt;1$ PDHG es</p>
+<div class="display">\[
+  y^{k+1}=\Proy_{C}\bigl(y^{k}+\sigma D\bar x^{k}\bigr),\qquad
+  x^{k+1}=\frac{x^{k}-\tau D\trans y^{k+1}+\tau b}{1+\tau},
+\]</div>
+<p>sin ningún sistema lineal.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p183">Ver demostración</button><div class="proof" id="general-convexa-p183"><p>$\prox_{\sigma\delta_{C}}=\Proy_{C}$, y $p=\prox_{\tau f}(w)$ es $p-w+\tau(p-b)=0$.</p></div>
+<div class="stmt ejemplo" id="general-c20:ej-clustering"><div class="head">Ejemplo clustering convexo</div><div class="body"><p>Dados $d_{1},\dots,d_{N}\in\R^{n}$, pesos $(\omega_{ij})$ y $\lambda&gt;0$, el
+<span class="df">clustering convexo</span> resuelve</p>
+<div class="display">\[
+  \min_{x_{1},\dots,x_{N}\in\R^{n}}\ \frac12\sum_{i=1}^{N}\norm{x_{i}-d_{i}}^{2}
+  +\lambda\sum_{i&lt;j}\omega_{ij}\norm{x_{i}-x_{j}}_{1},
+\]</div>
+<p>con, por ejemplo, $\omega_{ij}=e^{-\norm{d_{i}-d_{j}}^{2}/a}\,\1\{\norm{d_{i}-d_{j}}\le\eta\}$.
+Los $d_{i}$ cuyos $x_{i}$ coinciden quedan en el mismo grupo, y con
+$K(x_{i})_{i}=(x_{i}-x_{j})_{i&lt;j}$ es del tipo de la variación total.</p></div></div>
+<div class="stmt observacion" id="general-c20:obs-admm-pdhg"><div class="head">Observación ADMM frente a PDHG<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>ADMM parte de $f(x)+g(z)$ con $Ax+Bz=c$, puede pedir sistemas lineales y se
+certifica con los residuos primal y dual. PDHG parte de $f(x)+g(Kx)$, solo pide
+proximales y productos por $K$ y $K^{*}$, sus pasos dependen de $\norm{K}$ y se
+certifica con la brecha primal-dual. Si el sistema de ADMM se factoriza una vez,
+ADMM es competitivo; si factorizar es caro y multiplicar por $K$ barato, conviene
+PDHG. No hay un ganador universal.</p></div></div>
+<div class="stmt observacion" id="general-c20:obs-extensiones"><div class="head">Observación extensiones<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Precondicionamiento con métricas, subproblemas inexactos con errores
+controlados, esquemas forward-backward primal-duales para $f+h+g\circ K$ con $h$
+suave, y pasos variables bajo convexidad fuerte. ADMM con tres o más bloques no
+hereda en general la convergencia del caso de dos.</p></div></div>
+<p>Todos estos métodos resuelven la inclusión monótona de las condiciones KKT: el
+punto proximal entera y de forma implícita; Douglas–Rachford, ADMM y PDHG con
+composiciones de resolventes más sencillos.</p></section>
+<section class="capitulo"><h2 id="general-cap:conica">Programación cónica</h2>
+<p>La programación cónica cambia las desigualdades coordenada a coordenada de la
+programación lineal por la pertenencia a un cono convexo. Programación lineal,
+de segundo orden y semidefinida son casos de una misma estructura primal-dual.</p>
+<h3 id="general-convexa-x44">Forma cónica primal y dual</h3>
+<p>En esta sección $\Hs$ es un espacio de Hilbert.</p>
+<div class="stmt definicion" id="general-c21:def-propio"><div class="head">Definición cono propio</div><div class="body"><p>Un cono convexo y cerrado $K\subset\Hs$ es <span class="df">propio</span> si $\intr K\neq\varnothing$
+y es <span class="df">puntiagudo</span>, es decir, $K\cap(-K)=\{0\}$.</p></div></div>
+<div class="stmt definicion" id="general-c21:def-programa"><div class="head">Definición programa cónico</div><div class="body"><p>Sean $K\subset\Hs$ un cono convexo y cerrado, $A\in\Bop{\Hs,\R^{m}}$,
+$b\in\R^{m}$ y $c\in\Hs$. El <span class="df">programa cónico</span> es</p>
+<div class="display">\[
+  p^{*}=\inf_{x}\ \ip{c}{x}\qquad\text{sujeto a}\qquad Ax=b,\quad x\in K.
+  \tag{P}
+\]</div></div></div>
+<p>Dualizamos solo la igualdad, con
+$\mathcal{L}(x,y)=\ip{c}{x}+\ip{y}{b-Ax}=\ip{b}{y}+\ip{c-A^{*}y}{x}$.</p>
+<div class="stmt proposicion" id="general-c21:prop-dual"><div class="head">Proposición el dual cónico</div><div class="body"><p>$\inf_{x\in K}\mathcal{L}(x,y)$ vale $\ip{b}{y}$ si $c-A^{*}y\in\polar{K}$ y
+$-\infty$ si no, así que, con la <span class="df">holgura dual</span> $s=c-A^{*}y$, el dual es</p>
+<div class="display">\[
+  d^{*}=\sup_{y\in\R^{m}}\ \ip{b}{y}\qquad\text{sujeto a}\qquad A^{*}y+s=c,\quad s\in\polar{K}.
+  \tag{D}
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p184">Ver demostración</button><div class="proof" id="general-convexa-p184"><p>Si $s\in\polar{K}$, $\ip{s}{x}\ge0$ en $K$ con igualdad en $0$. Si no, hay $x\in K$
+con $\ip{s}{x}&lt;0$, y $\ip{s}{tx}\to-\infty$ cuando $t\to\infty$.</p></div>
+<div class="stmt proposicion" id="general-c21:prop-debil"><div class="head">Proposición dualidad débil</div><div class="body"><p>Si $x$ es factible para (P) y $(y,s)$ para (D), entonces
+$\ip{c}{x}-\ip{b}{y}=\ip{s}{x}\ge0$, y en particular $d^{*}\le p^{*}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p185">Ver demostración</button><div class="proof" id="general-convexa-p185"><p>$\ip{A^{*}y+s}{x}-\ip{Ax}{y}=\ip{s}{x}$.</p></div>
+<div class="stmt definicion" id="general-c21:def-brecha"><div class="head">Definición dualidad fuerte y brecha</div><div class="body"><p>Si hay $x^{*}$ factible para (P) e $y^{*}$ factible para (D) con
+$\ip{c}{x^{*}}=\ip{b}{y^{*}}$, se tiene <span class="df">dualidad fuerte</span>, y
+$\mathcal{G}(x,y)=\ip{c}{x}-\ip{b}{y}$ es la <span class="df">brecha de dualidad</span>.</p></div></div>
+<p>La brecha es exactamente la complementariedad $\ip{s}{x}$.</p>
+<div class="stmt proposicion" id="general-c21:prop-kkt"><div class="head">Proposición condiciones KKT cónicas<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $x$ factible para (P) y $(y,s)$ factible para (D), $\ip{x}{s}=0$ implica que
+los dos son óptimos con $p^{*}=d^{*}$, y si $p^{*}=d^{*}$ y los dos son óptimos,
+$\ip{x}{s}=0$. Bajo dualidad fuerte, la optimalidad es</p>
+<div class="display">\[
+  Ax=b,\qquad A^{*}y+s=c,\qquad x\in K,\qquad s\in\polar{K},\qquad\ip{x}{s}=0.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p186">Ver demostración</button><div class="proof" id="general-convexa-p186"><p>$\ip{b}{y}\le d^{*}\le p^{*}\le\ip{c}{x}$, y los extremos difieren en $\ip{s}{x}$.</p></div>
+<div class="stmt teorema" id="general-c21:teo-slater"><div class="head">Teorema Slater para programas cónicos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><ol class="lista"><li><p>Si existe $\bar x\in\intr K$ con $A\bar x=b$ y $p^{*}$ es finito,
+  entonces el dual alcanza su valor y $p^{*}=d^{*}$.</p></li><li><p>Si existen $\bar y$ y $\bar s\in\intr\polar{K}$ con
+  $A^{*}\bar y+\bar s=c$ y $d^{*}$ es finito, entonces el primal alcanza su valor y
+  $p^{*}=d^{*}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p187">Ver demostración</button><div class="proof" id="general-convexa-p187"><p>a) Con $f=\ip{c}{\cdot}+\delta_{K}$ y $g=\delta_{\{b\}}$, (P) es
+$\inf f+g\circ A$. Se tiene $f^{*}(u)=\delta_{\polar{K}}(c-u)$, por el Ejemplo
+13.3(ii) y la Proposición 13.23(iii) de Bauschke–Combettes, y
+$g^{*}=\ip{b}{\cdot}$, así que su dual de Fenchel es (D) tras cambiar $y$ por
+$-y$. Si $\bar x+\varepsilon B\subset K$, entonces
+$\{b\}-A(K)=A(\bar x-K)\supset A(\varepsilon B)$, y como $\{b\}-A(K)\subset\operatorname{ran}A$,
+el cono que genera es $\operatorname{ran}A$, que es cerrado por ser de dimensión
+finita. Así $0\in\sri(\dom g-A(\dom f))$, y el teorema de dualidad fuerte da la
+conclusión.</p>
+<p>b) $-d^{*}=\inf_{y}f(y)+g(A^{*}y)$ con $f=-\ip{b}{\cdot}$ y
+$g(u)=\delta_{\polar{K}}(c-u)$. Ahora $f^{*}=\delta_{\{-b\}}$ y, por el teorema
+bipolar, $g^{*}(x)=\ip{c}{x}+\delta_{K}(x)$, así que su dual de Fenchel es
+$-p^{*}$ con el primal como problema. Si $\bar s+\varepsilon B\subset\polar{K}$,
+entonces $\dom g-A^{*}(\R^{m})\supset c-\bar s-\varepsilon B-A^{*}\bar y=-\varepsilon B$,
+así que $0$ es interior y está en el $\sri$. El teorema de dualidad fuerte
+concluye.</p></div>
+<div class="stmt proposicion" id="general-c21:prop-productos"><div class="head">Proposición productos de conos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $K_{i}\subset\Hs_{i}$ son conos convexos y cerrados en espacios de Hilbert,
+$i=1,\dots,r$, entonces $K=K_{1}\times\cdots\times K_{r}$ es un cono convexo y
+cerrado en $\Hs_{1}\times\cdots\times\Hs_{r}$ y
+$\polar{K}=\polar{K_{1}}\times\cdots\times\polar{K_{r}}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p188">Ver demostración</button><div class="proof" id="general-convexa-p188"><p>$\ip{s}{x}=\sum_{i}\ip{s_{i}}{x_{i}}$, y para el recíproco se toman $x_{j}=0$ con
+$j\neq i$.</p></div>
+<p>Así se combinan restricciones lineales, de segundo orden y semidefinidas. Desde
+aquí, salvo donde se diga, todo es de dimensión finita, porque los objetos son
+matrices.</p>
+<h3 id="general-convexa-x45">Los conos que nos interesan</h3>
+<div class="stmt ejemplo" id="general-c21:ej-conos"><div class="head">Ejemplo conos estándar</div><div class="body"><p>En $\R^{n}$ y $\Sym{n}$, los tres primeros son autoduales, y cada uno da una
+clase de problemas:</p>
+<ul class="lista"><li><p>$K=\R^{n}_{+}$ da la programación lineal (LP);</p></li><li><p>$K=\Qcono{n+1}=\{(t,x)\in\R\times\R^{n}:\norm{x}\le t\}$ y el cono
+  rotado de abajo dan la programación de segundo orden (SOCP);</p></li><li><p>$K=\PSD{n}=\{X\in\Sym{n}:X\succeq0\}$ da la programación semidefinida
+  (SDP);</p></li><li><p>$K=\{X\in\Sym{n}:a\trans Xa\ge0\ \text{para todo }a\ge0\}$ es el <span class="df">cono
+  copositivo</span>.</p></li></ul></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p189">Ver demostración</button><div class="proof" id="general-convexa-p189"><p>Las tres autodualidades son los ejemplos del ortante, del cono de segundo orden y
+del cono semidefinido del capítulo de conos, que además dan $\ell^{2}_{+}$ y el cono
+de segundo orden de $\R\times\Hs$ autoduales.</p></div>
+<p>En $\Hs$, el cono rotado se escribe igual, y su prueba solo usa el producto interno.</p>
+<div class="stmt proposicion" id="general-c21:prop-rotado"><div class="head">Proposición el cono de segundo orden rotado</div><div class="body"><p>Sea</p>
+<div class="display">\[
+  \Qcono{r}=\{(z,u,v)\in\Hs\times\R\times\R:\ u,v\ge0,\ 2uv\ge\norm{z}^{2}\}.
+\]</div>
+<p>La aplicación lineal $T(z,u,v)=\bigl(u+v,(\sqrt{2}z,u-v)\bigr)$ lleva
+$\Qcono{r}$ sobre el cono de segundo orden de $\R\times(\Hs\times\R)$, y
+$\frac{1}{\sqrt2}T$ es una isometría lineal sobreyectiva. Así, $\Qcono{r}$ es,
+salvo el factor $\sqrt2$, una rotación de ese cono.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p190">Ver demostración</button><div class="proof" id="general-convexa-p190"><p>$(u+v)^{2}-(u-v)^{2}=4uv$, así que
+$\norm{(\sqrt2z,u-v)}\le u+v$ si y solo si $u+v\ge0$ y $2\norm{z}^{2}\le4uv$. Y
+$u+v\ge0$ con $uv\ge0$ es $u,v\ge0$. Además
+$\norm{T(z,u,v)}^{2}=(u+v)^{2}+2\norm{z}^{2}+(u-v)^{2}=2\norm{(z,u,v)}^{2}$, así que
+$\frac{1}{\sqrt2}T$ es una isometría lineal, y es sobreyectiva porque
+$(t,(w,\xi))$ tiene la preimagen $\bigl(w/\sqrt2,(t+\xi)/2,(t-\xi)/2\bigr)$.</p></div>
+<h3 id="general-convexa-x46">Programación lineal</h3>
+<div class="stmt ejemplo" id="general-c21:ej-lp"><div class="head">Ejemplo programación lineal<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $K=\R^{n}_{+}$, el programa lineal $\min c\trans x$ sujeto a $Ax=b$, $x\ge0$
+tiene dual</p>
+<div class="display">\[
+  \max_{y}\ b\trans y\qquad\text{sujeto a}\qquad A\trans y+s=c,\quad s\ge0,
+\]</div>
+<p>es decir, $A\trans y\le c$, y la complementariedad es $x_{i}s_{i}=0$ para
+$i=1,\dots,n$. Una desigualdad $Gx\le h$ se vuelve igualdad con holguras,
+$Gx+z=h$ y $z\ge0$, y una variable libre es diferencia de dos no negativas, así que
+todas las formas de la programación lineal son programas cónicos sobre ortantes.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p191">Ver demostración</button><div class="proof" id="general-convexa-p191"><p>El dual es el dual cónico con $\polar{(\R^{n}_{+})}=\R^{n}_{+}$, y
+$\ip{x}{s}=\sum_{i}x_{i}s_{i}$ es una suma de términos no negativos, que es $0$ si
+y solo si cada uno lo es.</p></div>
+<h3 id="general-convexa-x47">Programación cuadrática</h3>
+<div class="stmt ejemplo" id="general-c21:ej-qp"><div class="head">Ejemplo programación cuadrática como SOCP</div><div class="body"><p>Sean $Q\in\PSD{n}$, $Q=C\trans C$ con $C$ una matriz $p\times n$, y el problema</p>
+<div class="display">\[
+  \min_{x}\ \frac12x\trans Qx+c\trans x\qquad\text{sujeto a}\qquad
+  Ax=b,\quad Gx+z=h,\quad z\in\R^{m}_{+}.
+\]</div>
+<p>Como $\frac12x\trans Qx=\frac12\norm{Cx}^{2}$, la restricción
+$\omega\ge\frac12x\trans Qx$ es $(Cx,1,\omega)\in\Qcono{r}_{p+2}$, y el problema queda</p>
+<div class="display">\[
+  \min_{x,\omega,z}\ c\trans x+\omega\qquad\text{sujeto a}\qquad
+  Ax=b,\quad Gx+z=h,\quad z\in\R^{m}_{+},\quad(Cx,1,\omega)\in\Qcono{r}_{p+2}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p192">Ver demostración</button><div class="proof" id="general-convexa-p192"><p>$(Cx,1,\omega)\in\Qcono{r}_{p+2}$ es $\omega\ge0$ y $2\omega\ge\norm{Cx}^{2}$, que es
+$\omega\ge\frac12\norm{Cx}^{2}$. En un óptimo del segundo problema
+$\omega=\frac12\norm{Cx}^{2}$, porque bajar $\omega$ baja el objetivo, así que los
+dos tienen el mismo valor y las mismas soluciones en $x$. Una $C$ existe, por
+ejemplo $Q^{1/2}$.</p></div>
+<p>Por eso los solvers cónicos resuelven QP convexos sin un algoritmo aparte.</p>
+<div class="stmt ejemplo" id="general-c21:ej-minimos-cuadrados"><div class="head">Ejemplo mínimos cuadrados restringidos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $P$ es un poliedro, el problema $\min_{x\in P}\frac12\norm{Bx-d}^{2}$ es</p>
+<div class="display">\[
+  \min_{x,t}\ t\qquad\text{sujeto a}\qquad x\in P,\quad(Bx-d,1,t)\in\Qcono{r},
+\]</div>
+<p>que es un SOCP.</p></div></div>
+<h3 id="general-convexa-x48">Programación de segundo orden</h3>
+<div class="stmt definicion" id="general-c21:def-socp"><div class="head">Definición SOCP<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Un <span class="df">programa de segundo orden</span> admite, además de igualdades lineales,
+restricciones</p>
+<div class="display">\[
+  \norm{A_{i}x+b_{i}}\le c_{i}\trans x+d_{i},\qquad i=1,\dots,m,
+\]</div>
+<p>cada una de las cuales es $(c_{i}\trans x+d_{i},A_{i}x+b_{i})\in\Qcono{}$. Así, un
+SOCP es un programa cónico sobre un producto de conos de segundo orden y ortantes.</p></div></div>
+<div class="stmt ejemplo" id="general-c21:ej-norma-afin"><div class="head">Ejemplo norma de una transformación afín<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\min c\trans x$ sujeto a $\norm{Ax-b}\le\rho$ es un SOCP. La restricción puede ser
+una cota de error, un conjunto de incertidumbre elipsoidal o una restricción de
+riesgo.</p></div></div>
+<p>La optimización robusta también sube a $\Hs$, con la misma prueba.</p>
+<div class="stmt ejemplo" id="general-c21:ej-robusta"><div class="head">Ejemplo optimización robusta</div><div class="body"><p>Sean $\Ks$ otro espacio de Hilbert, $\bar a\in\Hs$, $K\in\Bop{\Ks,\Hs}$ y
+$P=\{\bar a+Ku:\norm{u}\le1\}$. La restricción $\ip{a}{x}\le b$ para todo $a\in P$
+equivale a</p>
+<div class="display">\[
+  \norm{K^{*}x}\le b-\ip{\bar a}{x},\qquad\text{es decir,}\qquad
+  \bigl(b-\ip{\bar a}{x},K^{*}x\bigr)\in\Qcono{},
+\]</div>
+<p>el cono de segundo orden de $\R\times\Ks$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p193">Ver demostración</button><div class="proof" id="general-convexa-p193"><p>Por Cauchy–Schwarz,</p>
+<div class="display">\[
+  \sup_{\norm{u}\le1}\ip{\bar a+Ku}{x}=\ip{\bar a}{x}+\sup_{\norm{u}\le1}\ip{u}{K^{*}x}=\ip{\bar a}{x}+\norm{K^{*}x},
+\]</div>
+<p>alcanzado en $u=K^{*}x/\norm{K^{*}x}$ si $K^{*}x\neq0$. La restricción
+robusta es que este supremo sea a lo sumo $b$.</p></div>
+<h3 id="general-convexa-x49">Programación semidefinida</h3>
+<div class="stmt definicion" id="general-c21:def-sdp"><div class="head">Definición programa semidefinido</div><div class="body"><p>Sean $A_{1},\dots,A_{m},C\in\Sym{n}$, $b\in\R^{m}$ y
+$\mathcal{A}:\Sym{n}\to\R^{m}$, $\mathcal{A}(X)_{i}=\ip{A_{i}}{X}$, cuyo adjunto es
+$\mathcal{A}^{*}(y)=\sum_{i}y_{i}A_{i}$. El <span class="df">programa semidefinido</span> es</p>
+<div class="display">\[
+  p^{*}=\min_{X}\ \ip{C}{X}\qquad\text{sujeto a}\qquad\mathcal{A}(X)=b,\quad X\succeq0,
+\]</div>
+<p>y, como $\PSD{n}$ es autodual, su dual cónico es</p>
+<div class="display">\[
+  d^{*}=\max_{y\in\R^{m}}\ \ip{b}{y}\qquad\text{sujeto a}\qquad
+  \sum_{i=1}^{m}y_{i}A_{i}+S=C,\quad S\succeq0,
+\]</div>
+<p>o, lo que es lo mismo, $C-\sum_{i}y_{i}A_{i}\succeq0$, que es una <span class="df">desigualdad
+matricial lineal</span> (LMI, por <em>linear matrix inequality</em>).</p></div></div>
+<div class="stmt proposicion" id="general-c21:prop-brecha-sdp"><div class="head">Proposición la brecha en SDP</div><div class="body"><p>Para $X$ y $(y,S)$ factibles,
+$\ip{C}{X}-\ip{b}{y}=\ip{S}{X}=\Tr(SX)\ge0$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p194">Ver demostración</button><div class="proof" id="general-convexa-p194"><p>Es la dualidad débil con $\ip{\mathcal{A}^{*}(y)}{X}=\sum_{i}y_{i}\ip{A_{i}}{X}=\ip{y}{\mathcal{A}(X)}$
+y $\polar{(\PSD{n})}=\PSD{n}$.</p></div>
+<div class="stmt proposicion" id="general-c21:prop-complementariedad-sdp"><div class="head">Proposición complementariedad en SDP<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X,S\succeq0$ y $\Tr(SX)=0$, entonces $SX=0$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p195">Ver demostración</button><div class="proof" id="general-convexa-p195"><p>$\Tr(SX)=\Tr(X^{1/2}SX^{1/2})=\Tr\bigl((S^{1/2}X^{1/2})\trans S^{1/2}X^{1/2}\bigr)$,
+que es la suma de los cuadrados de las entradas de $S^{1/2}X^{1/2}$. Si es $0$,
+$S^{1/2}X^{1/2}=0$ y $SX=S^{1/2}(S^{1/2}X^{1/2})X^{1/2}=0$.</p></div>
+<div class="stmt ejemplo" id="general-c21:ej-valor-propio"><div class="head">Ejemplo máximo valor propio<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $M\in\Sym{n}$, $\lambda_{\max}(M)=\min\{t\in\R:tI-M\succeq0\}$. Por tanto,
+minimizar el máximo valor propio de $M(x)=M_{0}+\sum_{i}x_{i}M_{i}$ es un SDP.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p196">Ver demostración</button><div class="proof" id="general-convexa-p196"><p>Los valores propios de $tI-M$ son $t-\lambda_{i}(M)$, que son todos no negativos si
+y solo si $t\ge\lambda_{\max}(M)$. Así, $\min_{x}\lambda_{\max}(M(x))$ es
+$\min_{x,t}t$ sujeto a la LMI $tI-M_{0}-\sum_{i}x_{i}M_{i}\succeq0$.</p></div>
+<div class="stmt proposicion" id="general-c21:prop-schur"><div class="head">Proposición complemento de Schur<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X\succ0$, entonces</p>
+<div class="display">\[
+  t\ge z\trans X^{-1}z\qquad\text{si y solo si}\qquad
+  \begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}\succeq0.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p197">Ver demostración</button><div class="proof" id="general-convexa-p197"><p>Con $P=</p>
+<div class="display">\begin{pmatrix}I&amp;-X^{-1}z\\0&amp;1\end{pmatrix}</div>
+<p>$, que es invertible,</p>
+<div class="display">\[
+  P\trans\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}P
+  =\begin{pmatrix}X&amp;0\\0&amp;t-z\trans X^{-1}z\end{pmatrix},
+\]</div>
+<p>y una congruencia conserva el ser semidefinida positiva. La matriz de la derecha
+lo es si y solo si $t-z\trans X^{-1}z\ge0$.</p></div>
+<div class="stmt ejemplo" id="general-c21:ej-maxcut"><div class="head">Ejemplo Max-Cut</div><div class="body"><p>Sea $G=(V,E,\omega)$ un grafo no dirigido con $V=\{1,\dots,n\}$ y pesos
+$\omega_{ij}=\omega_{ji}\ge0$, nulos fuera de $E$. Un <span class="df">corte</span> es un $S\subset V$, con
+peso $\omega(S)=\sum_{i\in S,\,j\notin S}\omega_{ij}$, y el problema es
+$\max_{S\subset V}\omega(S)$. Cada $S$ corresponde a un $x\in\{-1,1\}^{n}$, con
+$x_{i}=1$ si y solo si $i\in S$, y el problema es</p>
+<div class="display">\[
+  \max_{x\in\{-1,1\}^{n}}\ \frac14\sum_{i,j}\omega_{ij}(1-x_{i}x_{j}).
+\]</div>
+<p>Para volverlo continuo se toma $X=xx\trans$: los $x\in\{-1,1\}^{n}$ dan exactamente
+las $X\succeq0$ con $X_{ii}=1$ para todo $i$ y $\rang(X)=1$, y el objetivo es
+$\frac14\sum_{i,j}\omega_{ij}(1-X_{ij})$. La condición de rango es muy fuerte. Si se
+permite $\rang(X)\le r$, es decir, $X=VV\trans$ con $V$ una matriz $n\times r$ de
+filas $v_{i}$, queda la relajación</p>
+<div class="display">\[
+  (P_{r})\qquad\max_{v_{1},\dots,v_{n}\in\R^{r}}\ \frac14\sum_{i,j}\omega_{ij}\bigl(1-\ip{v_{i}}{v_{j}}\bigr)
+  \qquad\text{sujeto a}\qquad\norm{v_{i}}=1,
+\]</div>
+<p>y con $r=n$, quitando el rango del todo, el SDP</p>
+<div class="display">\[
+  \max_{X}\ \frac14\sum_{i,j}\omega_{ij}(1-X_{ij})\qquad\text{sujeto a}\qquad
+  X_{ii}=1\ \text{para todo }i,\quad X\succeq0.
+\]</div>
+<p>Su valor es una cota superior del de Max-Cut, y su solución puede redondearse a
+un corte.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p198">Ver demostración</button><div class="proof" id="general-convexa-p198"><p>Si $i\in S$ y $j\notin S$, o al revés, $1-x_{i}x_{j}=2$, y si no, $0$. La suma sobre
+pares ordenados cuenta cada par separado dos veces, así que da $4\,\omega(S)$. Si
+$X=xx\trans$ con $x_{i}=\pm1$, entonces $X\succeq0$, $\rang(X)=1$ y
+$X_{ii}=x_{i}^{2}=1$. Recíprocamente, una $X\succeq0$ de rango $1$ es $xx\trans$, y
+$X_{ii}=1$ da $x_{i}=\pm1$. Toda $X\succeq0$ es $VV\trans$ con $V$ de $n\times n$, y
+$X_{ii}=\norm{v_{i}}^{2}$, $X_{ij}=\ip{v_{i}}{v_{j}}$; así, $(P_{1})$ es Max-Cut y
+$(P_{n})$ es el SDP. Cada relajación tiene más factibles que la anterior, así que
+su valor es mayor o igual.</p></div></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -11055,7 +11787,211 @@ $z^{k+1}=\prox_{\frac{\lambda}{\rho}\norm{\cdot}_{1}}(x^{k+1}+y^{k}/\rho)$, el u
 suave, e $y^{k+1}=y^{k}+\rho(x^{k+1}-z^{k+1})$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p225" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p225"><p>El primer objetivo es diferenciable con gradiente
 $M\trans(Mx-b)+y^{k}+\rho(x-z^{k})$; en el segundo, completando el cuadrado, queda
 $\lambda\norm{z}_{1}+\frac{\rho}{2}\norm{z-x^{k+1}-y^{k}/\rho}^{2}$ más una
-constante.</p></div></div></section></div>
+constante.</p></div></div>
+<h3 id="ambas-convexa-x44">Criterios de parada y elección de $\rho$</h3>
+<div class="stmt observacion" id="ambas-c20:obs-parada"><div class="head">Observación criterio de parada<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Se detiene ADMM cuando $\norm{r^{k}}\le\varepsilon_{\mathrm{pri}}$ y
+$\norm{s^{k}}\le\varepsilon_{\mathrm{dual}}$, con tolerancias que combinan un
+término absoluto y uno relativo, en $\R^{n}$ típicamente
+$\varepsilon_{\mathrm{pri}}=\sqrt{p}\,\varepsilon_{\mathrm{abs}}+\varepsilon_{\mathrm{rel}}\max\{\norm{Ax^{k}},\norm{Bz^{k}},\norm{c}\}$
+y $\varepsilon_{\mathrm{dual}}=\sqrt{n}\,\varepsilon_{\mathrm{abs}}+\varepsilon_{\mathrm{rel}}\norm{A^{*}y^{k}}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-rho"><div class="head">Observación la elección de $\rho$<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\rho$ no cambia la solución, pero sí la velocidad. La heurística de balance
+multiplica $\rho$ por $\tau&gt;1$ si $\norm{r^{k}}&gt;\mu\norm{s^{k}}$, lo divide si
+$\norm{s^{k}}&gt;\mu\norm{r^{k}}$ y lo deja igual si no, con $\mu&gt;1$.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-sobrerrelajacion"><div class="head">Observación sobrerrelajación<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Se reemplaza $Ax^{k+1}$ en las actualizaciones de $z$ y de $y$ por
+$\alpha Ax^{k+1}+(1-\alpha)(c-Bz^{k})$, con $\alpha\in(0,2)$.</p></div></div>
+<h3 id="ambas-convexa-x45">PDHG</h3>
+<p>Para $\min_{x}f(x)+g(Kx)$ con $K\in\Bop{\Hs,\Ks}$, el problema de silla es el de
+$S(x,y)=f(x)+\ip{Kx}{y}-g^{*}(y)$.</p>
+<div class="stmt proposicion" id="ambas-c20:prop-pdhg-fijos"><div class="head">Proposición los puntos de silla como puntos fijos</div><div class="body"><p>$(x^{*},y^{*})$ es punto de silla de $S$ si y solo si
+$0\in\subdif f(x^{*})+K^{*}y^{*}$ y $0\in\subdif g^{*}(y^{*})-Kx^{*}$, si y solo si
+$x^{*}=\prox_{\tau f}(x^{*}-\tau K^{*}y^{*})$ e
+$y^{*}=\prox_{\sigma g^{*}}(y^{*}+\sigma Kx^{*})$ para todos $\sigma,\tau&gt;0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p226" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p226"><p>La primera equivalencia son las condiciones de punto de silla del capítulo
+anterior, y la segunda es la caracterización del proximal, que en un Hilbert es
+la misma.</p></div></div>
+<div class="stmt definicion" id="ambas-c20:def-pdhg"><div class="head">Definición PDHG</div><div class="body"><p>Con $\sigma,\tau&gt;0$, $\theta\in(0,1]$ y $\bar x^{0}=x^{0}$:
+$y^{k+1}=\prox_{\sigma g^{*}}(y^{k}+\sigma K\bar x^{k})$,
+$x^{k+1}=\prox_{\tau f}(x^{k}-\tau K^{*}y^{k+1})$ y
+$\bar x^{k+1}=x^{k+1}+\theta(x^{k+1}-x^{k})$; típicamente $\theta=1$.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-pdhg-moreau"><div class="head">Observación el paso dual con el proximal de $g$<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\prox_{\sigma g^{*}}(v)=v-\sigma\prox_{g/\sigma}(v/\sigma)$, por la identidad de
+Moreau.</p></div></div>
+<div class="stmt proposicion" id="ambas-c20:prop-pdhg-residuos"><div class="head">Proposición residuos de PDHG</div><div class="body"><p>$r_{x}^{k+1}=\frac{x^{k}-x^{k+1}}{\tau}\in\subdif f(x^{k+1})+K^{*}y^{k+1}$ y
+$r_{y}^{k+1}=\frac{y^{k}-y^{k+1}}{\sigma}+K(\bar x^{k}-x^{k+1})\in\subdif g^{*}(y^{k+1})-Kx^{k+1}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p227" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p227"><p>Por la caracterización del proximal,
+$\frac{y^{k}+\sigma K\bar x^{k}-y^{k+1}}{\sigma}\in\subdif g^{*}(y^{k+1})$ y
+$\frac{x^{k}-\tau K^{*}y^{k+1}-x^{k+1}}{\tau}\in\subdif f(x^{k+1})$; se resta
+$Kx^{k+1}$ en la primera y se suma $K^{*}y^{k+1}$ en la segunda.</p></div></div>
+<div class="stmt teorema" id="ambas-c20:teo-pdhg"><div class="head">Teorema convergencia de PDHG</div><div class="body"><p>En $\R^{n}$, si $S$ tiene un punto de silla, $\theta=1$ y $\tau\sigma\norm{K}^{2}&lt;1$,
+los iterados convergen a un punto de silla, $\bar x^{k}-x^{k}\to0$, y los promedios
+ergódicos tienen brecha primal-dual restringida a acotados de orden $O(1/N)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p228" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p228"><p>$\bar x^{k}-x^{k}=x^{k}-x^{k-1}$, y los promedios de Cesàro de una sucesión
+convergente tienen su límite. Lo demás es el teorema de Chambolle y Pock, y se
+admite.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-pdhg-contraste"><div class="head">Observación PDHG en un Hilbert</div><div class="body"><p>Las dos proposiciones de arriba valen en $\Hs$ con la misma prueba, pero
+Bauschke–Combettes no enuncia la convergencia de PDHG. Su método primal-dual en
+$\Hs$ para $0\in A(x)+L^{*}B(Lx)$ es otro, de tipo forward-backward-forward, y da
+convergencia débil de los iterados primal y dual (Teorema 26.34 de
+Bauschke–Combettes).</p></div></div>
+<div class="stmt ejemplo" id="ambas-c20:ej-tv-pdhg"><div class="head">Ejemplo variación total con PDHG</div><div class="body"><p>En $\R^{n}$, con $C=[-\lambda,\lambda]^{m}$ y $\sigma\tau\norm{D}^{2}&lt;1$:
+$y^{k+1}=\Proy_{C}(y^{k}+\sigma D\bar x^{k})$ y
+$x^{k+1}=\frac{x^{k}-\tau D\trans y^{k+1}+\tau b}{1+\tau}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p229" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p229"><p>$\prox_{\sigma\delta_{C}}=\Proy_{C}$, y $p=\prox_{\tau f}(w)$ es $p-w+\tau(p-b)=0$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c20:ej-clustering"><div class="head">Ejemplo clustering convexo</div><div class="body"><p>$\min_{x_{i}\in\R^{n}}\frac12\sum_{i}\norm{x_{i}-d_{i}}^{2}+\lambda\sum_{i&lt;j}\omega_{ij}\norm{x_{i}-x_{j}}_{1}$,
+con pesos como $\omega_{ij}=e^{-\norm{d_{i}-d_{j}}^{2}/a}\,\1\{\norm{d_{i}-d_{j}}\le\eta\}$;
+es del tipo de la variación total.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-admm-pdhg"><div class="head">Observación ADMM frente a PDHG<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>ADMM puede pedir sistemas lineales y se certifica con los residuos; PDHG solo pide
+proximales y productos por $K$ y $K^{*}$ y se certifica con la brecha. No hay un
+ganador universal.</p></div></div>
+<div class="stmt observacion" id="ambas-c20:obs-extensiones"><div class="head">Observación extensiones<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Precondicionamiento, pasos inexactos, forward-backward primal-duales con un
+término suave y pasos variables bajo convexidad fuerte. ADMM con tres o más
+bloques no hereda en general la convergencia.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:conica">Programación cónica</h2>
+<p>La programación cónica cambia las desigualdades coordenada a coordenada por la
+pertenencia a un cono convexo. En la primera sección $\Hs$ es un espacio de
+Hilbert, que puede ser $\R^{n}$.</p>
+<h3 id="ambas-convexa-x46">Forma cónica primal y dual</h3>
+<div class="stmt definicion" id="ambas-c21:def-propio"><div class="head">Definición cono propio</div><div class="body"><p>Un cono convexo y cerrado $K\subset\Hs$ es <span class="df">propio</span> si $\intr K\neq\varnothing$
+y $K\cap(-K)=\{0\}$.</p></div></div>
+<div class="stmt observacion" id="ambas-c21:obs-sin-interior"><div class="head">Observación conos sin interior</div><div class="body"><p>En $\R^{n}$ el ortante es propio. En $\ell^{2}$, el cono $\ell^{2}_{+}$ es
+autodual pero tiene interior vacío: para $x\in\ell^{2}_{+}$ y $\varepsilon&gt;0$ hay
+un $n$ con $x_{n}&lt;\varepsilon/2$, y $x-\varepsilon e_{n}$ está a distancia
+$\varepsilon$ de $x$ y fuera del cono. Así, la condición de Slater con $\intr K$ no
+se puede usar sobre $\ell^{2}_{+}$.</p></div></div>
+<div class="stmt definicion" id="ambas-c21:def-programa"><div class="head">Definición programa cónico</div><div class="body"><p>Con $K\subset\Hs$ cono convexo y cerrado, $A\in\Bop{\Hs,\R^{m}}$, $b\in\R^{m}$ y
+$c\in\Hs$: $p^{*}=\inf\ip{c}{x}$ sujeto a $Ax=b$, $x\in K$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c21:prop-dual"><div class="head">Proposición el dual cónico</div><div class="body"><p>$\inf_{x\in K}\ip{b}{y}+\ip{c-A^{*}y}{x}$ es $\ip{b}{y}$ si $c-A^{*}y\in\polar{K}$ y
+$-\infty$ si no, así que el dual es $d^{*}=\sup\ip{b}{y}$ sujeto a $A^{*}y+s=c$,
+$s\in\polar{K}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p230" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p230"><p>Si $s\in\polar{K}$, $\ip{s}{x}\ge0$ en $K$ con igualdad en $0$. Si no, hay $x\in K$
+con $\ip{s}{x}&lt;0$, y $\ip{s}{tx}\to-\infty$ cuando $t\to\infty$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c21:prop-debil"><div class="head">Proposición dualidad débil</div><div class="body"><p>Para $x$ y $(y,s)$ factibles, $\ip{c}{x}-\ip{b}{y}=\ip{s}{x}\ge0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p231" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p231"><p>$\ip{A^{*}y+s}{x}-\ip{Ax}{y}=\ip{s}{x}$.</p></div></div>
+<div class="stmt definicion" id="ambas-c21:def-brecha"><div class="head">Definición dualidad fuerte y brecha</div><div class="body"><p>Hay <span class="df">dualidad fuerte</span> si existen factibles con $\ip{c}{x^{*}}=\ip{b}{y^{*}}$, y
+$\mathcal{G}(x,y)=\ip{c}{x}-\ip{b}{y}$ es la <span class="df">brecha de dualidad</span>.</p></div></div>
+<div class="stmt proposicion" id="ambas-c21:prop-kkt"><div class="head">Proposición condiciones KKT cónicas<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Bajo dualidad fuerte, la optimalidad es $Ax=b$, $A^{*}y+s=c$, $x\in K$,
+$s\in\polar{K}$ y $\ip{x}{s}=0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p232" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p232"><p>$\ip{b}{y}\le d^{*}\le p^{*}\le\ip{c}{x}$, y los extremos difieren en $\ip{s}{x}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c21:teo-slater"><div class="head">Teorema Slater para programas cónicos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>a) Si hay $\bar x\in\intr K$ con $A\bar x=b$ y $p^{*}$ es finito, el dual alcanza
+su valor y $p^{*}=d^{*}$. b) Si hay $\bar s\in\intr\polar{K}$ con
+$A^{*}\bar y+\bar s=c$ y $d^{*}$ es finito, el primal alcanza su valor y
+$p^{*}=d^{*}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p233" data-titulo="1">Demostración en ℝⁿ</button><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p234" data-titulo="1">Demostración en ℋ</button><div class="proof" id="ambas-convexa-p233"><p>a) (P) es el primal de Fenchel de $f(x)=\ip{c}{x}+\delta_{K}(x)$ y
+$g=\delta_{\{b\}}$. Como $f^{*}(u)=\sup_{x\in K}\ip{u-c}{x}$ vale $0$ si
+$c-u\in\polar{K}$ e $\infty$ si no, y $g^{*}(y)=\ip{b}{y}$, su dual de Fenchel es</p>
+<div class="display">\[
+  \sup_{y}\ -f^{*}(-A\trans y)-g^{*}(y)
+  =\sup\bigl\{-\ip{b}{y}:\ c+A\trans y\in\polar{K}\bigr\},
+\]</div>
+<p>que con $y\mapsto-y$ es (D). La condición de Slater de Fenchel pide un punto de
+$\ri(\dom f)=\intr K$ que $A$ lleve a $\ri(\dom g)=\{b\}$, y eso es $\bar x$. El
+teorema de dualidad fuerte da $p^{*}=d^{*}$ con el dual alcanzado.</p>
+<p>b) Ahora $-d^{*}=\inf_{y}\,f(y)+g(A\trans y)$ con $f(y)=-\ip{b}{y}$ y
+$g(u)=\delta_{\polar{K}}(c-u)$. Aquí $f^{*}=\delta_{\{-b\}}$ y</p>
+<div class="display">\[
+  g^{*}(x)=\sup_{s\in\polar{K}}\ip{x}{c-s}=\ip{c}{x}+\delta_{K}(x),
+\]</div>
+<p>porque $\sup_{s\in\polar{K}}\ip{-x}{s}$ es $0$ si $x\in\polar{(\polar{K})}=K$, por
+el teorema bipolar, e $\infty$ si no. Su dual de Fenchel es
+$\sup_{x}\{-\ip{c}{x}:Ax=b,\ x\in K\}=-p^{*}$. Como $\intr\polar{K}\neq\varnothing$,
+$\ri(\dom g)=c-\intr\polar{K}$, que contiene a $A\trans\bar y=c-\bar s$, y
+$\ri(\dom f)=\R^{m}$. El teorema de dualidad fuerte, con $-d^{*}&gt;-\infty$, da
+$-d^{*}=-p^{*}$ con el último supremo alcanzado, es decir, (P) tiene solución.</p></div><div class="proof" id="ambas-convexa-p234"><p>a) Con $f=\ip{c}{\cdot}+\delta_{K}$ y $g=\delta_{\{b\}}$, (P) es
+$\inf f+g\circ A$. Se tiene $f^{*}(u)=\delta_{\polar{K}}(c-u)$, por el Ejemplo
+13.3(ii) y la Proposición 13.23(iii) de Bauschke–Combettes, y
+$g^{*}=\ip{b}{\cdot}$, así que su dual de Fenchel es (D) tras cambiar $y$ por
+$-y$. Si $\bar x+\varepsilon B\subset K$, entonces
+$\{b\}-A(K)=A(\bar x-K)\supset A(\varepsilon B)$, y como $\{b\}-A(K)\subset\operatorname{ran}A$,
+el cono que genera es $\operatorname{ran}A$, que es cerrado por ser de dimensión
+finita. Así $0\in\sri(\dom g-A(\dom f))$, y el teorema de dualidad fuerte da la
+conclusión.</p>
+<p>b) $-d^{*}=\inf_{y}f(y)+g(A^{*}y)$ con $f=-\ip{b}{\cdot}$ y
+$g(u)=\delta_{\polar{K}}(c-u)$. Ahora $f^{*}=\delta_{\{-b\}}$ y, por el teorema
+bipolar, $g^{*}(x)=\ip{c}{x}+\delta_{K}(x)$, así que su dual de Fenchel es
+$-p^{*}$ con el primal como problema. Si $\bar s+\varepsilon B\subset\polar{K}$,
+entonces $\dom g-A^{*}(\R^{m})\supset c-\bar s-\varepsilon B-A^{*}\bar y=-\varepsilon B$,
+así que $0$ es interior y está en el $\sri$. El teorema de dualidad fuerte
+concluye.</p></div></div>
+<div class="stmt observacion" id="ambas-c21:obs-slater-contraste"><div class="head">Observación por qué sube a $\Hs$</div><div class="body"><p>En $\R^{n}$ basta la condición de Slater de Fenchel con interiores relativos. En
+$\Hs$ hace falta el interior relativo fuerte, y aquí se cumple porque $A$ llega a
+$\R^{m}$: el cono generado por $\{b\}-A(K)$ es la imagen de $A$, que es cerrada
+por ser de dimensión finita. Con $A$ a valores en otro espacio de dimensión
+infinita esa imagen puede no ser cerrada.</p></div></div>
+<div class="stmt proposicion" id="ambas-c21:prop-productos"><div class="head">Proposición productos de conos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El dual de $K_{1}\times\cdots\times K_{r}$ es $\polar{K_{1}}\times\cdots\times\polar{K_{r}}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p235" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p235"><p>$\ip{s}{x}=\sum_{i}\ip{s_{i}}{x_{i}}$, y para el recíproco se toman $x_{j}=0$ con
+$j\neq i$.</p></div></div>
+<h3 id="ambas-convexa-x47">Los conos que nos interesan</h3>
+<div class="stmt ejemplo" id="ambas-c21:ej-conos"><div class="head">Ejemplo conos estándar</div><div class="body"><p>$\R^{n}_{+}$ da LP, el cono de segundo orden $\Qcono{n+1}$ da SOCP y $\PSD{n}$ da
+SDP, los tres autoduales; el <span class="df">cono copositivo</span> es
+$\{X\in\Sym{n}:a\trans Xa\ge0\ \text{para todo }a\ge0\}$. En $\Hs$, $\ell^{2}_{+}$
+y el cono de segundo orden de $\R\times\Hs$ siguen siendo autoduales.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p236" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p236"><p>Las tres autodualidades son los ejemplos del ortante, del cono de segundo orden y
+del cono semidefinido del capítulo de conos, que además dan $\ell^{2}_{+}$ y el cono
+de segundo orden de $\R\times\Hs$ autoduales.</p></div></div>
+<div class="stmt proposicion" id="ambas-c21:prop-rotado"><div class="head">Proposición el cono de segundo orden rotado</div><div class="body"><p>$\Qcono{r}=\{(z,u,v)\in\Hs\times\R\times\R:u,v\ge0,\ 2uv\ge\norm{z}^{2}\}$ es la imagen
+del cono de segundo orden por $(z,u,v)\mapsto(u+v,(\sqrt2z,u-v))$, que es $\sqrt2$
+veces una isometría lineal sobreyectiva.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p237" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p237"><p>$(u+v)^{2}-(u-v)^{2}=4uv$, así que
+$\norm{(\sqrt2z,u-v)}\le u+v$ si y solo si $u+v\ge0$ y $2\norm{z}^{2}\le4uv$. Y
+$u+v\ge0$ con $uv\ge0$ es $u,v\ge0$. Además
+$\norm{T(z,u,v)}^{2}=(u+v)^{2}+2\norm{z}^{2}+(u-v)^{2}=2\norm{(z,u,v)}^{2}$, así que
+$\frac{1}{\sqrt2}T$ es una isometría lineal, y es sobreyectiva porque
+$(t,(w,\xi))$ tiene la preimagen $\bigl(w/\sqrt2,(t+\xi)/2,(t-\xi)/2\bigr)$.</p></div></div>
+<h3 id="ambas-convexa-x48">Programación lineal</h3>
+<div class="stmt ejemplo" id="ambas-c21:ej-lp"><div class="head">Ejemplo programación lineal<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>El dual de $\min c\trans x$ sujeto a $Ax=b$, $x\ge0$ es $\max b\trans y$ sujeto a
+$A\trans y\le c$, con complementariedad $x_{i}s_{i}=0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p238" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p238"><p>El dual es el dual cónico con $\polar{(\R^{n}_{+})}=\R^{n}_{+}$, y
+$\ip{x}{s}=\sum_{i}x_{i}s_{i}$ es una suma de términos no negativos, que es $0$ si
+y solo si cada uno lo es.</p></div></div>
+<h3 id="ambas-convexa-x49">Programación cuadrática</h3>
+<div class="stmt ejemplo" id="ambas-c21:ej-qp"><div class="head">Ejemplo programación cuadrática como SOCP</div><div class="body"><p>Con $Q=C\trans C\succeq0$, $\min\frac12x\trans Qx+c\trans x$ sujeto a $Ax=b$,
+$Gx+z=h$, $z\ge0$ es $\min c\trans x+\omega$ con la restricción adicional
+$(Cx,1,\omega)\in\Qcono{r}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p239" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p239"><p>$(Cx,1,\omega)\in\Qcono{r}_{p+2}$ es $\omega\ge0$ y $2\omega\ge\norm{Cx}^{2}$, que es
+$\omega\ge\frac12\norm{Cx}^{2}$. En un óptimo del segundo problema
+$\omega=\frac12\norm{Cx}^{2}$, porque bajar $\omega$ baja el objetivo, así que los
+dos tienen el mismo valor y las mismas soluciones en $x$. Una $C$ existe, por
+ejemplo $Q^{1/2}$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c21:ej-minimos-cuadrados"><div class="head">Ejemplo mínimos cuadrados restringidos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sobre un poliedro, $\min\frac12\norm{Bx-d}^{2}$ es un SOCP vía
+$(Bx-d,1,t)\in\Qcono{r}$.</p></div></div>
+<h3 id="ambas-convexa-x50">Programación de segundo orden</h3>
+<div class="stmt definicion" id="ambas-c21:def-socp"><div class="head">Definición SOCP<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Restricciones $\norm{A_{i}x+b_{i}}\le c_{i}\trans x+d_{i}$, es decir,
+$(c_{i}\trans x+d_{i},A_{i}x+b_{i})\in\Qcono{}$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c21:ej-norma-afin"><div class="head">Ejemplo norma de una transformación afín<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\min c\trans x$ sujeto a $\norm{Ax-b}\le\rho$ es un SOCP.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c21:ej-robusta"><div class="head">Ejemplo optimización robusta</div><div class="body"><p>Con $P=\{\bar a+Ku:\norm{u}\le1\}$ y $K\in\Bop{\Ks,\Hs}$, $\ip{a}{x}\le b$ para todo
+$a\in P$ equivale a $\norm{K^{*}x}\le b-\ip{\bar a}{x}$, que en $\R^{n}$ es una
+restricción de segundo orden.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p240" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p240"><p>Por Cauchy–Schwarz,</p>
+<div class="display">\[
+  \sup_{\norm{u}\le1}\ip{\bar a+Ku}{x}=\ip{\bar a}{x}+\sup_{\norm{u}\le1}\ip{u}{K^{*}x}=\ip{\bar a}{x}+\norm{K^{*}x},
+\]</div>
+<p>alcanzado en $u=K^{*}x/\norm{K^{*}x}$ si $K^{*}x\neq0$. La restricción
+robusta es que este supremo sea a lo sumo $b$.</p></div></div>
+<h3 id="ambas-convexa-x51">Programación semidefinida</h3>
+<div class="stmt definicion" id="ambas-c21:def-sdp"><div class="head">Definición programa semidefinido</div><div class="body"><p>$p^{*}=\min\ip{C}{X}$ sujeto a $\mathcal{A}(X)=b$, $X\succeq0$, con
+$\mathcal{A}(X)_{i}=\ip{A_{i}}{X}$, y dual $d^{*}=\max\ip{b}{y}$ sujeto a
+$\sum_{i}y_{i}A_{i}+S=C$, $S\succeq0$, es decir, la LMI $C-\sum_{i}y_{i}A_{i}\succeq0$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c21:prop-brecha-sdp"><div class="head">Proposición la brecha en SDP</div><div class="body"><p>$\ip{C}{X}-\ip{b}{y}=\Tr(SX)\ge0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p241" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p241"><p>Es la dualidad débil con $\ip{\mathcal{A}^{*}(y)}{X}=\sum_{i}y_{i}\ip{A_{i}}{X}=\ip{y}{\mathcal{A}(X)}$
+y $\polar{(\PSD{n})}=\PSD{n}$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c21:prop-complementariedad-sdp"><div class="head">Proposición complementariedad en SDP<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X,S\succeq0$ y $\Tr(SX)=0$, entonces $SX=0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p242" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p242"><p>$\Tr(SX)=\Tr(X^{1/2}SX^{1/2})=\Tr\bigl((S^{1/2}X^{1/2})\trans S^{1/2}X^{1/2}\bigr)$,
+que es la suma de los cuadrados de las entradas de $S^{1/2}X^{1/2}$. Si es $0$,
+$S^{1/2}X^{1/2}=0$ y $SX=S^{1/2}(S^{1/2}X^{1/2})X^{1/2}=0$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c21:ej-valor-propio"><div class="head">Ejemplo máximo valor propio<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\lambda_{\max}(M)=\min\{t:tI-M\succeq0\}$, así que minimizar
+$\lambda_{\max}(M_{0}+\sum_{i}x_{i}M_{i})$ es un SDP.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p243" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p243"><p>Los valores propios de $tI-M$ son $t-\lambda_{i}(M)$, que son todos no negativos si
+y solo si $t\ge\lambda_{\max}(M)$. Así, $\min_{x}\lambda_{\max}(M(x))$ es
+$\min_{x,t}t$ sujeto a la LMI $tI-M_{0}-\sum_{i}x_{i}M_{i}\succeq0$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c21:prop-schur"><div class="head">Proposición complemento de Schur<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X\succ0$, $t\ge z\trans X^{-1}z$ si y solo si
+$</p>
+<div class="display">\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}</div>
+<p>\succeq0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p244" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p244"><p>Con $P=</p>
+<div class="display">\begin{pmatrix}I&amp;-X^{-1}z\\0&amp;1\end{pmatrix}</div>
+<p>$, que es invertible,</p>
+<div class="display">\[
+  P\trans\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}P
+  =\begin{pmatrix}X&amp;0\\0&amp;t-z\trans X^{-1}z\end{pmatrix},
+\]</div>
+<p>y una congruencia conserva el ser semidefinida positiva. La matriz de la derecha
+lo es si y solo si $t-z\trans X^{-1}z\ge0$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c21:ej-maxcut"><div class="head">Ejemplo Max-Cut</div><div class="body"><p>$\max_{x\in\{-1,1\}^{n}}\frac14\sum_{i,j}\omega_{ij}(1-x_{i}x_{j})$ es el corte
+máximo. Con $X=xx\trans$ ($X\succeq0$, $X_{ii}=1$, $\rang X=1$) y relajando el rango
+a $r$ queda $(P_{r})$, $\max\frac14\sum\omega_{ij}(1-\ip{v_{i}}{v_{j}})$ con
+$\norm{v_{i}}=1$ en $\R^{r}$, y con $r=n$ el SDP con $X_{ii}=1$ y $X\succeq0$, cuyo
+valor acota por arriba el del corte máximo.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p245" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p245"><p>Si $i\in S$ y $j\notin S$, o al revés, $1-x_{i}x_{j}=2$, y si no, $0$. La suma sobre
+pares ordenados cuenta cada par separado dos veces, así que da $4\,\omega(S)$. Si
+$X=xx\trans$ con $x_{i}=\pm1$, entonces $X\succeq0$, $\rang(X)=1$ y
+$X_{ii}=x_{i}^{2}=1$. Recíprocamente, una $X\succeq0$ de rango $1$ es $xx\trans$, y
+$X_{ii}=1$ da $x_{i}=\pm1$. Toda $X\succeq0$ es $VV\trans$ con $V$ de $n\times n$, y
+$X_{ii}=\norm{v_{i}}^{2}$, $X_{ij}=\ip{v_{i}}{v_{j}}$; así, $(P_{1})$ es Max-Cut y
+$(P_{n})$ es el SDP. Cada relajación tiene más factibles que la anterior, así que
+su valor es mayor o igual.</p></div></div>
+<div class="stmt observacion" id="ambas-c21:obs-sdp-contraste"><div class="head">Observación las matrices se quedan en dimensión finita</div><div class="body"><p>La primera sección vale en cualquier Hilbert y lo de segundo orden sube con
+$\R\times\Hs$, pero LP, QP, SDP y Max-Cut se escriben con matrices y se quedan en
+$\R^{n}$ en las dos versiones.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
@@ -11080,7 +12016,7 @@ const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 /* Los rotulos y las notaciones los inyecta el generador, porque dependen de
    que Overleaf sea la base. Una nota de ejercicios dice «soluciones» donde
    una de lecture notes dice «demostraciones». */
-const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [], "idiomas": [{"id": "clase", "rotulo": "Clase", "carpeta": "clase"}, {"id": "general", "rotulo": "General", "carpeta": "general"}, {"id": "ambas", "rotulo": "Ambas", "carpeta": "ambas", "pruebas_de": [{"de": "clase", "rotulo": "Demostración en ℝⁿ"}, {"de": "general", "rotulo": "Demostración en ℋ", "rotulo_igual": "Demostración (la misma en ℝⁿ y en ℋ)"}], "pruebas_distintas": ["c1:teo-c1-frechet", "c2:teo-segundo-suficiente", "c5:teo-proyeccion", "c5:cor-semiespacios", "c7:teo-weierstrass", "c9:teo-no-vacio", "c9:teo-soporte-subdif", "c10:teo-max", "c10:teo-cadena", "c10:teo-suma", "c11:ej-norma", "c11:teo-fenchel-moreau", "c13:prop-fejer", "c13:teo-cocoercividad", "c13:prop-sandwich", "c15:prop-descenso", "c15:teo-global", "c17:prop-existe", "c17:prop-firme", "c17:ej-umbral", "c17:ej-elastic", "c18:ej-cuadratico", "c18:lem-valor", "c18:prop-estacionariedad", "c19:teo-dag", "c19:teo-extragradiente", "c20:teo-dr", "c20:teo-admm"]}], "glosario": {}, "artefacto": false};
+const CFG = {"ver": "Ver demostración", "ocultar": "Ocultar demostración", "abrirTodas": "Abrir todas las demostraciones", "cerrarTodas": "Cerrar todas las demostraciones", "notaciones": [], "idiomas": [{"id": "clase", "rotulo": "Clase", "carpeta": "clase"}, {"id": "general", "rotulo": "General", "carpeta": "general"}, {"id": "ambas", "rotulo": "Ambas", "carpeta": "ambas", "pruebas_de": [{"de": "clase", "rotulo": "Demostración en ℝⁿ"}, {"de": "general", "rotulo": "Demostración en ℋ", "rotulo_igual": "Demostración (la misma en ℝⁿ y en ℋ)"}], "pruebas_distintas": ["c1:teo-c1-frechet", "c2:teo-segundo-suficiente", "c5:teo-proyeccion", "c5:cor-semiespacios", "c7:teo-weierstrass", "c9:teo-no-vacio", "c9:teo-soporte-subdif", "c10:teo-max", "c10:teo-cadena", "c10:teo-suma", "c11:ej-norma", "c11:teo-fenchel-moreau", "c13:prop-fejer", "c13:teo-cocoercividad", "c13:prop-sandwich", "c15:prop-descenso", "c15:teo-global", "c17:prop-existe", "c17:prop-firme", "c17:ej-umbral", "c17:ej-elastic", "c18:ej-cuadratico", "c18:lem-valor", "c18:prop-estacionariedad", "c19:teo-dag", "c19:teo-extragradiente", "c20:teo-dr", "c20:teo-admm", "c21:teo-slater"]}], "glosario": {}, "artefacto": false};
 
 /* Una nota privada se publica como artefacto de Claude, y alli el hash lo
    vigila el visor y solo admite #nombres sencillos; las anclas de la nota
