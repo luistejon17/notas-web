@@ -4945,25 +4945,29 @@ y $\polar{(\PSD{n})}=\PSD{n}$.</p></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p204">Ver demostración</button><div class="proof" id="clase-convexa-p204"><p>$\Tr(SX)=\Tr(X^{1/2}SX^{1/2})=\Tr\bigl((S^{1/2}X^{1/2})\trans S^{1/2}X^{1/2}\bigr)$,
 que es la suma de los cuadrados de las entradas de $S^{1/2}X^{1/2}$. Si es $0$,
 $S^{1/2}X^{1/2}=0$ y $SX=S^{1/2}(S^{1/2}X^{1/2})X^{1/2}=0$.</p></div>
-<div class="stmt ejemplo" id="clase-c21:ej-valor-propio"><div class="head">Ejemplo máximo valor propio<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $M\in\Sym{n}$, $\lambda_{\max}(M)=\min\{t\in\R:tI-M\succeq0\}$. Por tanto,
+<div class="stmt ejemplo" id="clase-c21:ej-valor-propio"><div class="head">Ejemplo máximo valor propio</div><div class="body"><p>Para $M\in\Sym{n}$, $\lambda_{\max}(M)=\min\{t\in\R:tI-M\succeq0\}$. Por tanto,
 minimizar el máximo valor propio de $M(x)=M_{0}+\sum_{i}x_{i}M_{i}$ es un SDP.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p205">Ver demostración</button><div class="proof" id="clase-convexa-p205"><p>Los valores propios de $tI-M$ son $t-\lambda_{i}(M)$, que son todos no negativos si
 y solo si $t\ge\lambda_{\max}(M)$. Así, $\min_{x}\lambda_{\max}(M(x))$ es
 $\min_{x,t}t$ sujeto a la LMI $tI-M_{0}-\sum_{i}x_{i}M_{i}\succeq0$.</p></div>
-<div class="stmt proposicion" id="clase-c21:prop-schur"><div class="head">Proposición complemento de Schur<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X\succ0$, entonces</p>
+<div class="stmt proposicion" id="clase-c21:prop-schur"><div class="head">Proposición complemento de Schur</div><div class="body"><p>Sean $X\in\Sym{n}$ con $X\succ0$, $Z\in\R^{n\times k}$ y $Y\in\Sym{k}$. Entonces</p>
 <div class="display">\[
-  t\ge z\trans X^{-1}z\qquad\text{si y solo si}\qquad
-  \begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}\succeq0.
-\]</div></div></div>
+  Y\succeq Z\trans X^{-1}Z\qquad\text{si y solo si}\qquad
+  \begin{pmatrix}X&amp;Z\\Z\trans&amp;Y\end{pmatrix}\succeq0.
+\]</div>
+<p>Con $k=1$: $t\ge z\trans X^{-1}z$ si y solo si
+$</p>
+<div class="display">\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}</div>
+<p>\succeq0$.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p206">Ver demostración</button><div class="proof" id="clase-convexa-p206"><p>Con $P=</p>
-<div class="display">\begin{pmatrix}I&amp;-X^{-1}z\\0&amp;1\end{pmatrix}</div>
+<div class="display">\begin{pmatrix}I&amp;-X^{-1}Z\\0&amp;I\end{pmatrix}</div>
 <p>$, que es invertible,</p>
 <div class="display">\[
-  P\trans\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}P
-  =\begin{pmatrix}X&amp;0\\0&amp;t-z\trans X^{-1}z\end{pmatrix},
+  P\trans\begin{pmatrix}X&amp;Z\\Z\trans&amp;Y\end{pmatrix}P
+  =\begin{pmatrix}X&amp;0\\0&amp;Y-Z\trans X^{-1}Z\end{pmatrix},
 \]</div>
-<p>y una congruencia conserva el ser semidefinida positiva. La matriz de la derecha
-lo es si y solo si $t-z\trans X^{-1}z\ge0$.</p></div>
+<p>y una congruencia conserva el ser semidefinida positiva. Como $X\succ0$, la
+matriz de la derecha lo es si y solo si $Y-Z\trans X^{-1}Z\succeq0$.</p></div>
 <div class="stmt ejemplo" id="clase-c21:ej-maxcut"><div class="head">Ejemplo Max-Cut</div><div class="body"><p>Sea $G=(V,E,\omega)$ un grafo no dirigido con $V=\{1,\dots,n\}$ y pesos
 $\omega_{ij}=\omega_{ji}\ge0$, nulos fuera de $E$. Un <span class="df">corte</span> es un $S\subset V$, con
 peso $\omega(S)=\sum_{i\in S,\,j\notin S}\omega_{ij}$, y el problema es
@@ -4995,7 +4999,343 @@ $X_{ii}=x_{i}^{2}=1$. Recíprocamente, una $X\succeq0$ de rango $1$ es $xx\trans
 $X_{ii}=1$ da $x_{i}=\pm1$. Toda $X\succeq0$ es $VV\trans$ con $V$ de $n\times n$, y
 $X_{ii}=\norm{v_{i}}^{2}$, $X_{ij}=\ip{v_{i}}{v_{j}}$; así, $(P_{1})$ es Max-Cut y
 $(P_{n})$ es el SDP. Cada relajación tiene más factibles que la anterior, así que
-su valor es mayor o igual.</p></div></section></div>
+su valor es mayor o igual.</p></div>
+<p>El complemento de Schur vuelve SDP problemas que no lo parecen, como el
+siguiente, donde el objetivo es la traza de una inversa.</p>
+<div class="stmt ejemplo" id="clase-c21:ej-diseno"><div class="head">Ejemplo diseño de experimentos</div><div class="body"><p>Sean $a_{1},\dots,a_{m}\in\R^{n}$ vectores que generan $\R^{n}$ y, para
+$x\in\simplex_{m}$, sea $M(x)=\sum_{i=1}^{m}x_{i}a_{i}a_{i}\trans$. El problema</p>
+<div class="display">\[
+  \min_{x\in\simplex_{m}}\ \Tr\bigl(M(x)^{-1}\bigr)\qquad\text{sujeto a}\qquad M(x)\succ0
+\]</div>
+<p>tiene el mismo valor que el SDP</p>
+<div class="display">\[
+  \min_{x\in\simplex_{m},\,Y\in\Sym{n}}\ \Tr(Y)\qquad\text{sujeto a}\qquad
+  \begin{pmatrix}M(x)&amp;I\\I&amp;Y\end{pmatrix}\succeq0,
+\]</div>
+<p>y en él la condición $M(x)\succ0$ sobra.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p208">Ver demostración</button><div class="proof" id="clase-convexa-p208"><p>Si la matriz por bloques es semidefinida positiva y $M(x)v=0$, con $w=-\varepsilon v$ la
+forma vale $-2\varepsilon\norm{v}^{2}+\varepsilon^{2}v\trans Yv$, que es negativa para
+$\varepsilon&gt;0$ pequeño salvo si $v=0$; así, $M(x)\succ0$. Con eso, el complemento de
+Schur con $Z=I$ dice que la restricción es $Y\succeq M(x)^{-1}$, que da
+$\Tr(Y)\ge\Tr(M(x)^{-1})$, con igualdad en $Y=M(x)^{-1}$. Los dos problemas tienen
+entonces el mismo valor, y hay factibles porque con $x_{i}=1/m$ los $a_{i}$ generan
+$\R^{n}$ y $M(x)\succ0$.</p></div>
+<h3 id="clase-convexa-x54">Problemas de momentos</h3>
+<p>La variable de un programa cónico puede ser una medida.</p>
+<div class="stmt proposicion" id="clase-c21:prop-momentos"><div class="head">Proposición el problema de momentos y su dual<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $\mathcal{X}\subset\R^{d}$ compacto, $\mathcal{M}_{+}(\mathcal{X})$ el cono de
+las medidas de Borel finitas y no negativas sobre $\mathcal{X}$, $g_{0}$ medible y
+acotada, $g_{1},\dots,g_{m}$ continuas y $b\in\R^{m}$. El <span class="df">problema de momentos</span></p>
+<div class="display">\[
+  \sup_{\mu\in\mathcal{M}_{+}(\mathcal{X})}\ \int_{\mathcal{X}}g_{0}\,d\mu
+  \qquad\text{sujeto a}\qquad\int_{\mathcal{X}}g_{i}\,d\mu=b_{i},\quad i=1,\dots,m,
+\]</div>
+<p>es un programa lineal sobre un cono de dimensión infinita, y su dual es</p>
+<div class="display">\[
+  \inf_{y\in\R^{m}}\ \ip{b}{y}\qquad\text{sujeto a}\qquad
+  \sum_{i=1}^{m}y_{i}g_{i}(x)\ge g_{0}(x)\quad\text{para todo }x\in\mathcal{X}:
+\]</div>
+<p>para $\mu$ y $y$ factibles, $\int g_{0}\,d\mu\le\ip{b}{y}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p209">Ver demostración</button><div class="proof" id="clase-convexa-p209"><p>Se integra la desigualdad $g_{0}\le\sum_{i}y_{i}g_{i}$ contra $\mu\ge0$:
+$\int g_{0}\,d\mu\le\sum_{i}y_{i}\int g_{i}\,d\mu=\ip{b}{y}$.</p></div>
+<p>El dual tiene finitas variables e infinitas restricciones, una por cada punto de
+$\mathcal{X}$: es un problema <span class="df">semiinfinito</span>.</p>
+<div class="stmt ejemplo" id="clase-c21:ej-cotas-momentos"><div class="head">Ejemplo cotas a partir de momentos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $X$ una variable aleatoria con valores en $\mathcal{X}$ de la que solo se
+conocen $\mathbb{E}g_{i}(X)=b_{i}$, con $g_{1}\equiv1$ y $b_{1}=1$, y sea
+$B\subset\mathcal{X}$ boreliano. La mayor probabilidad de $\{X\in B\}$ compatible con
+esos momentos es el problema de momentos con $g_{0}=\mathbf{1}_{B}$, y todo $y$ con
+$\sum_{i}y_{i}g_{i}\ge\mathbf{1}_{B}$ da la cota $\mathbb{P}(X\in B)\le\ip{b}{y}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p210">Ver demostración</button><div class="proof" id="clase-convexa-p210"><p>Las leyes de las $X$ compatibles son las $\mu\in\mathcal{M}_{+}(\mathcal{X})$ con
+$\int g_{i}\,d\mu=b_{i}$, que son de probabilidad por $g_{1}\equiv1$, y
+$\mathbb{P}(X\in B)=\int\mathbf{1}_{B}\,d\mu$. La cota es la dualidad débil del
+problema de momentos.</p></div>
+<p>Si las $g_{i}$ son polinomios, la positividad del dual se aproxima con sumas de
+cuadrados, y el problema queda aproximado por una sucesión de SDP finitos cada vez
+más precisos.</p>
+<h3 id="clase-convexa-x55">Modelación cónica</h3>
+<div class="stmt observacion" id="clase-c21:obs-representacion"><div class="head">Observación elegir la representación<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Una misma función convexa admite varias representaciones cónicas, y no cuestan lo
+mismo: cada variable auxiliar agranda el sistema lineal interno, y un cono más
+estructurado ahorra restricciones a cambio de operaciones matriciales más caras.
+Lo típico es el ortante para desigualdades lineales, flujos y mezclas; el cono
+rotado para mínimos cuadrados y portafolios; productos de conos de segundo orden
+para normas, robustez elipsoidal y riesgo; $\PSD{n}$ para LMI, control y
+relajaciones espectrales; y medidas o SDP para momentos y polinomios.</p></div></div>
+<p>El capítulo siguiente aprovecha esta estructura: LP, SOCP y SDP escriben su
+optimalidad con la misma geometría primal-dual, y eso es lo que usan los métodos
+de punto interior.</p></section>
+<section class="capitulo"><h2 id="clase-cap:punto-interior">Métodos de punto interior</h2>
+<p>Los métodos de punto interior se quedan dentro del conjunto factible y siguen,
+con pasos de Newton, una familia de problemas suavizados. Cada iteración cuesta
+más que en los métodos de primer orden, pero hacen falta pocas.</p>
+<h3 id="clase-convexa-x56">El método de barrera</h3>
+<p>En esta sección el problema es</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\ f_{0}(x)\qquad\text{sujeto a}\qquad f_{i}(x)\le0,\quad i=1,\dots,m,\qquad Ax=b,
+\]</div>
+<p>con $f_{0},\dots,f_{m}$ convexas y diferenciables, $A\in\R^{p\times n}$ y $b\in\R^{p}$.</p>
+<div class="stmt definicion" id="clase-c22:def-barrera"><div class="head">Definición función de barrera</div><div class="body"><p>Una <span class="df">función de barrera</span> es una $\phi:(-\infty,0)\to\R$ con $\phi(u)\to+\infty$
+cuando $u\uparrow0$; por ejemplo $\phi(u)=-\log(-u)$ o $\phi(u)=1/u^{2}$. La
+<span class="df">barrera logarítmica</span> del problema es
+$-\sum_{i=1}^{m}\log(-f_{i}(x))$, definida donde $f_{i}(x)&lt;0$ para todo $i$.</p></div></div>
+<p>A diferencia de una penalización, la barrera no deja salir del interior: explota al
+acercarse a la frontera. Las dos de arriba son convexas y crecientes, así que
+$\phi\circ f_{i}$ es convexa.</p>
+<div class="stmt definicion" id="clase-c22:def-camino"><div class="head">Definición camino central</div><div class="body"><p>Para $t&gt;0$, sea</p>
+<div class="display">\[
+  x(t)\in\argmin_{Ax=b}\ \Bigl\{t f_{0}(x)-\sum_{i=1}^{m}\log(-f_{i}(x))\Bigr\}.
+\]</div>
+<p>Cuando el minimizador es único, la curva $t\mapsto x(t)$ es el <span class="df">camino central</span>.</p></div></div>
+<div class="stmt proposicion" id="clase-c22:prop-camino-kkt"><div class="head">Proposición el camino central y las condiciones KKT</div><div class="body"><p>Si $x(t)$ existe, hay $\nu(t)\in\R^{p}$ tal que</p>
+<div class="display">\[
+  \nabla f_{0}(x(t))+\sum_{i=1}^{m}\lambda_{i}(t)\nabla f_{i}(x(t))+A\trans\nu(t)=0,
+  \qquad\lambda_{i}(t):=-\frac{1}{t f_{i}(x(t))}&gt;0,
+\]</div>
+<p>y por tanto $\lambda_{i}(t)f_{i}(x(t))=-1/t$ para todo $i$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p211">Ver demostración</button><div class="proof" id="clase-convexa-p211"><p>$x(t)$ minimiza una función convexa y diferenciable sobre $\{Ax=b\}$, así que su
+gradiente está en la imagen de $A\trans$: con el lagrangiano
+$\mathcal{L}(x,\omega)=tf_{0}(x)-\sum_{i}\log(-f_{i}(x))+\ip{Ax-b}{\omega}$ hay
+$\omega(t)$ con</p>
+<div class="display">\[
+  0=t\nabla f_{0}(x(t))+\sum_{i=1}^{m}\frac{\nabla f_{i}(x(t))}{-f_{i}(x(t))}+A\trans\omega(t).
+\]</div>
+<p>Se divide por $t$ y se llama $\nu(t)=\omega(t)/t$.</p></div>
+<p>Son las condiciones KKT con la holgura complementaria $\lambda_{i}f_{i}=0$
+cambiada por $\lambda_{i}f_{i}=-1/t$.</p>
+<div class="stmt proposicion" id="clase-c22:prop-brecha-camino"><div class="head">Proposición brecha del camino central<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $x(t)$ existe, $(\lambda(t),\nu(t))$ es dualmente factible y
+$f_{0}(x(t))-p^{*}\le m/t$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p212">Ver demostración</button><div class="proof" id="clase-convexa-p212"><p>Como $\lambda(t)&gt;0$, el lagrangiano
+$x\mapsto f_{0}(x)+\sum_{i}\lambda_{i}(t)f_{i}(x)+\ip{\nu(t)}{Ax-b}$ es convexo, y su gradiente se anula en $x(t)$, que entonces lo minimiza. Su valor
+dual es
+$f_{0}(x(t))+\sum_{i}\lambda_{i}(t)f_{i}(x(t))=f_{0}(x(t))-m/t$, y la dualidad débil
+dice que es menor o igual que $p^{*}$.</p></div>
+<p>Así $t$ se lee como precisión: para una brecha de a lo sumo $\varepsilon$ basta
+$t\ge m/\varepsilon$.</p>
+<div class="stmt definicion" id="clase-c22:def-metodo-barrera"><div class="head">Definición método básico de barrera<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Dados $x$ estrictamente factible, $t&gt;0$, $\gamma&gt;1$ y $\varepsilon&gt;0$: mientras
+$m/t&gt;\varepsilon$, se aproxima con Newton, empezando en $x$,
+$x\leftarrow\argmin_{Az=b}\{tf_{0}(z)-\sum_{i}\log(-f_{i}(z))\}$, y se hace
+$t\leftarrow\gamma t$.</p></div></div>
+<p>Un $\gamma$ grande aleja el problema nuevo del punto de partida y Newton tarda.
+Cuánto se puede subir $t$ sin perder la rapidez de Newton lo dice la
+autoconcordancia.</p>
+<h3 id="clase-convexa-x57">Barreras cónicas y camino central</h3>
+<p>Se vuelve al programa cónico $\min\ip{c}{x}$ sujeto a $Ax=b$, $x\in K$, con dual
+$\max\ip{b}{y}$ sujeto a $A\trans y+s=c$, $s\in\polar{K}$, donde $K\subset\R^{n}$ es
+un cono convexo y cerrado con interior no vacío.</p>
+<div class="stmt definicion" id="clase-c22:def-log-homogenea"><div class="head">Definición barrera logarítmicamente homogénea</div><div class="body"><p>Una barrera convexa $F:\intr K\to\R$, de clase $C^{2}$ y con $F(x_{k})\to+\infty$
+cuando $x_{k}$ tiende a la frontera de $K$, es <span class="df">logarítmicamente homogénea de
+grado $\nu$</span> si</p>
+<ol class="lista"><li><p>$F(\alpha x)=F(x)-\nu\log\alpha$ para todo $\alpha&gt;0$ y todo $x\in\intr K$;</p></li><li><p>$-\nabla F(x)\in\polar{K}$ para todo $x\in\intr K$.</p></li></ol></div></div>
+<div class="stmt proposicion" id="clase-c22:prop-camino-conico"><div class="head">Proposición el camino central cónico</div><div class="body"><p>Sea $F$ logarítmicamente homogénea de grado $\nu$ y, para $t&gt;0$,</p>
+<div class="display">\[
+  x(t)\in\argmin_{Ax=b}\ \bigl\{t\ip{c}{x}+F(x)\bigr\}.
+\]</div>
+<p>Entonces hay $y(t)\in\R^{m}$ con
+$s(t):=c-A\trans y(t)=-\tfrac1t\nabla F(x(t))\in\polar{K}$, y</p>
+<div class="display">\[
+  \ip{c}{x(t)}-\ip{b}{y(t)}=\ip{x(t)}{s(t)}=\frac{\nu}{t}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p213">Ver demostración</button><div class="proof" id="clase-convexa-p213"><p>La condición de optimalidad sobre $\{Ax=b\}$ da $w$ con $tc+\nabla F(x(t))=A\trans w$,
+es decir, $c+\frac1t\nabla F(x(t))-A\trans y(t)=0$ con $y(t)=w/t$. Por (ii),
+$s(t)\in\polar{K}$, así que $(y(t),s(t))$ es factible para el dual, y la dualidad
+débil cónica da la primera igualdad. Derivando (i) en $\alpha=1$,
+$\ip{\nabla F(x)}{x}=-\nu$, de modo que
+$\ip{x(t)}{s(t)}=-\frac1t\ip{x(t)}{\nabla F(x(t))}=\frac{\nu}{t}$.</p></div>
+<p>Es común escribir $\mu:=1/t$, y entonces la brecha sobre el camino central es
+$\nu\mu$.</p>
+<div class="stmt ejemplo" id="clase-c22:ej-barreras"><div class="head">Ejemplo tres barreras</div><div class="body"><ol class="lista"><li><p>Para $K=\R^{n}_{+}$, $F(x)=-\sum_{i}\log x_{i}$ tiene grado $n$, y con
+  $X=\operatorname{diag}(x)$ es $\nabla F(x)=-X^{-1}\mathbf{1}$; el camino central es
+  $Xs=\mu\mathbf{1}$, con $\ip{x}{s}=n\mu$.</p></li><li><p>Para $K=\PSD{n}$, $F(X)=-\log\det X$ tiene grado $n$ y
+  $\nabla F(X)=-X^{-1}$; el camino central es $XS=\mu I$, con $\Tr(XS)=n\mu$.</p></li><li><p>Para $K=\Qcono{n+1}$, $F(\tau,u)=-\log(\tau^{2}-\norm{u}^{2})$ tiene grado $2$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p214">Ver demostración</button><div class="proof" id="clase-convexa-p214"><p>(a) $F(\alpha x)=F(x)-n\log\alpha$, y $-\nabla F(x)=(1/x_{i})_{i}\in\R^{n}_{+}$. La
+igualdad $s=-\mu\nabla F(x)=\mu X^{-1}\mathbf{1}$ es $Xs=\mu\mathbf{1}$.
+(b) $\det(\alpha X)=\alpha^{n}\det X$, el gradiente es el del cálculo de
+$\log\det$ del primer capítulo, y $-\nabla F(X)=X^{-1}\succ0$. La igualdad
+$S=\mu X^{-1}$ es $XS=\mu I$.
+(c) $F(\alpha\tau,\alpha u)=F(\tau,u)-2\log\alpha$, y
+$-\nabla F(\tau,u)=\frac{2}{\tau^{2}-\norm{u}^{2}}(\tau,-u)\in\Qcono{n+1}$, que es
+autodual. Las tres son convexas: (a) y (b) por el capítulo de regularidad, y (c)
+porque $-\log(\tau^{2}-\norm{u}^{2})=-\log\tau-\log(\tau-\norm{u}^{2}/\tau)$, con
+$\norm{u}^{2}/\tau$ convexa. Las tres explotan en la frontera.</p></div>
+<h3 id="clase-convexa-x58">Funciones autoconcordantes</h3>
+<p>Para resolver $\min_{Ax=b}t\ip{c}{x}+F(x)$ con Newton hace falta controlar la
+Hessiana, y la de $F$ no es Lipschitz porque $F$ explota en la frontera. Nesterov
+definió lo siguiente.</p>
+<div class="stmt definicion" id="clase-c22:def-autoconcordante"><div class="head">Definición función autoconcordante</div><div class="body"><p>Sea $D\subset\R^{n}$ abierto y convexo. Una $F\in C^{3}(D)$ convexa es
+<span class="df">autoconcordante</span> si</p>
+<div class="display">\[
+  \bigl|\Dif^{3}F(x)[h,h,h]\bigr|\le2\bigl(\Dif^{2}F(x)[h,h]\bigr)^{3/2}
+  \qquad\text{para todo }x\in D,\ h\in\R^{n}.
+\]</div>
+<p>Si además $H(x):=\nabla^{2}F(x)\succ0$, sus <span class="df">normas locales</span> son
+$\norm{h}_{x}:=\sqrt{h\trans H(x)h}$ y $\norm{g}_{x,*}:=\sqrt{g\trans H(x)^{-1}g}$.</p></div></div>
+<p>Las dos normas son duales, $\abs{\ip{g}{h}}\le\norm{g}_{x,*}\norm{h}_{x}$, por
+Cauchy–Schwarz aplicado a $H(x)^{-1/2}g$ y $H(x)^{1/2}h$. Un término lineal no cambia
+ni $\Dif^{2}F$ ni $\Dif^{3}F$, así que $t\ip{c}{\cdot}+F$ es autoconcordante si $F$ lo
+es. En lo que sigue se supone $H(x)\succ0$ en $D$, y se escribe</p>
+<div class="display">\[
+  \omega(r):=r-\log(1+r),\qquad\omega_{*}(r):=-r-\log(1-r)\quad(0\le r&lt;1).
+\]</div>
+<div class="stmt proposicion" id="clase-c22:prop-cotas"><div class="head">Proposición cotas de Taylor autoconcordantes</div><div class="body"><p>Sea $F$ autoconcordante, $x,x+h\in D$ y $r=\norm{h}_{x}$. Entonces</p>
+<div class="display">\[
+  F(x+h)\ge F(x)+\ip{\nabla F(x)}{h}+\omega(r),
+\]</div>
+<p>y si $r&lt;1$,</p>
+<div class="display">\[
+  F(x+h)\le F(x)+\ip{\nabla F(x)}{h}+\omega_{*}(r).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p215">Ver demostración</button><div class="proof" id="clase-convexa-p215"><p>Si $h=0$ no hay nada que probar. Sea $\psi(\tau)=\Dif^{2}F(x+\tau h)[h,h]&gt;0$ para
+$\tau\in[0,1]$, que tiene sentido porque $D$ es convexo. La autoconcordancia es
+$\abs{\psi&#x27;}\le2\psi^{3/2}$, es decir,
+$\bigl|\tfrac{d}{d\tau}\psi^{-1/2}\bigr|\le1$, y como $\psi(0)^{-1/2}=1/r$,</p>
+<div class="display">\[
+  \frac1r-\tau\le\psi(\tau)^{-1/2}\le\frac1r+\tau .
+\]</div>
+<p>Así $\psi(\tau)\ge r^{2}/(1+\tau r)^{2}$ siempre, y $\psi(\tau)\le r^{2}/(1-\tau r)^{2}$ si
+$\tau r&lt;1$. Por Taylor con resto integral,
+$F(x+h)-F(x)-\ip{\nabla F(x)}{h}=\int_{0}^{1}\int_{0}^{\tau}\psi(\sigma)\,d\sigma\,d\tau$, y</p>
+<div class="display">\begin{gather*}
+  \int_{0}^{1}\!\!\int_{0}^{\tau}\frac{r^{2}\,d\sigma\,d\tau}{(1+\sigma r)^{2}}
+  =\int_{0}^{1}\Bigl(r-\frac{r}{1+\tau r}\Bigr)d\tau=\omega(r),\\
+  \int_{0}^{1}\!\!\int_{0}^{\tau}\frac{r^{2}\,d\sigma\,d\tau}{(1-\sigma r)^{2}}
+  =\int_{0}^{1}\Bigl(\frac{r}{1-\tau r}-r\Bigr)d\tau=\omega_{*}(r).
+\end{gather*}</div></div>
+<div class="stmt teorema" id="clase-c22:teo-dikin"><div class="head">Teorema control de la Hessiana y elipsoide de Dikin<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $F$ autoconcordante, $x\in D$ y $h$ con $r=\norm{h}_{x}&lt;1$ y $[x,x+h]\subset D$.
+Entonces</p>
+<div class="display">\[
+  (1-r)^{2}H(x)\preceq H(x+h)\preceq\frac{1}{(1-r)^{2}}H(x).
+\]</div>
+<p>Si además $F(x_{k})\to+\infty$ cuando $x_{k}$ tiende a la frontera de $D$, el
+<span class="df">elipsoide de Dikin</span> $\{x+h:\norm{h}_{x}&lt;1\}$ está contenido en $D$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p216">Ver demostración</button><div class="proof" id="clase-convexa-p216"><p>Se usa, y se admite, que para $F$ autoconcordante
+$\abs{\Dif^{3}F(y)[h,u,u]}\le2\norm{h}_{y}\norm{u}_{y}^{2}$, que es un hecho de formas
+trilineales simétricas probado en Nesterov y Nemirovski (1994). Para $u\ne0$ sea
+$\psi_{u}(\tau)=\Dif^{2}F(x+\tau h)[u,u]$. Entonces
+$\abs{(\log\psi_{u})&#x27;(\tau)}\le2\norm{h}_{x+\tau h}\le2r/(1-\tau r)$, por la cota de
+$\psi$ de la prueba anterior, y al integrar en $[0,1]$,
+$\abs{\log(\psi_{u}(1)/\psi_{u}(0))}\le-2\log(1-r)$, que es la comparación de
+Hessianas. Para Dikin, si $x+h\notin D$ hay un primer $\tau_{0}\le1$ con
+$x+\tau h\to\partial D$ cuando $\tau\uparrow\tau_{0}$, y para $\tau&lt;\tau_{0}$ las cotas
+de Taylor dan
+$F(x+\tau h)\le F(x)+\abs{\ip{\nabla F(x)}{h}}+\omega_{*}(r)$, que no explota.</p></div>
+<div class="stmt definicion" id="clase-c22:def-nu-barrera"><div class="head">Definición $\nu$-barrera autoconcordante</div><div class="body"><p>Una $F$ autoconcordante en $D$ con $F(x_{k})\to+\infty$ cuando $x_{k}$ tiende a la
+frontera de $D$ es una <span class="df">barrera autoconcordante</span>, y es una <span class="df">$\nu$-barrera</span> si
+además $\norm{\nabla F(x)}_{x,*}\le\sqrt\nu$ para todo $x\in D$, es decir,
+$\abs{\ip{\nabla F(x)}{h}}\le\sqrt\nu\,\norm{h}_{x}$ para todo $h$.</p></div></div>
+<div class="stmt proposicion" id="clase-c22:prop-log-homogenea-nu"><div class="head">Proposición las logarítmicamente homogéneas son $\nu$-barreras</div><div class="body"><p>Si $F$ es una barrera autoconcordante en $\intr K$, logarítmicamente homogénea de
+grado $\nu$, entonces $H(x)x=-\nabla F(x)$, $\norm{x}_{x}^{2}=\nu$ y
+$\norm{\nabla F(x)}_{x,*}=\sqrt\nu$. En particular es una $\nu$-barrera.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p217">Ver demostración</button><div class="proof" id="clase-convexa-p217"><p>El gradiente de (i) es $\alpha\nabla F(\alpha x)=\nabla F(x)$; derivando en $\alpha=1$,
+$\nabla F(x)+H(x)x=0$. Entonces
+$\norm{\nabla F(x)}_{x,*}^{2}=\ip{H(x)^{-1}\nabla F(x)}{\nabla F(x)}=\ip{x}{H(x)x}=\norm{x}_{x}^{2}$,
+y esto es $-\ip{x}{\nabla F(x)}=\nu$.</p></div>
+<div class="stmt ejemplo" id="clase-c22:ej-nu-barreras"><div class="head">Ejemplo las tres barreras son autoconcordantes<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$-\sum_{i}\log x_{i}$ en $\R^{n}_{+}$, $-\log\det X$ en $\PSD{n}$ y
+$-\log(\tau^{2}-\norm{u}^{2})$ en $\Qcono{n+1}$ son barreras autoconcordantes, con
+$\nu=n$, $n$ y $2$. Para un producto de conos se suman las barreras, y los $\nu$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p218">Ver demostración</button><div class="proof" id="clase-convexa-p218"><p>Para la primera, $\Dif^{2}F(x)[h,h]=\sum_{i}a_{i}^{2}$ y
+$\Dif^{3}F(x)[h,h,h]=-2\sum_{i}a_{i}^{3}$ con $a_{i}=h_{i}/x_{i}$, y
+$\abs{\sum_{i}a_{i}^{3}}\le\max_{i}\abs{a_{i}}\sum_{i}a_{i}^{2}\le(\sum_{i}a_{i}^{2})^{3/2}$.
+Para la segunda es la misma cuenta con los valores propios $a_{i}$ de
+$X^{-1/2}HX^{-1/2}$, porque $\Dif^{2}F(X)[H,H]=\Tr\bigl((X^{-1}H)^{2}\bigr)$ y
+$\Dif^{3}F(X)[H,H,H]=-2\Tr\bigl((X^{-1}H)^{3}\bigr)$. La tercera se admite, como en
+Nesterov y Nemirovski (1994). Los $\nu$ salen de los grados del ejemplo de las tres
+barreras y de la proposición anterior. Para un producto, las segundas y terceras
+derivadas de una suma de funciones de variables separadas se suman, y
+$2p^{3/2}+2q^{3/2}\le2(p+q)^{3/2}$; los grados se suman, y el dual del producto es
+el producto de los duales.</p></div>
+<h3 id="clase-convexa-x59">Decremento de Newton</h3>
+<div class="stmt definicion" id="clase-c22:def-decremento-ac"><div class="head">Definición paso y decremento de Newton</div><div class="body"><p>Para $F$ autoconcordante, el <span class="df">paso de Newton</span> en $x$ es
+$\Delta x_{N}=-H(x)^{-1}\nabla F(x)$, y el <span class="df">decremento de Newton</span> es
+$\lambda(x):=\norm{\Delta x_{N}}_{x}=\norm{\nabla F(x)}_{x,*}$.</p></div></div>
+<p>A diferencia de $\norm{\nabla F(x)}$, el decremento no cambia con un cambio afín de
+coordenadas.</p>
+<div class="stmt teorema" id="clase-c22:teo-newton-ac"><div class="head">Teorema Newton para barreras autoconcordantes<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $F$ una barrera autoconcordante en $D$ y $x\in D$, con $\lambda=\lambda(x)$.</p>
+<ol class="lista"><li><p>Si $F$ tiene un minimizador $x^{*}$ y $\lambda&lt;1$, entonces
+  $F(x)-F(x^{*})\le\omega_{*}(\lambda)$.</p></li><li><p>El paso amortiguado $x^{+}=x+\frac{1}{1+\lambda}\Delta x_{N}$ está en $D$ y
+  $F(x^{+})\le F(x)-\omega(\lambda)$.</p></li><li><p>Si $\lambda&lt;1$, el paso completo $x^{+}=x+\Delta x_{N}$ está en $D$ y
+  $\lambda(x^{+})\le\bigl(\lambda/(1-\lambda)\bigr)^{2}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p219">Ver demostración</button><div class="proof" id="clase-convexa-p219"><p>(a) Por la cota inferior de Taylor y la dualidad de las normas, con
+$r=\norm{x^{*}-x}_{x}$,
+$F(x^{*})\ge F(x)-\lambda r+\omega(r)\ge F(x)+\min_{r\ge0}\{(1-\lambda)r-\log(1+r)\}$. El
+mínimo está en $r=\lambda/(1-\lambda)$ y vale $\lambda+\log(1-\lambda)=-\omega_{*}(\lambda)$.</p>
+<p>(b) El paso tiene $\norm{\cdot}_{x}=\lambda/(1+\lambda)&lt;1$, así que $x^{+}\in D$ por Dikin.
+Como $\ip{\nabla F(x)}{\Delta x_{N}}=-\lambda^{2}$, la cota superior de Taylor da</p>
+<div class="display">\[
+  F(x^{+})\le F(x)-\frac{\lambda^{2}}{1+\lambda}+\omega_{*}\Bigl(\frac{\lambda}{1+\lambda}\Bigr)
+  =F(x)-\frac{\lambda^{2}}{1+\lambda}-\frac{\lambda}{1+\lambda}+\log(1+\lambda)
+  =F(x)-\omega(\lambda).
+\]</div>
+<p>(c) $x^{+}\in D$ por Dikin. Como $\nabla F(x)+H(x)\Delta x_{N}=0$,</p>
+<div class="display">\[
+  \nabla F(x^{+})=\int_{0}^{1}\bigl(H(x+\tau\Delta x_{N})-H(x)\bigr)\Delta x_{N}\,d\tau=:G\Delta x_{N},
+\]</div>
+<p>y por el control de la Hessiana,
+$-\bigl(1-(1-\tau\lambda)^{2}\bigr)H(x)\preceq H(x+\tau\Delta x_{N})-H(x)\preceq\bigl((1-\tau\lambda)^{-2}-1\bigr)H(x)$.
+Al integrar, la matriz simétrica $H(x)^{-1/2}GH(x)^{-1/2}$ tiene sus valores propios
+entre $-(\lambda-\lambda^{2}/3)$ y $\lambda/(1-\lambda)$, así que
+$\norm{\nabla F(x^{+})}_{x,*}\le\frac{\lambda}{1-\lambda}\norm{\Delta x_{N}}_{x}=\frac{\lambda^{2}}{1-\lambda}$.
+Por último $H(x^{+})\succeq(1-\lambda)^{2}H(x)$ da
+$\lambda(x^{+})=\norm{\nabla F(x^{+})}_{x^{+},*}\le\frac{1}{1-\lambda}\norm{\nabla F(x^{+})}_{x,*}$.</p></div>
+<p>Así, se dan pasos amortiguados mientras el decremento es grande y pasos completos
+cuando es pequeño, y desde ahí la convergencia es cuadrática.</p>
+<p>Todo esto vale restringido a $\{Ax=b\}$. Si las columnas de $Z$ son una base de
+$\ker A$ y $Ax_{0}=b$, $u\mapsto F(x_{0}+Zu)$ es una barrera autoconcordante; su paso de
+Newton, visto en $x$, es el minimizador $\Delta x_{N}$ de
+$\ip{\nabla F(x)}{h}+\frac12\norm{h}_{x}^{2}$ sobre $\ker A$, y su decremento es
+$\norm{\Delta x_{N}}_{x}=\max\{-\ip{\nabla F(x)}{h}:Ah=0,\ \norm{h}_{x}\le1\}$.</p>
+<h3 id="clase-convexa-x60">Complejidad del camino central</h3>
+<p>Sobre el camino central la brecha es $\nu/t$, así que la precisión $\varepsilon$ pide
+$t$ del orden de $\nu/\varepsilon$. No hace falta resolver cada problema de barrera
+desde cero: basta un paso de Newton por cada aumento de $t$.</p>
+<div class="stmt definicion" id="clase-c22:def-paso-corto"><div class="head">Definición método de camino central de paso corto</div><div class="body"><p>Sea $F$ una barrera autoconcordante en $\intr K$, logarítmicamente homogénea de grado
+$\nu\ge1$, y sea $\phi_{t}(x):=t\ip{c}{x}+F(x)$. Para $x\in\intr K$ con $Ax=b$, sean
+$(\Delta x_{N})_{t}(x)$ y $\lambda_{t}(x)$ el paso y el decremento de Newton de
+$\phi_{t}$ restringida a $\{Ax=b\}$. Se asume que $A$ tiene rango completo por
+filas y que hay $x_{0}\in\intr K$ y $t_{0}&gt;0$ con $Ax_{0}=b$ y
+$\lambda_{t_{0}}(x_{0})\le1/8$. El método es</p>
+<div class="display">\[
+  t_{k+1}=t_{k}\Bigl(1+\frac{1}{1+8\sqrt\nu}\Bigr),\qquad
+  x_{k+1}=x_{k}+(\Delta x_{N})_{t_{k+1}}(x_{k}).
+\]</div>
+<p>Con $\Delta_{k}=(\Delta x_{N})_{t_{k}}(x_{k})$, el sistema de Newton
+$t_{k}c+\nabla F(x_{k})+H(x_{k})\Delta_{k}=A\trans w_{k}$ define $y_{k}:=w_{k}/t_{k}$ y
+$s_{k}:=c-A\trans y_{k}$.</p></div></div>
+<div class="stmt teorema" id="clase-c22:teo-paso-corto"><div class="head">Teorema complejidad del camino corto</div><div class="body"><p>En el método de paso corto, para todo $k$:</p>
+<ol class="lista"><li><p>$x_{k}\in\intr K$ y $Ax_{k}=b$;</p></li><li><p>$\lambda_{t_{k}}(x_{k})\le1/8$;</p></li><li><p>$(y_{k},s_{k})$ es factible para el dual y
+  $\ip{c}{x_{k}}-\ip{b}{y_{k}}=\ip{x_{k}}{s_{k}}\le\dfrac{9\nu}{8t_{k}}$.</p></li></ol>
+<p>Por tanto la brecha es a lo sumo $\varepsilon$ desde
+$k\ge(2+8\sqrt\nu)\log\frac{9\nu}{8t_{0}\varepsilon}$, es decir, tras
+$O\bigl(\sqrt\nu\,(1+\log\frac{\nu}{t_{0}\varepsilon})_{+}\bigr)$ iteraciones.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="clase-convexa-p220">Ver demostración</button><div class="proof" id="clase-convexa-p220"><p>(i) y (ii) por inducción. Sea $\delta=1/(1+8\sqrt\nu)$ y $t&#x27;=(1+\delta)t_{k}$. Como
+$t&#x27;c+\nabla F=(1+\delta)(t_{k}c+\nabla F)-\delta\nabla F$, la fórmula del decremento
+restringido como un máximo da</p>
+<div class="display">\[
+  \lambda_{t&#x27;}(x_{k})\le(1+\delta)\lambda_{t_{k}}(x_{k})+\delta\norm{\nabla F(x_{k})}_{x_{k},*}
+  \le\frac{1+\delta}{8}+\delta\sqrt\nu=\frac18+\delta\Bigl(\frac18+\sqrt\nu\Bigr)=\frac14 .
+\]</div>
+<p>El teorema de Newton para barreras autoconcordantes, aplicado a $\phi_{t&#x27;}$ en
+$\{Ax=b\}$, da $x_{k+1}\in\intr K$, $Ax_{k+1}=b$ y
+$\lambda_{t&#x27;}(x_{k+1})\le(1/3)^{2}\le1/8$.</p>
+<p>(iii) Primero, $-\ip{\nabla F(x)}{u}\ge\norm{u}_{x}$ para $u\in K$: si $u\in\intr K$ y
+$\tau&gt;0$, la cota inferior de Taylor y la homogeneidad dan</p>
+<div class="display">\[
+  F(u+x/\tau)-\nu\log\tau=F(x+\tau u)\ge F(x)+\tau\bigl(\ip{\nabla F(x)}{u}+\norm{u}_{x}\bigr)-\log(1+\tau\norm{u}_{x}),
+\]</div>
+<p>y el lado izquierdo crece como $-\nu\log\tau$, así que el paréntesis no puede ser
+positivo; para $u\in K$ se pasa al límite, porque $K$ es la clausura de su interior.
+Ahora $A\trans y_{k}+s_{k}=c$ por definición, y
+$t_{k}s_{k}=-\nabla F(x_{k})-H(x_{k})\Delta_{k}$. Para $u\in K$,
+$t_{k}\ip{s_{k}}{u}\ge\norm{u}_{x_{k}}-\norm{\Delta_{k}}_{x_{k}}\norm{u}_{x_{k}}\ge0$, porque
+$\norm{\Delta_{k}}_{x_{k}}=\lambda_{t_{k}}(x_{k})\le1/8$; así $s_{k}\in\polar{K}$. La
+igualdad es la dualidad débil cónica, y con $\ip{\nabla F(x)}{x}=-\nu$ y
+$\norm{x}_{x}=\sqrt\nu$,</p>
+<div class="display">\[
+  t_{k}\ip{x_{k}}{s_{k}}=\nu-\ip{H(x_{k})\Delta_{k}}{x_{k}}\le\nu+\frac{\sqrt\nu}{8}\le\frac{9\nu}{8},
+\]</div>
+<p>porque $\nu\ge1$. Por último $t_{k}=t_{0}(1+\delta)^{k}$ y
+$\log(1+\delta)\ge\delta/(1+\delta)=1/(2+8\sqrt\nu)$, así que con ese $k$ es
+$t_{k}\ge9\nu/(8\varepsilon)$.</p></div>
+<p>La cota es polinomial en el tamaño del cono y logarítmica en $1/\varepsilon$. Para LP
+con $n$ variables $\nu=n$, y para SDP de $n\times n$ también; lo que cambia mucho es
+el costo de cada paso de Newton.</p></section></div>
 <div class="doc" data-lang="general"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="general-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -8418,25 +8758,29 @@ y $\polar{(\PSD{n})}=\PSD{n}$.</p></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p195">Ver demostración</button><div class="proof" id="general-convexa-p195"><p>$\Tr(SX)=\Tr(X^{1/2}SX^{1/2})=\Tr\bigl((S^{1/2}X^{1/2})\trans S^{1/2}X^{1/2}\bigr)$,
 que es la suma de los cuadrados de las entradas de $S^{1/2}X^{1/2}$. Si es $0$,
 $S^{1/2}X^{1/2}=0$ y $SX=S^{1/2}(S^{1/2}X^{1/2})X^{1/2}=0$.</p></div>
-<div class="stmt ejemplo" id="general-c21:ej-valor-propio"><div class="head">Ejemplo máximo valor propio<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Para $M\in\Sym{n}$, $\lambda_{\max}(M)=\min\{t\in\R:tI-M\succeq0\}$. Por tanto,
+<div class="stmt ejemplo" id="general-c21:ej-valor-propio"><div class="head">Ejemplo máximo valor propio</div><div class="body"><p>Para $M\in\Sym{n}$, $\lambda_{\max}(M)=\min\{t\in\R:tI-M\succeq0\}$. Por tanto,
 minimizar el máximo valor propio de $M(x)=M_{0}+\sum_{i}x_{i}M_{i}$ es un SDP.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p196">Ver demostración</button><div class="proof" id="general-convexa-p196"><p>Los valores propios de $tI-M$ son $t-\lambda_{i}(M)$, que son todos no negativos si
 y solo si $t\ge\lambda_{\max}(M)$. Así, $\min_{x}\lambda_{\max}(M(x))$ es
 $\min_{x,t}t$ sujeto a la LMI $tI-M_{0}-\sum_{i}x_{i}M_{i}\succeq0$.</p></div>
-<div class="stmt proposicion" id="general-c21:prop-schur"><div class="head">Proposición complemento de Schur<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X\succ0$, entonces</p>
+<div class="stmt proposicion" id="general-c21:prop-schur"><div class="head">Proposición complemento de Schur</div><div class="body"><p>Sean $X\in\Sym{n}$ con $X\succ0$, $Z\in\R^{n\times k}$ y $Y\in\Sym{k}$. Entonces</p>
 <div class="display">\[
-  t\ge z\trans X^{-1}z\qquad\text{si y solo si}\qquad
-  \begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}\succeq0.
-\]</div></div></div>
+  Y\succeq Z\trans X^{-1}Z\qquad\text{si y solo si}\qquad
+  \begin{pmatrix}X&amp;Z\\Z\trans&amp;Y\end{pmatrix}\succeq0.
+\]</div>
+<p>Con $k=1$: $t\ge z\trans X^{-1}z$ si y solo si
+$</p>
+<div class="display">\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}</div>
+<p>\succeq0$.</p></div></div>
 <button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p197">Ver demostración</button><div class="proof" id="general-convexa-p197"><p>Con $P=</p>
-<div class="display">\begin{pmatrix}I&amp;-X^{-1}z\\0&amp;1\end{pmatrix}</div>
+<div class="display">\begin{pmatrix}I&amp;-X^{-1}Z\\0&amp;I\end{pmatrix}</div>
 <p>$, que es invertible,</p>
 <div class="display">\[
-  P\trans\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}P
-  =\begin{pmatrix}X&amp;0\\0&amp;t-z\trans X^{-1}z\end{pmatrix},
+  P\trans\begin{pmatrix}X&amp;Z\\Z\trans&amp;Y\end{pmatrix}P
+  =\begin{pmatrix}X&amp;0\\0&amp;Y-Z\trans X^{-1}Z\end{pmatrix},
 \]</div>
-<p>y una congruencia conserva el ser semidefinida positiva. La matriz de la derecha
-lo es si y solo si $t-z\trans X^{-1}z\ge0$.</p></div>
+<p>y una congruencia conserva el ser semidefinida positiva. Como $X\succ0$, la
+matriz de la derecha lo es si y solo si $Y-Z\trans X^{-1}Z\succeq0$.</p></div>
 <div class="stmt ejemplo" id="general-c21:ej-maxcut"><div class="head">Ejemplo Max-Cut</div><div class="body"><p>Sea $G=(V,E,\omega)$ un grafo no dirigido con $V=\{1,\dots,n\}$ y pesos
 $\omega_{ij}=\omega_{ji}\ge0$, nulos fuera de $E$. Un <span class="df">corte</span> es un $S\subset V$, con
 peso $\omega(S)=\sum_{i\in S,\,j\notin S}\omega_{ij}$, y el problema es
@@ -8468,7 +8812,344 @@ $X_{ii}=x_{i}^{2}=1$. Recíprocamente, una $X\succeq0$ de rango $1$ es $xx\trans
 $X_{ii}=1$ da $x_{i}=\pm1$. Toda $X\succeq0$ es $VV\trans$ con $V$ de $n\times n$, y
 $X_{ii}=\norm{v_{i}}^{2}$, $X_{ij}=\ip{v_{i}}{v_{j}}$; así, $(P_{1})$ es Max-Cut y
 $(P_{n})$ es el SDP. Cada relajación tiene más factibles que la anterior, así que
-su valor es mayor o igual.</p></div></section></div>
+su valor es mayor o igual.</p></div>
+<p>El complemento de Schur vuelve SDP problemas que no lo parecen, como el
+siguiente, donde el objetivo es la traza de una inversa.</p>
+<div class="stmt ejemplo" id="general-c21:ej-diseno"><div class="head">Ejemplo diseño de experimentos</div><div class="body"><p>Sean $a_{1},\dots,a_{m}\in\R^{n}$ vectores que generan $\R^{n}$ y, para
+$x\in\simplex_{m}$, sea $M(x)=\sum_{i=1}^{m}x_{i}a_{i}a_{i}\trans$. El problema</p>
+<div class="display">\[
+  \min_{x\in\simplex_{m}}\ \Tr\bigl(M(x)^{-1}\bigr)\qquad\text{sujeto a}\qquad M(x)\succ0
+\]</div>
+<p>tiene el mismo valor que el SDP</p>
+<div class="display">\[
+  \min_{x\in\simplex_{m},\,Y\in\Sym{n}}\ \Tr(Y)\qquad\text{sujeto a}\qquad
+  \begin{pmatrix}M(x)&amp;I\\I&amp;Y\end{pmatrix}\succeq0,
+\]</div>
+<p>y en él la condición $M(x)\succ0$ sobra.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p199">Ver demostración</button><div class="proof" id="general-convexa-p199"><p>Si la matriz por bloques es semidefinida positiva y $M(x)v=0$, con $w=-\varepsilon v$ la
+forma vale $-2\varepsilon\norm{v}^{2}+\varepsilon^{2}v\trans Yv$, que es negativa para
+$\varepsilon&gt;0$ pequeño salvo si $v=0$; así, $M(x)\succ0$. Con eso, el complemento de
+Schur con $Z=I$ dice que la restricción es $Y\succeq M(x)^{-1}$, que da
+$\Tr(Y)\ge\Tr(M(x)^{-1})$, con igualdad en $Y=M(x)^{-1}$. Los dos problemas tienen
+entonces el mismo valor, y hay factibles porque con $x_{i}=1/m$ los $a_{i}$ generan
+$\R^{n}$ y $M(x)\succ0$.</p></div>
+<h3 id="general-convexa-x50">Problemas de momentos</h3>
+<p>La variable de un programa cónico puede ser una medida.</p>
+<div class="stmt proposicion" id="general-c21:prop-momentos"><div class="head">Proposición el problema de momentos y su dual<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sean $\mathcal{X}$ un espacio métrico compacto, $\mathcal{M}_{+}(\mathcal{X})$ el cono de
+las medidas de Borel finitas y no negativas sobre $\mathcal{X}$, $g_{0}$ medible y
+acotada, $g_{1},\dots,g_{m}$ continuas y $b\in\R^{m}$. El <span class="df">problema de momentos</span></p>
+<div class="display">\[
+  \sup_{\mu\in\mathcal{M}_{+}(\mathcal{X})}\ \int_{\mathcal{X}}g_{0}\,d\mu
+  \qquad\text{sujeto a}\qquad\int_{\mathcal{X}}g_{i}\,d\mu=b_{i},\quad i=1,\dots,m,
+\]</div>
+<p>es un programa lineal sobre un cono de dimensión infinita, y su dual es</p>
+<div class="display">\[
+  \inf_{y\in\R^{m}}\ \ip{b}{y}\qquad\text{sujeto a}\qquad
+  \sum_{i=1}^{m}y_{i}g_{i}(x)\ge g_{0}(x)\quad\text{para todo }x\in\mathcal{X}:
+\]</div>
+<p>para $\mu$ y $y$ factibles, $\int g_{0}\,d\mu\le\ip{b}{y}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p200">Ver demostración</button><div class="proof" id="general-convexa-p200"><p>Se integra la desigualdad $g_{0}\le\sum_{i}y_{i}g_{i}$ contra $\mu\ge0$:
+$\int g_{0}\,d\mu\le\sum_{i}y_{i}\int g_{i}\,d\mu=\ip{b}{y}$.</p></div>
+<p>El dual tiene finitas variables e infinitas restricciones, una por cada punto de
+$\mathcal{X}$: es un problema <span class="df">semiinfinito</span>.</p>
+<div class="stmt ejemplo" id="general-c21:ej-cotas-momentos"><div class="head">Ejemplo cotas a partir de momentos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $X$ una variable aleatoria con valores en $\mathcal{X}$ de la que solo se
+conocen $\mathbb{E}g_{i}(X)=b_{i}$, con $g_{1}\equiv1$ y $b_{1}=1$, y sea
+$B\subset\mathcal{X}$ boreliano. La mayor probabilidad de $\{X\in B\}$ compatible con
+esos momentos es el problema de momentos con $g_{0}=\mathbf{1}_{B}$, y todo $y$ con
+$\sum_{i}y_{i}g_{i}\ge\mathbf{1}_{B}$ da la cota $\mathbb{P}(X\in B)\le\ip{b}{y}$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p201">Ver demostración</button><div class="proof" id="general-convexa-p201"><p>Las leyes de las $X$ compatibles son las $\mu\in\mathcal{M}_{+}(\mathcal{X})$ con
+$\int g_{i}\,d\mu=b_{i}$, que son de probabilidad por $g_{1}\equiv1$, y
+$\mathbb{P}(X\in B)=\int\mathbf{1}_{B}\,d\mu$. La cota es la dualidad débil del
+problema de momentos.</p></div>
+<p>Si las $g_{i}$ son polinomios, la positividad del dual se aproxima con sumas de
+cuadrados, y el problema queda aproximado por una sucesión de SDP finitos cada vez
+más precisos.</p>
+<h3 id="general-convexa-x51">Modelación cónica</h3>
+<div class="stmt observacion" id="general-c21:obs-representacion"><div class="head">Observación elegir la representación<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Una misma función convexa admite varias representaciones cónicas, y no cuestan lo
+mismo: cada variable auxiliar agranda el sistema lineal interno, y un cono más
+estructurado ahorra restricciones a cambio de operaciones matriciales más caras.
+Lo típico es el ortante para desigualdades lineales, flujos y mezclas; el cono
+rotado para mínimos cuadrados y portafolios; productos de conos de segundo orden
+para normas, robustez elipsoidal y riesgo; $\PSD{n}$ para LMI, control y
+relajaciones espectrales; y medidas o SDP para momentos y polinomios.</p></div></div>
+<p>El capítulo siguiente aprovecha esta estructura: LP, SOCP y SDP escriben su
+optimalidad con la misma geometría primal-dual, y eso es lo que usan los métodos
+de punto interior.</p></section>
+<section class="capitulo"><h2 id="general-cap:punto-interior">Métodos de punto interior</h2>
+<p>Los métodos de punto interior se quedan dentro del conjunto factible y siguen,
+con pasos de Newton, una familia de problemas suavizados. Cada iteración cuesta
+más que en los métodos de primer orden, pero hacen falta pocas. Todo el capítulo
+es de dimensión finita.</p>
+<h3 id="general-convexa-x52">El método de barrera</h3>
+<p>En esta sección el problema es</p>
+<div class="display">\[
+  \min_{x\in\R^{n}}\ f_{0}(x)\qquad\text{sujeto a}\qquad f_{i}(x)\le0,\quad i=1,\dots,m,\qquad Ax=b,
+\]</div>
+<p>con $f_{0},\dots,f_{m}$ convexas y diferenciables, $A\in\R^{p\times n}$ y $b\in\R^{p}$.</p>
+<div class="stmt definicion" id="general-c22:def-barrera"><div class="head">Definición función de barrera</div><div class="body"><p>Una <span class="df">función de barrera</span> es una $\phi:(-\infty,0)\to\R$ con $\phi(u)\to+\infty$
+cuando $u\uparrow0$; por ejemplo $\phi(u)=-\log(-u)$ o $\phi(u)=1/u^{2}$. La
+<span class="df">barrera logarítmica</span> del problema es
+$-\sum_{i=1}^{m}\log(-f_{i}(x))$, definida donde $f_{i}(x)&lt;0$ para todo $i$.</p></div></div>
+<p>A diferencia de una penalización, la barrera no deja salir del interior: explota al
+acercarse a la frontera. Las dos de arriba son convexas y crecientes, así que
+$\phi\circ f_{i}$ es convexa.</p>
+<div class="stmt definicion" id="general-c22:def-camino"><div class="head">Definición camino central</div><div class="body"><p>Para $t&gt;0$, sea</p>
+<div class="display">\[
+  x(t)\in\argmin_{Ax=b}\ \Bigl\{t f_{0}(x)-\sum_{i=1}^{m}\log(-f_{i}(x))\Bigr\}.
+\]</div>
+<p>Cuando el minimizador es único, la curva $t\mapsto x(t)$ es el <span class="df">camino central</span>.</p></div></div>
+<div class="stmt proposicion" id="general-c22:prop-camino-kkt"><div class="head">Proposición el camino central y las condiciones KKT</div><div class="body"><p>Si $x(t)$ existe, hay $\nu(t)\in\R^{p}$ tal que</p>
+<div class="display">\[
+  \nabla f_{0}(x(t))+\sum_{i=1}^{m}\lambda_{i}(t)\nabla f_{i}(x(t))+A\trans\nu(t)=0,
+  \qquad\lambda_{i}(t):=-\frac{1}{t f_{i}(x(t))}&gt;0,
+\]</div>
+<p>y por tanto $\lambda_{i}(t)f_{i}(x(t))=-1/t$ para todo $i$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p202">Ver demostración</button><div class="proof" id="general-convexa-p202"><p>$x(t)$ minimiza una función convexa y diferenciable sobre $\{Ax=b\}$, así que su
+gradiente está en la imagen de $A\trans$: con el lagrangiano
+$\mathcal{L}(x,\omega)=tf_{0}(x)-\sum_{i}\log(-f_{i}(x))+\ip{Ax-b}{\omega}$ hay
+$\omega(t)$ con</p>
+<div class="display">\[
+  0=t\nabla f_{0}(x(t))+\sum_{i=1}^{m}\frac{\nabla f_{i}(x(t))}{-f_{i}(x(t))}+A\trans\omega(t).
+\]</div>
+<p>Se divide por $t$ y se llama $\nu(t)=\omega(t)/t$.</p></div>
+<p>Son las condiciones KKT con la holgura complementaria $\lambda_{i}f_{i}=0$
+cambiada por $\lambda_{i}f_{i}=-1/t$.</p>
+<div class="stmt proposicion" id="general-c22:prop-brecha-camino"><div class="head">Proposición brecha del camino central<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $x(t)$ existe, $(\lambda(t),\nu(t))$ es dualmente factible y
+$f_{0}(x(t))-p^{*}\le m/t$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p203">Ver demostración</button><div class="proof" id="general-convexa-p203"><p>Como $\lambda(t)&gt;0$, el lagrangiano
+$x\mapsto f_{0}(x)+\sum_{i}\lambda_{i}(t)f_{i}(x)+\ip{\nu(t)}{Ax-b}$ es convexo, y su gradiente se anula en $x(t)$, que entonces lo minimiza. Su valor
+dual es
+$f_{0}(x(t))+\sum_{i}\lambda_{i}(t)f_{i}(x(t))=f_{0}(x(t))-m/t$, y la dualidad débil
+dice que es menor o igual que $p^{*}$.</p></div>
+<p>Así $t$ se lee como precisión: para una brecha de a lo sumo $\varepsilon$ basta
+$t\ge m/\varepsilon$.</p>
+<div class="stmt definicion" id="general-c22:def-metodo-barrera"><div class="head">Definición método básico de barrera<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Dados $x$ estrictamente factible, $t&gt;0$, $\gamma&gt;1$ y $\varepsilon&gt;0$: mientras
+$m/t&gt;\varepsilon$, se aproxima con Newton, empezando en $x$,
+$x\leftarrow\argmin_{Az=b}\{tf_{0}(z)-\sum_{i}\log(-f_{i}(z))\}$, y se hace
+$t\leftarrow\gamma t$.</p></div></div>
+<p>Un $\gamma$ grande aleja el problema nuevo del punto de partida y Newton tarda.
+Cuánto se puede subir $t$ sin perder la rapidez de Newton lo dice la
+autoconcordancia.</p>
+<h3 id="general-convexa-x53">Barreras cónicas y camino central</h3>
+<p>Se vuelve al programa cónico $\min\ip{c}{x}$ sujeto a $Ax=b$, $x\in K$, con dual
+$\max\ip{b}{y}$ sujeto a $A\trans y+s=c$, $s\in\polar{K}$, donde $K\subset\R^{n}$ es
+un cono convexo y cerrado con interior no vacío.</p>
+<div class="stmt definicion" id="general-c22:def-log-homogenea"><div class="head">Definición barrera logarítmicamente homogénea</div><div class="body"><p>Una barrera convexa $F:\intr K\to\R$, de clase $C^{2}$ y con $F(x_{k})\to+\infty$
+cuando $x_{k}$ tiende a la frontera de $K$, es <span class="df">logarítmicamente homogénea de
+grado $\nu$</span> si</p>
+<ol class="lista"><li><p>$F(\alpha x)=F(x)-\nu\log\alpha$ para todo $\alpha&gt;0$ y todo $x\in\intr K$;</p></li><li><p>$-\nabla F(x)\in\polar{K}$ para todo $x\in\intr K$.</p></li></ol></div></div>
+<div class="stmt proposicion" id="general-c22:prop-camino-conico"><div class="head">Proposición el camino central cónico</div><div class="body"><p>Sea $F$ logarítmicamente homogénea de grado $\nu$ y, para $t&gt;0$,</p>
+<div class="display">\[
+  x(t)\in\argmin_{Ax=b}\ \bigl\{t\ip{c}{x}+F(x)\bigr\}.
+\]</div>
+<p>Entonces hay $y(t)\in\R^{m}$ con
+$s(t):=c-A\trans y(t)=-\tfrac1t\nabla F(x(t))\in\polar{K}$, y</p>
+<div class="display">\[
+  \ip{c}{x(t)}-\ip{b}{y(t)}=\ip{x(t)}{s(t)}=\frac{\nu}{t}.
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p204">Ver demostración</button><div class="proof" id="general-convexa-p204"><p>La condición de optimalidad sobre $\{Ax=b\}$ da $w$ con $tc+\nabla F(x(t))=A\trans w$,
+es decir, $c+\frac1t\nabla F(x(t))-A\trans y(t)=0$ con $y(t)=w/t$. Por (ii),
+$s(t)\in\polar{K}$, así que $(y(t),s(t))$ es factible para el dual, y la dualidad
+débil cónica da la primera igualdad. Derivando (i) en $\alpha=1$,
+$\ip{\nabla F(x)}{x}=-\nu$, de modo que
+$\ip{x(t)}{s(t)}=-\frac1t\ip{x(t)}{\nabla F(x(t))}=\frac{\nu}{t}$.</p></div>
+<p>Es común escribir $\mu:=1/t$, y entonces la brecha sobre el camino central es
+$\nu\mu$.</p>
+<div class="stmt ejemplo" id="general-c22:ej-barreras"><div class="head">Ejemplo tres barreras</div><div class="body"><ol class="lista"><li><p>Para $K=\R^{n}_{+}$, $F(x)=-\sum_{i}\log x_{i}$ tiene grado $n$, y con
+  $X=\operatorname{diag}(x)$ es $\nabla F(x)=-X^{-1}\mathbf{1}$; el camino central es
+  $Xs=\mu\mathbf{1}$, con $\ip{x}{s}=n\mu$.</p></li><li><p>Para $K=\PSD{n}$, $F(X)=-\log\det X$ tiene grado $n$ y
+  $\nabla F(X)=-X^{-1}$; el camino central es $XS=\mu I$, con $\Tr(XS)=n\mu$.</p></li><li><p>Para $K=\Qcono{n+1}$, $F(\tau,u)=-\log(\tau^{2}-\norm{u}^{2})$ tiene grado $2$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p205">Ver demostración</button><div class="proof" id="general-convexa-p205"><p>(a) $F(\alpha x)=F(x)-n\log\alpha$, y $-\nabla F(x)=(1/x_{i})_{i}\in\R^{n}_{+}$. La
+igualdad $s=-\mu\nabla F(x)=\mu X^{-1}\mathbf{1}$ es $Xs=\mu\mathbf{1}$.
+(b) $\det(\alpha X)=\alpha^{n}\det X$, el gradiente es el del cálculo de
+$\log\det$ del primer capítulo, y $-\nabla F(X)=X^{-1}\succ0$. La igualdad
+$S=\mu X^{-1}$ es $XS=\mu I$.
+(c) $F(\alpha\tau,\alpha u)=F(\tau,u)-2\log\alpha$, y
+$-\nabla F(\tau,u)=\frac{2}{\tau^{2}-\norm{u}^{2}}(\tau,-u)\in\Qcono{n+1}$, que es
+autodual. Las tres son convexas: (a) y (b) por el capítulo de regularidad, y (c)
+porque $-\log(\tau^{2}-\norm{u}^{2})=-\log\tau-\log(\tau-\norm{u}^{2}/\tau)$, con
+$\norm{u}^{2}/\tau$ convexa. Las tres explotan en la frontera.</p></div>
+<h3 id="general-convexa-x54">Funciones autoconcordantes</h3>
+<p>Para resolver $\min_{Ax=b}t\ip{c}{x}+F(x)$ con Newton hace falta controlar la
+Hessiana, y la de $F$ no es Lipschitz porque $F$ explota en la frontera. Nesterov
+definió lo siguiente.</p>
+<div class="stmt definicion" id="general-c22:def-autoconcordante"><div class="head">Definición función autoconcordante</div><div class="body"><p>Sea $D\subset\R^{n}$ abierto y convexo. Una $F\in C^{3}(D)$ convexa es
+<span class="df">autoconcordante</span> si</p>
+<div class="display">\[
+  \bigl|\Dif^{3}F(x)[h,h,h]\bigr|\le2\bigl(\Dif^{2}F(x)[h,h]\bigr)^{3/2}
+  \qquad\text{para todo }x\in D,\ h\in\R^{n}.
+\]</div>
+<p>Si además $H(x):=\nabla^{2}F(x)\succ0$, sus <span class="df">normas locales</span> son
+$\norm{h}_{x}:=\sqrt{h\trans H(x)h}$ y $\norm{g}_{x,*}:=\sqrt{g\trans H(x)^{-1}g}$.</p></div></div>
+<p>Las dos normas son duales, $\abs{\ip{g}{h}}\le\norm{g}_{x,*}\norm{h}_{x}$, por
+Cauchy–Schwarz aplicado a $H(x)^{-1/2}g$ y $H(x)^{1/2}h$. Un término lineal no cambia
+ni $\Dif^{2}F$ ni $\Dif^{3}F$, así que $t\ip{c}{\cdot}+F$ es autoconcordante si $F$ lo
+es. En lo que sigue se supone $H(x)\succ0$ en $D$, y se escribe</p>
+<div class="display">\[
+  \omega(r):=r-\log(1+r),\qquad\omega_{*}(r):=-r-\log(1-r)\quad(0\le r&lt;1).
+\]</div>
+<div class="stmt proposicion" id="general-c22:prop-cotas"><div class="head">Proposición cotas de Taylor autoconcordantes</div><div class="body"><p>Sea $F$ autoconcordante, $x,x+h\in D$ y $r=\norm{h}_{x}$. Entonces</p>
+<div class="display">\[
+  F(x+h)\ge F(x)+\ip{\nabla F(x)}{h}+\omega(r),
+\]</div>
+<p>y si $r&lt;1$,</p>
+<div class="display">\[
+  F(x+h)\le F(x)+\ip{\nabla F(x)}{h}+\omega_{*}(r).
+\]</div></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p206">Ver demostración</button><div class="proof" id="general-convexa-p206"><p>Si $h=0$ no hay nada que probar. Sea $\psi(\tau)=\Dif^{2}F(x+\tau h)[h,h]&gt;0$ para
+$\tau\in[0,1]$, que tiene sentido porque $D$ es convexo. La autoconcordancia es
+$\abs{\psi&#x27;}\le2\psi^{3/2}$, es decir,
+$\bigl|\tfrac{d}{d\tau}\psi^{-1/2}\bigr|\le1$, y como $\psi(0)^{-1/2}=1/r$,</p>
+<div class="display">\[
+  \frac1r-\tau\le\psi(\tau)^{-1/2}\le\frac1r+\tau .
+\]</div>
+<p>Así $\psi(\tau)\ge r^{2}/(1+\tau r)^{2}$ siempre, y $\psi(\tau)\le r^{2}/(1-\tau r)^{2}$ si
+$\tau r&lt;1$. Por Taylor con resto integral,
+$F(x+h)-F(x)-\ip{\nabla F(x)}{h}=\int_{0}^{1}\int_{0}^{\tau}\psi(\sigma)\,d\sigma\,d\tau$, y</p>
+<div class="display">\begin{gather*}
+  \int_{0}^{1}\!\!\int_{0}^{\tau}\frac{r^{2}\,d\sigma\,d\tau}{(1+\sigma r)^{2}}
+  =\int_{0}^{1}\Bigl(r-\frac{r}{1+\tau r}\Bigr)d\tau=\omega(r),\\
+  \int_{0}^{1}\!\!\int_{0}^{\tau}\frac{r^{2}\,d\sigma\,d\tau}{(1-\sigma r)^{2}}
+  =\int_{0}^{1}\Bigl(\frac{r}{1-\tau r}-r\Bigr)d\tau=\omega_{*}(r).
+\end{gather*}</div></div>
+<div class="stmt teorema" id="general-c22:teo-dikin"><div class="head">Teorema control de la Hessiana y elipsoide de Dikin<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $F$ autoconcordante, $x\in D$ y $h$ con $r=\norm{h}_{x}&lt;1$ y $[x,x+h]\subset D$.
+Entonces</p>
+<div class="display">\[
+  (1-r)^{2}H(x)\preceq H(x+h)\preceq\frac{1}{(1-r)^{2}}H(x).
+\]</div>
+<p>Si además $F(x_{k})\to+\infty$ cuando $x_{k}$ tiende a la frontera de $D$, el
+<span class="df">elipsoide de Dikin</span> $\{x+h:\norm{h}_{x}&lt;1\}$ está contenido en $D$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p207">Ver demostración</button><div class="proof" id="general-convexa-p207"><p>Se usa, y se admite, que para $F$ autoconcordante
+$\abs{\Dif^{3}F(y)[h,u,u]}\le2\norm{h}_{y}\norm{u}_{y}^{2}$, que es un hecho de formas
+trilineales simétricas probado en Nesterov y Nemirovski (1994). Para $u\ne0$ sea
+$\psi_{u}(\tau)=\Dif^{2}F(x+\tau h)[u,u]$. Entonces
+$\abs{(\log\psi_{u})&#x27;(\tau)}\le2\norm{h}_{x+\tau h}\le2r/(1-\tau r)$, por la cota de
+$\psi$ de la prueba anterior, y al integrar en $[0,1]$,
+$\abs{\log(\psi_{u}(1)/\psi_{u}(0))}\le-2\log(1-r)$, que es la comparación de
+Hessianas. Para Dikin, si $x+h\notin D$ hay un primer $\tau_{0}\le1$ con
+$x+\tau h\to\partial D$ cuando $\tau\uparrow\tau_{0}$, y para $\tau&lt;\tau_{0}$ las cotas
+de Taylor dan
+$F(x+\tau h)\le F(x)+\abs{\ip{\nabla F(x)}{h}}+\omega_{*}(r)$, que no explota.</p></div>
+<div class="stmt definicion" id="general-c22:def-nu-barrera"><div class="head">Definición $\nu$-barrera autoconcordante</div><div class="body"><p>Una $F$ autoconcordante en $D$ con $F(x_{k})\to+\infty$ cuando $x_{k}$ tiende a la
+frontera de $D$ es una <span class="df">barrera autoconcordante</span>, y es una <span class="df">$\nu$-barrera</span> si
+además $\norm{\nabla F(x)}_{x,*}\le\sqrt\nu$ para todo $x\in D$, es decir,
+$\abs{\ip{\nabla F(x)}{h}}\le\sqrt\nu\,\norm{h}_{x}$ para todo $h$.</p></div></div>
+<div class="stmt proposicion" id="general-c22:prop-log-homogenea-nu"><div class="head">Proposición las logarítmicamente homogéneas son $\nu$-barreras</div><div class="body"><p>Si $F$ es una barrera autoconcordante en $\intr K$, logarítmicamente homogénea de
+grado $\nu$, entonces $H(x)x=-\nabla F(x)$, $\norm{x}_{x}^{2}=\nu$ y
+$\norm{\nabla F(x)}_{x,*}=\sqrt\nu$. En particular es una $\nu$-barrera.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p208">Ver demostración</button><div class="proof" id="general-convexa-p208"><p>El gradiente de (i) es $\alpha\nabla F(\alpha x)=\nabla F(x)$; derivando en $\alpha=1$,
+$\nabla F(x)+H(x)x=0$. Entonces
+$\norm{\nabla F(x)}_{x,*}^{2}=\ip{H(x)^{-1}\nabla F(x)}{\nabla F(x)}=\ip{x}{H(x)x}=\norm{x}_{x}^{2}$,
+y esto es $-\ip{x}{\nabla F(x)}=\nu$.</p></div>
+<div class="stmt ejemplo" id="general-c22:ej-nu-barreras"><div class="head">Ejemplo las tres barreras son autoconcordantes<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$-\sum_{i}\log x_{i}$ en $\R^{n}_{+}$, $-\log\det X$ en $\PSD{n}$ y
+$-\log(\tau^{2}-\norm{u}^{2})$ en $\Qcono{n+1}$ son barreras autoconcordantes, con
+$\nu=n$, $n$ y $2$. Para un producto de conos se suman las barreras, y los $\nu$.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p209">Ver demostración</button><div class="proof" id="general-convexa-p209"><p>Para la primera, $\Dif^{2}F(x)[h,h]=\sum_{i}a_{i}^{2}$ y
+$\Dif^{3}F(x)[h,h,h]=-2\sum_{i}a_{i}^{3}$ con $a_{i}=h_{i}/x_{i}$, y
+$\abs{\sum_{i}a_{i}^{3}}\le\max_{i}\abs{a_{i}}\sum_{i}a_{i}^{2}\le(\sum_{i}a_{i}^{2})^{3/2}$.
+Para la segunda es la misma cuenta con los valores propios $a_{i}$ de
+$X^{-1/2}HX^{-1/2}$, porque $\Dif^{2}F(X)[H,H]=\Tr\bigl((X^{-1}H)^{2}\bigr)$ y
+$\Dif^{3}F(X)[H,H,H]=-2\Tr\bigl((X^{-1}H)^{3}\bigr)$. La tercera se admite, como en
+Nesterov y Nemirovski (1994). Los $\nu$ salen de los grados del ejemplo de las tres
+barreras y de la proposición anterior. Para un producto, las segundas y terceras
+derivadas de una suma de funciones de variables separadas se suman, y
+$2p^{3/2}+2q^{3/2}\le2(p+q)^{3/2}$; los grados se suman, y el dual del producto es
+el producto de los duales.</p></div>
+<h3 id="general-convexa-x55">Decremento de Newton</h3>
+<div class="stmt definicion" id="general-c22:def-decremento-ac"><div class="head">Definición paso y decremento de Newton</div><div class="body"><p>Para $F$ autoconcordante, el <span class="df">paso de Newton</span> en $x$ es
+$\Delta x_{N}=-H(x)^{-1}\nabla F(x)$, y el <span class="df">decremento de Newton</span> es
+$\lambda(x):=\norm{\Delta x_{N}}_{x}=\norm{\nabla F(x)}_{x,*}$.</p></div></div>
+<p>A diferencia de $\norm{\nabla F(x)}$, el decremento no cambia con un cambio afín de
+coordenadas.</p>
+<div class="stmt teorema" id="general-c22:teo-newton-ac"><div class="head">Teorema Newton para barreras autoconcordantes<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Sea $F$ una barrera autoconcordante en $D$ y $x\in D$, con $\lambda=\lambda(x)$.</p>
+<ol class="lista"><li><p>Si $F$ tiene un minimizador $x^{*}$ y $\lambda&lt;1$, entonces
+  $F(x)-F(x^{*})\le\omega_{*}(\lambda)$.</p></li><li><p>El paso amortiguado $x^{+}=x+\frac{1}{1+\lambda}\Delta x_{N}$ está en $D$ y
+  $F(x^{+})\le F(x)-\omega(\lambda)$.</p></li><li><p>Si $\lambda&lt;1$, el paso completo $x^{+}=x+\Delta x_{N}$ está en $D$ y
+  $\lambda(x^{+})\le\bigl(\lambda/(1-\lambda)\bigr)^{2}$.</p></li></ol></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p210">Ver demostración</button><div class="proof" id="general-convexa-p210"><p>(a) Por la cota inferior de Taylor y la dualidad de las normas, con
+$r=\norm{x^{*}-x}_{x}$,
+$F(x^{*})\ge F(x)-\lambda r+\omega(r)\ge F(x)+\min_{r\ge0}\{(1-\lambda)r-\log(1+r)\}$. El
+mínimo está en $r=\lambda/(1-\lambda)$ y vale $\lambda+\log(1-\lambda)=-\omega_{*}(\lambda)$.</p>
+<p>(b) El paso tiene $\norm{\cdot}_{x}=\lambda/(1+\lambda)&lt;1$, así que $x^{+}\in D$ por Dikin.
+Como $\ip{\nabla F(x)}{\Delta x_{N}}=-\lambda^{2}$, la cota superior de Taylor da</p>
+<div class="display">\[
+  F(x^{+})\le F(x)-\frac{\lambda^{2}}{1+\lambda}+\omega_{*}\Bigl(\frac{\lambda}{1+\lambda}\Bigr)
+  =F(x)-\frac{\lambda^{2}}{1+\lambda}-\frac{\lambda}{1+\lambda}+\log(1+\lambda)
+  =F(x)-\omega(\lambda).
+\]</div>
+<p>(c) $x^{+}\in D$ por Dikin. Como $\nabla F(x)+H(x)\Delta x_{N}=0$,</p>
+<div class="display">\[
+  \nabla F(x^{+})=\int_{0}^{1}\bigl(H(x+\tau\Delta x_{N})-H(x)\bigr)\Delta x_{N}\,d\tau=:G\Delta x_{N},
+\]</div>
+<p>y por el control de la Hessiana,
+$-\bigl(1-(1-\tau\lambda)^{2}\bigr)H(x)\preceq H(x+\tau\Delta x_{N})-H(x)\preceq\bigl((1-\tau\lambda)^{-2}-1\bigr)H(x)$.
+Al integrar, la matriz simétrica $H(x)^{-1/2}GH(x)^{-1/2}$ tiene sus valores propios
+entre $-(\lambda-\lambda^{2}/3)$ y $\lambda/(1-\lambda)$, así que
+$\norm{\nabla F(x^{+})}_{x,*}\le\frac{\lambda}{1-\lambda}\norm{\Delta x_{N}}_{x}=\frac{\lambda^{2}}{1-\lambda}$.
+Por último $H(x^{+})\succeq(1-\lambda)^{2}H(x)$ da
+$\lambda(x^{+})=\norm{\nabla F(x^{+})}_{x^{+},*}\le\frac{1}{1-\lambda}\norm{\nabla F(x^{+})}_{x,*}$.</p></div>
+<p>Así, se dan pasos amortiguados mientras el decremento es grande y pasos completos
+cuando es pequeño, y desde ahí la convergencia es cuadrática.</p>
+<p>Todo esto vale restringido a $\{Ax=b\}$. Si las columnas de $Z$ son una base de
+$\ker A$ y $Ax_{0}=b$, $u\mapsto F(x_{0}+Zu)$ es una barrera autoconcordante; su paso de
+Newton, visto en $x$, es el minimizador $\Delta x_{N}$ de
+$\ip{\nabla F(x)}{h}+\frac12\norm{h}_{x}^{2}$ sobre $\ker A$, y su decremento es
+$\norm{\Delta x_{N}}_{x}=\max\{-\ip{\nabla F(x)}{h}:Ah=0,\ \norm{h}_{x}\le1\}$.</p>
+<h3 id="general-convexa-x56">Complejidad del camino central</h3>
+<p>Sobre el camino central la brecha es $\nu/t$, así que la precisión $\varepsilon$ pide
+$t$ del orden de $\nu/\varepsilon$. No hace falta resolver cada problema de barrera
+desde cero: basta un paso de Newton por cada aumento de $t$.</p>
+<div class="stmt definicion" id="general-c22:def-paso-corto"><div class="head">Definición método de camino central de paso corto</div><div class="body"><p>Sea $F$ una barrera autoconcordante en $\intr K$, logarítmicamente homogénea de grado
+$\nu\ge1$, y sea $\phi_{t}(x):=t\ip{c}{x}+F(x)$. Para $x\in\intr K$ con $Ax=b$, sean
+$(\Delta x_{N})_{t}(x)$ y $\lambda_{t}(x)$ el paso y el decremento de Newton de
+$\phi_{t}$ restringida a $\{Ax=b\}$. Se asume que $A$ tiene rango completo por
+filas y que hay $x_{0}\in\intr K$ y $t_{0}&gt;0$ con $Ax_{0}=b$ y
+$\lambda_{t_{0}}(x_{0})\le1/8$. El método es</p>
+<div class="display">\[
+  t_{k+1}=t_{k}\Bigl(1+\frac{1}{1+8\sqrt\nu}\Bigr),\qquad
+  x_{k+1}=x_{k}+(\Delta x_{N})_{t_{k+1}}(x_{k}).
+\]</div>
+<p>Con $\Delta_{k}=(\Delta x_{N})_{t_{k}}(x_{k})$, el sistema de Newton
+$t_{k}c+\nabla F(x_{k})+H(x_{k})\Delta_{k}=A\trans w_{k}$ define $y_{k}:=w_{k}/t_{k}$ y
+$s_{k}:=c-A\trans y_{k}$.</p></div></div>
+<div class="stmt teorema" id="general-c22:teo-paso-corto"><div class="head">Teorema complejidad del camino corto</div><div class="body"><p>En el método de paso corto, para todo $k$:</p>
+<ol class="lista"><li><p>$x_{k}\in\intr K$ y $Ax_{k}=b$;</p></li><li><p>$\lambda_{t_{k}}(x_{k})\le1/8$;</p></li><li><p>$(y_{k},s_{k})$ es factible para el dual y
+  $\ip{c}{x_{k}}-\ip{b}{y_{k}}=\ip{x_{k}}{s_{k}}\le\dfrac{9\nu}{8t_{k}}$.</p></li></ol>
+<p>Por tanto la brecha es a lo sumo $\varepsilon$ desde
+$k\ge(2+8\sqrt\nu)\log\frac{9\nu}{8t_{0}\varepsilon}$, es decir, tras
+$O\bigl(\sqrt\nu\,(1+\log\frac{\nu}{t_{0}\varepsilon})_{+}\bigr)$ iteraciones.</p></div></div>
+<button class="proof-btn" type="button" aria-expanded="false" data-t="general-convexa-p211">Ver demostración</button><div class="proof" id="general-convexa-p211"><p>(i) y (ii) por inducción. Sea $\delta=1/(1+8\sqrt\nu)$ y $t&#x27;=(1+\delta)t_{k}$. Como
+$t&#x27;c+\nabla F=(1+\delta)(t_{k}c+\nabla F)-\delta\nabla F$, la fórmula del decremento
+restringido como un máximo da</p>
+<div class="display">\[
+  \lambda_{t&#x27;}(x_{k})\le(1+\delta)\lambda_{t_{k}}(x_{k})+\delta\norm{\nabla F(x_{k})}_{x_{k},*}
+  \le\frac{1+\delta}{8}+\delta\sqrt\nu=\frac18+\delta\Bigl(\frac18+\sqrt\nu\Bigr)=\frac14 .
+\]</div>
+<p>El teorema de Newton para barreras autoconcordantes, aplicado a $\phi_{t&#x27;}$ en
+$\{Ax=b\}$, da $x_{k+1}\in\intr K$, $Ax_{k+1}=b$ y
+$\lambda_{t&#x27;}(x_{k+1})\le(1/3)^{2}\le1/8$.</p>
+<p>(iii) Primero, $-\ip{\nabla F(x)}{u}\ge\norm{u}_{x}$ para $u\in K$: si $u\in\intr K$ y
+$\tau&gt;0$, la cota inferior de Taylor y la homogeneidad dan</p>
+<div class="display">\[
+  F(u+x/\tau)-\nu\log\tau=F(x+\tau u)\ge F(x)+\tau\bigl(\ip{\nabla F(x)}{u}+\norm{u}_{x}\bigr)-\log(1+\tau\norm{u}_{x}),
+\]</div>
+<p>y el lado izquierdo crece como $-\nu\log\tau$, así que el paréntesis no puede ser
+positivo; para $u\in K$ se pasa al límite, porque $K$ es la clausura de su interior.
+Ahora $A\trans y_{k}+s_{k}=c$ por definición, y
+$t_{k}s_{k}=-\nabla F(x_{k})-H(x_{k})\Delta_{k}$. Para $u\in K$,
+$t_{k}\ip{s_{k}}{u}\ge\norm{u}_{x_{k}}-\norm{\Delta_{k}}_{x_{k}}\norm{u}_{x_{k}}\ge0$, porque
+$\norm{\Delta_{k}}_{x_{k}}=\lambda_{t_{k}}(x_{k})\le1/8$; así $s_{k}\in\polar{K}$. La
+igualdad es la dualidad débil cónica, y con $\ip{\nabla F(x)}{x}=-\nu$ y
+$\norm{x}_{x}=\sqrt\nu$,</p>
+<div class="display">\[
+  t_{k}\ip{x_{k}}{s_{k}}=\nu-\ip{H(x_{k})\Delta_{k}}{x_{k}}\le\nu+\frac{\sqrt\nu}{8}\le\frac{9\nu}{8},
+\]</div>
+<p>porque $\nu\ge1$. Por último $t_{k}=t_{0}(1+\delta)^{k}$ y
+$\log(1+\delta)\ge\delta/(1+\delta)=1/(2+8\sqrt\nu)$, así que con ese $k$ es
+$t_{k}\ge9\nu/(8\varepsilon)$.</p></div>
+<p>La cota es polinomial en el tamaño del cono y logarítmica en $1/\varepsilon$. Para LP
+con $n$ variables $\nu=n$, y para SDP de $n\times n$ también; lo que cambia mucho es
+el costo de cada paso de Newton.</p></section></div>
 <div class="doc" data-lang="ambas"><section class="capitulo"><!-- entorno omitido: titlepage --></section>
 <section class="capitulo"><h2 id="ambas-cap:calculo">Cálculo diferencial</h2>
 <p>En todo el capítulo $E$ y $F$ son espacios de Banach reales, $U\subset E$ es
@@ -11961,22 +12642,22 @@ y $\polar{(\PSD{n})}=\PSD{n}$.</p></div></div>
 <div class="stmt proposicion" id="ambas-c21:prop-complementariedad-sdp"><div class="head">Proposición complementariedad en SDP<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X,S\succeq0$ y $\Tr(SX)=0$, entonces $SX=0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p242" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p242"><p>$\Tr(SX)=\Tr(X^{1/2}SX^{1/2})=\Tr\bigl((S^{1/2}X^{1/2})\trans S^{1/2}X^{1/2}\bigr)$,
 que es la suma de los cuadrados de las entradas de $S^{1/2}X^{1/2}$. Si es $0$,
 $S^{1/2}X^{1/2}=0$ y $SX=S^{1/2}(S^{1/2}X^{1/2})X^{1/2}=0$.</p></div></div>
-<div class="stmt ejemplo" id="ambas-c21:ej-valor-propio"><div class="head">Ejemplo máximo valor propio<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$\lambda_{\max}(M)=\min\{t:tI-M\succeq0\}$, así que minimizar
+<div class="stmt ejemplo" id="ambas-c21:ej-valor-propio"><div class="head">Ejemplo máximo valor propio</div><div class="body"><p>$\lambda_{\max}(M)=\min\{t:tI-M\succeq0\}$, así que minimizar
 $\lambda_{\max}(M_{0}+\sum_{i}x_{i}M_{i})$ es un SDP.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p243" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p243"><p>Los valores propios de $tI-M$ son $t-\lambda_{i}(M)$, que son todos no negativos si
 y solo si $t\ge\lambda_{\max}(M)$. Así, $\min_{x}\lambda_{\max}(M(x))$ es
 $\min_{x,t}t$ sujeto a la LMI $tI-M_{0}-\sum_{i}x_{i}M_{i}\succeq0$.</p></div></div>
-<div class="stmt proposicion" id="ambas-c21:prop-schur"><div class="head">Proposición complemento de Schur<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $X\succ0$, $t\ge z\trans X^{-1}z$ si y solo si
+<div class="stmt proposicion" id="ambas-c21:prop-schur"><div class="head">Proposición complemento de Schur</div><div class="body"><p>Si $X\succ0$, $Y\succeq Z\trans X^{-1}Z$ si y solo si
 $</p>
-<div class="display">\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}</div>
+<div class="display">\begin{pmatrix}X&amp;Z\\Z\trans&amp;Y\end{pmatrix}</div>
 <p>\succeq0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p244" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p244"><p>Con $P=</p>
-<div class="display">\begin{pmatrix}I&amp;-X^{-1}z\\0&amp;1\end{pmatrix}</div>
+<div class="display">\begin{pmatrix}I&amp;-X^{-1}Z\\0&amp;I\end{pmatrix}</div>
 <p>$, que es invertible,</p>
 <div class="display">\[
-  P\trans\begin{pmatrix}X&amp;z\\z\trans&amp;t\end{pmatrix}P
-  =\begin{pmatrix}X&amp;0\\0&amp;t-z\trans X^{-1}z\end{pmatrix},
+  P\trans\begin{pmatrix}X&amp;Z\\Z\trans&amp;Y\end{pmatrix}P
+  =\begin{pmatrix}X&amp;0\\0&amp;Y-Z\trans X^{-1}Z\end{pmatrix},
 \]</div>
-<p>y una congruencia conserva el ser semidefinida positiva. La matriz de la derecha
-lo es si y solo si $t-z\trans X^{-1}z\ge0$.</p></div></div>
+<p>y una congruencia conserva el ser semidefinida positiva. Como $X\succ0$, la
+matriz de la derecha lo es si y solo si $Y-Z\trans X^{-1}Z\succeq0$.</p></div></div>
 <div class="stmt ejemplo" id="ambas-c21:ej-maxcut"><div class="head">Ejemplo Max-Cut</div><div class="body"><p>$\max_{x\in\{-1,1\}^{n}}\frac14\sum_{i,j}\omega_{ij}(1-x_{i}x_{j})$ es el corte
 máximo. Con $X=xx\trans$ ($X\succeq0$, $X_{ii}=1$, $\rang X=1$) y relajando el rango
 a $r$ queda $(P_{r})$, $\max\frac14\sum\omega_{ij}(1-\ip{v_{i}}{v_{j}})$ con
@@ -11989,9 +12670,205 @@ $X_{ii}=1$ da $x_{i}=\pm1$. Toda $X\succeq0$ es $VV\trans$ con $V$ de $n\times n
 $X_{ii}=\norm{v_{i}}^{2}$, $X_{ij}=\ip{v_{i}}{v_{j}}$; así, $(P_{1})$ es Max-Cut y
 $(P_{n})$ es el SDP. Cada relajación tiene más factibles que la anterior, así que
 su valor es mayor o igual.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c21:ej-diseno"><div class="head">Ejemplo diseño de experimentos</div><div class="body"><p>Con $a_{1},\dots,a_{m}$ que generan $\R^{n}$ y $M(x)=\sum_{i}x_{i}a_{i}a_{i}\trans$,
+$\min_{x\in\simplex_{m}}\Tr(M(x)^{-1})$ tiene el valor del SDP
+$\min\Tr(Y)$ sujeto a $x\in\simplex_{m}$ y
+$</p>
+<div class="display">\begin{pmatrix}M(x)&amp;I\\I&amp;Y\end{pmatrix}</div>
+<p>\succeq0$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p246" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p246"><p>Si la matriz por bloques es semidefinida positiva y $M(x)v=0$, con $w=-\varepsilon v$ la
+forma vale $-2\varepsilon\norm{v}^{2}+\varepsilon^{2}v\trans Yv$, que es negativa para
+$\varepsilon&gt;0$ pequeño salvo si $v=0$; así, $M(x)\succ0$. Con eso, el complemento de
+Schur con $Z=I$ dice que la restricción es $Y\succeq M(x)^{-1}$, que da
+$\Tr(Y)\ge\Tr(M(x)^{-1})$, con igualdad en $Y=M(x)^{-1}$. Los dos problemas tienen
+entonces el mismo valor, y hay factibles porque con $x_{i}=1/m$ los $a_{i}$ generan
+$\R^{n}$ y $M(x)\succ0$.</p></div></div>
 <div class="stmt observacion" id="ambas-c21:obs-sdp-contraste"><div class="head">Observación las matrices se quedan en dimensión finita</div><div class="body"><p>La primera sección vale en cualquier Hilbert y lo de segundo orden sube con
-$\R\times\Hs$, pero LP, QP, SDP y Max-Cut se escriben con matrices y se quedan en
-$\R^{n}$ en las dos versiones.</p></div></div></section></div>
+$\R\times\Hs$, pero LP, QP, SDP, Max-Cut y el diseño de experimentos se escriben
+con matrices y se quedan en $\R^{n}$ en las dos versiones.</p></div></div>
+<h3 id="ambas-convexa-x52">Problemas de momentos</h3>
+<div class="stmt proposicion" id="ambas-c21:prop-momentos"><div class="head">Proposición el problema de momentos y su dual<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $\mathcal{X}$ métrico compacto, el dual de
+$\sup\int g_{0}\,d\mu$ sobre $\mu\in\mathcal{M}_{+}(\mathcal{X})$ con
+$\int g_{i}\,d\mu=b_{i}$ es el problema semiinfinito $\inf\ip{b}{y}$ sujeto a
+$\sum_{i}y_{i}g_{i}\ge g_{0}$ en $\mathcal{X}$, y
+$\int g_{0}\,d\mu\le\ip{b}{y}$ para factibles.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p247" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p247"><p>Se integra la desigualdad $g_{0}\le\sum_{i}y_{i}g_{i}$ contra $\mu\ge0$:
+$\int g_{0}\,d\mu\le\sum_{i}y_{i}\int g_{i}\,d\mu=\ip{b}{y}$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c21:ej-cotas-momentos"><div class="head">Ejemplo cotas a partir de momentos<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si solo se conocen los momentos $\mathbb{E}g_{i}(X)=b_{i}$, con $g_{1}\equiv1$, todo
+$y$ con $\sum_{i}y_{i}g_{i}\ge\mathbf{1}_{B}$ da $\mathbb{P}(X\in B)\le\ip{b}{y}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p248" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p248"><p>Las leyes de las $X$ compatibles son las $\mu\in\mathcal{M}_{+}(\mathcal{X})$ con
+$\int g_{i}\,d\mu=b_{i}$, que son de probabilidad por $g_{1}\equiv1$, y
+$\mathbb{P}(X\in B)=\int\mathbf{1}_{B}\,d\mu$. La cota es la dualidad débil del
+problema de momentos.</p></div></div>
+<div class="stmt observacion" id="ambas-c21:obs-momentos-contraste"><div class="head">Observación aquí la dimensión infinita es de origen</div><div class="body"><p>El problema de momentos vive en un cono de medidas aun en la versión de
+$\R^{n}$, y su dualidad débil es la misma integral en las dos. Lo que cambia es
+$\mathcal{X}$: compacto de $\R^{d}$ en una y métrico compacto en la otra.</p></div></div>
+<h3 id="ambas-convexa-x53">Modelación cónica</h3>
+<div class="stmt observacion" id="ambas-c21:obs-representacion"><div class="head">Observación elegir la representación<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Una función convexa admite varias representaciones cónicas, y no cuestan lo
+mismo: más variables auxiliares agrandan el sistema lineal interno, y un cono más
+estructurado ahorra restricciones a cambio de operaciones más caras.</p></div></div></section>
+<section class="capitulo"><h2 id="ambas-cap:punto-interior">Métodos de punto interior</h2>
+<p>Los métodos de punto interior siguen, con pasos de Newton, una familia de
+problemas suavizados sin salir del interior del conjunto factible.</p>
+<h3 id="ambas-convexa-x54">El método de barrera</h3>
+<div class="stmt definicion" id="ambas-c22:def-barrera"><div class="head">Definición función de barrera</div><div class="body"><p>Una $\phi:(-\infty,0)\to\R$ con $\phi(u)\to+\infty$ cuando $u\uparrow0$, como
+$-\log(-u)$ o $1/u^{2}$. La barrera logarítmica de $f_{i}\le0$ es
+$-\sum_{i}\log(-f_{i})$.</p></div></div>
+<div class="stmt definicion" id="ambas-c22:def-camino"><div class="head">Definición camino central</div><div class="body"><p>$x(t)\in\argmin_{Ax=b}\{tf_{0}(x)-\sum_{i}\log(-f_{i}(x))\}$ para $t&gt;0$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c22:prop-camino-kkt"><div class="head">Proposición el camino central y las condiciones KKT</div><div class="body"><p>$\nabla f_{0}(x(t))+\sum_{i}\lambda_{i}(t)\nabla f_{i}(x(t))+A\trans\nu(t)=0$ con
+$\lambda_{i}(t)=-1/(tf_{i}(x(t)))&gt;0$, es decir, $\lambda_{i}(t)f_{i}(x(t))=-1/t$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p249" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p249"><p>$x(t)$ minimiza una función convexa y diferenciable sobre $\{Ax=b\}$, así que su
+gradiente está en la imagen de $A\trans$: con el lagrangiano
+$\mathcal{L}(x,\omega)=tf_{0}(x)-\sum_{i}\log(-f_{i}(x))+\ip{Ax-b}{\omega}$ hay
+$\omega(t)$ con</p>
+<div class="display">\[
+  0=t\nabla f_{0}(x(t))+\sum_{i=1}^{m}\frac{\nabla f_{i}(x(t))}{-f_{i}(x(t))}+A\trans\omega(t).
+\]</div>
+<p>Se divide por $t$ y se llama $\nu(t)=\omega(t)/t$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c22:prop-brecha-camino"><div class="head">Proposición brecha del camino central<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>$(\lambda(t),\nu(t))$ es dualmente factible y $f_{0}(x(t))-p^{*}\le m/t$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p250" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p250"><p>Como $\lambda(t)&gt;0$, el lagrangiano
+$x\mapsto f_{0}(x)+\sum_{i}\lambda_{i}(t)f_{i}(x)+\ip{\nu(t)}{Ax-b}$ es convexo, y su gradiente se anula en $x(t)$, que entonces lo minimiza. Su valor
+dual es
+$f_{0}(x(t))+\sum_{i}\lambda_{i}(t)f_{i}(x(t))=f_{0}(x(t))-m/t$, y la dualidad débil
+dice que es menor o igual que $p^{*}$.</p></div></div>
+<div class="stmt definicion" id="ambas-c22:def-metodo-barrera"><div class="head">Definición método básico de barrera<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Mientras $m/t&gt;\varepsilon$: aproximar $x(t)$ con Newton desde el $x$ anterior y
+hacer $t\leftarrow\gamma t$.</p></div></div>
+<h3 id="ambas-convexa-x55">Barreras cónicas y camino central</h3>
+<div class="stmt definicion" id="ambas-c22:def-log-homogenea"><div class="head">Definición barrera logarítmicamente homogénea</div><div class="body"><p>$F:\intr K\to\R$ con $F(\alpha x)=F(x)-\nu\log\alpha$ y $-\nabla F(x)\in\polar{K}$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c22:prop-camino-conico"><div class="head">Proposición el camino central cónico</div><div class="body"><p>Si $x(t)$ minimiza $t\ip{c}{x}+F(x)$ en $\{Ax=b\}$, hay $y(t)$ con
+$s(t)=c-A\trans y(t)=-\frac1t\nabla F(x(t))\in\polar{K}$ y brecha
+$\ip{x(t)}{s(t)}=\nu/t$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p251" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p251"><p>La condición de optimalidad sobre $\{Ax=b\}$ da $w$ con $tc+\nabla F(x(t))=A\trans w$,
+es decir, $c+\frac1t\nabla F(x(t))-A\trans y(t)=0$ con $y(t)=w/t$. Por (ii),
+$s(t)\in\polar{K}$, así que $(y(t),s(t))$ es factible para el dual, y la dualidad
+débil cónica da la primera igualdad. Derivando (i) en $\alpha=1$,
+$\ip{\nabla F(x)}{x}=-\nu$, de modo que
+$\ip{x(t)}{s(t)}=-\frac1t\ip{x(t)}{\nabla F(x(t))}=\frac{\nu}{t}$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c22:ej-barreras"><div class="head">Ejemplo tres barreras</div><div class="body"><p>$-\sum_{i}\log x_{i}$ (grado $n$, $Xs=\mu\mathbf{1}$), $-\log\det X$ (grado $n$,
+$XS=\mu I$) y $-\log(\tau^{2}-\norm{u}^{2})$ (grado $2$).</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p252" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p252"><p>(a) $F(\alpha x)=F(x)-n\log\alpha$, y $-\nabla F(x)=(1/x_{i})_{i}\in\R^{n}_{+}$. La
+igualdad $s=-\mu\nabla F(x)=\mu X^{-1}\mathbf{1}$ es $Xs=\mu\mathbf{1}$.
+(b) $\det(\alpha X)=\alpha^{n}\det X$, el gradiente es el del cálculo de
+$\log\det$ del primer capítulo, y $-\nabla F(X)=X^{-1}\succ0$. La igualdad
+$S=\mu X^{-1}$ es $XS=\mu I$.
+(c) $F(\alpha\tau,\alpha u)=F(\tau,u)-2\log\alpha$, y
+$-\nabla F(\tau,u)=\frac{2}{\tau^{2}-\norm{u}^{2}}(\tau,-u)\in\Qcono{n+1}$, que es
+autodual. Las tres son convexas: (a) y (b) por el capítulo de regularidad, y (c)
+porque $-\log(\tau^{2}-\norm{u}^{2})=-\log\tau-\log(\tau-\norm{u}^{2}/\tau)$, con
+$\norm{u}^{2}/\tau$ convexa. Las tres explotan en la frontera.</p></div></div>
+<div class="stmt observacion" id="ambas-c22:obs-sin-barrera"><div class="head">Observación sin interior no hay barrera</div><div class="body"><p>Una barrera vive en $\intr K$, y el ortante de $\ell^{2}$ tiene interior vacío,
+como se vio en el capítulo anterior: la construcción no tiene ni de dónde
+empezar. El cono de segundo orden de $\R\times\Hs$ sí tiene interior, y la fórmula
+$-\log(\tau^{2}-\norm{u}^{2})$ tiene sentido allí, pero las notas no la suben porque
+ninguna de sus fuentes trata la autoconcordancia fuera de $\R^{n}$.</p></div></div>
+<h3 id="ambas-convexa-x56">Funciones autoconcordantes</h3>
+<div class="stmt definicion" id="ambas-c22:def-autoconcordante"><div class="head">Definición función autoconcordante</div><div class="body"><p>$\abs{\Dif^{3}F(x)[h,h,h]}\le2(\Dif^{2}F(x)[h,h])^{3/2}$, con normas locales
+$\norm{h}_{x}=\sqrt{h\trans H(x)h}$ y $\norm{g}_{x,*}=\sqrt{g\trans H(x)^{-1}g}$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c22:prop-cotas"><div class="head">Proposición cotas de Taylor autoconcordantes</div><div class="body"><p>Con $r=\norm{h}_{x}$:
+$F(x+h)\ge F(x)+\ip{\nabla F(x)}{h}+\omega(r)$ siempre, y
+$F(x+h)\le F(x)+\ip{\nabla F(x)}{h}+\omega_{*}(r)$ si $r&lt;1$, con
+$\omega(r)=r-\log(1+r)$ y $\omega_{*}(r)=-r-\log(1-r)$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p253" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p253"><p>Si $h=0$ no hay nada que probar. Sea $\psi(\tau)=\Dif^{2}F(x+\tau h)[h,h]&gt;0$ para
+$\tau\in[0,1]$, que tiene sentido porque $D$ es convexo. La autoconcordancia es
+$\abs{\psi&#x27;}\le2\psi^{3/2}$, es decir,
+$\bigl|\tfrac{d}{d\tau}\psi^{-1/2}\bigr|\le1$, y como $\psi(0)^{-1/2}=1/r$,</p>
+<div class="display">\[
+  \frac1r-\tau\le\psi(\tau)^{-1/2}\le\frac1r+\tau .
+\]</div>
+<p>Así $\psi(\tau)\ge r^{2}/(1+\tau r)^{2}$ siempre, y $\psi(\tau)\le r^{2}/(1-\tau r)^{2}$ si
+$\tau r&lt;1$. Por Taylor con resto integral,
+$F(x+h)-F(x)-\ip{\nabla F(x)}{h}=\int_{0}^{1}\int_{0}^{\tau}\psi(\sigma)\,d\sigma\,d\tau$, y</p>
+<div class="display">\begin{gather*}
+  \int_{0}^{1}\!\!\int_{0}^{\tau}\frac{r^{2}\,d\sigma\,d\tau}{(1+\sigma r)^{2}}
+  =\int_{0}^{1}\Bigl(r-\frac{r}{1+\tau r}\Bigr)d\tau=\omega(r),\\
+  \int_{0}^{1}\!\!\int_{0}^{\tau}\frac{r^{2}\,d\sigma\,d\tau}{(1-\sigma r)^{2}}
+  =\int_{0}^{1}\Bigl(\frac{r}{1-\tau r}-r\Bigr)d\tau=\omega_{*}(r).
+\end{gather*}</div></div></div>
+<div class="stmt teorema" id="ambas-c22:teo-dikin"><div class="head">Teorema control de la Hessiana y elipsoide de Dikin<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Si $r=\norm{h}_{x}&lt;1$, $(1-r)^{2}H(x)\preceq H(x+h)\preceq(1-r)^{-2}H(x)$, y para una
+barrera $\{x+h:\norm{h}_{x}&lt;1\}\subset D$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p254" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p254"><p>Se usa, y se admite, que para $F$ autoconcordante
+$\abs{\Dif^{3}F(y)[h,u,u]}\le2\norm{h}_{y}\norm{u}_{y}^{2}$, que es un hecho de formas
+trilineales simétricas probado en Nesterov y Nemirovski (1994). Para $u\ne0$ sea
+$\psi_{u}(\tau)=\Dif^{2}F(x+\tau h)[u,u]$. Entonces
+$\abs{(\log\psi_{u})&#x27;(\tau)}\le2\norm{h}_{x+\tau h}\le2r/(1-\tau r)$, por la cota de
+$\psi$ de la prueba anterior, y al integrar en $[0,1]$,
+$\abs{\log(\psi_{u}(1)/\psi_{u}(0))}\le-2\log(1-r)$, que es la comparación de
+Hessianas. Para Dikin, si $x+h\notin D$ hay un primer $\tau_{0}\le1$ con
+$x+\tau h\to\partial D$ cuando $\tau\uparrow\tau_{0}$, y para $\tau&lt;\tau_{0}$ las cotas
+de Taylor dan
+$F(x+\tau h)\le F(x)+\abs{\ip{\nabla F(x)}{h}}+\omega_{*}(r)$, que no explota.</p></div></div>
+<div class="stmt definicion" id="ambas-c22:def-nu-barrera"><div class="head">Definición $\nu$-barrera autoconcordante</div><div class="body"><p>Una barrera autoconcordante con $\norm{\nabla F(x)}_{x,*}\le\sqrt\nu$ en $D$.</p></div></div>
+<div class="stmt proposicion" id="ambas-c22:prop-log-homogenea-nu"><div class="head">Proposición las logarítmicamente homogéneas son $\nu$-barreras</div><div class="body"><p>$H(x)x=-\nabla F(x)$ y $\norm{\nabla F(x)}_{x,*}=\norm{x}_{x}=\sqrt\nu$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p255" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p255"><p>El gradiente de (i) es $\alpha\nabla F(\alpha x)=\nabla F(x)$; derivando en $\alpha=1$,
+$\nabla F(x)+H(x)x=0$. Entonces
+$\norm{\nabla F(x)}_{x,*}^{2}=\ip{H(x)^{-1}\nabla F(x)}{\nabla F(x)}=\ip{x}{H(x)x}=\norm{x}_{x}^{2}$,
+y esto es $-\ip{x}{\nabla F(x)}=\nu$.</p></div></div>
+<div class="stmt ejemplo" id="ambas-c22:ej-nu-barreras"><div class="head">Ejemplo las tres barreras son autoconcordantes<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>Con $\nu=n$, $n$ y $2$; en un producto de conos, los $\nu$ se suman.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p256" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p256"><p>Para la primera, $\Dif^{2}F(x)[h,h]=\sum_{i}a_{i}^{2}$ y
+$\Dif^{3}F(x)[h,h,h]=-2\sum_{i}a_{i}^{3}$ con $a_{i}=h_{i}/x_{i}$, y
+$\abs{\sum_{i}a_{i}^{3}}\le\max_{i}\abs{a_{i}}\sum_{i}a_{i}^{2}\le(\sum_{i}a_{i}^{2})^{3/2}$.
+Para la segunda es la misma cuenta con los valores propios $a_{i}$ de
+$X^{-1/2}HX^{-1/2}$, porque $\Dif^{2}F(X)[H,H]=\Tr\bigl((X^{-1}H)^{2}\bigr)$ y
+$\Dif^{3}F(X)[H,H,H]=-2\Tr\bigl((X^{-1}H)^{3}\bigr)$. La tercera se admite, como en
+Nesterov y Nemirovski (1994). Los $\nu$ salen de los grados del ejemplo de las tres
+barreras y de la proposición anterior. Para un producto, las segundas y terceras
+derivadas de una suma de funciones de variables separadas se suman, y
+$2p^{3/2}+2q^{3/2}\le2(p+q)^{3/2}$; los grados se suman, y el dual del producto es
+el producto de los duales.</p></div></div>
+<h3 id="ambas-convexa-x57">Decremento de Newton</h3>
+<div class="stmt definicion" id="ambas-c22:def-decremento-ac"><div class="head">Definición paso y decremento de Newton</div><div class="body"><p>$\Delta x_{N}=-H(x)^{-1}\nabla F(x)$ y
+$\lambda(x)=\norm{\Delta x_{N}}_{x}=\norm{\nabla F(x)}_{x,*}$.</p></div></div>
+<div class="stmt teorema" id="ambas-c22:teo-newton-ac"><div class="head">Teorema Newton para barreras autoconcordantes<sup style="color:#c0392b;font-weight:700">+</sup></div><div class="body"><p>(a) $F(x)-F(x^{*})\le\omega_{*}(\lambda)$ si $\lambda&lt;1$. (b) El paso amortiguado
+$x+\Delta x_{N}/(1+\lambda)$ baja $F$ al menos $\omega(\lambda)$. (c) Si $\lambda&lt;1$,
+el paso completo cumple $\lambda(x^{+})\le(\lambda/(1-\lambda))^{2}$.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p257" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p257"><p>(a) Por la cota inferior de Taylor y la dualidad de las normas, con
+$r=\norm{x^{*}-x}_{x}$,
+$F(x^{*})\ge F(x)-\lambda r+\omega(r)\ge F(x)+\min_{r\ge0}\{(1-\lambda)r-\log(1+r)\}$. El
+mínimo está en $r=\lambda/(1-\lambda)$ y vale $\lambda+\log(1-\lambda)=-\omega_{*}(\lambda)$.</p>
+<p>(b) El paso tiene $\norm{\cdot}_{x}=\lambda/(1+\lambda)&lt;1$, así que $x^{+}\in D$ por Dikin.
+Como $\ip{\nabla F(x)}{\Delta x_{N}}=-\lambda^{2}$, la cota superior de Taylor da</p>
+<div class="display">\[
+  F(x^{+})\le F(x)-\frac{\lambda^{2}}{1+\lambda}+\omega_{*}\Bigl(\frac{\lambda}{1+\lambda}\Bigr)
+  =F(x)-\frac{\lambda^{2}}{1+\lambda}-\frac{\lambda}{1+\lambda}+\log(1+\lambda)
+  =F(x)-\omega(\lambda).
+\]</div>
+<p>(c) $x^{+}\in D$ por Dikin. Como $\nabla F(x)+H(x)\Delta x_{N}=0$,</p>
+<div class="display">\[
+  \nabla F(x^{+})=\int_{0}^{1}\bigl(H(x+\tau\Delta x_{N})-H(x)\bigr)\Delta x_{N}\,d\tau=:G\Delta x_{N},
+\]</div>
+<p>y por el control de la Hessiana,
+$-\bigl(1-(1-\tau\lambda)^{2}\bigr)H(x)\preceq H(x+\tau\Delta x_{N})-H(x)\preceq\bigl((1-\tau\lambda)^{-2}-1\bigr)H(x)$.
+Al integrar, la matriz simétrica $H(x)^{-1/2}GH(x)^{-1/2}$ tiene sus valores propios
+entre $-(\lambda-\lambda^{2}/3)$ y $\lambda/(1-\lambda)$, así que
+$\norm{\nabla F(x^{+})}_{x,*}\le\frac{\lambda}{1-\lambda}\norm{\Delta x_{N}}_{x}=\frac{\lambda^{2}}{1-\lambda}$.
+Por último $H(x^{+})\succeq(1-\lambda)^{2}H(x)$ da
+$\lambda(x^{+})=\norm{\nabla F(x^{+})}_{x^{+},*}\le\frac{1}{1-\lambda}\norm{\nabla F(x^{+})}_{x,*}$.</p></div></div>
+<h3 id="ambas-convexa-x58">Complejidad del camino central</h3>
+<div class="stmt definicion" id="ambas-c22:def-paso-corto"><div class="head">Definición método de camino central de paso corto</div><div class="body"><p>Desde $\lambda_{t_{0}}(x_{0})\le1/8$:
+$t_{k+1}=t_{k}(1+1/(1+8\sqrt\nu))$ y $x_{k+1}=x_{k}+(\Delta x_{N})_{t_{k+1}}(x_{k})$.</p></div></div>
+<div class="stmt teorema" id="ambas-c22:teo-paso-corto"><div class="head">Teorema complejidad del camino corto</div><div class="body"><p>Los $x_{k}$ son factibles, $\lambda_{t_{k}}(x_{k})\le1/8$ y la brecha es a lo sumo
+$9\nu/(8t_{k})$, así que bastan
+$O\bigl(\sqrt\nu\,(1+\log\frac{\nu}{t_{0}\varepsilon})_{+}\bigr)$ iteraciones.</p></div><button class="proof-btn" type="button" aria-expanded="false" data-t="ambas-convexa-p258" data-titulo="1">Demostración (la misma en ℝⁿ y en ℋ)</button><div class="proof" id="ambas-convexa-p258"><p>(i) y (ii) por inducción. Sea $\delta=1/(1+8\sqrt\nu)$ y $t&#x27;=(1+\delta)t_{k}$. Como
+$t&#x27;c+\nabla F=(1+\delta)(t_{k}c+\nabla F)-\delta\nabla F$, la fórmula del decremento
+restringido como un máximo da</p>
+<div class="display">\[
+  \lambda_{t&#x27;}(x_{k})\le(1+\delta)\lambda_{t_{k}}(x_{k})+\delta\norm{\nabla F(x_{k})}_{x_{k},*}
+  \le\frac{1+\delta}{8}+\delta\sqrt\nu=\frac18+\delta\Bigl(\frac18+\sqrt\nu\Bigr)=\frac14 .
+\]</div>
+<p>El teorema de Newton para barreras autoconcordantes, aplicado a $\phi_{t&#x27;}$ en
+$\{Ax=b\}$, da $x_{k+1}\in\intr K$, $Ax_{k+1}=b$ y
+$\lambda_{t&#x27;}(x_{k+1})\le(1/3)^{2}\le1/8$.</p>
+<p>(iii) Primero, $-\ip{\nabla F(x)}{u}\ge\norm{u}_{x}$ para $u\in K$: si $u\in\intr K$ y
+$\tau&gt;0$, la cota inferior de Taylor y la homogeneidad dan</p>
+<div class="display">\[
+  F(u+x/\tau)-\nu\log\tau=F(x+\tau u)\ge F(x)+\tau\bigl(\ip{\nabla F(x)}{u}+\norm{u}_{x}\bigr)-\log(1+\tau\norm{u}_{x}),
+\]</div>
+<p>y el lado izquierdo crece como $-\nu\log\tau$, así que el paréntesis no puede ser
+positivo; para $u\in K$ se pasa al límite, porque $K$ es la clausura de su interior.
+Ahora $A\trans y_{k}+s_{k}=c$ por definición, y
+$t_{k}s_{k}=-\nabla F(x_{k})-H(x_{k})\Delta_{k}$. Para $u\in K$,
+$t_{k}\ip{s_{k}}{u}\ge\norm{u}_{x_{k}}-\norm{\Delta_{k}}_{x_{k}}\norm{u}_{x_{k}}\ge0$, porque
+$\norm{\Delta_{k}}_{x_{k}}=\lambda_{t_{k}}(x_{k})\le1/8$; así $s_{k}\in\polar{K}$. La
+igualdad es la dualidad débil cónica, y con $\ip{\nabla F(x)}{x}=-\nu$ y
+$\norm{x}_{x}=\sqrt\nu$,</p>
+<div class="display">\[
+  t_{k}\ip{x_{k}}{s_{k}}=\nu-\ip{H(x_{k})\Delta_{k}}{x_{k}}\le\nu+\frac{\sqrt\nu}{8}\le\frac{9\nu}{8},
+\]</div>
+<p>porque $\nu\ge1$. Por último $t_{k}=t_{0}(1+\delta)^{k}$ y
+$\log(1+\delta)\ge\delta/(1+\delta)=1/(2+8\sqrt\nu)$, así que con ese $k$ es
+$t_{k}\ge9\nu/(8\varepsilon)$.</p></div></div>
+<div class="stmt observacion" id="ambas-c22:obs-punto-interior-contraste"><div class="head">Observación todo el capítulo en $\R^{n}$</div><div class="body"><p>Las dos versiones coinciden aquí. Bauschke–Combettes no trata métodos de punto
+interior, y cada paso resuelve un sistema con la Hessiana, cuyo costo es lo que
+cuenta: la complejidad $O(\sqrt\nu\log(1/\varepsilon))$ depende del parámetro de la
+barrera, no de la dimensión, pero la teoría que la prueba es de dimensión finita.</p></div></div></section></div>
   <p class="note">Generada desde el Overleaf por <code>build.py</code>.</p>
 </main>
 
